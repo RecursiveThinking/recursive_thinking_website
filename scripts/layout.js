@@ -4,25 +4,26 @@ class api {
 
     }
 
-    appendPage(pageId) {
-        const dashboardHTML = document.getElementById(pageId).import;
-        const template = dashboardHTML.getElementById(pageId);
-        const main = document.getElementById('main-content');
-        main.innerHTML = '';
-        main.appendChild(template);
-    }
-
     init() {
-        window.addEventListener('DOMContentLoaded', function(e) {
+        // do stuff when page loads
+        window.addEventListener('load', function(e) {
             e.preventDefault();
             console.log(e);
             console.log(document.getElementById('main-content'));
         });
+
+        // adding our click listener to each sidebar item
+        const sidebarItems = document.getElementsByClassName('sidebar-item');
+        const sideBarItemsArray = Array.from(sidebarItems);
+        sideBarItemsArray.forEach((item) => {
+            item.addEventListener('click', () => {
+                const pageId = item.getAttribute('data-pageId');
+                window.location.hash = pageId;
+            });
+        });
+
     }
 
 }
 const recursiveApi = new api();
 recursiveApi.init();
-// recursiveApi.appendPage('dashboardHTML');
-
-
