@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon -->
     <link rel="shortcut icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
     <link rel="icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
+    <!-- font awesome (icons) -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,500" rel="stylesheet">
     <title>Title</title>
     <!-- css -->
-    <link href="main.css" type="text/css" rel="stylesheet">
-    <link href="templates/recursiveDirectory.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/homeScreen.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/recursiveDirectory.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/dashboard.css" >
+    <!-- templates -->
     <link id="dashboardHTML" href="templates/dashboard.html" type="text/html" rel="import">
     <link id="upcomingLessonsHTML" href="templates/upcomingLessons.html" type="text/html" rel="import">
     <link id="editProfileHTML" href="templates/editProfile.html" type="text/html" rel="import">
@@ -19,50 +29,85 @@
     <script src="./scripts/redirect.js"></script>
 </head>
 <body>
-    <header>
-        <img class="header-image" src="./public/images/recursivelogo.png">
+    <header class="grid gutters third">
+        <div class="cell">
+            <div class="content">
+                <div class="logo">
+                    <img src="../public/images/recursivelogo.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-center">
+            <div class="content">
+                <div class="searchBar">
+                    <a href="/templates/homeScreen.html"><button class="btn btnFill">To HomeScreen</button></a>
+                    <input class="input search" type="search" placeholder="Enter your Search Here">
+                </div>
+            </div>
+        </div>
     </header>
-    <div class="flex-container">
-        <aside class="sidebar">
-            <article class="dev-caption">
-                <img class="sidebar-image" src="./public/images/porg_sq.jpeg">
-                <h2 class="dev-name">Dev Name</h2>
-                <h3 class="dev-title">Dev Title</h3>
-            </article>
-            <article class="sidebar-item" data-pageId="dashboard">
-                <h2 class="sidebar-title">Dashboard</h2>
-                <span>&#9635;</span>
-                <!-- <span>&#x260f;</span> -->
-            </article>
-            <article class="sidebar-item" data-pageId="upcoming-lessons">
-                <h2 class="sidebar-title">Upcoming Lessons</h2>
-                <span>&#9650;</span>
-            </article>
-            <article class="sidebar-item" data-pageId="vote-for-lessons">
-                <h2 class="sidebar-title">Vote For Lessons</h2>
-                <span>&#9825;</span>
-            </article>
-            <article class="sidebar-item" data-pageId="interview-prep">
-                <h2 class="sidebar-title">Interview Prep</h2>
-                <span>&#9734;</span>
-            </article>
-            <article class="sidebar-item" data-pageId="recursive-directory">
-                <h2 class="sidebar-title">Recursive Directory</h2>
-                <span>&#9093;</span>
-            </article>
-            <article class="sidebar-item" data-pageId="edit-profile">
-                <h2 class="sidebar-title">Edit Profile</h2>
-                <span>&#9786;</span>
-            </article>
-            <article class="sidebar-item" data-pageId="sign-out">
-                <h2 class="sidebar-title">Sign Out</h2>
-                <!-- <span>&#10177;</span> -->
-            </article>
-        </aside>
-        <main id="main-content">
-
-        </main>
+    <div class="grid sixth">
+        <div class="cell">
+            <aside class="sidebar">
+                <article class="devCaption item-textCenter">
+                    <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
+                    <h2 class="devName">Dev Name</h2>
+                    <h3 class="devTitle">Dev Title</h3>
+                    <!-- <hr> -->
+                </article>
+                <article class="sidebar-item" data-pageId="dashboard">
+                    <h2 class="sidebarTitle">Dashboard</h2>
+                    <span><i class="fa fa-tachometer"></i></span>
+                </article>
+                <article class="sidebar-item" data-pageId="upcoming-lessons">
+                    <h2 class="sidebarTitle">Upcoming Lessons</h2>
+                    <span><i class="fa fa-calendar"></i></span>
+                </article>
+                <article class="sidebar-item" data-pageId="vote-for-lessons">
+                    <h2 class="sidebarTitle">Vote For Lessons</h2>
+                    <span><i class="fa fa-thumbs-up"></i></span>
+                </article>
+                <article class="sidebar-item" data-pageId="interview-prep">
+                    <h2 class="sidebarTitle">Interview Prep</h2>
+                    <span><i class="fa fa-object-group"></i></span>
+                </article>
+                <article class="sidebar-item" data-pageId="recursive-directory">
+                    <h2 class="sidebarTitle">Recursive Directory</h2>
+                    <span><i class="fa fa-address-book-o"></i></span>
+                </article>
+                <article class="sidebar-item" data-pageId="edit-profile">
+                    <h2 class="sidebarTitle">Edit Profile</h2>
+                    <span><i class="fa fa-user "></i></span>
+                </article>
+                <article class="sidebar-item" data-pageId="sign-out">
+                    <h2 class="sidebarTitle">Sign Out</h2>
+                    <span><i class="fa fa-sign-out"></i></span>
+                </article>
+                <article class="sidebar-item last" data-pageId="sign-out">
+                    <!-- <h2 class="sidebarTitle">Sign Out</h2> -->
+                </article>
+            </aside>
+        </div>
+        <div class="cell">
+            <main id="main-content">
+                    <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo dolore corrupti laboriosam! Quam sequi delectus, autem neque illo natus vero labore libero nobis reiciendis excepturi quia odit at repellat eligendi provident illum iure ipsa rem assumenda eius. Praesentium iste ratione, obcaecati quos laudantium officia reiciendis, ad est esse voluptates ea error aliquid aliquam, neque repellat dolor ut at quisquam. Consequatur, placeat inventore. Molestiae voluptas laborum ab sunt eum, quas corporis fugit dolorum harum esse nemo similique aut voluptatibus ipsa accusamus ipsum architecto culpa, nesciunt velit fugiat porro, dolor earum? Veritatis et architecto quis repellat alias ducimus quae, fugit assumenda necessitatibus!</p> -->
+            </main>
+        </div>
     </div>
+    <footer>
+        <div class="grid gutters half">
+            <div class="cell cell-center">
+                <div class="content copyAlignment">
+                    <p>&#169; Recursive Thinking, All Rights Reserved</p>
+                </div>
+            </div>
+            <div class="cell cell-center">
+                <div class="content iconAlignment">
+                    <i class="fa fa-linkedin-square"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
 <script src="./scripts/layout.js"></script>
 </body>
 </html>
