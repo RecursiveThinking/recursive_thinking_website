@@ -1,8 +1,9 @@
 #recursiveDirectoryHTML {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #eeeeee;
+    padding: 3rem;
 }
 #recursiveDirectoryHTML hr {
     width: 80%;
@@ -25,12 +26,19 @@
     border-radius: 50%;
 }
 #recursiveDirectoryHTML .directory-card {
-    text-align: center;
-    flex: 0 0 5rem;
+    /* flex: 0 0 5rem; */
+    height: 30%;
+    flex: 0 0 28%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
     background-color: #ffffff;
-    margin: 3rem;
+    margin: 0 3rem 3rem 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: center;
 }
 
 
