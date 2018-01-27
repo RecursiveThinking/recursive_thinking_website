@@ -1,129 +1,145 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>RT - Home</title>
+    <title>Test Title Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
-    <link rel="icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
+    <!-- font awesome (icons) -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,500" rel="stylesheet">
     <!-- css -->
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="homeScreen.css" /> -->
     <link rel="stylesheet" type="text/css" media="screen" href="../main.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./homeScreen.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/homeScreen.css"/>
     <!-- <script src="main.js"></script> -->
 </head>
+
 <body>
-    <header>
-        <!-- <img class="header-image" src="./public/images/recursivelogo.png"> -->
-        <img class="header-image" src="../public/images/recursivelogo.png">
-        <nav class="flex-container-nav">
-                <a href="../layout.html"><button class="btn btnFill">To Dashboard</button></a>
-            <button id="btnSignUp" class="btn btnOutline">Sign Up</button>
-            <button id="btnLogin" class="btn btnFill">Login</button>
-        </nav>
+    <!-- <header class="grid gutters cols-2"> -->
+    <header class="grid gutters third">
+        <div class="cell cell-center">
+            <div class="content">
+                <div class="logo">
+                    <img src="../public/images/recursivelogo.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-center">
+            <div class="content">
+                <nav class="navButtons">
+                    <a href="../layout.html"><button class="btn btnFill">D</button></a>
+                    <button id="btnSignUp" class="btn btnOutline">Sign Up</button>
+                    <button id="btnLogin" class="btn btnFill">Login</button>
+                </nav>
+            </div>
+        </div>
     </header>
-    <section>
-        <div id="modalSignUp" class="modal">
-            <div class="modalContent">
-                <h2>Sign Up</h2>
-                <hr class="modalHR">
-                <div class="giveMeSpaceModal"></div>
-                <form action="">
-                    <div class="flex-container-input">
-                        <label for="email">Email: </label>
-                        <input type="text" name="email" placeholder="Email">
-                    </div>
-                    <div class="flex-container-input">
-                        <label for="password">Password:</label>
-                        <input type="text" name="password" placeholder="Password">
-                    </div>
-                    <div class="flex-container-input">
-                        <label for="passwordConfirm">Re-enter Password:</label>
-                        <input type="text" name="passwordConfirm" placeholder="Password Confirmation">
-                    </div>
-                    <hr class="modalHR">
-                    <div class="flex-container-button">
-                        <button class="btn btnHeadGreen">Sign Up</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div id="modalLogin" class="modal">
-            <div class="modalContent">
-                <h2>Login</h2>
-                <hr class="modalHR">
-                <div class="giveMeSpaceModal"></div>
-                <form action="">
-                    <div class="flex-container-input">
-                        <label for="email">Email: </label>
-                        <input type="text" name="email" placeholder="Email">
-                    </div>
-                    <div class="flex-container-input">
-                        <label for="password">Password:</label>
-                        <input type="text" name="password" placeholder="Password">
-                    </div>
-                    <hr class="modalHR">
-                    <div class="flex-container-button">
-                        <button class="btn btnHeadGreen">Login</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
     <section class="bannerImage">
-        <div class="bannerImageTextBox">
-            <h1>Recursive Thinking</h1>
+        <div class="grid gutters cols-1 u-textCenter">
+            <div class="cell">
+                <div class="content">
+                    <div class="bannerImageTextBox">
+                        <h1>Recursive Thinking</h1>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <section class="section signUp">
-        <h4>Learning to Code? Learning UX Design? Furthering your Skills?</h4>
-        <h2>Join Recursive Thinking!</h2>
-        <button>Sign Up</button>
+        <div class="grid gutters cols-1 u-textCenter">
+            <div class="cell">
+                <div class="content">
+                    <h4>Learning to Code? Learning UX Design? Furthering your Skills?</h4>
+                    <h2>Join Recursive Thinking!</h2>
+                    <button class="btn btnFill signUp btnMarginTop">Sign Up</button>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="section description">
-        <h2>What is Recursive Thinking?</h2>
-        <p>Recursive Thinking is a brain share of developers and designers participating in career development and mentorship. <span class="descriptionTextStrong">We are 75+ people strong with 15-25 individuals attending our weekly events.</span> We have a variety of full time and part time teachers from Amazon, Microsoft, Expedia, Code Fellows, Coding Dojo, General Assembly and many more.</p>
+        <div class="grid gutters cols-1 u-textCenter">
+            <div class="cell">
+                <div class="content">
+                    <h2>What is Recursive Thinking?</h2>
+                    <p>Recursive Thinking is a brain share of developers and designers participating in career development and mentorship. <span class="descriptionTextStrong">We are 75+ people strong with 15-25 individuals attending our weekly events.</span> We have a variety of full time and part time teachers from Amazon, Microsoft, Expedia, Code Fellows, Coding Dojo, General Assembly and many more.</p>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="section people">
-        <div class="flex-container-people">
-            <div class="tile people">
-                <!-- <img src="./public/images/avatar1.png" alt=""> -->
-                <img src="../public/images/avatar1.png" alt="">
-                <h3>Really Great Title</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+        <div class="grid gutters cols-3 u-textCenter">
+            <div class="cell">
+                <div class="content">
+                    <img class="imgAvatarMed" src="../public/images/avatar1.png" alt="">
+                    <h3>Really Great Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+                </div>
             </div>
-            <div class="tile people">
-                <!-- <img src="./public/images/avatar1.png" alt=""> -->
-                <img src="../public/images/avatar1.png" alt="">
-                <h3>Really Great Title</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+            <div class="cell">
+                <div class="content">
+                    <img class="imgAvatarMed" src="../public/images/avatar2.png" alt="">
+                    <h3>Really Great Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+                </div>
             </div>
-            <div class="tile people">
-                <!-- <img src="./public/images/avatar1.png" alt=""> -->
-                <img src="../public/images/avatar1.png" alt="">
-                <h3>Really Great Title</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+            <div class="cell">
+                <div class="content">
+                    <img class="imgAvatarMed" src="../public/images/avatar3.png" alt="">
+                    <h3>Really Great Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+                </div>
             </div>
         </div>
     </section>
+    <!-- <section class="grid gutters third large-fit u-textCenter"> -->
     <section class="section famousQuote">
-        <div class="flex-container-famousQuote">
-            <!-- <img src="./public/images/avatar4.png" alt=""> -->
-            <img src="../public/images/avatar4.png" alt="">
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eisumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-            <br><br>
-            - Hailey Skelcher, UX Designer
-            </p>
+        <div class="grid gutters third u-textCenter">
+            <!-- <div class="cell cell-center"> -->
+            <div class="cell cell-center">
+                <div class="content">
+                    <img class="imgAvatarLarge" src="../public/images/avatar4.png" alt="">
+                </div>
+            </div>
+            <!-- <div class="cell cell-center twice"></div> -->
+            <div class="cell cell-center">
+                <div class="content quoteAlignment">
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eisumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    <br><br>
+                    - Hailey Skelcher, UX Designer
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
-    <script src="homeScreen.js"></script>
+    <footer>
+        <div class="grid gutters half">
+            <div class="cell cell-center">
+                <div class="content copyAlignment">
+                    <p>&#169; Recursive Thinking, All Rights Reserved</p>
+                </div>
+            </div>
+            <div class="cell cell-center">
+                <div class="content iconAlignment">
+                    <i class="fa fa-linkedin-square"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
+
+<!-- <div class="grid">
+    <div class="cell">…</div>
+    <div class="cell">…</div>
+    <div class="cell">…</div>
+</div> -->
+
+<!-- <div class="Grid">
+    <div class="Grid-cell">…</div>
+    <div class="Grid-cell">…</div>
+    <div class="Grid-cell">…</div>
+</div> -->

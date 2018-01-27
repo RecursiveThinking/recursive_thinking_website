@@ -1,0 +1,253 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+    /* font-size: 10px; */
+    /* margin: 0;
+    padding: 0; */
+}
+
+/* body {
+    max-width: 1920px;
+    margin: 0 auto;
+} */
+
+
+
+header .cell .content {
+    margin-bottom: 0;
+}
+
+header {
+    /* need to fix this */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    /* z-index: 1; */
+    /* position: fixed; */
+}
+
+.navButtons button, .btn.btnFill.signUp {
+    padding: 1rem 2rem;
+    margin-left: 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+}
+
+.navButtons button:first-of-type{
+    margin-left: 0;
+}
+
+.btn.btnFill, .btn.btnOutline:hover {
+    border: 1px solid #00b371;
+    background-color: #00b371;
+    color: #ffffff;
+}
+
+.btn.btnFill.signUp {
+    width: 40rem;
+    padding: 1rem 0;
+    margin-left: 0px;
+}
+
+.btnMarginTop {
+    margin-top: 4rem;
+}
+
+.btn.btnOutline, .btn.btnFill:hover {
+    border: 1px solid #00b371;
+    background-color: #ffffff;
+    color: #00b371;
+}
+
+.content > .imgAvatarMed {
+    width: 50%;
+    border-radius: 50%;
+}
+
+.content > .imgAvatarLarge {
+    width: 75%;
+    border-radius: 50%;
+}
+
+.content:after {
+    content: "";
+    display: block;
+    margin-top: 0.8em;
+    height: 1px;
+}
+
+.bannerImage {
+    background-image: url("../public/images/banner.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1; 
+}
+
+.bannerImageTextBox h1 {
+    font-family: 'Abel', sans-serif;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    letter-spacing: 4.8px;
+    font-weight: lighter;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)
+}
+
+.section {
+    padding: 150px 0;
+    background-color: #ffffff;
+}
+
+.section h4 {
+    font-weight: 300;
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    color: #000000;
+    margin: .25rem 0;
+}
+
+.section h2 {
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin: .75rem 0 .75rem 0;
+}
+
+.section p {
+    width: 75%;
+    margin: auto auto;
+}
+
+.section p, .tile.people p {
+    font-size: 2.4rem;
+    font-weight: 300;
+    letter-spacing: 1.4px;
+    color: #000000;
+}
+
+.section p span {
+    font-size: 2.4rem;
+    font-weight: bolder;
+    letter-spacing: 2.8px;
+    color: #000000;
+}
+
+.section.description {
+    background-color: #f6f6f6;
+}
+
+.section.people h3 {
+    font-size: 2.52rem;
+    font-weight: 500;
+    letter-spacing: 2.2px;
+}
+
+.section.famousQuote {
+    background-color: #2d3134;
+}
+
+.section.famousQuote p {
+    color: #ffffff;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 2.2px;
+}
+
+.section.famousQuote .quoteAlignment {
+    text-align: center;
+}
+
+footer {
+    background-color: #ffffff;
+}
+
+footer p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #a2a2a2;
+}
+
+footer .content {
+    padding-top: 0;
+    margin-bottom: 0;
+}
+
+footer .content:after {
+    margin-top: 0;
+}
+
+/* footer .copyAlignment {
+    text-align: center;
+}
+
+footer .iconAlignment {
+    text-align: center;
+} */
+
+footer .fa {
+    font-size: 3.4rem;
+    padding: .75rem 0;
+}
+
+/* Phone S Base Case to 425 */
+@media only screen and (max-width: 425px) and (min-width: 320px) {
+
+    .navButtons button, .btn.btnFill.signUp {
+        padding: .75rem 1.75rem;
+    }
+}
+
+/* Phone L 426px to 479 */
+@media only screen and (max-width: 480px) and (min-width: 426px) {
+    /* font-size in main.css */
+    /* .navButtons button, .btn.btnFill.signUp {
+        padding: 1rem 2.5rem;
+    } */
+    /* footer .content:nth-of-type(2){
+        text-align: right;
+    } */
+    .section.famousQuote p {
+        /* margin-top: 75px; */
+        padding: 0;
+    }
+}
+/* for globals after 480 */
+@media only screen and (min-width: 480px){
+    .navButtons button, .btn.btnFill.signUp {
+        padding: 1rem 2.5rem;
+    }
+}
+
+/* Tablet  480 to 768 */
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+
+}
+/* for globals after 768 */
+@media only screen and (min-width: 768px){
+    .navButtons button, .btn.btnFill.signUp {
+        padding: 1rem 4rem;
+    }
+    .section.famousQuote .quoteAlignment {
+        text-align: left;
+    }
+}
+/* Laptop S 768 to 1024 */
+@media only screen and (max-width: 1024px) and (min-width: 769px) {
+
+}
+/* Laptop M 1440 */
+@media only screen and (max-width: 1440px) and (min-width: 1025px) {
+
+}
+/* All others */
+@media only screen and (min-width: 1440px) {
+    .navButtons button, .btn.btnFill.signUp {
+        padding: 1rem 6rem;
+    }
+}
+
