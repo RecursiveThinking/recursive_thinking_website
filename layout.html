@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,500" rel="stylesheet">
     <title>Title</title>
     <!-- css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/homeScreen.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/homeScreen.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/recursiveDirectory.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/dashboard.css" >
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/dashboard.css" >
     <!-- templates -->
     <link id="dashboardHTML" href="templates/dashboard.html" type="text/html" rel="import">
     <link id="upcomingLessonsHTML" href="templates/upcomingLessons.html" type="text/html" rel="import">
@@ -33,21 +33,20 @@
         <div class="cell">
             <div class="content">
                 <div class="logo">
-                    <img src="../public/images/recursivelogo.png" alt="">
+                    <img src="./public/images/recursivelogo.png" alt="">
                 </div>
             </div>
         </div>
         <div class="cell cell-center">
             <div class="content">
                 <div class="searchBar">
-                    <a href="/templates/homeScreen.html"><button class="btn btnFill">To HomeScreen</button></a>
+                    <a href="./templates/homeScreen.html"><button class="btn btnFill">To HomeScreen</button></a>
                     <input class="input search" type="search" placeholder="Enter your Search Here">
                 </div>
             </div>
         </div>
     </header>
-    <div class="grid sixth">
-        <div class="cell">
+        <div class="sidebarWrapper">
             <aside class="sidebar">
                 <article class="devCaption item-textCenter">
                     <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
@@ -83,17 +82,13 @@
                     <h2 class="sidebarTitle">Sign Out</h2>
                     <span><i class="fa fa-sign-out"></i></span>
                 </article>
-                <article class="sidebar-item last" data-pageId="sign-out">
-                    <!-- <h2 class="sidebarTitle">Sign Out</h2> -->
-                </article>
             </aside>
         </div>
-        <div class="cell">
+        <div class="mainContentWrapper">
             <main id="main-content">
                     <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo dolore corrupti laboriosam! Quam sequi delectus, autem neque illo natus vero labore libero nobis reiciendis excepturi quia odit at repellat eligendi provident illum iure ipsa rem assumenda eius. Praesentium iste ratione, obcaecati quos laudantium officia reiciendis, ad est esse voluptates ea error aliquid aliquam, neque repellat dolor ut at quisquam. Consequatur, placeat inventore. Molestiae voluptas laborum ab sunt eum, quas corporis fugit dolorum harum esse nemo similique aut voluptatibus ipsa accusamus ipsum architecto culpa, nesciunt velit fugiat porro, dolor earum? Veritatis et architecto quis repellat alias ducimus quae, fugit assumenda necessitatibus!</p> -->
             </main>
         </div>
-    </div>
     <footer>
         <div class="grid gutters half">
             <div class="cell cell-center">
@@ -109,5 +104,17 @@
         </div>
     </footer>
 <script src="./scripts/layout.js"></script>
+
+    <script src="www.data.com/data.json"></script>
+    <script>
+        function getData(){
+            
+        }
+        var json = ([{asdfasdf: asdfasdf,
+        asdfasdf: asdfasdf}]);
+
+        getData(json);
+
+    </script>
 </body>
 </html>

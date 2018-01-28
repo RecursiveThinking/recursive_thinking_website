@@ -21,7 +21,6 @@ class api {
                 window.location.hash = pageId;
             });
         });
-
     }
 
 }

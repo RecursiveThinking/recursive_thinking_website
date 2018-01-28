@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: #eeeeee;
-    padding: 3rem;
+    padding: 3rem 0 3rem 3rem;
 }
 #recursiveDirectoryHTML hr {
     width: 80%;
@@ -27,7 +27,7 @@
 }
 #recursiveDirectoryHTML .directory-card {
     /* flex: 0 0 5rem; */
-    height: 30%;
+    /*height: 30%;*/
     flex: 0 0 28%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
