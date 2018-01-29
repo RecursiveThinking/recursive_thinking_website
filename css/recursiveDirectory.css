@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 #recursiveDirectoryHTML {
     display: flex;
     flex-wrap: wrap;
@@ -6,39 +11,42 @@
     padding: 3rem 0 3rem 3rem;
 }
 #recursiveDirectoryHTML hr {
-    width: 80%;
+    width: 90%;
     border-top: 0;
 }
 #recursiveDirectoryHTML .devName {
-    font-size: 2rem;
+    font-size: 3.6rem;
     margin-bottom: 0;
+    letter-spacing: 2.2px;
 }
 #recursiveDirectoryHTML .devTitle {
-    font-size: 1.6rem;
-    font-weight: 100;
+    font-size: 2.8rem;
     margin-bottom: 0;
+    letter-spacing: 1.7px;
 }
 #recursiveDirectoryHTML .devLocation {
-    font-size: 1.2rem;
-    font-weight: 100;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
 }
 #recursiveDirectoryHTML .devPicture {
+    width: 31.6rem;
+    height: auto;
     border-radius: 50%;
 }
 #recursiveDirectoryHTML .directory-card {
     /* flex: 0 0 5rem; */
     /*height: 30%;*/
-    flex: 0 0 28%;
+    /* flex: 0 0 28%; */
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
     background-color: #ffffff;
     margin: 0 3rem 3rem 0;
-    padding: 2rem;
-    display: flex;
+    padding: 4rem 2rem;
+    /* display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    text-align: center;
+    flex-wrap: nowrap; */
+    align-items: center; 
+    text-align: center; 
 }
 
 
