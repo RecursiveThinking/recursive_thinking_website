@@ -32,6 +32,7 @@ window.onclick = function(event) {
         modalContLogin.style.display = "none";
     }
     else{
-        console.log(event.target.parentElement.style.display);
+        // console.log(event.target.parentElement.style.display);
+        console.log("Clicking on Something Not a Modal");
     }
 }

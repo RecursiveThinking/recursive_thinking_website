@@ -1,9 +1,9 @@
 *{
     box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif;
+    /* font-family: 'Nunito Sans', sans-serif; */
     /* font-size: 10px; */
-    /* margin: 0;
-    padding: 0; */
+    margin: 0;
+    padding: 0;
 }
 
 /* body {
@@ -27,7 +27,7 @@ header {
 .navButtons button, .btn.btnFill.signUp {
     padding: 1rem 2rem;
     margin-left: 20px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     font-weight: 500;
     font-size: 2rem;
     letter-spacing: 1.2px;
@@ -40,6 +40,7 @@ header {
 .btn.btnFill, .btn.btnOutline:hover {
     border: 1px solid #00b371;
     background-color: #00b371;
+    border-radius: 10px;
     color: #ffffff;
 }
 
@@ -56,7 +57,117 @@ header {
 .btn.btnOutline, .btn.btnFill:hover {
     border: 1px solid #00b371;
     background-color: #ffffff;
+    border-radius: 10px;
     color: #00b371;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .4);
+    /* size */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* if over scroll */
+    overflow: auto;
+}
+
+.modalContent {
+    /* padding */
+    margin: 15rem auto 0 auto;
+    padding: 4.2rem 5rem;
+    width: 72.5%;
+}
+
+.fc-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h2ModalTitle {
+    font-size: 4rem;
+    letter-spacing: 2.4px;
+    margin: 0 0 3.5rem 0;
+}
+
+.modalHR {
+    border-top: 0;
+    border-bottom: 1px solid #c6c6c6;
+    /* margin: 1rem 10%; */
+    width: 100%;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fc-form {
+    padding: 15rem 0;
+    width: 100%;
+    
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.fc-input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 auto 3.5rem auto;
+    width: 100%;
+    justify-content: center;
+    /* margin: 0 auto; */
+}
+
+.fc-input:last-of-type {
+    margin: 0 auto;
+}
+
+.fc-input label {
+    width: 30%;
+    text-align: right;
+    font-size: 3.6rem;
+    letter-spacing: 2.2px;
+}
+
+.fc-input input {
+    width: 60%;
+    margin: 0 0 0 2.5rem;
+    padding: 0 0 0 1.5rem;
+    text-align: left;
+    
+    font-size: 2.4rem;
+    letter-spacing: 2.2px;
+}
+
+.fc-input input::placeholder {
+    color: #666666;
+    font-weight: 100;
+}
+
+.fc-input input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 .25rem .025rem #00b371;
+    border: 1px solid #00b371;
+    /* outline-offset: 0; */
+    outline: none;
+}
+
+form button {
+    margin: 3rem auto 0 auto;
+    padding: 2rem 16rem;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    /* width: 40%; */
 }
 
 .content > .imgAvatarMed {

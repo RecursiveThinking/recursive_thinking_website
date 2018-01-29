@@ -29,13 +29,67 @@
         <div class="cell cell-center">
             <div class="content">
                 <nav class="navButtons">
-                    <a href="../layout.html"><button class="btn btnFill">D</button></a>
+                    <!-- <a href="../layout.html"><button class="btn btnFill">D</button></a> -->
                     <button id="btnSignUp" class="btn btnOutline">Sign Up</button>
                     <button id="btnLogin" class="btn btnFill">Login</button>
                 </nav>
             </div>
         </div>
     </header>
+    <section>
+        <div id="modalSignUp" class="modal">
+            <div class="modalContent card">
+                <div class="fc-modal">
+                    <h2 class="h2ModalTitle colorBlack fw300">Sign Up</h2>
+                    <hr class="modalHR">
+                    <!-- <div class="giveMeSpaceModal"></div> -->
+                    <form action="">
+                        <div class="fc-form">
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="email">Email: </label>
+                                <input class="colorGray42 fw300" type="text" name="email" placeholder="Email">
+                            </div>
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="password">Password:</label>
+                                <input class="colorGray42 fw300" type="text" name="password" placeholder="Password">
+                            </div>
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="passwordConfirm">Re-enter Password:</label>
+                                <input class="colorGray42 fw300" type="text" name="passwordConfirm" placeholder="Password Confirmation">
+                            </div>
+                        </div>
+                        <hr class="modalHR">
+                        <button class="btn btnFill colorWhiteff fw500">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div id="modalLogin" class="modal">
+            <div class="modalContent card">
+                <div class="fc-modal">
+                    <h2 class="h2ModalTitle colorBlack fw300">Login</h2>
+                    <hr class="modalHR">
+                    <!-- <div class="giveMeSpaceModal"></div> -->
+                    <form action="">
+                        <div class="fc-form">
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="email">Email: </label>
+                                <input class="colorGray42 fw300" type="text" name="email" placeholder="Email">
+                            </div>
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="password">Password:</label>
+                                <input class="colorGray42 fw300" type="text" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <hr class="modalHR">
+                        <button class="btn btnFill colorWhiteff fw500">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="bannerImage">
         <div class="grid gutters cols-1 u-textCenter">
             <div class="cell">
@@ -127,6 +181,7 @@
             </div>
         </div>
     </footer>
+    <script src="homeScreen.js"></script>
 </body>
 
 </html>
