@@ -18,7 +18,10 @@ body {
     /* padding: 0; */
 
     /* width: 100vw; */
-     height: 100vh;
+    /* height: 100vh; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     max-width: 1920px;
     margin: 0 auto;
@@ -35,6 +38,8 @@ header {
     /* flex-direction: row; */
     /* flex-wrap: nowrap; */
     /* justify-content: space-between; */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .content > .logo {
@@ -55,15 +60,8 @@ header {
     display: block;
 }
 
-#mainContent {
-    overflow: auto;
-    background-color: #eeeeee;
-}
-
-.mainContentWrapper {
-    display: inline-block;
-    min-width: 74%;
-    max-width: 74%;
+.grow {
+    flex-grow: 1;
 }
 
 .content .searchBar {
@@ -74,7 +72,8 @@ header .input.search {
 }
 
 .input {
-    padding: 1rem 16rem 1rem 2rem;
+    /* padding: 1rem 16rem 1rem 2rem; */
+    padding: 1rem 6rem 1rem 2rem;
     margin-left: 2rem;
     border-radius: 3rem;
     border: .1rem solid #979797;
@@ -86,22 +85,15 @@ header .input.search {
     text-align: left;
 }
 
-.sidebarWrapper {
-    height: 100%;
-    display: inline-block;
-    position: relative;
-    min-width: 25%;
-    max-width: 25%;
-}
-
 .sidebar {
     display: flex;
     flex-direction: column;
     background-color: #2d3134;
     justify-content: flex-start;
     height: 100%;
-    width: 300px;
-    align-items: stretch;
+    /* width: 300px; */
+    /* align-items: stretch; */
+    flex-grow: 1;
     margin: 0;
 
 }
@@ -119,13 +111,6 @@ header .input.search {
     color: #ffffff;
     text-transform: uppercase;
 }
-
-
-/* .sidebar hr {
-    border-width: 0 0 .2rem 0;
-    border-color: #979797;
-    border-style: solid;
-} */
 
 .sidebar .sidebar-item {
     /* flex: 12 12 auto; */
@@ -195,11 +180,13 @@ header .input.search {
     border: solid 1px #c6c6c6;
 }
 
+
 footer {
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     left: 0;
     width: 100%;
+    box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 footer .copyAlignment {
@@ -214,11 +201,44 @@ footer .cell:nth-of-type(2){
     order: -1;
 }
 
+/* general classes */
+
+.ttup {
+    text-transform: uppercase;
+}
+
+.ttlow {
+    text-transform: lowercase;
+}
 
 
+.fw300 {
+    font-weight: 300;
+}
 
+.fw500 {
+    font-weight: 500;
+}
 
+.fw700 {
+    font-weight: 700;
+}
 
+.fw900 {
+    font-weight: 900;
+}
+
+.colorGreen {
+    color: #00b371;
+}
+
+.colorGrayb9 {
+    color: #b9b9b9;
+}
+
+.colorBlack {
+    color: #000000;
+}
 
 /* Flexbox Responsive Grid */
 
@@ -227,7 +247,7 @@ footer .cell:nth-of-type(2){
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 /* Grid Justify */
@@ -245,6 +265,11 @@ footer .cell:nth-of-type(2){
 }
 .gutters .cell {
     padding-left: 1em;
+}
+
+/* Container Vertical Center*/
+.contVertCenter {
+    align-items: center;
 }
 
 /* Grid TextAlign */
