@@ -292,19 +292,6 @@ footer .content:after {
     margin-top: 0;
 }
 
-/* footer .copyAlignment {
-    text-align: center;
-}
-
-footer .iconAlignment {
-    text-align: center;
-} */
-
-footer .fa {
-    font-size: 3.4rem;
-    padding: .75rem 0;
-}
-
 /* Phone S Base Case to 425 */
 @media only screen and (max-width: 425px) and (min-width: 320px) {
 
