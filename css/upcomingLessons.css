@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#upcomingLessonsHTML {
+    /* min-height: 100vh; */
+    background-color: #eeeeee;
+    padding: 3rem 3rem 3rem 3rem;
+}
+
+#upcomingLessonsHTML  > .content.container > .grid.gutters.third > .cell > article {
+    height: 100%;
+}
+
+#upcomingLessonsHTML  .fc-taughtByThumbs {
+    margin-bottom: 1.5rem;
+}
+
+.fc-lessonButtons {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    /* justify-content: center; */
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.lessonButton {
+    flex: 0 0 32%;
+    text-align: center;
+    border-radius: 1rem;
+    /* border: 1px solid black; */
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    padding: 1.4rem 0;
+}
+
+/* .fc-lessonTitleDescription {
+    margin: 1.8rem 0;
+} */
+
+.fc-attendingContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.thumbAndName {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex: 0 0 50%;
+    margin: 1rem 0;
+    align-items: center;
+}
+
+.thumbAndName .avatarThumbRound {
+    margin: 0;
+}
+
+.marginLeft14 {
+    margin-left: 1.4rem;
+}
