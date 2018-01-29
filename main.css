@@ -212,6 +212,9 @@ footer .cell:nth-of-type(2){
     text-transform: lowercase;
 }
 
+.fw100 {
+    font-weight: 100;
+}
 
 .fw300 {
     font-weight: 300;
