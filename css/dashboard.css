@@ -9,14 +9,16 @@
     padding: 3rem 3rem 3rem 3rem;
 }
 
-#dashboardHTML article {
+/* #dashboardHTML article { */
+.cell > article {
     display: flex;
     flex-direction: column;
     padding: 2rem;
     background-color: white;
 }
 
-#dashboardHTML article h2 {
+/* #dashboardHTML article h2 { */
+.cell > article h2 {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     /* color: #b9b9b9; */
@@ -38,7 +40,8 @@
     text-align: center;
 }
 
-#dashboardHTML .h1Data, #dashboardHTML .h1Date {
+/* #dashboardHTML .h1Data, #dashboardHTML .h1Date { */
+#dashboardHTML .h1Data, .h1Date {
     font-size: 7.2rem;
     /* font-weight: 300; */
     letter-spacing: 4.3px;
@@ -54,53 +57,66 @@
     height: 100%;
 }
 
-#dashboardHTML .fc-dateRow {
+/* #dashboardHTML .fc-dateRow { */
+.fc-dateRow {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
 }
 
 #dashboardHTML .imAttending .fc-dateRow {
+/* .imAttending .fc-dateRow { */
     margin-top: 1rem;
 } 
 
-#dashboardHTML .fc-dateRow .h1Date {
+/* #dashboardHTML .fc-dateRow .h1Date { */
+.fc-dateRow .h1Date {
     margin-top: .25rem;
 }
 
-#dashboardHTML .fc-dateRow .fc-dateRowMonthYear {
+/* #dashboardHTML .fc-dateRow .fc-dateRowMonthYear { */
+.fc-dateRow .fc-dateRowMonthYear {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: space-between;
 }
 
-#dashboardHTML .h4MonthYear {
+/* #dashboardHTML .h4MonthYear { */
+.h4MonthYear {
     font-size: 2.4rem;
     letter-spacing: 1.5px;
     margin-left: 1rem;
 }
 
-#dashboardHTML .h4LessonTitle {
+/* #dashboardHTML .h4LessonTitle { */
+.h4LessonTitle {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 }
 
-#dashboardHTML .h4LessonTitle.ucMargin {
+/* #dashboardHTML .h4LessonTitle.ucMargin { */
+.h4LessonTitle.ucMargin {
     margin: .75rem 0 .35rem 0;
 }
 
-#dashboardHTML .h4LessonTitle.negMarg {
+/* #dashboardHTML .h4LessonTitle.negMarg { */
+.h4LessonTitle.negMarg {
     margin: -.5rem 0 2rem 0;
 }
 
-#dashboardHTML p {
+.fc-lessonTitleDescription {
+    margin: 1.8rem 0;
+}
+
+.fc-lessonTitleDescription p {
     font-size: 1.6rem;
     letter-spacing: 1px;
     padding: 1rem 0; 
 }
 
-#dashboardHTML .fc-taughtByThumbs {
+/* #dashboardHTML .fc-taughtByThumbs { */
+.fc-taughtByThumbs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -108,7 +124,8 @@
     /* justify-content: space-between; */
 }
 
-#dashboardHTML .fc-taughtByThumbs img {
+/* #dashboardHTML .fc-taughtByThumbs img { */
+.avatarThumbRound {
     width: 7rem;
     height: 7rem;
     border-radius: 50%;
@@ -137,7 +154,7 @@
 }
 
 /* responsive grid after 768px */
-@media only screen and (min-width: 480px){
+@media only screen and (max-width: 768px){
     #dashboardHTML {
         padding: 2rem;
     }
