@@ -241,6 +241,34 @@ footer .cell:nth-of-type(2){
     color: #000000;
 }
 
+.colorBlack06 {
+    color: #060606;
+}
+
+.colorGray42 {
+    color: #424041;
+}
+
+.colorGray66 {
+    color: #666666;
+}
+
+.colorWhiteff {
+    color: #ffffff;
+}
+
+.btnColorGreenBright {
+    background-color: #00b371;
+}
+
+.btnColorGreenForest {
+    background-color: #006842;
+}
+
+.btnColorGreenDark {
+    background-color: #2d3134;
+}
+
 /* Flexbox Responsive Grid */
 
 /* Grid Def */
