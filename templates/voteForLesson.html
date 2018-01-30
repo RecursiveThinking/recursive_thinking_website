@@ -6,8 +6,169 @@
 </head>
 <body>
 <section id="voteForLessonHTML">
-    <h1>Vote for lessons</h1>
+    <!-- <h1>Vote for lessons</h1> -->
+    <div class="content container">
+        <div class="grid full">
+            <div class="cell">
+                <article class="submitLesson card">
+                    <h4 class="h4Title fw300 colorBlack">Want to learn something specific? Have something to teach?</h4>
+                    <h2 class="h2Title fw300 colorBlack">Submit a lesson request</h2>
+                    <button id="btnSubmitLesson" class="btn btnFill signUp btnMarginTop">Submit Lesson</button>
+                </article>
+            </div>
+        </div>
+        <section>
+            <div id="modalSubmitLesson" class="modal">
+                <div class="modalContent card">
+                    <div class="fc-modal">
+                        <h2 class="h2ModalTitle colorBlack fw300">Submit a lesson request</h2>
+                        <hr class="modalHR">
+                        <!-- <div class="giveMeSpaceModal"></div> -->
+                        <form action="">
+                            <div class="fc-form">
+                                <div class="fc-input2">
+                                    <label class="labelSm colorGray42 fw500" for="email">Lesson title: </label>
+                                    <input class="colorGray42 fw300" type="text" name="lessonTitle" placeholder="Email">
+                                </div>
+                                <div class="fc-input2">
+                                    <label class="labelSm colorGray42 fw500" for="password">Description:</label>
+                                    <textarea rows="8" cols="12" class="colorGray42 fw300" type="text" name="lessonDescription" placeholder="Enter Your Description Here"></textarea>
+                                </div>
+                                <div class="fc-input2">
+                                    <label class="labelSm colorGray42 fw500" for="passwordConfirm">Taught by:</label>
+                                    <input class="colorGray42 fw300" type="text" name="lessonTaughtBy" placeholder="Teacher Name">
+                                </div>
+                            </div>
+                            <hr class="modalHR">
+                            <button class="btn btnFill colorWhiteff fw500">Submit Lesson</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="cardContainer">
+            <div class="grid gutters half">
+                <div class="cell">
+                    <article class="content card">
+                        <h3 class="h3TitleLesson colorBlack fw500">Designing with A-Frame VR</h3>
+                        <hr>
+                        <div class="fc-pLesson">
+                            <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <!-- <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                            </p>
+                        </div>
+                        <hr>
+                        <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
+                        <div class="fc-taughtByThumbs">
+                            <img class="avatarThumbRound" src="../public/images/avatar1.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar2.png" alt="">
+                            <!-- <img class="avatarThumbRound" src="../public/images/avatar3.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar4.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar5.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar6.png" alt=""> -->
+                        </div>
+                        <hr>
+                        <div class="fc-votes">
+                            <h3 class="h3VoteCount colorGreen fw900">15 Votes</h3>
+                            <button class="btn btnOutline fw900" type="submit">Voted!</button>
+                        </div>
+                    </article>
+                </div>
+                <div class="cell">
+                    <article class="content card">
+                        <h3 class="h3TitleLesson colorBlack fw500">Building a city with HTML & CSS</h3>
+                        <hr>
+                        <div class="fc-pLesson">
+                            <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <!-- <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                            </p>
+                        </div>
+                        <hr>
+                        <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
+                        <div class="fc-taughtByThumbs">
+                            <img class="avatarThumbRound" src="../public/images/avatar1.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar2.png" alt="">
+                            <!-- <img class="avatarThumbRound" src="../public/images/avatar3.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar4.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar5.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar6.png" alt=""> -->
+                        </div>
+                        <hr>
+                        <div class="fc-votes">
+                            <h3 class="h3VoteCount colorGreen fw900">12 Votes</h3>
+                            <button class="btn btnFill fw500" type="submit">Vote for this</button>
+                        </div>
+                    </article>
+                </div>
+                <div class="cell">
+                    <article class="content card">
+                        <h3 class="h3TitleLesson colorBlack fw500">Building a calculator with HTML, CSS & JavaScript</h3>
+                        <hr>
+                        <div class="fc-pLesson">
+                            <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <!-- <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                            </p>
+                        </div>
+                        <hr>
+                        <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
+                        <div class="fc-taughtByThumbs">
+                            <img class="avatarThumbRound" src="../public/images/avatar1.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar2.png" alt="">
+                            <!-- <img class="avatarThumbRound" src="../public/images/avatar3.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar4.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar5.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar6.png" alt=""> -->
+                        </div>
+                        <hr>
+                        <div class="fc-votes">
+                            <h3 class="h3VoteCount colorGreen fw900">15 Votes</h3>
+                            <button class="btn btnFill fw500" type="submit">Vote for this</button>
+                        </div>
+                    </article>
+                </div>
+                <div class="cell">
+                    <article class="content card">
+                        <h3 class="h3TitleLesson colorBlack fw500">Building a native application with Swift</h3>
+                        <hr>
+                        <div class="fc-pLesson">
+                            <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                            <!-- <br><br>
+                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                            </p>
+                        </div>
+                        <hr>
+                        <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
+                        <div class="fc-taughtByThumbs">
+                            <img class="avatarThumbRound" src="../public/images/avatar1.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar2.png" alt="">
+                            <!-- <img class="avatarThumbRound" src="../public/images/avatar3.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar4.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar5.png" alt="">
+                            <img class="avatarThumbRound" src="../public/images/avatar6.png" alt=""> -->
+                        </div>
+                        <hr>
+                        <div class="fc-votes">
+                            <h3 class="h3VoteCount colorGreen fw900">15 Votes</h3>
+                            <button class="btn btnFill fw500" type="submit">Vote for this</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<!-- <script src="voteForLesson.js"></script> -->
 </body>
 </html>
 

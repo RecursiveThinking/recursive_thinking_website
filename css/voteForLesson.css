@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#voteForLessonHTML {
+    /* min-height: 100vh; */
+    background-color: #eeeeee;
+}
+
+#voteForLessonHTML .content.container {
+    padding: 0;
+}
+
+#voteForLessonHTML .cardContainer {
+    padding: 3rem 3rem 3rem 3rem;
+}
+
+#voteForLessonHTML .submitLesson {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 0;
+}
+
+#voteForLessonHTML .fc-form {
+    padding: 4rem 0;
+}
+
+.fc-input2 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 0 auto 2.4rem auto;
+    width: 90%;
+    justify-content: center;
+    /* margin: 0 auto; */
+}
+
+.fc-input2 .labelSm {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    
+    margin: 0 0 1.1rem 0;
+}
+
+.fc-input2 input, .fc-input2 textarea  {
+    /* margin: 0 0 0 2.5rem; */
+    padding: 1rem 1.5rem;
+    text-align: left;
+    
+    font-size: 2.4rem;
+    letter-spacing: 2.2px;
+}
+
+.fc-input2 textarea {
+    resize: none;
+}
+
+.fc-input2 input::placeholder, .fc-input2 textarea::placeholder {
+    color: #666666;
+    font-weight: 100;
+}
+
+.cardContainer > .grid.gutters.half > .cell > .content {
+    padding: 4rem 4rem 2.4rem 4rem;
+}
+
+.h3TitleLesson {
+    font-size: 2.8rem;
+    letter-spacing: 1.7px;
+    
+    margin: 0 0 1.9rem 0;
+}
+
+.fc-pLesson {
+    margin: 1.9rem 0;
+}
+
+.fc-pLesson p {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.fc-votes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.9rem 0 0 0;
+}
+
+.h3VoteCount {
+    font-size: 2.8rem;
+    letter-spacing: 1.7px;
+}
+
+.fc-votes button {
+    padding: 1rem 0;
+    width: 24rem;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    margin: 0 0 0 0;
+}
+
+#voteForLessonHTML .fc-taughtByThumbs {
+    margin-bottom: 1.5rem;
+}
