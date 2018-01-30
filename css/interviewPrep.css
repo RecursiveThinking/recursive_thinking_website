@@ -1,0 +1,180 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#interviewPrepHTML {
+    /* min-height: 100vh; */
+    background-color: #eeeeee;
+}
+
+#interviewPrepHTML .content.container {
+    padding: 0;
+}
+
+#interviewPrepHTML .cardContainer {
+    padding: 3rem 3rem 3rem 3rem;
+}
+
+#interviewPrepHTML .submitInterviewQuestion {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 0;
+}
+
+.sortBar.content, .filterBar.content{
+    padding: 1rem;
+    border: 1px solid #979797;
+    
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+}
+
+.fc-titleAnswer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.h5InterviewQuestionDate {
+    font-size: 2rem;
+    letter-spacing: 1.7px;
+    margin-bottom: .9rem;
+}
+
+.fc-form h4 {
+    margin-bottom: .9rem;
+}
+
+.h4TitleInterviewQuestion {
+    font-size: 2.4rem;
+    letter-spacing: 1.7px;
+}
+
+#interviewPrepHTML .fc-form {
+    padding: 3.5rem 0 4rem 0;
+}
+
+.fc-textAreaModalAnswer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 2.4rem auto 0 auto;
+    justify-content: center;
+    /* margin: 0 auto; */
+}
+
+.fc-textAreaModalAnswer .labelSm {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    
+    margin: 0 0 1.1rem 0;
+}
+
+.fc-textAreaModalAnswer textarea  {
+    /* margin: 0 0 0 2.5rem; */
+    padding: 1rem 1.5rem;
+    text-align: left;
+    
+    font-size: 2.4rem;
+    letter-spacing: 2.2px;
+}
+
+.fc-textAreaModalAnswer textarea {
+    resize: none;
+}
+
+.fc-textAreaModalAnswer textarea::placeholder {
+    color: #666666;
+    font-weight: 100;
+}
+
+
+.fc-replies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.9rem 0 0 0;
+}
+
+.fc-replies.open {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 1.9rem 0 0 0;
+}
+
+.fc-replies.open .fc-answers {
+    display: flex;
+    flex-direction: column;
+}
+
+.fc-replies.open .fc-answers .fc-author {
+    display: flex;
+    flex-direction: row;
+}
+
+.fc-replies.open .fc-answers {
+    margin: 1.9rem 0;
+}
+
+.fc-replies.open .fc-answers:first-of-type {
+    margin: 1.9rem 0 0 0;
+}
+
+.fc-replies.open .fc-answers h5, .fc-replies.open .fc-answers p {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.fc-replies.open .fc-answers .fc-author .h5TitleDate {
+    margin: 0 0 0 .5rem;
+} 
+
+.fc-replies.open .fc-answers p {
+    margin: 1rem 0 2rem 0;
+}
+
+.fc-replies.open > button {
+    align-self: flex-end;
+}
+
+.fc-replies button {
+    padding: 2rem 0;
+    width: 24rem;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    margin: 0 0 0 0;
+}
+
+.fc-interviewQuestionTags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+    margin: 2.5rem 0;
+}
+
+.tagInterviewQuestion {
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    
+    padding: 1rem 2rem;
+    border: 1px solid #00b371;
+    border-radius: 2.3rem;
+    margin-left: 1rem;
+}
+
+.tagInterviewQuestion:first-of-type{
+    margin-left: 0;
+}

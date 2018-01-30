@@ -6,8 +6,235 @@
 </head>
 <body>
 <section id="interviewPrepHTML">
-    <h1>interview prep</h1>
-</section>
+        <!-- <h1>interview prep</h1> -->
+        <div class="content container">
+            <div class="grid full">
+                <div class="cell">
+                    <article class="submitInterviewQuestion card">
+                        <h4 class="h4Title fw300 colorBlack">Have you come across an interview question you would like to share?</h4>
+                        <h2 class="h2Title fw300 colorBlack">Submit an Interview Question</h2>
+                        <button id="btnSubmitInterviewQuestion" class="btn btnFill signUp btnMarginTop">Submit Question</button>
+                    </article>
+                </div>
+            </div>
+            <section>
+                <div id="modalSubmitInterviewQuestion" class="modal">
+                    <div class="modalContent card">
+                        <div class="fc-modal">
+                            <h2 class="h2ModalTitle colorBlack fw300">Submit an Interview Question</h2>
+                            <hr class="modalHR">
+                            <!-- <div class="giveMeSpaceModal"></div> -->
+                            <form action="">
+                                <div class="fc-form">
+                                    <div class="fc-input2">
+                                        <label class="labelSm colorGray42 fw500" for="questionTitle">Question Title: </label>
+                                        <input class="colorGray42 fw300" type="text" name="questionTitle" placeholder="Title">
+                                    </div>
+                                    <div class="fc-input2">
+                                        <label class="labelSm colorGray42 fw500" for="questionDescription">Question Description:</label>
+                                        <textarea rows="8" cols="12" class="colorGray42 fw300" type="text" name="questionDescription" placeholder="Enter Question Description Here"></textarea>
+                                    </div>
+                                    <div class="fc-input2">
+                                        <label class="labelSm colorGray42 fw500" for="questionTags">Tag profession, skills & languages:</label>
+                                        <input class="colorGray42 fw300" type="text" name="questionTags" placeholder="Tags">
+                                    </div>
+                                </div>
+                                <hr class="modalHR">
+                                <button class="btn btnFill colorWhiteff fw500">Submit Question</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="cardContainer">
+                <div class="grid gutters half">
+                    <div class="cell">
+                        <article class="sortBar content">
+                            
+                        </article>
+                    </div>
+                    <div class="cell">
+                        <article class="filterBar content">
+                            
+                        </article>
+                    </div>
+                </div>
+                <section>
+                    <div id="modalAnswerInterviewQuestion" class="modal">
+                        <div class="modalContent card">
+                            <div class="fc-modal">
+                                <h2 class="h2ModalTitle colorBlack fw300">Reply to Interview Question</h2>
+                                <hr class="modalHR">
+                                <!-- <div class="giveMeSpaceModal"></div> -->
+                                <form action="">
+                                    <div class="fc-form">
+                                        <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Highlight Table Rows:</h4>
+                                        <hr class="modalHR">
+                                        <div class="fc-pLesson">
+                                            <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                            <br><br>
+                                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                            <!-- <br><br>
+                                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                                            </p>
+                                        </div>
+                                        <hr class="modalHR">
+                                        <div class="fc-interviewQuestionTags">
+                                            <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
+                                            <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
+                                            <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
+                                            <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
+                                        </div>
+                                        <hr class="modalHR">
+                                        <div class="fc-textAreaModalAnswer">
+                                            <label class="labelSm colorGray42 fw500" for="questionDescription">Your Reply:</label>
+                                            <textarea rows="8" cols="12" class="colorGray42 fw300" type="text" name="questionDescription" placeholder="Enter Your Answer Here"></textarea>
+                                        </div>
+                                    </div>
+                                    <hr class="modalHR">
+                                    <button class="btn btnFill colorWhiteff fw500">Submit Answer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="grid gutters full">
+                    <div class="cell">
+                        <article class="content card">
+                            <div class="fc-titleAnswer">
+                                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Highlight Table Rows:</h4>
+                                <h5 class="h5InterviewQuestionDate colorGray64 fw300">September 5, 2017</h5>
+                            </div>
+                            <hr>
+                            <div class="fc-pLesson">
+                                <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <!-- <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="fc-interviewQuestionTags">
+                                <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
+                            </div>
+                            <hr>
+                            <div class="fc-replies">
+                                <h3 class="h3VoteCount colorGreen fw900">2 Replies</h3>
+                                <button id="btnAnswerQuestion" class="btn btnFill" type="submit">Answer Question</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="cell">
+                        <article class="content card">
+                            <div class="fc-titleAnswer">
+                                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Build an Accordion:</h4></h3>
+                                <h5 class="h5InterviewQuestionDate colorGray64 fw300">September 1, 2017</h5>
+                            </div>
+                            <hr>
+                            <div class="fc-pLesson">
+                                <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <!-- <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="fc-interviewQuestionTags">
+                                <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
+                            </div>
+                            <hr>
+                            <div class="fc-replies open">
+                                <h3 class="h3VoteCount colorGreen fw900">Replies (add .open class on click)</h3>
+                                <div class="fc-answers">
+                                    <div class="fc-author">
+                                        <h5 class="colorBlack fw900">Josh Smith</h5>
+                                        <h5 class="h5TitleDate colorGray55 fw300">11/12/17</h5>
+                                    </div>
+                                    <p class="colorGray55 fw300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.</p>
+                                    <hr>
+                                </div>
+                                <div class="fc-answers">
+                                    <div class="fc-author">
+                                        <h5 class="colorBlack fw900">Jack Scolon</h5>
+                                        <h5 class="h5TitleDate colorGray55 fw300">11/12/17</h5>
+                                    </div>
+                                    <p class="colorGray55 fw300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.</p>
+                                    <hr>
+                                </div>
+                                <button class="btn btnFill fw500" type="submit">Answer Question</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="cell">
+                        <article class="content card">
+                            <div class="fc-titleAnswer">
+                                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Build a Modal:</h4></h3>
+                                <h5 class="h5InterviewQuestionDate colorGray64 fw300">August 25, 2017</h5>
+                            </div>
+                            <hr>
+                            <div class="fc-pLesson">
+                                <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <!-- <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="fc-interviewQuestionTags">
+                                <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
+                            </div>
+                            <hr>
+                            <div class="fc-replies">
+                                <h3 class="h3VoteCount colorGreen fw900">3 Replies</h3>
+                                <button class="btn btnFill fw500" type="submit">Answer Question</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="cell">
+                        <article class="content card">
+                            <div class="fc-titleAnswer">
+                                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Build a Gallery:</h4></h3>
+                                <h5 class="h5InterviewQuestionDate colorGray64 fw300">August 5, 2017</h5>
+                            </div>
+                            <hr>
+                            <div class="fc-pLesson">
+                                <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                <!-- <br><br>
+                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="fc-interviewQuestionTags">
+                                <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
+                                <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
+                            </div>
+                            <hr>
+                            <div class="fc-replies">
+                                <h3 class="h3VoteCount colorGreen fw900">4 Replies</h3>
+                                <button class="btn btnFill fw500" type="submit">Answer Question</button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
 
