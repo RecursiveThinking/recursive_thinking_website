@@ -14,13 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:100,200,300,400,500,900" rel="stylesheet">
     <title>Title</title>
     <!-- css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/homeScreen.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/dashboard.css" >
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/upcomingLessons.css" >
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/voteForLesson.css" >
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/upcomingLessons.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/voteForLesson.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/interviewPrep.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css"/>
     <!-- templates -->
     <link id="dashboardHTML" href="templates/dashboard.html" type="text/html" rel="import">
     <link id="upcomingLessonsHTML" href="templates/upcomingLessons.html" type="text/html" rel="import">
@@ -71,7 +71,7 @@
                     <h2 class="sidebarTitle">Vote For Lessons</h2>
                     <span><i class="fa fa-thumbs-up"></i></span>
                 </article>
-                <article class="sidebar-item" data-pageId="interview-prep">
+                <article id="btnSidebarInterviewPrep" class="sidebar-item" data-pageId="interview-prep">
                     <h2 class="sidebarTitle">Interview Prep</h2>
                     <span><i class="fa fa-object-group"></i></span>
                 </article>
@@ -114,5 +114,6 @@
 <script src="./scripts/genericFunctions.js"></script>
 <!-- <script src="./scripts/allFunctions.js"></script> -->
 <script src="./templates/voteForLesson.js"></script>
+<script src="./templates/interviewPrep.js"></script>
 </body>
 </html>
