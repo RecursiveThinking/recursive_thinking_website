@@ -18,7 +18,7 @@
 }
 
 /* #dashboardHTML article h2 { */
-.cell > article h2 {
+.cell > article h4 {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     /* color: #b9b9b9; */
