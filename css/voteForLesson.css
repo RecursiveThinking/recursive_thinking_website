@@ -65,7 +65,7 @@
     font-weight: 100;
 }
 
-.cardContainer > .grid.gutters.half > .cell > .content {
+.cardContainer > .grid.gutters.full > .cell > .content {
     padding: 4rem 4rem 2.4rem 4rem;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .fc-votes button {
-    padding: 1rem 0;
+    padding: 2rem 0;
     width: 24rem;
     font-size: 2rem;
     letter-spacing: 1.2px;
