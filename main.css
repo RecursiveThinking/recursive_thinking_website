@@ -309,10 +309,11 @@ footer a:nth-of-type(2){
 
 /* Grid Gutters */
 .gutters {
-    margin-left: -1em;
+    margin-left: -3em;
 }
 .gutters .cell {
-    padding-left: 1em;
+    /* padding-left: 1em; */
+    padding-left: 3em;
 }
 
 /* Container Vertical Center*/
@@ -331,7 +332,8 @@ footer a:nth-of-type(2){
 
 .content {
     padding: 0.8em 1em 0;
-    margin-bottom: 1em;
+    /* margin-bottom: 1em; */
+    margin-bottom: 3em;
 }
 
 .item-textCenter {
