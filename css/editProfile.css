@@ -1,0 +1,265 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#editProfileHTML {
+    /* min-height: 100vh; */
+    background-color: #eeeeee;
+}
+
+#editProfileHTML .content.container {
+    padding: 3rem 3rem 3rem 3rem;
+}
+
+#editProfileHTML .editProfile.card {
+    padding: 5rem 5rem 5rem 5rem;
+}
+
+#editProfileHTML .fc-topBar {
+    margin: 0 0 0rem 0;
+}
+
+#editProfileHTML .avatarPicXL {
+    width: 29.3rem;
+    height: auto;
+    border-radius: 50%;
+    z-index: 0;
+    position: relative;
+}
+
+#editProfileHTML .caption {
+    width: 29.3rem;
+    /* background-color: red; */
+    padding: 2rem 0;
+    z-index: 1;
+    /* margin-top: -3rem; */
+    position: absolute;
+    margin: -5.5rem auto 0 auto;
+    text-align: center;
+}
+
+.fc-infoCont1 {
+    margin: 0 0 7rem 0;
+}
+
+.fc-infoCont2 {
+    margin: 0 0 11.8rem 0;
+}
+
+.fc-infoCont3 {
+    margin: 0 0 8rem 0;
+}
+
+.fc-form-profile {
+    padding: 3.75rem 0;
+    width: 100%;
+}
+
+.fc-input-profile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 auto 2rem auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    /* margin: 0 auto; */
+}
+
+.fc-input-profile:last-of-type {
+    margin: 0 auto;
+}
+
+.fc-input-profile label {
+    width: 23%;
+    text-align: right;
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+}
+
+.fc-input-profile input {
+    width: 67%;
+    margin: 0 0 0 2.5rem;
+    padding: 1rem 0 1rem 1.5rem;
+    text-align: left;
+    
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+}
+
+.fc-input-profile input::placeholder {
+    color: #666666;
+    font-weight: 100;
+}
+
+.fc-input-profile input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 .25rem .025rem #00b371;
+    border: 1px solid #00b371;
+    /* outline-offset: 0; */
+    outline: none;
+}
+
+.fc-form-about {
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; */
+    
+    width: 100%;
+}
+
+.fc-form-about .grid .cell {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+}
+
+.fc-about {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* align-content: center; */
+    /* align-items: center; */
+    height: auto;
+    /* width: 100%; */
+}
+
+.fc-about .fc-input-about {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-content: center;
+    /* align-items: flex-end; */
+    /* align-content: flex-end; */
+    /* align-content: flex-end; */
+    /* align-items: flex-end; */
+    /* text-align: right; */
+    width: 100%;
+}
+
+.fc-about .fc-input-about label {
+    text-align: right;
+}
+
+.fc-about .fc-input-about .lbltaCenter {
+    text-align: center;
+}
+
+.fc-about .fc-input-about input {
+    width: 50%;
+}
+
+.fc-form-about, .fc-form-skills {
+    padding: 2.4rem 0 7.4rem 0;
+}
+
+.fc-form-skills.noBotPad {
+    /* background-color: red; */
+    padding: 2.4rem 0 0 0;
+}
+
+.fc-form-input label {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    margin: 0 0 1.8rem 0;
+}
+
+.fc-form-about label {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    text-align: right;
+}
+
+.fc-form-about textarea {
+    width: 100%;
+    /* display: block; */
+    resize: none;
+    min-height: 28rem;
+    
+    padding: 1rem 1.5rem;
+    text-align: left;
+    
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+}
+
+.fc-form-input {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    padding: 3rem 0 0 0;
+    margin: 0 0 2rem 0;
+}
+
+.fc-form-input input {
+    width: 80%;
+
+    padding: 1rem 0 1rem 1.5rem;
+    text-align: left;
+    
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+}
+
+.fc-skillItemCont {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* max-height: 100px; */
+}
+
+.fc-skillItemCont > .fc-skillItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    /* align-content: center; */
+    align-items: center;
+    width: 50%;
+    margin: 0 0 2rem 0;
+}
+
+.fc-skillItemCont > .fc-skillItem > h5, .editProfile .profileTitle {
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+}
+
+.editProfile .profileTitle {
+    text-align: center;
+}
+
+.fc-skillItemCont > .fc-skillItem > h5 {
+    text-align: right;
+    margin-right: 1.25rem;
+}
+
+.fc-skillItemCont > .fc-skillItem > .skillItemDash {
+    /* content: "|"; */
+    
+    /* margin: -.25rem 1rem 0 1rem; */
+    /* padding: 0 0 2rem 0; */
+    
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    
+}
+
+.fc-skillItemCont > .fc-skillItem > .skillItemClose {
+    
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    
+    border-left: 2px solid #979797;
+    /* margin-left: 1rem; */
+    padding-left: 1.25rem;
+    margin: -.125rem 0 0 0;
+    
+    cursor: pointer;
+}
