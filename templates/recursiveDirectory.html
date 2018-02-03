@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Upcoming Lessons</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Upcoming Lessons</title>
+        
+    </head>
+<body >
 <section id="recursiveDirectoryHTML">
-    <div class="grid cols-3">
+    <div id="gridContainer" class="grid cols-3">
         <div class="cell">
             <article class="directory-card">
                 <img class="devPicture" src="./public/images/avatar1.png" alt="a developers picture">
-                <h2 class="devName colorGray42 fw500">Porg Dev1</h2>
-                <hr>
-                <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
-                <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
+                <div class="fc-text-group">
+                    <a href="./templates/viewProfile.html" target="_blank"><h2 class="devName colorGray42 fw500">Porg Dev1</h2></a>
+                    <hr>
+                    <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
+                    <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
+                </div>
             </article>
         </div>
         <div class="cell">
@@ -37,10 +40,12 @@
         <div class="cell">
             <article class="directory-card">
                 <img class="devPicture" src="./public/images/avatar4.png" alt="a developers picture">
-                <h2 class="devName colorGray42 fw500">Porg Dev4</h2>
-                <hr>
-                <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
-                <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
+                <div class="fc-text-group">
+                    <h2 class="devName colorGray42 fw500">Porg Dev4</h2>
+                    <hr>
+                    <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
+                    <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
+                </div>
             </article>
         </div>
         <div class="cell">
@@ -64,16 +69,18 @@
         <div class="cell">
             <article class="directory-card">
                 <img class="devPicture" src="./public/images/avatar1.png" alt="a developers picture">
-                <h2 class="devName colorGray42 fw500">Porg Dev4</h2>
-                <hr>
-                <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
-                <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
+                <div class="fc-text-group">
+                    <h2 class="devName colorGray42 fw500">Porg Dev7</h2>
+                    <hr>
+                    <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
+                    <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
+                </div>
             </article>
         </div>
         <div class="cell">
             <article class="directory-card">
                 <img class="devPicture" src="./public/images/avatar2.png" alt="a developers picture">
-                <h2 class="devName colorGray42 fw500">Porg Dev5</h2>
+                <h2 class="devName colorGray42 fw500">Porg Dev8</h2>
                 <hr>
                 <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
                 <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
@@ -82,15 +89,17 @@
         <div class="cell">
             <article class="directory-card">
                 <img class="devPicture" src="./public/images/avatar3.png" alt="a developers picture">
-                <h2 class="devName colorGray42 fw500">Porg Dev6</h2>
+                <h2 class="devName colorGray42 fw500">Porg Dev9</h2>
                 <hr>
                 <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
                 <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
             </article>
         </div>
     </div>
-
 </section>
+<!-- <script src="../scripts/global.js"></script> -->
+<!-- <script src="recursiveDirectory.js"></script> -->
+<script src="recursiveDirectory.js"></script>
 </body>
 </html>
 

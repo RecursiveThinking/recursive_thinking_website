@@ -4,47 +4,57 @@
 }
 
 #recursiveDirectoryHTML {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-color: #eeeeee;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    /* background-color: #eeeeee; */
     padding: 3rem 0 3rem 3rem;
 }
+
+#recursiveDirectoryHTML .devPicture {
+    width: 31.6rem;
+    height: auto;
+    border-radius: 50%;
+    margin: 0 0 3.8rem 0;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+#recursiveDirectoryHTML .fc-text-group {
+    width: 100%
+}
+
 #recursiveDirectoryHTML hr {
     width: 90%;
+    margin: .6rem auto;
     border-top: 0;
+    
 }
 #recursiveDirectoryHTML .devName {
     font-size: 3.6rem;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
     letter-spacing: 2.2px;
 }
 #recursiveDirectoryHTML .devTitle {
     font-size: 2.8rem;
-    margin-bottom: 0;
+    margin-bottom: .4rem;
     letter-spacing: 1.7px;
 }
 #recursiveDirectoryHTML .devLocation {
     font-size: 2rem;
     letter-spacing: 1.2px;
+    margin: 0 0 0 0;
 }
-#recursiveDirectoryHTML .devPicture {
-    width: 31.6rem;
-    height: auto;
-    border-radius: 50%;
-}
+
 #recursiveDirectoryHTML .directory-card {
-    /* flex: 0 0 5rem; */
-    /*height: 30%;*/
-    /* flex: 0 0 28%; */
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
     background-color: #ffffff;
     margin: 0 3rem 3rem 0;
     padding: 4rem 2rem;
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    flex-wrap: nowrap; */
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center; 
     text-align: center; 
 }
