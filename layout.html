@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./css/interviewPrep.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/editProfile.css"/>
+    
+    <script src="./scripts/global.js"></script>
     <!-- templates -->
     <link id="dashboardHTML" href="templates/dashboard.html" type="text/html" rel="import">
     <link id="upcomingLessonsHTML" href="templates/upcomingLessons.html" type="text/html" rel="import">
@@ -55,9 +57,11 @@
         <div class="cell">
             <aside class="sidebar">
                 <article class="devCaption item-textCenter">
-                    <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
-                    <h2 class="devName">Dev Name</h2>
-                    <h3 class="devTitle">Dev Title</h3>
+                    <div class="fc-devInfo">
+                        <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
+                        <h2 class="devName">Dev Name</h2>
+                        <h3 class="devTitle">Dev Title</h3>
+                    </div>
                     <!-- <hr> -->
                 </article>
                 <article class="sidebar-item" data-pageId="dashboard">
@@ -113,7 +117,9 @@
     </footer>
 <script src="./scripts/layout.js"></script>
 <script src="./scripts/genericFunctions.js"></script>
+
 <!-- <script src="./scripts/allFunctions.js"></script> -->
+<!-- <script src="./templates/recursiveDirectory.js"></script> -->
 <script src="./templates/voteForLesson.js"></script>
 <script src="./templates/interviewPrep.js"></script>
 </body>
