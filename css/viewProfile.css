@@ -179,3 +179,12 @@
     font-size: 1.4rem;
     letter-spacing: 0.8px;
 }
+
+.fc-profileAbout h4, .fc-skillViewProfile h4 {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+}
+
+.fc-skillViewProfile {
+    padding: 1.6rem 3rem 0 3rem;
+}
