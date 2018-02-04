@@ -5,12 +5,13 @@ class api {
     }
 
     init() {
-        // do stuff when page loads
         window.addEventListener('load', function(e) {
             e.preventDefault();
-            console.log(e);
-            console.log(document.getElementById('main-content'));
+            const headerheight = document.getElementsByTagName("header")[0].offsetHeight;
+            const mainContainer = document.getElementById("mainWindow");
+            mainContainer.style.marginTop = `${headerheight}px`;
         });
+
 
         // adding our click listener to each sidebar item
         const sidebarItems = document.getElementsByClassName('sidebar-item');

@@ -30,28 +30,5 @@ const allUsers = [
         location: 'Dev6 Location'
     }
 ]
-console.log("At Global");
-console.log(allUsers);
-
-// const allEvents = [
-//     {
-        
-//     },
-//     {
-        
-//     },
-//     {
-        
-//     },
-//     {
-        
-//     },
-//     {
-        
-//     },
-//     {
-        
-//     }
-// ]
 
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
