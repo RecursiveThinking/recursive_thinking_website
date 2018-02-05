@@ -8,6 +8,9 @@
 <body>
 <section id="dashboardHTML">
     <!-- <h1>HELLO I AM THE DASHBOARD</h1> -->
+    <div class="cell">
+        <button class="btn btnFill btnTemp" onclick="buildProfileStatistics()">Click Me</button>
+    </div>
     <div class="content container">
         <div class="grid gutters full">
             <div class="cell">
@@ -59,10 +62,13 @@
         <br>
         <div class="grid gutters half grow">
             <div class="cell">
-                <article class="upComing card">
+                <div class="cell">
+                    <button class="btn btnFill btnTemp" onclick="buildUpcomingLesson()">Click Me</button>
+                </div>  
+                <article id="upComingLessonCard" class="upComing card">
                     <h4 class="colorGrayb9 fw900 ttup">Upcoming Lessons</h4>
                     <hr>
-                    <div class="fc-dateRow contVertCenter">
+                    <!-- <div class="fc-dateRow contVertCenter">
                         <h1 class="h1Date colorGreen fw300">25</h1>
                         <div class="fc-dateRowMonthYear">
                             <h4 class="h4MonthYear colorBlack fw500 ttup">November</h4>
@@ -74,23 +80,24 @@
                         <h4 class="h4LessonTitle ucMargin colorBlack fw300">Designing with A-Frame VR</h4>
                         <p>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
                         <br><br>
-                        Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                        Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
+                        
                         <!-- <br><br>
                         Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
-                    </div>
+                        
+                    <!-- </div>
                     <hr>
                     <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
                     <div class="fc-taughtByThumbs">
                         <img class="avatarThumbRound" src="../public/images/avatar1.png" alt="">
                         <img class="avatarThumbRound" src="../public/images/avatar2.png" alt="">
-                        <!-- <img class="avatarThumbRound" src="../public/images/avatar3.png" alt="">
-                        <img class="avatarThumbRound" src="../public/images/avatar4.png" alt="">
-                        <img class="avatarThumbRound" src="../public/images/avatar5.png" alt="">
-                        <img class="avatarThumbRound" src="../public/images/avatar6.png" alt=""> -->
-                    </div>
+                    </div> -->
                 </article>
             </div>
             <div class="cell">
+                <div class="cell">
+                    <button class="btn btnFill btnTemp" onclick="buildUpcomingLesson()">Click Me</button>
+                </div>
                 <article class="imAttending card">
                     <h4 class="colorGrayb9 fw900 ttup">I'm Attending</h4>
                     <hr>
@@ -135,5 +142,6 @@
         </div>    
     </div>
 </section>
+<script src="dashboard.js"></script>
 </body>
 </html>
