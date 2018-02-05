@@ -1,0 +1,56 @@
+
+/* header height based on Logo height */
+header {
+    /* border: 1px solid #979797; */
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    /* padding: 1rem; */
+    /* height: 10%; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* flex-wrap: nowrap; */
+    /* justify-content: space-between; */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+header .input.search {
+    margin-left: 0;
+}
+
+.content>.logo {
+    text-align: center;
+}
+
+.content>.logo>img {
+    height: 5.25rem;
+    width: auto;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px){
+    header{
+        height: auto;
+    }
+}
+
+@media only screen and (min-width: 480px){
+    .content>.logo>img {
+        height: 5.25rem;
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .content>.logo>img {
+        /* height: 7rem; */
+        /* margin: auto; */
+        width: auto;
+    }
+    .content>.logo {
+        text-align: left;
+    }
+}
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +9,24 @@
     <link rel="shortcut icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
     <link rel="icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
     <!-- font awesome (icons) -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:100,200,300,400,500,900" rel="stylesheet">
     <title>Title</title>
     <!-- css -->
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/header.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/footer.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/sidebar.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/homeScreen.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/dashboard.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/upcomingLessons.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/voteForLesson.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/interviewPrep.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/editProfile.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/editProfile.css" />
 
     <script src="./scripts/global.js"></script>
     <!-- templates -->
@@ -34,6 +39,7 @@
     <link id="recursiveDirectoryHTML" href="templates/recursiveDirectory.html" type="text/html" rel="import">
     <script src="./scripts/redirect.js"></script>
 </head>
+
 <body>
     <!-- <header class="grid gutters third"> -->
     <header class="grid third">
@@ -53,50 +59,50 @@
             </div>
         </div>
     </header>
-    <div class="grid quarter grow" id="mainWindow">
-        <div class="cell">
-            <aside class="sidebar">
-                <article class="devCaption item-textCenter">
-                    <div class="fc-devInfo">
-                        <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
-                        <h2 class="devName">Dev Name</h2>
-                        <h3 class="devTitle">Dev Title</h3>
-                    </div>
-                    <!-- <hr> -->
-                </article>
-                <article class="sidebar-item" data-pageId="dashboard">
-                    <h2 class="sidebarTitle">Dashboard</h2>
-                    <span><i class="fa fa-tachometer"></i></span>
-                </article>
-                <article class="sidebar-item" data-pageId="upcoming-lessons">
-                    <h2 class="sidebarTitle">Upcoming Lessons</h2>
-                    <span><i class="fa fa-calendar"></i></span>
-                </article>
-                <article id="btnSidebarVoteLessons" class="sidebar-item" data-pageId="vote-for-lessons">
-                    <h2 class="sidebarTitle">Vote For Lessons</h2>
-                    <span><i class="fa fa-thumbs-up"></i></span>
-                </article>
-                <article id="btnSidebarInterviewPrep" class="sidebar-item" data-pageId="interview-prep">
-                    <h2 class="sidebarTitle">Interview Prep</h2>
-                    <span><i class="fa fa-object-group"></i></span>
-                </article>
-                <article class="sidebar-item" data-pageId="recursive-directory">
-                    <h2 class="sidebarTitle">Recursive Directory</h2>
-                    <span><i class="fa fa-address-book-o"></i></span>
-                </article>
-                <article class="sidebar-item" data-pageId="edit-profile">
-                    <h2 class="sidebarTitle">Edit Profile</h2>
-                    <span><i class="fa fa-user "></i></span>
-                </article>
-                <article class="sidebar-item" data-pageId="sign-out">
-                    <h2 class="sidebarTitle">Sign Out</h2>
-                    <span><i class="fa fa-sign-out"></i></span>
-                </article>
-            </aside>
+    <aside class="sidebar">
+        <article class="devCaption item-textCenter">
+            <div class="fc-devInfo">
+                <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
+                <h2 class="devName">Dev Name</h2>
+                <h3 class="devTitle">Dev Title</h3>
+            </div>
+            <!-- <hr> -->
+        </article>
+        <div class="sidebarLinksContainer">
+            <article class="sidebar-item" data-pageId="dashboard">
+                <h2 class="sidebarTitle">Dashboard</h2>
+                <span><i class="fa fa-tachometer"></i></span>
+            </article>
+            <article class="sidebar-item" data-pageId="upcoming-lessons">
+                <h2 class="sidebarTitle">Upcoming Lessons</h2>
+                <span><i class="fa fa-calendar"></i></span>
+            </article>
+            <article id="btnSidebarVoteLessons" class="sidebar-item" data-pageId="vote-for-lessons">
+                <h2 class="sidebarTitle">Vote For Lessons</h2>
+                <span><i class="fa fa-thumbs-up"></i></span>
+            </article>
+            <article id="btnSidebarInterviewPrep" class="sidebar-item" data-pageId="interview-prep">
+                <h2 class="sidebarTitle">Interview Prep</h2>
+                <span><i class="fa fa-object-group"></i></span>
+            </article>
+            <article class="sidebar-item" data-pageId="recursive-directory">
+                <h2 class="sidebarTitle">Recursive Directory</h2>
+                <span><i class="fa fa-address-book-o"></i></span>
+            </article>
+            <article class="sidebar-item" data-pageId="edit-profile">
+                <h2 class="sidebarTitle">Edit Profile</h2>
+                <span><i class="fa fa-user "></i></span>
+            </article>
+            <article class="sidebar-item" data-pageId="sign-out">
+                <h2 class="sidebarTitle">Sign Out</h2>
+                <span><i class="fa fa-sign-out"></i></span>
+            </article>
         </div>
+    </aside>
+    <div class="grid grow" id="mainWindow">
         <div class="cell">
             <main id="main-content">
-                    <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo dolore corrupti laboriosam! Quam sequi delectus, autem neque illo natus vero labore libero nobis reiciendis excepturi quia odit at repellat eligendi provident illum iure ipsa rem assumenda eius. Praesentium iste ratione, obcaecati quos laudantium officia reiciendis, ad est esse voluptates ea error aliquid aliquam, neque repellat dolor ut at quisquam. Consequatur, placeat inventore. Molestiae voluptas laborum ab sunt eum, quas corporis fugit dolorum harum esse nemo similique aut voluptatibus ipsa accusamus ipsum architecto culpa, nesciunt velit fugiat porro, dolor earum? Veritatis et architecto quis repellat alias ducimus quae, fugit assumenda necessitatibus!</p> -->
+                <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo dolore corrupti laboriosam! Quam sequi delectus, autem neque illo natus vero labore libero nobis reiciendis excepturi quia odit at repellat eligendi provident illum iure ipsa rem assumenda eius. Praesentium iste ratione, obcaecati quos laudantium officia reiciendis, ad est esse voluptates ea error aliquid aliquam, neque repellat dolor ut at quisquam. Consequatur, placeat inventore. Molestiae voluptas laborum ab sunt eum, quas corporis fugit dolorum harum esse nemo similique aut voluptatibus ipsa accusamus ipsum architecto culpa, nesciunt velit fugiat porro, dolor earum? Veritatis et architecto quis repellat alias ducimus quae, fugit assumenda necessitatibus!</p> -->
             </main>
         </div>
     </div>
@@ -115,12 +121,13 @@
             </div>
         </div>
     </footer>
-<script src="./scripts/layout.js"></script>
-<!-- <script src="./scripts/genericFunctions.js"></script> -->
+    <script src="./scripts/layout.js"></script>
+    <!-- <script src="./scripts/genericFunctions.js"></script> -->
 
-<!-- <script src="./scripts/allFunctions.js"></script> -->
-<!-- <script src="./templates/recursiveDirectory.js"></script> -->
-<!--<script src="./templates/voteForLesson.js"></script>-->
-<script src="./templates/interviewPrep.js"></script>
+    <!-- <script src="./scripts/allFunctions.js"></script> -->
+    <!-- <script src="./templates/recursiveDirectory.js"></script> -->
+    <!--<script src="./templates/voteForLesson.js"></script>-->
+    <script src="./templates/interviewPrep.js"></script>
 </body>
+
 </html>

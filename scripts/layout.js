@@ -5,13 +5,12 @@ class api {
     }
 
     init() {
-        window.addEventListener('load', function(e) {
-            e.preventDefault();
-            const headerheight = document.getElementsByTagName("header")[0].offsetHeight;
-            const mainContainer = document.getElementById("mainWindow");
-            mainContainer.style.marginTop = `${headerheight}px`;
-        });
-
+        // window.addEventListener('load', function(e) {
+        //     e.preventDefault();
+        //     const headerheight = document.getElementsByTagName("header")[0].offsetHeight;
+        //     const mainContainer = document.getElementById("mainWindow");
+        //     mainContainer.style.marginTop = `${headerheight}px`;
+        // });
 
         // adding our click listener to each sidebar item
         const sidebarItems = document.getElementsByClassName('sidebar-item');
@@ -20,6 +19,7 @@ class api {
             item.addEventListener('click', () => {
                 const pageId = item.getAttribute('data-pageId');
                 window.location.hash = pageId;
+                window.scrollTo(0, 0);
             });
         });
     }
