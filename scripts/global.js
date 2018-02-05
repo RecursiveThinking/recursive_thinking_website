@@ -62,34 +62,47 @@ localStorage.setItem('allUsers', JSON.stringify(allUsers));
 
 var allLessons = [
     {
+        _id: 1000000001,
         title: 'Designing with A-Frame VR',
         date: '11/25/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.'
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        taughtBy: []
     },
     {
+        _id: 1000000002,
         title: 'Building a city with HTML & CSS',
         date: '12/02/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.'
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        taughtBy: []
+        
     },
     {
+        _id: 1000000003,
         title: 'Building a calculator with HTML, CSS & JavaScript',
         date: '12/09/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.'
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        taughtBy: []
     },
     {
+        _id: 1000000004,
         title: 'Building a timer with HTML, CSS & JavaScript',
         date: '12/16/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.'
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        taughtBy: []
     },
     {
+        _id: 1000000005,
         title: 'Building a website with HTML, CSS & JavaScript',
         date: '12/23/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.'
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        taughtBy: []
     },
     {
+        _id: 1000000006,
         title: 'Building a web application with HTML, CSS & JavaScript',
         date: '12/30/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.'
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        taughtBy: []
     }
 ]
 
@@ -144,13 +157,50 @@ function randomAvatar(){
 }
 
 function getRandomNumber(min, max){
+    // let min = min || 0;
+    // let max = max;
     let randomNumber = Math.floor(Math.random()*(max-min)+min);
     // console.log(randomNumber);
     return randomNumber;
 }
 
+var arrayOfDays =  [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+var arrayOfMonths = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+
+function getDayOfWeek(index){
+    let dateString = arrayOfDays[index];
+    return dateString;
+}
+
+function getMonthOfYear(index){
+    let monthString = arrayOfMonths[index];
+    return monthString;
+}
+
 // getRandomNumber(0, 6)
 // randomAvatar(arrayOfAvatars);
+
+function generateTaughtByThumbs(loopNumber, containerHTML, lessonTitleForAlt, ){
+    for(let i = 0; i < loopNumber; i += 1){
+        // create image
+        let imgTaughtByThumbs = document.createElement('img');
+        imgTaughtByThumbs.className = `avatarThumbRound`;
+        // get random Image
+        let randImage = randomAvatar();
+        let randImageName = randImage.replace('.png', '');
+        imgTaughtByThumbs.setAttribute('src', `../public/images/${randImage}`);
+        imgTaughtByThumbs.setAttribute('alt', `lesson ${lessonTitleForAlt} taught by developer ${randImageName}`)
+        // connect
+        containerHTML.appendChild(imgTaughtByThumbs);
+        // console.log(containerHTML);
+        // return containerHTML.appendChild(imgTaughtByThumbs);
+    }
+}
+
+
+function displayMessage(){
+    
+}
 
 class Random {
     static randomPrint(){
