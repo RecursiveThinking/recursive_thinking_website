@@ -1,5 +1,34 @@
 # GIT HUB GUIDE FOR NEWBS
 
+Get Started Quick with Github Guide:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Errors:
 
 git push origin master:
