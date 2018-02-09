@@ -2,35 +2,40 @@
 
     function appendPage(pageId) {
         const dashboardHTML = document.getElementById(pageId).import;
-        const template = dashboardHTML.getElementById(pageId).cloneNode(true);
+        const template = dashboardHTML.getElementById(pageId+'HTML').cloneNode(true);
         const main = document.getElementById('main-content');
         main.innerHTML = '';
         main.appendChild(template);
+
+        // Demonstrating that the template has loaded
+        console.log(document.getElementById(pageId+'HTML'));
     }
 
+    // Appends HTML template, then runs associated setup scripts
     function hashRouting() {
         const location = window.location.hash.replace('#','');
         switch(location){
             case 'dashboard':
-                appendPage('dashboardHTML');
+                appendPage('dashboard');
+                setUpDashboard();
                 break;
             case 'upcoming-lessons':
-                appendPage('upcomingLessonsHTML');
+                appendPage('upcomingLessons');
                 break;
             case 'vote-for-lessons':
-                appendPage('voteForLessonHTML');
+                appendPage('voteForLesson');
                 break;
             case 'edit-profile':
-                appendPage('editProfileHTML');
+                appendPage('editProfile');
                 break;
             case 'sign-out':
-                appendPage('signOutHTML');
+                appendPage('signOut');
                 break;
             case 'interview-prep':
-                appendPage('interviewPrepHTML');
+                appendPage('interviewPrep');
                 break;
             case 'recursive-directory':
-                appendPage('recursiveDirectoryHTML');
+                appendPage('recursiveDirectory');
                 break;
             default:
                 break;
