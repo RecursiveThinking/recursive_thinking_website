@@ -155,6 +155,37 @@ body {
     background-color: #2d3134;
 }
 
+.alert {
+    margin: 1rem 0 0 0;
+    width: 100%;
+    padding: 2rem;
+    color: #ffffff;
+}
+
+.fc-alert{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+}
+
+.error {
+    background-color: red;
+}
+
+.warn {
+    background-color: orange;
+}
+
+.status {
+    background-color: #00b371;
+}
+
+
+
+
+
 /* Flexbox Responsive Grid */
 
 /* Grid Def */
