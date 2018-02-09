@@ -21,6 +21,7 @@
                 break;
             case 'upcoming-lessons':
                 appendPage('upcomingLessons');
+                setUpUpComingLessons();
                 break;
             case 'vote-for-lessons':
                 appendPage('voteForLesson');
@@ -36,6 +37,7 @@
                 break;
             case 'recursive-directory':
                 appendPage('recursiveDirectory');
+                setUpRecursiveDirectory();
                 break;
             default:
                 break;

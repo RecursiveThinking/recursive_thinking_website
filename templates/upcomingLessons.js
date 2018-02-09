@@ -2,6 +2,12 @@ var allUsers = JSON.parse(localStorage.getItem('allUsers'));
 var allLessons = JSON.parse(localStorage.getItem('allLessons'));
 var allProfileStatistics = JSON.parse(localStorage.getItem('allProfileStatistics'));
 
+
+
+function setUpUpComingLessons()
+{
+    buildUpComingLessons();
+}
 function buildUpComingLessons(){
     // grab lesson card
     const upComingLessonsCard = document.getElementById('upComingLessonsCard');

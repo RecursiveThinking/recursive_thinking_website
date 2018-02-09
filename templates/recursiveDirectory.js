@@ -1,6 +1,11 @@
 var allUsers = JSON.parse(localStorage.getItem('allUsers'));
 var allLessons = JSON.parse(localStorage.getItem('allLessons'));
 
+
+function setUpRecursiveDirectory(){
+    buildRecursiveDirectory();
+}
+
 function buildRecursiveDirectory(){
     const gridContainer = document.getElementById('gridContainer');
     console.log(gridContainer);
