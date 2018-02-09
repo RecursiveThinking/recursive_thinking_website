@@ -177,6 +177,28 @@ function getMonthOfYear(index){
     return monthString;
 }
 
+function getFormattedLessonDate(dateToFormat){
+    
+    let dayOfWeek = getDayOfWeek(dateToFormat.getDay());
+    let dateOfMonth = dateToFormat.getDate();
+    let year = dateToFormat.getFullYear();
+    let monthAsNumberIndex = dateToFormat.getMonth();
+    let monthAsNumber = monthAsNumberIndex + 1;
+    let monthAsString = getMonthOfYear(monthAsNumberIndex);
+    let upComingDateString = `${year} ${monthAsNumber} ${dateOfMonth}`
+    
+    let finalDateObject = {
+        dayOfWeek: dayOfWeek,
+        dateOfMonth: dateOfMonth,
+        year: year,
+        monthAsNumberIndex: monthAsNumberIndex,
+        monthAsNumber: monthAsNumber,
+        monthAsString: monthAsString,
+        upComingDateString: upComingDateString
+    };
+    return finalDateObject;
+}
+
 // getRandomNumber(0, 6)
 // randomAvatar(arrayOfAvatars);
 
