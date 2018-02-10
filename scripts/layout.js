@@ -1,7 +1,7 @@
 class api {
 
     constructor() {
-
+        this.apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod"
     }
 
     init() {
@@ -22,6 +22,26 @@ class api {
                 window.scrollTo(0, 0);
             });
         });
+    }
+
+    getDeveloperProfiles() {
+        const resource = "/developer";
+
+        const options = {
+            method: "GET"
+        };
+        fetch(this.apiUrl + resource, options)
+            .then((data) => {
+                return data.json();
+            })
+            .then((response) => {
+                console.log("shit worked", response);
+                return response;
+            })
+            .catch((err) => {
+                console.log("shit broke ", err);
+                return err;
+            })
     }
 
 }

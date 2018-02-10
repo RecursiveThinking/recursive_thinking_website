@@ -40,8 +40,9 @@
                 // setUpInterviewPrep();
                 break;
             case 'recursive-directory':
-                appendPage('recursiveDirectory');
                 setUpRecursiveDirectory();
+                recursiveApi.getDeveloperProfiles();
+                appendPage('recursiveDirectory');
                 break;
             default:
                 break;
