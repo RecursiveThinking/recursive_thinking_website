@@ -18,7 +18,6 @@
 
             // file.import is the #document of a file
             file.import.querySelectorAll('template').forEach((template) => {
-                console.log(template.content)
                 pages[file.id][template.id] = template.content // template.content is the document-fragment of a template
             })
         })
