@@ -25,7 +25,7 @@
                 break;
             case 'vote-for-lessons':
                 appendPage('voteForLesson');
-                // setUpVoteForLesson();
+                setUpVoteForLesson();
                 break;
             case 'edit-profile':
                 appendPage('editProfile');
