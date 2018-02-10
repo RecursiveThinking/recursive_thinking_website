@@ -81,19 +81,24 @@
                 break;
             case 'vote-for-lessons':
                 appendPage('voteForLesson');
+                setUpVoteForLesson();
                 break;
             case 'edit-profile':
                 appendPage('editProfile');
+                // setUpEditProfile();
                 break;
             case 'sign-out':
                 appendPage('signOut');
+                // setUpSignOut();
                 break;
             case 'interview-prep':
                 appendPage('interviewPrep');
+                // setUpInterviewPrep();
                 break;
             case 'recursive-directory':
-                appendPage('recursiveDirectory');
                 setUpRecursiveDirectory();
+                recursiveApi.getDeveloperProfiles();
+                appendPage('recursiveDirectory');
                 break;
             default:
                 break;

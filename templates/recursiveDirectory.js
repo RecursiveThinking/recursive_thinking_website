@@ -18,7 +18,7 @@ function buildRecursiveDirectory(){
         const articleCell = document.createElement('article');
         // add art class
         articleCell.className = `directory-card`
-            
+
             // add article image
             const articleImage = document.createElement('img');
             // add img class
@@ -31,7 +31,7 @@ function buildRecursiveDirectory(){
             articleImage.setAttribute('src', `./public/images/${randAvatarImage}`);
             articleImage.setAttribute('alt', `a picture of ${allUsers[i].name}`);
             articleCell.appendChild(articleImage);
-            
+
             // add div for text
             const divTextGroup = document.createElement('div');
             // add class to div
@@ -49,12 +49,12 @@ function buildRecursiveDirectory(){
                     linkHeadingName.appendChild(headingName);
                 // connect link to divTextGroup
                 divTextGroup.appendChild(linkHeadingName);
-                
+
                 // make a hr
                 const hr = document.createElement('hr');
                 // connect hr to divTextGroup
                 divTextGroup.appendChild(hr)
-                
+
                 // h3 heading for Job
                 const headingTitle = document.createElement('h3');
                 // title classes
@@ -63,7 +63,7 @@ function buildRecursiveDirectory(){
                 headingTitle.innerText = `${allUsers[i].title}`;
                 // connect
                 divTextGroup.appendChild(headingTitle);
-                
+
                 // h4 heading for Location
                 const headingLocation = document.createElement('h4');
                 // location classes
@@ -72,14 +72,15 @@ function buildRecursiveDirectory(){
                 headingLocation.innerText = `${allUsers[i].location}`;
                 // connect
                 divTextGroup.appendChild(headingLocation);
-                
-                
+
+
             articleCell.appendChild(divTextGroup);
-            
+
         div.appendChild(articleCell);
-        
+
         gridContainer.appendChild(div)
     }
     console.log(allUsers);
 
 }
+

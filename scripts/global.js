@@ -6,74 +6,85 @@ var allUsers = [
         name: 'Porg Dev1',
         title: 'Dev1 Title',
         location: 'Dev1 Location',
-        attending: []
+        lecturesAttending: []
     },
     {
         _id: 0000000002,
         name: 'Porg Dev2',
         title: 'Dev2 Title',
-        location: 'Dev2 Location'
+        location: 'Dev2 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000003,
         name: 'Porg Dev3',
         title: 'Dev3 Title',
-        location: 'Dev3 Location'
+        location: 'Dev3 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000004,
         name: 'Porg Dev4',
         title: 'Dev4 Title',
-        location: 'Dev4 Location'
+        location: 'Dev4 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000005,
         name: 'Porg Dev5',
         title: 'Dev5 Title',
-        location: 'Dev5 Location'
+        location: 'Dev5 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000006,
         name: 'Porg Dev6',
         title: 'Dev6 Title',
-        location: 'Dev6 Location'
+        location: 'Dev6 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000007,
         name: 'Porg Dev7',
         title: 'Dev7 Title',
-        location: 'Dev7 Location'
+        location: 'Dev7 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000010,
         name: 'Porg Dev8',
         title: 'Dev8 Title',
-        location: 'Dev8 Location'
+        location: 'Dev8 Location',
+        lecturesAttending: []
     },
     {
         _id: 0000000011,
         name: 'Porg Dev9',
         title: 'Dev9 Title',
-        location: 'Dev9 Location'
+        location: 'Dev9 Location',
+        lecturesAttending: []
     }
 ]
-
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
-
+// database call for Lessons
 var allLessons = [
     {
         _id: 1000000001,
         title: 'Designing with A-Frame VR',
         date: '11/25/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        taughtBy: []
+        lessonTaughtBy: [],
+        lessonAttendees: [],
+        lessonVotes: []
     },
     {
         _id: 1000000002,
         title: 'Building a city with HTML & CSS',
         date: '12/02/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        taughtBy: []
+        lessonTaughtBy: [],
+        lessonAttendees: [],
+        lessonVotes: []
         
     },
     {
@@ -81,31 +92,38 @@ var allLessons = [
         title: 'Building a calculator with HTML, CSS & JavaScript',
         date: '12/09/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        taughtBy: []
+        lessonTaughtBy: [],
+        lessonAttendees: [],
+        lessonVotes: []
     },
     {
         _id: 1000000004,
         title: 'Building a timer with HTML, CSS & JavaScript',
         date: '12/16/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        taughtBy: []
+        lessonTaughtBy: [],
+        lessonAttendees: [],
+        lessonVotes: []
     },
     {
         _id: 1000000005,
         title: 'Building a website with HTML, CSS & JavaScript',
         date: '12/23/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        taughtBy: []
+        lessonTaughtBy: [],
+        lessonAttendees: [],
+        lessonVotes: []
     },
     {
         _id: 1000000006,
         title: 'Building a web application with HTML, CSS & JavaScript',
         date: '12/30/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        taughtBy: []
+        lessonTaughtBy: [],
+        lessonAttendees: [],
+        lessonVotes: []
     }
 ]
-
 localStorage.setItem('allLessons', JSON.stringify(allLessons));
 
 // variables that represent database calls

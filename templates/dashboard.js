@@ -8,11 +8,43 @@ function setUpDashboard(){
 }
 
 function buildProfileStatistics(){
-    // console.log(allProfileStatistics);
-    for(let i = 0; i < allProfileStatistics.length; i += 1){
-        console.log(allProfileStatistics[i].totalCount);
-        console.log(allProfileStatistics[i].title);
+    const dashboardProfileStatisticsContRowOne = document.getElementById('dashboardProfileStatisticsContRowOne');
+    // grab the container
+    // console.log(dashboardProfileStatisticsCont);
+    buildProfileStatisticsRow(0, 2, dashboardProfileStatisticsContRowOne);
+    // dashboardProfileStatisticsCont.appendChild(divCell);
+    const dashboardProfileStatisticsContRowTwo = document.getElementById('dashboardProfileStatisticsContRowTwo');
+    buildProfileStatisticsRow(3, 6, dashboardProfileStatisticsContRowTwo);
+}
+
+function buildProfileStatisticsRow(start, end, container){
+    console.log(start, end, container);
+        for(let i = start; i < end + 1; i += 1){
+        // console.log(allProfileStatistics[i].totalCount);
+        // console.log(allProfileStatistics[i].title);
+        // div Cont
+        const divCell = document.createElement('div');
+        divCell.className = `cell`;
+            //create inner div
+            const divContentProfileStats = document.createElement('div');
+            divContentProfileStats.className = `content profileStatsData`
+                const h1Data = document.createElement('h1');
+                h1Data.className = `h1Data fw300 colorGreen`
+                h1Data.innerText = `${allProfileStatistics[i].totalCount}`
+                // h1 connect
+                divContentProfileStats.appendChild(h1Data);
+                // h5
+                const h5Data = document.createElement('h5');
+                h5Data.className = `h5Data fw500 colorGrayb9`;
+                h5Data.innerText = `${allProfileStatistics[i].title}`
+                divContentProfileStats.appendChild(h5Data)
+                
+            // connect
+            divCell.appendChild(divContentProfileStats);
+        // connect
+        container.appendChild(divCell);
     }
+    // return container
 }
 
 function buildUpcomingLesson(){
