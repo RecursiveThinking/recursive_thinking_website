@@ -8,6 +8,13 @@
     // console.log("Connected Vote for Lesson");
     // document.addEventListener('DOMContentLoaded', function() {
         // your code here
+function setUpVoteForLesson(){
+    console.log("Setup Function for Vote for Lesson Connected");
+    // buildUpcomingLesson();
+    // buildProfileStatistics();
+}
+        
+        
 const submitButton = document.getElementById("btnSubmitLesson");
 
 const openModal = () => {
