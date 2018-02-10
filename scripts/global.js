@@ -57,9 +57,8 @@ var allUsers = [
         location: 'Dev9 Location'
     }
 ]
-
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
-
+// database call for Lessons
 var allLessons = [
     {
         _id: 1000000001,
@@ -105,7 +104,6 @@ var allLessons = [
         taughtBy: []
     }
 ]
-
 localStorage.setItem('allLessons', JSON.stringify(allLessons));
 
 // variables that represent database calls
