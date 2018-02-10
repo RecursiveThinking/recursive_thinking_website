@@ -31,8 +31,20 @@
 
 #dashboardHTML .content.profileStatsData {
     padding: 3rem 0;
+    /* border-style: solid;
+    border-width: .1rem; */
     border-style: solid;
     border-color: #c6c6c6;
+    /* border-color: red; */
+}
+
+#dashboardHTML .grid.gutters.cols-3 > .cell > .content {
+    border-width: .1rem .1rem 0;
+}
+
+#dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
+    /* padding: 3rem 0; */
+    /* border-width: .1rem; */
     border-width: .1rem;
 }
 
@@ -153,9 +165,68 @@
     color: #00b371;
 }
 
-/* responsive grid after 768px */
+/* responsive grid before 768px */
 @media only screen and (max-width: 768px){
     #dashboardHTML {
         padding: 2rem;
+    }
+}
+
+/* responsive grid after 768px */
+@media only screen and (min-width: 768px) {
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(1) > .content {
+        /* padding: 3rem 0; */
+        border-width: .1rem;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) {
+        /* padding: 3rem 0; */
+        padding-left: 0;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) > .content {
+        /* padding: 3rem 0; */
+        /* border-top-width: .1rem; */
+        /* border-bottom-width: .1rem; */
+        border-width: .1rem 0;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) {
+        /* padding: 3rem 0; */
+        padding-left: 0;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) > .content {
+        /* padding: 3rem 0; */
+        border-width: .1rem;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(1) > .content {
+        /* padding: 3rem 0; */
+        /* border-width: .1rem; */
+        border-width: 0 .1rem .1rem .1rem;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) {
+        /* padding: 3rem 0; */
+        padding-left: 0;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) > .content {
+        /* padding: 3rem 0; */
+        /* border-top-width: .1rem; */
+        /* border-bottom-width: .1rem; */
+        border-width: 0 0 .1rem 0;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) {
+        /* padding: 3rem 0; */
+        padding-left: 0;
+    }
+    
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
+        /* padding: 3rem 0; */
+        /* border-width: .1rem; */
+        border-width: 0 .1rem .1rem .1rem;
     }
 }
