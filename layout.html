@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./css/editProfile.css" />
 
     <script src="./scripts/global.js"></script>
+
     <!-- templates -->
     <link id="dashboard" href="templates/dashboard.html" type="text/html" rel="import">
     <link id="upcomingLessons" href="templates/upcomingLessons.html" type="text/html" rel="import">
@@ -37,6 +38,10 @@
     <link id="signOut" href="templates/signOut.html" type="text/html" rel="import">
     <link id="voteForLesson" href="templates/voteForLesson.html" type="text/html" rel="import">
     <link id="recursiveDirectory" href="templates/recursiveDirectory.html" type="text/html" rel="import">
+
+    <!-- load after templates but before everything else -->
+    <script src="./scripts/templater.js"></script>
+
     <script src="./scripts/redirect.js"></script>
 </head>
 

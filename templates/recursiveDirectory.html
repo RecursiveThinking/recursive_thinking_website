@@ -1,20 +1,25 @@
 <template id="page">
-<section id="recursiveDirectoryHTML">
-    <div id="gridContainer" class="grid cols-3" >
-        <div class="cell">
-            <article class="directory-card">
-                <img class="devPicture" src="./public/images/avatar1.png" alt="a developers picture">
-                <div class="fc-text-group">
-                    <a href="./templates/viewProfile.html" target="_blank"><h2 class="devName colorGray42 fw500">Porg Dev1</h2></a>
-                    <hr>
-                    <h3 class="devTitle colorGray42 fw300">Web Developer</h3>
-                    <h4 class="devLocation colorGray42 fw300 ttup">Seattle, WA</h4>
-                </div>
-            </article>
-
+    <section id="recursiveDirectoryHTML">
+        <div id="gridContainer" class="grid cols-3">
+            <slot name="recursiveDirectory"></slot>
         </div>
+    </section>
+</template>
+
+<template id="developer">
+    <div class="cell">
+        <article class="directory-card">
+            <img class="devPicture" slot="picture">
+            <div class="fc-text-group">
+                <a href="./templates/viewProfile.html" target="_blank">
+                    <h2 class="devName colorGray42 fw500"><slot name="name" /></h2>
+                </a>
+                <hr>
+                <h3 class="devTitle colorGray42 fw300"><slot name="title" /></h3>
+                <h4 class="devLocation colorGray42 fw300 ttup"><slot name="location">Seattle, WA</slot></h4>
+            </div>
+        </article>
     </div>
-</section>
 </template>
 
 <!-- <script src="../scripts/global.js"></script> -->
