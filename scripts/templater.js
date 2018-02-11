@@ -106,8 +106,8 @@ var fill = (function() {
     }
   
     // insert string into slot
-    else if (typeof node === 'string')
-      slot.insertAdjacentText('beforeBegin', node)
+    else if (typeof node !== 'object')
+      slot.insertAdjacentHTML('beforeBegin', node)
   
     // insert another template into slot
     else if (node && node.nodeName === '#document-fragment')

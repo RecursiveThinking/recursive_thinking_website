@@ -7,23 +7,7 @@
                     <article id="upComingLessonsCard" class="card">
                         <h4 class="colorGray42 fw900 ttup">Upcoming Lessons</h4>
                         <hr>
-                        <!-- <div class="fc-dateRowTitle">
-                            <div class="fc-dateRow contVertCenter">
-                                <h1 class="h1Date colorGreen fw300">25</h1>
-                                <div class="fc-dateRowMonthYear">
-                                    <h4 class="h4MonthYear colorBlack06 fw500 ttup">November</h4>
-                                    <h4 class="h4MonthYear colorBlack06 fw500 ttup">2017</h4>
-                                </div>
-                            </div>
-                            <h4 class="h4LessonTitle negMarg colorGray66 fw300">Designing with A-Frame VR</h4>
-                        </div>
-                        <hr> -->
-                        <!-- <div class="alert status">
-                            <div class="fc-alert">
-                                <h5>Upcoming Lession Information Unavailable</h5>
-                                <h6>X</h6>
-                            </div>
-                        </div> -->
+                        <slot name="upcomingLessons">
                     </article>
                 </div>
                 <div class="cell">
@@ -47,11 +31,11 @@
                         <div class="fc-lessonTitleDescription">
                             <h4 class="h4LessonTitle botMargin colorGray66 fw300">Designing with A-Frame VR</h4>
                             <p>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                            <br><br>
-                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                            <br><br>
-                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                            <!-- <br><br>
+                                    <br><br>
+                                    Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                    <br><br>
+                                    Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
+                                    <!-- <br><br>
                             Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
                             </p>
                         </div>
@@ -106,6 +90,36 @@
             </div>
         </div>
     </section>
+</template>
+
+<template id="lessonSummary">
+    <div class="fc-dateRowTitle">
+        <div class="fc-dateRow contVertCenter">
+            <h1 class="h1Date colorGreen fw300">
+                <slot name="day" />
+            </h1>
+            <div class="fc-dateRowMonthYear">
+                <h4 class="h4MonthYear colorBlack06 fw500 ttup">
+                    <slot name="month" />
+                </h4>
+                <h4 class="h4MonthYear colorBlack06 fw500 ttup">
+                    <slot name="year" />
+                </h4>
+            </div>
+        </div>
+        <h4 class="h4LessonTitle negMarg colorGray66 fw300">
+            <slot name="title" />
+        </h4>
+    </div>
+</template>
+
+<template id="lessonSummary_none">
+    <div class="alert status">
+        <div class="fc-alert">
+            <h5>Upcoming Lession Information Unavailable</h5>
+            <h6>X</h6>
+        </div>
+    </div>
 </template>
 
 <script src="upcomingLessons.js"></script>

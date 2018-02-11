@@ -20,8 +20,20 @@
                 setUpDashboard();
                 break;
             case 'upcoming-lessons':
-                appendPage('upcomingLessons');
-                setUpUpComingLessons();
+                var allLessons = JSON.parse(localStorage.getItem('allLessons'));
+                
+                setUpPage(fill(templates.upcomingLessons.page, {
+                    upcomingLessons: allLessons.map(lesson => {
+                        let formattedDate = getFormattedLessonDate(new Date(lesson.date))
+                        return fill(templates.upcomingLessons.lessonSummary, {
+                            day: formattedDate.dateOfMonth,
+                            month: formattedDate.monthAsString,
+                            year: formattedDate.year,
+                            title: lesson.title
+                        })
+                    })
+                }))
+
                 break;
             case 'vote-for-lessons':
                 appendPage('voteForLesson');

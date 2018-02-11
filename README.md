@@ -9,9 +9,13 @@
 
 Use a `<template>` element to define a new template.
 
+**Details**
+
 **`id`** *`(Attribute)`*: the id by which you will reference the template.  
 **`<slot name="SLOTNAME">`** *`(Element)`*: An element that represents insertion of Text, HTML or other Templates.  
 **`slot="SLOTNAME"`** *`(Attribute)`*: An attribute that represents insertion of attributes on a non-slot element.  
+
+**Example**
 
 Lines 7, 10 are examples of **Text, HTML Text, and HTML Element** insertion.  
 Line 11 is an example of **Text, HTML Text, and HTML Element** insertion with a default value. If location is not set, Seattle, WA will be inserted.  
