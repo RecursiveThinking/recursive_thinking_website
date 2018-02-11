@@ -83,16 +83,9 @@ var fill = (function() {
         console.error('Slot attribute missing slot name! (e.g.: slot="slotname: attribute1, attribute2")', node)
         return;
       }
-      if (!vav) {
-        console.error('Slot attribute missing attribute name(s)! (e.g.: slot="slotname: attribute1, attribute2")', node)
-        return;
-      }
-  
-      // have to do this after checking so we don't hit a type error
-      var slotAttributes = Object.keys(vav)
-  
+
       if (vav) {
-        slotAttributes.forEach(atr => node.setAttribute(atr, values[slotName][atr]))
+        Object.keys(vav).forEach(atr => node.setAttribute(atr, values[slotName][atr]))
         node.removeAttribute('slot')
       }
       
