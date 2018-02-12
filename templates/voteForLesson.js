@@ -1,10 +1,3 @@
-function setUpVoteForLesson(){
-    // console.log("Setup Function for Vote for Lesson Connected");
-    // buildUpcomingLesson();
-    // buildProfileStatistics();
-    modal();
-}
-
 function modal(){
     // const submitButton = document.getElementById("btnSubmitLesson");
 
@@ -18,9 +11,10 @@ function modal(){
     // }
 
     const btnSubmitLesson = document.getElementById('btnSubmitLesson');
-    // console.log(btnSubmitLesson);
+    console.log(btnSubmitLesson);
 
     const modalContSubmitLesson = document.getElementById('modalSubmitLesson');
+    console.log(modalContSubmitLesson);
 
     btnSubmitLesson.onclick = function() {
         modalContSubmitLesson.style.display = "block";
