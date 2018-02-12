@@ -1,10 +1,13 @@
 var allUsers = JSON.parse(localStorage.getItem('allUsers'));
 var allLessons = JSON.parse(localStorage.getItem('allLessons'));
 var allProfileStatistics = JSON.parse(localStorage.getItem('allProfileStatistics'))
+var currentUser = JSON.parse(localStorage.getItem('currentUser'))
+console.log(currentUser);
 
 function setUpDashboard(){
     buildUpcomingLesson();
     buildProfileStatistics();
+    buildLessonsAttending();
 }
 
 function buildProfileStatistics(){
@@ -14,7 +17,7 @@ function buildProfileStatistics(){
     buildProfileStatisticsRow(0, 2, dashboardProfileStatisticsContRowOne);
     // dashboardProfileStatisticsCont.appendChild(divCell);
     const dashboardProfileStatisticsContRowTwo = document.getElementById('dashboardProfileStatisticsContRowTwo');
-    buildProfileStatisticsRow(3, 6, dashboardProfileStatisticsContRowTwo);
+    buildProfileStatisticsRow(3, 5, dashboardProfileStatisticsContRowTwo);
 }
 
 function buildProfileStatisticsRow(start, end, container){
@@ -174,6 +177,7 @@ function buildUpcomingLesson(){
     }
 }
 
-function buildAttendingList(){
-    
+function buildLessonsAttending(){
+    const divAttendingLessonCard = document.getElementById('divAttendingLessonCard');
+    console.log(divAttendingLessonCard);
 }
