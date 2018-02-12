@@ -38,26 +38,19 @@
             case 'vote-for-lessons':
                 // appendPage('voteForLesson');
                 // setUpVoteForLesson();
+                var allUsers = JSON.parse(localStorage.getItem('allUsers'))
                 var allLessons = JSON.parse(localStorage.getItem('allLessons'));
-                
+                console.log(allUsers);
+                let lessonOne = allLessons[0];
+                console.log(lessonOne);
                 setUpPage(fill(templates.voteForLesson.page, {
                     voteForLesson: allLessons.map(lesson => {
                         return fill(templates.voteForLesson.displayALesson, {
                             title: lesson.title,
                             description: lesson.description,
                             lessonVotes: getLessonVoteString(lesson),
-                            lessonTaughtBy: lesson.lessonTaughtBy.map((image) => {
-                                // this brings back the numeric value of the image
-                                return image;
-                                // return { picture: {src: `./public/images/avatar${image}.png`}};
-                                // return {
-                                //     picture: {
-                                //         // insert these attributes into the element tagged as a slot
-                                //         // src: `./public/images/${randomAvatar()}`,
-                                //         src: `./public/images/avatar${image}.png`,  
-                                //         alt: `Profile picture for ${user.name}` 
-                                //     }
-                                // }
+                            lessonTeachers: lesson.lessonTaughtBy.map((image) => {
+                                return `<img class="avatarThumbRound" src="./public/images/avatar${image}.png" alt="avatar${image} - Sweet Mug">`
                             })
                         })
                     })
