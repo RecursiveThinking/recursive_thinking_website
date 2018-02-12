@@ -39,19 +39,28 @@
                 // appendPage('voteForLesson');
                 // setUpVoteForLesson();
                 var allUsers = JSON.parse(localStorage.getItem('allUsers'))
+                // var allLessons = JSON.parse(localStorage.getItem('allLessons'));
                 var allLessons = JSON.parse(localStorage.getItem('allLessons'));
-                console.log(allUsers);
-                let lessonOne = allLessons[0];
-                console.log(lessonOne);
+                let lessonLimit = 4;
                 setUpPage(fill(templates.voteForLesson.page, {
                     voteForLesson: allLessons.map(lesson => {
+                        let filteredTaughtByUserArray = returnFilteredTaughtByUserArray(lesson.lessonTaughtBy);
+                        // console.log(filteredTaughtByUserArray);
                         return fill(templates.voteForLesson.displayALesson, {
                             title: lesson.title,
                             description: lesson.description,
                             lessonVotes: getLessonVoteString(lesson),
-                            lessonTeachers: lesson.lessonTaughtBy.map((image) => {
-                                return `<img class="avatarThumbRound" src="./public/images/avatar${image}.png" alt="avatar${image} - Sweet Mug">`
-                            })
+                            // lessonTeachers: lesson.lessonTaughtBy.map((image) => {
+                            //     return `<img class="avatarThumbRound" src="./public/images/avatar${image}.png" alt="avatar${image} - Sweet Mug">`
+                            // })
+                            lessonTeachers: filteredTaughtByUserArray.map(userObj => fill(templates.voteForLesson.displayTaughtByLessons, {
+                                    imgAttrs: {
+                                        // src: `./public/images/avatar${image}.png`,
+                                        src: `${userObj["image"]}`,
+                                        alt: `Lesson ${lesson.title} will be taught by ${userObj["name"]}`
+                                    }
+                                })
+                            )
                         })
                     })
                 }))
