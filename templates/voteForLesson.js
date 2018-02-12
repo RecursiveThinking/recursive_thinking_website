@@ -11,10 +11,10 @@ function modal(){
     // }
 
     const btnSubmitLesson = document.getElementById('btnSubmitLesson');
-    console.log(btnSubmitLesson);
+    // console.log(btnSubmitLesson);
 
     const modalContSubmitLesson = document.getElementById('modalSubmitLesson');
-    console.log(modalContSubmitLesson);
+    // console.log(modalContSubmitLesson);
 
     btnSubmitLesson.onclick = function() {
         modalContSubmitLesson.style.display = "block";
