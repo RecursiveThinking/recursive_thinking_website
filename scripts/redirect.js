@@ -36,8 +36,35 @@
 
                 break;
             case 'vote-for-lessons':
-                appendPage('voteForLesson');
-                setUpVoteForLesson();
+                // appendPage('voteForLesson');
+                // setUpVoteForLesson();
+                var allLessons = JSON.parse(localStorage.getItem('allLessons'));
+                
+                setUpPage(fill(templates.voteForLesson.page, {
+                    voteForLesson: allLessons.map(lesson => {
+                        return fill(templates.voteForLesson.displayALesson, {
+                            title: lesson.title,
+                            description: lesson.description,
+                            lessonVotes: getLessonVoteString(lesson),
+                            lessonTaughtBy: lesson.lessonTaughtBy.map((image) => {
+                                // this brings back the numeric value of the image
+                                return image;
+                                // return { picture: {src: `./public/images/avatar${image}.png`}};
+                                // return {
+                                //     picture: {
+                                //         // insert these attributes into the element tagged as a slot
+                                //         // src: `./public/images/${randomAvatar()}`,
+                                //         src: `./public/images/avatar${image}.png`,  
+                                //         alt: `Profile picture for ${user.name}` 
+                                //     }
+                                // }
+                            })
+                        })
+                    })
+                }))
+                // turn on lesson modal
+                modal();
+                
                 break;
             case 'edit-profile':
                 appendPage('editProfile');
@@ -66,7 +93,8 @@
                         // picture is attribute insertion (find slot="picture")
                         picture: {
                             // insert these attributes into the element tagged as a slot
-                            src: `./public/images/${randomAvatar()}`, 
+                            // src: `./public/images/${randomAvatar()}`,
+                            src: `./public/images/${user.image}`,  
                             alt: `Profile picture for ${user.name}` 
                         }
                     }))
