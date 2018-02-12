@@ -12,11 +12,13 @@ var templates = (function () {
 
   // build out the pages object (seen above)
   document.querySelectorAll('link[type="text/html"][rel="import"]').forEach((file) => {
-    pages[file.id] = {}
+    var pageName = file.id || file.name || file.getAttribute('name')
+    pages[pageName] = {}
 
     // file.import is the #document of a file
     file.import.querySelectorAll('template').forEach((template) => {
-      pages[file.id][template.id] = template.content // template.content is the document-fragment of a template
+      var templateName = template.id || template.name || template.getAttribute('name')
+      pages[file.id][templateName] = template.content // template.content is the document-fragment of a template
     })
   })
 
@@ -109,8 +111,8 @@ var fill = (function() {
     else if (typeof node !== 'object')
       slot.insertAdjacentHTML('beforeBegin', node)
   
-    // insert another template into slot
-    else if (node && node.nodeName === '#document-fragment')
+    // insert other DOM nodes (templates, DOM elements or document fragments) into slot
+    else if (node && node.nodeType)
       slot.parentNode.insertBefore(node, slot)
   
     // replace slot with it's contents
