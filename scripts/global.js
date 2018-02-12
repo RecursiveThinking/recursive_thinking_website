@@ -1,4 +1,3 @@
-
 // represents database call for all users
 var allUsers = [
     {
@@ -6,6 +5,7 @@ var allUsers = [
         name: 'Porg Dev1',
         title: 'Dev1 Title',
         location: 'Dev1 Location',
+        image: './public/images/avatar1.png',
         lecturesAttending: []
     },
     {
@@ -13,6 +13,7 @@ var allUsers = [
         name: 'Porg Dev2',
         title: 'Dev2 Title',
         location: 'Dev2 Location',
+        image: './public/images/avatar2.png',
         lecturesAttending: []
     },
     {
@@ -20,6 +21,7 @@ var allUsers = [
         name: 'Porg Dev3',
         title: 'Dev3 Title',
         location: 'Dev3 Location',
+        image: './public/images/avatar3.png',
         lecturesAttending: []
     },
     {
@@ -27,6 +29,7 @@ var allUsers = [
         name: 'Porg Dev4',
         title: 'Dev4 Title',
         location: 'Dev4 Location',
+        image: './public/images/avatar4.png',
         lecturesAttending: []
     },
     {
@@ -34,6 +37,7 @@ var allUsers = [
         name: 'Porg Dev5',
         title: 'Dev5 Title',
         location: 'Dev5 Location',
+        image: './public/images/avatar5.png',
         lecturesAttending: []
     },
     {
@@ -41,13 +45,15 @@ var allUsers = [
         name: 'Porg Dev6',
         title: 'Dev6 Title',
         location: 'Dev6 Location',
+        image: './public/images/avatar6.png',
         lecturesAttending: []
     },
     {
         _id: 0000000007,
-        name: 'Porg Dev7',
-        title: 'Dev7 Title',
+        name: 'Porg Von Porghoven',
+        title: 'Porgy Porg Porg',
         location: 'Dev7 Location',
+        image: './public/images/porg_sq.jpeg',
         lecturesAttending: []
     },
     {
@@ -55,6 +61,7 @@ var allUsers = [
         name: 'Porg Dev8',
         title: 'Dev8 Title',
         location: 'Dev8 Location',
+        image: './public/images/avatar1.png',
         lecturesAttending: []
     },
     {
@@ -62,66 +69,70 @@ var allUsers = [
         name: 'Porg Dev9',
         title: 'Dev9 Title',
         location: 'Dev9 Location',
+        image: './public/images/avatar2.png',
         lecturesAttending: []
     }
 ]
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
+var currentUser = allUsers[6];
+// console.log(currentUser);
+localStorage.setItem('currentUser', JSON.stringify(currentUser));
 // database call for Lessons
 var allLessons = [
     {
         _id: 1000000001,
         title: 'Designing with A-Frame VR',
         date: '11/25/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        lessonTaughtBy: [],
-        lessonAttendees: [],
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        lessonTaughtBy: [0000000001, 0000000002],
+        lessonAttendees: [0000000001, 0000000002, 0000000003, 0000000004],
         lessonVotes: []
     },
     {
         _id: 1000000002,
         title: 'Building a city with HTML & CSS',
         date: '12/02/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        lessonTaughtBy: [],
-        lessonAttendees: [],
-        lessonVotes: []
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        lessonTaughtBy: [0000000003, 0000000004, 0000000006],
+        lessonAttendees: [0000000001, 0000000002, 0000000003, 0000000004, 0000000005, 0000000006, 0000000007],
+        lessonVotes: [0000000001]
         
     },
     {
         _id: 1000000003,
         title: 'Building a calculator with HTML, CSS & JavaScript',
         date: '12/09/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        lessonTaughtBy: [],
-        lessonAttendees: [],
-        lessonVotes: []
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        lessonTaughtBy: [0000000005, 0000000006],
+        lessonAttendees: [0000000001, 0000000002, 0000000003, 0000000004, 0000000005, 0000000006, 0000000007],
+        lessonVotes: [0000000001, 0000000002]
     },
     {
         _id: 1000000004,
         title: 'Building a timer with HTML, CSS & JavaScript',
         date: '12/16/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        lessonTaughtBy: [],
-        lessonAttendees: [],
-        lessonVotes: []
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        lessonTaughtBy: [0000000001, 0000000003],
+        lessonAttendees: [0000000001, 0000000002, 0000000003, 0000000004, 0000000005, 0000000006, 0000000007],
+        lessonVotes: [0000000001, 0000000002, 0000000003]
     },
     {
         _id: 1000000005,
         title: 'Building a website with HTML, CSS & JavaScript',
         date: '12/23/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        lessonTaughtBy: [],
-        lessonAttendees: [],
-        lessonVotes: []
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        lessonTaughtBy: [0000000002, 0000000004],
+        lessonAttendees: [0000000001, 0000000002, 0000000003, 0000000004, 0000000005, 0000000006, 0000000007],
+        lessonVotes: [0000000001, 0000000002, 0000000003, 0000000004]
     },
     {
         _id: 1000000006,
         title: 'Building a web application with HTML, CSS & JavaScript',
         date: '12/30/2017',
-        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        lessonTaughtBy: [],
-        lessonAttendees: [],
-        lessonVotes: []
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        lessonTaughtBy: [0000000003, 0000000005],
+        lessonAttendees: [0000000001, 0000000002, 0000000003, 0000000004, 0000000005, 0000000006, 0000000007],
+        lessonVotes: [0000000001, 0000000002, 0000000003, 0000000004, 0000000005]
     }
 ]
 localStorage.setItem('allLessons', JSON.stringify(allLessons));
@@ -215,6 +226,21 @@ function getFormattedLessonDate(dateToFormat){
         upComingDateString: upComingDateString
     };
     return finalDateObject;
+}
+
+// function to fix vote string based on number
+function getLessonVoteString(lesson){
+    let createVoteString = '';
+    if(lesson.lessonVotes.length === 0){
+        createVoteString = `No Votes`;
+    }
+    else if(lesson.lessonVotes.length === 1){
+        createVoteString = `${lesson.lessonVotes.length} Vote`;
+    }
+    else if(lesson.lessonVotes.length > 1){
+        createVoteString = `${lesson.lessonVotes.length} Votes`
+    }
+    return createVoteString;
 }
 
 // getRandomNumber(0, 6)
