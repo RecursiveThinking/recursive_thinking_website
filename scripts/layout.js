@@ -51,16 +51,16 @@ recursiveApi.init();
 buildCurrentUserDashInfo()
 
 function buildCurrentUserDashInfo(){
-    console.log("In Function");
+    // console.log("In Function");
     const currentUserDashInfo = document.getElementById('currentUserDashInfo');
-    console.log(currentUserDashInfo);
+    // console.log(currentUserDashInfo);
     // make div
     const divDevInfo = document.createElement('div');
     divDevInfo.className = `fc-devInfo`;
         // make img
         const devImage = document.createElement('img');
         devImage.className = `sidebarImage`;
-        console.log(currentUser.name);
+        // console.log(currentUser.name);
         if(!currentUser.image){
             currentUser.image = './public/images/avatar1.png';
         }
