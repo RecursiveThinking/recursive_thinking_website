@@ -47,3 +47,38 @@ class api {
 }
 const recursiveApi = new api();
 recursiveApi.init();
+
+buildCurrentUserDashInfo()
+
+function buildCurrentUserDashInfo(){
+    console.log("In Function");
+    const currentUserDashInfo = document.getElementById('currentUserDashInfo');
+    console.log(currentUserDashInfo);
+    // make div
+    const divDevInfo = document.createElement('div');
+    divDevInfo.className = `fc-devInfo`;
+        // make img
+        const devImage = document.createElement('img');
+        devImage.className = `sidebarImage`;
+        console.log(currentUser.name);
+        if(!currentUser.image){
+            currentUser.image = './public/images/avatar1.png';
+        }
+        devImage.setAttribute('src', `${currentUser.image}`)
+        // connect
+        divDevInfo.appendChild(devImage)
+        // make h2 heading
+        const h2DevName = document.createElement('h2');
+        h2DevName.className = `devName`;
+        h2DevName.innerText = `${currentUser.name}`;
+        // connect
+        divDevInfo.appendChild(h2DevName);
+        // make h3 heading
+        const h3DevTitle = document.createElement('h3');
+        h3DevTitle.className = `devTitle`;
+        h3DevTitle.innerText = `${currentUser.title}`;
+        // connect
+        divDevInfo.appendChild(h3DevTitle);
+    //connect
+    currentUserDashInfo.appendChild(divDevInfo);
+}
