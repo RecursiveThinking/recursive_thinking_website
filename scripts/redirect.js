@@ -65,7 +65,7 @@
                     })
                 }))
                 // turn on lesson modal
-                modal();
+                modalLessons();
                 
                 break;
             case 'edit-profile':
@@ -78,7 +78,7 @@
                 break;
             case 'interview-prep':
                 appendPage('interviewPrep');
-                // setUpInterviewPrep();
+                modalInterview();
                 break;
             case 'recursive-directory':
 
