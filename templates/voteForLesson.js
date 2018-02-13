@@ -1,4 +1,4 @@
-function modal(){
+function modalLessons(){
     // const submitButton = document.getElementById("btnSubmitLesson");
 
     // const openModal = () => {
