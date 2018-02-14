@@ -29,12 +29,18 @@
     border-top: 0;
     
 }
-#recursiveDirectoryHTML .devName {
+#recursiveDirectoryHTML a {
+    text-decoration: none;
+}
+#recursiveDirectoryHTML .devDirName {
     font-size: 3.6rem;
     /* margin-bottom: 0; */
     letter-spacing: 2.2px;
 }
-#recursiveDirectoryHTML .devTitle {
+#recursiveDirectoryHTML .devDirName:hover {
+    color: #00b371;
+}
+#recursiveDirectoryHTML .devDirTitle {
     font-size: 2.8rem;
     margin-bottom: .4rem;
     letter-spacing: 1.7px;
