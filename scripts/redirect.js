@@ -96,7 +96,7 @@
                         picture: {
                             // insert these attributes into the element tagged as a slot
                             // src: `./public/images/${randomAvatar()}`,
-                            src: `./public/images/${user.image}`,  
+                            src: `${user.image}`,  
                             alt: `Profile picture for ${user.name}` 
                         }
                     }))
