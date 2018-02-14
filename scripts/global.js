@@ -52,7 +52,7 @@ var allUsers = [
         _id: '0000000007',
         name: 'Porg Von Porghoven',
         title: 'Porgy Porg Porg',
-        location: 'Dev7 Location',
+        location: 'Porgsville - Population Porg',
         image: './public/images/porg_sq.jpeg',
         lecturesAttending: []
     },
