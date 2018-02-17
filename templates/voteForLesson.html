@@ -100,7 +100,9 @@
                 <h3 class="h3VoteCount colorGreen fw900">
                     <slot name="lessonVotes" />
                 </h3>
-                <button class="btn btnOutline fw900" type="submit">Voted!</button>
+                <!-- <button class="btn btnOutline fw900" type="submit">Voted!</button> -->
+                <!-- <button class="btn btnFill fw900" type="submit">Click To Voite</button> -->
+                <slot name="hasCurrentUserVoted" />
             </div>
         </article>
     </div>
