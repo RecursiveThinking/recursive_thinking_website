@@ -15,6 +15,7 @@ class api {
         // adding our click listener to each sidebar item
         const sidebarItems = document.getElementsByClassName('sidebar-item');
         const sideBarItemsArray = Array.from(sidebarItems);
+        serverApi.getDeveloperProfiles();
         sideBarItemsArray.forEach((item) => {
             item.addEventListener('click', () => {
                 const pageId = item.getAttribute('data-pageId');
@@ -24,25 +25,25 @@ class api {
         });
     }
 
-    getDeveloperProfiles() {
-        const resource = "/developer";
+    // getDeveloperProfiles() {
+    //     const resource = "/developer";
 
-        const options = {
-            method: "GET"
-        };
-        fetch(this.apiUrl + resource, options)
-            .then((data) => {
-                return data.json();
-            })
-            .then((response) => {
-                console.log("shit worked", response);
-                return response;
-            })
-            .catch((err) => {
-                console.log("shit broke ", err);
-                return err;
-            })
-    }
+    //     const options = {
+    //         method: "GET"
+    //     };
+    //     fetch(this.apiUrl + resource, options)
+    //         .then((data) => {
+    //             return data.json();
+    //         })
+    //         .then((response) => {
+    //             console.log("shit worked", response);
+    //             return response;
+    //         })
+    //         .catch((err) => {
+    //             console.log("shit broke ", err);
+    //             return err;
+    //         })
+    // }
 
 }
 const recursiveApi = new api();

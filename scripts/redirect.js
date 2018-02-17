@@ -84,7 +84,7 @@
 
                 var allUsers = JSON.parse(localStorage.getItem('allUsers'));
             
-                recursiveApi.getDeveloperProfiles(); // not used yet
+                serverApi.getDeveloperProfiles(); // not used yet
 
                 setUpPage(fill(templates.recursiveDirectory.page, {
                     recursiveDirectory: allUsers.map((user) => fill(templates.recursiveDirectory.developer, {
