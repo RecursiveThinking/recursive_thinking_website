@@ -75,7 +75,7 @@ var allUsers = [
 ]
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
 // create a static currentUser for testing
-// var currentUser = allUsers[6];
+// var currentUser = allUsers[1];
 // this will autoGenerate a new
 var currentUser = allUsers[getRandomNumber(0, allUsers.length)];
 console.log(allUsers);
@@ -175,9 +175,84 @@ var profileStatistics = [
         title: 'Resume Views'
     }
 ]
-
 localStorage.setItem('allProfileStatistics', JSON.stringify(profileStatistics));
 // console.log(profileStatistics);
+
+// interview questions
+var allInterviewQuestions = [
+    {
+        _id: 'iq00000001',
+        title: 'Highlight Table Rows',
+        submitted: '09/05/2017',
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS' ],
+        answersToQuestion: [],
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'iq00000002',
+        title: 'Build An Accordion',
+        submitted: '09/05/2017',
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS' ],
+        answersToQuestion: [],
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'iq00000001',
+        title: 'Highlight Table Rows',
+        submitted: '09/05/2017',
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS' ],
+        answersToQuestion: [],
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'iq00000002',
+        title: 'Build An Accordion',
+        submitted: '09/05/2017',
+        description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
+        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS' ],
+        answersToQuestion: [],
+        fk_author: '0000000001'
+    }
+]
+localStorage.setItem('allInterviewQuestions', JSON.stringify(allInterviewQuestions));
+var allAnswersToQuestions = [
+    {
+        _id: 'ia00000000',
+        title: '',
+        submitted: '',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
+        fk_question: 'iq00000001',
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'ia00000001',
+        title: '',
+        submitted: '',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
+        fk_question: 'iq00000001',
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'ia00000002',
+        title: '',
+        submitted: '',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
+        fk_question: 'iq00000002',
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'ia00000003',
+        title: '',
+        submitted: '',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
+        fk_question: 'iq00000002',
+        fk_author: '0000000001'
+    }
+]
+localStorage.setItem('allInterviewQuestions', JSON.stringify(allAnswersToQuestions));
 
 var arrayOfAvatars = [ 'avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png', 'avatar6.png' ]
 
@@ -268,7 +343,7 @@ function generateTaughtByThumbs(loopNumber, containerHTML, lessonTitleForAlt, ){
 }
 
 
-function displayMessage(){
+function displayMessage(inputString){
     
 }
 
@@ -285,6 +360,36 @@ function returnFilteredTaughtByUserArray(lessonTaughtByArray){
     }
     // console.log(compareArray);
     return compareArray;
+}
+
+function hasUserVoted(lessonVotesArray, currentUserObj){
+    let hasVotedArrayOnLesson = [];
+    console.log(lessonVotesArray);
+    let hasVotedArrayOnLessonBool = false;
+    // console.log(lessonVotesArray, currentUserObj["_id"] , currentUserObj);
+    for(let i = 0; i < lessonVotesArray.length; i += 1){
+        if(lessonVotesArray[i] === currentUserObj["_id"]){
+            hasVotedArrayOnLesson.push(true)
+        }
+        else {
+            hasVotedArrayOnLesson.push(false)
+        }
+    }
+    hasVotedArrayOnLesson = hasVotedArrayOnLesson.filter((element) => element === true);
+    // console.log(hasVotedArrayOnLesson);
+    if(hasVotedArrayOnLesson.length > 0){
+        hasVotedArrayOnLessonBool = true;
+    }
+    
+    return hasVotedArrayOnLessonBool;
+}
+
+function getButtonHTMLString(boolVal){
+    if(boolVal){
+        return `<button class="btn btnOutline fw900" type="submit">Voted!</button>`
+    } else {
+        return `<button class="btn btnFill fw900" type="submit">Click to Vote!</button>`
+    }
 }
 
 class Random {
