@@ -1,0 +1,29 @@
+{
+  "name": "recursive_thinking_website",
+  "version": "1.0.0",
+  "description": "A website for a developer network called Recursive Thinking",
+  "main": "layout.html",
+  "scripts": {
+    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
+    "start": "http-server",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RecursiveThinking/recursive_thinking_website.git"
+  },
+  "author": "Recursive Thinking Developers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RecursiveThinking/recursive_thinking_website/issues"
+  },
+  "homepage": "https://github.com/RecursiveThinking/recursive_thinking_website#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "http-server": "^0.11.1",
+    "webpack": "^3.11.0"
+  }
+}

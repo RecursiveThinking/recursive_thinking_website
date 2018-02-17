@@ -1,4 +1,4 @@
-function modalLessons(){
+export const modalLessons = () => {
     // const submitButton = document.getElementById("btnSubmitLesson");
 
     // const openModal = () => {

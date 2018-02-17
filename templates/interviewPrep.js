@@ -1,4 +1,4 @@
-function modalInterview(){
+export const modalInterview = () => {
 
     const btnSubmitInterviewQuestion = document.getElementById('btnSubmitInterviewQuestion');
     

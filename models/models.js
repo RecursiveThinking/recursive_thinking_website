@@ -1,0 +1,9 @@
+import { getUpcomingLessonsModel } from './upcoming_lessons_model';
+import { getVoteForLessonsModel } from './vote_for_lessons_model';
+import { getRecursiveDirectoryModel } from './recursive_directory_model';
+
+export const models = {
+    getUpcomingLessonsModel,
+    getVoteForLessonsModel,
+    getRecursiveDirectoryModel
+};

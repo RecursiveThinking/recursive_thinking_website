@@ -28,8 +28,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/editProfile.css" />
 
-    <script src="./scripts/global.js"></script>
-
     <!-- templates -->
     <link id="dashboard" href="templates/dashboard.html" type="text/html" rel="import">
     <link id="upcomingLessons" href="templates/upcomingLessons.html" type="text/html" rel="import">
@@ -40,10 +38,7 @@
     <link id="recursiveDirectory" href="templates/recursiveDirectory.html" type="text/html" rel="import">
 
     <!-- load after templates but before everything else -->
-    <script src="./scripts/templater.js"></script>
-
-    <script src="./scripts/redirect.js"></script>
-    <script src="./scripts/serverApi.js"></script>
+    <script src="./build/main.bundle.js"></script>
 </head>
 
 <body>
@@ -127,13 +122,12 @@
             </div>
         </div>
     </footer>
-    <script src="./scripts/layout.js"></script>
     <!-- <script src="./scripts/genericFunctions.js"></script> -->
 
     <!-- <script src="./scripts/allFunctions.js"></script> -->
     <!-- <script src="./templates/recursiveDirectory.js"></script> -->
     <!--<script src="./templates/voteForLesson.js"></script>-->
-    <script src="./templates/interviewPrep.js"></script>
+    <!--<script src="./templates/interviewPrep.js"></script>-->
 </body>
 
 </html>
