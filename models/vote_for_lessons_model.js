@@ -17,10 +17,10 @@ export const getVoteForLessonsModel = () => {
     let lessonLimit = 4;
     return {
         voteForLesson: allLessons.map(lesson => {
-            let filteredTaughtByUserArray = returnFilteredTaughtByUserArray(lesson.lessonTaughtBy);
+            let filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(lesson.lessonTaughtBy);
             // console.log(filteredTaughtByUserArray);
-            let boolHasUserVoted = hasUserVoted(lesson.lessonVotes, currentUser);
-            console.log("bool at redirect", boolHasUserVoted);
+            let boolHasUserVoted = utils.hasUserVoted(lesson.lessonVotes, currentUser);
+            // console.log("bool at redirect", boolHasUserVoted);
             return fill(templates.voteForLesson.displayALesson, {
                 title: lesson.title,
                 description: lesson.description,
@@ -34,9 +34,9 @@ export const getVoteForLessonsModel = () => {
                     }
                 })),
                 // this passes a lesson to function - the function counts the number of votes, and returns an appropriate string
-                lessonVotes: getLessonVoteString(lesson),
+                lessonVotes: utils.getLessonVoteString(lesson),
                 // this returns an HTML string for the button based on whether or not user has voited on lesson.
-                hasCurrentUserVoted: getButtonHTMLString(boolHasUserVoted)
+                hasCurrentUserVoted: utils.getButtonHTMLString(boolHasUserVoted)
             })
         })
     }

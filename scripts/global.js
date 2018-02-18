@@ -404,5 +404,7 @@ export const utils = {
     getRandomNumber,
     getLessonVoteString,
     returnFilteredTaughtByUserArray,
+    hasUserVoted,
+    getButtonHTMLString,
     generateTaughtByThumbs
 };
