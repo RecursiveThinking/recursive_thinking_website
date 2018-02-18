@@ -143,7 +143,7 @@ const allInterviewQuestions = [
     {
         _id: 'iq00000001',
         title: 'Highlight Table Rows',
-        submitted: '09/05/2017',
+        submitted: '09/12/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
         categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
         answersToQuestion: [],
@@ -159,18 +159,18 @@ const allInterviewQuestions = [
         fk_author: '0000000001'
     },
     {
-        _id: 'iq00000001',
-        title: 'Highlight Table Rows',
-        submitted: '09/05/2017',
+        _id: 'iq00000003',
+        title: 'Build a Modal',
+        submitted: '08/28/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
         categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
         answersToQuestion: [],
         fk_author: '0000000001'
     },
     {
-        _id: 'iq00000002',
-        title: 'Build An Accordion',
-        submitted: '09/05/2017',
+        _id: 'iq00000004',
+        title: 'Build a Gallery',
+        submitted: '08/21/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
         categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
         answersToQuestion: [],
@@ -213,7 +213,7 @@ const allAnswersToQuestions = [
         fk_author: '0000000001'
     }
 ]
-localStorage.setItem('allInterviewQuestions', JSON.stringify(allAnswersToQuestions));
+localStorage.setItem('allAnswersToQuestions', JSON.stringify(allAnswersToQuestions));
 
 const arrayOfAvatars = ['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png', 'avatar6.png']
 localStorage.setItem('arrayOfAvatars', JSON.stringify(arrayOfAvatars));
@@ -292,7 +292,8 @@ const getFormattedLessonDate = (dateToFormat) => {
     const monthAsNumberIndex = dateToFormat.getMonth();
     const monthAsNumber = monthAsNumberIndex + 1;
     const monthAsString = getMonthOfYear(monthAsNumberIndex);
-    const upComingDateString = `${year} ${monthAsNumber} ${dateOfMonth}`
+    const upComingDateStringEuroNamingNumber = `${year} ${monthAsNumber} ${dateOfMonth}`
+    const upComingDateStringAmericanNaming = `${monthAsString} ${dateOfMonth}, ${year}`
 
     return {
         dayOfWeek: dayOfWeek,
@@ -301,22 +302,41 @@ const getFormattedLessonDate = (dateToFormat) => {
         monthAsNumberIndex: monthAsNumberIndex,
         monthAsNumber: monthAsNumber,
         monthAsString: monthAsString,
-        upComingDateString: upComingDateString
+        upComingDateStringEuroNamingNumber: upComingDateStringEuroNamingNumber,
+        upComingDateStringAmericanNaming: upComingDateStringAmericanNaming
     };
 
 }
 
 // function to fix vote string based on number
-const getLessonVoteString = (lesson) => {
-    let createVoteString = '';
-    if (lesson.lessonVotes.length === 0) {
-        createVoteString = `No Votes`;
-    } else if (lesson.lessonVotes.length === 1) {
-        createVoteString = `${lesson.lessonVotes.length} Vote`;
-    } else if (lesson.lessonVotes.length > 1) {
-        createVoteString = `${lesson.lessonVotes.length} Votes`
+// const getLessonVoteString = (lesson) => {
+//     let createVoteString = '';
+//     if (lesson.lessonVotes.length === 0) {
+//         createVoteString = `No Votes`;
+//     } else if (lesson.lessonVotes.length === 1) {
+//         createVoteString = `${lesson.lessonVotes.length} Vote`;
+//     } else if (lesson.lessonVotes.length > 1) {
+//         createVoteString = `${lesson.lessonVotes.length} Votes`
+//     }
+//     return createVoteString;
+// }
+const getCountString = (condString, array) => {
+    let createCountString = '';
+    let count;
+    if(condString === 'lesson'){
+        count = array.lessonVotes.length;
     }
-    return createVoteString;
+    else if(condString === 'question'){
+        count = array.answersToQuestion.length;
+    }
+    if (count === 0) {
+        createCountString = `No Votes`;
+    } else if (count === 1) {
+        createCountString = `${count} Vote`;
+    } else if (count > 1) {
+        createCountString = `${count} Votes`
+    }
+    return createCountString;
 }
 
 // getRandomNumber(0, 6)
@@ -358,7 +378,7 @@ const returnFilteredTaughtByUserArray = (lessonTaughtByArray) => {
 
 function hasUserVoted(lessonVotesArray, currentUserObj) {
     let hasVotedArrayOnLesson = [];
-    console.log(lessonVotesArray);
+    // console.log(lessonVotesArray);
     let hasVotedArrayOnLessonBool = false;
     // console.log(lessonVotesArray, currentUserObj["_id"] , currentUserObj);
     for (let i = 0; i < lessonVotesArray.length; i += 1) {
@@ -386,15 +406,25 @@ function getButtonHTMLString(boolVal) {
 }
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
-const getAllLessons = () => JSON.parse(localStorage.getItem('allLessons'));
-const getAllProfileStatistics = () => JSON.parse(localStorage.getItem('allProfileStatistics'));
+// console.log('getAllUsers', getAllUsers);
 const getCurrentUser = () => JSON.parse(localStorage.getItem('currentUser'));
+
+const getAllProfileStatistics = () => JSON.parse(localStorage.getItem('allProfileStatistics'));
+
+const getAllLessons = () => JSON.parse(localStorage.getItem('allLessons'));
+
+const getAllInterviewQuestions = () => JSON.parse(localStorage.getItem('allInterviewQuestions'));
+
+const getAllAnswersToQuestions = () => JSON.parse(localStorage.getItem('allAnswersToQuestions'));
+
 
 export const data = {
     getAllUsers,
-    getAllLessons,
+    getCurrentUser,
     getAllProfileStatistics,
-    getCurrentUser
+    getAllLessons,
+    getAllInterviewQuestions,
+    getAllAnswersToQuestions
 };
 
 export const utils = {
@@ -402,7 +432,7 @@ export const utils = {
     getMonthOfYear,
     getFormattedLessonDate,
     getRandomNumber,
-    getLessonVoteString,
+    getCountString,
     returnFilteredTaughtByUserArray,
     hasUserVoted,
     getButtonHTMLString,
