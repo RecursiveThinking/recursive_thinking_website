@@ -36,12 +36,14 @@ export default (function() {
                 break;
             case 'edit-profile':
                 appendPage('editProfile');
+                // setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
                 break;
             case 'sign-out':
                 appendPage('signOut');
                 break;
             case 'interview-prep':
-                appendPage('interviewPrep');
+                // appendPage('interviewPrep');
+                setUpPage(fill(templates.interviewPrep.page, models.getInterviewPrepModel()));
                 modalInterview();
                 break;
             case 'recursive-directory':
