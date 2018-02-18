@@ -34,7 +34,7 @@ export const getVoteForLessonsModel = () => {
                     }
                 })),
                 // this passes a lesson to function - the function counts the number of votes, and returns an appropriate string
-                lessonVotes: utils.getLessonVoteString(lesson),
+                lessonVotes: utils.getCountString('lesson', lesson),
                 // this returns an HTML string for the button based on whether or not user has voited on lesson.
                 hasCurrentUserVoted: utils.getButtonHTMLString(boolHasUserVoted)
             })
