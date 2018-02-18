@@ -8,7 +8,7 @@ export const getUpcomingLessonsModel = () => {
     
     return {
         upcomingLessons: allLessons.map(lesson => {
-            let formattedDate = utils.getFormattedLessonDate(new Date(lesson.date));
+            let formattedDate = utils.getFormattedDate(new Date(lesson.date));
             return fill(templates.upcomingLessons.lessonSummary, {
                 day: formattedDate.dateOfMonth,
                 month: formattedDate.monthAsString,

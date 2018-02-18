@@ -284,7 +284,7 @@ const getMonthOfYear = (index) => {
     return monthString;
 }
 
-const getFormattedLessonDate = (dateToFormat) => {
+const getFormattedDate = (dateToFormat) => {
 
     const dayOfWeek = getDayOfWeek(dateToFormat.getDay());
     const dateOfMonth = dateToFormat.getDate();
@@ -430,7 +430,7 @@ export const data = {
 export const utils = {
     getDayOfWeek,
     getMonthOfYear,
-    getFormattedLessonDate,
+    getFormattedDate,
     getRandomNumber,
     getCountString,
     returnFilteredTaughtByUserArray,
