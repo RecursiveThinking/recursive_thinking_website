@@ -24,8 +24,7 @@ export default (function() {
         const location = window.location.hash.replace('#','');
         switch (location) {
             case 'dashboard':
-                appendPage('dashboard');
-                setUpDashboard();
+                setUpPage(fill(templates.dashboard.page, models.getDashboardModel()));
                 break;
             case 'upcoming-lessons':
                 setUpPage(fill(templates.upcomingLessons.page, models.getUpcomingLessonsModel()));

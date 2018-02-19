@@ -417,6 +417,8 @@ const getAllInterviewQuestions = () => JSON.parse(localStorage.getItem('allInter
 
 const getAllAnswersToQuestions = () => JSON.parse(localStorage.getItem('allAnswersToQuestions'));
 
+const getArrayOfAvatars = () => JSON.parse(localStorage.getItem('arrayOfAvatars'));
+
 
 export const data = {
     getAllUsers,
@@ -424,7 +426,8 @@ export const data = {
     getAllProfileStatistics,
     getAllLessons,
     getAllInterviewQuestions,
-    getAllAnswersToQuestions
+    getAllAnswersToQuestions,
+    getArrayOfAvatars
 };
 
 export const utils = {
