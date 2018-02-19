@@ -49,6 +49,8 @@ export default (function() {
                 setUpPage(fill(templates.recursiveDirectory.page, models.getRecursiveDirectoryModel()));
                 break;
             default:
+                window.location.hash = "dashboard";
+                setUpPage(fill(templates.dashboard.page, models.getDashboardModel()));
                 break;
         }
     }
