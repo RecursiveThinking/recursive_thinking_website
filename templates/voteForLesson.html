@@ -66,7 +66,7 @@
                         </div>
                     </article>
                 </div> -->
-                <slot name="voteForLesson">
+                <slot name="voteForLesson"></slot>
                 
                 
             </div>
@@ -80,28 +80,28 @@
     <div class="cell">
         <article class="content card">
             <h3 class="h3TitleLesson colorBlack fw500">
-                <slot name="title" />
+                <slot name="title"></slot>
             </h3>
             <hr>
             <div class="fc-pLesson">
                 <p class="fw300">
-                    <slot name="description" />
+                    <slot name="description"></slot>
                 </p>
             </div>
             <hr>
             <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
             <div class="fc-taughtByThumbs">
                 <!-- <img class="avatarThumbRound" src="../public/images/avatar2.png" alt=""> -->
-                <slot name="lessonTeachers">
+                <slot name="lessonTeachers"></slot>
             </div>
             <hr>
             <div class="fc-votes">
                 <h3 class="h3VoteCount colorGreen fw900">
-                    <slot name="lessonVotes" />
+                    <slot name="lessonVotes"></slot>
                 </h3>
                 <!-- <button class="btn btnOutline fw900" type="submit">Voted!</button> -->
                 <!-- <button class="btn btnFill fw900" type="submit">Click To Voite</button> -->
-                <slot name="hasCurrentUserVoted" />
+                <slot name="hasCurrentUserVoted"></slot>
             </div>
         </article>
     </div>

@@ -7,7 +7,7 @@
                     <article id="upComingLessonsCard" class="card">
                         <h4 class="colorGray42 fw900 ttup">Upcoming Lessons</h4>
                         <hr>
-                        <slot name="upcomingLessons">
+                        <slot name="upcomingLessons"></slot>
                     </article>
                 </div>
                 <div class="cell">
@@ -96,19 +96,19 @@
     <div class="fc-dateRowTitle">
         <div class="fc-dateRow contVertCenter">
             <h1 class="h1Date colorGreen fw300">
-                <slot name="day" />
+                <slot name="day"></slot>
             </h1>
             <div class="fc-dateRowMonthYear">
                 <h4 class="h4MonthYear colorBlack06 fw500 ttup">
-                    <slot name="month" />
+                    <slot name="month"></slot>
                 </h4>
                 <h4 class="h4MonthYear colorBlack06 fw500 ttup">
-                    <slot name="year" />
+                    <slot name="year"></slot>
                 </h4>
             </div>
         </div>
         <h4 class="h4LessonTitle negMarg colorGray66 fw300">
-            <slot name="title" />
+            <slot name="title"></slot>
         </h4>
     </div>
     <!-- need to figure out a way to turn this off on the last one -->

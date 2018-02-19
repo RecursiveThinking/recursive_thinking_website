@@ -5,7 +5,7 @@
 
 Use the `<template>` element to create a new HTML template that can be reused at will. 
 
-You can specify **dynamic content** (Element Slots) by using `<slot>` elements. You can set default output from a slot by defining it's inner html (e.g. `<slot name="location">Seattle, WA</slot>`).
+You can specify **dynamic content** (Element Slots) by using `<slot>` elements. You can set default output from a slot by defining it's inner html (e.g. `<slot name="location">Seattle, WA</slot>`). **Slot Elements must be closed with `</slot>`.**
 
 You can specify **dynamic attributes** (Attribute Slots) on an HTML element by specifying a `slot=""` attribute. You can provide default values for attributes by defining them in the template. If the data is not overridden, the value in the template will be used. 
 
@@ -29,7 +29,7 @@ Make sense? No? Great! Here's an example that'll probably help:
     <img slot="picture" class="devPicture" alt="profile picture for this developer">
     <div class="fc-text-group">
       <!-- the two <slot> elements ("name" and "title") are examples of Element Slots -->
-      <h2 class="devName colorGray42 fw500"><slot name="name" /></h2>
+      <h2 class="devName colorGray42 fw500"><slot name="name"></slot></h2>
       <h3 class="devTitle colorGray42 fw300"><slot name="title">Developer</slot></h3>
     </div>
   </div>
@@ -41,7 +41,7 @@ Make sense? No? Great! Here's an example that'll probably help:
 fill(templates.recursiveDirectory.developer, {
   // name of slot : data to insert
 
-  name: "Nathaniel" // insert `Nathaniel` into <slot name="name" /> as HTML
+  name: "Nathaniel" // insert `Nathaniel` into <slot name="name"></slot> as HTML
   // not defining title, so the default title ( "Developer" ) will be used
 
   // insert `src="/path/to/epic/photo.png"` and `alt="A Badass Dude"` into slot="picture" as attributes
