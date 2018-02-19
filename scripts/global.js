@@ -155,7 +155,7 @@ const allInterviewQuestions = [
         submitted: '09/05/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
         categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
-        answersToQuestion: [],
+        answersToQuestion: ['ia00000001', 'ia00000002'],
         fk_author: '0000000001'
     },
     {
@@ -164,7 +164,7 @@ const allInterviewQuestions = [
         submitted: '08/28/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
         categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
-        answersToQuestion: [],
+        answersToQuestion: ['ia00000003'],
         fk_author: '0000000001'
     },
     {
@@ -173,7 +173,7 @@ const allInterviewQuestions = [
         submitted: '08/21/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
         categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
-        answersToQuestion: [],
+        answersToQuestion: ['ia00000004'],
         fk_author: '0000000001'
     }
 ]
@@ -181,25 +181,17 @@ localStorage.setItem('allInterviewQuestions', JSON.stringify(allInterviewQuestio
 
 const allAnswersToQuestions = [
     {
-        _id: 'ia00000000',
-        title: '',
-        submitted: '',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
-        fk_question: 'iq00000001',
-        fk_author: '0000000001'
-    },
-    {
         _id: 'ia00000001',
         title: '',
-        submitted: '',
+        submitted: '09/07/2017',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
-        fk_question: 'iq00000001',
+        fk_question: 'iq00000002',
         fk_author: '0000000001'
     },
     {
         _id: 'ia00000002',
         title: '',
-        submitted: '',
+        submitted: '09/09/2017',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
         fk_question: 'iq00000002',
         fk_author: '0000000001'
@@ -207,9 +199,17 @@ const allAnswersToQuestions = [
     {
         _id: 'ia00000003',
         title: '',
-        submitted: '',
+        submitted: '09/01/2017',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
-        fk_question: 'iq00000002',
+        fk_question: 'iq00000003',
+        fk_author: '0000000001'
+    },
+    {
+        _id: 'ia00000004',
+        title: '',
+        submitted: '08/31/2017',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, recusandae distinctio sunt beatae ut quasi! Nulla repellendus impedit eum recusandae architecto, distinctio id voluptate doloremque ratione alias eveniet maiores voluptatum, qui maxime repellat iste facilis possimus quibusdam eos similique amet nesciunt? Ipsum iure deserunt facilis fugit officia pariatur, rerum, dolore ad sit laborum odio amet! At, quibusdam. Hic laborum, alias dolore suscipit minima inventore accusamus! Autem, magni! Aliquid quod ullam maiores illo similique? Dolore ad consequuntur, accusamus fugit sint iure quod quos id suscipit molestiae quibusdam expedita nam autem consectetur dignissimos doloremque fugiat veniam error rem! Illo totam minima fugiat.',
+        fk_question: 'iq00000004',
         fk_author: '0000000001'
     }
 ]
@@ -294,6 +294,7 @@ const getFormattedDate = (dateToFormat) => {
     const monthAsString = getMonthOfYear(monthAsNumberIndex);
     const upComingDateStringEuroNamingNumber = `${year} ${monthAsNumber} ${dateOfMonth}`
     const upComingDateStringAmericanNaming = `${monthAsString} ${dateOfMonth}, ${year}`
+    const upComingDateStringAmericanWithSlash = `${monthAsNumber}/${dateOfMonth}/${year}`
 
     return {
         dayOfWeek: dayOfWeek,
@@ -303,7 +304,8 @@ const getFormattedDate = (dateToFormat) => {
         monthAsNumber: monthAsNumber,
         monthAsString: monthAsString,
         upComingDateStringEuroNamingNumber: upComingDateStringEuroNamingNumber,
-        upComingDateStringAmericanNaming: upComingDateStringAmericanNaming
+        upComingDateStringAmericanNaming: upComingDateStringAmericanNaming,
+        upComingDateStringAmericanWithSlash: upComingDateStringAmericanWithSlash
     };
 
 }
@@ -323,6 +325,7 @@ const getFormattedDate = (dateToFormat) => {
 const getCountString = (condString, array) => {
     let createCountString = '';
     let count;
+    let string = '';
     if(condString === 'lesson'){
         count = array.lessonVotes.length;
     }
@@ -330,11 +333,29 @@ const getCountString = (condString, array) => {
         count = array.answersToQuestion.length;
     }
     if (count === 0) {
-        createCountString = `No Votes`;
+        if(condString === 'lesson'){
+            string = 'Votes'
+        }
+        else if(condString === 'question'){
+            string = 'Replies'
+        }
+        createCountString = `No ${string}`;
     } else if (count === 1) {
-        createCountString = `${count} Vote`;
+        if(condString === 'lesson'){
+            string = 'Vote'
+        }
+        else if(condString === 'question'){
+            string = 'Reply'
+        }
+        createCountString = `${count} ${string}`;
     } else if (count > 1) {
-        createCountString = `${count} Votes`
+        if(condString === 'lesson'){
+            string = 'Votes'
+        }
+        else if(condString === 'question'){
+            string = 'Replies'
+        }
+        createCountString = `${count} ${string}`
     }
     return createCountString;
 }
