@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon -->
-    <link rel="shortcut icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
-    <link rel="icon" href="../public/images/favicon/favicon_32x32.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/images/favicon/favicon_32x32.ico" type="image/x-icon">
+    <link rel="icon" href="public/images/favicon/favicon_32x32.ico" type="image/x-icon">
     <!-- font awesome (icons) -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
@@ -17,16 +17,16 @@
     <title>Title</title>
     <!-- css -->
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/header.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/footer.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/sidebar.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/homeScreen.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/dashboard.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/upcomingLessons.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/voteForLesson.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/interviewPrep.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/recursiveDirectory.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/editProfile.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/header.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/homeScreen.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/upcomingLessons.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/voteForLesson.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/interviewPrep.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/recursiveDirectory.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/editProfile.css" />
 
     <!-- templates -->
     <link id="dashboard" href="templates/dashboard.html" type="text/html" rel="import">
@@ -38,7 +38,9 @@
     <link id="recursiveDirectory" href="templates/recursiveDirectory.html" type="text/html" rel="import">
 
     <!-- load after templates but before everything else -->
-    <script src="./build/main.bundle.js"></script>
+    <!--IF YOUR TRYING TO LOAD THIS FILE IN LOCAL YOUR DOING IT WRONG.  -->
+    <!-- RUN "NPM RUN WEBPACK" THEN LAUNCH THE BUILD/INDEX.HTML, AS YOU CHANGE
+    <!--FILES WEBPACK WILL AUTOMATICALLY REBUILD.  JUST REFRESH PAGE TO VIEW CHANGES.-->
 </head>
 
 <body>
@@ -47,14 +49,14 @@
         <div class="cell cell-center">
             <div class="content">
                 <div class="logo">
-                    <img src="./public/images/recursivelogo.png" alt="">
+                    <img src="public/images/recursivelogo.png" alt="">
                 </div>
             </div>
         </div>
         <div class="cell cell-center">
             <div class="content cell-center">
                 <div class="searchBar">
-                    <a href="./templates/homeScreen.html"><button class="btn btnFill">To HomeScreen</button></a>
+                    <a href="templates/homeScreen.html"><button class="btn btnFill">To HomeScreen</button></a>
                     <input class="input search" type="search" placeholder="Enter your Search Here">
                 </div>
             </div>
@@ -122,12 +124,6 @@
             </div>
         </div>
     </footer>
-    <!-- <script src="./scripts/genericFunctions.js"></script> -->
-
-    <!-- <script src="./scripts/allFunctions.js"></script> -->
-    <!-- <script src="./templates/recursiveDirectory.js"></script> -->
-    <!--<script src="./templates/voteForLesson.js"></script>-->
-    <!--<script src="./templates/interviewPrep.js"></script>-->
 </body>
 
 </html>
