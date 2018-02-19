@@ -19,7 +19,7 @@ module.exports = {
             { from: './css/', to: './css', force: true },
             { from: './buildspec.yml', to: './', force: true },
             { from: './template.yml', to: './', force: true },
-            { from: './testlambda.js', to: './', force: true },
+            { from: './backend/', to: './', force: true },
             { from: './main.css', to: './', force: true }
         ])
     ],

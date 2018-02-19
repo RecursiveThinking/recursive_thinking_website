@@ -1,13 +1,26 @@
 # Recursive Thinking: The Website
 
+## Getting Started
+
+Welcome to the Recursive Thinking Website!
+
+Start your engines! Initiate a Webpack Build / Watch.
+```
+npm run webpack
+```
+
+Visit your `build/index.html` in the browser.
+
+Make changes and refresh the page to view them.
+
 
 ## Using Templates
 
-Use the `<template>` element to create a new HTML template that can be reused at will. 
+Use the `<template>` element to create a new HTML template that can be reused at will.
 
 You can specify **dynamic content** (Element Slots) by using `<slot>` elements. You can set default output from a slot by defining it's inner html (e.g. `<slot name="location">Seattle, WA</slot>`). **Slot Elements must be closed with `</slot>`.**
 
-You can specify **dynamic attributes** (Attribute Slots) on an HTML element by specifying a `slot=""` attribute. You can provide default values for attributes by defining them in the template. If the data is not overridden, the value in the template will be used. 
+You can specify **dynamic attributes** (Attribute Slots) on an HTML element by specifying a `slot=""` attribute. You can provide default values for attributes by defining them in the template. If the data is not overridden, the value in the template will be used.
 
 Once you've created it, use the `fill(<template>, <dataObject>)` javascript function to fill your template. `<template>` is the template you just made (accessible by `templates.PAGENAME.TEMPLATENAME`) and fill data is an object of key value pairs where the key corresponds to a slot in your template and the value corresponds to the data you're inserting.
 
@@ -16,7 +29,7 @@ Make sense? No? Great! Here's an example that'll probably help:
 **Add Template To Project**
 ```html
 <link name="recursiveDirectory" href="templates/recursiveDirectory.html" type="text/html" rel="import">
-``` 
+```
 
 **Define your Template (in templates/recursiveDirectory.html)**
 ```html
@@ -71,15 +84,15 @@ fill(templates.recursiveDirectory.developer, {
 
 #### `<template name="TEMPLATENAME" [id="TEMPLATENAME"]>`
 
-Use a `<template>` element to define a new template.  
-Use a `<slot>` element to define dynamically inserted content.  
+Use a `<template>` element to define a new template.
+Use a `<slot>` element to define dynamically inserted content.
 Use a `slot=""` attribute on an element to define dynamically inserted attributes.
 
 **Details**
 
-**`name`** *`(attribute)`*: the name by which you will reference the template.  
-**`id`** *`(attribute)`* *`[deprecated]`*: the name by which you will reference the template (use `name` instead).  
-**`<slot name="SLOTNAME">`** *`(Element Slot)`*: An element that represents insertion of Text, HTML or other Templates.  
+**`name`** *`(attribute)`*: the name by which you will reference the template.
+**`id`** *`(attribute)`* *`[deprecated]`*: the name by which you will reference the template (use `name` instead).
+**`<slot name="SLOTNAME">`** *`(Element Slot)`*: An element that represents insertion of Text, HTML or other Templates.
 **`slot="SLOTNAME"`** *`(Attribute Slot)`*: An attribute that represents insertion of attributes on a non-slot element.
 
 Templates are represented as `document-fragments` in javascript.
@@ -92,10 +105,10 @@ Fills a template using the `fillData` object. If fillData is not defined, templa
 
 **Arguments**
 
-**`template`** *`(document-fragment)`*: The template object to be filled. (e.g. `templates.PAGE.TEMPLATEID`)  
+**`template`** *`(document-fragment)`*: The template object to be filled. (e.g. `templates.PAGE.TEMPLATEID`)
 **`fillData`** *`(object)`*: Data object to be used to fill template.
 
-`keys` in the fillData object map to the names slots in the template. (e.g. { slot1: '...' })  
+`keys` in the fillData object map to the names slots in the template. (e.g. { slot1: '...' })
 `values` are the value to be inserted in the slot (strings, html strings, numbers, template, and elements are all valid)
 
 ```js
@@ -111,3 +124,26 @@ fillData: {
 **Returns**
 
 **`template`** *`(Template)`*: A filled template
+
+## Deployment
+
+Production deployments are handled in https://github.com/amnevins/recursivethinking.git
+
+Essentially the above deployment repo will merge from this one and commit to kick off a build.  This gives  a manual approval process for deployment to production.
+
+
+#### buildspec.yml
+
+This file contains build logic that will kick off on a deployment.
+The gist is:
+- get the newest aws sdk
+- npm install packages
+- run webpack to generate build folder
+- copy the frontend build files to an S3 bucket for hosting
+- run the template.yml to deploy backend architecture
+
+####template.yml
+
+This file contains our SAM (serverless application model) template.  We will use this config to directly deploy/update lambdas/api gateway routes/dynamodb resources.
+
+To learn more about SAM - https://github.com/awslabs/serverless-application-model

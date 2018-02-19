@@ -12,7 +12,7 @@ Resources:
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: testlambda.get
+      Handler: backend/lambdas/testlambda.get
       Runtime: nodejs4.3
       Role:
         Fn::ImportValue:
