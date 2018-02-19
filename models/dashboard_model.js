@@ -17,7 +17,7 @@ export const getDashboardModel = () => {
 
     // All Upcoming lesson data should come from the user profile, for now we are simply using generic dummy lesson data
     const upComingLessons = data.getAllLessons();
-    const upComingLessonDate = utils.getFormattedLessonDate(new Date(upComingLessons[0].date));
+    const upComingLessonDate = utils.getFormattedDate(new Date(upComingLessons[0].date));
 
     // Individual Lesson for upComingLesson Template
     const upComingLesson = {
@@ -91,7 +91,7 @@ export const getDashboardModel = () => {
         }),
         lessonsAttending: fill(templates.dashboard.lessonsAttending, {
             individualLessons: lessonsAttending.map((lesson) => {
-                const lessonDate = utils.getFormattedLessonDate(new Date(lesson.date));
+                const lessonDate = utils.getFormattedDate(new Date(lesson.date));
                 return fill(templates.dashboard.individualLesson, {
                     lessonTitle: lesson.title,
                     lessonDateDay: lessonDate.dateOfMonth,
