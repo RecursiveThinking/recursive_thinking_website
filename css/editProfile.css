@@ -81,11 +81,19 @@
 .fc-input-profile input {
     width: 67%;
     margin: 0 0 0 2.5rem;
+}
+
+.fc-about .fc-input-about .fc-right input {
+    width: 100%;
+}
+
+.fc-input-profile input, .fc-about .fc-input-about .fc-right input {
     padding: 1rem 0 1rem 1.5rem;
     text-align: left;
     
     font-size: 1.8rem;
     letter-spacing: 1.1px;
+    border: 1px solid #979797
 }
 
 .fc-input-profile input::placeholder {
@@ -94,7 +102,7 @@
 }
 
 .fc-input-profile input[type=text]:focus, textarea:focus {
-    box-shadow: 0 0 .25rem .025rem #00b371;
+    box-shadow: 0 0 .125rem .025rem #00b371;
     border: 1px solid #00b371;
     /* outline-offset: 0; */
     outline: none;
@@ -120,36 +128,67 @@
     /* flex-direction: column; */
     flex-wrap: wrap;
     /* justify-content: center; */
-    /* align-content: center; */
+    align-content: center;
     /* align-items: center; */
     height: auto;
-    /* width: 100%; */
+    width: 100%;
 }
 
 .fc-about .fc-input-about {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-end;
-    align-content: center;
+    /* justify-content: center; */
+    /* align-content: center; */
     /* align-items: flex-end; */
     /* align-content: flex-end; */
     /* align-content: flex-end; */
-    /* align-items: flex-end; */
+    align-items: center;
     /* text-align: right; */
     width: 100%;
 }
 
-.fc-about .fc-input-about label {
-    text-align: right;
+/* .fc-about .fc-input-about .fc-left label {
+    
+} */
+
+.fc-about .fc-input-about:first-of-type{
+    margin-bottom: 4rem;
 }
 
-.fc-about .fc-input-about .lbltaCenter {
+.fc-about .fc-input-about .fc-right {
+    display: flex;
+    align-content: flex-start;
+    align-items: center;
     text-align: center;
 }
 
-.fc-about .fc-input-about input {
-    width: 50%;
+.fc-about .fc-input-about .fc-left {
+    width: 70%;
+    text-align: right;
+}
+.fc-about .fc-input-about .fc-left label {
+    margin-right: 3rem;
+}
+
+.fc-about .fc-input-about .fc-right {
+    width: 30%;
+}
+
+.fc-about .fc-input-about .fc-right label {
+    margin: 0 0 0 1rem;
+}
+
+.fc-about .fc-input-about .fc-right label:first-of-type {
+    margin: 0 1rem 0 1rem;
+}
+
+.fc-about .fc-input-about .fc-right input {
+    width: 100%;
+}
+
+.fc-about .fc-input-about .fc-right .inputShort {
+    width: 40%;
 }
 
 .fc-form-about, .fc-form-skills {
