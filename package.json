@@ -29,5 +29,8 @@
     "html-webpack-prefix-plugin": "^0.1.1",
     "http-server": "^0.11.1",
     "webpack": "^3.11.0"
+  },
+  "dependencies": {
+    "aws-amplify": "^0.2.6"
   }
 }

@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const bucketPath = "https://s3-us-west-2.amazonaws.com/aws-codestar-us-west-2-131603044023-devdaywebsite-app/";
 
 module.exports = {
-    entry: './main.js',
+    entry: `${__dirname}/main.js`,
     plugins: [
         new CleanWebpackPlugin(['build']),
         new HtmlWebpackPlugin({
@@ -39,7 +39,8 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015']
-                }
+                },
+                exclude: /node_modules/
             }
         ]
     },

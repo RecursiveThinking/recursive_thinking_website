@@ -125,6 +125,15 @@ fillData: {
 
 **`template`** *`(Template)`*: A filled template
 
+## Auth
+
+We use Cognito user pools for user sign in and profile info.
+We use Cognito federated pools to give our signed in users
+permission to call post API's to our DB.
+
+Visit Auth.js for all utility methods for Auth, just import them
+in your workflow and start using - simple as that.
+
 ## Deployment
 
 Production deployments are handled in https://github.com/amnevins/recursivethinking.git

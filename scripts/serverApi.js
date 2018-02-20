@@ -1,4 +1,10 @@
-let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod"
+import { User } from './auth';
+
+let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
+
+function signUp(info) {
+    User.signUp(info);
+}
 
 // Get all developer profiles
 function getDeveloperProfiles() {
@@ -133,5 +139,6 @@ export default {
     postInterviewQuestion,
     postInterviewQuestionResponse,
     postEditProfile,
-    initFetchCall
+    initFetchCall,
+    signUp
 }
