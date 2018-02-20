@@ -53,6 +53,7 @@
                         </article>
                     </div>
                 </div>
+                <!-- modal for answer -->
                 <section>
                     <div id="modalAnswerInterviewQuestion" class="modal">
                         <div class="modalContent card">
@@ -93,7 +94,7 @@
                     </div>
                 </section>
                 <div class="grid gutters full">
-                    <div class="cell">
+                    <!-- <div class="cell">
                         <article class="content card">
                             <div class="fc-titleAnswer">
                                 <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Highlight Table Rows:</h4>
@@ -104,8 +105,6 @@
                                 <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
                                 <br><br>
                                 Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                                <!-- <br><br>
-                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
                                 </p>
                             </div>
                             <hr>
@@ -133,8 +132,6 @@
                                 <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
                                 <br><br>
                                 Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                                <!-- <br><br>
-                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
                                 </p>
                             </div>
                             <hr>
@@ -178,8 +175,6 @@
                                 <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
                                 <br><br>
                                 Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                                <!-- <br><br>
-                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
                                 </p>
                             </div>
                             <hr>
@@ -207,8 +202,6 @@
                                 <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
                                 <br><br>
                                 Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                                <!-- <br><br>
-                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. -->
                                 </p>
                             </div>
                             <hr>
@@ -224,11 +217,55 @@
                                 <button class="btn btnFill fw500" type="submit">Answer Question</button>
                             </div>
                         </article>
-                    </div>
+                    </div> -->
+                    <slot name="interviewPrep">
                 </div>
             </div>
         </div>
     </section>
 </template>
+<template id="tempIdInterviewQuestion">
+    <div class="cell">
+        <article class="content card">
+            <div class="fc-titleAnswer">
+                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900"><slot name="title" /></h4>
+                <h5 class="h5InterviewQuestionDate colorGray64 fw300"><slot name="date" /></h5>
+            </div>
+            <hr>
+            <div class="fc-pLesson">
+                <p class="fw300">
+                    <slot name="description" />
+                </p>
+            </div>
+            <hr>
+            <div class="fc-interviewQuestionTags">
+                <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
+                <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
+                <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
+                <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
+            </div>
+            <hr>
+            <!-- <div class="fc-replies open"> -->
+            <div class="fc-replies">
+                <!-- <h3 class="h3VoteCount colorGreen fw900">4 Replies</h3> -->
+                <h3 class="h3VoteCount colorGreen fw900"><slot name="questionAnswersCount" /></h3>
+                <!-- <div class="answers" style="display: block;"> -->
+                <div class="answers">
+                    <slot name="questionAnswers"></slot>
+                </div>
+                <button class="btn btnFill fw500" type="submit">Answer Question</button>
+            </div>
+        </article>
+    </div>
+</template>
 
-
+<template id="tempIdInterviewQuestionAnswer">
+    <div class="fc-answers">
+        <div class="fc-author">
+            <h5 class="colorBlack fw900">Josh Smith</h5>
+            <h5 class="h5TitleDate colorGray55 fw300"><slot name="submitted" /></h5>
+        </div>
+        <p class="colorGray55 fw300"><slot name="description" /></p>
+        <hr>
+    </div>
+</template>

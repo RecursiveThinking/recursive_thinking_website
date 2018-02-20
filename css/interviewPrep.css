@@ -101,6 +101,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 1.9rem 0 0 0;
+    /* display: none; */
 }
 
 .fc-replies.open {
@@ -110,6 +111,10 @@
     justify-content: space-between;
     align-items: flex-start;
     margin: 1.9rem 0 0 0;
+}
+
+.fc-replies .answers {
+    display: none;
 }
 
 .fc-replies.open .fc-answers {
