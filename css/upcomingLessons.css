@@ -63,3 +63,10 @@
 .marginLeft14 {
     margin-left: 1.4rem;
 }
+
+.fc-dateRowTitle,
+.lessonButton,
+.thumbAndName,
+.avatarThumbRound {
+  cursor: pointer;
+}
