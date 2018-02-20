@@ -50,6 +50,7 @@
             <h4 class="colorGrayb9 fw900 ttup">
                 Upcoming Lessons
             </h4>
+            <hr>
             <div class="fc-dateRow contVertCenter">
                 <h1 class="h1Date colorGreen fw300">
                     <slot name="lessonDateDay"></slot>
@@ -72,13 +73,14 @@
                     <slot name="lessonDescription"></slot>
                 </p>
             </div>
+            <hr>
             <div>
-                <h4>
+                <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">
                     Taught By:
                 </h4>
                 <div class="fc-taughtByThumbs">
                     <slot name="lessonTaughtBy"></slot>
-                </div>>
+                </div>
             </div>
         </article>
     </div>
@@ -86,7 +88,9 @@
 
 <!-- Avatar1.png is the default image if no image is given -->
 <template id="lessonTaughtBy">
-    <img slot="taughtByImage" class="avatarThumbRound" src="public/images/avatar1.png" alt="Lesson taught by Avatar 1">
+    <img slot="imgAttr" class="avatarThumbRound">
+    <!-- fixed the above - but the default doesn't work in this case? so I took it out -->
+    <!-- src="public/images/avatar1.png" alt="Lesson taught by Avatar 1" -->
 </template>
 
 <template id="lessonsAttending">

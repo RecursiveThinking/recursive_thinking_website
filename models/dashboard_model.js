@@ -18,7 +18,8 @@ export const getDashboardModel = () => {
     // All Upcoming lesson data should come from the user profile, for now we are simply using generic dummy lesson data
     const upComingLessons = data.getAllLessons();
     const upComingLessonDate = utils.getFormattedDate(new Date(upComingLessons[0].date));
-
+    const filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(upComingLessons[0].lessonTaughtBy);
+    console.log(filteredTaughtByUserArray);
     // Individual Lesson for upComingLesson Template
     const upComingLesson = {
         lessonTitle: upComingLessons[0].title,
@@ -26,12 +27,13 @@ export const getDashboardModel = () => {
         lessonDateMonth: upComingLessonDate.monthAsString,
         lessonDateYear: upComingLessonDate.year,
         lessonDescription: upComingLessons[0].description,
-        // lessonTaughtBy: upComingLessons[0].lessonTaughtBy.map((developer) => {
-        //     console.log(avatars[developer])
-        //     return fill(templates.dashboard.lessonTaughtBy, {
-        //         src="public/images/"
-        //     })
-        // })
+        lessonTeachers: filteredTaughtByUserArray.map((userObj) => fill(templates.voteForLesson.displayTaughtByLessons, {
+            // console.log(avatars[developer])
+            imgAttrs: {
+                src: `${userObj["image"]}`,
+                alt: `Lesson will be taught by ${userObj["name"]}`
+            }
+        }))
     };
 
     let lessonsAttending = upComingLessons.slice(0, 3);
@@ -85,9 +87,7 @@ export const getDashboardModel = () => {
             lessonDateMonth: upComingLesson.lessonDateMonth,
             lessonDateYear: upComingLesson.lessonDateYear,
             lessonDescription: upComingLesson.lessonDescription,
-            // lessonTaughtBy: {
-
-            // }
+            lessonTaughtBy: upComingLesson.lessonTeachers,
         }),
         lessonsAttending: fill(templates.dashboard.lessonsAttending, {
             individualLessons: lessonsAttending.map((lesson) => {
