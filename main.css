@@ -48,6 +48,27 @@ body {
     text-align: center;
 }
 
+button.btn.btnFill.greenNavButton {
+    font-size: 2rem;
+    padding: 1rem 4rem;
+    border-radius: 1rem;
+}
+
+.homeNavButton {
+    margin-right: 2rem;
+}
+
+.uploadButton {
+    margin-left: 2rem;
+    margin-right: 1rem;
+    padding: 0 1rem;
+    /*lol  */
+}
+
+.fc-input-profile input.resumeInput {
+    width: 51%;
+}
+
 .btn {
     cursor: pointer;
 }
