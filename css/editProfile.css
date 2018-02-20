@@ -164,15 +164,13 @@
 }
 
 .fc-about .fc-input-about .fc-left {
-    width: 70%;
+    width: 65%;
     text-align: right;
-}
-.fc-about .fc-input-about .fc-left label {
-    margin-right: 3rem;
+    margin: 0 3rem 0 0;
 }
 
 .fc-about .fc-input-about .fc-right {
-    width: 30%;
+    width: 35%;
 }
 
 .fc-about .fc-input-about .fc-right label {
