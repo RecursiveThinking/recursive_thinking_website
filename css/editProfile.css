@@ -22,7 +22,7 @@
 
 #editProfileHTML .avatarPicXL {
     width: 29.3rem;
-    height: auto;
+    height: 29.3rem;
     border-radius: 50%;
     z-index: 0;
     position: relative;
