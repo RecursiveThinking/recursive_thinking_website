@@ -12,6 +12,11 @@ export const getEditProfileModel = () => {
     let age = utils.getAgeEditProfile(new Date(currentUser.birthday));
     // let age = new Date(currentUser.birthday);
     // console.log(age);
+    let skillsProfessionalArray = utils.returnArrayOfApplicableItems('skillsProfessional', currentUser.skillsProfessional);
+    let skillsSoftwareArray = utils.returnArrayOfApplicableItems('skillsSoftware', currentUser.skillsSoftware);
+    let skillsLanguageArray = utils.returnArrayOfApplicableItems('skillsLanguage', currentUser.skillsLanguages);
+    let aboutUser = currentUser['aboutUser'];
+    console.log(aboutUser);
     return {
         editProfile: fill(templates.editProfile.currentUserProfile, {
             // basic stats
@@ -32,11 +37,24 @@ export const getEditProfileModel = () => {
             profileLinkPortfolio: { value: `${currentUser['linkPortfolio']}`},
             profileLinkResume: { value: `${currentUser['linkResume']}`},
             // about
-            profileAboutUser: { value: `${currentUser['aboutUser']}`},
+            // profileAboutUser: currentUser.aboutUser,
+            profileAboutUser: currentUser['aboutUser'],
+            // profileAboutUser: { value: `${currentUser['aboutUser']}`},
             profileAboutUserYearsOfExperience: { value: `${currentUser['aboutUserYearsOfExperience']}`},
             profileAboutUserTimeWithRTYear: {},
             profileAboutUserTimeWithRTMonth: {},
             // professional skills
+            profileSkillProfessional: skillsProfessionalArray.map((skillProfessional) => fill(templates.editProfile.currentUserSkillProfessional, {
+                skillItemProf: skillProfessional,
+                delSkillItemProf: { onclick: utils.deleteItemFromArray()}
+            })),
+            
+            profileSkillSoftware: skillsSoftwareArray.map((skillSoftware) => fill(templates.editProfile.currentUserSkillSoftware, {
+                skillItemSoft: skillSoftware
+            })),
+            profileSkillLanguage: skillsLanguageArray.map((skillLanguage) => fill(templates.editProfile.currentUserSkillLanguage, {
+                skillItemLang: skillLanguage
+            }))
         })
     }
 };
