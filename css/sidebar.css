@@ -1,4 +1,4 @@
-/* 
+/*
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
 
 /* width: 300px; */
 
-/* align-items: stretch; 
+/* align-items: stretch;
     flex-grow: 1;
     margin: 0;
 } */
@@ -27,6 +27,7 @@
     /* align-items: stretch; */
     flex-grow: 1;
     margin: 0;
+    box-shadow: 1px 0 4px 0 rgba(0, 0, 0, 0.5);
 }
 .devCaption{
     height: 252px;
@@ -52,7 +53,7 @@
 
 .devTitle {
     font-size: 1.6rem;
-    font-weight: 300;
+    font-weight: 100;
     line-height: 1.44;
     letter-spacing: 1px;
     text-align: center;
@@ -71,8 +72,12 @@
     border-radius: 50%;
 }
 
+.fa {
+    font-size: 2.5rem;
+}
+
 .sidebarTitle {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 1px;
     color: #ffffff;
@@ -93,36 +98,36 @@
     flex-grow: 1;
     justify-content: space-between;
     align-items: center;
-    /* padding: 3.5rem 0; */
+    padding: 6%;
     margin: 0 5%;
-    border-top: .05rem solid #979797;
-    border-bottom: .05rem solid #979797;
+    border-top: 0rem solid #666666;
+    border-bottom: .01rem solid #666666;
 }
 
 .sidebar .sidebar-item:hover {
     margin: 0 0;
-    padding-left: 5%;
-    padding-right: 5%;
-    background-color: #027d50;
+    padding-left: 8%;
+    padding-right: 8%;
+    background-color: #00b371;
     cursor: pointer;
-    border-top: .05rem solid #027d50;
-    border-bottom: .05rem solid #027d50;
+    border-top: 0rem solid #2d3134;
+    border-bottom: .01rem solid #2d3134;
 }
 
 .sidebar-item:nth-of-type(2) {
-    border-top: .15rem solid #979797;
+    border-top: 0 solid #666666;
 }
 
 .sidebar-item:nth-of-type(2):hover {
-    border-top: .15rem solid #027d50;
+    border-top: .01rem solid #027d50;
 }
 
 .sidebar-item:nth-last-of-type(1) {
-    border-bottom: .15rem solid #979797;
+    border-bottom: .01rem solid #979797;
 }
 
 .sidebar-item:nth-last-of-type(1):hover {
-    border-bottom: .15rem solid #027d50;
+    border-bottom: .01rem solid #027d50;
 }
 
 .sidebar article span {
@@ -141,7 +146,7 @@
     .sidebarImage {
         width: 100px;
     }
-    
+
 }
 
 @media only screen and (min-width: 768px){

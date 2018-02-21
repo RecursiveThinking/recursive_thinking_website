@@ -23,6 +23,7 @@
     letter-spacing: 1.4px;
     /* color: #b9b9b9; */
     margin-bottom: .9rem;
+    font-weight: 500 !important;
 }
 
 #dashboardHTML .content {
@@ -54,15 +55,17 @@
 
 /* #dashboardHTML .h1Data, #dashboardHTML .h1Date { */
 #dashboardHTML .h1Data, .h1Date {
-    font-size: 7.2rem;
+    font-size: 5.2rem;
     /* font-weight: 300; */
     letter-spacing: 4.3px;
 }
 
 #dashboardHTML .h5Data {
-    font-size: 2.0rem;
+    font-size: 1.8rem;
     /* font-weight: 500; */
     letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #555555;
 }
 
 #dashboardHTML > .content.container > .grid.gutters.half.grow > .cell > article {
@@ -77,9 +80,9 @@
 }
 
 #dashboardHTML .imAttending .fc-dateRow {
-/* .imAttending .fc-dateRow { */
+    /* .imAttending .fc-dateRow { */
     margin-top: 1rem;
-} 
+}
 
 /* #dashboardHTML .fc-dateRow .h1Date { */
 .fc-dateRow .h1Date {
@@ -124,7 +127,7 @@
 .fc-lessonTitleDescription p {
     font-size: 1.6rem;
     letter-spacing: 1px;
-    padding: 1rem 0; 
+    padding: 1rem 0;
 }
 
 /* #dashboardHTML .fc-taughtByThumbs { */
@@ -178,52 +181,52 @@
         /* padding: 3rem 0; */
         border-width: .1rem;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) {
         /* padding: 3rem 0; */
         padding-left: 0;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) > .content {
         /* padding: 3rem 0; */
         /* border-top-width: .1rem; */
         /* border-bottom-width: .1rem; */
         border-width: .1rem 0;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) {
         /* padding: 3rem 0; */
         padding-left: 0;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) > .content {
         /* padding: 3rem 0; */
         border-width: .1rem;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(1) > .content {
         /* padding: 3rem 0; */
         /* border-width: .1rem; */
         border-width: 0 .1rem .1rem .1rem;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) {
         /* padding: 3rem 0; */
         padding-left: 0;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) > .content {
         /* padding: 3rem 0; */
         /* border-top-width: .1rem; */
         /* border-bottom-width: .1rem; */
         border-width: 0 0 .1rem 0;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) {
         /* padding: 3rem 0; */
         padding-left: 0;
     }
-    
+
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
         /* padding: 3rem 0; */
         /* border-width: .1rem; */

@@ -89,8 +89,9 @@ button.btn.btnFill.greenNavButton {
 
 .card {
     background-color: #ffffff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0.5px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
+    margin-bottom: 2em;
 }
 
 /* general classes */
