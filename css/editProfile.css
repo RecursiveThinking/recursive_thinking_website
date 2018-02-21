@@ -82,7 +82,9 @@
     width: 100%;
 }
 
-.fc-input-profile input, .fc-about .fc-input-about .fc-right input {
+.fc-input-profile input, 
+.fc-about .fc-input-about .fc-right input,
+.fc-skillCont .fc-form-skills .fc-form-input input {
     padding: 1rem 0 1rem 1.5rem;
     text-align: left;
 
@@ -96,7 +98,14 @@
     font-weight: 100;
 }
 
-.fc-input-profile input[type=text]:focus, textarea:focus {
+.fc-input-profile input[type=email]:focus,
+.fc-input-profile input[type=number]:focus,
+.fc-input-profile input[type=search]:focus, 
+.fc-input-profile input[type=text]:focus,
+.fc-input-profile input[type=url]:focus,
+.fc-about .fc-input-about .fc-right input[type=number]:focus,
+.fc-skillCont .fc-form-skills .fc-form-input input[type=search]:focus,
+textarea:focus {
     box-shadow: 0 0 .125rem .025rem #00b371;
     border: 1px solid #00b371;
     /* outline-offset: 0; */

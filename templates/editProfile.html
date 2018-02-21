@@ -111,7 +111,9 @@
             <div class="grid gutters half">
                 <div class="cell">
                     <!-- <div class="fc-aboutCont"> -->
-                        <textarea rows="8" cols="12" placeholder="Please enter Information About Yourself" slot="profileAboutUser"></textarea>
+                        <textarea rows="8" cols="12" placeholder="Please enter Information About Yourself"><slot name="profileAboutUser"></slot></textarea>
+                        <!-- slot="profileAboutUser" -->
+                        <!-- <slot name="profileAboutUser" />  -->
                     <!-- </div> -->
                 </div>
                 <div class="cell">
@@ -151,51 +153,17 @@
                 <div class="cell">
                     <div class="fc-form-input">
                         <label for="skillProfessional" class="fw300 colorGray42">Search for Professional Skills:</label>
-                        <input type="text" name="skillProfessional" value="" placeholder="Find Professional Skill">
+                        <input type="search" name="skillProfessional" placeholder="Find Professional Skill">
                     </div>
                 </div>
                 <div class="cell">
                     <div class="fc-skillItemCont">
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">User Research</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Information Architecture</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Visual Design</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">User Centered Design</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Wireframing Design</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Interaction Design</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
                         <!-- <div class="fc-skillItem">
                             <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
                             <div class="skillItemDash"></div>
                             <h5 class="skillItemClose colorGreen fw500">X</h5>
                         </div> -->
+                        <slot name="profileSkillProfessional"></slot>
                     </div>
                 </div>
             </div>
@@ -210,31 +178,17 @@
                 <div class="cell">
                     <div class="fc-form-input">
                         <label for="skillProfessional" class="fw300 colorGray42">Seach for Software Skills:</label>
-                        <input type="text" name="skillProfessional" value="" placeholder="Find Software Skill">
+                        <input type="search" name="skillProfessional" placeholder="Find Software Skill">
                     </div>
                 </div>
                 <div class="cell">
                     <div class="fc-skillItemCont">
-                        <div class="fc-skillItem">
+                        <!-- <div class="fc-skillItem">
                             <h5 class="skillItem colorGray42 fw500">Sketch</h5>
                             <div class="skillItemDash"></div>
                             <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Balsamiq</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">OmniGraffle</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Axure</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
+                        </div> -->
+                        <slot name="profileSkillSoftware"></slot>
                     </div>
                 </div>
             </div>
@@ -249,34 +203,44 @@
                 <div class="cell">
                     <div class="fc-form-input">
                         <label for="skillProfessional" class="fw300 colorGray42">Search for Coding Languages:</label>
-                        <input type="text" name="skillProfessional" value="" placeholder="Find Coding Language">
+                        <input type="search" name="skillProfessional" placeholder="Find Coding Language">
                     </div>
                 </div>
                 <div class="cell">
                     <div class="fc-skillItemCont">
-                        <div class="fc-skillItem">
+                        <!-- <div class="fc-skillItem">
                             <h5 class="skillItem colorGray42 fw500">HTML</h5>
                             <div class="skillItemDash"></div>
                             <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">CSS</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">JavaScript</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
-                        <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">jQuery</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div>
+                        </div> -->
+                        <slot name="profileSkillLanguage"></slot>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</template>
+
+<template id="currentUserSkillProfessional">
+    <div class="fc-skillItem">
+        <h5 class="skillItem colorGray42 fw500"><slot name="skillItemProf"></h5>
+        <div class="skillItemDash"></div>
+        <h5 class="skillItemClose colorGreen fw500" slot="delSkillItemProf">X</h5>
+    </div>
+</template>
+
+<template id="currentUserSkillSoftware">
+    <div class="fc-skillItem">
+        <h5 class="skillItem colorGray42 fw500"><slot name="skillItemSoft"></h5>
+        <div class="skillItemDash"></div>
+        <h5 class="skillItemClose colorGreen fw500">X</h5>
+    </div>
+</template>
+
+<template id="currentUserSkillLanguage">
+    <div class="fc-skillItem">
+        <h5 class="skillItem colorGray42 fw500"><slot name="skillItemLang"></h5>
+        <div class="skillItemDash"></div>
+        <h5 class="skillItemClose colorGreen fw500">X</h5>
     </div>
 </template>
