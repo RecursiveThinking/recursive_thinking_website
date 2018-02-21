@@ -22,15 +22,15 @@
                 <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
                 <img class="avatarPicXL" slot="profileBasicValImgAttrs">
                 <label id="profile-picture" class="caption card">
-                    <span>Add Profile Picture</span>
+                    <span class="profileTitle fw500">Add Profile Picture</span>
                     <input id="file" style="visibility:hidden;" type="file">
                 </label>
                 <!-- end fix commit -->
                 <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
                 <!-- <img class="avatarPicXL" slot="profileBasicValImgAttrs"> -->
-                <div class="caption card">
+                <!-- <div class="caption card">
                     <h5 class="profileTitle colorGray42 fw500">Edit Profile Picture</h5>
-                </div>
+                </div> -->
             </div>
             <div class="cell">
                 <div class="fc-infoCont1">
@@ -44,7 +44,7 @@
                             </div>
                             <div class="fc-input-profile">
                                 <label class="colorGray42 fw900" for="age">Age:</label>
-                                <input class="colorGray42 fw300" type="number" name="age" placeholder="Age">
+                                <input class="colorGray42 fw300" type="number" name="age" placeholder="Age" slot="profileBasicValAge">
                             </div>
                             <div class="fc-input-profile">
                                 <label class="colorGray42 fw900" for="location">Location:</label>
@@ -119,20 +119,20 @@
                         <div class="fc-about">
                             <div class="fc-input-about">
                                 <div class="fc-left">
-                                    <label class="colorGray42 fw900" for="linkGitHub">Years of Experience:</label>
+                                    <label class="colorGray42 fw900" for="aboutYearsOfXP">Years of Experience:</label>
                                 </div>
                                 <div class="fc-right">
-                                    <input class="colorGray42 fw300" type="number" name="linkGitHub" placeholder="Total Experience" slot="profileAboutUserYearsOfExperience">
+                                    <input class="colorGray42 fw300" type="number" name="aboutYearsOfXP" placeholder="Total Experience" slot="profileAboutUserYearsOfExperience">
                                 </div>
                             </div>
                             <div class="fc-input-about">
                                 <div class="fc-left">
-                                    <label class="colorGray42 fw900" for="linkGitHub">Time with Recursive Thinking:</label>
+                                    <label class="colorGray42 fw900" for="aboutTimeWithRT">Time with Recursive Thinking:</label>
                                 </div>
                                 <div class="fc-right">
-                                    <input class="inputShort colorGray42 fw300" type="number" name="linkGitHub" placeholder="Y" slot="">
+                                    <input class="inputShort colorGray42 fw300" type="number" name="aboutTimeWithRTY" placeholder="Y" slot="profileAboutUserTimeWithRTYear">
                                     <label for="" class="colorGray42 fw900">Y</label>
-                                    <input class="inputShort colorGray42 fw300" type="number" name="linkGitHub" placeholder="M" slot="">
+                                    <input class="inputShort colorGray42 fw300" type="number" name="aboutTimeWithRTM" placeholder="M" slot="profileAboutUserTimeWithRTMonth">
                                     <label for="" class="colorGray42 fw900">M</label>
                                 </div>
                             </div>

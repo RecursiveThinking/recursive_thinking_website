@@ -302,18 +302,19 @@
 }
 
 #profile-picture {
-  background: #00b371;
-  color: white;
-  cursor: pointer;
+    /* background: #00b371; */
+    /* color: white; */
+    color: #424041;
+    cursor: pointer;
 }
 
-#profile-picture > span {
-  font-size: 2rem;
-  margin-right: 1.7rem;
-  cursor: pointer;
+#profile-picture>span {
+    font-size: 2rem;
+    margin-right: 1.7rem;
+    cursor: pointer;
 }
 
 #profile-picture:hover {
-  background: white;
-  color: #00b371;
+    /* background: white; */
+    color: #00b371;
 }
