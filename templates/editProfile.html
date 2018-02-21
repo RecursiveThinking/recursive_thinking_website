@@ -4,266 +4,279 @@
         <div class="grid full">
             <div class="cell">
                 <article class="editProfile card">
-                    <!-- avatar/name -->
-                    <div class="fc-topBar">
-                        <div class="grid gutters quarter">
-                            <div class="cell">
-                                <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt="">
-                                <label id="profile-picture" class="caption card">
-                                  <span>Add Profile Picture</span>
-                                  <input id="file" style="visibility:hidden;" type="file">
-                                </label>
-                            </div>
-                            <div class="cell">
-                                <div class="fc-infoCont1">
-                                    <h4 class="colorGray42 fw900 ttup">Basic Information</h4>
-                                    <hr>
-                                    <div class="fc-inputProfile">
-                                        <div class="fc-form-profile">
-                                            <div class="fc-input-profile">
-                                                <label class="colorGray42 fw900" for="name">Name:</label>
-                                                <input class="colorGray42 fw300" type="text" name="name" placeholder="Name">
-                                            </div>
-                                            <div class="fc-input-profile">
-                                                <label class="colorGray42 fw900" for="age">Age:</label>
-                                                <input class="colorGray42 fw300" type="number" name="age" placeholder="Age">
-                                            </div>
-                                            <div class="fc-input-profile">
-                                                <label class="colorGray42 fw900" for="location">Location:</label>
-                                                <input class="colorGray42 fw300" type="text" name="location" placeholder="Location">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Professional Stats -->
-                    <div class="fc-infoCont2">
-                        <h4 class="colorGray42 fw900 ttup">Professional Status</h4>
-                        <hr>
-                        <div class="fc-inputProfile">
-                            <div class="fc-form-profile">
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="jobTitle">Job Title:</label>
-                                    <input class="colorGray42 fw300" type="text" name="jobTitle" placeholder="Job Title">
-                                </div>
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="employer">Employer:</label>
-                                    <input class="colorGray42 fw300" type="text" name="employer" placeholder="Employeer Name">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Links -->
-                    <div class="fc-infoCont3">
-                        <h4 class="colorGray42 fw900 ttup">Links</h4>
-                        <hr>
-                        <div class="fc-inputProfile">
-                            <div class="fc-form-profile">
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="linkGitHub">GitHub:</label>
-                                    <input class="colorGray42 fw300" type="url" name="linkGitHub" placeholder="GitHub URL">
-                                </div>
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="linkCodePen">CodePen:</label>
-                                    <input class="colorGray42 fw300" type="url" name="linkCodePen" placeholder="CodePen URL">
-                                </div>
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="linkLinkedIn">LinkedIn:</label>
-                                    <input class="colorGray42 fw300" type="url" name="linkLinkedIn" placeholder="LinkedIn URL">
-                                </div>
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="linkPortfolio">Portfolio:</label>
-                                    <input class="colorGray42 fw300" type="url" name="linkPortfolio" placeholder="Portfolio URL">
-                                </div>
-                                <div class="fc-input-profile">
-                                    <label class="colorGray42 fw900" for="linkResume">R&eacute;sum&eacute;  :</label>
-                                    <input class="colorGray42 fw300 resumeInput" type="text" name="linkResume" placeholder="R&eacute;sum&eacute;: (PDF format please)">
-                                    <button class="btn btnFill greenNavButton uploadButton">Upload</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- About -->
-                    <div class="fc-infoAbout">
-                        <h4 class="colorGray42 fw900 ttup">About</h4>
-                        <hr>
-                        <div class="fc-form-about">
-                            <div class="grid gutters half">
-                                <div class="cell">
-                                    <!-- <div class="fc-aboutCont"> -->
-                                        <textarea rows="8" cols="12" placeholder="Please enter Information About Yourself"></textarea>
-                                    <!-- </div> -->
-                                </div>
-                                <div class="cell">
-                                    <div class="fc-aboutCont">
-                                        <div class="fc-about">
-                                            <div class="fc-input-about">
-                                                <div class="fc-left">
-                                                    <label class="colorGray42 fw900" for="linkGitHub">Years of Experience:</label>
-                                                </div>
-                                                <div class="fc-right">
-                                                    <input class="colorGray42 fw300" type="number" name="linkGitHub" placeholder="Total Experience">
-                                                </div>
-                                            </div>
-                                            <div class="fc-input-about">
-                                                <div class="fc-left">
-                                                    <label class="colorGray42 fw900" for="linkGitHub">Time with Recursive Thinking:</label>
-                                                </div>
-                                                <div class="fc-right">
-                                                    <input class="inputShort colorGray42 fw300" type="number" name="linkGitHub" placeholder="Y">
-                                                    <label for="" class="colorGray42 fw900">Y</label>
-                                                    <input class="inputShort colorGray42 fw300" type="number" name="linkGitHub" placeholder="M">
-                                                    <label for="" class="colorGray42 fw900">M</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Professional Skills -->
-                    <div class="fc-skillCont">
-                        <h4 class="colorGray42 fw900 ttup">Professional Skills</h4>
-                        <hr>
-                        <div class="fc-form-skills">
-                            <div class="grid gutters half">
-                                <div class="cell">
-                                    <div class="fc-form-input">
-                                        <label for="skillProfessional" class="fw300 colorGray42">Search for Professional Skills:</label>
-                                        <input type="text" name="skillProfessional" value="" placeholder="Find Professional Skill">
-                                    </div>
-                                </div>
-                                <div class="cell">
-                                    <div class="fc-skillItemCont">
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">User Research</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Information Architecture</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Visual Design</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">User Centered Design</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Wireframing Design</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Interaction Design</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <!-- <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Software Skills -->
-                    <div class="fc-skillCont">
-                        <h4 class="colorGray42 fw900 ttup">Software Skills</h4>
-                        <hr>
-                        <div class="fc-form-skills">
-                            <div class="grid gutters half">
-                                <div class="cell">
-                                    <div class="fc-form-input">
-                                        <label for="skillProfessional" class="fw300 colorGray42">Seach for Software Skills:</label>
-                                        <input type="text" name="skillProfessional" value="" placeholder="Find Software Skill">
-                                    </div>
-                                </div>
-                                <div class="cell">
-                                    <div class="fc-skillItemCont">
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Sketch</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Balsamiq</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">OmniGraffle</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">Axure</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Languages -->
-                    <div class="fc-skillCont">
-                        <h4 class="colorGray42 fw900 ttup">Languages</h4>
-                        <hr>
-                        <div class="fc-form-skills noBotPad">
-                            <div class="grid gutters half">
-                                <div class="cell">
-                                    <div class="fc-form-input">
-                                        <label for="skillProfessional" class="fw300 colorGray42">Search for Coding Languages:</label>
-                                        <input type="text" name="skillProfessional" value="" placeholder="Find Coding Language">
-                                    </div>
-                                </div>
-                                <div class="cell">
-                                    <div class="fc-skillItemCont">
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">HTML</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">CSS</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">JavaScript</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                        <div class="fc-skillItem">
-                                            <h5 class="skillItem colorGray42 fw500">jQuery</h5>
-                                            <div class="skillItemDash"></div>
-                                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <slot name="editProfile"></slot>
                 </article>
             </div>
         </div>
     </div>
 </section>
+</template>
+
+<template id="currentUserProfile">
+    <!-- avatar/name -->
+    <div class="fc-topBar">
+        <div class="grid gutters quarter">
+            <div class="cell">
+                <!-- fix commit -->
+                <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
+                <img class="avatarPicXL" slot="profileBasicValImgAttrs">
+                <label id="profile-picture" class="caption card">
+                    <span>Add Profile Picture</span>
+                    <input id="file" style="visibility:hidden;" type="file">
+                </label>
+                <!-- end fix commit -->
+                <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
+                <!-- <img class="avatarPicXL" slot="profileBasicValImgAttrs"> -->
+                <div class="caption card">
+                    <h5 class="profileTitle colorGray42 fw500">Edit Profile Picture</h5>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="fc-infoCont1">
+                    <h4 class="colorGray42 fw900 ttup">Basic Information</h4>
+                    <hr>
+                    <div class="fc-inputProfile">
+                        <div class="fc-form-profile">
+                            <div class="fc-input-profile">
+                                <label class="colorGray42 fw900" for="name">Name:</label>
+                                <input class="colorGray42 fw300" type="text" name="name" placeholder="Name" slot="profileBasicValName">
+                            </div>
+                            <div class="fc-input-profile">
+                                <label class="colorGray42 fw900" for="age">Age:</label>
+                                <input class="colorGray42 fw300" type="number" name="age" placeholder="Age">
+                            </div>
+                            <div class="fc-input-profile">
+                                <label class="colorGray42 fw900" for="location">Location:</label>
+                                <input class="colorGray42 fw300" type="text" name="location" placeholder="Location" slot="profileBasicValLocation">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Professional Stats -->
+    <div class="fc-infoCont2">
+        <h4 class="colorGray42 fw900 ttup">Professional Status</h4>
+        <hr>
+        <div class="fc-inputProfile">
+            <div class="fc-form-profile">
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="jobTitle">Job Title:</label>
+                    <input class="colorGray42 fw300" type="text" name="jobTitle" placeholder="Job Title" slot="profileProfValJobTitle">
+                </div>
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="employer">Employer:</label>
+                    <input class="colorGray42 fw300" type="text" name="employer" placeholder="Employeer Name" slot="profileProfValEmployer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Links -->
+    <div class="fc-infoCont3">
+        <h4 class="colorGray42 fw900 ttup">Links</h4>
+        <hr>
+        <div class="fc-inputProfile">
+            <div class="fc-form-profile">
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="linkGitHub">GitHub:</label>
+                    <input class="colorGray42 fw300" type="url" name="linkGitHub" placeholder="GitHub URL" slot="profileLinkGitHub">
+                </div>
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="linkCodePen">CodePen:</label>
+                    <input class="colorGray42 fw300" type="url" name="linkCodePen" placeholder="CodePen URL" slot="profileLinkCodePen">
+                </div>
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="linkLinkedIn">LinkedIn:</label>
+                    <input class="colorGray42 fw300" type="url" name="linkLinkedIn" placeholder="LinkedIn URL" slot="profileLinkLinkedIn">
+                </div>
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="linkPortfolio">Portfolio:</label>
+                    <input class="colorGray42 fw300" type="url" name="linkPortfolio" placeholder="Portfolio URL" slot="profileLinkPortfolio">
+                </div>
+                <div class="fc-input-profile">
+                    <label class="colorGray42 fw900" for="linkResume">R&eacute;sum&eacute;  :</label>
+                    <input class="colorGray42 fw300 resumeInput" type="text" name="linkResume" placeholder="R&eacute;sum&eacute;: (PDF format please)" slot="profileLinkResume">
+                    <button class="btn btnFill greenNavButton uploadButton">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About -->
+    <div class="fc-infoAbout">
+        <h4 class="colorGray42 fw900 ttup">About</h4>
+        <hr>
+        <div class="fc-form-about">
+            <div class="grid gutters half">
+                <div class="cell">
+                    <!-- <div class="fc-aboutCont"> -->
+                        <textarea rows="8" cols="12" placeholder="Please enter Information About Yourself" slot="profileAboutUser"></textarea>
+                    <!-- </div> -->
+                </div>
+                <div class="cell">
+                    <div class="fc-aboutCont">
+                        <div class="fc-about">
+                            <div class="fc-input-about">
+                                <div class="fc-left">
+                                    <label class="colorGray42 fw900" for="linkGitHub">Years of Experience:</label>
+                                </div>
+                                <div class="fc-right">
+                                    <input class="colorGray42 fw300" type="number" name="linkGitHub" placeholder="Total Experience" slot="profileAboutUserYearsOfExperience">
+                                </div>
+                            </div>
+                            <div class="fc-input-about">
+                                <div class="fc-left">
+                                    <label class="colorGray42 fw900" for="linkGitHub">Time with Recursive Thinking:</label>
+                                </div>
+                                <div class="fc-right">
+                                    <input class="inputShort colorGray42 fw300" type="number" name="linkGitHub" placeholder="Y" slot="">
+                                    <label for="" class="colorGray42 fw900">Y</label>
+                                    <input class="inputShort colorGray42 fw300" type="number" name="linkGitHub" placeholder="M" slot="">
+                                    <label for="" class="colorGray42 fw900">M</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Professional Skills -->
+    <div class="fc-skillCont">
+        <h4 class="colorGray42 fw900 ttup">Professional Skills</h4>
+        <hr>
+        <div class="fc-form-skills">
+            <div class="grid gutters half">
+                <div class="cell">
+                    <div class="fc-form-input">
+                        <label for="skillProfessional" class="fw300 colorGray42">Search for Professional Skills:</label>
+                        <input type="text" name="skillProfessional" value="" placeholder="Find Professional Skill">
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="fc-skillItemCont">
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">User Research</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Information Architecture</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Visual Design</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">User Centered Design</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Wireframing Design</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Interaction Design</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <!-- <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Software Skills -->
+    <div class="fc-skillCont">
+        <h4 class="colorGray42 fw900 ttup">Software Skills</h4>
+        <hr>
+        <div class="fc-form-skills">
+            <div class="grid gutters half">
+                <div class="cell">
+                    <div class="fc-form-input">
+                        <label for="skillProfessional" class="fw300 colorGray42">Seach for Software Skills:</label>
+                        <input type="text" name="skillProfessional" value="" placeholder="Find Software Skill">
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="fc-skillItemCont">
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Sketch</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Balsamiq</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">OmniGraffle</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">Axure</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Languages -->
+    <div class="fc-skillCont">
+        <h4 class="colorGray42 fw900 ttup">Languages</h4>
+        <hr>
+        <div class="fc-form-skills noBotPad">
+            <div class="grid gutters half">
+                <div class="cell">
+                    <div class="fc-form-input">
+                        <label for="skillProfessional" class="fw300 colorGray42">Search for Coding Languages:</label>
+                        <input type="text" name="skillProfessional" value="" placeholder="Find Coding Language">
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="fc-skillItemCont">
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">HTML</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">CSS</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">JavaScript</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                        <div class="fc-skillItem">
+                            <h5 class="skillItem colorGray42 fw500">jQuery</h5>
+                            <div class="skillItemDash"></div>
+                            <h5 class="skillItemClose colorGreen fw500">X</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
