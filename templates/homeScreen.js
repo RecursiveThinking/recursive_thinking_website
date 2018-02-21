@@ -1,46 +1,92 @@
+import { User } from '../scripts/auth';
+import { utils } from '../scripts/global';
 
 export const homeScreen = () => {
-    
-// capture header signup button
-    const btnSignUpHead = document.getElementById('btnSignUpHead');
-// console.log(btnSignUpHead);
-// caputer header login button
-    const btnLoginHead = document.getElementById('btnLoginHead');
-// console.log(btnLoginHead);
-    const btnSignUpBody = document.getElementById('btnSignUpBody')
-    console.log(btnSignUpBody);
 
-// capture modal Signup
-    const modalContSignUp = document.getElementById('modalSignUp');
-// console.log(modalContSignup);
+    const initModalEvents = () => {
 
-// capture modal Container Login
-    const modalContLogin = document.getElementById('modalLogin');
-// console.log(modalContLogin);
+        const btnSignUpHead = document.getElementById('btnSignUpHead');
+        const btnSignUpSubmit = document.getElementById('btnSignUpSubmit');
+        const btnLoginHead = document.getElementById('btnLoginHead');
+        const btnSignUpBody = document.getElementById('btnSignUpBody');
+        const modalContSignUp = document.getElementById('modalSignUp');
+        const modalContLogin = document.getElementById('modalLogin');
+        const homePage = document.getElementById('homePage');
 
-    btnSignUpHead.onclick = function () {
-        modalContSignUp.style.display = "block";
-    }
+        btnSignUpHead.onclick = function () {
+            modalContSignUp.style.display = "block";
+        };
 
-    btnLoginHead.onclick = function () {
-        modalContLogin.style.display = "block";
-    }
+        btnLoginHead.onclick = function () {
+            modalContLogin.style.display = "block";
+        };
 
-    btnSignUpBody.onclick = function () {
-        modalContSignUp.style.display = "block";
-    }
+        btnSignUpBody.onclick = function () {
+            modalContSignUp.style.display = "block";
+        };
 
-// if the user clicks outside either modal, close that modal
-    window.onclick = function (event) {
-        if (event.target == modalContSignUp) {
-            modalContSignUp.style.display = "none";
+        btnSignUpSubmit.onclick = function () {
+            handleSignUpSubmit(modalContSignUp);
+        };
+
+        homePage.onclick = function (event) {
+            if (event.target == modalContSignUp) {
+                modalContSignUp.style.display = "none";
+            }
+            else if (event.target == modalContLogin) {
+                modalContLogin.style.display = "none";
+            }
+            else {
+                console.log("Clicking on Something Not a Modal");
+            }
         }
-        else if (event.target == modalContLogin) {
-            modalContLogin.style.display = "none";
-        }
-        else {
-            // console.log(event.target.parentElement.style.display);
-            console.log("Clicking on Something Not a Modal");
-        }
-    }
-}
+
+
+    };
+
+    const handleSignUpSubmit = (modal) => {
+
+        const name = document.getElementById('signUpName').value;
+        const username = document.getElementById('signUpUserName').value;
+        const email = document.getElementById('signUpEmail').value;
+        const password = document.getElementById('signUpPassword').value;
+
+        const info = {
+            name,
+            username,
+            email,
+            password
+        };
+        User.signUp(info)
+            .then((data) => {
+            console.log('signed up ', data);
+            modal.style.display = "none";
+            utils.navigateToPage('dashboard');
+        })
+        .catch(err => {
+            console.log("Sign up failed ", err);
+            let check;
+            if (typeof err === 'string') {
+                check = err.toLowerCase();
+            } else {
+                check = err.message;
+                err = err.message;
+            }
+
+            if (check.indexOf('username') !== -1) {
+                document.getElementById('signUpUserNameError').innerText = err;
+            } else if (check.indexOf('email') !== -1) {
+                document.getElementById('signUpEmailError').innerText = err;
+            } else if (check.indexOf('name') !== -1) {
+                document.getElementById('signUpNameError').innerText = err;
+            } else {
+                document.getElementById('signUpPasswordError').innerText = err;
+            }
+        });
+
+    };
+
+
+
+    initModalEvents();
+};

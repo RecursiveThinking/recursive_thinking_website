@@ -23,7 +23,12 @@ export default (function() {
     // Appends HTML template, then runs associated setup scripts
     function hashRouting() {
         const location = window.location.hash.replace('#','');
+        utils.checkFullScreen(location);
         switch (location) {
+            case 'home':
+                appendPage('homeScreen');
+                homeScreen();
+                break;
             case 'dashboard':
                 setUpPage(fill(templates.dashboard.page, models.getDashboardModel()));
                 break;

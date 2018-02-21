@@ -87,6 +87,15 @@ header {
     align-items: center;
 }
 
+.fc-alert {
+    color: #721c25;
+    background-color: #f7d7da;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+}
+
 .h2ModalTitle {
     font-size: 4rem;
     letter-spacing: 2.4px;
@@ -107,8 +116,23 @@ form {
     justify-content: center;
 }
 
+.input-error {
+    font-size: 1.6rem;
+    color: darkred;
+}
+
+.input-error-container {
+    margin-left: 37%;
+}
+
+#btnSignUpSubmit {
+    font-size: 3.6rem;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
 .fc-form {
-    padding: 15rem 0;
+    padding: 7% 0;
     width: 100%;
     
     /* display: flex;
@@ -121,13 +145,13 @@ form {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin: 0 auto 3.5rem auto;
+    margin: 5% auto 0 auto;
     width: 100%;
     justify-content: center;
     /* margin: 0 auto; */
 }
 
-.fc-input:last-of-type {
+.fc-input:first-of-type {
     margin: 0 auto;
 }
 

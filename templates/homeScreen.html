@@ -19,172 +19,188 @@
     <!-- <script src="main.js"></script> -->
 </head>
 
-<body>
-    <header class="grid third">
-        <div class="cell cell-center">
-            <div class="content">
-                <div class="logo">
-                    <img src="public/images/recursivelogo.png" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="cell cell-center">
-            <div class="content">
-                <nav class="navButtons">
-                    <a href="../index.html"><button class="btn btnFill">D</button></a>
-                    <button id="btnSignUpHead" class="btn btnOutline">Sign Up</button>
-                    <button id="btnLoginHead" class="btn btnFill">Login</button>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <section>
-        <div id="modalSignUp" class="modal">
-            <div class="modalContent card">
-                <div class="fc-modal">
-                    <h2 class="h2ModalTitle colorBlack fw300">Sign Up</h2>
-                    <hr class="modalHR">
-                    <!-- <div class="giveMeSpaceModal"></div> -->
-                    <form action="">
-                        <div class="fc-form">
-                            <div class="fc-input">
-                                <label class="colorGray42 fw500" for="email">Email: </label>
-                                <input class="colorGray42 fw300" type="text" name="email" placeholder="Email">
-                            </div>
-                            <div class="fc-input">
-                                <label class="colorGray42 fw500" for="password">Password:</label>
-                                <input class="colorGray42 fw300" type="text" name="password" placeholder="Password">
-                            </div>
-                            <div class="fc-input">
-                                <label class="colorGray42 fw500" for="passwordConfirm">Re-enter Password:</label>
-                                <input class="colorGray42 fw300" type="text" name="passwordConfirm" placeholder="Password Confirmation">
-                            </div>
-                        </div>
-                        <hr class="modalHR">
-                        <button class="btn btnFill colorWhiteff fw500">Sign Up</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div id="modalLogin" class="modal">
-            <div class="modalContent card">
-                <div class="fc-modal">
-                    <h2 class="h2ModalTitle colorBlack fw300">Login</h2>
-                    <hr class="modalHR">
-                    <!-- <div class="giveMeSpaceModal"></div> -->
-                    <form action="">
-                        <div class="fc-form">
-                            <div class="fc-input">
-                                <label class="colorGray42 fw500" for="email">Email: </label>
-                                <input class="colorGray42 fw300" type="text" name="email" placeholder="Email">
-                            </div>
-                            <div class="fc-input">
-                                <label class="colorGray42 fw500" for="password">Password:</label>
-                                <input class="colorGray42 fw300" type="text" name="password" placeholder="Password">
-                            </div>
-                        </div>
-                        <hr class="modalHR">
-                        <button class="btn btnFill colorWhiteff fw500">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="bannerImage">
-        <div class="grid gutters cols-1 u-textCenter">
-            <div class="cell">
+<template id="page">
+    <section id="homePage">
+        <header class="grid third">
+            <div class="cell cell-center">
                 <div class="content">
-                    <div class="bannerImageTextBox">
-                        <h1>Recursive Thinking</h1>
+                    <div class="logo">
+                        <img src="../public/images/recursivelogo.png" alt="">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="section signUp">
-        <div class="grid gutters cols-1 u-textCenter">
-            <div class="cell">
-                <div class="content">
-                    <h4>Learning to Code? Learning UX Design? Furthering your Skills?</h4>
-                    <h2>Join Recursive Thinking!</h2>
-                    <button id="btnSignUpBody" class="btn btnFill signUp btnMarginTop">Sign Up</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section description">
-        <div class="grid gutters cols-1 u-textCenter">
-            <div class="cell">
-                <div class="content">
-                    <h2>What is Recursive Thinking?</h2>
-                    <p>Recursive Thinking is a brain share of developers and designers participating in career development and mentorship. <span class="descriptionTextStrong">We are 75+ people strong with 15-25 individuals attending our weekly events.</span> We have a variety of full time and part time teachers from Amazon, Microsoft, Expedia, Code Fellows, Coding Dojo, General Assembly and many more.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section people">
-        <div class="grid gutters cols-3 u-textCenter">
-            <div class="cell">
-                <div class="content">
-                    <img class="imgAvatarMed" src="public/images/avatar1.png" alt="">
-                    <h3>Really Great Title</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
-                </div>
-            </div>
-            <div class="cell">
-                <div class="content">
-                    <img class="imgAvatarMed" src="public/images/avatar2.png" alt="">
-                    <h3>Really Great Title</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
-                </div>
-            </div>
-            <div class="cell">
-                <div class="content">
-                    <img class="imgAvatarMed" src="public/images/avatar3.png" alt="">
-                    <h3>Really Great Title</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- <section class="grid gutters third large-fit u-textCenter"> -->
-    <section class="section famousQuote">
-        <div class="grid gutters third u-textCenter">
-            <!-- <div class="cell cell-center"> -->
             <div class="cell cell-center">
                 <div class="content">
-                    <img class="imgAvatarLarge" src="public/images/avatar4.png" alt="">
+                    <nav class="navButtons">
+                        <a href="#dashboard"><button class="btn btnFill">D</button></a>
+                        <button id="btnSignUpHead" class="btn btnOutline">Sign Up</button>
+                        <button id="btnLoginHead" class="btn btnFill">Login</button>
+                    </nav>
                 </div>
             </div>
-            <!-- <div class="cell cell-center twice"></div> -->
-            <div class="cell cell-center">
-                <div class="content quoteAlignment">
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eisumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                    <br><br>
-                    - Hailey Skelcher, UX Designer
-                    </p>
+        </header>
+        <section>
+            <div id="modalSignUp" class="modal">
+                <div class="modalContent card">
+                    <div class="fc-modal">
+                        <h2 class="h2ModalTitle colorBlack fw300">Sign Up</h2>
+                        <hr class="modalHR">
+                            <div class="fc-form">
+                                <div class="fc-input">
+                                    <label class="colorGray42 fw500" for="signUpName">Name:</label>
+                                    <input id="signUpName" class="colorGray42 fw300" type="text" name="passwordConfirm" placeholder="Name" />
+                                </div>
+                                <div class="input-error-container">
+                                    <span id="signUpNameError" class="input-error"></span>
+                                </div>
+                                <div class="fc-input">
+                                    <label class="colorGray42 fw500" for="signUpUserName">Username:</label>
+                                    <input id="signUpUserName" class="colorGray42 fw300" type="text" name="passwordConfirm" placeholder="Username" />
+                                </div>
+                                <div class="input-error-container">
+                                    <span id="signUpUserNameError" class="input-error"></span>
+                                </div>
+
+                                <div class="fc-input">
+                                    <label class="colorGray42 fw500" for="signUpEmail">Email: </label>
+                                    <input id="signUpEmail" class="colorGray42 fw300" type="text" name="email" placeholder="Email" />
+                                </div>
+                                <div class="input-error-container">
+                                    <span id="signUpEmailError" class="input-error"></span>
+                                </div>
+                                <div class="fc-input">
+                                    <label class="colorGray42 fw500" for="signUpPassword">Password:</label>
+                                    <input id="signUpPassword" class="colorGray42 fw300" type="text" name="password" placeholder="Password" />
+                                </div>
+                                <div class="input-error-container">
+                                    <span id="signUpPasswordError" class="input-error"></span>
+                                </div>
+                            </div>
+                        <hr class="modalHR">
+                        <button id="btnSignUpSubmit" class="btn btnFill colorWhiteff fw500">Sign Up</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <section>
+            <div id="modalLogin" class="modal">
+                <div class="modalContent card">
+                    <div class="fc-modal">
+                        <h2 class="h2ModalTitle colorBlack fw300">Login</h2>
+                        <hr class="modalHR">
+                        <!-- <div class="giveMeSpaceModal"></div> -->
+                        <form action="">
+                            <div class="fc-form">
+                                <div class="fc-input">
+                                    <label class="colorGray42 fw500" for="email">Email: </label>
+                                    <input class="colorGray42 fw300" type="text" name="email" placeholder="Email">
+                                </div>
+                                <div class="fc-input">
+                                    <label class="colorGray42 fw500" for="password">Password:</label>
+                                    <input class="colorGray42 fw300" type="text" name="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <hr class="modalHR">
+                            <button class="btn btnFill colorWhiteff fw500">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bannerImage">
+            <div class="grid gutters cols-1 u-textCenter">
+                <div class="cell">
+                    <div class="content">
+                        <div class="bannerImageTextBox">
+                            <h1>Recursive Thinking</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section signUp">
+            <div class="grid gutters cols-1 u-textCenter">
+                <div class="cell">
+                    <div class="content">
+                        <h4>Learning to Code? Learning UX Design? Furthering your Skills?</h4>
+                        <h2>Join Recursive Thinking!</h2>
+                        <button id="btnSignUpBody" class="btn btnFill signUp btnMarginTop">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section description">
+            <div class="grid gutters cols-1 u-textCenter">
+                <div class="cell">
+                    <div class="content">
+                        <h2>What is Recursive Thinking?</h2>
+                        <p>Recursive Thinking is a brain share of developers and designers participating in career development and mentorship. <span class="descriptionTextStrong">We are 75+ people strong with 15-25 individuals attending our weekly events.</span> We have a variety of full time and part time teachers from Amazon, Microsoft, Expedia, Code Fellows, Coding Dojo, General Assembly and many more.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section people">
+            <div class="grid gutters cols-3 u-textCenter">
+                <div class="cell">
+                    <div class="content">
+                        <img class="imgAvatarMed" src="../public/images/avatar1.png" alt="">
+                        <h3>Really Great Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="content">
+                        <img class="imgAvatarMed" src="../public/images/avatar2.png" alt="">
+                        <h3>Really Great Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="content">
+                        <img class="imgAvatarMed" src="../public/images/avatar3.png" alt="">
+                        <h3>Really Great Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iste perspiciatis, facilis nemo hic nihil corrupti cumque ut.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- <section class="grid gutters third large-fit u-textCenter"> -->
+        <section class="section famousQuote">
+            <div class="grid gutters third u-textCenter">
+                <!-- <div class="cell cell-center"> -->
+                <div class="cell cell-center">
+                    <div class="content">
+                        <img class="imgAvatarLarge" src="../public/images/avatar4.png" alt="">
+                    </div>
+                </div>
+                <!-- <div class="cell cell-center twice"></div> -->
+                <div class="cell cell-center">
+                    <div class="content quoteAlignment">
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eisumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                        <br><br>
+                        - Hailey Skelcher, UX Designer
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="grid gutters half">
+                <div class="cell cell-center">
+                    <div class="content copyAlignment">
+                        <p>&#169; Recursive Thinking, All Rights Reserved</p>
+                    </div>
+                </div>
+                <div class="cell cell-center">
+                    <div class="content iconAlignment">
+                        <a href="https://github.com/RecursiveThinking/" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="https://www.linkedin.com/company/18067985/" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="homeScreen.js"></script>
     </section>
-    <footer>
-        <div class="grid gutters half">
-            <div class="cell cell-center">
-                <div class="content copyAlignment">
-                    <p>&#169; Recursive Thinking, All Rights Reserved</p>
-                </div>
-            </div>
-            <div class="cell cell-center">
-                <div class="content iconAlignment">
-                    <a href="https://github.com/RecursiveThinking/" target="_blank"><i class="fa fa-github"></i></a>
-                    <a href="https://www.linkedin.com/company/18067985/" target="_blank"><i class="fa fa-linkedin-square"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="homeScreen.js"></script>
-</body>
+</template>
 
 </html>

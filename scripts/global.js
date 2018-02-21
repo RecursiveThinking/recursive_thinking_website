@@ -544,6 +544,7 @@ function getButtonHTMLString(boolVal) {
     }
 }
 
+
 //editProfile functions
 function getAgeEditProfile(dateOfBirth){
     let millisecsInAYear = 31536000000;
@@ -552,6 +553,23 @@ function getAgeEditProfile(dateOfBirth){
     // console.log(Math.floor(totalAgeMS/millisecsInAYear));
     return Math.floor(totalAgeMS/millisecsInAYear);
 }
+
+const checkFullScreen = (page) => {
+    if (page === 'home') {
+        document.querySelector('.sidebar').style.display = "none";
+        document.querySelector('header').style.display = "none";
+        document.querySelector('#mainWindow').style.marginLeft = 0;
+    } else {
+        document.querySelector('#mainWindow').style.marginLeft = '20%';
+        document.querySelector('.sidebar').style.display = "";
+        document.querySelector('header').style.display = "";
+    }
+};
+
+const navigateToPage = (page) => {
+    window.location.hash = page;  
+};
+
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
@@ -588,6 +606,7 @@ export const utils = {
     hasUserVoted,
     getButtonHTMLString,
     generateTaughtByThumbs,
-    // edit Profile
-    getAgeEditProfile
+    getAgeEditProfile,
+    checkFullScreen,
+    navigateToPage
 };

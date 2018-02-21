@@ -23,7 +23,7 @@ const signIn = (username, password) => {
 */
 const signUp = (info) => {
     const { username, password, email, name } = info;
-    Auth.signUp({
+    return Auth.signUp({
         username,
         password,
         attributes: {
@@ -42,10 +42,7 @@ const signUp = (info) => {
             // other custom attributes
         }
     })
-        .then((data) => {
-            console.log('signed up ', data);
-        })
-        .catch(err => console.log("Sign up failed ", err));
+    
 };
 
 /*
