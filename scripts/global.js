@@ -544,6 +544,15 @@ function getButtonHTMLString(boolVal) {
     }
 }
 
+//editProfile functions
+function getAgeEditProfile(dateOfBirth){
+    let millisecsInAYear = 31536000000;
+    let dateNow = Date.now();
+    let totalAgeMS = dateNow - dateOfBirth;
+    // console.log(Math.floor(totalAgeMS/millisecsInAYear));
+    return Math.floor(totalAgeMS/millisecsInAYear);
+}
+
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
 const getCurrentUser = () => JSON.parse(localStorage.getItem('currentUser'));
@@ -578,5 +587,7 @@ export const utils = {
     returnFilteredTaughtByUserArray,
     hasUserVoted,
     getButtonHTMLString,
-    generateTaughtByThumbs
+    generateTaughtByThumbs,
+    // edit Profile
+    getAgeEditProfile
 };
