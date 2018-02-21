@@ -76,6 +76,28 @@
     
         slot.parentNode.removeChild(slot)
       })
+
+      // deal with textareas inside slots (their contents don't render as HTML elements)
+      template.querySelectorAll('textarea').forEach(function(textarea) {
+        var sandbox = document.createElement('div') // make sandbox
+        sandbox.innerHTML = textarea.textContent // move contents to sandbox
+      
+        // fill sandbox slots (the same way we do for slot elements)
+        sandbox.querySelectorAll('slot').forEach(slot => {
+          var vav = values[slot.name]
+      
+          if (Array.isArray(vav)) {
+            vav.forEach(sandbox => insertNode(slot, sandbox))
+          } else {
+            insertNode(slot, vav)
+          }
+      
+          slot.parentNode.removeChild(slot)
+        })
+
+        // replace textarea content with sandbox content
+        textarea.innerHTML = sandbox.innerHTML
+      })
     
       // deal with slot attributes
       template.querySelectorAll('[slot]').forEach(node => {
