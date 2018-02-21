@@ -9,7 +9,9 @@ export const getEditProfileModel = () => {
     const currentUser = data.getCurrentUser();
     console.log(currentUser);
     
-    
+    let age = utils.getAgeEditProfile(new Date(currentUser.birthday));
+    // let age = new Date(currentUser.birthday);
+    // console.log(age);
     return {
         editProfile: fill(templates.editProfile.currentUserProfile, {
             // basic stats
@@ -18,7 +20,7 @@ export const getEditProfileModel = () => {
                 alt: `A profile picture of ${currentUser['name']}`
             },
             profileBasicValName: { value: `${currentUser['name']}` },
-            profileBasicValAge: {},
+            profileBasicValAge: { value: age },
             profileBasicValLocation: { value: `${currentUser['location']}`},
             // professional stats
             profileProfValJobTitle: { value: `${currentUser['title']}`},
