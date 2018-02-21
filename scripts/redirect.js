@@ -4,6 +4,7 @@ import { modalInterview } from '../templates/interviewPrep';
 import { homeScreen } from '../templates/homeScreen';
 import { modalLessons } from '../templates/voteForLesson';
 import { setUpDashboard } from '../templates/dashboard';
+import { editProfile } from '../templates/editProfile';
 import { utils, data } from './global';
 
 export default (function() {
@@ -35,6 +36,7 @@ export default (function() {
                 break;
             case 'edit-profile':
                 appendPage('editProfile');
+                editProfile();
                 // setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
                 break;
             case 'sign-out':

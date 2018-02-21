@@ -90,7 +90,7 @@
 .fc-input-profile input, .fc-about .fc-input-about .fc-right input {
     padding: 1rem 0 1rem 1.5rem;
     text-align: left;
-    
+
     font-size: 1.8rem;
     letter-spacing: 1.1px;
     border: 1px solid #979797
@@ -112,7 +112,7 @@
     /* display: flex;
     flex-direction: row;
     flex-wrap: wrap; */
-    
+
     width: 100%;
 }
 
@@ -149,7 +149,7 @@
 }
 
 /* .fc-about .fc-input-about .fc-left label {
-    
+
 } */
 
 .fc-about .fc-input-about:first-of-type{
@@ -215,10 +215,10 @@
     /* display: block; */
     resize: none;
     min-height: 28rem;
-    
+
     padding: 1rem 1.5rem;
     text-align: left;
-    
+
     font-size: 1.8rem;
     letter-spacing: 1.1px;
 }
@@ -237,14 +237,14 @@
 
     padding: 1rem 0 1rem 1.5rem;
     text-align: left;
-    
+
     font-size: 1.8rem;
     letter-spacing: 1.1px;
 }
 
 .fc-skillItemCont {
     width: 100%;
-    
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -279,24 +279,36 @@
 
 .fc-skillItemCont > .fc-skillItem > .skillItemDash {
     /* content: "|"; */
-    
+
     /* margin: -.25rem 1rem 0 1rem; */
     /* padding: 0 0 2rem 0; */
-    
+
     font-size: 2.4rem;
     letter-spacing: 1.4px;
-    
+
 }
 
 .fc-skillItemCont > .fc-skillItem > .skillItemClose {
-    
+
     font-size: 2.4rem;
     letter-spacing: 1.4px;
-    
+
     border-left: 2px solid #979797;
     /* margin-left: 1rem; */
     padding-left: 1.25rem;
     margin: -.125rem 0 0 0;
-    
+
     cursor: pointer;
+}
+
+#profile-picture {
+  background: #00b371;
+  color: white;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+#profile-picture:hover {
+  background: white;
+    color: #00b371;
 }
