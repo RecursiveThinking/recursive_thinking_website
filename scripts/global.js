@@ -141,7 +141,7 @@ const allUsers = [
         aboutUser: 'Porgy porg porgy porgy. Porghoven porghoven von von von porg porghoven porgy porgy porgy porghoven porgy porgy porg von. Porghoven team player porg porg porghoven porg porghoven porgy porg von porghoven porgy von.&NewLine;&NewLine;Von porghoven porg porghoven porg porg porg porghoven porghoven porghoven detail oriented porg porghoven porghoven. Porgy porgy porg von porgy porg porgy von. Porghoven porgy porgy von.&NewLine;&NewLine;Porgy porgy porg porg porg porgy porgy porg porghoven porgy porgy porghoven porgy. Porgy porg von porghoven von porgy porghoven porghoven super rocket von porgy porgy von von. Porgy porg porghoven porghoven porgy porg.',
         aboutUserYearsOfExperience: '11/07/2016',
         aboutUserTimeWithRT: '02/02/2017',
-        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
+        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6, 7],
         skillsSoftware: [ 0, 1, 2, 3 ],
         skillsLanguages:[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ],
         lecturesAttending: []
@@ -193,7 +193,7 @@ localStorage.setItem('allUsers', JSON.stringify(allUsers));
 
 // allSkillsProfessional
 const allSkillsProfessional = [
-    'User Experience Design', 'User Research', 'Information Architecture', 'Visual Design', 'User Centered Design', 'Wireframing Design', 'Interaction Design'
+    'User Experience Design', 'User Research', 'Information Architecture', 'Visual Design', 'User Centered Design', 'Wireframing Design', 'Interaction Design', 'Front End Development'
 ]
 
 const allSkillsSoftware = [
@@ -205,9 +205,10 @@ const allProgrammingLanguages = [
 ]
 
 const allCategories = allSkillsProfessional.concat(allSkillsSoftware, allProgrammingLanguages);
+console.log(allCategories);
 
 function returnArrayOfApplicableItems(category, inputArray){
-    console.log(category, inputArray);
+    // console.log(category, inputArray);
     let returnArray = [];
     for(let i = 0; i < inputArray.length; i += 1){
         if(category === 'skillsProfessional'){
@@ -223,19 +224,20 @@ function returnArrayOfApplicableItems(category, inputArray){
             returnArray[i] = allCategories[inputArray[i]];
         }
         else {
-            
+            "Eat my Shorts"
         }
     }
-    console.log(returnArray);
+    // console.log(returnArray);
     return returnArray;
 }
 
-function deleteItemFromArray(){
+function deleteItemFromArray(index){
+    console.log(index);
     console.log("AT FUNCTION");
 }
 
-const currentUser = allUsers[6];
-// const currentUser = allUsers[getRandomNumber(0, allUsers.length)];
+// const currentUser = allUsers[6];
+const currentUser = allUsers[getRandomNumber(0, allUsers.length)];
 localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
 // database call for Lessons
@@ -305,7 +307,7 @@ const allInterviewQuestions = [
         title: 'Highlight Table Rows',
         submitted: '09/12/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
+        categories: [7, 14, 12, 13],
         answersToQuestion: [],
         fk_author: '0000000001'
     },
@@ -314,7 +316,7 @@ const allInterviewQuestions = [
         title: 'Build An Accordion',
         submitted: '09/05/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
+        categories: [ 3, 7, 12, 13, 14 ],
         answersToQuestion: ['ia00000001', 'ia00000002'],
         fk_author: '0000000001'
     },
@@ -323,7 +325,7 @@ const allInterviewQuestions = [
         title: 'Build a Modal',
         submitted: '08/28/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
+        categories: [ 3, 7, 12, 13, 14 ],
         answersToQuestion: ['ia00000003'],
         fk_author: '0000000001'
     },
@@ -332,7 +334,7 @@ const allInterviewQuestions = [
         title: 'Build a Gallery',
         submitted: '08/21/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: ['Front End Development', 'JavaScript', 'HTML', 'CSS'],
+        categories: [ 3, 7, 12, 13, 14, 15, 24 ],
         answersToQuestion: ['ia00000004'],
         fk_author: '0000000001'
     }
