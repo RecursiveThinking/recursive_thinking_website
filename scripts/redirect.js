@@ -37,6 +37,7 @@ export default (function() {
             case 'edit-profile':
                 // appendPage('editProfile');
                 setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
+                editProfilePicture();
                 break;
             case 'sign-out':
                 appendPage('signOut');
