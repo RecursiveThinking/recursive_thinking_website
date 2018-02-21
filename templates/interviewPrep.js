@@ -1,23 +1,23 @@
 export const modalInterview = () => {
 
     const btnSubmitInterviewQuestion = document.getElementById('btnSubmitInterviewQuestion');
-    
+
     // const btnAnswerQuestion = document.getElementById('btnAnswerQuestion');
 
 //     // modal
     const modalContSubmitInterviewQuestion = document.getElementById('modalSubmitInterviewQuestion');
-    
+
     // const modalConstAnswerInterviewQuestion = document.getElementById('modalAnswerInterviewQuestion');
-    
-    
+
+
     btnSubmitInterviewQuestion.onclick = function() {
         modalContSubmitInterviewQuestion.style.display = "block";
     }
-    
+
     // btnAnswerQuestion.onclick = function() {
     //     modalConstAnswerInterviewQuestion.style.display = "block";
     // }
-    
+
     window.onclick = function(event) {
         if (event.target == modalContSubmitInterviewQuestion) {
             modalContSubmitInterviewQuestion.style.display = "none";

@@ -4,6 +4,7 @@ import { modalInterview } from '../templates/interviewPrep';
 import { homeScreen } from '../templates/homeScreen';
 import { modalLessons } from '../templates/voteForLesson';
 import { setUpDashboard } from '../templates/dashboard';
+import { editProfilePicture } from '../templates/editProfilePicture';
 import { utils, data } from './global';
 
 export default (function() {
