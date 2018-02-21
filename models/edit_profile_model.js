@@ -44,10 +44,15 @@ export const getEditProfileModel = () => {
             profileAboutUserTimeWithRTYear: {},
             profileAboutUserTimeWithRTMonth: {},
             // professional skills
-            profileSkillProfessional: skillsProfessionalArray.map((skillProfessional) => fill(templates.editProfile.currentUserSkillProfessional, {
+            profileSkillProfessional: skillsProfessionalArray.map((skillProfessional, index) => {
+                // let deleteItem = utils.deleteItemFromArray(index);
+                return fill(templates.editProfile.currentUserSkillProfessional, {
                 skillItemProf: skillProfessional,
-                delSkillItemProf: { onclick: utils.deleteItemFromArray()}
-            })),
+                // delSkillItemProf: { onclick: "deleteItemFromArray(index)"}
+                // delSkillItemProf: { onclick: "deleteItem(index)"}
+                delSkillItemProf: { onclick: ""}
+                })
+            }),
             
             profileSkillSoftware: skillsSoftwareArray.map((skillSoftware) => fill(templates.editProfile.currentUserSkillSoftware, {
                 skillItemSoft: skillSoftware
