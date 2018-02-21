@@ -34,8 +34,8 @@ export default (function() {
                 modalLessons();
                 break;
             case 'edit-profile':
-                appendPage('editProfile');
-                // setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
+                // appendPage('editProfile');
+                setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
                 break;
             case 'sign-out':
                 appendPage('signOut');
