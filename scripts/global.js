@@ -1,4 +1,3 @@
-
 const allUsers = [
     {
         _id: '0000000001',
@@ -16,9 +15,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [ 0, 1, 2, 3 ],
+        skillsLanguages:[ 0, 1, 2, 3 ],
         lecturesAttending: []
     },
     {
@@ -37,9 +36,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 0, 2, 4, 6],
+        skillsSoftware: [ 0, 2 ],
+        skillsLanguages:[ 0, 2 ],
         lecturesAttending: []
     },
     {
@@ -58,9 +57,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 1, 3, 5 ],
+        skillsSoftware: [ 1, 3 ],
+        skillsLanguages:[ 1, 3 ],
         lecturesAttending: []
     },
     {
@@ -79,9 +78,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [ 0, 1, 2, 3 ],
+        skillsLanguages:[ 0, 1, 2, 3 ],
         lecturesAttending: []
     },
     {
@@ -100,9 +99,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 1, 3, 5 ],
+        skillsSoftware: [ 1, 3 ],
+        skillsLanguages:[ 1, 3 ],
         lecturesAttending: []
     },
     {
@@ -121,9 +120,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [ 0, 1, 2, 3 ],
+        skillsLanguages:[ 0, 1, 2, 3 ],
         lecturesAttending: []
     },
     {
@@ -139,12 +138,12 @@ const allUsers = [
         linkLinkedIn: 'https://www.linkedin.com/in/porgvonporghoven/',
         linkPortfolio: 'https://www.theporgisindahus.com',
         linkResume: '',
-        aboutUser: 'Porgy porg porgy porgy. Porghoven porghoven von von von porg porghoven porgy porgy porgy porghoven porgy porgy porg von. Porghoven team player porg porg porghoven porg porghoven porgy porg von porghoven porgy von.<br><br>Von porghoven porg porghoven porg porg porg porghoven porghoven porghoven detail oriented porg porghoven porghoven. Porgy porgy porg von porgy porg porgy von. Porghoven porgy porgy von.<br><br>Porgy porgy porg porg porg porgy porgy porg porghoven porgy porgy porghoven porgy. Porgy porg von porghoven von porgy porghoven porghoven super rocket von porgy porgy von von. Porgy porg porghoven porghoven porgy porg.',
+        aboutUser: 'Porgy porg porgy porgy. Porghoven porghoven von von von porg porghoven porgy porgy porgy porghoven porgy porgy porg von. Porghoven team player porg porg porghoven porg porghoven porgy porg von porghoven porgy von.&NewLine;&NewLine;Von porghoven porg porghoven porg porg porg porghoven porghoven porghoven detail oriented porg porghoven porghoven. Porgy porgy porg von porgy porg porgy von. Porghoven porgy porgy von.&NewLine;&NewLine;Porgy porgy porg porg porg porgy porgy porg porghoven porgy porgy porghoven porgy. Porgy porg von porghoven von porgy porghoven porghoven super rocket von porgy porgy von von. Porgy porg porghoven porghoven porgy porg.',
         aboutUserYearsOfExperience: '11/07/2016',
         aboutUserTimeWithRT: '02/02/2017',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [ 0, 1, 2, 3 ],
+        skillsLanguages:[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ],
         lecturesAttending: []
     },
     {
@@ -163,9 +162,9 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 0, 2, 4, 6],
+        skillsSoftware: [ 0, 2 ],
+        skillsLanguages:[ 0, 2 ],
         lecturesAttending: []
     },
     {
@@ -184,16 +183,59 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [],
-        skillsSoftware: [],
-        skillsLanguages:[],
+        skillsProfessional: [ 1, 3, 5 ],
+        skillsSoftware: [ 1, 3 ],
+        skillsLanguages:[ 1, 3 ],
         lecturesAttending: []
     }
 ]
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
 
-// const currentUser = allUsers[6];
-const currentUser = allUsers[getRandomNumber(0, allUsers.length)];
+// allSkillsProfessional
+const allSkillsProfessional = [
+    'User Experience Design', 'User Research', 'Information Architecture', 'Visual Design', 'User Centered Design', 'Wireframing Design', 'Interaction Design'
+]
+
+const allSkillsSoftware = [
+    'Sketch', 'Balsamiq', 'OmniGraffle', 'Axure'
+]
+
+const allProgrammingLanguages = [
+    'HTML', 'CSS', 'JavaScript', 'jQuery', 'Angular', 'React', 'C#', '.NETCore', 'Nancy', 'Python', 'Django', 'Flask', 'Bootstrap', 'WebPack'
+]
+
+const allCategories = allSkillsProfessional.concat(allSkillsSoftware, allProgrammingLanguages);
+
+function returnArrayOfApplicableItems(category, inputArray){
+    console.log(category, inputArray);
+    let returnArray = [];
+    for(let i = 0; i < inputArray.length; i += 1){
+        if(category === 'skillsProfessional'){
+            returnArray[i] = allSkillsProfessional[inputArray[i]];
+        }
+        else if(category === 'skillsSoftware'){
+            returnArray[i] = allSkillsSoftware[inputArray[i]];
+        }
+        else if(category === 'skillsLanguage'){
+            returnArray[i] = allProgrammingLanguages[inputArray[i]];
+        }
+        else if(category === 'allCategories'){
+            returnArray[i] = allCategories[inputArray[i]];
+        }
+        else {
+            
+        }
+    }
+    console.log(returnArray);
+    return returnArray;
+}
+
+function deleteItemFromArray(){
+    console.log("AT FUNCTION");
+}
+
+const currentUser = allUsers[6];
+// const currentUser = allUsers[getRandomNumber(0, allUsers.length)];
 localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
 // database call for Lessons
@@ -606,7 +648,10 @@ export const utils = {
     hasUserVoted,
     getButtonHTMLString,
     generateTaughtByThumbs,
+    // edit Profile
     getAgeEditProfile,
+    returnArrayOfApplicableItems,
+    deleteItemFromArray,
     checkFullScreen,
     navigateToPage
 };
