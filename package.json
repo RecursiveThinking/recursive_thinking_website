@@ -4,9 +4,13 @@
   "description": "A website for a developer network called Recursive Thinking",
   "main": "layout.html",
   "scripts": {
-    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
-    "start": "http-server",
-    "webpack": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "server": "webpack-dev-server",
+    "dev-server": "webpack-dev-server",
+    
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -27,8 +31,8 @@
     "copy-webpack-plugin": "^4.4.1",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-prefix-plugin": "^0.1.1",
-    "http-server": "^0.11.1",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
     "aws-amplify": "^0.2.6"

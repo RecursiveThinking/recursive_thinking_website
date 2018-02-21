@@ -5,13 +5,14 @@
 Welcome to the Recursive Thinking Website!
 
 Start your engines! Initiate a Webpack Build / Watch.
-```
-npm run webpack
-```
 
-Visit your `build/index.html` in the browser.
+1. Perform a `git pull --rebase` to get remote changes.  
 
-Make changes and refresh the page to view them.
+    **IMPORTANT**: If there are remote changes, run an `npm install` to update packages.
+
+2. Run `npm run dev-server` to start `webpack-dev-server`. This will open your default browser to the correct route.
+
+3. Develop!
 
 
 ## Using Templates

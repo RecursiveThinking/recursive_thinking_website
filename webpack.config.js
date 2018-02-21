@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const bucketPath = "https://s3-us-west-2.amazonaws.com/aws-codestar-us-west-2-131603044023-devdaywebsite-app/";
 
 module.exports = {
     entry: `${__dirname}/main.js`,
@@ -27,11 +26,6 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: './public/main.bundle.js'
     },
-    watch: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-    },
     module: {
         loaders: [
             {
@@ -47,5 +41,11 @@ module.exports = {
     stats: {
         colors: true
     },
-    devtool: 'source-map'
+    devtool: 'source-map',
+    devServer: {
+        // NOTE: The dev server DOES NOT write to the disk -- it keeps assets in memory instead 
+        // When you use webpack-dev-server, the build folder will be deleted. Don't worry!
+        contentBase: './build', // serve static assets from here
+        open: true // opens browser automagically
+    }
 };
