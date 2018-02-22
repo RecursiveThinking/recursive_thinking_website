@@ -2,6 +2,7 @@ export const editProfilePicture = () => {
   const editProfilePicButton = document.getElementById("profile-picture");
   const profilePicture = document.getElementsByClassName("avatarPicXL")[0];
   const fileInput = document.getElementById('file');
+  const sidebarImage = document.getElementsByClassName('sidebarImage')[0];
 
   const preventDefaults = (e) => {
     e.preventDefault()
@@ -18,6 +19,7 @@ export const editProfilePicture = () => {
 
     reader.onload = function(event) {
       const imageUrl = event.target.result;
+      sidebarImage.setAttribute('src', imageUrl)
       profilePicture.setAttribute('src', imageUrl);
     }
 
