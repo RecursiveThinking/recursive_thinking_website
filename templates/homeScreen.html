@@ -48,14 +48,14 @@
                             <div class="fc-form">
                                 <div class="fc-input">
                                     <label class="colorGray42 fw500" for="signUpName">Name:</label>
-                                    <input id="signUpName" class="colorGray42 fw300" type="text" name="passwordConfirm" placeholder="Name" />
+                                    <input id="signUpName" class="colorGray42 fw300" type="text" name="signUpName" placeholder="Name" />
                                 </div>
                                 <div class="input-error-container">
                                     <span id="signUpNameError" class="input-error"></span>
                                 </div>
                                 <div class="fc-input">
                                     <label class="colorGray42 fw500" for="signUpUserName">Username:</label>
-                                    <input id="signUpUserName" class="colorGray42 fw300" type="text" name="passwordConfirm" placeholder="Username" />
+                                    <input id="signUpUserName" class="colorGray42 fw300" type="text" name="signUpUserName" placeholder="Username" />
                                 </div>
                                 <div class="input-error-container">
                                     <span id="signUpUserNameError" class="input-error"></span>
@@ -78,6 +78,32 @@
                             </div>
                         <hr class="modalHR">
                         <button id="btnSignUpSubmit" class="btn btnFill colorWhiteff fw500">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+            <div id="modalConfirm" class="modal">
+                <div class="modalContent card">
+                    <div class="fc-modal">
+                        <h2 class="h2ModalTitle colorBlack fw300">Sign Up</h2>
+                        <hr class="modalHR">
+                        <div class="fc-form">
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="confirmUserName">Name:</label>
+                                <input id="confirmUserName" class="colorGray42 fw300" type="text" name="confirmUserName" placeholder="Name" />
+                            </div>
+                            <div class="input-error-container">
+                                <span id="confirmUserNameError" class="input-error"></span>
+                            </div>
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="confirmCode">Username:</label>
+                                <input id="confirmCode" class="colorGray42 fw300" type="text" name="confirmCode" placeholder="Username" />
+                            </div>
+                            <div class="input-error-container">
+                                <span id="confirmCodeError" class="input-error"></span>
+                            </div>
+                        </div>
+                        <hr class="modalHR">
+                        <button id="btnConfirmSubmit" class="btn btnFill colorWhiteff fw500">Send Verification</button>
                     </div>
                 </div>
             </div>

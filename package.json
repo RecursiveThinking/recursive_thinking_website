@@ -8,7 +8,6 @@
     "start": "webpack-dev-server",
     "server": "webpack-dev-server",
     "dev-server": "webpack-dev-server",
-    
     "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server"
   },

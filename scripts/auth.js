@@ -51,13 +51,7 @@ const signUp = (info) => {
  * @returns string success/fail
  */
 const confirmSignUp = (username, code) => {
-    Auth.confirmSignUp(username, code)
-        .then((user) => {
-            console.log('confirmed sign up ', user);
-            // do something with signed in user credential
-            // maybe not since theres a currentCredential API to get signed in user
-        })
-        .catch(err => console.log("There was a problem confirming sign up ", err));
+    return Auth.confirmSignUp(username, code);
 };
 
 const getCredentials = () => {

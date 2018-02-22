@@ -12,6 +12,11 @@ export const homeScreen = () => {
         const modalContSignUp = document.getElementById('modalSignUp');
         const modalContLogin = document.getElementById('modalLogin');
         const homePage = document.getElementById('homePage');
+        const btnConfirmSubmit = document.getElementById('btnConfirmSubmit');
+
+        btnConfirmSubmit.onclick = function () {
+            handleConfirmSubmit(modalConfirm);
+        };
 
         btnSignUpHead.onclick = function () {
             modalContSignUp.style.display = "block";
@@ -41,11 +46,11 @@ export const homeScreen = () => {
             }
         }
 
-
     };
 
     const handleSignUpSubmit = (modal) => {
 
+        const modalConfirm = document.getElementById('modalConfirm');
         const name = document.getElementById('signUpName').value;
         const username = document.getElementById('signUpUserName').value;
         const email = document.getElementById('signUpEmail').value;
@@ -61,7 +66,7 @@ export const homeScreen = () => {
             .then((data) => {
             console.log('signed up ', data);
             modal.style.display = "none";
-            utils.navigateToPage('dashboard');
+            modalConfirm.style.display = "block";
         })
         .catch(err => {
             console.log("Sign up failed ", err);
@@ -86,7 +91,35 @@ export const homeScreen = () => {
 
     };
 
+    const handleConfirmSubmit = (modal) => {
 
+        const username = document.getElementById('confirmUserName').value;
+        const code = document.getElementById('confirmCode').value;
+
+        User.confirmSignUp(username, code)
+            .then((user) => {
+                console.log('confirmed sign up ', user);
+                modal.style.display = "none";
+                utils.navigateToPage('dashboard');
+            })
+            .catch((err) => {
+                console.log("There was a problem confirming sign up ", err);
+                let check;
+                if (typeof err === 'string') {
+                    check = err.toLowerCase();
+                } else {
+                    check = err.message.toLowerCase();
+                    err = err.message;
+                }
+
+                if (check.indexOf('username') !== -1) {
+                    document.getElementById('confirmUserNameError').innerText = err;
+                } else {
+                    document.getElementById('confirmCodeError').innerText = err;
+                }
+            });
+
+    };
 
     initModalEvents();
 };
