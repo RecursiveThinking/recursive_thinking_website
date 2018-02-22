@@ -8,13 +8,7 @@ import { Auth } from 'aws-amplify';
 */
 
 const signIn = (username, password) => {
-    Auth.signIn(username, password)
-        .then((user) => {
-            console.log(user);
-            // do something with signed in user credential
-            // maybe not since theres a currentCredential API to get signed in user
-        })
-        .catch(err => console.log("There was a problem signing in ", err));
+    return Auth.signIn(username, password);
 };
 
 /*

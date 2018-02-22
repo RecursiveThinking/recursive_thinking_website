@@ -125,7 +125,7 @@ form {
     margin-left: 37%;
 }
 
-#btnSignUpSubmit {
+.modalButtons {
     font-size: 3.6rem;
     margin-top: 1rem;
     padding: 1rem;

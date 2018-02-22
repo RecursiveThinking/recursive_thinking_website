@@ -7,8 +7,10 @@ export const homeScreen = () => {
 
         const btnSignUpHead = document.getElementById('btnSignUpHead');
         const btnSignUpSubmit = document.getElementById('btnSignUpSubmit');
+        const btnSignInSubmit = document.getElementById('btnSignInSubmit');
         const btnLoginHead = document.getElementById('btnLoginHead');
         const btnSignUpBody = document.getElementById('btnSignUpBody');
+        const modalConfirm = document.getElementById('modalConfirm');
         const modalContSignUp = document.getElementById('modalSignUp');
         const modalContLogin = document.getElementById('modalLogin');
         const homePage = document.getElementById('homePage');
@@ -32,6 +34,10 @@ export const homeScreen = () => {
 
         btnSignUpSubmit.onclick = function () {
             handleSignUpSubmit(modalContSignUp);
+        };
+
+        btnSignInSubmit.onclick = function () {
+            handleSignInSubmit(modalContLogin);
         };
 
         homePage.onclick = function (event) {
@@ -74,7 +80,7 @@ export const homeScreen = () => {
             if (typeof err === 'string') {
                 check = err.toLowerCase();
             } else {
-                check = err.message;
+                check = err.message.toLowerCase();
                 err = err.message;
             }
 
@@ -116,6 +122,36 @@ export const homeScreen = () => {
                     document.getElementById('confirmUserNameError').innerText = err;
                 } else {
                     document.getElementById('confirmCodeError').innerText = err;
+                }
+            });
+
+    };
+
+    const handleSignInSubmit = (modal) => {
+
+        const username = document.getElementById('signInUserName').value;
+        const password = document.getElementById('signInPassword').value;
+
+        User.signIn(username, password)
+            .then((data) => {
+                console.log('signed in ', data);
+                modal.style.display = "none";
+                utils.navigateToPage('dashboard');
+            })
+            .catch(err => {
+                console.log("Sign in failed ", err);
+                let check;
+                if (typeof err === 'string') {
+                    check = err.toLowerCase();
+                } else {
+                    check = err.message.toLowerCase();
+                    err = err.message;
+                }
+
+                if (check.indexOf('username') !== -1) {
+                    document.getElementById('signInUserNameError').innerText = err;
+                } else {
+                    document.getElementById('signInPasswordError').innerText = err;
                 }
             });
 

@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         <hr class="modalHR">
-                        <button id="btnSignUpSubmit" class="btn btnFill colorWhiteff fw500">Sign Up</button>
+                        <button id="btnSignUpSubmit" class="btn btnFill colorWhiteff fw500 modalButtons">Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <hr class="modalHR">
-                        <button id="btnConfirmSubmit" class="btn btnFill colorWhiteff fw500">Send Verification</button>
+                        <button id="btnConfirmSubmit" class="btn btnFill colorWhiteff fw500 modalButtons">Send Verification</button>
                     </div>
                 </div>
             </div>
@@ -115,20 +115,25 @@
                         <h2 class="h2ModalTitle colorBlack fw300">Login</h2>
                         <hr class="modalHR">
                         <!-- <div class="giveMeSpaceModal"></div> -->
-                        <form action="">
-                            <div class="fc-form">
-                                <div class="fc-input">
-                                    <label class="colorGray42 fw500" for="email">Email: </label>
-                                    <input class="colorGray42 fw300" type="text" name="email" placeholder="Email">
-                                </div>
-                                <div class="fc-input">
-                                    <label class="colorGray42 fw500" for="password">Password:</label>
-                                    <input class="colorGray42 fw300" type="text" name="password" placeholder="Password">
-                                </div>
+                        <hr class="modalHR">
+                        <div class="fc-form">
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="signUpUserName">Username:</label>
+                                <input id="signInUserName" class="colorGray42 fw300" type="text" name="signUpUserName" placeholder="Username" />
                             </div>
-                            <hr class="modalHR">
-                            <button class="btn btnFill colorWhiteff fw500">Login</button>
-                        </form>
+                            <div class="input-error-container">
+                                <span id="signInUserNameError" class="input-error"></span>
+                            </div>
+                            <div class="fc-input">
+                                <label class="colorGray42 fw500" for="signUpPassword">Password:</label>
+                                <input id="signInPassword" class="colorGray42 fw300" type="text" name="password" placeholder="Password" />
+                            </div>
+                            <div class="input-error-container">
+                                <span id="signInPasswordError" class="input-error"></span>
+                            </div>
+                        </div>
+                        <hr class="modalHR">
+                        <button id="btnSignInSubmit" class="btn btnFill colorWhiteff fw500 modalButtons">Sign In</button>
                     </div>
                 </div>
             </div>
