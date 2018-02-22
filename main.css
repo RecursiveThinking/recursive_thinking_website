@@ -75,12 +75,13 @@ button.btn.btnFill.greenNavButton {
 
 .input {
     /* padding: 1rem 16rem 1rem 2rem; */
-    padding: 1rem 6rem 1rem 2rem;
+    padding: 1rem 2rem 1rem 2rem;
     margin-left: 2rem;
     border-radius: 3rem;
     border: .1rem solid #979797;
     font-size: 2rem;
     text-align: left;
+    width: 30%;
 }
 
 .ta-left {
