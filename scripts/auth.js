@@ -58,13 +58,8 @@ const getCredentials = () => {
 };
 
 const getUserCredentials = () => {
-    // Get authenticated credentials of current user.
-    Auth.currentUserCredentials()
-        .then((user) => {
-            console.log('current user credential ', user);
-            // do something with signed in user credential
-        })
-        .catch(err => console.log("There was a problem getting user credentials ", err));
+    // Get authenticated credentials of current user. #federated not user pool
+    return Auth.currentUserCredentials()
 };
 
 const getUserInfo = () => {
@@ -77,13 +72,8 @@ const getUserInfo = () => {
 };
 
 const getUserPoolUser = () => {
-    // Get current authenticated user
-    Auth.currentUserPoolUser()
-        .then((user) => {
-            console.log('current user pool user info ', user);
-            // do something with signed in user credential
-        })
-        .catch(err => console.log("There was a problem getting user info ", err));
+    // Get current authenticated user pool user
+    return Auth.currentUserPoolUser()
 };
 
 const getUserSession = () => {
@@ -128,16 +118,11 @@ const forgotPasswordSubmit = (username, code, newPassword) => {
 
 const updateUserAttributes = (user, attributes) => {
     // update user's attributes with attributes object
-    Auth.updateUserAttributes(user, attributes)
-        .then((user) => {
-            console.log('current users updated their attributes ', user);
-            // do something with signed in user session
-        })
-        .catch(err => console.log(`There was a problem updating attributes ${attributes} for the user ${user} `, err));
+    return Auth.updateUserAttributes(user, attributes)
 };
 
 const getUserAttributes = (user) => {
-    // takes cognito user object and returns their attributes
+    // takes cognito user pool object and returns their attributes
     Auth.userAttributes(user)
         .then((attributes) => {
             console.log('current user attributes ', attributes);
@@ -160,5 +145,31 @@ export const User = {
     forgotPasswordSubmit,
     updateUserAttributes,
     getUserAttributes
+};
+
+// @return string SUCCESS or error
+export const updateUsersProfile = (attributes) => {
+    User.getUserPoolUser()
+        .then((user) => {
+            User.updateUserAttributes(user, attributes)
+                .then((status) => {
+                    console.log(status, ' current users updated their attributes.');
+                    // do something with signed in user session
+                })
+                .catch(err => console.log(`There was a problem updating attributes ${attributes} for the user ${user} `, err));
+        });
+};
+
+// @return array of objects, each object is an attribute of user profile
+export const getUsersProfile = () => {
+    User.getUserPoolUser()
+        .then((user) => {
+            User.getUserAttributes(user)
+                .then((profile) => {
+                    return profile;
+                    // do something with signed in user session
+                })
+                .catch(err => console.log(`There was a problem getting the profile for user ${user} `, err));
+        });
 };
 
