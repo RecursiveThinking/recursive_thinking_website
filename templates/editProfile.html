@@ -1,12 +1,24 @@
 <template id="page">
 <section id="editProfileHTML">
     <div class="content container">
-        <div class="grid full">
+        <!-- THIS SECTION IS FOR THE SAVE CHANGES DROPDOWN -->
+        <!-- <div class="grid full">
             <div class="cell">
-                <article class="editProfile card">
-                    
-                    <slot name="editProfile"></slot>
+                <article class="changeProfile card">
+                    <div class="fc-changeProfileText">
+                        <h2 class="h2TitleChange fw300 colorWhiteff">Looks like you've made a change.  Save your changes?</h2>
+                        <button id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
+                    </div>
                 </article>
+            </div>
+        </div> -->
+        <div class="cardContainer">
+            <div class="grid full">
+                <div class="cell">
+                    <article class="editProfile card">
+                        <slot name="editProfile"></slot>
+                    </article>
+                </div>
             </div>
         </div>
     </div>
@@ -20,16 +32,19 @@
         <div class="grid gutters quarter">
             <div class="cell">
                 <!-- fix commit -->
-                <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
                 <img class="avatarPicXL" slot="profileBasicValImgAttrs">
-                <label id="profile-picture" class="caption card">
+                <!-- <label id="profile-picture" class="caption card">
                     <span class="profileTitle fw500">Add Profile Picture</span>
                     <input id="file" style="visibility:hidden;" type="file">
-                </label>
+                </label> -->
+                <div id="profile-picture" class="caption card">
+                    <span class="profileTitle fw500">Add Profile Picture</span>
+                    <input id="file" style="visibility:hidden;" type="file">
+                </div>
                 <!-- end fix commit -->
                 <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
-                <!-- <img class="avatarPicXL" slot="profileBasicValImgAttrs"> -->
-                <!-- <div class="caption card">
+                <!-- <img class="avatarPicXL" slot="profileBasicValImgAttrs">
+                <div class="caption card">
                     <h5 class="profileTitle colorGray42 fw500">Edit Profile Picture</h5>
                 </div> -->
             </div>

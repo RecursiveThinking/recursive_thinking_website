@@ -22,7 +22,7 @@ header {
     /* position: fixed; */
 }
 
-.navButtons button, .btn.btnFill.signUp {
+.navButtons button, .btn.btnFill.signUp, .btn.btnFill.signUp {
     padding: 1rem 2rem;
     margin-left: 20px;
     /* border-radius: 10px; */

@@ -4,7 +4,49 @@
 }
 
 #editProfileHTML .content.container {
+    /* padding: 3rem 3rem 3rem 3rem; */
+    padding: 0;
+}
+
+#editProfileHTML .cardContainer {
     padding: 3rem 3rem 3rem 3rem;
+}
+
+.changeProfile.card {
+    background-color: #00b371;
+    color: #ffffff;
+    border: none;
+}
+
+.cell > .changeProfile {
+    display: flex;
+    /*flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+    padding: 6rem 0;
+}
+
+.fc-changeProfileText {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    text-align: center;
+}
+
+.btn.btnFill.signUp.saveProfile {
+    padding: 1rem 6rem;
+    border: 1px solid #ffffff;
+    margin-left: 11rem;
+}
+
+.h2TitleChange {
+    font-size: 3rem;
+    letter-spacing: 1.8px;
 }
 
 #editProfileHTML .editProfile.card {
