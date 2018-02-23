@@ -40,6 +40,24 @@ body {
     display: block;
 }
 
+.hamburger {
+    font-size: 4rem;
+    margin: .5rem;
+    display: none;
+}
+
+.displayed {
+    display: block !important;
+}
+
+.home {
+    display:none;
+}
+
+.marginLeft {
+    margin-left: 20%;
+}
+
 .grow {
     flex-grow: 1;
 }
@@ -334,8 +352,29 @@ button.btn.btnFill.greenNavButton {
 }
 
 @media only screen and (max-width: 425px) and (min-width: 320px) {
+    .hamburger {
+        font-size: 4rem;
+        display: inline-block;
+        left: 3rem;
+        top: 2rem;
+        position: absolute;
+    }
     * {
         font-size: 7px;
+    }
+    .sidebar {
+        width: 35%;
+        top: 10%;
+        display: none;
+    }
+    #mainWindow {
+        margin-left: 0;
+    }
+    .home {
+        display: block;
+    }
+    .headerOptionalNav {
+        display: none;
     }
 }
 
@@ -344,6 +383,27 @@ button.btn.btnFill.greenNavButton {
 @media only screen and (max-width: 480px) and (min-width: 426px) {
     * {
         font-size: 7.5px;
+    }
+    .hamburger {
+        font-size: 4rem;
+        display: inline-block;
+        left: 3rem;
+        top: 2rem;
+        position: absolute;
+    }
+    .sidebar {
+        width: 35%;
+        top: 10%;
+        display: none;
+    }
+    #mainWindow {
+        margin-left: 0;
+    }
+    .home {
+        display: block;
+    }
+    .headerOptionalNav {
+        display: none;
     }
 }
 
@@ -391,6 +451,29 @@ button.btn.btnFill.greenNavButton {
         /* font-size: 8.5px; */
         /* overflow: auto; */
     }
+
+    .hamburger {
+        font-size: 4rem;
+        display: inline-block;
+        left: 3rem;
+        top: 2rem;
+        position: absolute
+    }
+    .sidebar {
+        width: 35%;
+        top: 12%;
+        display: none;
+        height: calc(100% - 52px - 40px)
+    }
+    .fc-devInfo {
+        margin: 3rem 0;
+    }
+    .home {
+        display: block;
+    }
+    .headerOptionalNav {
+        display: none;
+    }
     .mobileNav {
         display: block;
     }
@@ -398,7 +481,7 @@ button.btn.btnFill.greenNavButton {
         display: none;
     }
     #mainWindow{
-        margin-left: 20%;
+        margin-left: 0;
         margin-bottom: 40px;
         margin-top: 112px;
     }

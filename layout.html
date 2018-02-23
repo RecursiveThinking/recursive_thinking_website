@@ -47,6 +47,7 @@
 <body>
     <!-- <header class="grid gutters third"> -->
     <header class="grid third">
+        <span id="hamburger" class="hamburger"><i class="fa fa-bars"></i></span>
         <div class="cell cell-center">
             <div class="content">
                 <div class="logo">
@@ -54,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="cell cell-center">
+        <div class="cell cell-center headerOptionalNav">
             <div class="content cell-center">
                 <div class="searchBar">
                     <a href="#home"><button class="btn btnFill greenNavButton homeNavButton">To Home Screen</button></a>
@@ -63,8 +64,8 @@
             </div>
         </div>
     </header>
-    <aside class="sidebar">
-        <article id="currentUserDashInfo" class="devCaption item-textCenter">
+    <aside id="sidebar" class="sidebar">
+        <article id="currentUserDashInfo" class=" item-textCenter">
             <!-- <div class="fc-devInfo">
                 <img class="sidebarImage" src="./public/images/porg_sq.jpeg">
                 <h2 class="devName">Dev Name</h2>
@@ -96,6 +97,10 @@
             <article class="sidebar-item" data-pageId="edit-profile">
                 <h2 class="sidebarTitle">Edit Profile</h2>
                 <span><i class="fa fa-user "></i></span>
+            </article>
+            <article class="sidebar-item home" data-pageId="home-screen">
+                <h2 class="sidebarTitle">Home Screen</h2>
+                <span><i class="fa fa-home"></i></span>
             </article>
             <article class="sidebar-item" data-pageId="sign-out">
                 <h2 class="sidebarTitle">Sign Out</h2>

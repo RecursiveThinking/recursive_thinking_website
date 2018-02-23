@@ -19,6 +19,7 @@ export default (function() {
 
             // adding our click listener to each sidebar item
             const sidebarItems = document.getElementsByClassName('sidebar-item');
+            const hamburger = document.getElementById('hamburger');
             const sideBarItemsArray = Array.from(sidebarItems);
             serverApi.getDeveloperProfiles();
             sideBarItemsArray.forEach((item) => {
@@ -28,6 +29,9 @@ export default (function() {
                     window.scrollTo(0, 0);
                 });
             });
+            hamburger.addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('displayed');
+            })
         }
 
         getDeveloperProfiles() {

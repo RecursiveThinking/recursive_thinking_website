@@ -604,7 +604,7 @@ const checkFullScreen = (page) => {
         document.querySelector('header').style.display = "none";
         document.querySelector('#mainWindow').style.marginLeft = 0;
     } else {
-        document.querySelector('#mainWindow').style.marginLeft = '20%';
+        document.querySelector('#mainWindow').classList.add('marginLeft');
         document.querySelector('.sidebar').style.display = "";
         document.querySelector('header').style.display = "";
     }
