@@ -173,3 +173,7 @@ export const getUsersProfile = () => {
         });
 };
 
+export const signOut = () => {
+    return Auth.signOut();
+};
+

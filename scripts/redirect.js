@@ -6,6 +6,7 @@ import { modalLessons } from '../templates/voteForLesson';
 import { setUpDashboard } from '../templates/dashboard';
 import { editProfilePicture } from '../templates/editProfilePicture';
 import { utils, data } from './global';
+import { signOut } from './auth';
 
 export default (function() {
     function appendPage(pageId) {
@@ -45,7 +46,14 @@ export default (function() {
                 editProfilePicture();
                 break;
             case 'sign-out':
-                appendPage('signOut');
+                signOut()
+                    .then((res) => {
+                        appendPage('homeScreen');
+                        homeScreen();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
                 break;
             case 'interview-prep':
                 // appendPage('interviewPrep');

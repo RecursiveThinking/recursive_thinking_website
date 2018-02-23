@@ -599,7 +599,7 @@ function getAgeEditProfile(dateOfBirth){
 }
 
 const checkFullScreen = (page) => {
-    if (page === 'home') {
+    if (page === 'home' || page === 'sign-out') {
         document.querySelector('.sidebar').style.display = "none";
         document.querySelector('header').style.display = "none";
         document.querySelector('#mainWindow').style.marginLeft = 0;
