@@ -135,6 +135,12 @@ permission to call post API's to our DB.
 Visit Auth.js for all utility methods for Auth, just import them
 in your workflow and start using - simple as that.
 
+## Working with authed User
+
+getUsersProfile() from auth folder will return currently logged in users profile
+
+updateUsersProfile() takes an attributes object, of attributes to update in the users profile.
+
 ## Deployment
 
 Production deployments are handled in https://github.com/amnevins/recursivethinking.git
