@@ -175,11 +175,84 @@
     letter-spacing: 0.8px;
 }
 
+.fc-profileAboutExp-time {
+    padding: 2rem 3rem 2.75rem 3rem;
+}
+
+.fc-profileAboutExp-time {
+    border-left: 1px solid #c6c6c6;
+}
+
+.fc-profileAboutExp-time:first-of-type {
+    border-bottom: 1px solid #c6c6c6;
+}
+
+.h3NumberExp {
+    font-size: 4.8rem;
+    letter-spacing: 2.9px;
+    padding: 0 .5rem;
+}
+
+.h3NumberExpSpan {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 0 .5rem;
+}
+
 .fc-profileAbout h4, .fc-skillViewProfile h4 {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
+    
 }
 
-.fc-skillViewProfile {
-    padding: 1.6rem 3rem 0 3rem;
+.fc-skillViewProfile, .fc-profileAbout {
+    padding: 1.6rem 0 0 3rem;
+}
+
+/* grid twothirds */
+
+.fc-profileAboutText {
+    padding: 1.55rem 0;
+}
+
+.h4Descript {
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+    text-align: center;
+}
+
+.fc-profileAboutText p {
+    font-size: 1.4rem;
+    line-height: 1.43;
+    text-align: justify;
+    letter-spacing: 0.7px;
+}
+
+.fc-profileAbout {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* padding: 1.55rem */
+}
+
+.fc-profileAboutExp {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    /* align-content: center; */
+    /* align-items: center; */
+    
+    height: 100%;
+}
+
+.fc-profileAboutExp-time {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 100%;
+    /* flex-wrap: nowrap; */
+    
+    align-content: center;
+    align-items: center;
 }
