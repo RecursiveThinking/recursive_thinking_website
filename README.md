@@ -12,8 +12,9 @@ Start your engines! Initiate a Webpack Build / Watch.
 
 2. Run `npm run dev-server` to start `webpack-dev-server`. This will open your default browser to the correct route.
 
-3. Develop!
+3. Get access to, and look at the [mockups](https://app.zeplin.io/project/5a35b3271068e9760ef79fc6)
 
+4. Develop!
 
 ## Using Templates
 
