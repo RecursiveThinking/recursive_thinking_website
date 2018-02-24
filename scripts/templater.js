@@ -124,21 +124,19 @@
     
     function insertNode(slot, node) {
       var tempNode
+      // technical note: We're actually inserting our content right before the 
+      // slot starts. This is so that we can cleanly remove the slot later and 
+      // not have to worry about preserving the content.
+
+      // insert string, HTML string, number, or other primatives into slot
+      if (typeof node !== 'object')
+        slot.insertAdjacentHTML('beforeBegin', node) // if we're worried about js injection, we should replace this with insertAdjacentText; that will also prevent us from using the html shortcut feature
     
-      // throw some errors
-      if (slot.childNodes && slot.childNodes.length > 2) {
-        console.error('Slots cannot have more than two children!')
-      }
-    
-      // insert string into slot
-      else if (typeof node !== 'object')
-        slot.insertAdjacentHTML('beforeBegin', node)
-    
-      // insert other DOM nodes (templates, DOM elements or document fragments) into slot
+      // insert DOM nodes (templates, DOM elements or nodes, documents, or document fragments) into slot
       else if (node && node.nodeType)
         slot.parentNode.insertBefore(node, slot)
     
-      // replace slot with it's contents
+      // default case: replace slot with it's contents
       else {
         var contents = [].slice.call(slot.childNodes)
     
