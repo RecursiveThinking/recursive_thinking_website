@@ -14,7 +14,7 @@ export default (function() {
         main.innerHTML = '';
         main.appendChild(templates[pageId].page);
     }
-
+    
     function setUpPage(template) {
         const main = document.getElementById('main-content');
         main.innerHTML = '';
