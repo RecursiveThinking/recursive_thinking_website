@@ -66,13 +66,13 @@
     function fill(template, values) {
       // deal with slot elements
       template.querySelectorAll('slot').forEach(slot => {
-        var vav = values[slot.name]
+        var slotData = values[slot.name]
     
-        if (Array.isArray(vav)) {
-          vav.forEach(template => insertNode(slot, template))
-        } else {
-          insertNode(slot, vav)
-        }
+        if (Array.isArray(slotData))
+          slotData.forEach(template => insertNode(slot, template))
+
+        else
+          insertNode(slot, slotData)
     
         slot.parentNode.removeChild(slot)
       })
@@ -84,13 +84,13 @@
       
         // fill sandbox slots (the same way we do for slot elements)
         sandbox.querySelectorAll('slot').forEach(slot => {
-          var vav = values[slot.name]
+          var slotData = values[slot.name]
       
-          if (Array.isArray(vav)) {
-            vav.forEach(sandbox => insertNode(slot, sandbox))
-          } else {
-            insertNode(slot, vav)
-          }
+          if (Array.isArray(slotData))
+            slotData.forEach(sandbox => insertNode(slot, sandbox))
+          
+          else
+            insertNode(slot, slotData)
       
           slot.parentNode.removeChild(slot)
         })
@@ -102,21 +102,31 @@
       // deal with slot attributes
       template.querySelectorAll('[slot]').forEach(node => {
         var slotName = node.getAttribute("slot"),
-            vav = values[slotName]
+            slotData = values[slotName]
     
-        if (!slotName) {
-          console.error('Slot attribute missing slot name! (e.g.: slot="slotname: attribute1, attribute2")', node)
-          return;
-        }
+        // would happen if you did `<element slot></element> or <element slot=""></slot>`
+        if (!slotName)
+          return console.error(
+            `Slot attribute missing slot name for ${node.outerHTML}\n`,
+            'Slot attribute must have a value. (e.g.: slot="slotname")'            
+          )
   
-        if (vav) {
-          Object.keys(vav).forEach(atr => node.setAttribute(atr, values[slotName][atr]))
-          node.removeAttribute('slot')
-        }
-        
-        else {
-          console.log('no vav, attr', slot, values, slotName)
-        }
+        // would happen if you did `slotname: '' || undefined || null || 0`
+        if (!slotData)
+          return console.error(
+            `No slot data for attribute slot ${slotName}!\n`,
+            `Must be an object. (e.g. slotname: { img: "path/to/image.png" }`
+          )
+
+        // would happen if you did `slotname: 'hello' || '12' || ['word','word']
+        if (typeof slotData !== 'object' || Array.isArray(slotData))
+          return console.error(
+            `Slot data for attribute slot ${slotName} is not an object!\n`,
+            `Must be an object. (e.g. slotname: { img: "path/to/image.png" }`
+          )
+
+        Object.keys(slotData).forEach(atr => node.setAttribute(atr, values[slotName][atr]))
+        node.removeAttribute('slot')
       })
     
       return template
@@ -128,21 +138,29 @@
       // slot starts. This is so that we can cleanly remove the slot later and 
       // not have to worry about preserving the content.
 
-      // insert string, HTML string, number, or other primatives into slot
-      if (typeof node !== 'object')
+      // insert string, HTML string, number, or other non-objects into slot
+      if (typeof node !== 'object' && (node === 0 || node !== ''))
         slot.insertAdjacentHTML('beforeBegin', node) // if we're worried about js injection, we should replace this with insertAdjacentText; that will also prevent us from using the html shortcut feature
     
       // insert DOM nodes (templates, DOM elements or nodes, documents, or document fragments) into slot
       else if (node && node.nodeType)
         slot.parentNode.insertBefore(node, slot)
-    
-      // default case: replace slot with it's contents
-      else {
+
+      // insert default if node is not defined (0 and '' will get caught by the first if)
+      else if (!node) {
         var contents = [].slice.call(slot.childNodes)
     
         contents.forEach(newNode => {
           slot.parentNode.insertBefore(newNode, slot)
         })
+      }
+    
+      // we've caught all the possible good cases already, shame on you
+      else {
+          return console.error(
+            `Invalid slot data: ${JSON.stringify(node)}\n`,
+            `Must be a Primative, Template, DOM Element or Node, Document, or Document Fragment`
+        )
       }
     }
   
