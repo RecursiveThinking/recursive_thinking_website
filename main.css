@@ -461,9 +461,9 @@ button.btn.btnFill.greenNavButton {
     }
     .sidebar {
         width: 35%;
-        top: 12%;
+        top: 10%;
         display: none;
-        height: calc(100% - 52px - 40px)
+        height: 85%;
     }
     .fc-devInfo {
         margin: 3rem 0;
