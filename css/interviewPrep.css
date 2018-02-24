@@ -29,17 +29,37 @@
     letter-spacing: 1.4px;
 }
 
+.interview.card {
+    padding: 0;
+}
+
+.fc-interview-push-top {
+    padding: 3rem 3rem 0 3rem;
+}
+
+.fc-interview-push-bot {
+    padding: 0 3rem 3rem 3rem;
+}
+
+/* .fc-interview-push-top .fc-titleAnswer .h4TitleInterviewQuestion {
+    
+} */
+
+
+
 .fc-titleAnswer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-content: center;
+    padding-bottom: 1.5rem;
+    align-items: center;
 }
 
 .h5InterviewQuestionDate {
     font-size: 2rem;
     letter-spacing: 1.7px;
-    margin-bottom: .9rem;
+    /* margin-bottom: 1.5rem; */
 }
 
 .fc-form h4 {
@@ -159,9 +179,11 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    /* justify-content: space-between; */
     justify-content: flex-start;
     
-    margin: 2.5rem 0;
+    margin: 1.5rem 2rem;
+    /* padding: 0 1rem; */
 }
 
 .tagInterviewQuestion {
@@ -171,9 +193,10 @@
     padding: 1rem 2rem;
     border: 1px solid #00b371;
     border-radius: 2.3rem;
-    margin-left: 1rem;
+    margin: .5rem .5rem .5rem .5rem;
+    /* margin-left: 1.5rem; */
 }
 
-.tagInterviewQuestion:first-of-type{
+/* .tagInterviewQuestion:first-of-type{
     margin-left: 0;
-}
+} */

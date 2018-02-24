@@ -11,6 +11,7 @@
                     </article>
                 </div>
             </div>
+            <!-- modal for question -->
             <section>
                 <div id="modalSubmitInterviewQuestion" class="modal">
                     <div class="modalContent card">
@@ -129,33 +130,37 @@
 </template>
 <template id="tempIdInterviewQuestion">
     <div class="cell">
-        <article class="content card">
-            <div class="fc-titleAnswer">
-                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900"><slot name="title" /></h4>
-                <h5 class="h5InterviewQuestionDate colorGray64 fw300"><slot name="date" /></h5>
+        <article class="interview card">
+            <div class="fc-interview-push-top">
+                <div class="fc-titleAnswer">
+                    <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900"><slot name="title" /></h4>
+                    <h5 class="h5InterviewQuestionDate colorGray64 fw300"><slot name="date" /></h5>
+                </div>
+                <hr>
+                <div class="fc-pLesson">
+                    <p class="fw300">
+                        <slot name="description" />
+                    </p>
+                </div>
+                <hr>
             </div>
-            <hr>
-            <div class="fc-pLesson">
-                <p class="fw300">
-                    <slot name="description" />
-                </p>
-            </div>
-            <hr>
             <div class="fc-interviewQuestionTags">
                 <!-- <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div> -->
                 <slot name="questionCategories"></slot>
             </div>
-            <hr>
-            <!-- <div class="fc-replies open"> -->
-            <div class="fc-replies">
-                <!-- <h3 class="h3VoteCount colorGreen fw900">4 Replies</h3> -->
-                <h3 class="h3VoteCount colorGreen fw900"><slot name="questionAnswersCount" /></h3>
-                <!-- <div class="answers" style="display: block;"> -->
-                <div class="answers">
-                    <slot name="questionAnswers"></slot>
+            <div class="fc-interview-push-bot">
+                <hr>
+                <!-- <div class="fc-replies open"> -->
+                <div class="fc-replies">
+                    <!-- <h3 class="h3VoteCount colorGreen fw900">4 Replies</h3> -->
+                    <h3 class="h3VoteCount colorGreen fw900"><slot name="questionAnswersCount" /></h3>
+                    <!-- <div class="answers" style="display: block;"> -->
+                        <div class="answers">
+                            <slot name="questionAnswers"></slot>
+                        </div>
+                        <button class="btn btnFill fw500" type="submit">Answer Question</button>
+                    </div>
                 </div>
-                <button class="btn btnFill fw500" type="submit">Answer Question</button>
-            </div>
         </article>
     </div>
 </template>
