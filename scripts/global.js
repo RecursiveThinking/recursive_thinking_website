@@ -611,7 +611,18 @@ const checkFullScreen = (page) => {
 };
 
 const navigateToPage = (page) => {
-    window.location.hash = page;  
+    window.location.hash = page;
+};
+
+const setTitle = () => {
+  const newTitle = document.location.hash.replace('#','').split('-');
+  const currentTitle = document.getElementsByTagName('title')[0];
+
+  const newTitleUppercased = newTitle.map((word) => {
+      return word[0].toUpperCase() + word.slice(1, word.length);
+    }).join(" ");
+
+  currentTitle.textContent = newTitleUppercased;
 };
 
 
@@ -655,5 +666,6 @@ export const utils = {
     returnArrayOfApplicableItems,
     deleteItemFromArray,
     checkFullScreen,
-    navigateToPage
+    navigateToPage,
+    setTitle
 };

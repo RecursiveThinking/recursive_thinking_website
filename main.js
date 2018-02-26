@@ -15,5 +15,3 @@ Amplify.configure({
         userPoolWebClientId: '1tt5sh3cf3csicaqcpg0a4jiva'
     }
 });
-
-

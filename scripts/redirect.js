@@ -14,7 +14,7 @@ export default (function() {
         main.innerHTML = '';
         main.appendChild(templates[pageId].page);
     }
-    
+
     function setUpPage(template) {
         const main = document.getElementById('main-content');
         main.innerHTML = '';
@@ -25,6 +25,7 @@ export default (function() {
     function hashRouting() {
         const location = window.location.hash.replace('#','');
         utils.checkFullScreen(location);
+        utils.setTitle();
         switch (location) {
             case 'home':
                 appendPage('homeScreen');
