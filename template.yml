@@ -9,17 +9,107 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
 
 Resources:
-  GetHelloWorld:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: backend/lambdas/testlambda.get
-      Runtime: nodejs4.3
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-      Events:
-        GetEvent:
-          Type: Api
-          Properties:
-            Path: /
-            Method: get
+  RecursiveThinkingWebsiteAPI:
+      Type: AWS::Serverless::Api
+      Properties:
+        StageName: Prod
+        DefinitionBody:
+          swagger: 2.0
+          info:
+            title:
+              Ref: AWS::StackName
+          paths:
+            "/developers":
+              get:
+                x-amazon-apigateway-integration:
+                  httpMethod: POST
+                  type: aws_proxy
+                  uri:
+                    Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetDevelopers.Arn}/invocations
+                responses: {}
+            "/developers/{developerId}":
+              get:
+                x-amazon-apigateway-integration:
+                  httpMethod: POST
+                  type: aws_proxy
+                  uri:
+                    Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetDeveloperProfile.Arn}/invocations
+                responses: {}
+            "/developers/{developerId}":
+              post:
+                x-amazon-apigateway-integration:
+                  httpMethod: POST
+                  type: aws_proxy
+                  uri:
+                    Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PostDeveloperProfile.Arn}/invocations
+                responses: {}
+          swagger: '2.0'
+  GetDevelopers:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: lambdas/GetDevelopers.get
+        Runtime: nodejs4.3
+        Environment:
+          Variables:
+            TABLE: !Ref DeveloperProfiles
+        Policies:
+          - DynamoDBReadPolicy:
+                TableName:
+                  Fn::GetAtt: ["DevProfiles", "TableName"]
+        Role:
+          Fn::ImportValue:
+            !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+        Events:
+          RecursiveThinkingWebsiteAPI:
+            Type: Api
+            Properties:
+              Path: /developers
+              Method: get
+  GetDeveloperProfile:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: lambdas/GetDeveloperProfile.get
+        Runtime: nodejs4.3
+        Environment:
+          Variables:
+            TABLE: !Ref DeveloperProfiles
+        Policies:
+          - DynamoDBReadPolicy:
+                TableName:
+                  Fn::GetAtt: ["DevProfiles", "TableName"]
+        Role:
+          Fn::ImportValue:
+            !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+        Events:
+          RecursiveThinkingWebsiteAPI:
+            Type: Api
+            Properties:
+              Path: /developers/{developerId}
+              Method: get
+  PostDeveloperProfile:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: lambdas/PostDeveloperProfile.post
+        Runtime: nodejs4.3
+        Environment:
+          Variables:
+            TABLE: !Ref DeveloperProfiles
+        Policies:
+          - DynamoDBReadPolicy:
+                TableName:
+                  Fn::GetAtt: ["DevProfiles", "TableName"]
+        Role:
+          Fn::ImportValue:
+            !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+        Events:
+          RecursiveThinkingWebsiteAPI:
+            Type: Api
+            Properties:
+              Path: /developers/{developerId}
+              Method: post
+  DeveloperProfiles:
+      Type: AWS::Serverless::SimpleTable
+      Properties:
+        PrimaryKey:
+          Name: id
+          Type: String
