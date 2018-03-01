@@ -19,7 +19,6 @@ module.exports = {
             { from: './buildspec.yml', to: './', force: true },
             { from: './template.yml', to: './', force: true },
             { from: './backend/', to: './', force: true },
-            { from: './main.css', to: './', force: true }
         ])
     ],
     output: {

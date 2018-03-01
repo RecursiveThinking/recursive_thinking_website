@@ -85,11 +85,11 @@
     border: 1px solid #00b371;
 }
 
-#upcomingLessonsHTML .lessonButton..btnColorGreenForest {
+#upcomingLessonsHTML .lessonButton.btnColorGreenForest {
     border: 1px solid #006842;
 }
 
-#upcomingLessonsHTML .lessonButton..btnColorGreenBright {
+#upcomingLessonsHTML .lessonButton.btnColorGreenBright {
     border: 1px solid #2d3134;
 }
 
