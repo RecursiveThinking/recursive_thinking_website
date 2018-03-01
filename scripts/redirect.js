@@ -25,7 +25,6 @@ export default (function() {
     function hashRouting() {
         const location = window.location.hash.replace('#','');
         utils.checkFullScreen(location);
-        utils.setTitle();
         switch (location) {
             case 'home':
                 appendPage('homeScreen');
@@ -68,6 +67,9 @@ export default (function() {
                 window.location.hash = "dashboard";
                 setUpPage(fill(templates.dashboard.page, models.getDashboardModel()));
                 break;
+
+        // run this after the routing so that if we change the route we get the right titel
+        utils.setTitle();
         }
     }
 
