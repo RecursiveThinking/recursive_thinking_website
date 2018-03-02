@@ -42,12 +42,11 @@
     padding: 1.4rem 0;
 }
 
-.fc-attendingContainer {
+#upcomingLessonsHTML .fc-attendingContainer {
     margin: 1.4rem 0 0 0;
-    
 }
 
-#upcomingLessonsHTML .card .fc-dateRow {
+#upcomingLessonsHTML .card .fc-lessonDate .fc-dateRow {
     padding-left: .7rem;
 }
 
@@ -55,19 +54,19 @@
     margin-bottom: .9rem;
 }
 
-.fc-attending {
+#upcomingLessonsHTML .fc-attending {
     padding-left: .7rem;
     margin: 1.4rem 0 0 0;
 }
 
-.fc-attendingThumbs {
+#upcomingLessonsHTML .fc-attendingThumbs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 
-.thumbAndName {
+#upcomingLessonsHTML .fc-attendingThumbs .thumbAndName {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -76,29 +75,30 @@
     align-items: center;
 }
 
-.thumbAndName .avatarThumbRound {
+#upcomingLessonsHTML .thumbAndName .avatarThumbRound {
     margin: 0;
 }
 
-.marginLeft14 {
+/* seth delete this shit */
+#upcomingLessonsHTML .marginLeft14 {
     margin-left: 1.4rem;
 }
 
-.lessonButton.btnColorGreenBright:hover {
+#upcomingLessonsHTML .lessonButton.btnColorGreenBright:hover {
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid #00b371;
     color: #00b371;
 }
 
-.lessonButton.btnColorGreenForest:hover {
+#upcomingLessonsHTML .lessonButton.btnColorGreenForest:hover {
     background-color: #ffffff;
     color: #006842;
     border: 1px solid #006842;
     border-radius: 10px;
 }
 
-.lessonButton.btnColorGreenDark:hover {
+#upcomingLessonsHTML .lessonButton.btnColorGreenDark:hover {
     background-color: #ffffff;
     color: #2d3134;
     border: 1px solid #2d3134;
@@ -117,9 +117,9 @@
     border: 1px solid #2d3134;
 }
 
-.fc-dateRowTitle,
+#upcomingLessonsHTML .fc-dateRowTitle,
 
-.thumbAndName,
-.avatarThumbRound {
+#upcomingLessonsHTML .thumbAndName,
+#upcomingLessonsHTML .avatarThumbRound {
     cursor: pointer;
 }
