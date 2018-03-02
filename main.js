@@ -3,6 +3,29 @@ import layout from './scripts/layout';
 import redirect from './scripts/redirect';
 import Amplify from 'aws-amplify';
 
+import './index.html'
+import './templates/dashboard.html'
+import './templates/upcomingLessons.html'
+import './templates/editProfile.html'
+import './templates/interviewPrep.html'
+import './templates/signOut.html'
+import './templates/voteForLesson.html'
+import './templates/recursiveDirectory.html'
+import './templates/homeScreen.html'
+
+import './css/main.css'
+import './css/header.css'
+import './css/footer.css'
+import './css/sidebar.css'
+import './css/homeScreen.css'
+import './css/dashboard.css'
+import './css/upcomingLessons.css'
+import './css/voteForLesson.css'
+import './css/interviewPrep.css'
+import './css/recursiveDirectory.css'
+import './css/editProfile.css'
+import './css/responsive.css'
+
 Amplify.configure({
     Auth: {
         // REQUIRED - Amazon Cognito Identity Pool ID
