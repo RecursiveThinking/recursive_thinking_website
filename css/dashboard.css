@@ -1,24 +1,7 @@
 #dashboardHTML {
-    /* min-height: 100vh; */
     background-color: #eeeeee;
-    padding: 3rem 3rem 3rem 3rem;
-}
-
-/* #dashboardHTML article { */
-.cell > article {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    background-color: white;
-}
-
-/* #dashboardHTML article h2 { */
-.cell > article h4 {
-    font-size: 2.4rem;
-    letter-spacing: 1.4px;
-    /* color: #b9b9b9; */
-    /* margin-bottom: .9rem; */
-    font-weight: 500 !important;
+    /* padding: 3rem; */
+    padding: 1.5rem;
 }
 
 #dashboardHTML .content {
@@ -27,11 +10,8 @@
 
 #dashboardHTML .content.profileStatsData {
     padding: 3rem 0;
-    /* border-style: solid;
-    border-width: .1rem; */
     border-style: solid;
     border-color: #c6c6c6;
-    /* border-color: red; */
 }
 
 #dashboardHTML .grid.gutters.cols-3 > .cell > .content {
@@ -39,25 +19,20 @@
 }
 
 #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
-    /* padding: 3rem 0; */
-    /* border-width: .1rem; */
-    border-width: .1rem;
+    border-width: .1rem .1rem .1rem .1rem;
 }
 
 #dashboardHTML article .profileStatsData {
     text-align: center;
 }
 
-/* #dashboardHTML .h1Data, #dashboardHTML .h1Date { */
-#dashboardHTML .h1Data, .h1Date {
+#dashboardHTML .h1Data {
     font-size: 5.2rem;
-    /* font-weight: 300; */
     letter-spacing: 4.3px;
 }
 
 #dashboardHTML .h5Data {
     font-size: 1.8rem;
-    /* font-weight: 500; */
     letter-spacing: 1.2px;
     text-transform: uppercase;
     color: #555555;
@@ -67,89 +42,38 @@
     height: 100%;
 }
 
-/* #dashboardHTML .fc-dateRow { */
-.fc-dateRow {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+/* card title */
+#dashboardHTML .h4CardTitle {
+    padding-left: .7rem;
+    margin-bottom: .9rem;
 }
 
-#dashboardHTML .imAttending .fc-dateRow {
-    /* .imAttending .fc-dateRow { */
-    margin-top: 1rem;
+#dashboardHTML .upComing.card .fc-dateRow {
+    padding-left: .7rem;
 }
 
-/* #dashboardHTML .fc-dateRow .h1Date { */
-.fc-dateRow .h1Date {
-    margin-top: .25rem;
+#dashboardHTML .h4LessonTitle {
+    margin-bottom: .9rem;
 }
 
-/* #dashboardHTML .fc-dateRow .fc-dateRowMonthYear { */
-.fc-dateRow .fc-dateRowMonthYear {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: space-between;
+#dashboardHTML .fc-taughtBy .h4LessonTitle {
+    /* adjust global height */
+    margin-bottom: .6rem;
 }
 
-/* #dashboardHTML .h4MonthYear { */
-.h4MonthYear {
-    font-size: 2.4rem;
-    letter-spacing: 1.5px;
-    margin-left: 1rem;
+#dashboardHTML .fc-attendLesson {
+    padding: 2rem 0 .8rem .8rem;
 }
 
-/* #dashboardHTML .h4LessonTitle { */
-.h4LessonTitle {
-    font-size: 2.4rem;
-    letter-spacing: 1.4px;
-}
-
-/* #dashboardHTML .h4LessonTitle.ucMargin { */
-.h4LessonTitle.ucMargin {
-    margin: .75rem 0 .35rem 0;
-}
-
-/* #dashboardHTML .h4LessonTitle.negMarg { */
-.h4LessonTitle.negMarg {
-    margin: -.5rem 0 2rem 0;
-}
-
-.fc-lessonTitleDescription {
-    margin: 1.8rem 0;
-}
-
-.fc-lessonTitleDescription p {
-    font-size: 1.6rem;
-    letter-spacing: 1px;
-    padding: 1rem 0;
-}
-
-/* #dashboardHTML .fc-taughtByThumbs { */
-.fc-taughtByThumbs {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    /* justify-content: space-between; */
-}
-
-/* #dashboardHTML .fc-taughtByThumbs img { */
-.avatarThumbRound {
-    width: 7rem;
-    height: 7rem;
-    border-radius: 50%;
-    margin-top: .75rem;
-    margin-right: 1.5rem;
+#dashboardHTML .fc-attendLesson .fc-dateRowTitle .h4LessonTitle {
+    margin-top: -1rem;
 }
 
 #dashboardHTML .fc-seeMore {
     display: flex;
     flex-direction: row-reverse;
-}
-
-#dashboardHTML .fc-seeMore .h6seeMore {
-    margin-top: .5rem;
+    height: 100%;
+    padding-top: 2rem;
 }
 
 #dashboardHTML .fc-seeMore .h6seeMore a {
@@ -163,68 +87,47 @@
     color: #00b371;
 }
 
-/* responsive grid before 768px */
-@media only screen and (max-width: 768px){
-    #dashboardHTML {
-        padding: 2rem;
-    }
-}
-
-/* responsive grid after 768px */
 @media only screen and (min-width: 768px) {
+    /* ============================================ */
+    /*              Dashboard - Stats               */
+    /* ============================================ */
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(1) > .content {
-        /* padding: 3rem 0; */
         border-width: .1rem;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) {
-        /* padding: 3rem 0; */
         padding-left: 0;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) > .content {
-        /* padding: 3rem 0; */
-        /* border-top-width: .1rem; */
-        /* border-bottom-width: .1rem; */
         border-width: .1rem 0;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) {
-        /* padding: 3rem 0; */
         padding-left: 0;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) > .content {
-        /* padding: 3rem 0; */
         border-width: .1rem;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(1) > .content {
-        /* padding: 3rem 0; */
-        /* border-width: .1rem; */
         border-width: 0 .1rem .1rem .1rem;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) {
-        /* padding: 3rem 0; */
         padding-left: 0;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) > .content {
-        /* padding: 3rem 0; */
-        /* border-top-width: .1rem; */
-        /* border-bottom-width: .1rem; */
         border-width: 0 0 .1rem 0;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) {
-        /* padding: 3rem 0; */
         padding-left: 0;
     }
 
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
-        /* padding: 3rem 0; */
-        /* border-width: .1rem; */
         border-width: 0 .1rem .1rem .1rem;
     }
 }

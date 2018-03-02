@@ -14,12 +14,11 @@
     </section>
 </template>
 
-
 <template id="profileStats">
     <div class="grid gutters full">
         <div class="cell">
             <article class="profileStats card">
-                <h4 class="colorGrayb9 fw900 ttup">Profile Statistics</h4>
+                <h4 class="h4CardTitle colorGrayb9 fw900 ttup">Profile Statistics</h4>
                 <div class="grid gutters cols-3">
                     <slot name="stats1" />
                 </div>
@@ -47,7 +46,7 @@
 <template id="upComingLesson">
     <div class="cell">
         <article id="upComingLessonCard" class="upComing card">
-            <h4 class="colorGrayb9 fw900 ttup">
+            <h4 class="h4CardTitle colorGrayb9 fw900 ttup">
                 Upcoming Lessons
             </h4>
             <hr>
@@ -66,7 +65,7 @@
             </div>
             <hr>
             <div class="fc-lessonTitleDescription">
-                <h4 class="h4LessonTitle ucMargin colorBlack fw300">
+                <h4 class="h4LessonTitle colorBlack fw300">
                     <slot name="lessonTitle"></slot>
                 </h4>
                 <p>
@@ -74,8 +73,8 @@
                 </p>
             </div>
             <hr>
-            <div>
-                <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">
+            <div class="fc-taughtBy">
+                <h4 class="h4LessonTitle colorBlack fw300 ttup">
                     Taught By:
                 </h4>
                 <div class="fc-taughtByThumbs">
@@ -96,36 +95,41 @@
 <template id="lessonsAttending">
     <div class="cell">
         <article id="divAttendingLessonCard" class="imAttending card">
-            <h4 class="colorGrayb9 fw900 ttup">I'm Attending</h4>
+            <h4 class="h4CardTitle colorGrayb9 fw900 ttup">I'm Attending</h4>
             <hr>
-            <slot name="individualLessons"></slot>
-            <div class="fc-seeMore">
-                <h6 class="h6seeMore fw900 ttup">
-                    <a href="#">See More</a>
-                </h6>
-            </div>
+            
+                <slot name="individualLessons"></slot>
+                <div class="fc-seeMore">
+                    <h6 class="h6seeMore fw900 ttup">
+                        <!-- is this a method or a link to upcoming lessons -->
+                        <a href="#">See More</a>
+                    </h6>
+                </div>
+            
         </article>
     </div>
 </template>
 
 <template id="individualLesson">
-    <div class="fc-dateRowTitle">
-        <div class="fc-dateRow contVertCenter">
-            <h1 class="h1Date colorGreen fw300">
-                <slot name="lessonDateDay"></slot>
-            </h1>
-            <div class="fc-dateRowMonthYear">
-                <h4 class="h4MonthYear colorBlack fw500 ttup">
-                    <slot name="lessonDateMonth"></slot>
-                </h4>
-                <h4 class="h4MonthYear colorBlack fw500 ttup">
-                    <slot name="lessonDateYear"></slot>
-                </h4>
+    <div class="fc-attendLesson">
+        <div class="fc-dateRowTitle">
+            <div class="fc-dateRow contVertCenter">
+                <h1 class="h1Date colorGreen fw300">
+                    <slot name="lessonDateDay"></slot>
+                </h1>
+                <div class="fc-dateRowMonthYear">
+                    <h4 class="h4MonthYear colorBlack fw500 ttup">
+                        <slot name="lessonDateMonth"></slot>
+                    </h4>
+                    <h4 class="h4MonthYear colorBlack fw500 ttup">
+                        <slot name="lessonDateYear"></slot>
+                    </h4>
+                </div>
             </div>
+            <h4 class="h4LessonTitle colorGray66 fw300">
+                <slot name="lessonTitle"></slot>
+            </h4>
         </div>
-        <h4 class="h4LessonTitle negMarg colorGray66 fw300">
-            <slot name="lessonTitle"></slot>
-        </h4>
     </div>
     <hr>
 </template>
