@@ -3,7 +3,6 @@
 * {
     box-sizing: border-box;
     font-family: 'Nunito Sans', sans-serif;
-    /* font-size: 10px; */
     margin: 0;
     padding: 0;
 }
@@ -25,7 +24,7 @@ body {
     /* overflow: hidden; */
 }
 
-#mainWindow{
+#mainWindow {
     margin-top: 70px;
     margin-left: 20%;
     margin-bottom: 40px;
@@ -111,6 +110,98 @@ button.btn.btnFill.greenNavButton {
     box-shadow: 0 0.5px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
     margin-bottom: 2em;
+    /* margin: 1.5em; */
+}
+
+.cell > article {
+    display: flex;
+    flex-direction: column;
+    padding: 2.1rem 3rem 2.2rem 3rem;
+    background-color: white;
+}
+
+.cell > article h4 {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    /* font-weight: 500 !important; */
+}
+
+/* date row from dashboard and upcoming lessons */
+.fc-dateRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* 1.5 padding - with a .825 adj for tall h1 */
+    padding: .7rem 0;
+}
+
+.fc-dateRow .fc-dateRowMonthYear {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-between;
+}
+
+.h1Date {
+    font-size: 5.75rem;
+    letter-spacing: 4.3px;
+    width: 7.8rem;
+    text-align: center;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+.h4MonthYear {
+    font-size: 2.4rem;
+    letter-spacing: 1.5px;
+    margin-left: 1rem;
+}
+
+.h4MonthYear:first-of-type {
+    margin-bottom: -.5rem;
+}
+.h4MonthYear:nth-of-type(2) {
+    margin-bottom: .25rem;
+}
+/* lesson title */
+.h4LessonTitle {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+}
+
+.fc-taughtBy .h4LessonTitle {
+    margin-bottom: .2rem;
+}
+
+.fc-taughtByThumbs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.avatarThumbRound {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    margin: .6rem;
+}
+
+.fc-lessonTitleDescription {
+    margin: 1.7rem 0 2rem 0;
+    margin-left: .7rem;
+}
+
+.fc-lessonTitleDescription p {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.fc-taughtBy {
+    margin: .9rem 0 0 0;
+    padding-left: .7rem;
 }
 
 /* general classes */
@@ -225,9 +316,9 @@ button.btn.btnFill.greenNavButton {
 
 
 
-
-/* Flexbox Responsive Grid */
-
+/* ============================================ */
+/*           Flexbox Responsive Grid            */
+/* ============================================ */
 /* Grid Def */
 
 .grid {
@@ -302,52 +393,52 @@ button.btn.btnFill.greenNavButton {
 .cell-center {
     align-self: center;
 }
-
-/* BASE GRID CLASSES - ALL  */
-
+/* ============================================ */
+/*            BASE GRID CLASSES - ALL           */
+/* ============================================ */
 /* MOBILE FIRST!!!! */
 
-.cols-2>.cell {
+.cols-2 > .cell {
     flex: 0 0 100%;
 }
 
-.cols-3>.cell {
+.cols-3 > .cell {
     flex: 0 0 100%;
 }
 
-.cols-4>.cell {
+.cols-4 > .cell {
     flex: 0 0 100%;
 }
 
-.cols-6>.cell {
+.cols-6 > .cell {
     /* flex: 0 0 calc(50% - 1em); */
     flex: 0 0 calc(100% - 1em);
 }
 
-.cols-12>.cell {
+.cols-12 > .cell {
     /* flex: 0 0 calc(33.3333% - 1em); */
     flex: 0 0 calc(100% - 1em);
 }
 
 /* One of -- columns*/
 
-.twothirds>.cell:first-of-type,
-.half>.cell:first-of-type,
-.third>.cell:first-of-type,
-.quarter>.cell:first-of-type {
+.twothirds > .cell:first-of-type,
+.half > .cell:first-of-type,
+.third > .cell:first-of-type,
+.quarter > .cell:first-of-type {
     flex: 0 0 100%;
 }
 
-.sixth>.cell:first-of-type {
+.sixth > .cell:first-of-type {
     /* flex: 0 0 50%; */
     flex: 0 0 100%;
 }
 
-.fit>.cell {
+.fit > .cell {
     flex: 1;
 }
 
-.full>.cell {
+.full > .cell {
     flex: 0 0 100%;
 }
 
@@ -449,7 +540,6 @@ button.btn.btnFill.greenNavButton {
 @media only screen and (max-width: 768px) and (min-width: 481px) {
     * {
         /* font-size: 8.5px; */
-        /* overflow: auto; */
     }
 
     .hamburger {
@@ -487,8 +577,11 @@ button.btn.btnFill.greenNavButton {
     }
 }
 
-/* responsive grid after 768px */
+@media only screen and (max-width: 768px) {
+}
 
+
+/* responsive grid after 768px */
 @media only screen and (min-width: 768px) {
     * {
         font-size: 8.5px;
