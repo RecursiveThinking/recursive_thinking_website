@@ -1,5 +1,4 @@
 #upcomingLessonsHTML {
-    /* min-height: 100vh; */
     background-color: #eeeeee;
     padding: 3rem 3rem 3rem 3rem;
 }
@@ -8,35 +7,60 @@
     height: 100%;
 }
 
-#upcomingLessonsHTML  .fc-taughtByThumbs {
-    margin-bottom: 1.5rem;
+#upcomingLessonsHTML .h4CardTitle {
+    padding-left: .7rem;
+    margin-bottom: 1.1rem;
 }
 
-.fc-lessonButtons {
+#upcomingLessonsHTML .fc-upComingLesson {
+    padding-left: .7rem;
+    margin: 1.65rem 0 1.6rem 0;
+}
+
+#upcomingLessonsHTML .fc-upComingLesson .fc-dateRowTitle .h4LessonTitle {
+    margin-top: -1.25rem;
+}
+
+#upcomingLessonsHTML .fc-taughtBy {
+    margin: 1.1rem 0 2rem 0;
+}
+
+#upcomingLessonsHTML .fc-lessonButtons {
     display: flex;
     flex-direction: row;
-    /* flex-wrap: nowrap;  */
-    /* justify-content: center; */
     justify-content: space-between;
     margin: 2rem 0;
     
 }
 
-.lessonButton {
+#upcomingLessonsHTML .lessonButton {
     flex: 0 0 32%;
     text-align: center;
     border-radius: 1rem;
-    /* border: 1px solid black; */
     font-size: 2rem;
     letter-spacing: 1.2px;
     padding: 1.4rem 0;
 }
 
-/* .fc-lessonTitleDescription {
-    margin: 1.8rem 0;
-} */
-
 .fc-attendingContainer {
+    margin: 1.4rem 0 0 0;
+    
+}
+
+#upcomingLessonsHTML .card .fc-dateRow {
+    padding-left: .7rem;
+}
+
+#upcomingLessonsHTML .card .fc-lessonTitleDescription .h4LessonTitle {
+    margin-bottom: .9rem;
+}
+
+.fc-attending {
+    padding-left: .7rem;
+    margin: 1.4rem 0 0 0;
+}
+
+.fc-attendingThumbs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
