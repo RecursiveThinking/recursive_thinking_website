@@ -1,6 +1,5 @@
 <template id="page">
     <section id="voteForLessonHTML">
-    <!-- <h1>Vote for lessons</h1> -->
     <div class="content container">
         <div class="grid full">
             <div class="cell">
@@ -8,7 +7,6 @@
                     <h4 class="h4Title fw300 colorBlack">Want to learn something specific? Have something to teach?</h4>
                     <h2 class="h2Title fw300 colorBlack">Submit a lesson request</h2>
                     <button id="btnSubmitLesson" class="btn btnFill signUp btnMarginTop" >Submit Lesson</button>
-                    <!-- onclick="openModal()" -->
                 </article>
             </div>
         </div>
@@ -43,38 +41,12 @@
         </section>
         <div class="cardContainer">
             <div class="grid gutters cols2">
-                <!-- <div class="cell">
-                    <article class="content card">
-                        <h3 class="h3TitleLesson colorBlack fw500">Designing with A-Frame VR</h3>
-                        <hr>
-                        <div class="fc-pLesson">
-                            <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                            <br><br>
-                            Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                            </p>
-                        </div>
-                        <hr>
-                        <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
-                        <div class="fc-taughtByThumbs">
-                            <img class="avatarThumbRound" src="../public/images/avatar1.png" alt="">
-                            <img class="avatarThumbRound" src="../public/images/avatar2.png" alt="">
-                        </div>
-                        <hr>
-                        <div class="fc-votes">
-                            <h3 class="h3VoteCount colorGreen fw900">15 Votes</h3>
-                            <button class="btn btnOutline fw900" type="submit">Voted!</button>
-                        </div>
-                    </article>
-                </div> -->
                 <slot name="voteForLesson"></slot>
-                
-                
             </div>
         </div>
     </div>
-</section>
+    </section>
 </template>
-
 
 <template id="displayALesson">
     <div class="cell">
@@ -89,18 +61,17 @@
                 </p>
             </div>
             <hr>
-            <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
-            <div class="fc-taughtByThumbs">
-                <!-- <img class="avatarThumbRound" src="../public/images/avatar2.png" alt=""> -->
-                <slot name="lessonTeachers"></slot>
+            <div class="fc-taughtBy">
+                <h4 class="h4LessonTitle ucMargin colorBlack fw300 ttup">Taught by:</h4>
+                <div class="fc-taughtByThumbs">
+                    <slot name="lessonTeachers"></slot>
+                </div>
             </div>
             <hr>
             <div class="fc-votes">
                 <h3 class="h3VoteCount colorGreen fw900">
                     <slot name="lessonVotes"></slot>
                 </h3>
-                <!-- <button class="btn btnOutline fw900" type="submit">Voted!</button> -->
-                <!-- <button class="btn btnFill fw900" type="submit">Click To Voite</button> -->
                 <slot name="hasCurrentUserVoted"></slot>
             </div>
         </article>
