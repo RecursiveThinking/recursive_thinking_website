@@ -11,7 +11,7 @@
                     </article>
                 </div>
             </div>
-            <!-- modal for question -->
+            <!-- START - question modal -->
             <section>
                 <div id="modalSubmitInterviewQuestion" class="modal">
                     <div class="modalContent card">
@@ -20,16 +20,16 @@
                             <hr class="modalHR">
                             <!-- <div class="giveMeSpaceModal"></div> -->
                             <form action="">
-                                <div class="fc-form">
-                                    <div class="fc-input2">
+                                <div class="fc-modalForm">
+                                    <div class="fc-modalInput">
                                         <label class="labelSm colorGray42 fw500" for="questionTitle">Question Title: </label>
                                         <input class="colorGray42 fw300" type="text" name="questionTitle" placeholder="Title">
                                     </div>
-                                    <div class="fc-input2">
+                                    <div class="fc-modalInput">
                                         <label class="labelSm colorGray42 fw500" for="questionDescription">Question Description:</label>
                                         <textarea rows="8" cols="12" class="colorGray42 fw300" type="text" name="questionDescription" placeholder="Enter Question Description Here"></textarea>
                                     </div>
-                                    <div class="fc-input2">
+                                    <div class="fc-modalInput">
                                         <label class="labelSm colorGray42 fw500" for="questionTags">Tag profession, skills & languages:</label>
                                         <input class="colorGray42 fw300" type="text" name="questionTags" placeholder="Tags">
                                     </div>
@@ -41,7 +41,10 @@
                     </div>
                 </div>
             </section>
+            <!-- END - end question modal -->
+            
             <div class="cardContainer">
+                <!-- START - search and filter bars -->
                 <div class="grid gutters half">
                     <div class="cell">
                         <article class="sortBar content">
@@ -54,6 +57,7 @@
                         </article>
                     </div>
                 </div>
+                <!-- END - search and filter bars -->
                 <!-- modal for answer -->
                 <section>
                     <div id="modalAnswerInterviewQuestion" class="modal">
@@ -63,7 +67,7 @@
                                 <hr class="modalHR">
                                 <!-- <div class="giveMeSpaceModal"></div> -->
                                 <form action="">
-                                    <div class="fc-form">
+                                    <div class="fc-modalForm">
                                         <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Highlight Table Rows:</h4>
                                         <hr class="modalHR">
                                         <div class="fc-pLesson">
@@ -95,46 +99,20 @@
                     </div>
                 </section>
                 <div class="grid gutters full">
-                    <!-- <div class="cell">
-                        <article class="content card">
-                            <div class="fc-titleAnswer">
-                                <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900">Highlight Table Rows:</h4>
-                                <h5 class="h5InterviewQuestionDate colorGray64 fw300">September 5, 2017</h5>
-                            </div>
-                            <hr>
-                            <div class="fc-pLesson">
-                                <p class="fw300">Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                                <br><br>
-                                Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="fc-interviewQuestionTags">
-                                <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div>
-                                <div class="tagInterviewQuestion colorGray42 fw500">JavaScript</div>
-                                <div class="tagInterviewQuestion colorGray42 fw500">HTML</div>
-                                <div class="tagInterviewQuestion colorGray42 fw500">CSS</div>
-                            </div>
-                            <hr>
-                            <div class="fc-replies">
-                                <h3 class="h3VoteCount colorGreen fw900">2 Replies</h3>
-                                <button id="btnAnswerQuestion" class="btn btnFill" type="submit">Answer Question</button>
-                            </div>
-                        </article>
-                    </div>-->
                     <slot name="interviewPrep">
                 </div>
             </div>
         </div>
     </section>
 </template>
+<!-- START - template for question card -->
 <template id="tempIdInterviewQuestion">
     <div class="cell">
-        <article class="interview card">
-            <div class="fc-interview-push-top">
-                <div class="fc-titleAnswer">
+        <article class="interviewQuestion card">
+            <div class="fc-interviewQuestion-pad-top">
+                <div class="fc-interviewQuestion-title">
                     <h4 class="h4TitleInterviewQuestion colorGrayb9 fw900"><slot name="title" /></h4>
-                    <h5 class="h5InterviewQuestionDate colorGray64 fw300"><slot name="date" /></h5>
+                    <h5 class="h5DateInterviewQuestion colorGray64 fw300"><slot name="date" /></h5>
                 </div>
                 <hr>
                 <div class="fc-pLesson">
@@ -145,17 +123,19 @@
                 <hr>
             </div>
             <div class="fc-interviewQuestionTags">
-                <!-- <div class="tagInterviewQuestion colorGray42 fw500">Front End Development</div> -->
                 <slot name="questionCategories"></slot>
             </div>
-            <div class="fc-interview-push-bot">
+            <div class="fc-interviewQuestion-pad-bot">
                 <hr>
-                <!-- <div class="fc-replies open"> -->
-                <div class="fc-replies">
-                    <!-- <h3 class="h3VoteCount colorGreen fw900">4 Replies</h3> -->
+                <!-- turn this on to see answers - #1 of 2 -->
+                <div class="fc-replies open">
+                <!-- turn this on to NOT see answers - #1 of 2 -->
+                <!-- <div class="fc-replies"> -->
                     <h3 class="h3VoteCount colorGreen fw900"><slot name="questionAnswersCount" /></h3>
-                    <!-- <div class="answers" style="display: block;"> -->
-                        <div class="answers">
+                        <!-- turn this on to see answers #2 of 2 -->
+                        <div class="answers" style="display: block;">
+                        <!-- turn this on to NOT see answers #2 of 2 -->
+                        <!-- <div class="answers"> -->
                             <slot name="questionAnswers"></slot>
                         </div>
                         <button class="btn btnFill fw500" type="submit">Answer Question</button>
@@ -164,11 +144,13 @@
         </article>
     </div>
 </template>
-
+<!-- END - template for question card -->
+<!-- START - template for question card categories -->
 <template id="tempIdInterviewQuestionCategory">
     <div class="tagInterviewQuestion colorGray42 fw500"><slot name="category"></slot></div>
 </template>
-
+<!-- END - template for question card categories -->
+<!-- START - template for question answers -->
 <template id="tempIdInterviewQuestionAnswer">
     <div class="fc-answers">
         <div class="fc-author">
@@ -179,3 +161,4 @@
         <hr>
     </div>
 </template>
+<!-- END - template for question answers -->

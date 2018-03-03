@@ -21,7 +21,19 @@
     padding: 6rem 0;
 }
 
-.sortBar.content, .filterBar.content{
+/* ======================================================= */
+/*                 interviewPrepHTML Modal                 */
+/* ======================================================= */
+#interviewPrepHTML .fc-modalForm {
+    padding: 3.5rem 0 4rem 0;
+}
+
+#interviewPrepHTML .fc-modalForm h4 {
+    margin-bottom: .9rem;
+}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+#interviewPrepHTML .sortBar.content, .filterBar.content{
     padding: 1rem;
     border: 1px solid #979797;
     
@@ -29,70 +41,66 @@
     letter-spacing: 1.4px;
 }
 
-.interview.card {
+/* ======================================================= */
+/*           interviewPrepHTML Question Card               */
+/* ======================================================= */
+
+
+#interviewPrepHTML .interviewQuestion.card {
     padding: 0;
 }
 
-.fc-interview-push-top {
+#interviewPrepHTML .fc-interviewQuestion-pad-top {
     padding: 3rem 3rem 0 3rem;
 }
 
-.fc-interview-push-bot {
-    padding: 0 3rem 3rem 3rem;
-}
-
-/* .fc-interview-push-top .fc-titleAnswer .h4TitleInterviewQuestion {
-    
-} */
-
-
-
-.fc-titleAnswer {
+#interviewPrepHTML .fc-interviewQuestion-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
     align-items: center;
 }
 
-.h5InterviewQuestionDate {
-    font-size: 2rem;
-    letter-spacing: 1.7px;
-    /* margin-bottom: 1.5rem; */
-}
-
-.fc-form h4 {
-    margin-bottom: .9rem;
-}
-
-.h4TitleInterviewQuestion {
+#interviewPrepHTML .h4TitleInterviewQuestion {
     font-size: 2.4rem;
     letter-spacing: 1.7px;
 }
 
-#interviewPrepHTML .fc-form {
-    padding: 3.5rem 0 4rem 0;
+#interviewPrepHTML .h5DateInterviewQuestion {
+    font-size: 2rem;
+    letter-spacing: 1.7px;
 }
 
-.fc-textAreaModalAnswer {
+#interviewPrepHTML .fc-pLesson {
+    margin: 1.9rem .7rem;
+    max-height: 20rem;
+    /* min-height: 8rem; */
+    overflow: auto;
+}
+
+#interviewPrepHTML .fc-pLesson p {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+#interviewPrepHTML .fc-textAreaModalAnswer {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     margin: 2.4rem auto 0 auto;
     justify-content: center;
-    /* margin: 0 auto; */
 }
 
-.fc-textAreaModalAnswer .labelSm {
+#interviewPrepHTML .fc-textAreaModalAnswer .labelSm {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     
     margin: 0 0 1.1rem 0;
 }
 
-.fc-textAreaModalAnswer textarea  {
-    /* margin: 0 0 0 2.5rem; */
+#interviewPrepHTML .fc-textAreaModalAnswer textarea  {
     padding: 1rem 1.5rem;
     text-align: left;
     
@@ -100,16 +108,20 @@
     letter-spacing: 2.2px;
 }
 
-.fc-textAreaModalAnswer textarea {
+#interviewPrepHTML .fc-textAreaModalAnswer textarea {
     resize: none;
 }
 
-.fc-textAreaModalAnswer textarea::placeholder {
+#interviewPrepHTML .fc-textAreaModalAnswer textarea::placeholder {
     color: #666666;
     font-weight: 100;
 }
 
-.fc-replies {
+#interviewPrepHTML .fc-interviewQuestion-pad-bot {
+    padding: 0 3rem 3rem 3rem;
+}
+
+#interviewPrepHTML .fc-replies {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -119,7 +131,7 @@
     /* display: none; */
 }
 
-.fc-replies.open {
+#interviewPrepHTML .fc-replies.open {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -128,46 +140,46 @@
     margin: 1.9rem 0 0 0;
 }
 
-.fc-replies .answers {
+#interviewPrepHTML .fc-replies .answers {
     display: none;
 }
 
-.fc-replies.open .fc-answers {
+#interviewPrepHTML .fc-replies.open .fc-answers {
     display: flex;
     flex-direction: column;
 }
 
-.fc-replies.open .fc-answers .fc-author {
+#interviewPrepHTML .fc-replies.open .fc-answers .fc-author {
     display: flex;
     flex-direction: row;
 }
 
-.fc-replies.open .fc-answers {
+#interviewPrepHTML .fc-replies.open .fc-answers {
     margin: 1.9rem 0;
 }
 
-.fc-replies.open .fc-answers:first-of-type {
+#interviewPrepHTML .fc-replies.open .fc-answers:first-of-type {
     margin: 1.9rem 0 0 0;
 }
 
-.fc-replies.open .fc-answers h5, .fc-replies.open .fc-answers p {
+#interviewPrepHTML .fc-replies.open .fc-answers h5, .fc-replies.open .fc-answers p {
     font-size: 1.6rem;
     letter-spacing: 1px;
 }
 
-.fc-replies.open .fc-answers .fc-author .h5TitleDate {
+#interviewPrepHTML .fc-replies.open .fc-answers .fc-author .h5TitleDate {
     margin: 0 0 0 .5rem;
 } 
 
-.fc-replies.open .fc-answers p {
+#interviewPrepHTML .fc-replies.open .fc-answers p {
     margin: 1rem 0 2rem 0;
 }
 
-.fc-replies.open > button {
+#interviewPrepHTML .fc-replies.open > button {
     align-self: flex-end;
 }
 
-.fc-replies button {
+#interviewPrepHTML .fc-replies button {
     padding: 2rem 0;
     width: 24rem;
     font-size: 2rem;
@@ -175,18 +187,16 @@
     margin: 0 0 0 0;
 }
 
-.fc-interviewQuestionTags {
+#interviewPrepHTML .fc-interviewQuestionTags {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
     justify-content: flex-start;
     
     margin: 1.5rem 2rem;
-    /* padding: 0 1rem; */
 }
 
-.tagInterviewQuestion {
+#interviewPrepHTML .tagInterviewQuestion {
     font-size: 2rem;
     letter-spacing: 1.2px;
     
@@ -194,9 +204,4 @@
     border: 1px solid #00b371;
     border-radius: 2.3rem;
     margin: .5rem .5rem .5rem .5rem;
-    /* margin-left: 1.5rem; */
 }
-
-/* .tagInterviewQuestion:first-of-type{
-    margin-left: 0;
-} */
