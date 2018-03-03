@@ -1,0 +1,211 @@
+* {
+    /* test for connection */
+    /* color: red !important;  */
+}
+
+@media only screen and (max-width: 425px) and (min-width: 320px) {
+    .hamburger {
+        font-size: 4rem;
+        display: inline-block;
+        left: 3rem;
+        top: 2rem;
+        position: absolute;
+    }
+    * {
+        font-size: 7px;
+    }
+    .sidebar {
+        width: 35%;
+        top: 10%;
+        display: none;
+    }
+    #mainWindow {
+        margin-left: 0;
+    }
+    .home {
+        display: block;
+    }
+    .headerOptionalNav {
+        display: none;
+    }
+}
+
+/* Phone L 426px to 479 */
+
+@media only screen and (max-width: 480px) and (min-width: 426px) {
+    * {
+        font-size: 7.5px;
+    }
+    .hamburger {
+        font-size: 4rem;
+        display: inline-block;
+        left: 3rem;
+        top: 2rem;
+        position: absolute;
+    }
+    .sidebar {
+        width: 35%;
+        top: 10%;
+        display: none;
+    }
+    #mainWindow {
+        margin-left: 0;
+    }
+    .home {
+        display: block;
+    }
+    .headerOptionalNav {
+        display: none;
+    }
+}
+
+/* responsive grid after 480px */
+
+@media only screen and (min-width: 480px) {
+    * {
+        font-size: 8px;
+    }
+    .cols-4>.cell {
+        flex: 0 0 calc(50% - 1em);
+    }
+    .cols-6>.cell {
+        flex: 0 0 calc(33.3333% - 1em);
+    }
+    .cols-12>.cell {
+        flex: 0 0 calc(16.6666% - 1em);
+    }
+    .twothirds>.cell:first-of-type {
+        flex: 0 0 66.67%;
+    }
+    .half>.cell:first-of-type {
+        /* flex: 0 0 50%; */
+        flex: 0 0 100%;
+    }
+    .sixth>.cell:first-of-type {
+        flex: 0 0 30%;
+    }
+    .quarter>.cell:first-of-type {
+        flex: 0 0 50%;
+    }
+    .third>.cell:first-of-type {
+        flex: 0 0 100%;
+    }
+    /* .content>.logo>img {
+        height: 5.25rem;
+        width: auto;
+    } */
+}
+
+/* Tablet  480 to 768 */
+
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+    * {
+        /* font-size: 8.5px; */
+    }
+
+    .hamburger {
+        font-size: 4rem;
+        display: inline-block;
+        left: 3rem;
+        top: 2rem;
+        position: absolute
+    }
+    .sidebar {
+        width: 35%;
+        top: 10%;
+        display: none;
+        height: 85%;
+    }
+    .fc-devInfo {
+        margin: 3rem 0;
+    }
+    .home {
+        display: block;
+    }
+    .headerOptionalNav {
+        display: none;
+    }
+    .mobileNav {
+        display: block;
+    }
+    .desktopNav {
+        display: none;
+    }
+    #mainWindow{
+        margin-left: 0;
+        margin-bottom: 40px;
+        margin-top: 112px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    
+}
+
+
+/* responsive grid after 768px */
+@media only screen and (min-width: 768px) {
+    * {
+        font-size: 8.5px;
+    }
+    .cols-2>.cell,
+    .cols-3>.cell,
+    .cols-4>.cell,
+    .cols-6>.cell,
+    .cols-12>.cell {
+        flex: 1;
+    }
+    .twothirds>.cell:first-of-type {
+        flex: 0 0 66.67%;
+    }
+    .half>.cell:first-of-type {
+        flex: 0 0 50%;
+    }
+    .sixth>.cell:first-of-type {
+        flex: 0 0 16.6666%;
+    }
+    .third>.cell:first-of-type {
+        flex: 0 0 33.3333%;
+    }
+    .quarter>.cell:first-of-type {
+        flex: 0 0 25%;
+    }
+    .gutters.nested .cell:first-of-type .content {
+        margin-right: 0;
+    }
+    /* .content>.logo>img {
+        height: 7rem;
+        width: auto;
+    }
+    .content>.logo {
+        text-align: left;
+    } */
+    .content>nav {
+        text-align: right;
+    }
+    .content .searchBar {
+        text-align: right;
+    }
+}
+
+/* Laptop S 768 to 1024 */
+
+@media only screen and (max-width: 1024px) and (min-width: 769px) {
+    
+}
+
+/* Laptop M 1440 */
+
+@media only screen and (max-width: 1440px) and (min-width: 1025px) {
+    
+}
+
+/* All others */
+
+/* @media (min-width: 1440px) { */
+
+@media only screen and (min-width: 1440px) {
+    * {
+        font-size: 10px;
+    }
+}
