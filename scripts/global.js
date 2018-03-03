@@ -1,3 +1,27 @@
+// userSchema = {
+//     username: - String - uuid for each user due to cognito
+//     picture: - String - upload .jpg or .png under 300kb to our S3 save url that comes back, (we could accept gravitar since we can control the url and just ask for gravitar username)
+//     name: 'Porg Dev1'
+//     created - - Date String - JS date string new Date().toString()
+//     birthday: - Date String - JS date string Date().toString()
+//     city: - String - city of residence
+//     state: - String - shorthand state e.g. WA
+//     title: - String -  Title of dev
+//     employer: - String - Free input
+//     github: - String - github username (we construct url ourselves)
+//     codepen: - String - codepen username (we construct url ourselves)
+//     linkedin: - String - linkedin username (we construct url ourselves)
+//     website: - String - free input website ... dangerous field, might want to not link it have it just be text
+//     resume: - String<S3URL> - Base64 the file and send it up to our S3 get the link from S3 back (validate only take certain extensions .doc .docx to S3)
+//     bio: - String - users bio max 500 words ''
+//     experience: - Number - Years experience (?)
+//     rank: Number - Rank in RT (white belt, green belt, black)etc... for mentor/project pairing,
+//     skillsProfessional: Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
+//     skillsSoftware:  Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
+//     skillsLanguages: Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
+//     lessonsAttending:  Array<Strings> - array of ids of lessons dev is planning to attend
+// }
+
 const allUsers = [
     {
         _id: '0000000001',
@@ -240,6 +264,15 @@ function deleteItemFromArray(index){
 const currentUser = allUsers[getRandomNumber(0, allUsers.length)];
 localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
+// lessonSchema = {
+//   id: - String - Random a-z0-9 uuid,
+//   title: - String - Title of lesson,
+//   date: - Date String - new Date().toString(),
+//   description: - String - A description of the lesson,
+//   lessonTaughtBy: - Array<String> - usernames of the devs teaching,
+//   lessonAttendees: - Array<String> - usernames of the devs attending,
+//   rank: Array<String> - usernames of the devs who have voted the lesson (for an optional sort) we display as length of the array or icons of devs,
+// }
 // database call for Lessons
 const allLessons = [
     {
@@ -300,6 +333,16 @@ const allLessons = [
 ]
 localStorage.setItem('allLessons', JSON.stringify(allLessons));
 
+// interviewQuestionSchema = {
+//     id: String - some random string uid',
+//     title: String - title of the question
+//     submitted: String - JS new Date().toString() "Sun Feb 25 2018 23:25:08 GMT-0800 (PST)",
+//     description: String(Max 1000 characters) - The question,
+//     categories: Array<Strings> - The question category names related to the question,
+//     rank: Array<String> - usernames of the devs who have upvoted the question (for an optional sort) we display as length of the array or icons of devs,
+//     author: String - username of the user who created
+// };
+
 // interview questions
 const allInterviewQuestions = [
     {
@@ -341,6 +384,15 @@ const allInterviewQuestions = [
 ]
 localStorage.setItem('allInterviewQuestions', JSON.stringify(allInterviewQuestions));
 
+// interviewAnswerSchema = {
+//     id: String - some random string uid',
+//     title: String - title of the question
+//     submitted: String - JS new Date().toString() "Sun Feb 25 2018 23:25:08 GMT-0800 (PST)",
+//     description: String - The question,
+//     rank: Number - devs who have upvoted the answer (for an optional sort),
+//     questionId: String - the id of the question the answer is associated with
+//     author: String - username of the user who created
+// };
 const allAnswersToQuestions = [
     {
         _id: 'ia00000001',
