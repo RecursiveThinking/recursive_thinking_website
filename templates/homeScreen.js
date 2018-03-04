@@ -21,14 +21,17 @@ export const homeScreen = () => {
         };
 
         btnSignUpHead.onclick = function () {
+            utils.showModal(modalContSignUp);
             modalContSignUp.style.display = "block";
         };
 
         btnLoginHead.onclick = function () {
+            utils.showModal(modalContLogin);
             modalContLogin.style.display = "block";
         };
 
         btnSignUpBody.onclick = function () {
+            utils.showModal(modalContSignUp);
             modalContSignUp.style.display = "block";
         };
 

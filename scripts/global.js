@@ -678,6 +678,15 @@ const setTitle = () => {
 };
 
 
+const showModal = (modalToShow) => {
+  Array.from(document.getElementsByClassName('modal'), (modal) => {
+    modal.style.display = "none";
+  });
+
+  modalToShow.style.display = "block";
+}
+
+
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
 const getCurrentUser = () => JSON.parse(localStorage.getItem('currentUser'));
@@ -719,5 +728,6 @@ export const utils = {
     deleteItemFromArray,
     checkFullScreen,
     navigateToPage,
-    setTitle
+    setTitle,
+    showModal
 };
