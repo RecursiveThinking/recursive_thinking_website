@@ -20,33 +20,33 @@ header .input.search {
     margin-left: 0;
 }
 
-.content>.logo {
+header .content > .logo {
     text-align: center;
 }
 
-.content>.logo>img {
+header .content > .logo > img {
     height: 6.5rem;
     width: auto;
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px){
-    header{
+    header {
         height: 10%;
     }
 }
 
 @media only screen and (min-width: 480px){
-    .content>.logo>img {
+    header .content > .logo > img {
         height: 6.5rem;
         width: auto;
     }
 }
 
 @media only screen and (min-width: 768px){
-    .content>.logo>img {
+    header .content > .logo > img {
         width: auto;
     }
-    .content>.logo {
+    header .content > .logo {
         text-align: left;
     }
 }
