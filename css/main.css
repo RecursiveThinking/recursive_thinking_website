@@ -30,7 +30,7 @@ body {
     margin-bottom: 40px;
 }
 
-.content>nav {
+.content > nav {
     text-align: center;
 }
 
@@ -88,6 +88,47 @@ button.btn.btnFill.greenNavButton {
 
 .btn {
     cursor: pointer;
+}
+
+.btn.btnFill, 
+.btn.btnOutline:hover {
+    border: 1px solid #00b371;
+    background-color: #00b371;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+.btn.btnOutline, 
+.btn.btnFill:hover {
+    border: 1px solid #00b371;
+    background-color: #ffffff;
+    border-radius: 10px;
+    color: #00b371;
+}
+
+.btn.btnFill.signUp {
+    width: 40rem;
+    padding: 1rem 0;
+    margin-left: 0px;
+}
+
+form button {
+    margin: 3rem auto 0 auto;
+    padding: 2rem 16rem;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+}
+
+.h2Title {
+    font-size: 5rem;
+    letter-spacing: 3px;
+    margin: 1.5rem 0 .75rem 0;
+}
+
+.h4Title {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    margin: .25rem 0;
 }
 
 .input {
@@ -203,6 +244,73 @@ button.btn.btnFill.greenNavButton {
     margin: .9rem 0 0 0;
     padding-left: .7rem;
 }
+
+/* ============================================ */
+/*       Modal CSS         */
+/* ============================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .4);
+    /* size */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* if over scroll */
+    overflow: auto;
+}
+
+.modalContent {
+    /* padding */
+    margin: 15rem auto 0 auto;
+    padding: 4.2rem 5rem;
+    width: 72.5%;
+}
+
+.fc-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h2ModalTitle {
+    font-size: 4rem;
+    letter-spacing: 2.4px;
+    margin: 0 0 3.5rem 0;
+}
+
+.modalHR {
+    border-top: 0;
+    border-bottom: 1px solid #c6c6c6;
+    /* margin: 1rem 10%; */
+    width: 100%;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-error {
+    font-size: 1.6rem;
+    color: darkred;
+}
+
+.input-error-container {
+    margin-left: 37%;
+}
+
+.modalButtons {
+    font-size: 3.6rem;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
 
 /* ============================================ */
 /*       Modal CSS for VFL and Interview        */
