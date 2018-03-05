@@ -1,28 +1,13 @@
 *{
     box-sizing: border-box;
-    /* font-family: 'Nunito Sans', sans-serif; */
-    /* font-size: 10px; */
 }
-
-/* body {
-    max-width: 1920px;
-    margin: 0 auto;
-} */
-
-
 
 header .cell .content {
     margin-bottom: 0;
 }
 
-header {
-    /* need to fix this */
-
-    /* z-index: 1; */
-    /* position: fixed; */
-}
-
-.navButtons button, .btn.btnFill.signUp, .btn.btnFill.signUp {
+.navButtons button,  
+.btn.btnFill.signUp {
     padding: 1rem 2rem;
     margin-left: 20px;
     /* border-radius: 10px; */
@@ -31,63 +16,15 @@ header {
     letter-spacing: 1.2px;
 }
 
-.navButtons button:first-of-type{
+#homePage .navButtons button:first-of-type{
     margin-left: 0;
 }
 
-.btn.btnFill, .btn.btnOutline:hover {
-    border: 1px solid #00b371;
-    background-color: #00b371;
-    border-radius: 10px;
-    color: #ffffff;
-}
-
-.btn.btnFill.signUp {
-    width: 40rem;
-    padding: 1rem 0;
-    margin-left: 0px;
-}
-
-.btnMarginTop {
+#homePage .btnMarginTop {
     margin-top: 3.5rem;
 }
 
-.btn.btnOutline, .btn.btnFill:hover {
-    border: 1px solid #00b371;
-    background-color: #ffffff;
-    border-radius: 10px;
-    color: #00b371;
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, .4);
-    /* size */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* if over scroll */
-    overflow: auto;
-}
-
-.modalContent {
-    /* padding */
-    margin: 15rem auto 0 auto;
-    padding: 4.2rem 5rem;
-    width: 72.5%;
-}
-
-.fc-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.fc-alert {
+#homePage .fc-alert {
     color: #721c25;
     background-color: #f7d7da;
     display: none;
@@ -96,73 +33,37 @@ header {
     padding: 2rem 1rem;
 }
 
-.h2ModalTitle {
-    font-size: 4rem;
-    letter-spacing: 2.4px;
-    margin: 0 0 3.5rem 0;
-}
+/* ============================================ */
+/*             Modal Login/Signup               */
+/* ============================================ */
 
-.modalHR {
-    border-top: 0;
-    border-bottom: 1px solid #c6c6c6;
-    /* margin: 1rem 10%; */
-    width: 100%;
-}
-
-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.input-error {
-    font-size: 1.6rem;
-    color: darkred;
-}
-
-.input-error-container {
-    margin-left: 37%;
-}
-
-.modalButtons {
-    font-size: 3.6rem;
-    margin-top: 1rem;
-    padding: 1rem;
-}
-
-.fc-form {
+#homePage .fc-form {
     padding: 7% 0;
     width: 100%;
-    
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
 }
 
-.fc-input {
+#homePage .fc-input {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 5% auto 0 auto;
     width: 100%;
     justify-content: center;
-    /* margin: 0 auto; */
 }
+/* margin: 0 auto; */
 
-.fc-input:first-of-type {
+#homePage .fc-input:first-of-type {
     margin: 0 auto;
 }
 
-.fc-input label {
+#homePage .fc-input label {
     width: 30%;
     text-align: right;
     font-size: 3.6rem;
     letter-spacing: 2.2px;
 }
 
-.fc-input input {
+#homePage .fc-input input {
     width: 60%;
     margin: 0 0 0 2.5rem;
     padding: 0 0 0 1.5rem;
@@ -172,44 +73,44 @@ form {
     letter-spacing: 2.2px;
 }
 
-.fc-input input::placeholder {
+#homePage .fc-input input::placeholder {
     color: #666666;
     font-weight: 100;
 }
 
-.fc-input input[type=text]:focus, textarea:focus {
+/* ++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* #homePage .fc-input input[type=text]:focus, textarea:focus {
     box-shadow: 0 0 .25rem .025rem #00b371;
     border: 1px solid #00b371;
-    /* outline-offset: 0; */
     outline: none;
-}
+} */
 
-form button {
+/* #homePage form button {
     margin: 3rem auto 0 auto;
     padding: 2rem 16rem;
     font-size: 2rem;
     letter-spacing: 1.2px;
-    /* width: 40%; */
-}
+} */
 
-.content > .imgAvatarMed {
+#homePage .content > .imgAvatarMed {
     width: 50%;
     border-radius: 50%;
 }
 
-.content > .imgAvatarLarge {
+#homePage .content > .imgAvatarLarge {
     width: 75%;
     border-radius: 50%;
 }
 
-.content:after {
+#homePage .content:after {
     content: "";
     display: block;
     margin-top: 0.8em;
     height: 1px;
 }
 
-.bannerImage {
+#homePage .bannerImage {
     background-image: url("../public/images/banner.jpg");
     height: 100vh;
     background-size: cover;
@@ -218,7 +119,7 @@ form button {
     z-index: -1; 
 }
 
-.bannerImageTextBox h1 {
+#homePage .bannerImageTextBox h1 {
     font-family: 'Abel', sans-serif;
     color: white;
     position: absolute;
@@ -231,12 +132,12 @@ form button {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)
 }
 
-.section {
+#homePage .section {
     padding: 150px 0;
     background-color: #ffffff;
 }
 
-.section h4 {
+#homePage .section h4 {
     font-weight: 300;
     font-size: 2.4rem;
     letter-spacing: 1.4px;
@@ -244,66 +145,55 @@ form button {
     margin: .25rem 0;
 }
 
-.h4Title {
-    font-size: 2.4rem;
-    letter-spacing: 1.4px;
-    margin: .25rem 0;
-}
-
-.section h2 {
+#homePage .section h2 {
     font-size: 5rem;
     font-weight: 300;
     letter-spacing: 3px;
     margin: .75rem 0 .75rem 0;
 }
 
-.h2Title {
-    font-size: 5rem;
-    letter-spacing: 3px;
-    margin: 1.5rem 0 .75rem 0;
-}
-
-.section p {
+#homePage .section p {
     width: 75%;
     margin: auto auto;
 }
 
-.section p, .tile.people p {
+#homePage .section p,
+#homePage .tile.people p {
     font-size: 2.4rem;
     font-weight: 300;
     letter-spacing: 1.4px;
     color: #000000;
 }
 
-.section p span {
+#homePage .section p span {
     font-size: 2.4rem;
     font-weight: bolder;
     letter-spacing: 2.8px;
     color: #000000;
 }
 
-.section.description {
+#homePage .section.description {
     background-color: #f6f6f6;
 }
 
-.section.people h3 {
+#homePage .section.people h3 {
     font-size: 2.52rem;
     font-weight: 500;
     letter-spacing: 2.2px;
 }
 
-.section.famousQuote {
+#homePage .section.famousQuote {
     background-color: #2d3134;
 }
 
-.section.famousQuote p {
+#homePage .section.famousQuote p {
     color: #ffffff;
     font-weight: 300;
     font-size: 2rem;
     letter-spacing: 2.2px;
 }
 
-.section.famousQuote .quoteAlignment {
+#homePage .section.famousQuote .quoteAlignment {
     text-align: center;
 }
 
@@ -329,7 +219,8 @@ footer .content:after {
 /* Phone S Base Case to 425 */
 @media only screen and (max-width: 425px) and (min-width: 320px) {
 
-    .navButtons button, .btn.btnFill.signUp {
+    #homePage .navButtons button,
+    #homePage .btn.btnFill.signUp {
         padding: .75rem 1.75rem;
     }
 }
@@ -343,14 +234,14 @@ footer .content:after {
     /* footer .content:nth-of-type(2){
         text-align: right;
     } */
-    .section.famousQuote p {
-        /* margin-top: 75px; */
+    #homePage .section.famousQuote p {
         padding: 0;
     }
 }
 /* for globals after 480 */
 @media only screen and (min-width: 480px){
-    .navButtons button, .btn.btnFill.signUp {
+    #homePage .navButtons button,
+    #homePage .btn.btnFill.signUp {
         padding: 1rem 2.5rem;
     }
 }
@@ -361,10 +252,11 @@ footer .content:after {
 }
 /* for globals after 768 */
 @media only screen and (min-width: 768px){
-    .navButtons button, .btn.btnFill.signUp {
+    #homePage .navButtons button, 
+    #homePage .btn.btnFill.signUp {
         padding: 1rem 4rem;
     }
-    .section.famousQuote .quoteAlignment {
+    #homePage .section.famousQuote .quoteAlignment {
         text-align: left;
     }
 }
@@ -378,7 +270,8 @@ footer .content:after {
 }
 /* All others */
 @media only screen and (min-width: 1440px) {
-    .navButtons button, .btn.btnFill.signUp {
+    #homePage .navButtons button,
+    #homePage .btn.btnFill.signUp {
         padding: 1rem 6rem;
     }
 }
