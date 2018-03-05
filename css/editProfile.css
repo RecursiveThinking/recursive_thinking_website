@@ -12,22 +12,22 @@
     padding: 3rem 3rem 3rem 3rem;
 }
 
-.changeProfile.card {
+#editProfileHTML .changeProfile.card {
     background-color: #00b371;
     color: #ffffff;
     border: none;
 }
 
-#editProfileHTML .changeProfile.card {
-    display: none;
-}
-
-.cell > .changeProfile {
+#editProfileHTML .cell > .changeProfile {
     display: flex;
     padding: 6rem 0;
 }
 
-.fc-changeProfileText {
+#editProfileHTML .cell > .changeProfile.card {
+    display: none;
+}
+
+#editProfileHTML .fc-changeProfileText {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -37,13 +37,13 @@
     text-align: center;
 }
 
-.btn.btnFill.signUp.saveProfile {
+#editProfileHTML .btn.btnFill.signUp.saveProfile {
     padding: 1rem 6rem;
     border: 1px solid #ffffff;
     margin-left: 11rem;
 }
 
-.h2TitleChange {
+#editProfileHTML .h2TitleChange {
     font-size: 3rem;
     letter-spacing: 1.8px;
 }
@@ -75,24 +75,24 @@
     text-align: center;
 }
 
-.fc-infoCont1 {
+#editProfileHTML .fc-infoCont1 {
     margin: 0 0 7rem 0;
 }
 
-.fc-infoCont2 {
+#editProfileHTML .fc-infoCont2 {
     margin: 0 0 11.8rem 0;
 }
 
-.fc-infoCont3 {
+#editProfileHTML .fc-infoCont3 {
     margin: 0 0 8rem 0;
 }
 
-.fc-form-profile {
+#editProfileHTML .fc-form-profile {
     padding: 3.75rem 0;
     width: 100%;
 }
 
-.fc-input-profile {
+#editProfileHTML .fc-input-profile {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -103,159 +103,126 @@
     /* margin: 0 auto; */
 }
 
-.fc-input-profile:last-of-type {
+#editProfileHTML .fc-input-profile:last-of-type {
     margin: 0 auto;
 }
 
-.fc-input-profile label {
+#editProfileHTML .fc-input-profile label {
     width: 23%;
     text-align: right;
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 }
 
-.fc-input-profile input {
+#editProfileHTML .fc-input-profile input {
     width: 67%;
     margin: 0 0 0 2.5rem;
 }
 
-.fc-about .fc-input-about .fc-right input {
+#editProfileHTML .fc-about .fc-input-about .fc-right input {
     width: 100%;
 }
 
-.fc-input-profile input, 
-.fc-about .fc-input-about .fc-right input,
-.fc-skillCont .fc-form-skills .fc-form-input input {
+#editProfileHTML .fc-input-profile input, 
+#editProfileHTML .fc-about .fc-input-about .fc-right input,
+#editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input {
     padding: 1rem 0 1rem 1.5rem;
     text-align: left;
 
     font-size: 1.8rem;
     letter-spacing: 1.1px;
-    border: 1px solid #979797
 }
 
-.fc-input-profile input::placeholder {
+#editProfileHTML .fc-input-profile input::placeholder {
     color: #666666;
     font-weight: 100;
 }
 
-.fc-input-profile input[type=email]:focus,
-.fc-input-profile input[type=number]:focus,
-.fc-input-profile input[type=search]:focus, 
-.fc-input-profile input[type=text]:focus,
-.fc-input-profile input[type=url]:focus,
-.fc-about .fc-input-about .fc-right input[type=number]:focus,
-.fc-skillCont .fc-form-skills .fc-form-input input[type=search]:focus,
-textarea:focus {
-    box-shadow: 0 0 .125rem .025rem #00b371;
-    border: 1px solid #00b371;
-    /* outline-offset: 0; */
-    outline: none;
-}
-
-.fc-form-about {
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; */
-
+#editProfileHTML .fc-form-about {
     width: 100%;
 }
 
-.fc-form-about .grid .cell {
+#editProfileHTML .fc-form-about .grid .cell {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
 }
 
-.fc-about {
+#editProfileHTML .fc-about {
     display: flex;
-    /* flex-direction: column; */
     flex-wrap: wrap;
-    /* justify-content: center; */
     align-content: center;
-    /* align-items: center; */
     height: auto;
     width: 100%;
 }
 
-.fc-about .fc-input-about {
+#editProfileHTML .fc-about .fc-input-about {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* align-items: flex-end; */
-    /* align-content: flex-end; */
-    /* align-content: flex-end; */
     align-items: center;
-    /* text-align: right; */
     width: 100%;
 }
 
-/* .fc-about .fc-input-about .fc-left label {
-
-} */
-
-.fc-about .fc-input-about:first-of-type{
+#editProfileHTML .fc-about .fc-input-about:first-of-type{
     margin-bottom: 4rem;
 }
 
-.fc-about .fc-input-about .fc-right {
+#editProfileHTML .fc-about .fc-input-about .fc-right {
     display: flex;
     align-content: flex-start;
     align-items: center;
     text-align: center;
 }
 
-.fc-about .fc-input-about .fc-left {
+#editProfileHTML .fc-about .fc-input-about .fc-left {
     width: 65%;
     text-align: right;
     margin: 0 3rem 0 0;
 }
 
-.fc-about .fc-input-about .fc-right {
+#editProfileHTML .fc-about .fc-input-about .fc-right {
     width: 35%;
 }
 
-.fc-about .fc-input-about .fc-right label {
+#editProfileHTML .fc-about .fc-input-about .fc-right label {
     margin: 0 0 0 1rem;
 }
 
-.fc-about .fc-input-about .fc-right label:first-of-type {
+#editProfileHTML .fc-about .fc-input-about .fc-right label:first-of-type {
     margin: 0 1rem 0 1rem;
 }
 
-.fc-about .fc-input-about .fc-right input {
+#editProfileHTML .fc-about .fc-input-about .fc-right input {
     width: 100%;
 }
 
-.fc-about .fc-input-about .fc-right .inputShort {
+#editProfileHTML .fc-about .fc-input-about .fc-right .inputShort {
     width: 40%;
 }
 
-.fc-form-about, .fc-form-skills {
+#editProfileHTML .fc-form-about, .fc-form-skills {
     padding: 2.4rem 0 7.4rem 0;
 }
 
-.fc-form-skills.noBotPad {
+#editProfileHTML .fc-form-skills.noBotPad {
     /* background-color: red; */
     padding: 2.4rem 0 0 0;
 }
 
-.fc-form-input label {
+#editProfileHTML .fc-form-input label {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     margin: 0 0 1.8rem 0;
 }
 
-.fc-form-about label {
+#editProfileHTML .fc-form-about label {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     text-align: right;
 }
 
-.fc-form-about textarea {
+#editProfileHTML .fc-form-about textarea {
     width: 100%;
     /* display: block; */
     resize: none;
@@ -268,7 +235,7 @@ textarea:focus {
     letter-spacing: 1.1px;
 }
 
-.fc-form-input {
+#editProfileHTML .fc-form-input {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -277,7 +244,7 @@ textarea:focus {
     margin: 0 0 2rem 0;
 }
 
-.fc-form-input input {
+#editProfileHTML .fc-form-input input {
     width: 80%;
 
     padding: 1rem 0 1rem 1.5rem;
@@ -287,9 +254,8 @@ textarea:focus {
     letter-spacing: 1.1px;
 }
 
-.fc-skillItemCont {
+#editProfileHTML .fc-skillItemCont {
     width: 100%;
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -297,7 +263,7 @@ textarea:focus {
     /* max-height: 100px; */
 }
 
-.fc-skillItemCont > .fc-skillItem {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -308,58 +274,50 @@ textarea:focus {
     margin: 0 0 2rem 0;
 }
 
-.fc-skillItemCont > .fc-skillItem > h5, .editProfile .profileTitle {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > h5, #editProfileHTML .editProfile .profileTitle {
     font-size: 2rem;
     letter-spacing: 1.2px;
 }
 
-.editProfile .profileTitle {
+#editProfileHTML .editProfile .profileTitle {
     text-align: center;
 }
 
-.fc-skillItemCont > .fc-skillItem > h5 {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > h5 {
     text-align: right;
     margin-right: 1.25rem;
 }
 
-.fc-skillItemCont > .fc-skillItem > .skillItemDash {
-    /* content: "|"; */
-
-    /* margin: -.25rem 1rem 0 1rem; */
-    /* padding: 0 0 2rem 0; */
-
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemDash {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 
 }
 
-.fc-skillItemCont > .fc-skillItem > .skillItemClose {
-
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemClose {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
-
     border-left: 2px solid #979797;
-    /* margin-left: 1rem; */
     padding-left: 1.25rem;
     margin: -.125rem 0 0 0;
 
     cursor: pointer;
 }
 
-#profile-picture {
+#editProfileHTML #profile-picture {
     /* background: #00b371; */
     /* color: white; */
     color: #424041;
     cursor: pointer;
 }
 
-#profile-picture>span {
+#editProfileHTML #profile-picture>span {
     font-size: 2rem;
     margin-right: 1.7rem;
     cursor: pointer;
 }
 
-#profile-picture:hover {
+#editProfileHTML #profile-picture:hover {
     /* background: white; */
     color: #00b371;
 }
