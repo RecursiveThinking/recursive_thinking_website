@@ -1,3 +1,4 @@
+import { utils } from '../scripts/global';
 import { templates, fill } from '../scripts/templater';
 
 export const getRecursiveDirectoryModel = () => {
@@ -10,7 +11,8 @@ export const getRecursiveDirectoryModel = () => {
             // name, title and location are slots where you can insert text (or HTML) or DOM Elements
             name: user.name,
             title: user.title,
-            location: user.location,
+            // location: user.location,
+            location: utils.getConcatenatedLocationString(user.city, user.state),
             // picture is attribute insertion (find slot="picture")
             picture: {
                 // insert these attributes into the element tagged as a slot

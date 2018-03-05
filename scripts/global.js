@@ -627,6 +627,7 @@ const getFormattedDate = (dateToFormat) => {
 //     }
 //     return createVoteString;
 // }
+
 const getCountString = (condString, array) => {
     let createCountString = '';
     let count;
@@ -777,6 +778,12 @@ const showModal = (modalToShow) => {
   modalToShow.style.display = "block";
 }
 
+const getConcatenatedLocationString = (city, state) => {
+    let concatString = `${city}, ${state}`;
+    // console.log(concatString);
+    return concatString;
+}
+
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
@@ -823,5 +830,6 @@ export const utils = {
     checkFullScreen,
     navigateToPage,
     setTitle,
-    showModal
+    showModal,
+    getConcatenatedLocationString
 };
