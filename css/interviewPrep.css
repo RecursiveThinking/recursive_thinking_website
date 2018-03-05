@@ -22,7 +22,7 @@
 }
 
 /* ======================================================= */
-/*                 interviewPrepHTML Modal                 */
+/*        interviewPrepHTML Submit Question Modal          */
 /* ======================================================= */
 #interviewPrepHTML .fc-modalForm {
     padding: 3.5rem 0 4rem 0;
@@ -85,6 +85,95 @@
     letter-spacing: 1px;
 }
 
+
+#interviewPrepHTML .fc-interviewQuestion-pad-bot {
+    padding: 0 3rem 3rem 3rem;
+}
+
+#interviewPrepHTML .fc-replies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.9rem 0 0 0;
+    /* display: none; */
+}
+
+#interviewPrepHTML .fc-replies.open {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 1.9rem 0 0 0;
+}
+
+#interviewPrepHTML .fc-replies .answers {
+    display: none;
+}
+
+#interviewPrepHTML .fc-replies.open .fc-answers {
+    display: flex;
+    flex-direction: column;
+    margin: 1.9em 0;
+}
+
+#interviewPrepHTML .fc-replies.open .fc-answers .fc-author {
+    display: flex;
+    flex-direction: row;
+}
+
+#interviewPrepHTML .fc-replies.open .fc-answers h5, .fc-replies.open .fc-answers p {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+#interviewPrepHTML .fc-replies.open .fc-answers .fc-author .h5TitleDate {
+    margin: 0 0 0 .5rem;
+} 
+
+#interviewPrepHTML .fc-replies.open .fc-answers p {
+    margin: 1rem 0 2rem 0;
+}
+
+#interviewPrepHTML .fc-replies.open > button {
+    align-self: flex-end;
+    /* offset from line */
+    /* margin: 1.9rem 0 0 0; */
+}
+
+#interviewPrepHTML .fc-replies button {
+    padding: 2rem 0;
+    width: 24rem;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    margin: 0 0 0 0;
+}
+
+#interviewPrepHTML .fc-interviewQuestionTags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+    margin: 1.5rem 2.5rem;
+}
+
+#interviewPrepHTML .tagInterviewQuestion {
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    padding: 1rem 2rem;
+    border: 1px solid #00b371;
+    border-radius: 2.3rem;
+    margin: .5rem .5rem .5rem .5rem;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* ======================================================= */
+/*           interviewPrepHTML Answer Modal                */
+/* ======================================================= */
 #interviewPrepHTML .fc-textAreaModalAnswer {
     display: flex;
     flex-direction: column;
@@ -117,91 +206,4 @@
     font-weight: 100;
 }
 
-#interviewPrepHTML .fc-interviewQuestion-pad-bot {
-    padding: 0 3rem 3rem 3rem;
-}
-
-#interviewPrepHTML .fc-replies {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 1.9rem 0 0 0;
-    /* display: none; */
-}
-
-#interviewPrepHTML .fc-replies.open {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 1.9rem 0 0 0;
-}
-
-#interviewPrepHTML .fc-replies .answers {
-    display: none;
-}
-
-#interviewPrepHTML .fc-replies.open .fc-answers {
-    display: flex;
-    flex-direction: column;
-}
-
-#interviewPrepHTML .fc-replies.open .fc-answers .fc-author {
-    display: flex;
-    flex-direction: row;
-}
-
-#interviewPrepHTML .fc-replies.open .fc-answers {
-    margin: 1.9rem 0;
-}
-
-#interviewPrepHTML .fc-replies.open .fc-answers:first-of-type {
-    margin: 1.9rem 0 0 0;
-}
-
-#interviewPrepHTML .fc-replies.open .fc-answers h5, .fc-replies.open .fc-answers p {
-    font-size: 1.6rem;
-    letter-spacing: 1px;
-}
-
-#interviewPrepHTML .fc-replies.open .fc-answers .fc-author .h5TitleDate {
-    margin: 0 0 0 .5rem;
-} 
-
-#interviewPrepHTML .fc-replies.open .fc-answers p {
-    margin: 1rem 0 2rem 0;
-}
-
-#interviewPrepHTML .fc-replies.open > button {
-    align-self: flex-end;
-}
-
-#interviewPrepHTML .fc-replies button {
-    padding: 2rem 0;
-    width: 24rem;
-    font-size: 2rem;
-    letter-spacing: 1.2px;
-    margin: 0 0 0 0;
-}
-
-#interviewPrepHTML .fc-interviewQuestionTags {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    
-    margin: 1.5rem 2rem;
-}
-
-#interviewPrepHTML .tagInterviewQuestion {
-    font-size: 2rem;
-    letter-spacing: 1.2px;
-    
-    padding: 1rem 2rem;
-    border: 1px solid #00b371;
-    border-radius: 2.3rem;
-    margin: .5rem .5rem .5rem .5rem;
-}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
