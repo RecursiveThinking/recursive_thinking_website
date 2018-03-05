@@ -33,13 +33,54 @@
 }
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-#interviewPrepHTML .sortBar.content, .filterBar.content{
-    padding: 1rem;
+#interviewPrepHTML .sortBar.content, 
+#interviewPrepHTML .filterBar.content {
+    padding: 1.25rem 1.5rem 1.25rem 2.75rem;
     border: 1px solid #979797;
     
+}
+
+#interviewPrepHTML .sortBar.content .fc-sortFilterBar, 
+#interviewPrepHTML .filterBar.content .fc-sortFilterBar {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    /* align-content: center; */
+    align-items: center;
+    width: 100%;
+}
+
+#interviewPrepHTML .sortBar.content input, 
+#interviewPrepHTML .filterBar.content input {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
+    border: none;
+    width: 70%;
 }
+
+#interviewPrepHTML .sortBar.content .h4TitleSortFilter, 
+#interviewPrepHTML .filterBar.content .h4TitleSortFilter {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    border: none;
+    padding: 0 2.5rem;
+    width: 20%;
+    text-align: center;
+}
+
+#interviewPrepHTML .sortBar.content i, 
+#interviewPrepHTML .filterBar.content i {
+    font-size: 7rem;
+    color: #00b371;
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    margin-top: -3.5rem;
+    /* align-self: flex-start; */
+}
+
 
 /* ======================================================= */
 /*           interviewPrepHTML Question Card               */
