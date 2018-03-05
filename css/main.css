@@ -247,8 +247,31 @@ button.btn.btnFill.greenNavButton {
 
 /* ============================================ */
 
+.h3TitleVoteCount, .h3ReplyCount {
+    font-size: 2.8rem;
+    letter-spacing: 1.7px;
+}
+
+input[type=email],
+input[type=number],
+input[type=search], 
+input[type=text],
+input[type=url],
+textarea:focus {
+    border: 1px solid #979797
+}
 
 
+input[type=email]:focus,
+input[type=number]:focus,
+input[type=search]:focus, 
+input[type=text]:focus,
+input[type=url]:focus,
+textarea:focus {
+    box-shadow: 0 0 .125rem .025rem #00b371;
+    border: 1px solid #00b371;
+    outline: none;
+}
 
 /* general classes */
 
