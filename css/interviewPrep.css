@@ -33,21 +33,37 @@
 }
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-#interviewPrepHTML .sortBar.content, 
-#interviewPrepHTML .filterBar.content {
-    padding: 1.25rem 1.5rem 1.25rem 2.75rem;
-    border: 1px solid #979797;
-    
+/* turn off defalut content */
+#interviewPrepHTML .cell .sortBar, #interviewPrepHTML .cell .filterBar {
+    background-color: #eeeeee;
 }
 
-#interviewPrepHTML .sortBar.content .fc-sortFilterBar, 
-#interviewPrepHTML .filterBar.content .fc-sortFilterBar {
+#interviewPrepHTML .sortBar.content, 
+#interviewPrepHTML .filterBar.content {
+    width: 100%;
+    padding: 0;
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
-    /* align-content: center; */
+}
+
+#interviewPrepHTML .sortBar.content {
+    justify-content: flex-start;
+}
+
+#interviewPrepHTML .filterBar.content {
+    justify-content: flex-end;
+}
+
+#interviewPrepHTML .sortBar .fc-sortFilterBar, 
+#interviewPrepHTML .filterBar .fc-sortFilterBar {
+    padding: 1.25rem 1.5rem 1.25rem 2.75rem;
+    background-color: #ffffff;
+    border: 1px solid #979797;
+    width: 94%;
+    
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    width: 100%;
 }
 
 #interviewPrepHTML .sortBar.content input, 
@@ -56,6 +72,11 @@
     letter-spacing: 1.4px;
     border: none;
     width: 70%;
+}
+
+#interviewPrepHTML .sortBar.content .fc-sortFilterBar input:focus,
+#interviewPrepHTML .filterBar.content .fc-sortFilterBar input:focus {
+    outline: none;
 }
 
 #interviewPrepHTML .sortBar.content .h4TitleSortFilter, 
