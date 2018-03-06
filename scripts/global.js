@@ -47,7 +47,7 @@ const allUsers = [
         skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
         skillsSoftware: [ 0, 1, 2, 3 ],
         skillsLanguages:[ 0, 1, 2, 3 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000001' ]
     },
     {
         _id: '0000000002',
@@ -72,7 +72,7 @@ const allUsers = [
         skillsProfessional: [ 0, 2, 4, 6],
         skillsSoftware: [ 0, 2 ],
         skillsLanguages:[ 0, 2 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000001', '1000000002' ]
     },
     {
         _id: '0000000003',
@@ -97,7 +97,7 @@ const allUsers = [
         skillsProfessional: [ 1, 3, 5 ],
         skillsSoftware: [ 1, 3 ],
         skillsLanguages:[ 1, 3 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000002', '1000000003' ]
     },
     {
         _id: '0000000004',
@@ -122,7 +122,7 @@ const allUsers = [
         skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
         skillsSoftware: [ 0, 1, 2, 3 ],
         skillsLanguages:[ 0, 1, 2, 3 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000003', '1000000004' ]
     },
     {
         _id: '0000000005',
@@ -147,7 +147,7 @@ const allUsers = [
         skillsProfessional: [ 1, 3, 5 ],
         skillsSoftware: [ 1, 3 ],
         skillsLanguages:[ 1, 3 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000005', '1000000006' ]
     },
     {
         _id: '0000000006',
@@ -172,7 +172,7 @@ const allUsers = [
         skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
         skillsSoftware: [ 0, 1, 2, 3 ],
         skillsLanguages:[ 0, 1, 2, 3 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000006' ]
     },
     {
         _id: '0000000007',
@@ -197,7 +197,7 @@ const allUsers = [
         skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6, 7],
         skillsSoftware: [ 0, 1, 2, 3 ],
         skillsLanguages:[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000001', '1000000002', '1000000003', '1000000004', '1000000005', '1000000006' ]
     },
     {
         _id: '0000000008',
@@ -222,7 +222,7 @@ const allUsers = [
         skillsProfessional: [ 0, 2, 4, 6],
         skillsSoftware: [ 0, 2 ],
         skillsLanguages:[ 0, 2 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000001', '1000000003', '1000000005']
     },
     {
         _id: '0000000009',
@@ -247,7 +247,7 @@ const allUsers = [
         skillsProfessional: [ 1, 3, 5 ],
         skillsSoftware: [ 1, 3 ],
         skillsLanguages:[ 1, 3 ],
-        lecturesAttending: []
+        lessonsAttending: [ '1000000002', '1000000004', '1000000006' ]
     }
 ]
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
@@ -576,6 +576,26 @@ function getRandomNumber(min, max) {
     return randomNumber;
 }
 
+const getBoolIfUserAttending = (lessonId, userAttendingArray) => {
+    console.log(lessonId);
+    console.log(userAttendingArray);
+    // console.log(Array.isArray(userAttendingArray));
+    let bool = userAttendingArray.includes(lessonId);
+    console.log(bool);
+    let slotObj = {};
+    if(bool){
+        //true
+        // slotString = `class="fc-dateRowTitle Star"`
+        slotObj = { class: "fc-dateRowTitle Star" }
+    }
+    else {
+        // slotString = `class="fc-dateRowTitle noStar"`
+        slotObj = { class: "fc-dateRowTitle noStar" }
+    }
+    console.log(slotObj);
+    return slotObj;
+}
+
 const arrayOfDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const arrayOfMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -831,5 +851,6 @@ export const utils = {
     navigateToPage,
     setTitle,
     showModal,
-    getConcatenatedLocationString
+    getConcatenatedLocationString,
+    getBoolIfUserAttending
 };
