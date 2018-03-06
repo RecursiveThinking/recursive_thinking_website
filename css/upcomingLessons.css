@@ -124,18 +124,8 @@
     cursor: pointer;
 }
 
-/* #upcomingLessonsHTML .fc-dateRowTitle{
-    display: flex;
-    flex-direction: row;
-} */
-
 #upcomingLessonsHTML .fc-dateRowTitle.noStar .fc-dateRow i {
-    /* width: 100%; */
     display: none;
-}
-
-#upcomingLessonsHTML .fc-dateRowTitle.Star .fc-dateRow {
-    /* width: 75%; */
 }
 
 #upcomingLessonsHTML .fc-dateRowTitle.Star .fc-dateRow .fc-star {
@@ -150,9 +140,4 @@
     color: #ff9a23;
     margin-left: 1rem;
     font-size: 5rem;
-    /* flex-direction: row; */
-    /* align-content: flex-end; */
-    /* align-items: flex-end; */
-    /* align-self: flex-end; */
-    /* text-align: right; */
 }
