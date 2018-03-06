@@ -96,7 +96,8 @@
 
 <template id="lessonSummary">
     <div class="fc-upComingLesson">
-        <div class="fc-dateRowTitle">
+        <div slot="">
+        <!-- <div class="fc-dateRowTitle Star"> -->
             <div class="fc-dateRow contVertCenter">
                 <h1 class="h1Date colorGreen fw300">
                     <slot name="day"></slot>
@@ -108,6 +109,9 @@
                     <h4 class="h4MonthYear colorBlack06 fw500 ttup">
                         <slot name="year"></slot>
                     </h4>
+                </div>
+                <div class="fc-star">
+                    <i class="fa fa-star"></i>
                 </div>
             </div>
             <h4 class="h4LessonTitle negMarg colorGray66 fw300">
