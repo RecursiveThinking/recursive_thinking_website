@@ -107,6 +107,7 @@
     margin: 0 auto;
 }
 
+
 #editProfileHTML .fc-input-profile label {
     width: 23%;
     text-align: right;
@@ -119,8 +120,21 @@
     margin: 0 0 0 2.5rem;
 }
 
+#editProfileHTML .fc-input-profile .fc-input-profile-cityState {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 69.5%;
+    align-items: center;
+    justify-content: center;
+}
+
 #editProfileHTML .fc-about .fc-input-about .fc-right input {
     width: 100%;
+}
+
+#editProfileHTML .fc-input-profile .fc-input-profile-cityState input {
+    /* width: 50%; */
 }
 
 #editProfileHTML .fc-input-profile input, 
