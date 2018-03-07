@@ -27,7 +27,9 @@ export const getEditProfileModel = () => {
             profileBasicValName: { value: `${currentUser['name']}` },
             profileBasicValAge: { value: age },
             // profileBasicValLocation: { value: `${currentUser['location']}`},
-            profileBasicValLocation: { value: utils.getConcatenatedLocationString(currentUser.city, currentUser.state)},
+            // profileBasicValLocation: { value: utils.getConcatenatedLocationString(currentUser.city, currentUser.state)},
+            profileBasicValCity: { value: `${currentUser['city']}` },
+            profileBasicValState: { value: `${currentUser['state']}` },
             // professional stats
             profileProfValJobTitle: { value: `${currentUser['title']}`},
             profileProfValEmployer: { value: `${currentUser['employer']}`},
