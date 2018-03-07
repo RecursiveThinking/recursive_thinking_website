@@ -746,9 +746,9 @@ function hasUserVoted(lessonVotesArray, currentUserObj) {
 
 function getButtonHTMLString(boolVal) {
     if (boolVal) {
-        return `<button class="btn btnOutline fw900" type="submit">Voted!</button>`
+        return `<button class="btn btnOutline fw500" type="submit">Voted!</button>`
     } else {
-        return `<button class="btn btnFill fw900" type="submit">Click to Vote!</button>`
+        return `<button class="btn btnFill fw500" type="submit">Vote for this</button>`
     }
 }
 
