@@ -804,6 +804,49 @@ const getConcatenatedLocationString = (city, state) => {
     return concatString;
 }
 
+// helper method for textAreaCharCounter
+const toggleCharCountText = (count, limit, element) => {
+  if (count < limit) {
+    element.style.color = element.style.color === 'red' ? 'black' : null;
+    element.textContent = `You have ${limit - count} characters left.`
+  } else {
+    element.style.color = 'red';
+    element.textContent = `You have exceeded the character limit. `
+  }
+}
+
+// helper method for textAreaCharCounter
+const getCharCount = (event) => {
+    return event.target.value.length;
+}
+
+const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
+  const parent = document.getElementById(textAreaElemantId).parentNode;
+  const textarea = document.getElementById(textAreaElemantId);
+  const charCount = document.createElement('div');
+  let count = textarea.value.length;
+
+
+  charCount.setAttribute('id', charCountId);
+
+  parent.appendChild(charCount);
+
+  charCount.textContent = `You have ${limit} characters left.`
+
+  toggleCharCountText(count, limit, charCount);
+
+  textarea.addEventListener('keypress', (e) => {
+    if (count === limit) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  textarea.addEventListener('input', (e) => {
+    count = getCharCount(e);
+    toggleCharCountText(count, limit, charCount);
+  });
+};
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
@@ -851,6 +894,10 @@ export const utils = {
     navigateToPage,
     setTitle,
     showModal,
+<<<<<<< HEAD
     getConcatenatedLocationString,
     getBoolIfUserAttending
+=======
+    textAreaCharCounter
+>>>>>>> charcounter
 };
