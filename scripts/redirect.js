@@ -5,6 +5,7 @@ import { homeScreen } from '../templates/homeScreen';
 import { modalLessons } from '../templates/voteForLesson';
 import { setUpDashboard } from '../templates/dashboard';
 import { editProfilePicture } from '../templates/editProfilePicture';
+import { editProfile } from '../templates/editProfile';
 import { utils, data } from './global';
 import { signOut } from './auth';
 
@@ -43,6 +44,7 @@ export default (function() {
             case 'edit-profile':
                 // appendPage('editProfile');
                 setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
+                editProfile();
                 editProfilePicture();
                 break;
             case 'sign-out':

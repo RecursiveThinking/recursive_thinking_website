@@ -894,10 +894,7 @@ export const utils = {
     navigateToPage,
     setTitle,
     showModal,
-<<<<<<< HEAD
     getConcatenatedLocationString,
-    getBoolIfUserAttending
-=======
+    getBoolIfUserAttending,
     textAreaCharCounter
->>>>>>> charcounter
 };
