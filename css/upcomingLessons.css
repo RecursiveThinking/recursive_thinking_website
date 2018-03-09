@@ -85,23 +85,23 @@
 }
 
 #upcomingLessonsHTML .lessonButton.btnColorGreenBright:hover {
-    background-color: #ffffff;
+    background-color: #007d4f;
     border-radius: 10px;
-    border: 1px solid #00b371;
-    color: #00b371;
+    border: 1px solid #007d4f;
+    color: #ffffff;
 }
 
 #upcomingLessonsHTML .lessonButton.btnColorGreenForest:hover {
-    background-color: #ffffff;
-    color: #006842;
-    border: 1px solid #006842;
+    background-color: #00482E;
+    color: #ffffff;
+    border: 1px solid #00482E;
     border-radius: 10px;
 }
 
 #upcomingLessonsHTML .lessonButton.btnColorGreenDark:hover {
-    background-color: #ffffff;
-    color: #2d3134;
-    border: 1px solid #2d3134;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
     border-radius: 10px;
 }
 
