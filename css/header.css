@@ -1,5 +1,5 @@
 /* header height based on Logo height */
-header {
+body > header {
     /* border: 1px solid #979797; */
     background-color: #ffffff;
     position: fixed;
@@ -16,37 +16,37 @@ header {
     z-index: 2;
 }
 
-header .input.search {
+body > header .input.search {
     margin-left: 0;
 }
 
-header .content > .logo {
+body > header .content > .logo {
     text-align: center;
 }
 
-header .content > .logo > img {
+body > header .content > .logo > img {
     height: 6.5rem;
     width: auto;
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px){
-    header {
+    body > header {
         height: 10%;
     }
 }
 
 @media only screen and (min-width: 480px){
-    header .content > .logo > img {
+    body > header .content > .logo > img {
         height: 6.5rem;
         width: auto;
     }
 }
 
 @media only screen and (min-width: 768px){
-    header .content > .logo > img {
+    body > header .content > .logo > img {
         width: auto;
     }
-    header .content > .logo {
+    body > header .content > .logo {
         text-align: left;
     }
 }
