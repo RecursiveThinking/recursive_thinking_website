@@ -828,6 +828,7 @@ const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
 
 
   charCount.setAttribute('id', charCountId);
+  charCount.classList.add('counterBot');
 
   parent.appendChild(charCount);
 
