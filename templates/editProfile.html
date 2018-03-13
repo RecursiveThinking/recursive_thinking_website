@@ -141,10 +141,11 @@
         <hr>
         <div class="fc-form-about">
             <div class="grid gutters half">
-                <div class="cell">
+                <div class="cell aboutTextCol">
                     <!-- <div class="fc-aboutCont"> -->
                         <textarea id="bio" rows="8" cols="12" placeholder="Please enter Information About Yourself"><slot name="profileAboutUser"></slot></textarea>
                     <!-- </div> -->
+                    <!-- <div id="counter" class="counterBot">You have 500 characters left.</div> -->
                 </div>
                 <div class="cell">
                     <div class="fc-aboutCont">
@@ -183,7 +184,7 @@
                 <div class="cell">
                     <div class="fc-form-input">
                         <label for="skillProfessional" class="fw300 colorGray42">Search for Professional Skills:</label>
-                        <input type="search" name="skillProfessional" placeholder="Find Professional Skill">
+                        <input type="search" results=5 name="skillProfessional" placeholder="Find Professional Skill">
                     </div>
                 </div>
                 <div class="cell">
@@ -208,7 +209,7 @@
                 <div class="cell">
                     <div class="fc-form-input">
                         <label for="skillProfessional" class="fw300 colorGray42">Seach for Software Skills:</label>
-                        <input type="search" name="skillProfessional" placeholder="Find Software Skill">
+                        <input type="search" results=5 name="skillProfessional" placeholder="Find Software Skill">
                     </div>
                 </div>
                 <div class="cell">
@@ -233,7 +234,7 @@
                 <div class="cell">
                     <div class="fc-form-input">
                         <label for="skillProfessional" class="fw300 colorGray42">Search for Coding Languages:</label>
-                        <input type="search" name="skillProfessional" placeholder="Find Coding Language">
+                        <input type="search" results=5 name="skillProfessional" placeholder="Find Coding Language">
                     </div>
                 </div>
                 <div class="cell">

@@ -133,18 +133,24 @@
     width: 100%;
 }
 
-#editProfileHTML .fc-input-profile .fc-input-profile-cityState input {
-    /* width: 50%; */
-}
-
 #editProfileHTML .fc-input-profile input, 
 #editProfileHTML .fc-about .fc-input-about .fc-right input,
 #editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input {
-    padding: 1rem 0 1rem 1.5rem;
+    padding: 1rem 1rem 1rem 1.5rem;
     text-align: left;
 
     font-size: 1.8rem;
     letter-spacing: 1.1px;
+}
+
+#editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    
+    /* custom */
+    height: 8px;
+    width: 6px;
+    border: 1.5px solid #00b371;
+    box-shadow: 0 0 .125rem .025rem #00b371;
 }
 
 #editProfileHTML .fc-input-profile input::placeholder {
@@ -158,8 +164,24 @@
 
 #editProfileHTML .fc-form-about .grid .cell {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+}
+
+#editProfileHTML .fc-form-about .grid .cell .aboutTextCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+}
+
+#editProfileHTML .fc-form-about .grid .cell.aboutTextCol .counterBot {
+    margin: 1rem 0 0 0;
+    font-size: 1.5rem;
+    color: #00b371;
+    letter-spacing: 2.5px;
+    /* color: red; */
 }
 
 #editProfileHTML .fc-about {
