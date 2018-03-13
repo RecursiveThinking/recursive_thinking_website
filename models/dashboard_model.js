@@ -19,7 +19,7 @@ export const getDashboardModel = () => {
     const upComingLessons = data.getAllLessons();
     const upComingLessonDate = utils.getFormattedDate(new Date(upComingLessons[0].date));
     const filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(upComingLessons[0].lessonTaughtBy);
-    console.log(filteredTaughtByUserArray);
+    // console.log(filteredTaughtByUserArray);
     // Individual Lesson for upComingLesson Template
     const upComingLesson = {
         lessonTitle: upComingLessons[0].title,
