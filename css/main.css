@@ -24,11 +24,11 @@ body {
     /* overflow: hidden; */
 }
 
-#mainWindow {
+/* #mainWindow {
     margin-top: 70px;
     margin-left: 20%;
     margin-bottom: 40px;
-}
+} */
 
 .content > nav {
     text-align: center;
