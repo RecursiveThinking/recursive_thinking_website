@@ -85,7 +85,7 @@
     letter-spacing: 1.4px;
     border: none;
     padding: 0 2.5rem;
-    width: 20%;
+    /* width: 20%; */
     text-align: center;
 }
 
@@ -93,7 +93,7 @@
 #interviewPrepHTML .filterBar.content i {
     font-size: 7rem;
     color: #00b371;
-    width: 10%;
+    /* width: 10%; */
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
