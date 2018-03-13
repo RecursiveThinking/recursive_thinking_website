@@ -5,9 +5,9 @@ export const getEditProfileModel = () => {
     
     // #TODO: API Call goes here
     // const allInterviewQuestions = JSON.parse(localStorage.getItem('allInterviewQuestions'));
-    console.log("In Edit Profile Model");
+    // console.log("In Edit Profile Model");
     const currentUser = data.getCurrentUser();
-    console.log(currentUser);
+    // console.log(currentUser);
     
     let age = utils.getAgeEditProfile(new Date(currentUser.birthday));
     // let age = new Date(currentUser.birthday);
@@ -16,7 +16,7 @@ export const getEditProfileModel = () => {
     let skillsSoftwareArray = utils.returnArrayOfApplicableItems('skillsSoftware', currentUser.skillsSoftware);
     let skillsLanguageArray = utils.returnArrayOfApplicableItems('skillsLanguage', currentUser.skillsLanguages);
     let aboutUser = currentUser['aboutUser'];
-    console.log(aboutUser);
+    // console.log(aboutUser);
     return {
         editProfile: fill(templates.editProfile.currentUserProfile, {
             // basic stats
