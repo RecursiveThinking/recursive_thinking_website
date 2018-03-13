@@ -10,12 +10,15 @@ export default (function() {
         }
 
         init() {
-            // window.addEventListener('load', function(e) {
-            //     e.preventDefault();
-            //     const headerheight = document.getElementsByTagName("header")[0].offsetHeight;
-            //     const mainContainer = document.getElementById("mainWindow");
-            //     mainContainer.style.marginTop = `${headerheight}px`;
-            // });
+            window.addEventListener('resize', function(event){
+                event.preventDefault();
+                if(window.innerWidth > 768){
+                    utils.setWindowOffsetsLayout();
+                }
+                else if(window.innerWidth <= 768){
+                    utils.setWindowOffsetsMobile();
+                }
+            })
 
             // adding our click listener to each sidebar item
             const sidebarItems = document.getElementsByClassName('sidebar-item');
@@ -29,9 +32,10 @@ export default (function() {
                     window.scrollTo(0, 0);
                 });
             });
-            hamburger.addEventListener('click', () => {
-                document.getElementById('sidebar').classList.toggle('displayed');
-            })
+            // moved this to global.js
+            // hamburger.addEventListener('click', () => {
+            //     document.getElementById('sidebar').classList.toggle('displayed');
+            // })
         }
 
         getDeveloperProfiles() {
@@ -53,15 +57,21 @@ export default (function() {
                     return err;
                 })
         }
-
     }
 
     window.onload = function() {
         buildCurrentUserDashInfo()
         const recursiveApi = new api();
         recursiveApi.init();
+        // call a function to setup windows
+        if(window.innerWidth > 768){
+            utils.setWindowOffsetsLayout();
+        }
+        else if(window.innerWidth <= 768){
+            utils.setWindowOffsetsMobile();
+        }
     };
-
+    
     function buildCurrentUserDashInfo(){
         const currentUser = data.getCurrentUser();
         // console.log("In Function");
@@ -95,5 +105,5 @@ export default (function() {
         //connect
         currentUserDashInfo.appendChild(divDevInfo);
     }
-
+    
 })();
