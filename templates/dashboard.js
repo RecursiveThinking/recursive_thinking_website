@@ -20,7 +20,6 @@ import { utils, data } from '../scripts/global';
     const buildProfileStatisticsRow = (start, end, container) => {
         console.log(start, end, container);
             for(let i = start; i < end + 1; i += 1){
-     
             const divCell = document.createElement('div');
             divCell.className = `cell`;
                 //create inner div
