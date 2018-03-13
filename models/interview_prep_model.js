@@ -6,15 +6,15 @@ export const getInterviewPrepModel = () => {
     // #TODO: API Call goes here
     // const allInterviewQuestions = JSON.parse(localStorage.getItem('allInterviewQuestions'));
     const allInterviewQuestions = data.getAllInterviewQuestions();
-    console.log(allInterviewQuestions);
+    // console.log(allInterviewQuestions);
     const allAnswersToQuestions = data.getAllAnswersToQuestions();
-    console.log(allAnswersToQuestions);
+    // console.log(allAnswersToQuestions);
     const currentUser = data.getCurrentUser();
-    console.log("currentUser at InterviewPrep", currentUser);
+    // console.log("currentUser at InterviewPrep", currentUser);
     return {
         interviewPrep: allInterviewQuestions.map(question => {
             let questionCategoryArray = utils.returnArrayOfApplicableItems('allCategories', question.categories);
-            console.log(questionCategoryArray);
+            // console.log(questionCategoryArray);
             const formattedDate = utils.getFormattedDate(new Date(question.submitted));
             
             return fill(templates.interviewPrep.tempIdInterviewQuestion, {
