@@ -111,10 +111,10 @@
         position: absolute
     }
     .sidebar {
-        width: 35%;
-        top: 10%;
+        width: 100%;
+        /* top: 10%; */
         display: none;
-        height: 85%;
+        height: 100%;
     }
     .fc-devInfo {
         margin: 3rem 0;
@@ -131,11 +131,11 @@
     .desktopNav {
         display: none;
     }
-    #mainWindow{
+    /* #mainWindow{
         margin-left: 0;
         margin-bottom: 40px;
         margin-top: 112px;
-    }
+    } */
 }
 
 @media only screen and (max-width: 768px) {
