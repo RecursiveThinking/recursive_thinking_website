@@ -36,9 +36,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev1 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -61,9 +61,9 @@ const allUsers = [
         state: 'OR',
         title: 'Dev2 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -86,9 +86,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev3 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -111,9 +111,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev4 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -136,9 +136,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev5 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -161,9 +161,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev6 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -211,9 +211,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev8 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -236,9 +236,9 @@ const allUsers = [
         state: 'WA',
         title: 'Dev9 Title',
         employer: '',
-        linkGitHub: '',
-        linkCodePen: '',
-        linkLinkedIn: '',
+        linkGitHub: 'https://github.com/',
+        linkCodePen: 'https://codepen.io/',
+        linkLinkedIn: 'https://www.linkedin.com/in/',
         linkPortfolio: '',
         linkResume: '',
         aboutUser: '',
@@ -320,7 +320,7 @@ const allStates = [
 localStorage.setItem('allStates', JSON.stringify(allStates));
 
 const allCategories = allSkillsProfessional.concat(allSkillsSoftware, allProgrammingLanguages);
-console.log(allCategories);
+// console.log(allCategories);
 
 function returnArrayOfApplicableItems(category, inputArray){
     // console.log(category, inputArray);
@@ -577,11 +577,11 @@ function getRandomNumber(min, max) {
 }
 
 const getBoolIfUserAttending = (lessonId, userAttendingArray) => {
-    console.log(lessonId);
-    console.log(userAttendingArray);
+    // console.log(lessonId);
+    // console.log(userAttendingArray);
     // console.log(Array.isArray(userAttendingArray));
     let bool = userAttendingArray.includes(lessonId);
-    console.log(bool);
+    // console.log(bool);
     let slotObj = {};
     if(bool){
         //true
@@ -592,7 +592,7 @@ const getBoolIfUserAttending = (lessonId, userAttendingArray) => {
         // slotString = `class="fc-dateRowTitle noStar"`
         slotObj = { class: "fc-dateRowTitle noStar" }
     }
-    console.log(slotObj);
+    // console.log(slotObj);
     return slotObj;
 }
 
@@ -762,15 +762,27 @@ function getAgeEditProfile(dateOfBirth){
     return Math.floor(totalAgeMS/millisecsInAYear);
 }
 
+// const theApi = new api();
+
 const checkFullScreen = (page) => {
     if (page === 'home' || page === 'sign-out') {
         document.querySelector('.sidebar').style.display = "none";
         document.querySelector('header').style.display = "none";
         document.querySelector('#mainWindow').style.marginLeft = 0;
+
     } else {
-        document.querySelector('#mainWindow').classList.add('marginLeft');
-        document.querySelector('.sidebar').style.display = "";
-        document.querySelector('header').style.display = "";
+        // console.log("We hit the checkFullScreen");
+        if(window.innerWidth > 768){
+            document.querySelector('.sidebar').style.display = "";
+            document.querySelector('header').style.display = "";
+            setWindowOffsetsLayout();
+        }
+        else if(window.innerWidth <= 768){
+            document.querySelector('.sidebar').style.display = "";
+            document.querySelector('header').style.display = "";
+            document.querySelector('#mainWindow').style.marginLeft = 0;
+            setWindowOffsetsMobile();
+        }
     }
 };
 
@@ -779,23 +791,23 @@ const navigateToPage = (page) => {
 };
 
 const setTitle = () => {
-  const newTitle = document.location.hash.replace('#','').split('-');
-  const currentTitle = document.getElementsByTagName('title')[0];
+    const newTitle = document.location.hash.replace('#', '').split('-');
+    const currentTitle = document.getElementsByTagName('title')[0];
 
-  const newTitleUppercased = newTitle.map((word) => {
-      return word[0].toUpperCase() + word.slice(1, word.length);
+    const newTitleUppercased = newTitle.map((word) => {
+        return word[0].toUpperCase() + word.slice(1, word.length);
     }).join(" ");
 
-  currentTitle.textContent = newTitleUppercased;
+    currentTitle.textContent = newTitleUppercased;
 };
 
 
 const showModal = (modalToShow) => {
-  Array.from(document.getElementsByClassName('modal'), (modal) => {
-    modal.style.display = "none";
-  });
+    Array.from(document.getElementsByClassName('modal'), (modal) => {
+        modal.style.display = "none";
+    });
 
-  modalToShow.style.display = "block";
+    modalToShow.style.display = "block";
 }
 
 const getConcatenatedLocationString = (city, state) => {
@@ -806,13 +818,13 @@ const getConcatenatedLocationString = (city, state) => {
 
 // helper method for textAreaCharCounter
 const toggleCharCountText = (count, limit, element) => {
-  if (count < limit) {
-    element.style.color = element.style.color === 'red' ? 'black' : null;
-    element.textContent = `You have ${limit - count} characters left.`
-  } else {
-    element.style.color = 'red';
-    element.textContent = `You have exceeded the character limit. `
-  }
+    if (count < limit) {
+        element.style.color = element.style.color === 'red' ? 'black' : null;
+        element.textContent = `You have ${limit - count} characters left.`
+    } else {
+        element.style.color = 'red';
+        element.textContent = `You have exceeded the character limit. `
+    }
 }
 
 // helper method for textAreaCharCounter
@@ -821,32 +833,32 @@ const getCharCount = (event) => {
 }
 
 const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
-  const parent = document.getElementById(textAreaElemantId).parentNode;
-  const textarea = document.getElementById(textAreaElemantId);
-  const charCount = document.createElement('div');
-  let count = textarea.value.length;
+    const parent = document.getElementById(textAreaElemantId).parentNode;
+    const textarea = document.getElementById(textAreaElemantId);
+    const charCount = document.createElement('div');
+    let count = textarea.value.length;
 
 
-  charCount.setAttribute('id', charCountId);
-  charCount.classList.add('counterBot');
+    charCount.setAttribute('id', charCountId);
+    charCount.classList.add('counterBot');
 
-  parent.appendChild(charCount);
+    parent.appendChild(charCount);
 
-  charCount.textContent = `You have ${limit} characters left.`
+    charCount.textContent = `You have ${limit} characters left.`
 
-  toggleCharCountText(count, limit, charCount);
-
-  textarea.addEventListener('keypress', (e) => {
-    if (count === limit) {
-      e.preventDefault();
-      return false;
-    }
-  });
-
-  textarea.addEventListener('input', (e) => {
-    count = getCharCount(e);
     toggleCharCountText(count, limit, charCount);
-  });
+
+    textarea.addEventListener('keypress', (e) => {
+        if (count === limit) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    textarea.addEventListener('input', (e) => {
+        count = getCharCount(e);
+        toggleCharCountText(count, limit, charCount);
+    });
 };
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
@@ -865,6 +877,79 @@ const getArrayOfAvatars = () => JSON.parse(localStorage.getItem('arrayOfAvatars'
 
 const getArrayOfAllStates = () => JSON.parse(localStorage.getItem('AllStates'));
 
+const setWindowOffsetsLayout = () => {
+    console.log("setWindowOffsetsLayout");
+    // console.log("innerHeight", window.innerHeight);
+    // console.log("outerHeight", window.outerHeight);
+    // console.log("innerWidth", window.innerWidth);
+    // console.log("outerWidth", window.outerWidth);
+    const header = document.getElementsByTagName("header")[0]
+    // console.log(header);
+    const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
+    // console.log("headerHeight: ", headerHeight);
+    const sideBar = document.getElementById("sidebar");
+    const sideBarWidth = Math.floor(window.innerWidth * .2);
+    // console.log("sideBarWidth: ", sideBarWidth);
+    const sideBarHeightOffsetTop = headerHeight;
+    const mainContainer = document.getElementById("mainWindow");
+    // console.log(mainContainer);
+    const mainContainerOffsetLeft = sideBarWidth;
+    // console.log("mainContainerOffLeft: ", mainContainerOffsetLeft);
+    const mainContainerOffsetTop = headerHeight;
+    // console.log("mainContainerOffTop: ", mainContainerOffsetTop);
+    const footerHeight = document.getElementsByTagName("footer")[0].offsetHeight;
+    // console.log("footerHeight: ", footerHeight);
+    let sidebarHeight = window.innerHeight - headerHeight - footerHeight;
+    // console.log(sidebarHeight);
+    // header
+    // console.log(header.offsetTop);
+    // header.offsetTop = `${headerHeight}px`;
+    sideBar.style.marginTop = `${headerHeight}px`;
+    sideBar.style.height = `${sidebarHeight}px`
+    sideBar.style.width = `${sideBarWidth}px`
+    mainContainer.style.marginTop = `${headerHeight}px`;
+    mainContainer.style.marginBottom = `${footerHeight}px`;
+    mainContainer.style.marginLeft = `${mainContainerOffsetLeft}px`
+    
+    console.log(document.getElementsByTagName("header"));
+}
+
+document.getElementById('hamburger').addEventListener('click', function log(){
+    const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
+    document.getElementById('sidebar').classList.toggle('displayed');
+    const sideBar = document.querySelector(".sidebar");
+    const sideBarHeight = sideBar.offsetHeight;
+    console.log("Log", sideBarHeight);
+    
+    const sideBarHeightOffsetTop = headerHeight;
+    sideBar.style.marginTop = `${sideBarHeightOffsetTop}px`
+    
+    const mainContainer = document.getElementById("mainWindow");
+    const mainContainerMarginTop = headerHeight + sideBarHeight;
+    
+    mainContainer.style.marginTop = `${mainContainerMarginTop}px`
+})
+
+
+const setWindowOffsetsMobile = () => {
+    console.log("setWindowOffsetsMobile");
+    const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
+    console.log(headerHeight);
+    const sideBar = document.querySelector(".sidebar");
+    console.log(sideBar);
+    // const sideBarWidth = window.innerWidth;
+    const sideBarHeight = sideBar.offsetHeight;
+    const sideBarHeightOffsetTop = headerHeight;
+    
+    const mainContainer = document.getElementById("mainWindow");
+    const mainContainerMarginTop = headerHeight + sideBarHeight;
+    document.querySelector('#mainWindow').style.marginLeft = 0;
+    sideBar.style.width = ""
+    
+    sideBar.style.marginTop = `${sideBarHeightOffsetTop}px`
+    
+    mainContainer.style.marginTop = `${mainContainerMarginTop}px`
+}
 
 export const data = {
     getAllUsers,
@@ -897,5 +982,7 @@ export const utils = {
     showModal,
     getConcatenatedLocationString,
     getBoolIfUserAttending,
-    textAreaCharCounter
+    textAreaCharCounter,
+    setWindowOffsetsLayout,
+    setWindowOffsetsMobile
 };
