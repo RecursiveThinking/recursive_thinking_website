@@ -13,7 +13,7 @@ export const getVoteForLessonsModel = () => {
     // var allLessons = JSON.parse(localStorage.getItem('allLessons'));
     var allLessons = JSON.parse(localStorage.getItem('allLessons'));
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(currentUser);
+    // console.log(currentUser);
     let lessonLimit = 4;
     return {
         voteForLesson: allLessons.map(lesson => {
