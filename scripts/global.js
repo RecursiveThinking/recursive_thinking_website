@@ -832,6 +832,14 @@ const getCharCount = (event) => {
     return event.target.value.length;
 }
 
+// helper method for textAreaCharCounter
+const checkForLimit = (event, count, limit) => {
+  if (count >= limit) {
+      event.preventDefault();
+      return false;
+  }
+};
+
 const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
     const parent = document.getElementById(textAreaElemantId).parentNode;
     const textarea = document.getElementById(textAreaElemantId);
@@ -849,10 +857,11 @@ const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
     toggleCharCountText(count, limit, charCount);
 
     textarea.addEventListener('keypress', (e) => {
-        if (count === limit) {
-            e.preventDefault();
-            return false;
-        }
+        checkForLimit(e, count, limit);
+    });
+
+    textarea.addEventListener('paste', (e) => {
+        checkForLimit(e, count, limit);
     });
 
     textarea.addEventListener('input', (e) => {
@@ -910,7 +919,7 @@ const setWindowOffsetsLayout = () => {
     mainContainer.style.marginTop = `${headerHeight}px`;
     mainContainer.style.marginBottom = `${footerHeight}px`;
     mainContainer.style.marginLeft = `${mainContainerOffsetLeft}px`
-    
+
     // console.log(document.getElementsByTagName("header"));
 }
 
@@ -920,13 +929,13 @@ document.getElementById('hamburger').addEventListener('click', function log(){
     const sideBar = document.querySelector(".sidebar");
     const sideBarHeight = sideBar.offsetHeight;
     // console.log("Log", sideBarHeight);
-    
+
     const sideBarHeightOffsetTop = headerHeight;
     sideBar.style.marginTop = `${sideBarHeightOffsetTop}px`
-    
+
     const mainContainer = document.getElementById("mainWindow");
     const mainContainerMarginTop = headerHeight + sideBarHeight;
-    
+
     mainContainer.style.marginTop = `${mainContainerMarginTop}px`
 })
 
@@ -940,14 +949,14 @@ const setWindowOffsetsMobile = () => {
     // const sideBarWidth = window.innerWidth;
     const sideBarHeight = sideBar.offsetHeight;
     const sideBarHeightOffsetTop = headerHeight;
-    
+
     const mainContainer = document.getElementById("mainWindow");
     const mainContainerMarginTop = headerHeight + sideBarHeight;
     document.querySelector('#mainWindow').style.marginLeft = 0;
     sideBar.style.width = ""
-    
+
     sideBar.style.marginTop = `${sideBarHeightOffsetTop}px`
-    
+
     mainContainer.style.marginTop = `${mainContainerMarginTop}px`
 }
 
