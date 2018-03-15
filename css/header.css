@@ -22,10 +22,6 @@ body > header .input.search,
     margin-left: 0;
 }
 
-/* #homePage > header .content > .logo {
-    text-align: left;
-} */
-
 body > header .content > .logo {
     text-align: center;
 }
@@ -35,27 +31,3 @@ body > header .content > .logo > img,
     height: 6.5rem;
     width: auto;
 }
-
-@media only screen and (min-width: 480px) and (max-width: 767px){
-    body > header, 
-    #homePage > header {
-        /* height: 20%; */
-    }
-}
-
-@media only screen and (min-width: 480px){
-    body > header .content > .logo > img {
-        height: 6.5rem;
-        width: auto;
-    }
-}
-
-@media only screen and (min-width: 768px){
-    body > header .content > .logo > img {
-        width: auto;
-    }
-    body > header .content > .logo {
-        text-align: left;
-    }
-}
-
