@@ -878,7 +878,7 @@ const getArrayOfAvatars = () => JSON.parse(localStorage.getItem('arrayOfAvatars'
 const getArrayOfAllStates = () => JSON.parse(localStorage.getItem('AllStates'));
 
 const setWindowOffsetsLayout = () => {
-    console.log("setWindowOffsetsLayout");
+    // console.log("setWindowOffsetsLayout");
     // console.log("innerHeight", window.innerHeight);
     // console.log("outerHeight", window.outerHeight);
     // console.log("innerWidth", window.innerWidth);
@@ -911,7 +911,7 @@ const setWindowOffsetsLayout = () => {
     mainContainer.style.marginBottom = `${footerHeight}px`;
     mainContainer.style.marginLeft = `${mainContainerOffsetLeft}px`
     
-    console.log(document.getElementsByTagName("header"));
+    // console.log(document.getElementsByTagName("header"));
 }
 
 document.getElementById('hamburger').addEventListener('click', function log(){
@@ -919,7 +919,7 @@ document.getElementById('hamburger').addEventListener('click', function log(){
     document.getElementById('sidebar').classList.toggle('displayed');
     const sideBar = document.querySelector(".sidebar");
     const sideBarHeight = sideBar.offsetHeight;
-    console.log("Log", sideBarHeight);
+    // console.log("Log", sideBarHeight);
     
     const sideBarHeightOffsetTop = headerHeight;
     sideBar.style.marginTop = `${sideBarHeightOffsetTop}px`
@@ -932,11 +932,11 @@ document.getElementById('hamburger').addEventListener('click', function log(){
 
 
 const setWindowOffsetsMobile = () => {
-    console.log("setWindowOffsetsMobile");
+    // console.log("setWindowOffsetsMobile");
     const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
-    console.log(headerHeight);
+    // console.log(headerHeight);
     const sideBar = document.querySelector(".sidebar");
-    console.log(sideBar);
+    // console.log(sideBar);
     // const sideBarWidth = window.innerWidth;
     const sideBarHeight = sideBar.offsetHeight;
     const sideBarHeightOffsetTop = headerHeight;
