@@ -147,23 +147,3 @@
 .sidebar article .sidebarTitle {
     /* margin-left: 1rem; */
 }
-@media only screen and (min-width: 480px) and (max-width: 767px){
-    .sidebar{
-        /* top: 10%; */
-        /* height: 85%; */
-    }
-    .sidebarImage {
-        width: 100px;
-    }
-
-}
-
-@media only screen and (min-width: 768px){
-    .sidebar {
-        /* top: 10%; */
-    }
-    .sidebarImage {
-        /* width: 75%; */
-        /* width: 18rem; */
-    }
-}
