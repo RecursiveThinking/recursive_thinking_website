@@ -43,29 +43,3 @@ body > footer a:hover {
 body > footer a:nth-of-type(2) {
     margin-right: 0;
 }
-
-/* responsive grid after 480px */
-
-@media only screen and (min-width: 480px) {
-    body > footer .copyAlignment {
-        text-align: left;
-    }
-    body > footer .iconAlignment {
-        text-align: right;
-    }
-    body > footer .cell:nth-of-type(2) {
-        order: 1;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    body > footer .copyAlignment {
-        text-align: left;
-    }
-    body > footer .iconAlignment {
-        text-align: right;
-    }
-    body > footer .cell:nth-of-type(2) {
-        order: 1;
-    }
-}
