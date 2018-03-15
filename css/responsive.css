@@ -90,10 +90,32 @@
     .third>.cell:first-of-type {
         flex: 0 0 100%;
     }
-    /* .content>.logo>img {
-        height: 5.25rem;
+    
+    /* ============================================ */
+    /*                     Header                   */
+    /* ============================================ */
+    
+    body > header .content > .logo > img {
+        height: 6.5rem;
         width: auto;
-    } */
+    }
+    
+    /* ============================================ */
+    /*                     Footer                   */
+    /* ============================================ */
+    
+    body > footer .copyAlignment {
+        text-align: center;
+        padding: .25rem 0 1rem 0;
+    }
+    body > footer .iconAlignment {
+        text-align: center;
+    }
+    body > footer .cell:nth-of-type(2) {
+        order: -1;
+    }
+    
+    
 }
 
 /* Tablet  480 to 768 */
@@ -136,6 +158,15 @@
         margin-bottom: 40px;
         margin-top: 112px;
     } */
+    
+    /* ============================================ */
+    /*                interview Prep                */
+    /* ============================================ */
+    
+    #interviewPrepHTML .sortBar .fc-sortFilterBar, 
+    #interviewPrepHTML .filterBar .fc-sortFilterBar {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -180,11 +211,79 @@
     .content>.logo {
         text-align: left;
     } */
-    .content>nav {
+    .content > nav {
         text-align: right;
     }
     .content .searchBar {
         text-align: right;
+    }
+    
+    /* ============================================ */
+    /*                     Header                   */
+    /* ============================================ */
+    
+    body > header .content > .logo > img {
+        width: auto;
+    }
+    body > header .content > .logo {
+        text-align: left;
+    }
+    
+    /* ============================================ */
+    /*                     Footer                   */
+    /* ============================================ */
+    
+    body > footer .copyAlignment {
+        text-align: left;
+    }
+    body > footer .iconAlignment {
+        text-align: right;
+    }
+    body > footer .cell:nth-of-type(2) {
+        order: 1;
+    }
+    
+    /* ============================================ */
+    /*              Dashboard - Stats               */
+    /* ============================================ */
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(1) > .content {
+        border-width: .1rem;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) {
+        padding-left: 0;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) > .content {
+        border-width: .1rem 0;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) {
+        padding-left: 0;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) > .content {
+        border-width: .1rem;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(1) > .content {
+        border-width: 0 .1rem .1rem .1rem;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) {
+        padding-left: 0;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) > .content {
+        border-width: 0 0 .1rem 0;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) {
+        padding-left: 0;
+    }
+
+    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
+        border-width: 0 .1rem .1rem .1rem;
     }
 }
 
