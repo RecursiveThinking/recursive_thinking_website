@@ -14,6 +14,14 @@
     border-color: #c6c6c6;
 }
 
+#dashboardHTML .content.container {
+    padding: 1.5rem;
+}
+
+#dashboardHTML .cell .card {
+    /* margin: 1.5rem; */
+}
+
 #dashboardHTML .grid.gutters.cols-3 > .cell > .content {
     border-width: .1rem .1rem 0;
 }
@@ -85,49 +93,4 @@
 #dashboardHTML .fc-seeMore .h6seeMore a:hover {
     text-decoration: none;
     color: #00b371;
-}
-
-@media only screen and (min-width: 768px) {
-    /* ============================================ */
-    /*              Dashboard - Stats               */
-    /* ============================================ */
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(1) > .content {
-        border-width: .1rem;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) {
-        padding-left: 0;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(2) > .content {
-        border-width: .1rem 0;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) {
-        padding-left: 0;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(1) > .cell:nth-child(3) > .content {
-        border-width: .1rem;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(1) > .content {
-        border-width: 0 .1rem .1rem .1rem;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) {
-        padding-left: 0;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(2) > .content {
-        border-width: 0 0 .1rem 0;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) {
-        padding-left: 0;
-    }
-
-    #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
-        border-width: 0 .1rem .1rem .1rem;
-    }
 }
