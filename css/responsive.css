@@ -28,6 +28,10 @@
     .headerOptionalNav {
         display: none;
     }
+    #homePage .navButtons button,
+    #homePage .btn.btnFill.signUp {
+        padding: .75rem 1.75rem;
+    }
 }
 
 /* Phone L 426px to 479 */
@@ -56,6 +60,9 @@
     }
     .headerOptionalNav {
         display: none;
+    }
+    #homePage .section.famousQuote p {
+        padding: 0;
     }
 }
 
@@ -115,7 +122,14 @@
         order: -1;
     }
     
+    /* ============================================ */
+    /*                 homeScreen                   */
+    /* ============================================ */
     
+    #homePage .navButtons button,
+    #homePage .btn.btnFill.signUp {
+        padding: 1rem 2.5rem;
+    }
 }
 
 /* Tablet  480 to 768 */
@@ -158,6 +172,10 @@
         margin-bottom: 40px;
         margin-top: 112px;
     } */
+    
+    .sidebarImage {
+        width: 100px;
+    }
     
     /* ============================================ */
     /*                interview Prep                */
@@ -285,6 +303,18 @@
     #dashboardHTML .grid.gutters.cols-3:nth-of-type(2) > .cell:nth-child(3) > .content {
         border-width: 0 .1rem .1rem .1rem;
     }
+    
+    /* ============================================ */
+    /*                 homeScreen                   */
+    /* ============================================ */
+    
+    #homePage .navButtons button, 
+    #homePage .btn.btnFill.signUp {
+        padding: 1rem 4rem;
+    }
+    #homePage .section.famousQuote .quoteAlignment {
+        text-align: left;
+    }
 }
 
 /* Laptop S 768 to 1024 */
@@ -300,11 +330,19 @@
 }
 
 /* All others */
-
 /* @media (min-width: 1440px) { */
 
 @media only screen and (min-width: 1440px) {
     * {
         font-size: 10px;
+    }
+    
+    /* ============================================ */
+    /*                 homeScreen                   */
+    /* ============================================ */
+    
+    #homePage .navButtons button,
+    #homePage .btn.btnFill.signUp {
+        padding: 1rem 6rem;
     }
 }
