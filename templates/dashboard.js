@@ -1,50 +1,42 @@
-import {
-    importTemplate,
-    templates, 
-    fill
-} from '../scripts/templater'
-
-import {
-    utils,
-    data
-} from '../scripts/global';
+import { importTemplate, templates, fill } from '../scripts/templater'
+import { utils, data } from '../scripts/global';
 
 import dashboardHtml from './dashboard.html'
 importTemplate("dashboard", dashboardHtml)
 
-export const setup = () => {
-    // this line takes the import html and builds templates out of it
-    return fill(templates.dashboard.page, getDashboardModel())
+export function setup(renderFunction) {
+    renderFunction(
+        fill(templates.dashboard.page, getDashboardModel())
+    );
 };
 
-/*
-Overall Model Shape
+/* Dashboard Model
 
-const profileStats = {
-    stats1: [{statCount, statTitle}],
-    stats2: [{statCount, statTitle}]
-}
+    const profileStats = {
+        stats1: [{statCount, statTitle}],
+        stats2: [{statCount, statTitle}]
+    }
 
-const upComingLesson = {
-    lessonTitle: string,
-    lessonDateDay: num,
-    lessonDateMonth: string,
-    lessonDateYear: num,
-    lessonDescription: string,
-    lessonsTaughtBy: [{
-        src: string (for image source)
-        alt: string
-    }]
-}
-
-const lessonsAttending = {
-    individualLessons: [{
+    const upComingLesson = {
         lessonTitle: string,
         lessonDateDay: num,
         lessonDateMonth: string,
-        lessonDateYear: num
-    }]
-}
+        lessonDateYear: num,
+        lessonDescription: string,
+        lessonsTaughtBy: [{
+            src: string (for image source)
+            alt: string
+        }]
+    }
+
+    const lessonsAttending = {
+        individualLessons: [{
+            lessonTitle: string,
+            lessonDateDay: num,
+            lessonDateMonth: string,
+            lessonDateYear: num
+        }]
+    }
 */
 
 export const getDashboardModel = () => {

@@ -1,16 +1,17 @@
-import { models } from '../models/models';
-import { templates, fill } from './templater';
-import { modalInterview } from '../templates/interviewPrep';
-import { homeScreen } from '../templates/homeScreen';
-import { modalLessons } from '../templates/voteForLesson';
-// import { setUpDashboard } from '../templates/dashboard';
-import { editProfilePicture } from '../templates/editProfilePicture';
-import { editProfile } from '../templates/editProfile';
-import { utils, data } from './global';
+import { templates } from './templater';
+import { utils } from './global';
 import { signOut } from './auth';
 
+import * as dashboard from '../templates/dashboard'
+import * as upcomingLessons from '../templates/upcomingLessons'
+import * as voteForLesson from '../templates/voteForLesson'
+import * as editProfile from '../templates/editProfile'
+import * as interviewPrep from '../templates/interviewPrep'
+import * as recursiveDirectory from '../templates/recursiveDirectory'
+import * as homeScreen from '../templates/homeScreen'
+
 export default (function() {
-    function setUpPage(template) {
+    function renderPage(template) {
         const main = document.getElementById('main-content');
         main.innerHTML = '';
 
@@ -27,47 +28,38 @@ export default (function() {
         utils.checkFullScreen(location);
         switch (location) {
             case 'home': 
-                setUpPage('homeScreen');
-                homeScreen();
+                homeScreen.setup(renderPage)
                 break;
             case 'dashboard':
-                import('../templates/dashboard')
-                    .then(dashboard => setUpPage(dashboard.setup()))
+                dashboard.setup(renderPage)
                 break;
             case 'upcoming-lessons':
-                setUpPage(fill(templates.upcomingLessons.page, models.getUpcomingLessonsModel()));
+                upcomingLessons.setup(renderPage)
                 break;
             case 'vote-for-lessons':
-                setUpPage(fill(templates.voteForLesson.page, models.getVoteForLessonsModel()));
-                modalLessons();
+                voteForLesson.setup(renderPage)
                 break;
             case 'edit-profile':
-                // setUpPage('editProfile');
-                setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
-                editProfile();
-                editProfilePicture();
+                editProfile.setup(renderPage)
                 break;
             case 'sign-out':
                 signOut()
                     .then((res) => {
-                        setUpPage('homeScreen');
-                        homeScreen();
+                        homeScreen.setup(renderPage)
                     })
                     .catch((err) => {
                         console.log(err);
                     });
                 break;
             case 'interview-prep':
-                // setUpPage('interviewPrep');
-                setUpPage(fill(templates.interviewPrep.page, models.getInterviewPrepModel()));
-                modalInterview();
+                interviewPrep.setup(renderPage)
                 break;
             case 'recursive-directory':
-                setUpPage(fill(templates.recursiveDirectory.page, models.getRecursiveDirectoryModel()));
+                recursiveDirectory.setup(renderPage)
                 break;
             default:
                 window.location.hash = "dashboard";
-                setUpPage(fill(templates.dashboard.page, models.getDashboardModel()));
+                dashboard.setup(renderPage)
                 break;
 
         // run this after the routing so that if we change the route we get the right titel

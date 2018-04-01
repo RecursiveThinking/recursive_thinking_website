@@ -1,5 +1,14 @@
-import { utils } from '../scripts/global';
-import { templates, fill } from '../scripts/templater';
+import { importTemplate, templates, fill } from '../scripts/templater'
+import { utils, data } from '../scripts/global';
+
+import recursiveDirectoryHtml from './recursiveDirectory.html'
+importTemplate("recursiveDirectory", recursiveDirectoryHtml)
+
+export function setup(renderFunction) {
+  renderFunction(
+    fill(templates.recursiveDirectory.page, getRecursiveDirectoryModel())
+  );
+};
 
 export const getRecursiveDirectoryModel = () => {
 

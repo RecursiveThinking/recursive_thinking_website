@@ -1,5 +1,18 @@
 import { User } from '../scripts/auth';
+
+import { importTemplate, templates, fill } from '../scripts/templater'
 import { utils } from '../scripts/global';
+
+import homeScreenHtml from './homeScreen.html'
+importTemplate("homeScreen", homeScreenHtml)
+
+export function setup(renderFunction) {
+    renderFunction(
+        "homeScreen"
+    );
+
+    homeScreen();
+};
 
 export const homeScreen = () => {
 
