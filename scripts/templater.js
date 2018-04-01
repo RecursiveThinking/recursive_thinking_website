@@ -3,19 +3,6 @@ const templateStore = {}
 // build a template getter
 export const templates = (function () {
   // store the templates we import
-
-  // build out the templateStore object (seen above)
-  document.querySelectorAll('link[type="text/html"][rel="import"]').forEach((file) => {
-    const pageName = file.id || file.name || file.getAttribute('name')
-    templateStore[pageName] = {};
-
-    // file.import is the #document of a file
-    file.import.querySelectorAll('template').forEach((template) => {
-      var templateName = template.id || template.name || template.getAttribute('name')
-      templateStore[file.id][templateName] = template.content // template.content is the document-fragment of a template
-    })
-  })
-
   let path = [] // used for building out an explicit error message
 
   // so... we're going to use a proxy make sure when someone does templateStore.page.template they don't remove it
@@ -56,15 +43,20 @@ export const templates = (function () {
 }());
 
 export function importTemplate(pageName, htmlString) {
-  templateStore[pageName] = {};
+  if (!templateStore[pageName]) {
+    templateStore[pageName] = {};
 
-  var fragment = document.createElement('div');
-  fragment.innerHTML = htmlString;
+    var fragment = document.createElement('div');
+    fragment.innerHTML = htmlString;
 
-  fragment.querySelectorAll('template').forEach((template) => {
-    var templateName = template.id || template.name || template.getAttribute('name')
-    templateStore[pageName][templateName] = template.content // template.content is the document-fragment of a template
-  })
+    fragment.querySelectorAll('template').forEach((template) => {
+      var templateName = template.id || template.name || template.getAttribute('name')
+      templateStore[pageName][templateName] = template.content // template.content is the document-fragment of a template
+    })
+  }
+  else {
+    console.warn('Template already imported!')
+  }
 }
 
 export function fill(template, values) {

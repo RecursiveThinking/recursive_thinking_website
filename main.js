@@ -4,13 +4,6 @@ import redirect from './scripts/redirect';
 import Amplify from 'aws-amplify';
 
 import './index.html'
-import './templates/upcomingLessons.html'
-import './templates/editProfile.html'
-import './templates/interviewPrep.html'
-import './templates/signOut.html'
-import './templates/voteForLesson.html'
-import './templates/recursiveDirectory.html'
-import './templates/homeScreen.html'
 
 import './css/main.css'
 import './css/header.css'
@@ -24,6 +17,13 @@ import './css/interviewPrep.css'
 import './css/recursiveDirectory.css'
 import './css/editProfile.css'
 import './css/responsive.css'
+
+import './public/images/avatar1.png'
+import './public/images/avatar2.png'
+import './public/images/avatar3.png'
+import './public/images/avatar4.png'
+import './public/images/avatar5.png'
+import './public/images/avatar6.png'
 
 Amplify.configure({
     Auth: {

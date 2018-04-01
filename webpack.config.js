@@ -27,21 +27,18 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.html$/,
-                // test: /index\.html$/,
+                test: /index\.html$/,
                 // note: items in the 'use' clause are run bottom -> top
                 use: [ 
                     'file-loader?name=[path][name].[ext]', // run third
                     'extract-loader', // run second
                     'html-loader' // run first
                 ],
-                exclude: [
-                    /dashboard\.html$/
-                ]
             },
             {
-                test: /dashboard\.html$/,
+                test: /\.html$/,
                 use: [ 'html-loader' ],
+                exclude: [ /index\.html$/ ]
             },
             {
                 test: /\.(png|jpg|jpeg|gif|ico)$/,
