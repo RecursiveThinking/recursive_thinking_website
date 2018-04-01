@@ -3,23 +3,22 @@ import { templates, fill } from './templater';
 import { modalInterview } from '../templates/interviewPrep';
 import { homeScreen } from '../templates/homeScreen';
 import { modalLessons } from '../templates/voteForLesson';
-import { setUpDashboard } from '../templates/dashboard';
+// import { setUpDashboard } from '../templates/dashboard';
 import { editProfilePicture } from '../templates/editProfilePicture';
 import { editProfile } from '../templates/editProfile';
 import { utils, data } from './global';
 import { signOut } from './auth';
 
 export default (function() {
-    function appendPage(pageId) {
-        const main = document.getElementById('main-content');
-        main.innerHTML = '';
-        main.appendChild(templates[pageId].page);
-    }
-
     function setUpPage(template) {
         const main = document.getElementById('main-content');
         main.innerHTML = '';
-        main.appendChild(template);
+
+        if (typeof template === "string")
+            main.appendChild(templates[template].page);
+
+        else
+            main.appendChild(template);
     }
 
     // Appends HTML template, then runs associated setup scripts
@@ -27,12 +26,13 @@ export default (function() {
         const location = window.location.hash.replace('#','');
         utils.checkFullScreen(location);
         switch (location) {
-            case 'home':
-                appendPage('homeScreen');
+            case 'home': 
+                setUpPage('homeScreen');
                 homeScreen();
                 break;
             case 'dashboard':
-                setUpPage(fill(templates.dashboard.page, models.getDashboardModel()));
+                import('../templates/dashboard')
+                    .then(dashboard => setUpPage(dashboard.setup()))
                 break;
             case 'upcoming-lessons':
                 setUpPage(fill(templates.upcomingLessons.page, models.getUpcomingLessonsModel()));
@@ -42,7 +42,7 @@ export default (function() {
                 modalLessons();
                 break;
             case 'edit-profile':
-                // appendPage('editProfile');
+                // setUpPage('editProfile');
                 setUpPage(fill(templates.editProfile.page, models.getEditProfileModel()));
                 editProfile();
                 editProfilePicture();
@@ -50,7 +50,7 @@ export default (function() {
             case 'sign-out':
                 signOut()
                     .then((res) => {
-                        appendPage('homeScreen');
+                        setUpPage('homeScreen');
                         homeScreen();
                     })
                     .catch((err) => {
@@ -58,7 +58,7 @@ export default (function() {
                     });
                 break;
             case 'interview-prep':
-                // appendPage('interviewPrep');
+                // setUpPage('interviewPrep');
                 setUpPage(fill(templates.interviewPrep.page, models.getInterviewPrepModel()));
                 modalInterview();
                 break;

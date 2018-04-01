@@ -4,7 +4,6 @@ import redirect from './scripts/redirect';
 import Amplify from 'aws-amplify';
 
 import './index.html'
-import './templates/dashboard.html'
 import './templates/upcomingLessons.html'
 import './templates/editProfile.html'
 import './templates/interviewPrep.html'

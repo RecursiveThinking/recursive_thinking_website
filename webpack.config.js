@@ -17,29 +17,35 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: './main.js'
+        filename: './[name].js'
     },
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                use: [ 'babel-loader?presets=es2015' ],
+                use: [ 'babel-loader' ],
                 exclude: /node_modules/
             },
             {
                 test: /\.html$/,
+                // test: /index\.html$/,
                 // note: items in the 'use' clause are run bottom -> top
                 use: [ 
                     'file-loader?name=[path][name].[ext]', // run third
                     'extract-loader', // run second
                     'html-loader' // run first
+                ],
+                exclude: [
+                    /dashboard\.html$/
                 ]
             },
             {
+                test: /dashboard\.html$/,
+                use: [ 'html-loader' ],
+            },
+            {
                 test: /\.(png|jpg|jpeg|gif|ico)$/,
-                use: [
-                    'file-loader?name=[path][name].[ext]'
-                ]
+                use: [ 'file-loader?name=[path][name].[ext]' ]
             },
             {
                 test: /\.css$/,

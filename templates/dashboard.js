@@ -1,177 +1,117 @@
-import { utils, data } from '../scripts/global';
+import {
+    importTemplate,
+    templates, 
+    fill
+} from '../scripts/templater'
 
-    export const setUpDashboard = () => {
+import {
+    utils,
+    data
+} from '../scripts/global';
 
-        buildUpcomingLesson();
-        buildProfileStatistics();
-        buildLessonsAttending();
+import dashboardHtml from './dashboard.html'
+importTemplate("dashboard", dashboardHtml)
+
+export const setup = () => {
+    // this line takes the import html and builds templates out of it
+    return fill(templates.dashboard.page, getDashboardModel())
+};
+
+/*
+Overall Model Shape
+
+const profileStats = {
+    stats1: [{statCount, statTitle}],
+    stats2: [{statCount, statTitle}]
+}
+
+const upComingLesson = {
+    lessonTitle: string,
+    lessonDateDay: num,
+    lessonDateMonth: string,
+    lessonDateYear: num,
+    lessonDescription: string,
+    lessonsTaughtBy: [{
+        src: string (for image source)
+        alt: string
+    }]
+}
+
+const lessonsAttending = {
+    individualLessons: [{
+        lessonTitle: string,
+        lessonDateDay: num,
+        lessonDateMonth: string,
+        lessonDateYear: num
+    }]
+}
+*/
+
+export const getDashboardModel = () => {
+
+    // #TODO: API Call goes here
+    const profileStats = JSON.parse(localStorage.getItem('allProfileStatistics'));
+
+    const stats1 = profileStats.slice(0, 3);
+    const stats2 = profileStats.slice(3);
+
+    // All Upcoming lesson data should come from the user profile, for now we are simply using generic dummy lesson data
+    const upComingLessons = data.getAllLessons();
+    const upComingLessonDate = utils.getFormattedDate(new Date(upComingLessons[0].date));
+    const filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(upComingLessons[0].lessonTaughtBy);
+
+    // Individual Lesson for upComingLesson Template
+    const upComingLesson = {
+        lessonTitle: upComingLessons[0].title,
+        lessonDateDay: upComingLessonDate.dateOfMonth,
+        lessonDateMonth: upComingLessonDate.monthAsString,
+        lessonDateYear: upComingLessonDate.year,
+        lessonDescription: upComingLessons[0].description,
+        lessonTeachers: filteredTaughtByUserArray.map((userObj) => fill(templates.voteForLesson.displayTaughtByLessons, {
+            imgAttrs: {
+                src: `${userObj["image"]}`,
+                alt: `Lesson will be taught by ${userObj["name"]}`
+            }
+        }))
     };
 
-    const buildProfileStatistics = () => {
-        const dashboardProfileStatisticsContRowOne = document.getElementById('dashboardProfileStatisticsContRowOne');
-        // grab the container
-        // console.log(dashboardProfileStatisticsCont);
-        buildProfileStatisticsRow(0, 2, dashboardProfileStatisticsContRowOne);
-        // dashboardProfileStatisticsCont.appendChild(divCell);
-        const dashboardProfileStatisticsContRowTwo = document.getElementById('dashboardProfileStatisticsContRowTwo');
-        buildProfileStatisticsRow(3, 5, dashboardProfileStatisticsContRowTwo);
-    };
+    let lessonsAttending = upComingLessons.slice(0, 3);
 
-    const buildProfileStatisticsRow = (start, end, container) => {
-        console.log(start, end, container);
-            for(let i = start; i < end + 1; i += 1){
-            const divCell = document.createElement('div');
-            divCell.className = `cell`;
-                //create inner div
-                const divContentProfileStats = document.createElement('div');
-                divContentProfileStats.className = `content profileStatsData`
-                    const h1Data = document.createElement('h1');
-                    h1Data.className = `h1Data fw300 colorGreen`
-                    h1Data.innerText = `${data.getAllProfileStatistics()[i].totalCount}`
-                    // h1 connect
-                    divContentProfileStats.appendChild(h1Data);
-                    // h5
-                    const h5Data = document.createElement('h5');
-                    h5Data.className = `h5Data fw500 colorGrayb9`;
-                    h5Data.innerText = `${data.getAllProfileStatistics()[i].title}`
-                    divContentProfileStats.appendChild(h5Data)
+    return {
+        profileStats: fill(templates.dashboard.profileStats, {
+            stats1: stats1.map((stat) => {
+                return fill(templates.dashboard.individualStat, {
+                    statCount: stat.totalCount,
+                    statTitle: stat.title
+                });
+            }),
+            stats2: stats2.map((stat) => {
+                return fill(templates.dashboard.individualStat, {
+                    statCount: stat.totalCount,
+                    statTitle: stat.title
+                });
+            })
+        }),
 
-                // connect
-                divCell.appendChild(divContentProfileStats);
-            // connect
-            container.appendChild(divCell);
-        }
-        // return container
-    };
+        upComingLesson: fill(templates.dashboard.upComingLesson, {
+            lessonTitle: upComingLesson.lessonTitle,
+            lessonDateDay: upComingLesson.lessonDateDay,
+            lessonDateMonth: upComingLesson.lessonDateMonth,
+            lessonDateYear: upComingLesson.lessonDateYear,
+            lessonDescription: upComingLesson.lessonDescription,
+            lessonTaughtBy: upComingLesson.lessonTeachers,
+        }),
 
-    const buildUpcomingLesson = () => {
-        const allLessons = data.getAllLessons();
-        // select the upComingLessonCard
-        const upComingLessonCard = document.getElementById('upComingLessonCard');
-
-
-        if(allLessons.length > 0){
-            // set what lesson you want to display
-            const upComingLesson = allLessons[0];
-
-            let upComingMeetingDate = new Date(upComingLesson.date)
-            // get date
-            let dayOfWeek = utils.getDayOfWeek(upComingMeetingDate.getDay());
-            // console.log(getDayOfWeek(date.getDay()));
-            let date = upComingMeetingDate.getDate();
-            // console.log(date);
-            let year = upComingMeetingDate.getFullYear();
-            // console.log(year);
-            let monthAsNumberIndex = upComingMeetingDate.getMonth();
-            // console.log(monthAsNumberIndex);
-            let monthAsNumber = monthAsNumberIndex + 1;
-            // console.log(monthAsNumber);
-            let monthAsString = utils.getMonthOfYear(monthAsNumberIndex);
-            // console.log(monthAsString);
-            // allLessions[0].date.getMonth();
-            let upComingDateString = `${year} ${monthAsNumber} ${date}`
-            // console.log(upComingDateString);
-
-            // start of the card
-
-            // create flex container dateRow
-            const divDateRow = document.createElement('div');
-            divDateRow.className = `fc-dateRow contVertCenter`;
-                //add h1
-                const h1 = document.createElement('h1');
-                h1.className = `h1Date colorGreen fw300`;
-                h1.innerText = `${date}`;
-                // connect h1 to div
-                divDateRow.appendChild(h1);
-
-                // div dateRowMonthYear
-                const divDateRowMonthYear = document.createElement('div');
-                divDateRowMonthYear.className = `fc-dateRowMonthYear`
-
-                    // heading Month String
-                    const h4Month = document.createElement('h4');
-                    h4Month.className = `h4MonthYear colorBlack fw500 ttup`;
-                    h4Month.innerText = `${monthAsString}`
-                    // connect
-                    divDateRowMonthYear.appendChild(h4Month);
-                    // heading Year
-                    const h4Year = document.createElement('h4');
-                    h4Year.className = `h4MonthYear colorBlack fw500 ttup`;
-                    h4Year.innerText = `${year}`
-                    // connect
-                    divDateRowMonthYear.appendChild(h4Year);
-
-                // connect div to div
-                divDateRow.appendChild(divDateRowMonthYear);
-
-            // connect div to upComingCard
-            upComingLessonCard.appendChild(divDateRow);
-
-            // hr
-            const hr1 = document.createElement('hr');
-            // connect
-            upComingLessonCard.appendChild(hr1);
-
-            // div lesson title
-            const divLessonTitleDescription = document.createElement('div');
-            divLessonTitleDescription.className = `fc-lessonTitleDescription`;
-
-                // h4 title
-                const h4LessonTitle = document.createElement('h4');
-                h4LessonTitle.className = `h4LessonTitle ucMargin colorBlack fw300`
-                h4LessonTitle.innerText = `${upComingLesson.title}`;
-                // connect
-                divLessonTitleDescription.appendChild(h4LessonTitle);
-
-                // p
-                const pLesson = document.createElement('p');
-                pLesson.innerText = `${upComingLesson.description}`;
-                // connect
-                divLessonTitleDescription.appendChild(pLesson);
-
-                // connect
-                upComingLessonCard.appendChild(divLessonTitleDescription);
-            //
-            const hr2 = document.createElement('hr');
-            // connect
-            upComingLessonCard.appendChild(hr2);
-
-            //
-            const h4LessonTitleTaught = document.createElement('h4');
-            h4LessonTitleTaught.className = `h4LessonTitle ucMargin colorBlack fw300 ttup`;
-            h4LessonTitleTaught.innerText = `Taught By:`
-            // connect
-            upComingLessonCard.appendChild(h4LessonTitleTaught);
-
-            // div
-            const divTaughtByThumbs = document.createElement('fc-taughtByThumbs');
-            divTaughtByThumbs.className = `fc-taughtByThumbs`;
-
-                const loopNumber = utils.getRandomNumber(1, 5);
-                // console.log(loopNumber);
-
-                // function to randomly generate taught by thumbs, # determined by random function above
-                // also - this just
-                let randomGenTaughtByThumbs = utils.generateTaughtByThumbs(loopNumber, divTaughtByThumbs, upComingLesson.title);
-
-                console.log(randomGenTaughtByThumbs);
-                // // img
-                // const imgTaughtByThumbs1 = document.createElement('img');
-                // imgTaughtByThumbs1.className = `avatarThumbRound`;
-                // imgTaughtByThumbs1.setAttribute('src', '../public/images/avatar1.png');
-                // imgTaughtByThumbs1.setAttribute('alt', `lesson ${upComingLesson.title} taught by developer`);
-                // // connect
-                // divTaughtByThumbs.appendChild(imgTaughtByThumbs1);
-
-            // connect
-            upComingLessonCard.appendChild(divTaughtByThumbs);
-        }
-        else{
-            // display a warning
-        }
-    };
-
-    const buildLessonsAttending = () => {
-        const divAttendingLessonCard = document.getElementById('divAttendingLessonCard');
-        console.log(divAttendingLessonCard);
-    };
+        lessonsAttending: fill(templates.dashboard.lessonsAttending, {
+            individualLessons: lessonsAttending.map((lesson) => {
+                const lessonDate = utils.getFormattedDate(new Date(lesson.date));
+                return fill(templates.dashboard.individualLesson, {
+                    lessonTitle: lesson.title,
+                    lessonDateDay: lessonDate.dateOfMonth,
+                    lessonDateMonth: lessonDate.monthAsString,
+                    lessonDateYear: lessonDate.year
+                });
+            })
+        })
+    }
+}
