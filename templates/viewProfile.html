@@ -2,87 +2,16 @@
     <section id="viewProfileHTML">
         <!-- <h1>View Profile</h1> -->
         <div class="content container">
-            <div class="cell">
-                <slot name='mainProfile'></slot>
-                <slot name='aboutProfile'></slot>
-                <slot name='skillsProfessional'></slot>
-                <slot name='skillsSoftware'></slot>
-                <slot name='skillsLanguages'></slot>
-            </div>
-            <div class="cell">
-                <div class="fc-verticalCards card">
-                    <article class="cardTile">
-                        <div class="fc-cardHorz first">
-                            <img src="../public/images/avatar1.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="cardTile">
-                        <!-- <hr> -->
-                        <div class="fc-cardHorz">
-                            <img src="../public/images/avatar2.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="cardTile">
-                        <!-- <hr> -->
-                        <div class="fc-cardHorz">
-                            <img src="../public/images/avatar3.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="cardTile">
-                        <div class="fc-cardHorz">
-                            <img src="../public/images/avatar4.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="cardTile">
-                        <div class="fc-cardHorz">
-                            <img src="../public/images/avatar5.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="cardTile">
-                        <div class="fc-cardHorz">
-                            <img src="../public/images/avatar6.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="cardTile">
-                        <div class="fc-cardHorz">
-                            <img src="../public/images/avatar1.png" alt="" class="imgAvatarS">
-                            <div class="fc-CardVertText">
-                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                                <h5 class="colorBlack fw300">UX Designer</h5>
-                                <h6 class="colorBlack fw300">Seattle, WA</h6>
-                            </div>
-                        </div>
-                    </article>
+            <div class="grid gutters twothirds">
+                <div class="cell">
+                    <slot name='mainProfile'></slot>
+                    <slot name='aboutProfile'></slot>
+                    <slot name='skillsProfessional'></slot>
+                    <slot name='skillsSoftware'></slot>
+                    <slot name='skillsLanguages'></slot>
+                </div>
+                <div class="cell">
+                    <slot name="otherProfiles"></slot>
                 </div>
             </div>
         </div>
@@ -218,14 +147,41 @@
                     </h4>
                     <hr>
                 </div>
-                <div class="fc-interviewQuestionTags">
-                    <slot name="skill"></slot>
-                </div>
             </div>
+        </div>
+        <div class="skillCategoryContainer">
+            <slot name="skill"></slot>
         </div>
     </article>
 </template>
 
 <template id="skill">
-    <div class="tagInterviewQuestion colorGray42 fw500"><slot name='skill'></slot></div>
+    <div class="skillCategory">
+        <slot name='skill'></slot>
+    </div>
+</template>
+
+<template id="otherProfiles">
+    <div class="fc-verticalCards card">
+        <slot name="profile"></slot>
+    </div>
+</template>
+
+<template id="profile">
+    <article class="cardTile">
+        <div class="fc-cardHorz first">
+            <img slot="imageAttributes" alt="" class="imgAvatarS">
+            <div class="fc-CardVertText">
+                <h4 class="colorBlack fw900">
+                    <slot name="name"></slot>
+                </h4>
+                <h5 class="colorBlack fw300">
+                    <slot name="title"></slot>
+                </h5>
+                <h6 class="colorBlack fw300">
+                    <slot name="city"></slot>, <slot name="state"></slot>
+                </h6>
+            </div>
+        </div>
+    </article>
 </template>

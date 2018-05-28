@@ -245,6 +245,23 @@ form button {
     padding-left: .7rem;
 }
 
+.skillCategoryContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 1.5rem 2.5rem;
+}
+
+.skillCategory {
+    font-size: 2rem;
+    letter-spacing: 1.2px;
+    padding: 1rem 2rem;
+    border: 1px solid #00b371;
+    border-radius: 2.3rem;
+    margin: .5rem .5rem .5rem .5rem;
+}
+
 /* ============================================ */
 /*       Modal CSS         */
 /* ============================================ */
@@ -310,7 +327,6 @@ form {
     margin-top: 1rem;
     padding: 1rem;
 }
-
 
 /* ============================================ */
 /*       Modal CSS for VFL and Interview        */

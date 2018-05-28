@@ -17,31 +17,6 @@ export function setup(renderFunction) {
     );
 };
 
-
-// userSchema = {
-//     username: - String - uuid for each user due to cognito
-//     picture: - String - upload .jpg or .png under 300kb to our S3 save url that comes back, (we could accept gravitar since we can control the url and just ask for gravitar username)
-//     name: 'Porg Dev1'
-//     created - - Date String - JS date string new Date().toString()
-//     birthday: - Date String - JS date string Date().toString()
-//     city: - String - city of residence
-//     state: - String - shorthand state e.g. WA
-//     title: - String -  Title of dev
-//     employer: - String - Free input
-//     github: - String - github username (we construct url ourselves)
-//     codepen: - String - codepen username (we construct url ourselves)
-//     linkedin: - String - linkedin username (we construct url ourselves)
-//     website: - String - free input website ... dangerous field, might want to not link it have it just be text
-//     resume: - String<S3URL> - Base64 the file and send it up to our S3 get the link from S3 back (validate only take certain extensions .doc .docx to S3)
-//     bio: - String - users bio max 500 words ''
-//     experience: - Number - Years experience (?)
-//     rank: Number - Rank in RT (white belt, green belt, black)etc... for mentor/project pairing,
-//     skillsProfessional: Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
-//     skillsSoftware:  Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
-//     skillsLanguages: Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
-//     lessonsAttending:  Array<Strings> - array of ids of lessons dev is planning to attend
-// }
-
 const viewProfileUser = {
     username: 'PorgDev1',
     picture: '../public/images/avatar1.png',
@@ -72,6 +47,7 @@ export const getViewProfileModel = () => {
     // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     // console.log(currentUser);
 
+    const allUsers = JSON.parse(localStorage.getItem('allUsers'));
     const viewProfileUserAge = Math.floor((Date.now() - Date.parse(viewProfileUser.birthday)) / (24 * 3600 * 365.25 * 1000));
 
     // Still missing "time with recursive thinking" as a userSchema
@@ -127,6 +103,19 @@ export const getViewProfileModel = () => {
             skill: viewProfileUser.skillsLanguages.map((skill) => {
                 return fill(templates.viewProfile.skill, {
                     skill
+                })
+            })
+        }),
+        otherProfiles: fill(templates.viewProfile.otherProfiles, {
+            profile: allUsers.map((user) => {
+                return fill(templates.viewProfile.profile, {
+                    imageAttributes: {
+                        src: user.image
+                    },
+                    name: user.name,
+                    title: user.title,
+                    city: user.city,
+                    state: user.state
                 })
             })
         })
