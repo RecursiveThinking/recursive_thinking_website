@@ -1,29 +1,29 @@
 <template id="page">
-<section id="editProfileHTML">
-    <div class="content container">
-        <!-- THIS SECTION IS FOR THE SAVE CHANGES DROPDOWN -->
-        <div class="grid full">
-            <div class="cell">
-                <!-- JUST ADD DISPLAY: BLOCK; to Article -->
-                <article class="changeProfile card">
-                    <div class="fc-changeProfileText">
-                        <h2 class="h2TitleChange fw300 colorWhiteff">Looks like you've made a change.  Save your changes?</h2>
-                        <button id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
-                    </div>
-                </article>
-            </div>
-        </div>
-        <div class="cardContainer">
+    <section id="editProfileHTML">
+        <div class="content container">
+            <!-- THIS SECTION IS FOR THE SAVE CHANGES DROPDOWN -->
             <div class="grid full">
                 <div class="cell">
-                    <article class="editProfile card">
-                        <slot name="editProfile"></slot>
+                    <!-- JUST ADD DISPLAY: BLOCK; to Article -->
+                    <article class="changeProfile card">
+                        <div class="fc-changeProfileText">
+                            <h2 class="h2TitleChange fw300 colorWhiteff">Looks like you've made a change. Save your changes?</h2>
+                            <button id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
+                        </div>
                     </article>
                 </div>
             </div>
+            <div class="cardContainer">
+                <div class="grid full">
+                    <div class="cell">
+                        <article class="editProfile card">
+                            <slot name="editProfile"></slot>
+                        </article>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 </template>
 
 <template id="currentUserProfile">
@@ -127,8 +127,9 @@
                     <input class="colorGray42 fw300" type="url" name="linkPortfolio" placeholder="Please enter Portfolio URL" slot="profileLinkPortfolio">
                 </div>
                 <div class="fc-input-profile">
-                    <label class="colorGray42 fw900" for="linkResume">R&eacute;sum&eacute;  :</label>
-                    <input class="colorGray42 fw300 resumeInput" type="text" name="linkResume" placeholder="R&eacute;sum&eacute;: (PDF format please)" slot="profileLinkResume">
+                    <label class="colorGray42 fw900" for="linkResume">R&eacute;sum&eacute; :</label>
+                    <input class="colorGray42 fw300 resumeInput" type="text" name="linkResume" placeholder="R&eacute;sum&eacute;: (PDF format please)"
+                        slot="profileLinkResume">
                     <button class="btn btnFill greenNavButton uploadButton">Upload</button>
                 </div>
             </div>
@@ -142,7 +143,9 @@
             <div class="grid gutters half">
                 <div class="cell aboutTextCol">
                     <!-- <div class="fc-aboutCont"> -->
-                        <textarea id="bio" rows="8" cols="12" placeholder="Please enter Information About Yourself"><slot name="profileAboutUser"></slot></textarea>
+                    <textarea id="bio" rows="8" cols="12" placeholder="Please enter Information About Yourself">
+                        <slot name="profileAboutUser"></slot>
+                    </textarea>
                     <!-- </div> -->
                     <!-- <div id="counter" class="counterBot">You have 500 characters left.</div> -->
                 </div>
@@ -253,7 +256,9 @@
 
 <template id="currentUserSkillProfessional">
     <div class="fc-skillItem">
-        <h5 class="skillItem colorGray42 fw500"><slot name="skillItemProf"></h5>
+        <h5 class="skillItem colorGray42 fw500">
+            <slot name="skillItemProf">
+        </h5>
         <div class="skillItemDash"></div>
         <h5 class="skillItemClose colorGreen fw500" slot="delSkillItemProf">X</h5>
         <!-- slot="delSkillItemProf" -->
@@ -262,7 +267,9 @@
 
 <template id="currentUserSkillSoftware">
     <div class="fc-skillItem">
-        <h5 class="skillItem colorGray42 fw500"><slot name="skillItemSoft"></h5>
+        <h5 class="skillItem colorGray42 fw500">
+            <slot name="skillItemSoft">
+        </h5>
         <div class="skillItemDash"></div>
         <h5 class="skillItemClose colorGreen fw500">X</h5>
     </div>
@@ -270,7 +277,9 @@
 
 <template id="currentUserSkillLanguage">
     <div class="fc-skillItem">
-        <h5 class="skillItem colorGray42 fw500"><slot name="skillItemLang"></h5>
+        <h5 class="skillItem colorGray42 fw500">
+            <slot name="skillItemLang">
+        </h5>
         <div class="skillItemDash"></div>
         <h5 class="skillItemClose colorGreen fw500">X</h5>
     </div>

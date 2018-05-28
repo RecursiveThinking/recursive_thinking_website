@@ -1,239 +1,231 @@
-<!-- <template id="page">
-<section id="viewProfileHTML">
-    
-</section>
-</template> -->
-
-<!-- <template id="selectedUserProfile">
-    
-</template> -->
-<section id="viewProfile">
-    <!-- <h1>View Profile</h1> -->
-    <div class="grid twothirds">
-        <div class="cell">
-            <article class="card">
-                <div class="grid gutters full">
-                    <div class="cell">
-                        <div class="grid gutters twothirds">
-                            <div class="cell">
-                                <div class="fc-profileInfo">
-                                    <img class="imgAvatarL" src="../public/images/avatar1.png" alt="">
-                                    <div class="fc-profileInfoText">
-                                        <h1 class="colorGray42 fw500">Hailey Skelcher</h1>
-                                        <h4 class="colorGray42 fw300">UX Designer</h4>
-                                        <div class="fc-profileInfoText-fine">
-                                            <h6 class="colorGray42 fw900 ttup">Age:</h6>
-                                            <h6 class="colorGray42 fw500">28</h6>
-                                        </div>
-                                        <div class="fc-profileInfoText-fine">
-                                            <h6 class="colorGray42 fw900 ttup">Location:</h6>
-                                            <h6 class="colorGray42 fw500">Seattle, WA</h6>
-                                        </div>
-                                        <div class="fc-profileInfoText-fine">
-                                            <h6 class="colorGray42 fw900 ttup">Company:</h6>
-                                            <h6 class="colorGray42 fw500">All Star Directories</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cell">
-                                <div class="fc-profileLinks">
-                                    <div class="fc-profileLinks-icons">
-                                        <div class="icon">
-                                            <i class="colorGrayc9 fa fa fa-git-square"></i>
-                                            <h6 class="colorGray42 fw300">GitHub</h6>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="colorGreen fa fa fa-codepen"></i>
-                                            <h6 class="colorGray42 fw300">CodePen</h6>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="colorGreen fa fa-linkedin-square"></i>
-                                            <h6 class="colorGray42 fw300">LinkedIn</h6>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="colorGreen fa fa-id-card-o"></i>
-                                            <h6 class="colorGray42 fw300">Resume</h6>
-                                        </div>
-                                    </div>
-                                    <div class="fc-profileLinks-port">
-                                        <h5 class="colorGreen fw900">Portfolio</h5>
-                                    </div>
-                                </div>
+<template id="page">
+    <section id="viewProfileHTML">
+        <!-- <h1>View Profile</h1> -->
+        <div class="content container">
+            <div class="cell">
+                <slot name='mainProfile'></slot>
+                <slot name='aboutProfile'></slot>
+                <slot name='skillsProfessional'></slot>
+                <slot name='skillsSoftware'></slot>
+                <slot name='skillsLanguages'></slot>
+            </div>
+            <div class="cell">
+                <div class="fc-verticalCards card">
+                    <article class="cardTile">
+                        <div class="fc-cardHorz first">
+                            <img src="../public/images/avatar1.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </article>
-            <br><br><br>
-            <article class="card">
-                <div class="grid gutters full">
-                    <div class="cell">
-                        <div class="grid gutters twothirds">
-                            <div class="cell">
-                                <div class="fc-profileAbout">
-                                    <h4 class="colorGrayb9 fw900 ttup">About</h4>
-                                    <hr>
-                                    <div class="fc-profileAboutText">
-                                        <p>I am an innovative and passionate user experience designer with a broad portfolio of product design solutions. I utilize creative, motivational and technical communication skills to facilitate team cohesiveness and efficiently achieve objectives. My passion for learning and professional develpment has led to an immersion in programming, UX design, UI design, graphic design, motion graphics and animation.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cell">
-                                <div class="fc-profileAboutExp">
-                                    <div class="fc-profileAboutExp-time">
-                                        <h3 class="h3NumberExp fw300 colorGray42">10</h3>
-                                        <h4 class="h4Descript fw500 colorGrayb9">Years of Experience</h4>
-                                    </div>
-                                    <div class="fc-profileAboutExp-time">
-                                        <h3 class="h3NumberExp fw300 colorGray42">3<span class="h3NumberExpSpan fw700 colorGray42 ttlow">years</span>10<span class="h3NumberExpSpan fw700 colorGray42 ttlow">months</span></h3>
-                                        <h4 class="h4Descript fw500 colorGrayb9">Time with Recursive Thinking</h4>
-                                    </div>
-                                </div>
+                    </article>
+                    <article class="cardTile">
+                        <!-- <hr> -->
+                        <div class="fc-cardHorz">
+                            <img src="../public/images/avatar2.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
                             </div>
                         </div>
-                    </div>
+                    </article>
+                    <article class="cardTile">
+                        <!-- <hr> -->
+                        <div class="fc-cardHorz">
+                            <img src="../public/images/avatar3.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="cardTile">
+                        <div class="fc-cardHorz">
+                            <img src="../public/images/avatar4.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="cardTile">
+                        <div class="fc-cardHorz">
+                            <img src="../public/images/avatar5.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="cardTile">
+                        <div class="fc-cardHorz">
+                            <img src="../public/images/avatar6.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="cardTile">
+                        <div class="fc-cardHorz">
+                            <img src="../public/images/avatar1.png" alt="" class="imgAvatarS">
+                            <div class="fc-CardVertText">
+                                <h4 class="colorBlack fw900">Haily Skelcher</h4>
+                                <h5 class="colorBlack fw300">UX Designer</h5>
+                                <h6 class="colorBlack fw300">Seattle, WA</h6>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-            </article>
-            <br><br><br>
-            <article class="card">
-                <div class="grid gutters full">
-                    <div class="cell">
-                        <div class="fc-skillViewProfile">
-                            <h4 class="colorGrayb9 fw900 ttup">Professional Skills</h4>
-                            <hr>
-                        </div>
-                        <div class="fc-interviewQuestionTags">
-                            <div class="tagInterviewQuestion colorGray42 fw500">User Centered Design</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Interaction Design</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Wireframing</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Information Architecture</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Visual Design</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">User Research</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">User Experience Design</div>
-                            <!-- <div class="tagInterviewQuestion colorGray42 fw500">Information Architecture</div> -->
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <br><br><br>
-            <article class="card">
-                <div class="grid gutters full">
-                    <div class="cell">
-                        <div class="fc-skillViewProfile">
-                            <h4 class="colorGrayb9 fw900 ttup">Professional Skills</h4>
-                            <hr>
-                        </div>
-                        <div class="fc-interviewQuestionTags">
-                            <div class="tagInterviewQuestion colorGray42 fw500">Sketch</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Balsamiq</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">OmniGraffle</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Axure</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">UX Pin</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">InVision</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Principal</div>
-                            <!-- <div class="tagInterviewQuestion colorGray42 fw500">Information Architecture</div> -->
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <br><br><br>
-            <article class="card">
-                <div class="grid gutters full">
-                    <div class="cell">
-                        <div class="fc-skillViewProfile">
-                            <h4 class="colorGrayb9 fw900 ttup">Professional Skills</h4>
-                            <hr>
-                        </div>
-                        <div class="fc-interviewQuestionTags">
-                            <div class="tagInterviewQuestion colorGray42 fw500">User Centered Design</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Interaction Design</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Wireframing</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Information Architecture</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">Visual Design</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">User Research</div>
-                            <div class="tagInterviewQuestion colorGray42 fw500">User Experience Design</div>
-                            <!-- <div class="tagInterviewQuestion colorGray42 fw500">Information Architecture</div> -->
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-        <div class="cell">
-            <div class="fc-verticalCards card">
-                <article class="cardTile">
-                    <div class="fc-cardHorz first">
-                        <img src="../public/images/avatar1.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
-                <article class="cardTile">
-                    <!-- <hr> -->
-                    <div class="fc-cardHorz">
-                        <img src="../public/images/avatar2.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
-                <article class="cardTile">
-                    <!-- <hr> -->
-                    <div class="fc-cardHorz">
-                        <img src="../public/images/avatar3.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
-                <article class="cardTile">
-                    <div class="fc-cardHorz">
-                        <img src="../public/images/avatar4.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
-                <article class="cardTile">
-                    <div class="fc-cardHorz">
-                        <img src="../public/images/avatar5.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
-                <article class="cardTile">
-                    <div class="fc-cardHorz">
-                        <img src="../public/images/avatar6.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
-                <article class="cardTile">
-                    <div class="fc-cardHorz">
-                        <img src="../public/images/avatar1.png" alt="" class="imgAvatarS">
-                        <div class="fc-CardVertText">
-                            <h4 class="colorBlack fw900">Haily Skelcher</h4>
-                            <h5 class="colorBlack fw300">UX Designer</h5>
-                            <h6 class="colorBlack fw300">Seattle, WA</h6>
-                        </div>
-                    </div>
-                </article>
             </div>
         </div>
+    </section>
+</template>
+
+<template id="mainProfile">
+    <article class="card">
+        <div class="grid gutters full">
+            <div class="cell">
+                <div class="grid gutters twothirds">
+                    <div class="cell">
+                        <div class="fc-profileInfo">
+                            <img slot="imageAttributes" class="avatarPicXL">
+                            <div class="fc-profileInfoText">
+                                <h1 class="colorGray42 fw500">
+                                    <slot name="name"></slot>
+                                </h1>
+                                <h4 class="colorGray42 fw300">
+                                    <slot name="title"></slot>
+                                </h4>
+                                <div class="fc-profileInfoText-fine">
+                                    <h6 class="colorGray42 fw900 ttup">Age:</h6>
+                                    <h6 class="colorGray42 fw500">
+                                        <slot name="age"></slot>
+                                    </h6>
+                                </div>
+                                <div class="fc-profileInfoText-fine">
+                                    <h6 class="colorGray42 fw900 ttup">Location:</h6>
+                                    <h6 class="colorGray42 fw500">
+                                        <slot name="city"></slot>,
+                                        <slot name="state"></slot>
+                                    </h6>
+                                </div>
+                                <div class="fc-profileInfoText-fine">
+                                    <h6 class="colorGray42 fw900 ttup">Company:</h6>
+                                    <h6 class="colorGray42 fw500">
+                                        <slot name="employer"></slot>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <slot name="profileLinks"></slot>
+                </div>
+            </div>
+        </div>
+    </article>
+</template>
+
+<template id="profileLinks">
+    <div class="cell">
+        <div class="fc-profileLinks">
+            <div class="fc-profileLinks-icons">
+                <a slot="github">
+                    <div class="icon">
+                        <i class="colorGrayc9 fa fa fa-git-square"></i>
+                        <h6 class="colorGray42 fw300">GitHub</h6>
+                    </div>
+                </a>
+                <a slot="codepen">
+                    <div class="icon">
+                        <i class="colorGreen fa fa fa-codepen"></i>
+                        <h6 class="colorGray42 fw300">CodePen</h6>
+                    </div>
+                </a>
+                <a slot="linkedin">
+                    <div class="icon">
+                        <i class="colorGreen fa fa-linkedin-square"></i>
+                        <h6 class="colorGray42 fw300">LinkedIn</h6>
+                    </div>
+                </a>
+                <div class="icon">
+                    <i class="colorGreen fa fa-id-card-o"></i>
+                    <h6 class="colorGray42 fw300">Resume</h6>
+                </div>
+            </div>
+            <a slot="website">
+                <div class="fc-profileLinks-port">
+                    <h5 class="colorGreen fw900">Portfolio</h5>
+                </div>
+            </a>
+        </div>
     </div>
-</section>
+</template>
+
+<template id="aboutProfile">
+    <article class="card">
+        <div class="grid gutters full">
+            <div class="cell">
+                <div class="grid gutters twothirds">
+                    <div class="cell">
+                        <div class="fc-profileAbout">
+                            <h4 class="colorGrayb9 fw900 ttup">About</h4>
+                            <hr>
+                            <div class="fc-profileAboutText">
+                                <p>
+                                    <slot name="bio"></slot>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="fc-profileAboutExp">
+                            <div class="fc-profileAboutExp-time">
+                                <h3 class="h3NumberExp fw300 colorGray42">
+                                    <slot name="experience"></slot>
+                                </h3>
+                                <h4 class="h4Descript fw500 colorGrayb9">Years of Experience</h4>
+                            </div>
+                            <div class="fc-profileAboutExp-time">
+                                <h3 class="h3NumberExp fw300 colorGray42">3
+                                    <span class="h3NumberExpSpan fw700 colorGray42 ttlow">years</span>10
+                                    <span class="h3NumberExpSpan fw700 colorGray42 ttlow">months</span>
+                                </h3>
+                                <h4 class="h4Descript fw500 colorGrayb9">Time with Recursive Thinking</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</template>
+
+<template id="skills">
+    <article class="card">
+        <div class="grid gutters full">
+            <div class="cell">
+                <div class="fc-skillViewProfile">
+                    <h4 class="colorGrayb9 fw900 ttup">
+                        <slot name="skillType"></slot>
+                    </h4>
+                    <hr>
+                </div>
+                <div class="fc-interviewQuestionTags">
+                    <slot name="skill"></slot>
+                </div>
+            </div>
+        </div>
+    </article>
+</template>
+
+<template id="skill">
+    <div class="tagInterviewQuestion colorGray42 fw500"><slot name='skill'></slot></div>
+</template>

@@ -16,6 +16,7 @@ import './css/voteForLesson.css'
 import './css/interviewPrep.css'
 import './css/recursiveDirectory.css'
 import './css/editProfile.css'
+import './css/viewProfile.css'
 import './css/responsive.css'
 
 import './public/images/avatar1.png'

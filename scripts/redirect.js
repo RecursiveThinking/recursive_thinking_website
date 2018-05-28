@@ -6,6 +6,7 @@ import * as dashboard from '../templates/dashboard'
 import * as upcomingLessons from '../templates/upcomingLessons'
 import * as voteForLesson from '../templates/voteForLesson'
 import * as editProfile from '../templates/editProfile'
+import * as viewProfile from '../templates/viewProfile'
 import * as interviewPrep from '../templates/interviewPrep'
 import * as recursiveDirectory from '../templates/recursiveDirectory'
 import * as homeScreen from '../templates/homeScreen'
@@ -41,6 +42,9 @@ export default (function() {
                 break;
             case 'edit-profile':
                 editProfile.setup(renderPage)
+                break;
+            case 'view-profile':
+                viewProfile.setup(renderPage);
                 break;
             case 'sign-out':
                 signOut()
