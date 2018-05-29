@@ -32,9 +32,9 @@
     /* margin-bottom: 0; */
     letter-spacing: 2.2px;
 }
-#recursiveDirectoryHTML .devDirName:hover {
+/* #recursiveDirectoryHTML .devDirName:hover {
     color: #00b371;
-}
+} */
 #recursiveDirectoryHTML .devDirTitle {
     font-size: 2.8rem;
     margin-bottom: .4rem;
@@ -58,6 +58,11 @@
     justify-content: center;
     align-items: center; 
     text-align: center; 
+    cursor: pointer;
+}
+
+#recursiveDirectoryHTML .directory-card:hover .devDirName, #recursiveDirectoryHTML .directory-card:hover .devDirTitle, #recursiveDirectoryHTML .directory-card:hover .devLocation{
+    color:  #00b371;
 }
 
 .btnTemp {

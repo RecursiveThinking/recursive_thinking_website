@@ -15,6 +15,10 @@ export function setup(renderFunction) {
     renderFunction(
         fill(templates.viewProfile.page, getViewProfileModel())
     );
+
+    document.getElementById("returnToDirectory").onclick = () => {
+        utils.navigateToPage("#recursive-directory");
+    }
 };
 
 const viewProfileUser = {
