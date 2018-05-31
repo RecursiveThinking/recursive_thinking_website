@@ -62,8 +62,10 @@ export default (function() {
                 recursiveDirectory.setup(renderPage)
                 break;
             default:
-                window.location.hash = "dashboard";
-                dashboard.setup(renderPage)
+                // window.location.hash = "dashboard";
+                // dashboard.setup(renderPage)
+                window.location.hash = "home";
+                homeScreen.setup(renderPage)
                 break;
 
         // run this after the routing so that if we change the route we get the right titel
