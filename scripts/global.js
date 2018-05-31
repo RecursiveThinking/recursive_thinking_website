@@ -635,19 +635,6 @@ const getFormattedDate = (dateToFormat) => {
 
 }
 
-// function to fix vote string based on number
-// const getLessonVoteString = (lesson) => {
-//     let createVoteString = '';
-//     if (lesson.lessonVotes.length === 0) {
-//         createVoteString = `No Votes`;
-//     } else if (lesson.lessonVotes.length === 1) {
-//         createVoteString = `${lesson.lessonVotes.length} Vote`;
-//     } else if (lesson.lessonVotes.length > 1) {
-//         createVoteString = `${lesson.lessonVotes.length} Votes`
-//     }
-//     return createVoteString;
-// }
-
 const getCountString = (condString, array) => {
     let createCountString = '';
     let count;
@@ -751,7 +738,6 @@ function getButtonHTMLString(boolVal) {
         return `<button class="btn btnFill fw500" type="submit">Vote for this</button>`
     }
 }
-
 
 //editProfile functions
 function getAgeEditProfile(dateOfBirth){
@@ -869,6 +855,7 @@ const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
         toggleCharCountText(count, limit, charCount);
     });
 };
+
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
