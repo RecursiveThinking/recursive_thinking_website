@@ -22,17 +22,18 @@ const signUp = (info) => {
         password,
         attributes: {
             email,
-            name,
-            "custom:title": 'Developer',
-            "custom:rank": 'a',
-            "custom:website": 'default',
-            "custom:linkedin": 'default',
-            "custom:picture": 'default',
-            "custom:bio": 'default',
-            "custom:quote": 'default',
-            "custom:city": 'default',
-            "custom:state": 'default',
-            "custom:experience": 'default'
+            name
+            // name,
+            // "custom:title": 'Developer',
+            // "custom:rank": 'a',
+            // "custom:website": 'default',
+            // "custom:linkedin": 'default',
+            // "custom:picture": 'default',
+            // "custom:bio": 'default',
+            // "custom:quote": 'default',
+            // "custom:city": 'default',
+            // "custom:state": 'default',
+            // "custom:experience": 'default'
             // other custom attributes
         }
     })
