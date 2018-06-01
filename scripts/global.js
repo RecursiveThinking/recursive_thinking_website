@@ -880,33 +880,42 @@ const setWindowOffsetsLayout = () => {
     // console.log("innerWidth", window.innerWidth);
     // console.log("outerWidth", window.outerWidth);
     const header = document.getElementsByTagName("header")[0]
-    // console.log(header);
     const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
-    // console.log("headerHeight: ", headerHeight);
-    const sideBar = document.getElementById("sidebar");
-    const sideBarWidth = Math.floor(window.innerWidth * .2);
-    // console.log("sideBarWidth: ", sideBarWidth);
-    const sideBarHeightOffsetTop = headerHeight;
     const mainContainer = document.getElementById("mainWindow");
-    // console.log(mainContainer);
-    const mainContainerOffsetLeft = sideBarWidth;
-    // console.log("mainContainerOffLeft: ", mainContainerOffsetLeft);
     const mainContainerOffsetTop = headerHeight;
-    // console.log("mainContainerOffTop: ", mainContainerOffsetTop);
     const footerHeight = document.getElementsByTagName("footer")[0].offsetHeight;
+    // console.log(header);
+    // console.log("headerHeight: ", headerHeight);
+
+
+    if(window.location.hash != "#home"){
+        const sideBar = document.getElementById("sidebar");
+        const sideBarWidth = Math.floor(window.innerWidth * .2);
+        const sideBarHeightOffsetTop = headerHeight;
+        const mainContainerOffsetLeft = sideBarWidth;
+
+        let sidebarHeight = window.innerHeight - headerHeight - footerHeight;
+
+        sideBar.style.marginTop = `${headerHeight}px`;
+        sideBar.style.height = `${sidebarHeight}px`;
+        sideBar.style.width = `${sideBarWidth}px`;
+        mainContainer.style.marginLeft = `${mainContainerOffsetLeft}px`;
+    }
+
+    // console.log("sideBarWidth: ", sideBarWidth);
+    // console.log(mainContainer);
+    // console.log("mainContainerOffLeft: ", mainContainerOffsetLeft);
+
+    // console.log("mainContainerOffTop: ", mainContainerOffsetTop);
+
     // console.log("footerHeight: ", footerHeight);
-    let sidebarHeight = window.innerHeight - headerHeight - footerHeight;
+
     // console.log(sidebarHeight);
     // header
     // console.log(header.offsetTop);
     // header.offsetTop = `${headerHeight}px`;
-    sideBar.style.marginTop = `${headerHeight}px`;
-    sideBar.style.height = `${sidebarHeight}px`
-    sideBar.style.width = `${sideBarWidth}px`
     mainContainer.style.marginTop = `${headerHeight}px`;
     mainContainer.style.marginBottom = `${footerHeight}px`;
-    mainContainer.style.marginLeft = `${mainContainerOffsetLeft}px`
-
     // console.log(document.getElementsByTagName("header"));
 }
 
