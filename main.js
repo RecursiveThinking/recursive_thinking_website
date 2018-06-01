@@ -68,7 +68,7 @@ Amplify.configure({
 // RTW
 // App Client Id:  57te4kfc511ietb5dpe3tkkm3e
 
-// Federated Entities - recursivethinkingindentity - edit - 
+// Federated Entities - recursivethinkingindentity - edit -
 
 //  category authentication providers - cognito tab
 

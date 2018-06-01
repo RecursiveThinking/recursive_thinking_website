@@ -60,6 +60,7 @@ export default (function() {
     }
 
     window.onload = function() {
+        document.getElementById('sidebar').style.visibility = 'hidden';
         buildCurrentUserDashInfo()
         const recursiveApi = new api();
         recursiveApi.init();
@@ -71,7 +72,14 @@ export default (function() {
             utils.setWindowOffsetsMobile();
         }
     };
-    
+
+    window.onhashchange = () => {
+        if (document.getElementById('sidebar').style.visibility === 'hidden') {
+          document.getElementById('sidebar').style.visibility = 'visible';
+        }
+    };
+
+
     function buildCurrentUserDashInfo(){
         const currentUser = data.getCurrentUser();
         // console.log("In Function");
@@ -105,5 +113,5 @@ export default (function() {
         //connect
         currentUserDashInfo.appendChild(divDevInfo);
     }
-    
+
 })();
