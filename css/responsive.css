@@ -113,7 +113,7 @@
     
     body > footer .copyAlignment {
         text-align: center;
-        padding: .25rem 0 1rem 0;
+        /* padding: .25rem 0 1rem 0; */
     }
     body > footer .iconAlignment {
         text-align: center;
