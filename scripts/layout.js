@@ -60,7 +60,12 @@ export default (function() {
     }
 
     window.onload = function() {
-        document.getElementById('sidebar').style.visibility = 'hidden';
+        if(window.location.hash == "#home"){
+            document.getElementById('sidebar').style.visibility = 'hidden';
+        }
+        else{
+            document.getElementById('sidebar').style.visibility = 'visible';
+        }
         buildCurrentUserDashInfo()
         const recursiveApi = new api();
         recursiveApi.init();
