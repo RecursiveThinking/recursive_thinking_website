@@ -1,17 +1,43 @@
 import { User } from './auth';
+// Austin's Api
+// let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
 
-let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
+// Avsean's Api
+let apiUrl = "https://q5yoreb3lj.execute-api.us-west-2.amazonaws.com/Prod";
 
 function signUp(info) {
     User.signUp(info);
 }
 
-// Get all developer profiles
-function getDeveloperProfiles() {
-    const resource = "/developer";
+
+function postDeveloperById(id){
+    const resource = `/developers/${id}`;
     const options = {
-        method: "GET"
+        method: "POST"
     };
+    return initFetchCall(resource, options);
+}
+
+// Get all developer profiles
+async function getDeveloperProfiles() {
+
+    const resource = "/developers";
+
+    // let token = await User.getUserSession().idToken.jwtToken;
+    
+    let token;
+
+    await User.getUserSession((user) => {
+        token = user.idToken.jwtToken;
+    });
+
+    const options = {
+        method: "GET",
+        headers: {
+            Authorization: token
+        }
+    };
+
     return initFetchCall(resource, options);
 }
 
@@ -116,6 +142,7 @@ function postEditProfile(developerId, profileInfo) {
 function initFetchCall(resource, options) {
     fetch(apiUrl + resource, options)
         .then((data) => {
+            console.log(data);
             return data.json();
         })
         .then((response) => {
@@ -129,6 +156,7 @@ function initFetchCall(resource, options) {
 }
 
 export default {
+    postDeveloperById,
     getDeveloperProfiles,
     getUpcomingLessons,
     postUpcomingLessons,

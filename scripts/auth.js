@@ -77,11 +77,15 @@ const getUserPoolUser = () => {
     return Auth.currentUserPoolUser()
 };
 
-const getUserSession = () => {
+
+const getUserSession = (cb) => {
     //Get current user's session
     Auth.currentSession()
         .then((user) => {
-            console.log('current user session ', user);
+            // console.log('current user session ', user);
+
+            // TODO: Do we want to return the user, or accept and invoke a callback?
+            cb(user);
             // do something with signed in user session
         })
         .catch(err => console.log("There was a problem getting session ", err));

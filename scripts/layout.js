@@ -24,7 +24,7 @@ export default (function() {
             const sidebarItems = document.getElementsByClassName('sidebar-item');
             const hamburger = document.getElementById('hamburger');
             const sideBarItemsArray = Array.from(sidebarItems);
-            serverApi.getDeveloperProfiles();
+            // serverApi.getDeveloperProfiles();
             sideBarItemsArray.forEach((item) => {
                 item.addEventListener('click', () => {
                     const pageId = item.getAttribute('data-pageId');

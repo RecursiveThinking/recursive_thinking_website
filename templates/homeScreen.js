@@ -2,6 +2,7 @@ import { User } from '../scripts/auth';
 
 import { importTemplate, templates, fill } from '../scripts/templater'
 import { utils } from '../scripts/global';
+import serverApi from '../scripts/serverApi.js';
 
 import homeScreenHtml from './homeScreen.html'
 importTemplate("homeScreen", homeScreenHtml)
@@ -86,6 +87,7 @@ export const homeScreen = () => {
             console.log('signed up ', data);
             modal.style.display = "none";
             modalConfirm.style.display = "block";
+            // serverApi.
         })
         .catch(err => {
             console.log("Sign up failed ", err);
@@ -148,6 +150,8 @@ export const homeScreen = () => {
         User.signIn(username, password)
             .then((data) => {
                 console.log('signed in ', data);
+
+                serverApi.getDeveloperProfiles();
                 modal.style.display = "none";
                 utils.navigateToPage('dashboard');
             })
