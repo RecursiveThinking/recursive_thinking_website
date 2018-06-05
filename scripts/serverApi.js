@@ -1,4 +1,6 @@
-import { User } from './auth';
+import {
+    User
+} from './auth';
 // Austin's Api
 // let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
 
@@ -10,10 +12,12 @@ function signUp(info) {
 }
 
 
-function postDeveloperById(id){
-    const resource = `/developers/${id}`;
+async function postDeveloperById(user) {
+    const resource = `/developers/${user.id}`;
+
     const options = {
-        method: "POST"
+        method: "POST",
+        body: user,
     };
     return initFetchCall(resource, options);
 }
@@ -24,18 +28,9 @@ async function getDeveloperProfiles() {
     const resource = "/developers";
 
     // let token = await User.getUserSession().idToken.jwtToken;
-    
-    let token;
-
-    await User.getUserSession((user) => {
-        token = user.idToken.jwtToken;
-    });
 
     const options = {
         method: "GET",
-        headers: {
-            Authorization: token
-        }
     };
 
     return initFetchCall(resource, options);
@@ -139,7 +134,16 @@ function postEditProfile(developerId, profileInfo) {
 }
 
 // Runs the fetch calls - can be called directly if you want to make unique fetch calls
-function initFetchCall(resource, options) {
+async function initFetchCall(resource, options) {
+    let token;
+    await User.getUserSession((user) => {
+        token = user.idToken.jwtToken;
+    });
+
+    options.headers = {
+        Authorization: token
+    }
+
     fetch(apiUrl + resource, options)
         .then((data) => {
             console.log(data);

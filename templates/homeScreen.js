@@ -1,10 +1,21 @@
-import { User } from '../scripts/auth';
+import {
+    User
+} from '../scripts/auth';
 
-import { importTemplate, templates, fill } from '../scripts/templater'
-import { utils } from '../scripts/global';
+import {
+    importTemplate,
+    templates,
+    fill
+} from '../scripts/templater'
+import {
+    utils
+} from '../scripts/global';
 import serverApi from '../scripts/serverApi.js';
 
 import homeScreenHtml from './homeScreen.html'
+import {
+    Auth
+} from 'aws-amplify';
 importTemplate("homeScreen", homeScreenHtml)
 
 export function setup(renderFunction) {
@@ -16,6 +27,7 @@ export function setup(renderFunction) {
 };
 
 export const homeScreen = () => {
+    let currentUser = {};
 
     const initModalEvents = () => {
 
@@ -57,11 +69,9 @@ export const homeScreen = () => {
         homePage.onclick = function (event) {
             if (event.target == modalContSignUp) {
                 modalContSignUp.style.display = "none";
-            }
-            else if (event.target == modalContLogin) {
+            } else if (event.target == modalContLogin) {
                 modalContLogin.style.display = "none";
-            }
-            else {
+            } else {
                 console.log("Clicking on Something Not a Modal");
             }
         }
@@ -84,32 +94,34 @@ export const homeScreen = () => {
         };
         User.signUp(info)
             .then((data) => {
-            console.log('signed up ', data);
-            modal.style.display = "none";
-            modalConfirm.style.display = "block";
-            // serverApi.
-        })
-        .catch(err => {
-            console.log("Sign up failed ", err);
-            let check;
-            if (typeof err === 'string') {
-                check = err.toLowerCase();
-            } else {
-                check = err.message.toLowerCase();
-                err = err.message;
-            }
+                console.log('signed up ', data);
 
-            if (check.indexOf('username') !== -1) {
-                document.getElementById('signUpUserNameError').innerText = err;
-            } else if (check.indexOf('email') !== -1) {
-                document.getElementById('signUpEmailError').innerText = err;
-            } else if (check.indexOf('name') !== -1) {
-                document.getElementById('signUpNameError').innerText = err;
-            } else {
-                document.getElementById('signUpPasswordError').innerText = err;
-            }
-        });
+                currentUser.id = data.userSub;
+                currentUser.userName = data.user.username;
 
+                modal.style.display = "none";
+                modalConfirm.style.display = "block";
+            })
+            .catch(err => {
+                console.log("Sign up failed ", err);
+                let check;
+                if (typeof err === 'string') {
+                    check = err.toLowerCase();
+                } else {
+                    check = err.message.toLowerCase();
+                    err = err.message;
+                }
+
+                if (check.indexOf('username') !== -1) {
+                    document.getElementById('signUpUserNameError').innerText = err;
+                } else if (check.indexOf('email') !== -1) {
+                    document.getElementById('signUpEmailError').innerText = err;
+                } else if (check.indexOf('name') !== -1) {
+                    document.getElementById('signUpNameError').innerText = err;
+                } else {
+                    document.getElementById('signUpPasswordError').innerText = err;
+                }
+            });
     };
 
     const handleConfirmSubmit = (modal) => {
@@ -120,6 +132,10 @@ export const homeScreen = () => {
         User.confirmSignUp(username, code)
             .then((user) => {
                 console.log('confirmed sign up ', user);
+                console.log(currentUser);
+
+                serverApi.postDeveloperById(currentUser);
+
                 modal.style.display = "none";
                 utils.navigateToPage('dashboard');
             })
@@ -149,7 +165,10 @@ export const homeScreen = () => {
 
         User.signIn(username, password)
             .then((data) => {
+
                 console.log('signed in ', data);
+
+                // const userId = utils.parseJwt(data.signInUserSession.idToken.jwtToken.sub);
 
                 serverApi.getDeveloperProfiles();
                 modal.style.display = "none";

@@ -38,14 +38,14 @@ Amplify.configure({
         // \/-- this if from new user pool
         // userPoolId: 'us-west-2_wlW7N1Kcp',
         // 20180601 - 12:30
-        userPoolId: 'us-west-2_PlxGUXcqm',
+        userPoolId: 'us-west-2_gXoTkHIJA',
         // THIS IS REQUIRED - Amazon Cognito Web Client ID
         // \/-- below is for old user pool - recursivethinking
         // userPoolWebClientId: '1tt5sh3cf3csicaqcpg0a4jiva'
         // \/-- this if from new user pool
         // userPoolWebClientId: '57te4kfc511ietb5dpe3tkkm3e'
         // 20180601 - 12:30
-        userPoolWebClientId: '5dtp61j363jcmcgcei0jljppur'
+        userPoolWebClientId: '2t68u41p8q84e9u7ejnmvg67g7'
     }
 });
 

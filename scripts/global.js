@@ -22,8 +22,7 @@
 //     lessonsAttending:  Array<Strings> - array of ids of lessons dev is planning to attend
 // }
 
-const allUsers = [
-    {
+const allUsers = [{
         _id: '0000000001',
         image: './public/images/avatar1.png',
         name: 'Porg Dev1',
@@ -44,10 +43,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
-        skillsSoftware: [ 0, 1, 2, 3 ],
-        skillsLanguages:[ 0, 1, 2, 3 ],
-        lessonsAttending: [ '1000000001' ]
+        skillsProfessional: [0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [0, 1, 2, 3],
+        skillsLanguages: [0, 1, 2, 3],
+        lessonsAttending: ['1000000001']
     },
     {
         _id: '0000000002',
@@ -69,10 +68,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 0, 2, 4, 6],
-        skillsSoftware: [ 0, 2 ],
-        skillsLanguages:[ 0, 2 ],
-        lessonsAttending: [ '1000000001', '1000000002' ]
+        skillsProfessional: [0, 2, 4, 6],
+        skillsSoftware: [0, 2],
+        skillsLanguages: [0, 2],
+        lessonsAttending: ['1000000001', '1000000002']
     },
     {
         _id: '0000000003',
@@ -94,10 +93,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 1, 3, 5 ],
-        skillsSoftware: [ 1, 3 ],
-        skillsLanguages:[ 1, 3 ],
-        lessonsAttending: [ '1000000002', '1000000003' ]
+        skillsProfessional: [1, 3, 5],
+        skillsSoftware: [1, 3],
+        skillsLanguages: [1, 3],
+        lessonsAttending: ['1000000002', '1000000003']
     },
     {
         _id: '0000000004',
@@ -119,10 +118,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
-        skillsSoftware: [ 0, 1, 2, 3 ],
-        skillsLanguages:[ 0, 1, 2, 3 ],
-        lessonsAttending: [ '1000000003', '1000000004' ]
+        skillsProfessional: [0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [0, 1, 2, 3],
+        skillsLanguages: [0, 1, 2, 3],
+        lessonsAttending: ['1000000003', '1000000004']
     },
     {
         _id: '0000000005',
@@ -144,10 +143,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 1, 3, 5 ],
-        skillsSoftware: [ 1, 3 ],
-        skillsLanguages:[ 1, 3 ],
-        lessonsAttending: [ '1000000005', '1000000006' ]
+        skillsProfessional: [1, 3, 5],
+        skillsSoftware: [1, 3],
+        skillsLanguages: [1, 3],
+        lessonsAttending: ['1000000005', '1000000006']
     },
     {
         _id: '0000000006',
@@ -169,10 +168,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6],
-        skillsSoftware: [ 0, 1, 2, 3 ],
-        skillsLanguages:[ 0, 1, 2, 3 ],
-        lessonsAttending: [ '1000000006' ]
+        skillsProfessional: [0, 1, 2, 3, 4, 5, 6],
+        skillsSoftware: [0, 1, 2, 3],
+        skillsLanguages: [0, 1, 2, 3],
+        lessonsAttending: ['1000000006']
     },
     {
         _id: '0000000007',
@@ -194,10 +193,10 @@ const allUsers = [
         aboutUser: 'Porgy porg porgy porgy. Porghoven porghoven von von von porg porghoven porgy porgy porgy porghoven porgy porgy porg von. Porghoven team player porg porg porghoven porg porghoven porgy porg von porghoven porgy von.&NewLine;&NewLine;Von porghoven porg porghoven porg porg porg porghoven porghoven porghoven detail oriented porg porghoven porghoven. Porgy porgy porg von porgy porg porgy von. Porghoven porgy porgy von.&NewLine;&NewLine;Porgy porgy porg porg porg porgy porgy porg porghoven porgy porgy porghoven porgy. Porgy porg von porghoven von porgy porghoven porghoven super rocket von porgy porgy von von. Porgy porg porghoven porghoven porgy porg.',
         aboutUserYearsOfExperience: '11/07/2016',
         aboutUserTimeWithRT: '02/02/2017',
-        skillsProfessional: [ 0, 1, 2, 3, 4, 5, 6, 7],
-        skillsSoftware: [ 0, 1, 2, 3 ],
-        skillsLanguages:[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ],
-        lessonsAttending: [ '1000000001', '1000000002', '1000000003', '1000000004', '1000000005', '1000000006' ]
+        skillsProfessional: [0, 1, 2, 3, 4, 5, 6, 7],
+        skillsSoftware: [0, 1, 2, 3],
+        skillsLanguages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+        lessonsAttending: ['1000000001', '1000000002', '1000000003', '1000000004', '1000000005', '1000000006']
     },
     {
         _id: '0000000008',
@@ -219,10 +218,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 0, 2, 4, 6],
-        skillsSoftware: [ 0, 2 ],
-        skillsLanguages:[ 0, 2 ],
-        lessonsAttending: [ '1000000001', '1000000003', '1000000005']
+        skillsProfessional: [0, 2, 4, 6],
+        skillsSoftware: [0, 2],
+        skillsLanguages: [0, 2],
+        lessonsAttending: ['1000000001', '1000000003', '1000000005']
     },
     {
         _id: '0000000009',
@@ -244,10 +243,10 @@ const allUsers = [
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
-        skillsProfessional: [ 1, 3, 5 ],
-        skillsSoftware: [ 1, 3 ],
-        skillsLanguages:[ 1, 3 ],
-        lessonsAttending: [ '1000000002', '1000000004', '1000000006' ]
+        skillsProfessional: [1, 3, 5],
+        skillsSoftware: [1, 3],
+        skillsLanguages: [1, 3],
+        lessonsAttending: ['1000000002', '1000000004', '1000000006']
     }
 ]
 localStorage.setItem('allUsers', JSON.stringify(allUsers));
@@ -322,23 +321,19 @@ localStorage.setItem('allStates', JSON.stringify(allStates));
 const allCategories = allSkillsProfessional.concat(allSkillsSoftware, allProgrammingLanguages);
 // console.log(allCategories);
 
-function returnArrayOfApplicableItems(category, inputArray){
+function returnArrayOfApplicableItems(category, inputArray) {
     // console.log(category, inputArray);
     let returnArray = [];
-    for(let i = 0; i < inputArray.length; i += 1){
-        if(category === 'skillsProfessional'){
+    for (let i = 0; i < inputArray.length; i += 1) {
+        if (category === 'skillsProfessional') {
             returnArray[i] = allSkillsProfessional[inputArray[i]];
-        }
-        else if(category === 'skillsSoftware'){
+        } else if (category === 'skillsSoftware') {
             returnArray[i] = allSkillsSoftware[inputArray[i]];
-        }
-        else if(category === 'skillsLanguage'){
+        } else if (category === 'skillsLanguage') {
             returnArray[i] = allProgrammingLanguages[inputArray[i]];
-        }
-        else if(category === 'allCategories'){
+        } else if (category === 'allCategories') {
             returnArray[i] = allCategories[inputArray[i]];
-        }
-        else {
+        } else {
             "Eat my Shorts"
         }
     }
@@ -346,7 +341,7 @@ function returnArrayOfApplicableItems(category, inputArray){
     return returnArray;
 }
 
-function deleteItemFromArray(index){
+function deleteItemFromArray(index) {
     console.log(index);
     console.log("AT FUNCTION");
 }
@@ -365,8 +360,7 @@ localStorage.setItem('currentUser', JSON.stringify(currentUser));
 //   rank: Array<String> - usernames of the devs who have voted the lesson (for an optional sort) we display as length of the array or icons of devs,
 // }
 // database call for Lessons
-const allLessons = [
-    {
+const allLessons = [{
         _id: '1000000001',
         title: 'Designing with A-Frame VR',
         date: '11/25/2017',
@@ -435,8 +429,7 @@ localStorage.setItem('allLessons', JSON.stringify(allLessons));
 // };
 
 // interview questions
-const allInterviewQuestions = [
-    {
+const allInterviewQuestions = [{
         _id: 'iq00000001',
         title: 'Highlight Table Rows',
         submitted: '09/12/2017',
@@ -450,7 +443,7 @@ const allInterviewQuestions = [
         title: 'Build An Accordion',
         submitted: '09/05/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: [ 3, 7, 12, 13, 14 ],
+        categories: [3, 7, 12, 13, 14],
         answersToQuestion: ['ia00000001', 'ia00000002'],
         fk_author: '0000000001'
     },
@@ -459,7 +452,7 @@ const allInterviewQuestions = [
         title: 'Build a Modal',
         submitted: '08/28/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: [ 3, 7, 12, 13, 14 ],
+        categories: [3, 7, 12, 13, 14],
         answersToQuestion: ['ia00000003'],
         fk_author: '0000000001'
     },
@@ -468,7 +461,7 @@ const allInterviewQuestions = [
         title: 'Build a Gallery',
         submitted: '08/21/2017',
         description: 'Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.<br><br>Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space. Words, words, words and more words go right here in this space.',
-        categories: [ 3, 7, 12, 13, 14, 15, 24 ],
+        categories: [3, 7, 12, 13, 14, 15, 24],
         answersToQuestion: ['ia00000004'],
         fk_author: '0000000001'
     }
@@ -484,8 +477,7 @@ localStorage.setItem('allInterviewQuestions', JSON.stringify(allInterviewQuestio
 //     questionId: String - the id of the question the answer is associated with
 //     author: String - username of the user who created
 // };
-const allAnswersToQuestions = [
-    {
+const allAnswersToQuestions = [{
         _id: 'ia00000001',
         title: '',
         submitted: '09/07/2017',
@@ -531,8 +523,7 @@ const profileLinkedInViews = 17;
 const profileResumeViews = 9;
 
 // database call for Lessons
-const profileStatistics = [
-    {
+const profileStatistics = [{
         totalCount: profileVisitsTotal,
         title: 'Profile Visits'
     },
@@ -583,14 +574,17 @@ const getBoolIfUserAttending = (lessonId, userAttendingArray) => {
     let bool = userAttendingArray.includes(lessonId);
     // console.log(bool);
     let slotObj = {};
-    if(bool){
+    if (bool) {
         //true
         // slotString = `class="fc-dateRowTitle Star"`
-        slotObj = { class: "fc-dateRowTitle Star" }
-    }
-    else {
+        slotObj = {
+            class: "fc-dateRowTitle Star"
+        }
+    } else {
         // slotString = `class="fc-dateRowTitle noStar"`
-        slotObj = { class: "fc-dateRowTitle noStar" }
+        slotObj = {
+            class: "fc-dateRowTitle noStar"
+        }
     }
     // console.log(slotObj);
     return slotObj;
@@ -639,33 +633,29 @@ const getCountString = (condString, array) => {
     let createCountString = '';
     let count;
     let string = '';
-    if(condString === 'lesson'){
+    if (condString === 'lesson') {
         count = array.lessonVotes.length;
-    }
-    else if(condString === 'question'){
+    } else if (condString === 'question') {
         count = array.answersToQuestion.length;
     }
     if (count === 0) {
-        if(condString === 'lesson'){
+        if (condString === 'lesson') {
             string = 'Votes'
-        }
-        else if(condString === 'question'){
+        } else if (condString === 'question') {
             string = 'Replies'
         }
         createCountString = `No ${string}`;
     } else if (count === 1) {
-        if(condString === 'lesson'){
+        if (condString === 'lesson') {
             string = 'Vote'
-        }
-        else if(condString === 'question'){
+        } else if (condString === 'question') {
             string = 'Reply'
         }
         createCountString = `${count} ${string}`;
     } else if (count > 1) {
-        if(condString === 'lesson'){
+        if (condString === 'lesson') {
             string = 'Votes'
-        }
-        else if(condString === 'question'){
+        } else if (condString === 'question') {
             string = 'Replies'
         }
         createCountString = `${count} ${string}`
@@ -740,12 +730,12 @@ function getButtonHTMLString(boolVal) {
 }
 
 //editProfile functions
-function getAgeEditProfile(dateOfBirth){
+function getAgeEditProfile(dateOfBirth) {
     let millisecsInAYear = 31536000000;
     let dateNow = Date.now();
     let totalAgeMS = dateNow - dateOfBirth;
     // console.log(Math.floor(totalAgeMS/millisecsInAYear));
-    return Math.floor(totalAgeMS/millisecsInAYear);
+    return Math.floor(totalAgeMS / millisecsInAYear);
 }
 
 // const theApi = new api();
@@ -758,12 +748,11 @@ const checkFullScreen = (page) => {
 
     } else {
         // console.log("We hit the checkFullScreen");
-        if(window.innerWidth > 768){
+        if (window.innerWidth > 768) {
             document.querySelector('.sidebar').style.display = "";
             document.querySelector('header').style.display = "";
             setWindowOffsetsLayout();
-        }
-        else if(window.innerWidth <= 768){
+        } else if (window.innerWidth <= 768) {
             document.querySelector('.sidebar').style.display = "";
             document.querySelector('header').style.display = "";
             document.querySelector('#mainWindow').style.marginLeft = 0;
@@ -820,10 +809,10 @@ const getCharCount = (event) => {
 
 // helper method for textAreaCharCounter
 const checkForLimit = (event, count, limit) => {
-  if (count >= limit) {
-      event.preventDefault();
-      return false;
-  }
+    if (count >= limit) {
+        event.preventDefault();
+        return false;
+    }
 };
 
 const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
@@ -856,6 +845,11 @@ const textAreaCharCounter = (textAreaElemantId, charCountId, limit) => {
     });
 };
 
+const parseJwt = (token) => {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+}
 
 const getAllUsers = () => JSON.parse(localStorage.getItem('allUsers'));
 // console.log('getAllUsers', getAllUsers);
@@ -888,7 +882,7 @@ const setWindowOffsetsLayout = () => {
     // console.log("headerHeight: ", headerHeight);
 
 
-    if(window.location.hash != "#home"){
+    if (window.location.hash != "#home") {
         const sideBar = document.getElementById("sidebar");
         const sideBarWidth = Math.floor(window.innerWidth * .2);
         const sideBarHeightOffsetTop = headerHeight;
@@ -919,7 +913,7 @@ const setWindowOffsetsLayout = () => {
     // console.log(document.getElementsByTagName("header"));
 }
 
-document.getElementById('hamburger').addEventListener('click', function log(){
+document.getElementById('hamburger').addEventListener('click', function log() {
     const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
     document.getElementById('sidebar').classList.toggle('displayed');
     const sideBar = document.querySelector(".sidebar");
@@ -989,5 +983,6 @@ export const utils = {
     getBoolIfUserAttending,
     textAreaCharCounter,
     setWindowOffsetsLayout,
-    setWindowOffsetsMobile
+    setWindowOffsetsMobile,
+    parseJwt
 };
