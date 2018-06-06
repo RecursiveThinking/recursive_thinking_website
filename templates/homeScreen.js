@@ -66,6 +66,18 @@ export const homeScreen = () => {
             handleSignInSubmit(modalContLogin);
         };
 
+        document.onkeydown = function(event) {
+           if(event.code === "Enter" || event.keyCode == 13) {
+             if (modalContSignUp.style.display === 'block') {
+               handleSignUpSubmit(modalContSignUp);
+             } else if (modalContLogin.style.display === 'block') {
+               handleSignInSubmit(modalContLogin);
+             } else if (modalConfirm.style.display === 'block') {
+               handleConfirmSubmit(modalConfirm);
+             }
+           }
+        };
+
         homePage.onclick = function (event) {
             if (event.target == modalContSignUp) {
                 modalContSignUp.style.display = "none";
