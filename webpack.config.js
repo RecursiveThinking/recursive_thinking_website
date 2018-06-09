@@ -9,9 +9,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['build']),
         new CopyWebpackPlugin([
-            { from: './buildspec.yml', to: './', force: true },
-            { from: './template.yml', to: './', force: true },
-            { from: './backend/', to: './', force: true },
+            { from: './buildspec.yml', to: './', force: true }
         ]),
         new ExtractTextPlugin("main.css"),
     ],

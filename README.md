@@ -148,7 +148,6 @@ Production deployments are handled in https://github.com/amnevins/recursivethink
 
 Essentially the above deployment repo will merge from this one and commit to kick off a build.  This gives  a manual approval process for deployment to production.
 
-
 #### buildspec.yml
 
 This file contains build logic that will kick off on a deployment.
@@ -157,10 +156,3 @@ The gist is:
 - npm install packages
 - run webpack to generate build folder
 - copy the frontend build files to an S3 bucket for hosting
-- run the template.yml to deploy backend architecture
-
-####template.yml
-
-This file contains our SAM (serverless application model) template.  We will use this config to directly deploy/update lambdas/api gateway routes/dynamodb resources.
-
-To learn more about SAM - https://github.com/awslabs/serverless-application-model
