@@ -121,7 +121,33 @@ export function fill(template, values) {
         `Must be an object. (e.g. slotname: { img: "path/to/image.png" }`
       )
 
-    Object.keys(slotData).forEach(atr => node.setAttribute(atr, values[slotName][atr]))
+    Object.keys(slotData).forEach(atr => {
+      var insertThis = values[slotName][atr]
+
+      // if atr matches event pattern (i.e. on<event>), insert either a real function OR prevent insertion of text
+      if (/^on[a-z]/.test(atr)) { // atr looks like an event (matches 'on' pattern - i.e. onclick/onmouseover)
+        
+        if (typeof insertThis === 'function') { // value passed in is a function
+
+          if (node[atr] === null) // event hasn't been set yet (if this were undefined, it isn't a valid event)
+            node[atr] = insertThis // break here so we don't also attach it as an attribute
+
+          else if (node[atr] === undefined)
+            console.warn(`Failed to insert ${atr}. ${atr} isn't a valid event.`)
+
+          else
+            console.warn(`Failed to insert ${atr}. ${atr} was already set.`)
+        }
+
+        else 
+          console.warn(`Failed to insert ${atr}. Insert value must be a function; got a ${typeof insertThis}`)
+      }
+
+      // assume it's not a function call, and just insert the value
+      else
+        node.setAttribute(atr, insertThis)
+    })
+
     node.removeAttribute('slot')
   })
 
@@ -135,14 +161,14 @@ function insertNode(slot, node) {
   // not have to worry about preserving the content.
 
   // insert string, HTML string, number, or other non-objects into slot
-  if (typeof node !== 'object' && (node === 0 || node !== ''))
+  if (typeof node !== 'object' && node !== undefined)
     slot.insertAdjacentHTML('beforeBegin', node) // if we're worried about js injection, we should replace this with insertAdjacentText; that will also prevent us from using the html shortcut feature
 
   // insert DOM nodes (templates, DOM elements or nodes, documents, or document fragments) into slot
   else if (node && node.nodeType)
     slot.parentNode.insertBefore(node, slot)
 
-  // insert default if node is not defined (0 and '' will get caught by the first if)
+  // insert default content if node is undefined or null (0 and '' will get caught by the first if)
   else if (!node) {
     var contents = [].slice.call(slot.childNodes)
 
