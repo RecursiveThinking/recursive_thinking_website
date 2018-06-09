@@ -515,7 +515,7 @@ localStorage.setItem('allAnswersToQuestions', JSON.stringify(allAnswersToQuestio
 const arrayOfAvatars = ['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png', 'avatar6.png']
 localStorage.setItem('arrayOfAvatars', JSON.stringify(arrayOfAvatars));
 
-const profileVisitsTotal = 27;
+const profileVisitsTotal = 277;
 const profileGitHubViews = 10;
 const profileCodePenViews = 8;
 const profilePortfolioViews = 13;
@@ -676,7 +676,7 @@ const generateTaughtByThumbs = (loopNumber, containerHTML, lessonTitleForAlt) =>
         let randImageName = randImage.replace('.png', '');
         imgTaughtByThumbs.setAttribute('src', `../public/images/${randImage}`);
         imgTaughtByThumbs.setAttribute('alt', `lesson ${lessonTitleForAlt} taught by developer ${randImageName}`)
-        // connect
+            // connect
         containerHTML.appendChild(imgTaughtByThumbs);
         // console.log(containerHTML);
         // return containerHTML.appendChild(imgTaughtByThumbs);
@@ -690,10 +690,10 @@ const returnFilteredTaughtByUserArray = (lessonTaughtByArray) => {
     for (let i = 0; i < lessonTaughtByArray.length; i += 1) {
         // console.log(lessonTaughtByArray[i]);
         let pushItem = allUsers.filter((element) => {
-            // console.log(element == lessonTaughtByArray[i]);
-            return element["_id"] == lessonTaughtByArray[i];
-        })
-        // console.log(pushItem);
+                // console.log(element == lessonTaughtByArray[i]);
+                return element["_id"] == lessonTaughtByArray[i];
+            })
+            // console.log(pushItem);
         compareArray.push(pushItem[0])
     }
     // console.log(compareArray);
