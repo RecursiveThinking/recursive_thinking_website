@@ -28,6 +28,7 @@ export function setup(renderFunction) {
 
 export const homeScreen = () => {
     let currentUser = {};
+    let developers;
 
     const initModalEvents = () => {
 
@@ -66,16 +67,16 @@ export const homeScreen = () => {
             handleSignInSubmit(modalContLogin);
         };
 
-        document.onkeydown = function(event) {
-           if(event.code === "Enter" || event.keyCode == 13) {
-             if (modalContSignUp.style.display === 'block') {
-               handleSignUpSubmit(modalContSignUp);
-             } else if (modalContLogin.style.display === 'block') {
-               handleSignInSubmit(modalContLogin);
-             } else if (modalConfirm.style.display === 'block') {
-               handleConfirmSubmit(modalConfirm);
-             }
-           }
+        document.onkeydown = function (event) {
+            if (event.code === "Enter" || event.keyCode == 13) {
+                if (modalContSignUp.style.display === 'block') {
+                    handleSignUpSubmit(modalContSignUp);
+                } else if (modalContLogin.style.display === 'block') {
+                    handleSignInSubmit(modalContLogin);
+                } else if (modalConfirm.style.display === 'block') {
+                    handleConfirmSubmit(modalConfirm);
+                }
+            }
         };
 
         homePage.onclick = function (event) {
@@ -93,14 +94,15 @@ export const homeScreen = () => {
     const handleSignUpSubmit = (modal) => {
 
         const modalConfirm = document.getElementById('modalConfirm');
-        const name = document.getElementById('signUpName').value;
+        const given_name = document.getElementById('signUpName').value;
         const username = document.getElementById('signUpUserName').value;
         const email = document.getElementById('signUpEmail').value;
         const password = document.getElementById('signUpPassword').value;
 
         const info = {
-            name,
+            given_name,
             username,
+            name: username,
             email,
             password
         };
@@ -108,8 +110,7 @@ export const homeScreen = () => {
             .then((data) => {
                 console.log('signed up ', data);
 
-                currentUser.id = data.userSub;
-                currentUser.userName = data.user.username;
+                currentUser = data;
 
                 modal.style.display = "none";
                 modalConfirm.style.display = "block";
@@ -144,9 +145,7 @@ export const homeScreen = () => {
         User.confirmSignUp(username, code)
             .then((user) => {
                 console.log('confirmed sign up ', user);
-                console.log(currentUser);
-
-                serverApi.postDeveloperById(currentUser);
+                // console.log(currentUser);
 
                 modal.style.display = "none";
                 utils.navigateToPage('dashboard');
@@ -176,16 +175,7 @@ export const homeScreen = () => {
         const password = document.getElementById('signInPassword').value;
 
         User.signIn(username, password)
-            .then((data) => {
-
-                console.log('signed in ', data);
-
-                // const userId = utils.parseJwt(data.signInUserSession.idToken.jwtToken.sub);
-
-                serverApi.getDeveloperProfiles();
-                modal.style.display = "none";
-                utils.navigateToPage('dashboard');
-            })
+            .then(signInCB)
             .catch(err => {
                 console.log("Sign in failed ", err);
                 let check;
@@ -202,6 +192,34 @@ export const homeScreen = () => {
                     document.getElementById('signInPasswordError').innerText = err;
                 }
             });
+
+        async function signInCB(data) {
+            let userInDB = false;
+            // console.log('signed in ', data);
+
+            currentUser = utils.parseJwt(data.signInUserSession.idToken.jwtToken);
+            developers = await serverApi.getDeveloperProfiles();
+            developers = developers.Items;
+            // console.log(currentUser);
+            // console.log(developers);
+
+            // Need to change this to userID (sub) in the future - Checking if the user has been added to the DB
+            for (let i = 0; i < developers.length; i++) {
+                if(developers[i].username == currentUser['cognito:username']){
+                    userInDB = true;
+                }
+            }
+            if(!userInDB){
+                serverApi.postDeveloperById(currentUser)
+                .then(async function reGetDevelopers(){
+                    developers = await serverApi.getDeveloperProfiles();
+                    developers = developers.Items;
+                    // console.log(developers);
+                });
+            }
+            modal.style.display = "none";
+            utils.navigateToPage('dashboard');
+        }
 
     };
 

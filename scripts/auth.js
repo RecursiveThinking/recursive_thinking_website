@@ -17,12 +17,13 @@ const signIn = (username, password) => {
 */
 const signUp = (info) => {
     const { username, password, email, name } = info;
+    console.log(`username: ${username}, email:${email}, name: ${name}`);
     return Auth.signUp({
         username,
         password,
         attributes: {
+            name,
             email,
-            name
             // name,
             // "custom:title": 'Developer',
             // "custom:rank": 'a',

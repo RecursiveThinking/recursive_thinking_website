@@ -11,14 +11,18 @@ function signUp(info) {
     User.signUp(info);
 }
 
-
 async function postDeveloperById(user) {
-    const resource = `/developers/${user.id}`;
+    const resource = `/developers/${user.sub}`;
 
     const options = {
         method: "POST",
-        body: user,
+        body: {
+            name: user.name,
+            username: user["cognito:username"],
+            email: user.email
+        }
     };
+
     return initFetchCall(resource, options);
 }
 
@@ -135,18 +139,22 @@ function postEditProfile(developerId, profileInfo) {
 
 // Runs the fetch calls - can be called directly if you want to make unique fetch calls
 async function initFetchCall(resource, options) {
+
     let token;
     await User.getUserSession((user) => {
         token = user.idToken.jwtToken;
     });
 
     options.headers = {
-        Authorization: token
+        Authorization: token,
+        'Content-Type': 'application/json'
     }
+    // The body needs to be stringified in order to be passed into the lambda function from API
+    options.body = JSON.stringify(options.body);
 
-    fetch(apiUrl + resource, options)
+    return fetch(apiUrl + resource, options)
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             return data.json();
         })
         .then((response) => {
