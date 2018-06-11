@@ -67,8 +67,8 @@ export const homeScreen = () => {
             handleSignInSubmit(modalContLogin);
         };
 
-        document.onkeydown = function (event) {
-            if (event.code === "Enter" || event.keyCode == 13) {
+        homePage.addEventListener('keydown', function (event) {
+            if (event.code === "Enter" || event.keyCode === 13) {
                 if (modalContSignUp.style.display === 'block') {
                     handleSignUpSubmit(modalContSignUp);
                 } else if (modalContLogin.style.display === 'block') {
@@ -77,7 +77,7 @@ export const homeScreen = () => {
                     handleConfirmSubmit(modalConfirm);
                 }
             }
-        };
+        });
 
         homePage.onclick = function (event) {
             if (event.target == modalContSignUp) {
