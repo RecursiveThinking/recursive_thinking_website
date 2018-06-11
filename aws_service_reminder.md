@@ -1,0 +1,14 @@
+When you download the website, you'll need to make changes to the following files/lines
+
+serverApi.js
+
+variable apiUrl should be equal to the url provided when you build the stack
+    this can also be found in the web UI under API Gateway, RecursiveThinkingAPI, on the left menu, select Stages, then click "Prod" in the middle menu, then a blue box will appear in the right-side area - copy the link titled "Invoke URL:" its also inside a little blue box for easier reference.
+    
+main.js
+
+    make sure all values in Auth object are consistent with your stack profile.
+    
+        region:
+        userPoolId:
+        userPoolWebClientId:
