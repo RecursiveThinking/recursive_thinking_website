@@ -1,18 +1,42 @@
 export const Store = {
-    currentUserCognitoId:{},
+    currentUserCognitoId: {},
     currentUser: {
-        name: "Seth",
-        occupation: "developer"
+        userId: '',
+        Username: '',
+        picture: '',
+        name: '',
+        created: '',
+        birthday: '',
+        city: '',
+        state: '',
+        title: '',
+        employer: '',
+        github: '',
+        codepen: '',
+        linkedin: '',
+        website: '',
+        resume: '',
+        bio: '',
+        experience: '',
+        rank: '',
+        skillsProfessional: '',
+        skillsSoftware: '',
+        skillsLanguages: '',
+        lessonsAttending: ''
     },
     developers: {},
     lessons: {},
-    updateUser: function(user){
-        this.currentUser = user;
+    updateUser: function (user) {
+        let keys = Object.keys(user);
+        keys.forEach((key) => {
+            this.currentUser[key] = user[key];
+        })
+        console.log(this.currentUser);
     },
-    updateCurrentUserCognitoId: function(userCreds){
+    updateCurrentUserCognitoId: function (userCreds) {
         this.currentUserCognitoId = userCreds;
     },
-    updateDevelopers: function(developers){
+    updateDevelopers: function (developers) {
         this.developers = developers;
     }
 }

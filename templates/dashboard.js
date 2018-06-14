@@ -1,7 +1,7 @@
-import { importTemplate, templates, fill } from '../scripts/templater'
+import { importTemplate, templates, fill } from '../scripts/templater';
 import { utils, data } from '../scripts/global';
-
-import dashboardHtml from './dashboard.html'
+import {Store} from '../scripts/store.js';
+import dashboardHtml from './dashboard.html';
 importTemplate("dashboard", dashboardHtml)
 
 export function setup(renderFunction) {

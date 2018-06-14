@@ -1,5 +1,6 @@
 // userSchema = {
-//     username: - String - uuid for each user due to cognito
+//     userId: - String - uuid for each user from cognito
+//     username: - String - username from cognito
 //     picture: - String - upload .jpg or .png under 300kb to our S3 save url that comes back, (we could accept gravitar since we can control the url and just ask for gravitar username)
 //     name: 'Porg Dev1'
 //     created - - Date String - JS date string new Date().toString()
@@ -971,6 +972,7 @@ export const utils = {
     hasUserVoted,
     getButtonHTMLString,
     generateTaughtByThumbs,
+    parseJwt,
     // edit Profile
     getAgeEditProfile,
     returnArrayOfApplicableItems,
@@ -984,5 +986,4 @@ export const utils = {
     textAreaCharCounter,
     setWindowOffsetsLayout,
     setWindowOffsetsMobile,
-    parseJwt
 };

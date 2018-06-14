@@ -18,7 +18,7 @@ import {
 } from 'aws-amplify';
 import {
     Store
-} from '../scripts/Store.js';
+} from '../scripts/store.js';
 
 importTemplate("homeScreen", homeScreenHtml);
 
@@ -212,7 +212,7 @@ export const homeScreen = () => {
                 console.log("user not in DB adding");
                 serverApi.postDeveloperById(Store.currentUser)
                     .then(async function reGetDevelopers() {
-                        Store.updateDevelopers(await serverApi.getDeveloperProfiles().Items);
+                        developers = await serverApi.getDeveloperProfiles();
                         developers = developers.Items;
                         Store.updateDevelopers(developers);
                     });
