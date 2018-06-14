@@ -5,7 +5,7 @@ import {
 // let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
 
 // Avsean's Api
-let apiUrl = "https://q5yoreb3lj.execute-api.us-west-2.amazonaws.com/Prod";
+let apiUrl = "https://93lkkahf1b.execute-api.us-west-2.amazonaws.com/Prod";
 
 function signUp(info) {
     User.signUp(info);

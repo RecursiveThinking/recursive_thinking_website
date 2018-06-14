@@ -42,7 +42,7 @@ import './public/images/avatar6.png'
 Amplify.configure({
     Auth: {
         region: 'us-west-2',
-        userPoolId: 'us-west-2_IAWWb9457',
-        userPoolWebClientId: '6q6hcqer2ubda6ebaa8b7i3doe'
+        userPoolId: 'us-west-2_Ll0gsVsni',
+        userPoolWebClientId: '5hch7trbdtsnha391ntejst7bb'
     }
 });

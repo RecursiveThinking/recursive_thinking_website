@@ -16,7 +16,11 @@ import homeScreenHtml from './homeScreen.html'
 import {
     Auth
 } from 'aws-amplify';
-importTemplate("homeScreen", homeScreenHtml)
+import {
+    Store
+} from '../scripts/Store.js';
+
+importTemplate("homeScreen", homeScreenHtml);
 
 export function setup(renderFunction) {
     renderFunction(
@@ -145,7 +149,6 @@ export const homeScreen = () => {
         User.confirmSignUp(username, code)
             .then((user) => {
                 console.log('confirmed sign up ', user);
-                // console.log(currentUser);
 
                 modal.style.display = "none";
                 utils.navigateToPage('dashboard');
@@ -198,30 +201,39 @@ export const homeScreen = () => {
             // console.log('signed in ', data);
 
             currentUser = utils.parseJwt(data.signInUserSession.idToken.jwtToken);
+            Store.updateCurrentUserCognitoId(currentUser);
+
             developers = await serverApi.getDeveloperProfiles();
             developers = developers.Items;
-            // console.log(currentUser);
-            // console.log(developers);
+            Store.updateDevelopers(developers);
+            userInDB = checkUserInDB();
 
-            // Need to change this to userID (sub) in the future - Checking if the user has been added to the DB
-            for (let i = 0; i < developers.length; i++) {
-                if(developers[i].username == currentUser['cognito:username']){
-                    userInDB = true;
-                }
+            if (!userInDB) {
+                console.log("user not in DB adding");
+                serverApi.postDeveloperById(Store.currentUser)
+                    .then(async function reGetDevelopers() {
+                        Store.updateDevelopers(await serverApi.getDeveloperProfiles().Items);
+                        developers = developers.Items;
+                        Store.updateDevelopers(developers);
+                    });
             }
-            if(!userInDB){
-                serverApi.postDeveloperById(currentUser)
-                .then(async function reGetDevelopers(){
-                    developers = await serverApi.getDeveloperProfiles();
-                    developers = developers.Items;
-                    // console.log(developers);
-                });
-            }
+
             modal.style.display = "none";
             utils.navigateToPage('dashboard');
         }
-
     };
+
+    function checkUserInDB() {
+        let flag = false;
+        // Need to change this to userID (sub) in the future - Checking if the user has been added to the DB
+        for (let i = 0; i < Store.developers.length; i++) {
+            if (Store.developers[i].Username == Store.currentUserCognitoId['cognito:username']) {
+                flag = true;
+                Store.updateUser(developers[i]);
+            }
+        }
+        return flag;
+    }
 
     initModalEvents();
 };
