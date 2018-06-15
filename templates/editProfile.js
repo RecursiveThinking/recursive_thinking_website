@@ -1,5 +1,6 @@
 import { importTemplate, templates, fill } from '../scripts/templater'
-import { utils, data } from '../scripts/global';
+import { utils, data, allSkillsProfessionalObj, allSkillsSoftwareObj, allProgrammingLanguagesObj } from '../scripts/global';
+import { Store } from '../scripts/store.js';
 
 import editProfileHtml from './editProfile.html'
 importTemplate("editProfile", editProfileHtml)
@@ -36,26 +37,25 @@ export const getEditProfileModel = () => {
                 src: `${currentUser['image']}`,
                 alt: `A profile picture of ${currentUser['name']}`
             },
-            profileBasicValName: { value: `${currentUser['name']}` },
-            profileBasicValAge: { value: age },
+            profileBasicValName: { value: `${Store.currentUser.name}` },
             // profileBasicValLocation: { value: `${currentUser['location']}`},
-            // profileBasicValLocation: { value: utils.getConcatenatedLocationString(currentUser.city, currentUser.state)},
-            profileBasicValCity: { value: `${currentUser['city']}` },
-            profileBasicValState: { value: `${currentUser['state']}` },
+            // profileBasicValLocation: { value: utils.getConcatenatedLocationString(currentUser.city, currentUser.Store)},
+            profileBasicValCity: { value: `${Store.currentUser.city}` },
+            profileBasicValState: { value: `${Store.currentUser.state}` },
             // professional stats
-            profileProfValJobTitle: { value: `${currentUser['title']}`},
-            profileProfValEmployer: { value: `${currentUser['employer']}`},
+            profileProfValJobTitle: { value: `${Store.currentUser.title}`},
+            profileProfValEmployer: { value: `${Store.currentUser.employer}`},
             // links
-            profileLinkGitHub: { value: `${currentUser['linkGitHub']}`},
-            profileLinkCodePen: { value: `${currentUser['linkCodePen']}`},
-            profileLinkLinkedIn: { value: `${currentUser['linkLinkedIn']}`},
-            profileLinkPortfolio: { value: `${currentUser['linkPortfolio']}`},
-            profileLinkResume: { value: `${currentUser['linkResume']}`},
+            profileLinkGitHub: { value: `${Store.currentUser.github}`},
+            profileLinkCodePen: { value: `${Store.currentUser.codepen}`},
+            profileLinkLinkedIn: { value: `${Store.currentUser.linkedin}`},
+            profileLinkPortfolio: { value: `${Store.currentUser.portfolioWebsite}`},
+            profileLinkResume: { value: `${Store.currentUser.resume}`},
             // about
             // profileAboutUser: currentUser.aboutUser,
-            profileAboutUser: currentUser['aboutUser'],
+            profileAboutUser: Store.currentUser.bio,
             // profileAboutUser: { value: `${currentUser['aboutUser']}`},
-            profileAboutUserYearsOfExperience: { value: `${currentUser['aboutUserYearsOfExperience']}`},
+            profileAboutUserYearsOfExperience: { value: `${Store.currentUser.experience}`},
             profileAboutUserTimeWithRTYear: {},
             profileAboutUserTimeWithRTMonth: {},
             // professional skills
