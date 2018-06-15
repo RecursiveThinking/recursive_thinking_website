@@ -1,6 +1,7 @@
 import { global } from './scripts/global';
 import layout from './scripts/layout';
 import redirect from './scripts/redirect';
+import { credentials } from './secrets/cognitoCreds.js';
 import Amplify from 'aws-amplify';
 
 import './index.html'
@@ -41,8 +42,8 @@ import './public/images/avatar6.png'
 // Avsean's Cognito pool
 Amplify.configure({
     Auth: {
-        region: 'us-west-2',
-        userPoolId: 'us-west-2_Ll0gsVsni',
-        userPoolWebClientId: '5hch7trbdtsnha391ntejst7bb'
+        region: credentials.region,
+        userPoolId: credentials.userPoolId,
+        userPoolWebClientId: credentials.userPoolWebClientId
     }
 });

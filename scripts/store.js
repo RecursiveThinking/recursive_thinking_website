@@ -2,7 +2,7 @@ export const Store = {
     currentUserCognitoId: {},
     currentUser: {
         userId: '',
-        Username: '',
+        username: '',
         picture: '',
         name: '',
         created: '',
