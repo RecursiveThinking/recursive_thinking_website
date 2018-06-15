@@ -1,12 +1,12 @@
 import {
     User
 } from './auth';
-import {cognitoCreds} from '../secrets/cognitoCreds.js';
+import {credentials} from '../secrets/cognitoCreds.js';
 // Austin's Api
 // let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
 
 // Avsean's Api
-let apiUrl = cognitoCreds.apiUrl;
+let apiUrl = credentials.apiUrl;
 
 function signUp(info) {
     User.signUp(info);

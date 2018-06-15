@@ -210,7 +210,7 @@ export const homeScreen = () => {
 
             if (!userInDB) {
                 console.log("user not in DB adding");
-                serverApi.postDeveloperById(Store.currentUser)
+                serverApi.postDeveloperById(Store.currentUserCognitoId)
                     .then(async function reGetDevelopers() {
                         developers = await serverApi.getDeveloperProfiles();
                         developers = developers.Items;
@@ -227,7 +227,7 @@ export const homeScreen = () => {
         let flag = false;
         // Need to change this to userID (sub) in the future - Checking if the user has been added to the DB
         for (let i = 0; i < Store.developers.length; i++) {
-            if (Store.developers[i].Username == Store.currentUserCognitoId['cognito:username']) {
+            if (Store.developers[i].username == Store.currentUserCognitoId['cognito:username']) {
                 flag = true;
                 Store.updateUser(developers[i]);
             }
