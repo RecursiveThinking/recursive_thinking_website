@@ -1,18 +1,28 @@
+# AWS Notes
+
+## When you Deploy the Stack for the First Time
+
 When you deploy your backend stack, you'll need to copy and save the following Outputs from the script log:
 
-CognitoUserPoolId : us-west-2_aNGi5YoeN
-CognitoClientId : r05v9bom94rthtepealmhr8tm
-BASE API URL : https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod
+    CognitoUserPoolId : <currentValueForStackDeployed>
+    CognitoClientId : <currentValueForStackDeployed>
+    BASE API URL : <currentValueForStackDeployed>
 
-Then, after the stack successfully deploys - you'll need to:
+For Example, A Recent AWS Stack Deployment Yielded this:
 
-1. Create a Folder in your project called "secret" (and yes, name it secret because we have git ignored this folder...)
+    CognitoUserPoolId : us-west-2_aNGi5YoeN
+    CognitoClientId : r05v9bom94rthtepealmhr8tm
+    BASE API URL : https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod
 
-2. Inside secret, make a file named cognitoCreds.js
+For the First time, after the stack successfully deploys - and to connect your FrontEnd (DevDay Website) to the AWS Backend Stack, you'll need to:
+
+- Create a Folder in your project called "secrets" (and yes, name it secret because we have git ignored this folder...)
+
+- Inside secrets, make a file named cognitoCreds.js
 
 In this file, paste the following code in: 
 
-```
+```javascript
     export const credentials = {
         region: 'us-west-2',
         userPoolId: 'us-west-2_Ll0gsVsni',
@@ -21,15 +31,30 @@ In this file, paste the following code in:
     }
 ```
 
-Some Notes:
+## Some Notes:
     
-    region:  <this value shoujld be the first part of userPoolId> (In this Case: us-west-2)
-    userPoolId: <this value should be CognitoUserPoolId in your Stack Output> (In this Case: us-west-2_aNGi5YoeN)
-    userPoolWebClientId: <this value should be CognitoClientId from your Stack Output> (In this Case: r05v9bom94rthtepealmhr8tm)
-    apiUrl: <this value should be BASE API URL from your Stack Output> (In this Case: https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod)
+    region:  <this value should be the first part of userPoolId> (In this Case: 'us-west-2')
+
+    userPoolId: <this value should be CognitoUserPoolId in your Stack Output> (In this Case: 'us-west-2_aNGi5YoeN')
     
+    userPoolWebClientId: <this value should be CognitoClientId from your Stack Output> (In this Case: 'r05v9bom94rthtepealmhr8tm')
     
-Did you Not Save the Information When you Built Your Stack
+    apiUrl: <this value should be BASE API URL from your Stack Output> (In this Case: 'https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod')
+    
+### A Finished Config File Should Look Something Like this:
+
+```javascript
+    export const credentials = {
+        region: '',
+        userPoolId: '',
+        userPoolWebClientId: '',
+        apiUrl: ''
+    }
+```
+
+## Did you Not Save the Information When you Built Your Stack?
+
+### Here are some alternate locations for this same information:
 
     apiUrl:
 
@@ -45,6 +70,8 @@ Did you Not Save the Information When you Built Your Stack
         -->App Clients
             App client id (userPoolWebClientId)
 --------------------------------------------------------------------------
+
+## @Avsean - Take it away!
 
 For more robust error/info logging in aws-amplify, go into the chrome console
     window.LOG_LEVEL = "DEBUG"
