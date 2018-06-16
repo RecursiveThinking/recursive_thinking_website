@@ -104,21 +104,33 @@ export function fill(template, values) {
     if (!slotName)
       return console.error(
         `Slot attribute missing slot name for ${node.outerHTML}\n`,
-        'Slot attribute must have a value. (e.g.: slot="slotname")'
+        'Slot attribute must have a value. (e.g.: slot="slotname")',
+
+        `node:`, node.outerHTML, '\n',
+        `slotName:`, slotName
       )
 
     // would happen if you did `slotname: '' || undefined || null || 0`
     if (!slotData)
       return console.error(
-        `No slot data for attribute slot ${slotName}!\n`,
-        `Must be an object. (e.g. slotname: { img: "path/to/image.png" }`
+        `No slot data for attribute slot "${slotName}". \n\n`,
+
+        `This error usually means you either a) forgot to define a value for this slot, or b) are trying to insert this slot into the wrong template. Please check your templates fill. \n\n`,
+
+        `node:`, node.outerHTML, '\n',
+        `slotName:`, slotName, '\n',
+        `slotData:`, slotData
       )
 
     // would happen if you did `slotname: 'hello' || '12' || ['word','word']
     if (typeof slotData !== 'object' || Array.isArray(slotData))
       return console.error(
-        `Slot data for attribute slot ${slotName} is not an object!\n`,
-        `Must be an object. (e.g. slotname: { img: "path/to/image.png" }`
+        `Invalid slot data for attribute slot "${slotName}". \n\n`,
+        `Slot data must be an object. (e.g. { img: "path/to/image.png" }). This error usually means you're attempting to pass a non-object value in the slots. Please check your templates fill. \n\n`,
+
+        `node:`, node.outerHTML, '\n',
+        `slotName:`, slotName, '\n',
+        `slotData:`, slotData
       )
 
     Object.keys(slotData).forEach(atr => {
@@ -133,14 +145,22 @@ export function fill(template, values) {
             node[atr] = insertThis // break here so we don't also attach it as an attribute
 
           else if (node[atr] === undefined)
-            console.warn(`Failed to insert ${atr}. ${atr} isn't a valid event.`)
+            console.warn(
+              `Failed to add event "${atr}" to slot "${slotName}". ${atr} isn't a valid event.`,
+            )
 
           else
-            console.warn(`Failed to insert ${atr}. ${atr} was already set.`)
+            console.warn(
+              `Failed to add event "${atr}" to slot "${slotName}". ${atr} was already set.\n\n`,
+
+              `${atr}:`, node[atr]
+            )
         }
 
         else 
-          console.warn(`Failed to insert ${atr}. Insert value must be a function; got a ${typeof insertThis}`)
+          console.warn(
+            `Failed to add event "${atr}" to slot "${slotName}". Value must be a function; got ${typeof insertThis}`
+          )
       }
 
       // assume it's not a function call, and just insert the value
