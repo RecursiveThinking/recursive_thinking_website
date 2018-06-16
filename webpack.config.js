@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    entry: `${__dirname}/main.js`,
+    entry: `${__dirname}/src/main.js`,
     plugins: [
         new CleanWebpackPlugin(['build']),
         new CopyWebpackPlugin([
