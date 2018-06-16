@@ -24,7 +24,7 @@
 }
 
 #editProfileHTML .cell > .changeProfile.card {
-    display: none;
+    display: block;
 }
 
 #editProfileHTML .fc-changeProfileText {
