@@ -1,5 +1,7 @@
 import { importTemplate, templates, fill } from '../scripts/templater'
-import { utils, data } from '../scripts/global';
+import { utils, data, allSkillsProfessionalObj, allSkillsSoftwareObj, allProgrammingLanguagesObj } from '../scripts/global';
+import { Store } from '../scripts/store.js';
+import { serverApi } from '../scripts/serverApi.js';
 
 import editProfileHtml from './editProfile.html'
 importTemplate("editProfile", editProfileHtml)
@@ -11,7 +13,37 @@ export function setup(renderFunction) {
 
     editProfile();
     editProfilePicture();
+
+    let button = document.getElementById('submitProfileBtn');
+
+    button.addEventListener("click", submitProfileChangeFunc);
+
 };
+
+function submitProfileChangeFunc(){
+    // console.log("HELLO!");
+    let updatedUserAttributes = document.querySelectorAll("[name]");
+
+    console.log(updatedUserAttributes);
+
+    updatedUserAttributes = Array.from(updatedUserAttributes);
+
+    updatedUserAttributes = updatedUserAttributes.filter((item) => {
+        console.log(item.name);
+        return item.name !== 'viewport' && item.name !== 'skillsProfessional' && item.name !== 'skillsSoftware' && item.name !== 'skillsLanguage';
+    });
+
+    // updatedUserAttributes = updatedUserAttributes.map((item) => {
+    //     if(Store.currentUser[item.name] != item.value || item.value !=){
+    //         return item.value
+    //     }
+    // });
+
+    console.log(updatedUserAttributes);
+
+    // serverApi.
+    
+}
 
 export const getEditProfileModel = () => {
     
@@ -31,31 +63,28 @@ export const getEditProfileModel = () => {
     // console.log(aboutUser);
     return {
         editProfile: fill(templates.editProfile.currentUserProfile, {
+            // SubmitProfileChanges
+            submitProfileChange: {onclick: submitProfileChangeFunc},
             // basic stats
             profileBasicValImgAttrs: {
                 src: `${currentUser['image']}`,
                 alt: `A profile picture of ${currentUser['name']}`
             },
-            profileBasicValName: { value: `${currentUser['name']}` },
-            profileBasicValAge: { value: age },
-            // profileBasicValLocation: { value: `${currentUser['location']}`},
-            // profileBasicValLocation: { value: utils.getConcatenatedLocationString(currentUser.city, currentUser.state)},
-            profileBasicValCity: { value: `${currentUser['city']}` },
-            profileBasicValState: { value: `${currentUser['state']}` },
+            profileBasicValName: { value: `${Store.currentUser.name}` },
+            profileBasicValCity: { value: `${Store.currentUser.city}` },
+            profileBasicValState: { value: `${Store.currentUser.state}` },
             // professional stats
-            profileProfValJobTitle: { value: `${currentUser['title']}`},
-            profileProfValEmployer: { value: `${currentUser['employer']}`},
+            profileProfValJobTitle: { value: `${Store.currentUser.title}`},
+            profileProfValEmployer: { value: `${Store.currentUser.employer}`},
             // links
-            profileLinkGitHub: { value: `${currentUser['linkGitHub']}`},
-            profileLinkCodePen: { value: `${currentUser['linkCodePen']}`},
-            profileLinkLinkedIn: { value: `${currentUser['linkLinkedIn']}`},
-            profileLinkPortfolio: { value: `${currentUser['linkPortfolio']}`},
-            profileLinkResume: { value: `${currentUser['linkResume']}`},
+            profileLinkGitHub: { value: `${Store.currentUser.github}`},
+            profileLinkCodePen: { value: `${Store.currentUser.codepen}`},
+            profileLinkLinkedIn: { value: `${Store.currentUser.linkedin}`},
+            profileLinkPortfolio: { value: `${Store.currentUser.portfolioWebsite}`},
+            profileLinkResume: { value: `${Store.currentUser.resume}`},
             // about
-            // profileAboutUser: currentUser.aboutUser,
-            profileAboutUser: currentUser['aboutUser'],
-            // profileAboutUser: { value: `${currentUser['aboutUser']}`},
-            profileAboutUserYearsOfExperience: { value: `${currentUser['aboutUserYearsOfExperience']}`},
+            profileAboutUser: Store.currentUser.bio,
+            profileAboutUserYearsOfExperience: { value: `${Store.currentUser.experience}`},
             profileAboutUserTimeWithRTYear: {},
             profileAboutUserTimeWithRTMonth: {},
             // professional skills

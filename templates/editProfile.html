@@ -7,8 +7,8 @@
                     <!-- JUST ADD DISPLAY: BLOCK; to Article -->
                     <article class="changeProfile card">
                         <div class="fc-changeProfileText">
-                            <h2 class="h2TitleChange fw300 colorWhiteff">Looks like you've made a change. Save your changes?</h2>
-                            <button id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
+                            <!-- <h2 class="h2TitleChange fw300 colorWhiteff">Looks like you've made a change. Save your changes?</h2> -->
+                            <button id='submitProfileBtn' slot="submitProfileChange" id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
                         </div>
                     </article>
                 </div>
@@ -31,29 +31,13 @@
     <div class="fc-topBar">
         <div class="grid gutters quarter">
             <div class="cell">
-                <!-- fix commit -->
                 <img class="avatarPicXL" slot="profileBasicValImgAttrs">
-                <!-- <label id="profile-picture" class="caption card">
-                    <span class="profileTitle fw500">Add Profile Picture</span>
-                    <input id="file" style="visibility:hidden;" type="file">
-                </label> -->
-                <!-- Below fixes position, but breaks upload -->
-                <!-- <div id="profile-picture" class="caption card">
-                    <span class="profileTitle fw500">Add Profile Picture</span>
-                    <input id="file" style="visibility:hidden;" type="file">
-                </div> -->
                 <div class="caption card">
                     <label id="profile-picture">
                         <span class="profileTitle fw500">Add Profile Picture</span>
                         <input id="file" style="visibility:hidden;" type="file">
                     </label>
                 </div>
-                <!-- end fix commit -->
-                <!-- <img class="avatarPicXL" src="public/images/porg_sq.jpeg" alt=""> -->
-                <!-- <img class="avatarPicXL" slot="profileBasicValImgAttrs">
-                <div class="caption card">
-                    <h5 class="profileTitle colorGray42 fw500">Edit Profile Picture</h5>
-                </div> -->
             </div>
             <div class="cell">
                 <div class="fc-infoCont1">
@@ -65,24 +49,14 @@
                                 <label class="colorGray42 fw900" for="name">Name:</label>
                                 <input class="colorGray42 fw300" type="text" name="name" placeholder="Name" slot="profileBasicValName">
                             </div>
-                            <!-- <div class="fc-input-profile">
-                                <label class="colorGray42 fw900" for="age">Age:</label>
-                                <input class="colorGray42 fw300" type="number" name="age" placeholder="Age" slot="profileBasicValAge">
-                            </div> -->
-                            <!-- <div class="fc-input-profile">
-                                <label class="colorGray42 fw900" for="location">Location:</label>
-                                <input class="colorGray42 fw300" type="text" name="location" placeholder="Location" slot="profileBasicValLocation">
-                            </div> -->
                             <div class="fc-input-profile">
                                 <label class="colorGray42 fw900" for="city">City:</label>
-                                <!-- <div class="fc-input-profile-cityState"> -->
                                 <input class="colorGray42 fw300 half" type="text" name="city" placeholder="City" slot="profileBasicValCity">
                             </div>
                             <div class="fc-input-profile">
                                 <label class="colorGray42 fw900 half" for="state">State:</label>
                                 <input class="colorGray42 fw300 half" type="text" name="state" placeholder="State" slot="profileBasicValState">
                             </div>
-                                <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -144,12 +118,9 @@
         <div class="fc-form-about">
             <div class="grid gutters half">
                 <div class="cell aboutTextCol">
-                    <!-- <div class="fc-aboutCont"> -->
                     <textarea id="bio" rows="8" cols="12" placeholder="Please enter Information About Yourself">
                         <slot name="profileAboutUser"></slot>
                     </textarea>
-                    <!-- </div> -->
-                    <!-- <div id="counter" class="counterBot">You have 500 characters left.</div> -->
                 </div>
                 <div class="cell">
                     <div class="fc-aboutCont">
@@ -187,17 +158,12 @@
             <div class="grid gutters half">
                 <div class="cell">
                     <div class="fc-form-input">
-                        <label for="skillProfessional" class="fw300 colorGray42">Search for Professional Skills:</label>
-                        <input type="search" results=5 name="skillProfessional" placeholder="Find Professional Skill">
+                        <label for="skillsProfessional" class="fw300 colorGray42">Search for Professional Skills:</label>
+                        <input type="search" results=5 name="skillsProfessional" placeholder="Find Professional Skill">
                     </div>
                 </div>
                 <div class="cell">
                     <div class="fc-skillItemCont">
-                        <!-- <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">User Experience Design</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div> -->
                         <slot name="profileSkillProfessional"></slot>
                     </div>
                 </div>
@@ -212,17 +178,12 @@
             <div class="grid gutters half">
                 <div class="cell">
                     <div class="fc-form-input">
-                        <label for="skillProfessional" class="fw300 colorGray42">Seach for Software Skills:</label>
-                        <input type="search" results=5 name="skillProfessional" placeholder="Find Software Skill">
+                        <label for="skillsSoftware" class="fw300 colorGray42">Seach for Software Skills:</label>
+                        <input type="search" results=5 name="skillsSoftware" placeholder="Find Software Skill">
                     </div>
                 </div>
                 <div class="cell">
                     <div class="fc-skillItemCont">
-                        <!-- <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">Sketch</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div> -->
                         <slot name="profileSkillSoftware"></slot>
                     </div>
                 </div>
@@ -237,17 +198,12 @@
             <div class="grid gutters half">
                 <div class="cell">
                     <div class="fc-form-input">
-                        <label for="skillProfessional" class="fw300 colorGray42">Search for Coding Languages:</label>
-                        <input type="search" results=5 name="skillProfessional" placeholder="Find Coding Language">
+                        <label for="skillsLanguage" class="fw300 colorGray42">Search for Coding Languages:</label>
+                        <input type="search" results=5 name="skillsLanguage" placeholder="Find Coding Language">
                     </div>
                 </div>
                 <div class="cell">
                     <div class="fc-skillItemCont">
-                        <!-- <div class="fc-skillItem">
-                            <h5 class="skillItem colorGray42 fw500">HTML</h5>
-                            <div class="skillItemDash"></div>
-                            <h5 class="skillItemClose colorGreen fw500">X</h5>
-                        </div> -->
                         <slot name="profileSkillLanguage"></slot>
                     </div>
                 </div>

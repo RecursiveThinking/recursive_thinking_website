@@ -1,3 +1,5 @@
+// need to add created and updated to postDeveloperById and postDeveloperByIdEdit
+
 export const Store = {
     currentUserCognitoId: {},
     currentUser: {
@@ -6,7 +8,7 @@ export const Store = {
         picture: '',
         name: '',
         created: '',
-        birthday: '',
+        updated: '',
         city: '',
         state: '',
         title: '',
@@ -14,15 +16,16 @@ export const Store = {
         github: '',
         codepen: '',
         linkedin: '',
-        website: '',
+        portfolioWebsite: '',
         resume: '',
         bio: '',
         experience: '',
+        timeWithRT: '',
         rank: '',
-        skillsProfessional: '',
-        skillsSoftware: '',
-        skillsLanguages: '',
-        lessonsAttending: ''
+        skillsProfessional: {},
+        skillsSoftware: {},
+        skillsLanguages: {},
+        lessonsAttending: []
     },
     developers: {},
     lessons: {},

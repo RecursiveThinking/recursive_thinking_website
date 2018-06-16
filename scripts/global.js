@@ -257,13 +257,48 @@ const allSkillsProfessional = [
     'User Experience Design', 'User Research', 'Information Architecture', 'Visual Design', 'User Centered Design', 'Wireframing Design', 'Interaction Design', 'Front End Development'
 ]
 
+export const allSkillsProfessionalObj = {
+    UXDesign: 'User Experience Design',
+    UResearch: 'User Research',
+    InfoArch: 'Information Architecture',
+    VisualDesign: 'Visual Design',
+    UCenterdDesign: 'User Centered Design',
+    WireFramingDesign: 'Wireframing Design',
+    InteracctionDesign: 'Interaction Design',
+    FrontEndDevelopment: 'Front End Development'
+}
+
 const allSkillsSoftware = [
     'Sketch', 'Balsamiq', 'OmniGraffle', 'Axure'
 ]
 
+export const allSkillsSoftwareObj = {
+    Sketch: 'Sketch',
+    Balsamiq: 'Balsamiq',
+    OmniGraffle: 'OmniGraffle',
+    Axure: 'Axure'
+}
+
 const allProgrammingLanguages = [
     'HTML', 'CSS', 'JavaScript', 'jQuery', 'Angular', 'React', 'C#', '.NETCore', 'Nancy', 'Python', 'Django', 'Flask', 'Bootstrap', 'WebPack'
 ]
+
+export const allProgrammingLanguagesObj = {
+    HTML : 'HTML',
+    CSS : 'CSS',
+    JavaScript: 'JavaScript',
+    jQuery: 'jQuery',
+    Angular: 'Angular',
+    React: 'React',
+    CSharp: 'C#',
+    dotNetCore: '.NETCore',
+    Nancy: 'Nancy',
+    Python: 'Python',
+    Django: 'Django',
+    Flask: 'Flask',
+    Bootstrap: 'Bootstrap',
+    WebPack: 'WebPack'
+}
 
 const allStates = [
     ["Alabama", "AL"],
