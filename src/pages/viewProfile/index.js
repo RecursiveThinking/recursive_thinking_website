@@ -2,11 +2,11 @@ import {
     importTemplate,
     templates,
     fill
-} from '../scripts/templater'
+} from '../../templater'
 import {
     utils,
     data
-} from '../scripts/global';
+} from '../../global';
 
 import viewProfileHtml from './viewProfile.html'
 importTemplate("viewProfile", viewProfileHtml)
@@ -23,7 +23,7 @@ export function setup(renderFunction) {
 
 const viewProfileUser = {
     username: 'PorgDev1',
-    picture: '../public/images/avatar1.png',
+    picture: '../../images/avatar1.png',
     name: 'Porg Dev1',
     created: new Date('01/01/2018').toString(),
     birthday: new Date('01/01/1990').toString(),

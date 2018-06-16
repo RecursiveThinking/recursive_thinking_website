@@ -2,11 +2,11 @@ import {
     importTemplate,
     templates,
     fill
-} from '../scripts/templater'
+} from '../../templater'
 import {
     utils,
     data
-} from '../scripts/global';
+} from '../../global';
 
 import recursiveDirectoryHtml from './recursiveDirectory.html'
 importTemplate("recursiveDirectory", recursiveDirectoryHtml)
@@ -41,7 +41,7 @@ export const getRecursiveDirectoryModel = () => {
             // picture is attribute insertion (find slot="picture")
             picture: {
                 // insert these attributes into the element tagged as a slot
-                // src: `./public/images/${randomAvatar()}`,
+                // src: `./images/${randomAvatar()}`,
                 src: `${user.image}`,
                 alt: `Profile picture for ${user.name}`
             }

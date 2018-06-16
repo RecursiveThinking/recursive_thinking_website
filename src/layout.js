@@ -1,5 +1,5 @@
-import { data, utils } from '../scripts/global';
-import serverApi from '../scripts/serverApi'
+import { data, utils } from './global';
+import serverApi from './serverApi'
 
 export default (function() {
 
@@ -98,7 +98,7 @@ export default (function() {
             devImage.className = `sidebarImage`;
             // console.log(currentUser.name);
             if(!currentUser.image){
-                currentUser.image = './public/images/avatar1.png';
+                currentUser.image = './images/avatar1.png';
             }
             devImage.setAttribute('src', `${currentUser.image}`)
             // connect

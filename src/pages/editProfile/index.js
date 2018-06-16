@@ -1,7 +1,7 @@
-import { importTemplate, templates, fill } from '../scripts/templater'
-import { utils, data, allSkillsProfessionalObj, allSkillsSoftwareObj, allProgrammingLanguagesObj } from '../scripts/global';
-import { Store } from '../scripts/store.js';
-import { serverApi } from '../scripts/serverApi.js';
+import { importTemplate, templates, fill } from '../../templater'
+import { utils, data, allSkillsProfessionalObj, allSkillsSoftwareObj, allProgrammingLanguagesObj } from '../../global';
+import { Store } from '../../store.js';
+import { serverApi } from '../../serverApi.js';
 
 import editProfileHtml from './editProfile.html'
 importTemplate("editProfile", editProfileHtml)

@@ -2,14 +2,14 @@ import { templates } from './templater';
 import { utils } from './global';
 import { signOut } from './auth';
 
-import * as dashboard from '../templates/dashboard'
-import * as upcomingLessons from '../templates/upcomingLessons'
-import * as voteForLesson from '../templates/voteForLesson'
-import * as editProfile from '../templates/editProfile'
-import * as viewProfile from '../templates/viewProfile'
-import * as interviewPrep from '../templates/interviewPrep'
-import * as recursiveDirectory from '../templates/recursiveDirectory'
-import * as homeScreen from '../templates/homeScreen'
+import * as dashboard from './pages/dashboard'
+import * as upcomingLessons from './pages/upcomingLessons'
+import * as voteForLesson from './pages/voteForLesson'
+import * as editProfile from './pages/editProfile'
+import * as viewProfile from './pages/viewProfile'
+import * as interviewPrep from './pages/interviewPrep'
+import * as recursiveDirectory from './pages/recursiveDirectory'
+import * as homeScreen from './pages/homeScreen'
 
 export default (function() {
     function renderPage(template) {

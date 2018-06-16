@@ -1,16 +1,16 @@
 import {
     User
-} from '../scripts/auth';
+} from '../../auth';
 
 import {
     importTemplate,
     templates,
     fill
-} from '../scripts/templater'
+} from '../../templater'
 import {
     utils
-} from '../scripts/global';
-import serverApi from '../scripts/serverApi.js';
+} from '../../global';
+import serverApi from '../../serverApi.js';
 
 import homeScreenHtml from './homeScreen.html'
 import {
@@ -18,7 +18,7 @@ import {
 } from 'aws-amplify';
 import {
     Store
-} from '../scripts/store.js';
+} from '../../store.js';
 
 importTemplate("homeScreen", homeScreenHtml);
 
