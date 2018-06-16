@@ -25,9 +25,10 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /src\/index\.html$/,
+                test: /index\.html$/,
+                test: new RegExp(path.resolve('src', 'index.html') + '$'),
                 // note: items in the 'use' clause are run bottom -> top
-                use: [ 
+                use: [
                     'file-loader?name=[name].[ext]', // run third
                     'extract-loader', // run second
                     'html-loader' // run first
