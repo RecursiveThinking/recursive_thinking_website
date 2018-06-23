@@ -225,7 +225,6 @@ export const homeScreen = () => {
 
     function checkUserInDB() {
         let flag = false;
-        // Need to change this to userID (sub) in the future - Checking if the user has been added to the DB
         for (let i = 0; i < Store.developers.length; i++) {
             if (Store.developers[i].username == Store.currentUserCognitoId['cognito:username']) {
                 flag = true;

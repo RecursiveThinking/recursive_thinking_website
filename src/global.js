@@ -16,6 +16,7 @@
 //     resume: - String<S3URL> - Base64 the file and send it up to our S3 get the link from S3 back (validate only take certain extensions .doc .docx to S3)
 //     bio: - String - users bio max 500 words ''
 //     experience: - Number - Years experience (?)
+//     timeWithRT: - Number - Years with RT (?)
 //     rank: Number - Rank in RT (white belt, green belt, black)etc... for mentor/project pairing,
 //     skillsProfessional: Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
 //     skillsSoftware:  Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
