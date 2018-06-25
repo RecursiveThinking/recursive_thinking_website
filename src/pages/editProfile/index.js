@@ -42,7 +42,7 @@ async function submitProfileChangeFunc() {
         let key = updatedUserAttributes[i].name;
         let currentValue = Store.currentUser[key];
         let updatedValue = updatedUserAttributes[i].value;
-        console.log('Key: ', key, 'Current Value: ', currentValue, 'Updated Value: ', updatedValue);
+        // console.log('Key: ', key, 'Current Value: ', currentValue, 'Updated Value: ', updatedValue);
 
         if(key === 'github' || key === 'codepen' || key === 'linkedin' || key === 'portfolioWebsite'){
             if(validateUrls(updatedValue)){
@@ -50,16 +50,20 @@ async function submitProfileChangeFunc() {
                 continue;
             }
             console.log(key, ' url is invalid');
+            continue;
         }
-        if(updatedValue !== currentValue && currentValue.length > 0){
+        if(updatedValue !== currentValue && typeof currentValue === 'string'){
             updateValue(key, updatedValue);
         }
     }
 
     console.log('Current User: ', Store.currentUser, 'Updated User', Store.updatedUser);
 
-    await serverApi.postEditProfile();
-
+    let response = await serverApi.postEditProfile();
+    if(response['Item']){
+        Store.updateUser(response['Item']);
+    }
+    Store.clearUpdatedUser();
 }
 
 function validateUrls(url){
