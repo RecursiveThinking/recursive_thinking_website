@@ -1,16 +1,16 @@
 import {
     User
-} from '../scripts/auth';
+} from '../../auth';
 
 import {
     importTemplate,
     templates,
     fill
-} from '../scripts/templater'
+} from '../../templater'
 import {
     utils
-} from '../scripts/global';
-import serverApi from '../scripts/serverApi.js';
+} from '../../global';
+import serverApi from '../../serverApi.js';
 
 import homeScreenHtml from './homeScreen.html'
 import {
@@ -18,7 +18,7 @@ import {
 } from 'aws-amplify';
 import {
     Store
-} from '../scripts/store.js';
+} from '../../store.js';
 
 importTemplate("homeScreen", homeScreenHtml);
 
@@ -225,7 +225,6 @@ export const homeScreen = () => {
 
     function checkUserInDB() {
         let flag = false;
-        // Need to change this to userID (sub) in the future - Checking if the user has been added to the DB
         for (let i = 0; i < Store.developers.length; i++) {
             if (Store.developers[i].username == Store.currentUserCognitoId['cognito:username']) {
                 flag = true;

@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    entry: `${__dirname}/main.js`,
+    entry: `${__dirname}/src/main.js`,
     plugins: [
         new CleanWebpackPlugin(['build']),
         new CopyWebpackPlugin([
@@ -26,9 +26,12 @@ module.exports = {
             },
             {
                 test: /index\.html$/,
+                include: [
+                    path.resolve(__dirname, "src")
+                ],
                 // note: items in the 'use' clause are run bottom -> top
-                use: [ 
-                    'file-loader?name=[path][name].[ext]', // run third
+                use: [
+                    'file-loader?name=[name].[ext]', // run third
                     'extract-loader', // run second
                     'html-loader' // run first
                 ],
@@ -40,7 +43,13 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|ico)$/,
-                use: [ 'file-loader?name=[path][name].[ext]' ]
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        context: 'src' // without this, images get output as 'src/images/path/to/img.png' instead of 'images/path/to/img.png'
+                    }
+                }]
             },
             {
                 test: /\.css$/,

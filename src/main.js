@@ -1,7 +1,7 @@
-import { global } from './scripts/global';
-import layout from './scripts/layout';
-import redirect from './scripts/redirect';
-import { credentials } from './secrets/cognitoCreds.js';
+import { global } from './global';
+import layout from './layout';
+import redirect from './redirect';
+import { credentials } from '../secrets/cognitoCreds.js';
 import Amplify from 'aws-amplify';
 
 import './index.html'
@@ -20,12 +20,15 @@ import './css/editProfile.css'
 import './css/viewProfile.css'
 import './css/responsive.css'
 
-import './public/images/avatar1.png'
-import './public/images/avatar2.png'
-import './public/images/avatar3.png'
-import './public/images/avatar4.png'
-import './public/images/avatar5.png'
-import './public/images/avatar6.png'
+import './images/avatar1.png'
+import './images/avatar2.png'
+import './images/avatar3.png'
+import './images/avatar4.png'
+import './images/avatar5.png'
+import './images/avatar6.png'
+
+import './images/favicon/favicon_16x16.ico'
+import './images/favicon/favicon_32x32.ico'
 
 
 // Austin's Cognito pool

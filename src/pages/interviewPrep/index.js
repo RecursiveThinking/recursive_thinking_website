@@ -1,5 +1,5 @@
-import { importTemplate, templates, fill } from '../scripts/templater'
-import { utils, data } from '../scripts/global';
+import { importTemplate, templates, fill } from '../../templater'
+import { utils, data } from '../../global';
 
 import interviewPrepHtml from './interviewPrep.html'
 importTemplate("interviewPrep", interviewPrepHtml)

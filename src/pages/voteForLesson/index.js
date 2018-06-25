@@ -1,5 +1,5 @@
-import { importTemplate, templates, fill } from '../scripts/templater'
-import { utils, data } from '../scripts/global';
+import { importTemplate, templates, fill } from '../../templater'
+import { utils, data } from '../../global';
 
 import voteForLessonHtml from './voteForLesson.html'
 importTemplate("voteForLesson", voteForLessonHtml)
@@ -32,7 +32,7 @@ export const model = () => {
                 title: lesson.title,
                 description: lesson.description,
                 // lessonTeachers: lesson.lessonTaughtBy.map((image) => {
-                //     return `<img class="avatarThumbRound" src="./public/images/avatar${image}.png" alt="avatar${image} - Sweet Mug">`
+                //     return `<img class="avatarThumbRound" src="./images/avatar${image}.png" alt="avatar${image} - Sweet Mug">`
                 // })
                 lessonTeachers: filteredTaughtByUserArray.map(userObj => fill(templates.voteForLesson.displayTaughtByLessons, {
                     imgAttrs: {

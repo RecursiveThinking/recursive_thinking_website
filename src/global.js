@@ -16,6 +16,7 @@
 //     resume: - String<S3URL> - Base64 the file and send it up to our S3 get the link from S3 back (validate only take certain extensions .doc .docx to S3)
 //     bio: - String - users bio max 500 words ''
 //     experience: - Number - Years experience (?)
+//     timeWithRT: - Number - Years with RT (?)
 //     rank: Number - Rank in RT (white belt, green belt, black)etc... for mentor/project pairing,
 //     skillsProfessional: Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
 //     skillsSoftware:  Array<Strings> -  should be array of text skills, (users pick from a wide variety we curate from dropdown)
@@ -25,7 +26,7 @@
 
 const allUsers = [{
         _id: '0000000001',
-        image: './public/images/avatar1.png',
+        image: './images/avatar1.png',
         name: 'Porg Dev1',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -51,7 +52,7 @@ const allUsers = [{
     },
     {
         _id: '0000000002',
-        image: './public/images/avatar2.png',
+        image: './images/avatar2.png',
         name: 'Porg Dev2',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -76,7 +77,7 @@ const allUsers = [{
     },
     {
         _id: '0000000003',
-        image: './public/images/avatar3.png',
+        image: './images/avatar3.png',
         name: 'Porg Dev3',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -101,7 +102,7 @@ const allUsers = [{
     },
     {
         _id: '0000000004',
-        image: './public/images/avatar4.png',
+        image: './images/avatar4.png',
         name: 'Porg Dev4',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -126,7 +127,7 @@ const allUsers = [{
     },
     {
         _id: '0000000005',
-        image: './public/images/avatar5.png',
+        image: './images/avatar5.png',
         name: 'Porg Dev5',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -151,7 +152,7 @@ const allUsers = [{
     },
     {
         _id: '0000000006',
-        image: './public/images/avatar6.png',
+        image: './images/avatar6.png',
         name: 'Porg Dev6',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -176,7 +177,7 @@ const allUsers = [{
     },
     {
         _id: '0000000007',
-        image: './public/images/porg_sq.jpeg',
+        image: './images/porg_sq.jpeg',
         name: 'Porg Von Porghoven',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -201,7 +202,7 @@ const allUsers = [{
     },
     {
         _id: '0000000008',
-        image: './public/images/avatar1.png',
+        image: './images/avatar1.png',
         name: 'Porg Dev8',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -226,7 +227,7 @@ const allUsers = [{
     },
     {
         _id: '0000000009',
-        image: './public/images/avatar2.png',
+        image: './images/avatar2.png',
         name: 'Porg Dev9',
         username: '',
         created: new Date('01/01/2016').toString(),
@@ -710,7 +711,7 @@ const generateTaughtByThumbs = (loopNumber, containerHTML, lessonTitleForAlt) =>
         // get random Image
         let randImage = randomAvatar();
         let randImageName = randImage.replace('.png', '');
-        imgTaughtByThumbs.setAttribute('src', `../public/images/${randImage}`);
+        imgTaughtByThumbs.setAttribute('src', `../images/${randImage}`);
         imgTaughtByThumbs.setAttribute('alt', `lesson ${lessonTitleForAlt} taught by developer ${randImageName}`)
             // connect
         containerHTML.appendChild(imgTaughtByThumbs);

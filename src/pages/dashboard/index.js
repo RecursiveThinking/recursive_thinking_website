@@ -1,6 +1,6 @@
-import { importTemplate, templates, fill } from '../scripts/templater';
-import { utils, data } from '../scripts/global';
-import {Store} from '../scripts/store.js';
+import { importTemplate, templates, fill } from '../../templater';
+import { utils, data } from '../../global';
+import {Store} from '../../store.js';
 import dashboardHtml from './dashboard.html';
 importTemplate("dashboard", dashboardHtml)
 
