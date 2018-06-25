@@ -2,6 +2,7 @@ import {
     User
 } from './auth';
 import {credentials} from '../secrets/cognitoCreds.js';
+import {Store} from '../src/store.js';
 // Austin's Api
 // let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
 
@@ -26,6 +27,17 @@ async function postDeveloperById(user) {
 
     return initFetchCall(resource, options);
 }
+
+async function postEditProfile() {
+    const resource = `/developers/${Store.currentUser.userId}/edit`;
+    const body = Object.assign(Store["updatedUser"]);
+    const options = {
+        method: "POST",
+        body
+    };
+    return initFetchCall(resource, options);
+}
+
 
 // Get all developer profiles
 async function getDeveloperProfiles() {
@@ -126,15 +138,6 @@ function postInterviewQuestionResponse(questionId, data) {
         method: "POST",
         body: data
     }
-    return initFetchCall(resource, options);
-}
-
-function postEditProfile(developerId, profileInfo) {
-    const resource = `/developers/${developerId}`;
-    options = {
-        method: "POST",
-        body: profileInfo
-    };
     return initFetchCall(resource, options);
 }
 

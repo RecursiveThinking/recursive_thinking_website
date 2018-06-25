@@ -26,7 +26,9 @@ module.exports = {
             },
             {
                 test: /index\.html$/,
-                test: new RegExp(path.resolve('src', 'index.html') + '$'),
+                include: [
+                    path.resolve(__dirname, "src")
+                ],
                 // note: items in the 'use' clause are run bottom -> top
                 use: [
                     'file-loader?name=[name].[ext]', // run third
