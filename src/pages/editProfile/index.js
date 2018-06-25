@@ -55,6 +55,7 @@ async function submitProfileChangeFunc() {
         if(updatedValue !== currentValue && typeof currentValue === 'string'){
             updateValue(key, updatedValue);
         }
+        // will need to check for array of strings (for the skills)
     }
 
     console.log('Current User: ', Store.currentUser, 'Updated User', Store.updatedUser);

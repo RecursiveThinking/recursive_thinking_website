@@ -1,5 +1,7 @@
 import { importTemplate, templates, fill } from '../../templater'
 import { utils, data } from '../../global';
+import uuidV1 from 'uuid/v1';
+import serverApi from '../../serverApi.js';
 
 import voteForLessonHtml from './voteForLesson.html'
 importTemplate("voteForLesson", voteForLessonHtml)
@@ -51,13 +53,15 @@ export const model = () => {
 }
 
 export const modalLessons = () => {
-    const btnSubmitLesson = document.getElementById('btnSubmitLesson');
-
+    const btnCreateLessonRequest = document.getElementById('btnCreateLessonRequest');
+    const btnSubmitLessonRequest = document.getElementById('btnSubmitLessonRequest');
     const modalContSubmitLesson = document.getElementById('modalSubmitLesson');
 
-    btnSubmitLesson.onclick = function() {
+    btnCreateLessonRequest.onclick = function() {
         modalContSubmitLesson.style.display = "block";
     }
+
+    btnSubmitLessonRequest.onclick = submitNewLesson;
 
     window.onclick = function(event) {
         if (event.target == modalContSubmitLesson) {
@@ -67,4 +71,24 @@ export const modalLessons = () => {
             console.log("Clicking on Something Not a Modal");
         }
     }
+}
+
+async function submitNewLesson(e){
+    e.preventDefault();
+    const title = document.querySelector('input[name="lessonTitle"]').value;
+    const description = document.querySelector('textarea[name="lessonDescription"]').value;
+    const taughtBy = document.querySelector('input[name="lessonTaughtBy"]').value;
+
+    const Id = uuidV1();
+
+    const lesson = {
+        Id,
+        title,
+        description,
+        taughtBy
+    }
+
+    await serverApi.postLessonById(lesson);
+    // console.log(lesson);
+
 }

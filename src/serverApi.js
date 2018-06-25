@@ -3,10 +3,7 @@ import {
 } from './auth';
 import {credentials} from '../secrets/cognitoCreds.js';
 import {Store} from '../src/store.js';
-// Austin's Api
-// let apiUrl = "https://6a3h75mkhi.execute-api.us-east-1.amazonaws.com/Prod";
 
-// Avsean's Api
 let apiUrl = credentials.apiUrl;
 
 function signUp(info) {
@@ -48,6 +45,23 @@ async function getDeveloperProfiles() {
 
     const options = {
         method: "GET",
+    };
+
+    return initFetchCall(resource, options);
+}
+
+// For now taughtBy will be a string of a username, however it should eventually be an array of valid userIds
+async function postLessonById(lesson){
+    const resource = `/lessons/${lesson.Id}`;
+
+    const options = {
+        method: "POST",
+        body: {
+            Id: lesson.Id,
+            title: lesson.title,
+            description: lesson.description,
+            taughtBy: lesson.taughtBy
+        }
     };
 
     return initFetchCall(resource, options);
@@ -174,6 +188,7 @@ async function initFetchCall(resource, options) {
 export default {
     postDeveloperById,
     getDeveloperProfiles,
+    postLessonById,
     getUpcomingLessons,
     postUpcomingLessons,
     getVoteForLessons,
