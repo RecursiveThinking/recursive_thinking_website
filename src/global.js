@@ -392,6 +392,7 @@ localStorage.setItem('currentUser', JSON.stringify(currentUser));
 //   title: - String - Title of lesson,
 //   date: - Date String - new Date().toString(),
 //   description: - String - A description of the lesson,
+//   createdBy: - String - uuid - userid of the dev that created the lesson request
 //   lessonTaughtBy: - Array<String> - usernames of the devs teaching,
 //   lessonAttendees: - Array<String> - usernames of the devs attending,
 //   rank: Array<String> - usernames of the devs who have voted the lesson (for an optional sort) we display as length of the array or icons of devs,
