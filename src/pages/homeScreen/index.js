@@ -203,20 +203,18 @@ export const homeScreen = () => {
             currentUser = utils.parseJwt(data.signInUserSession.idToken.jwtToken);
             Store.updateCurrentUserCognitoId(currentUser);
 
-            developers = await serverApi.getDeveloperProfiles();
-            developers = developers.Items;
-            Store.updateDevelopers(developers);
+            await serverApi.getDeveloperProfiles();
             userInDB = checkUserInDB();
 
             if (!userInDB) {
                 console.log("user not in DB adding");
                 serverApi.postDeveloperById(Store.currentUserCognitoId)
                     .then(async function reGetDevelopers() {
-                        developers = await serverApi.getDeveloperProfiles();
-                        developers = developers.Items;
-                        Store.updateDevelopers(developers);
+                        await serverApi.getDeveloperProfiles();
                     });
             }
+
+            await serverApi.getLessons();
 
             modal.style.display = "none";
             utils.navigateToPage('dashboard');
@@ -228,7 +226,7 @@ export const homeScreen = () => {
         for (let i = 0; i < Store.developers.length; i++) {
             if (Store.developers[i].username == Store.currentUserCognitoId['cognito:username']) {
                 flag = true;
-                Store.updateUser(developers[i]);
+                Store.updateUser(Store.developers[i]);
             }
         }
         return flag;

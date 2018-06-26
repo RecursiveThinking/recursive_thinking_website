@@ -69,6 +69,12 @@ export const Store = {
     },
     updateDevelopers: function (developers) {
         this.developers = developers;
+    },
+    updateLessons: function (lessons){
+        lessons.forEach((lesson) => {
+            this.lessons[lesson.Id] = lesson;
+        });
+        console.log(this.lessons);
     }
 }
 

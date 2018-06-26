@@ -47,7 +47,9 @@ async function getDeveloperProfiles() {
         method: "GET",
     };
 
-    return initFetchCall(resource, options);
+    let developers = await initFetchCall(resource, options);
+    developers = developers.Items;
+    Store.updateDevelopers(developers);
 }
 
 // For now taughtBy will be a string of a username, however it should eventually be an array of valid userIds
@@ -68,12 +70,15 @@ async function postLessonById(lesson){
 }
 
 // Get all upcoming lessons
-function getUpcomingLessons() {
+async function getLessons() {
     const resource = "/lessons";
     const options = {
         method: "GET"
     };
-    return initFetchCall(resource, options);
+    let lessons = await initFetchCall(resource, options);
+    lessons = lessons.Items;
+    Store.updateLessons(lessons);
+    
 }
 
 // Submit an attending status (Attending, maybe, not attending) to a lesson
@@ -186,10 +191,10 @@ async function initFetchCall(resource, options) {
 }
 
 export default {
-    postDeveloperById,
     getDeveloperProfiles,
+    postDeveloperById,
+    getLessons,
     postLessonById,
-    getUpcomingLessons,
     postUpcomingLessons,
     getVoteForLessons,
     postVoteForLessons,
