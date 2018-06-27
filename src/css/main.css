@@ -377,6 +377,7 @@ form {
 }
 
 input[type=email],
+input[type=password],
 input[type=number],
 input[type=search], 
 input[type=text],
@@ -387,6 +388,7 @@ textarea:focus {
 
 
 input[type=email]:focus,
+input[type=password]:focus,
 input[type=number]:focus,
 input[type=search]:focus, 
 input[type=text]:focus,
