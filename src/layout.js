@@ -1,6 +1,8 @@
 import { data, utils } from './global';
 import serverApi from './serverApi'
 
+import { Store } from './store.js';
+
 export default (function() {
 
     class api {
@@ -19,7 +21,6 @@ export default (function() {
                     utils.setWindowOffsetsMobile();
                 }
             })
-
             // adding our click listener to each sidebar item
             const sidebarItems = document.getElementsByClassName('sidebar-item');
             const hamburger = document.getElementById('hamburger');
@@ -80,13 +81,18 @@ export default (function() {
 
     window.onhashchange = () => {
         if (document.getElementById('sidebar').style.visibility === 'hidden') {
-          document.getElementById('sidebar').style.visibility = 'visible';
+            document.getElementById('sidebar').style.visibility = 'visible';
         }
     };
 
-
     function buildCurrentUserDashInfo(){
+        // const currentUser = JSON.parse(JSON.stringify(Store.currentUser))
+        // console.log(currentUser);
+        // console.log(currentUser.username);
+        // console.log(currentUser.name);
+        // console.log(currentUser.title);
         const currentUser = data.getCurrentUser();
+        // const currentUserFromGlobal = data.getCurrentUser();
         // console.log("In Function");
         const currentUserDashInfo = document.getElementById('currentUserDashInfo');
         // console.log(currentUserDashInfo);
