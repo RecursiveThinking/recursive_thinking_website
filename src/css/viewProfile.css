@@ -7,22 +7,26 @@
     /* background-color: red; */
 }
 
-/* .imgAvatarL {
+#viewProfileHTML > .grid.twothirds > .cell.padding > .card {
+    padding: 0;
+}
+
+#viewProfileHTML .imgAvatarL {
     width: 21.3rem;
     height: 21.3rem;
     border-radius: 50%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     margin: 2.6rem;
-} */
-#viewProfileHTML .avatarPicXL {
+}
+/* #viewProfileHTML .avatarPicXL {
     width: 29.3rem;
     height: 29.3rem;
     border-radius: 50%;
     z-index: 0;
     position: relative;
-}
+} */
 
-.fc-profileInfo {
+#viewProfileHTML .fc-profileInfo {
     display: flex;
     flex-direction: row;
     /* flex-wrap: wrap; */
@@ -31,61 +35,62 @@
     align-items: center;
 }
 
-.fc-profileInfoText {
+#viewProfileHTML .fc-profileInfoText {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-start;
 }
 
-.fc-profileInfoText h1 {
+#viewProfileHTML .fc-profileInfoText h1 {
     font-size: 3.6rem;
     letter-spacing: 2.2px;
 }
 
-.fc-profileInfoText h4 {
+#viewProfileHTML .fc-profileInfoText h4 {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 }
 
-.fc-profileInfoText-fine h6 {
+#viewProfileHTML .fc-profileInfoText-fine h6 {
     font-size: 1.4rem;
 }
 
-.fc-profileInfoText-fine {
+#viewProfileHTML .fc-profileInfoText-fine {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
 }
 
-.fc-profileInfoText-fine:first-of-type {
+#viewProfileHTML .fc-profileInfoText-fine:first-of-type {
     margin: 1rem 0 0 0;
 }
 
-.fc-profileInfoText-fine h6:first-child {
+#viewProfileHTML .fc-profileInfoText-fine h6:first-child {
     margin: 0 .5rem 0 0;
 }
 
-.fc-profileLinks {
+#viewProfileHTML .fc-profileLinks {
     display: flex;
     flex-direction: column;
     /* width: 100%; */
     height: 100%;
 }
 
-.fc-profileLinks > a {
+#viewProfileHTML .fc-profileLinks > a {
     text-decoration: none;
+    height: 25%;
 }
 
-.fc-profileLinks-icons {
+#viewProfileHTML .fc-profileLinks-icons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: 75%;
 }
 
-.fc-profileLinks-icons > .icon {
+#viewProfileHTML .fc-profileLinks-icons > .icon {
     display: flex;
     flex-direction: column;
     height: 50%;
@@ -97,25 +102,16 @@
     align-items: center;
 }
 
-.fc-profileLinks-icons > a {
+#viewProfileHTML .fc-profileLinks-icons > .icon > a {
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    height: 50%;
-    width: 50%;
-    border-left: 1px solid #c6c6c6;
-    border-bottom: 1px solid #c6c6c6;
-    padding: 2rem 0 1.5rem 0;
-    justify-content: center;
-    align-items: center;
 }
 
-.icon > i {
+#viewProfileHTML .icon > a > i {
     font-size: 4.2rem;
     margin: 0 0 1rem 0;
 }
 
-.fc-profileLinks-port {
+#viewProfileHTML .fc-profileLinks-port {
     display: flex;
     flex-direction: row;
     height: 25%;
@@ -123,29 +119,35 @@
     align-items: center;
 }
 
-.fc-profileLinks-port h5 {
+#viewProfileHTML .fc-profileLinks-port > a {
+    text-decoration: none;
+}
+
+
+#viewProfileHTML .fc-profileLinks-port h5 {
     font-size: 1.8rem;
     letter-spacing: 1.1px;
 }
 
-.fc-profileLinks-port {
+#viewProfileHTML .fc-profileLinks-port {
     border-left: 1px solid #c6c6c6;
 }
 
-.fc-verticalCards {
-    margin: 0 0 0 3rem;
+#viewProfileHTML .fc-verticalCards {
+    /* margin: 0 0 0 3rem; */
+    margin: 0 0 0 0;
 }
 
 .fc-verticalCards {
     /* padding-top: 1rem; */
 }
 
-.cardTile {
+#viewProfileHTML .cardTile {
     /* width: 90%; */
     margin: 0 auto;
 }
 
-.fc-cardHorz {
+#viewProfileHTML .fc-cardHorz {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -155,128 +157,148 @@
     border-top: 1px solid #c6c6c6;
 }
 
-.cardTile .fc-cardHorz.first {
+#viewProfileHTML .cardTile .fc-cardHorz.first {
     border-top: 1px solid #c6c6c6;
     border-top: 0;
 }
 
-.cardTile {
+#viewProfileHTML .cardTile {
     padding: 0 2.5rem 0 2.5rem;
 }
 
-.cardTile > .fc-cardHorz > .imgAvatarS {
+#viewProfileHTML .cardTile > .fc-cardHorz > .imgAvatarS {
     width: 10.7rem;
     height: 10.7rem;
     border-radius: 50%;
 }
 
-.fc-cardHorz {
+#viewProfileHTML .fc-cardHorz {
     padding: 2.5rem 0 2.5rem 0;
 }
 
-.fc-cardHorz img {
+#viewProfileHTML .fc-cardHorz img {
     margin-right: 1.8rem;
 }
 
-.fc-CardVertText {
+#viewProfileHTML .fc-CardVertText {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-.fc-CardVertText h4 {
+#viewProfileHTML .fc-CardVertText h4 {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 }
 
-.fc-CardVertText h5 {
+#viewProfileHTML .fc-CardVertText h5 {
     font-size: 2rem;
     letter-spacing: 1.2px;
 }
 
-.fc-CardVertText h6 {
+#viewProfileHTML .fc-CardVertText h6 {
     font-size: 1.4rem;
     letter-spacing: 0.8px;
 }
 
-.fc-profileAboutExp-time {
-    padding: 2rem 3rem 2.75rem 3rem;
-}
-
-.fc-profileAboutExp-time {
-    border-left: 1px solid #c6c6c6;
-}
-
-.fc-profileAboutExp-time:first-of-type {
-    border-bottom: 1px solid #c6c6c6;
-}
-
-.h3NumberExp {
-    font-size: 4.8rem;
-    letter-spacing: 2.9px;
-    padding: 0 .5rem;
-}
-
-.h3NumberExpSpan {
-    font-size: 1rem;
-    letter-spacing: 2px;
-    padding: 0 .5rem;
-}
-
-.fc-profileAbout h4, .fc-skillViewProfile h4 {
-    font-size: 2.4rem;
-    letter-spacing: 1.4px;
-    
-}
-
-.fc-skillViewProfile, .fc-profileAbout {
-    padding: 1.6rem 0 0 3rem;
-}
-
-/* grid twothirds */
-
-.fc-profileAboutText {
-    padding: 1.55rem 0;
-}
-
-.h4Descript {
-    font-size: 1.8rem;
-    letter-spacing: 1.1px;
-    text-align: center;
-}
-
-.fc-profileAboutText p {
-    font-size: 1.4rem;
-    line-height: 1.43;
-    text-align: justify;
-    letter-spacing: 0.7px;
-}
-
-.fc-profileAbout {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    /* padding: 1.55rem */
-}
-
-.fc-profileAboutExp {
+#viewProfileHTML .fc-profileAboutExp {
     display: flex;
     flex-direction: column;
     /* flex-wrap: nowrap; */
     justify-content: center;
     /* align-content: center; */
     /* align-items: center; */
-    
     height: 100%;
 }
 
-.fc-profileAboutExp-time {
+#viewProfileHTML .fc-profileAboutExp-time {
     display: flex;
     flex-direction: column;
     height: 50%;
     width: 100%;
     /* flex-wrap: nowrap; */
-    
+    justify-content: center;
     align-content: center;
     align-items: center;
 }
+
+#viewProfileHTML .fc-profileAboutExp-time {
+    padding: 2rem 3rem 2.75rem 3rem;
+}
+
+#viewProfileHTML .fc-profileAboutExp-time {
+    border-left: 1px solid #c6c6c6;
+}
+
+#viewProfileHTML .fc-profileAboutExp-time:first-of-type {
+    border-bottom: 1px solid #c6c6c6;
+}
+
+#viewProfileHTML .timeBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#viewProfileHTML .h3NumberExp:first-of-type {
+    display: flex;
+
+    font-size: 4.8rem;
+    letter-spacing: 2.9px;
+    padding: 0 0 0 0;
+}
+
+#viewProfileHTML .h3NumberExp {
+    display: flex;
+
+    font-size: 4.8rem;
+    letter-spacing: 2.9px;
+    padding: 0 0 0 1rem;
+}
+
+#viewProfileHTML .h3NumberExpSpan {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem 0 0 0;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 0 0 0 1rem;
+}
+
+#viewProfileHTML .fc-profileAbout h4, .fc-skillViewProfile h4 {
+    font-size: 2.4rem;
+    letter-spacing: 1.4px;
+    
+}
+
+#viewProfileHTML .fc-skillViewProfile, .fc-profileAbout {
+    padding: 1.6rem 3rem 0 3rem;
+}
+
+/* grid twothirds */
+
+#viewProfileHTML .fc-profileAboutText {
+    padding: 1.55rem 0;
+}
+
+#viewProfileHTML .h4Descript {
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+    text-align: center;
+}
+
+#viewProfileHTML .fc-profileAboutText p {
+    font-size: 1.4rem;
+    line-height: 1.43;
+    text-align: justify;
+    letter-spacing: 0.7px;
+}
+
+#viewProfileHTML .fc-profileAbout {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* padding: 1.55rem */
+}
+

@@ -1,20 +1,24 @@
 <template id="page">
     <section id="viewProfileHTML">
-        <div class="content container">
-            <button class="btn btnFill signUp" id="returnToDirectory">< Return to Directory</button>
-            <div class="grid gutters twothirds">
-                <div class="cell">
-                    <slot name='mainProfile'></slot>
-                    <slot name='aboutProfile'></slot>
-                    <slot name='skillsProfessional'></slot>
-                    <slot name='skillsSoftware'></slot>
-                    <slot name='skillsLanguages'></slot>
+        <!-- <div class="container"> -->
+            <!-- <div class="grid full"> -->
+                <div class="grid twothirds">
+                    <div class="cell padding">
+                        <button class="btn btnFill signUp mb3" id="returnToDirectory">< Return to Directory</button>
+                        <slot name='mainProfile'></slot>
+                        <slot name='aboutProfile'></slot>
+                        <slot name='skillsProfessional'></slot>
+                        <slot name='skillsSoftware'></slot>
+                        <slot name='skillsLanguages'></slot>
+                    </div>
+                    <!-- <div class="grid third"> -->
+                    <div class="cell">
+                        <slot name="otherProfiles"></slot>
+                    </div>
                 </div>
-                <div class="cell">
-                    <slot name="otherProfiles"></slot>
-                </div>
-            </div>
-        </div>
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
     </section>
 </template>
 
@@ -25,7 +29,7 @@
                 <div class="grid gutters twothirds">
                     <div class="cell">
                         <div class="fc-profileInfo">
-                            <img slot="imageAttributes" class="avatarPicXL">
+                            <img slot="imageAttributes" class="imgAvatarL">
                             <div class="fc-profileInfoText">
                                 <h1 class="colorGray42 fw500">
                                     <slot name="name"></slot>
@@ -33,12 +37,12 @@
                                 <h4 class="colorGray42 fw300">
                                     <slot name="title"></slot>
                                 </h4>
-                                <div class="fc-profileInfoText-fine">
+                                <!-- <div class="fc-profileInfoText-fine">
                                     <h6 class="colorGray42 fw900 ttup">Age:</h6>
                                     <h6 class="colorGray42 fw500">
                                         <slot name="age"></slot>
                                     </h6>
-                                </div>
+                                </div> -->
                                 <div class="fc-profileInfoText-fine">
                                     <h6 class="colorGray42 fw900 ttup">Location:</h6>
                                     <h6 class="colorGray42 fw500">
@@ -56,13 +60,49 @@
                         </div>
                     </div>
                     <slot name="profileLinks"></slot>
+                <!-- </div> -->
+                    <div class="cell">
+                        <div class="fc-profileLinks">
+                            <div class="fc-profileLinks-icons">
+                                <div class="icon">
+                                    <a slot="github">
+                                        <i class="colorGrayc9 fa fa fa-git-square"></i>
+                                        <h6 class="colorGray42 fw300">GitHub</h6>
+                                    </a>
+                                </div>
+                                <div class="icon">
+                                    <a slot="codepen">
+                                        <i class="colorGreen fa fa fa-codepen"></i>
+                                        <h6 class="colorGray42 fw300">CodePen</h6>
+                                    </a>
+                                </div>
+                                <div class="icon">
+                                    <a slot="linkedin">
+                                        <i class="colorGreen fa fa-linkedin-square"></i>
+                                        <h6 class="colorGray42 fw300">LinkedIn</h6>
+                                    </a>
+                                </div>
+                                <div class="icon">
+                                    <a slot="resume">    
+                                        <i class="colorGreen fa fa-id-card-o"></i>
+                                        <h6 class="colorGray42 fw300">Resume</h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="fc-profileLinks-port">
+                                <a slot="website">
+                                    <h5 class="colorGreen fw900">Portfolio</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </article>
 </template>
 
-<template id="profileLinks">
+<!-- <template id="profileLinks">
     <div class="cell">
         <div class="fc-profileLinks">
             <div class="fc-profileLinks-icons">
@@ -96,7 +136,7 @@
             </a>
         </div>
     </div>
-</template>
+</template> -->
 
 <template id="aboutProfile">
     <article class="card">
@@ -123,10 +163,13 @@
                                 <h4 class="h4Descript fw500 colorGrayb9">Years of Experience</h4>
                             </div>
                             <div class="fc-profileAboutExp-time">
-                                <h3 class="h3NumberExp fw300 colorGray42">3
-                                    <span class="h3NumberExpSpan fw700 colorGray42 ttlow">years</span>10
+                                <div class="timeBlock">
+                                    <h3 class="h3NumberExp fw300 colorGray42">3</h3>
+                                    <span class="h3NumberExpSpan fw700 colorGray42 ttlow">years</span>
+                                    <h3 class="h3NumberExp fw300 colorGray42">10</h3>
                                     <span class="h3NumberExpSpan fw700 colorGray42 ttlow">months</span>
-                                </h3>
+                                </div>
+                                
                                 <h4 class="h4Descript fw500 colorGrayb9">Time with Recursive Thinking</h4>
                             </div>
                         </div>
