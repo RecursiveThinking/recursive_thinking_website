@@ -10,7 +10,7 @@ header .cell .content {
 .btn.btnFill.signUp,
 .modalButtons {
     padding: 1rem 2rem;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     /* border-radius: 10px; */
     font-weight: 500;
     font-size: 2rem;
