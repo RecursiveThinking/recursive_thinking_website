@@ -63,11 +63,11 @@ export const getViewProfileModel = () => {
             },
             name: viewProfileUser.name,
             title: viewProfileUser.title,
-            age: viewProfileUserAge,
+            // age: viewProfileUserAge,
             city: viewProfileUser.city,
             state: viewProfileUser.state,
             employer: viewProfileUser.employer,
-            profileLinks: fill(templates.viewProfile.profileLinks, {
+            // profileLinks: fill(templates.viewProfile.profileLinks, {
                 github: {
                     href: viewProfileUser.github
                 },
@@ -79,8 +79,11 @@ export const getViewProfileModel = () => {
                 },
                 website: {
                     href: viewProfileUser.website
+                },
+                resume: {
+                    href: viewProfileUser.resume
                 }
-            })
+            // })
         }),
         aboutProfile: fill(templates.viewProfile.aboutProfile, {
             bio: viewProfileUser.bio,
