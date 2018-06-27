@@ -150,7 +150,7 @@ form button {
     background-color: #ffffff;
     box-shadow: 0 0.5px 4px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px #c6c6c6;
-    margin-bottom: 2em;
+    margin-bottom: 3rem;
     /* margin: 1.5em; */
 }
 
@@ -481,6 +481,11 @@ textarea:focus {
     background-color: #2d3134;
 }
 
+.mb3 {
+    margin-bottom: 3rem;
+}
+
+
 .alert {
     margin: 1rem 0 0 0;
     width: 100%;
@@ -539,6 +544,10 @@ textarea:focus {
 .gutters .cell {
     /* padding-left: 1em; */
     padding-left: 3em;
+}
+
+.cell.padding {
+    padding: 3rem 3rem 3rem 3rem;
 }
 
 /* Container Vertical Center*/
@@ -613,7 +622,6 @@ textarea:focus {
 }
 
 /* One of -- columns*/
-
 .twothirds > .cell:first-of-type,
 .half > .cell:first-of-type,
 .third > .cell:first-of-type,
