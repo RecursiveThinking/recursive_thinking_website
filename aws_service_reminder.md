@@ -20,7 +20,15 @@ For the First time, after the stack successfully deploys - and to connect your F
 
 - Inside secrets, make a file named cognitoCreds.js
 
-In this file, paste the following code in: 
+Inside cognitoCreds.js, paste this code:
+
+```javascript
+    import creds from './cognitoSecrets.json'
+    
+    export const credentials = creds
+```
+
+( This will still work BUT its OLD! ) In cognitoCreds.js, paste the following code in (but you will need to update each of these items anytime you delete and rebuild the stack): 
 
 ```javascript
     export const credentials = {
@@ -78,4 +86,10 @@ For more robust error/info logging in aws-amplify, go into the chrome console
 
 If ambiguous login errors occur on the client, try updating the aws-amplify package
     npm install aws-amplify@latest
+    
+If you need to update the AWS CLI - here is the command: (this does mean you need pip...)
+
+```javascript
+    pip install awscli --upgrade --user
+```
     
