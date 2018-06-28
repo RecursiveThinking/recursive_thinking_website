@@ -371,6 +371,58 @@ form {
 
 /* ============================================ */
 
+/* ============================================ */
+/*       Modal CSS for input/autocomplete       */
+/* ============================================ */
+
+.autocomplete {
+    position: relative;
+    display: block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+    width: 80%;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    /* padding: 10px; */
+    padding: 1rem;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4; 
+    width: 100%;
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.autocomplete-items div strong {
+    font-size: 1.8rem;
+    letter-spacing: 1.1px;
+}
+
+.autocomplete-items > .item.active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: #00b371 !important;
+    border-bottom: 1px solid #00b371;
+    color: #ffffff;
+}
+
+/* ============================================ */
+
 .h3TitleVoteCount, .h3ReplyCount {
     font-size: 2.8rem;
     letter-spacing: 1.7px;
