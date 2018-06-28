@@ -25,6 +25,10 @@ export function setup(renderFunction) {
 
     editProfile();
     editProfilePicture();
+    // getSkillProgInput();
+    // skillSoftwareInput();
+    // skillProfInput();
+    loadDocumentElements();
 };
 
 async function submitProfileChangeFunc() {
@@ -120,7 +124,7 @@ export const getEditProfileModel = () => {
                 value: `${Store.currentUser.employer}`
             },
             // links
-           github: {
+            github: {
                 value: `${Store.currentUser.github}`
             },
             codepen: {
@@ -235,4 +239,126 @@ export const editProfilePicture = () => {
         renderImage(this.files[0]);
         uploadFile(this.files[0]);
     }, false);
+}
+
+function loadDocumentElements(){
+    let skillProfInput = document.getElementById('skillsProf')
+    let skillSoftwareInput = document.getElementById('skillsSoft')
+    let skillProgInput = document.getElementById('skillsProg')
+    
+    skillProfInput.addEventListener('input', autoComplete)
+    skillSoftwareInput.addEventListener('input', autoComplete)
+    skillProgInput.addEventListener('input', autoComplete)
+}
+
+let allSkillsProfessionalArray = Object.values(allSkillsProfessionalObj);
+let allSkillsSoftwareArray = Object.values(allSkillsSoftwareObj);
+let allProgrammingLanguagesArray = Object.values(allProgrammingLanguagesObj);
+
+function autoComplete(event){
+    let currentFocus;
+    let arrayInput = [];
+    if(event.target.id === "skillsProg"){
+        arrayInput = allProgrammingLanguagesArray;
+        // arrayInput = countries;
+    }
+    else if(event.target.id === "skillsSoft"){
+        arrayInput = allSkillsSoftwareArray
+    }
+    else if(event.target.id === "skillsProf"){
+        arrayInput = allSkillsProfessionalArray
+    }
+    else {
+        console.log('Where the Sidewalk Ends');
+    }
+    // close any other array lists
+    closeAllLists(event.target);
+    currentFocus = -1;
+    let masterDiv = document.createElement("div");
+    let filterDiv;
+    masterDiv.setAttribute("id", this.id + "autocomplete-list");
+    masterDiv.setAttribute("class", "autocomplete-items");
+    // append the DIV element as a child of the autocomplete container:
+    this.parentNode.appendChild(masterDiv);
+    // this will make the filtered Array for the DDL
+    // let filterDiv = ''
+    let matchArray = [];
+    let inputValue = event.target.value
+    arrayInput.forEach(arrItem => {
+        if(arrItem.substr(0, inputValue.length).toLowerCase() == inputValue.toLowerCase()) {
+            filterDiv = document.createElement("div");
+            filterDiv.setAttribute("class", "item");
+            /*make the matching letters bold:*/
+            filterDiv.innerHTML = "<strong>" + arrItem.substr(0, inputValue.length) + "</strong>";
+            filterDiv.innerHTML += arrItem.substr(inputValue.length);
+            /*insert a input field that will hold the current array item's value:*/
+            filterDiv.innerHTML += "<input type='hidden' value='" + arrItem + "'>";
+            /*execute a function when someone clicks on the item value (div element):*/
+            filterDiv.addEventListener("click", function (e) {
+                // insert the value for the autocomplete text field:
+                this.parentNode.previousSibling.previousSibling.value = this.getElementsByTagName("input")[0].value;
+                // close the list of autocompleted values, (or any other open lists of autocompleted values:
+                closeAllLists();
+            });
+            masterDiv.appendChild(filterDiv);  
+        matchArray.push(arrItem)
+        }
+    })
+    if(!matchArray.length){
+        matchArray.push("No Results Found")
+    }
+    this.addEventListener("keydown", function (event) {
+        var dropDownList = document.getElementById(this.id + "autocomplete-list");
+        if (dropDownList){ dropDownList = dropDownList.getElementsByTagName("div") };
+        if (event.keyCode == 40) {
+            /*If the arrow DOWN key is pressed, increase the currentFocus variable:*/
+            currentFocus += 1;
+            /*and and make the current item more visible:*/
+            addActive(dropDownList);
+        } else if (event.keyCode == 38) { //up
+            /*If the arrow UP key is pressed, decrease the currentFocus variable:*/
+            currentFocus -= 1;
+            /* and and make the current item more visible:*/
+            addActive(dropDownList);
+        } else if (event.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            event.preventDefault();
+            if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if(dropDownList){ dropDownList[currentFocus].click() };
+            }
+        }
+    });
+    function addActive(ddl){
+        /*a function to classify an item as "active":*/
+        if (!ddl){ return false };
+        /*start by removing the "active" class on all items:*/
+        removeActive(ddl);
+        if (currentFocus >= ddl.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (ddl.length - 1);
+        /*add class "autocomplete-active":*/
+        ddl[currentFocus].classList.add("active");
+    }
+
+    function removeActive(ddl){
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < ddl.length; i += 1) {
+            ddl[i].classList.remove("active");
+        }
+    }
+    
+    function closeAllLists(htmlTag){
+        // console.log(item);
+        /*close all autocomplete lists in the document, except the one passed as an argument:*/
+        let arrayItems = document.getElementsByClassName("autocomplete-items");
+        for (let i = 0; i < arrayItems.length; i += 1) {
+            if (htmlTag !== arrayItems[i] && htmlTag !== this) {
+                arrayItems[i].parentNode.removeChild(arrayItems[i]);
+            }
+        }
+    }
+    
+    document.addEventListener("click", function (event) {
+        closeAllLists(event.target);
+    });
 }
