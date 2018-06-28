@@ -1,6 +1,11 @@
 import { importTemplate, templates, fill } from '../../templater'
-import { utils, data } from '../../global';
-
+import {
+    utils,
+    data,
+    allSkillsProfessionalObj,
+    allSkillsSoftwareObj,
+    allProgrammingLanguagesObj
+} from '../../global';
 import interviewPrepHtml from './interviewPrep.html'
 importTemplate("interviewPrep", interviewPrepHtml)
 
@@ -10,6 +15,7 @@ export function setup(renderFunction) {
     );
 
     modalInterview();
+    loadDocumentElements();
 };
 
 export const getInterviewPrepModel = () => {
@@ -83,4 +89,9 @@ export const modalInterview = () => {
             console.log("Clicking on Something Not a Modal - Interview");
         }
     }
+}
+
+function loadDocumentElements(){
+    let allSkillInput = document.getElementById('allSkills')
+    allSkillInput.addEventListener('input', utils.autoComplete)
 }

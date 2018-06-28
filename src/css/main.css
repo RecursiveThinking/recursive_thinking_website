@@ -345,6 +345,28 @@ form {
     justify-content: center;
 }
 
+.fc-modalInput > .autocomplete {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 0 auto 2.4rem auto;
+    width: 100%;
+    justify-content: center;
+}
+
+.fc-modalInput > .autocomplete > .autocomplete-items {
+    position: absolute;
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+    width: 100%;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
 .fc-modalInput .labelSm {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
