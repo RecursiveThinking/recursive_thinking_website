@@ -67,7 +67,7 @@ export default (function() {
         else{
             document.getElementById('sidebar').style.visibility = 'visible';
         }
-        buildCurrentUserDashInfo()
+        // buildCurrentUserDashInfo()
         const recursiveApi = new api();
         recursiveApi.init();
         // call a function to setup windows
@@ -86,12 +86,12 @@ export default (function() {
     };
 
     function buildCurrentUserDashInfo(){
-        // const currentUser = JSON.parse(JSON.stringify(Store.currentUser))
-        // console.log(currentUser);
+        const currentUser = JSON.parse(JSON.stringify(Store.currentUser))
+        console.log(currentUser);
         // console.log(currentUser.username);
-        // console.log(currentUser.name);
-        // console.log(currentUser.title);
-        const currentUser = data.getCurrentUser();
+        console.log(currentUser.name);
+        console.log(currentUser.title);
+        // const currentUser = data.getCurrentUser();
         // const currentUserFromGlobal = data.getCurrentUser();
         // console.log("In Function");
         const currentUserDashInfo = document.getElementById('currentUserDashInfo');
