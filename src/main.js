@@ -20,16 +20,14 @@ import './css/editProfile.css'
 import './css/viewProfile.css'
 import './css/responsive.css'
 
-import './images/avatar1.png'
-import './images/avatar2.png'
-import './images/avatar3.png'
-import './images/avatar4.png'
-import './images/avatar5.png'
-import './images/avatar6.png'
 
-import './images/favicon/favicon_16x16.ico'
-import './images/favicon/favicon_32x32.ico'
+/**
+ * What is happening here?
+ * Since import() statements can be dynamic, webpack doesn't resolve imports using the value of variables at initialization (b/c it could change at runtime). So what it does instead is import all files could possibly match the path pattern. This is normally annoying -- it bloats your output. In this case, we want this behaviour 'cause it allows us to say  'import all files in the ./images/ folder'.
+ */
 
+var imagePath = ''
+import(`./images/${imagePath}`)
 
 // Austin's Cognito pool
 // Amplify.configure({
