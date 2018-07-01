@@ -69,9 +69,14 @@ const fs = (function() {
   }
 
   // a generic function that lets you write files or folders
-  // if you're writing a file, data is the content of the file
-  // if you're writing a folder, data is a fileName -> data map
-  // e.g. { "filename.txt": "my text document" }
+  // file -> data is the content of the file
+  //   e.g. "my text document"
+  // folder -> data is an optional fileName: data map (if not specified, it simply makes the folders)
+  //   e.g. { "filename.txt": "my text document" }
+  //
+  // Notes:
+  // - this function creates any intermediary folders that don't exist
+  // - even if writing the file fails, the intermediary folders still get created
   function write(path, data, options) {
     return new Promise((resolve, reject) => makeFoldersRecursively(path)
       .then(() => {
