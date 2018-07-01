@@ -6,10 +6,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "server": "webpack-dev-server",
-    "dev-server": "webpack-dev-server",
-    "webpack": "webpack",
-    "webpack-dev-server": "webpack-dev-server"
+    "server": "npm run start",
+    "dev-server": "npm run start"
   },
   "repository": {
     "type": "git",
