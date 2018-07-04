@@ -2,6 +2,37 @@
 
 ## When you Deploy the Stack for the First Time
 
+For the First time, after the stack successfully deploys - and to connect your FrontEnd (DevDay Website) to the AWS Backend Stack, you'll need to:
+
+- Create a Folder in your project called "secrets" (and yes, name it secrets because we have git ignored this folder...)
+
+### File 01: cognitoCreds.js
+
+- Inside the secrets folder, make a file named cognitoCreds.js
+
+- Inside cognitoCreds.js, paste this code:
+
+```javascript
+    import creds from './cognitoSecrets.json'
+    
+    export const credentials = creds
+```
+### File 02: s3UploadSecrets.js
+
+- Inside the secrets folder, make a file named s3UploadSecrets.js
+
+- Inside s3UploadSecrets.js, paste this code:
+
+```javascript
+    import s3UploadSecrets from './s3UploadSecrets.json'
+
+    export const s3UploadCreds = s3UploadSecrets
+```
+
+### ++++ cognitoCreds.js - OLD INSTRCUTIONS ++++
+
+( The below instructions will still (for File 01 - cognitoCreds.js ) work BUT its OLD! ) 
+
 When you deploy your backend stack, you'll need to copy and save the following Outputs from the script log:
 
     CognitoUserPoolId : <currentValueForStackDeployed>
@@ -14,21 +45,18 @@ For Example, A Recent AWS Stack Deployment Yielded this:
     CognitoClientId : r05v9bom94rthtepealmhr8tm
     BASE API URL : https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod
 
-For the First time, after the stack successfully deploys - and to connect your FrontEnd (DevDay Website) to the AWS Backend Stack, you'll need to:
-
-- Create a Folder in your project called "secrets" (and yes, name it secrets because we have git ignored this folder...)
-
-- Inside secrets, make a file named cognitoCreds.js
-
-Inside cognitoCreds.js, paste this code:
+In cognitoCreds.js, paste the following code in (but you will need to update each of these items anytime you delete and rebuild the stack): 
 
 ```javascript
-    import creds from './cognitoSecrets.json'
-    
-    export const credentials = creds
+    export const credentials = {
+        region: '',
+        userPoolId: '',
+        userPoolWebClientId: '',
+        apiUrl: ''
+    }
 ```
 
-( This will still work BUT its OLD! ) In cognitoCreds.js, paste the following code in (but you will need to update each of these items anytime you delete and rebuild the stack): 
+### A Finished Config File Should Look Something Like this:
 
 ```javascript
     export const credentials = {
@@ -49,16 +77,6 @@ Inside cognitoCreds.js, paste this code:
     
     apiUrl: <this value should be BASE API URL from your Stack Output> (In this Case: 'https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod')
     
-### A Finished Config File Should Look Something Like this:
-
-```javascript
-    export const credentials = {
-        region: '',
-        userPoolId: '',
-        userPoolWebClientId: '',
-        apiUrl: ''
-    }
-```
 
 ## Did you Not Save the Information When you Built Your Stack?
 
