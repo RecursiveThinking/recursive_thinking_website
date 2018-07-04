@@ -16,7 +16,7 @@ For Example, A Recent AWS Stack Deployment Yielded this:
 
 For the First time, after the stack successfully deploys - and to connect your FrontEnd (DevDay Website) to the AWS Backend Stack, you'll need to:
 
-- Create a Folder in your project called "secrets" (and yes, name it secret because we have git ignored this folder...)
+- Create a Folder in your project called "secrets" (and yes, name it secrets because we have git ignored this folder...)
 
 - Inside secrets, make a file named cognitoCreds.js
 
