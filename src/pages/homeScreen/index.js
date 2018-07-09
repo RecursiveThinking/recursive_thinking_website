@@ -19,6 +19,7 @@ import {
 import {
     Store
 } from '../../store.js';
+import { s3Utils } from '../../s3Upload.js'
 
 importTemplate("homeScreen", homeScreenHtml);
 
@@ -213,7 +214,14 @@ export const homeScreen = () => {
                         await serverApi.getDeveloperProfiles();
                     });
             }
-
+            // This is portion of login to make a folder in s3 for the currentUser
+            // console.log(Store.currentUserCognitoId.sub);
+            // let userUploadFolder = false;
+            // userUploadFolder = doesUserHaveUploadFolder();
+            console.log('getBucketCreds');
+            console.log(s3Utils.getBucketCreds());
+            console.log('doesDirectoryExist: ', s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub));
+            console.log('createUserFolderS3: ', s3Utils.createUserFolderS3(Store.currentUserCognitoId.sub));
             await serverApi.getLessons();
 
             modal.style.display = "none";
