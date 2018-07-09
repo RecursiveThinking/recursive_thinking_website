@@ -43,7 +43,7 @@ const doesDirectoryExist = (id, stringSubFolder) => {
     let folderName = id;
     console.log(`${folderName}/${stringSubFolder}/`);
     let exists = true;
-    let obj = s3.headObject({
+    s3.headObject({
         Key: `${folderName}/${stringSubFolder}/`
     }, function(error, data){
         console.log(error, data);
