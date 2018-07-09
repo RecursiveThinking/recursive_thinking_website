@@ -221,7 +221,7 @@ export const homeScreen = () => {
             // }
             
             // s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Avatar')
-            console.log('Avatar', checkForAvatarFolder);
+            // console.log('Avatar', checkForAvatarFolder);
             console.log('Resume', s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Resume'));
             if(!s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Avatar')){
                 s3Utils.createFolderByStringS3(Store.currentUserCognitoId.sub, 'Avatar')
