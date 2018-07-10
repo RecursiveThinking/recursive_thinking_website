@@ -215,22 +215,24 @@ export const homeScreen = () => {
                     });
             }
             // This is portion of login to make a folder in s3 for the currentUser
-            // if Avatar Folder Doesnt Exist, make one with the user's Id
-            // let checkForAvatarFolder = async function reDoesDirectoryExist(){
-            //     await s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Avatar')
-            // }
+            let checkForS3AvatarFolder = await s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Avatar')
             
-            // s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Avatar')
-            // console.log('Avatar', checkForAvatarFolder);
-            console.log('Resume', s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Resume'));
-            if(!s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Avatar')){
+            let checkForS3FolderResume = await s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Resume')
+            console.log('Avatar', checkForS3AvatarFolder);
+            console.log('Resume', checkForS3FolderResume);
+            
+            console.log('Avatar Data ', checkForS3AvatarFolder.response);
+            console.log('Resume Data ', checkForS3FolderResume.response);
+            
+            // if Avatar Folder Doesnt Exist, make one with the user's Id
+            if(!checkForS3AvatarFolder.response.data){
                 s3Utils.createFolderByStringS3(Store.currentUserCognitoId.sub, 'Avatar')
             }
             else {
                 console.log('Avatar Folder Exists - Skipping Setup');
             }
             // if Resume Folder Doesnt Exist, make one with the user's Id
-            if(!s3Utils.doesDirectoryExist(Store.currentUserCognitoId.sub, 'Resume')){
+            if(!checkForS3FolderResume.response.data){
                 s3Utils.createFolderByStringS3(Store.currentUserCognitoId.sub, 'Resume')
             }
             else {
