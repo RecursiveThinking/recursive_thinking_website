@@ -38,29 +38,27 @@ const getBucketIdentityPoolId = () => {
     return identityPoolId;
 }
 
-const doesDirectoryExist = (id, stringSubFolder) => {
-    console.log(`In Check For Directory | Passing Id: ${id}`);
+async function doesDirectoryExist(id, stringSubFolder){
+    // console.log(`In Check For Directory | Passing Id: ${id}`);
     let folderName = id;
-    console.log(`${folderName}/${stringSubFolder}/`);
-    let exists = true;
-    s3.headObject({
+    // console.log(`${folderName}/${stringSubFolder}/`);
+    // let exists = false;
+    let reqObj = s3.headObject({
         Key: `${folderName}/${stringSubFolder}/`
     }, function(error, data){
-        console.log(error, data);
+        // console.log(error, data);
         if(data){
             console.log(`Folder Exists`);
-            exists = true;
         }
         else{
-            // console.log(error, error.code);
-            exists = false;
+            console.log('Folder Does Not Exist');      
         }
     })
-    // console.log(obj);
-    return exists;
+    return reqObj;
 }
 
 const createFolderByStringS3 = (id, stringSubFolder) => {
+    console.log('MAKE MY BUCKETS');
     let folderName = id;
     if(!folderName){
         console.log('Invalid Folder name of: ', folderName);
@@ -71,7 +69,6 @@ const createFolderByStringS3 = (id, stringSubFolder) => {
         return null;
     }
     let folderKey = folderName;
-    let success = false;
     s3.headObject(
         //
         {
@@ -81,25 +78,26 @@ const createFolderByStringS3 = (id, stringSubFolder) => {
                 if(data){
                     console.log(`Folder already exists, ${data}`);
                     // return null;
-                    success = false;
+                    // success = false;
                 }
                 if(error.code !== 'NotFound'){
-                    console.log(`Error1 Creating Folder (${stringSubFolder}): ${error.message}`);
+                    console.log(`Unkown Error: ${error.message}`);
                 }
                 s3.putObject({
                     Key: `${folderKey}/${stringSubFolder}/`
                 }, function(error, data){
                     if(error){
-                        console.log(`Error2 Creating Folder: ${error.message}`);
+                        console.log(`Error Creating Folder at Path: ${error.message}`);
                         return null;
                     }
-                    console.log(`Successfully Created Folder (${folderKey}/${stringSubFolder}/): `);
-                    // This is where I should build/rebuild a data object
-                    // return true; 
-                    success = true;
+                    else if(data){
+                        console.log(`Successfully Created Folder (${folderKey}/${stringSubFolder}/): `);
+                    }
+                    else{
+                        console.log('Should Never Run');
+                    }
                 })
     })
-    return success;
 }
 
 export const s3Utils = {
