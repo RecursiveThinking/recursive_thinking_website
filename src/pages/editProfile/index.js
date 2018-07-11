@@ -67,6 +67,7 @@ async function submitProfileChangeFunc() {
     let response = await serverApi.postEditProfile();
     if(response['Item']){
         Store.updateUser(response['Item']);
+        utils.updateSidebarNameTitle();
     }
     Store.clearUpdatedUser();
 }

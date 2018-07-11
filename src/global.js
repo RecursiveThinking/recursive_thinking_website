@@ -1,3 +1,4 @@
+import {Store} from './store.js';
 // userSchema = {
 //     userId: - String - uuid for each user from cognito
 //     username: - String - username from cognito
@@ -1105,6 +1106,17 @@ function autoComplete(event){
     });
 }
 
+function updateSidebarNameTitle(){
+    const sidebarDeveloperName = document.getElementById('sidebarDeveloperName');
+    const sidebarDeveloperTitle = document.getElementById('sidebarDeveloperTitle');
+    if(Store.currentUser.username.length > 0){
+        sidebarDeveloperName.innerText = Store.currentUser.username;
+    }
+    if(Store.currentUser.title.length > 0){
+        sidebarDeveloperTitle.innerText = Store.currentUser.title;
+    }
+}
+
 export const data = {
     getAllUsers,
     getCurrentUser,
@@ -1140,5 +1152,6 @@ export const utils = {
     textAreaCharCounter,
     setWindowOffsetsLayout,
     setWindowOffsetsMobile,
-    autoComplete
+    autoComplete,
+    updateSidebarNameTitle
 };

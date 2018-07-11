@@ -212,6 +212,7 @@ export const homeScreen = () => {
                 serverApi.postDeveloperById(Store.currentUserCognitoId)
                     .then(async function reGetDevelopers() {
                         await serverApi.getDeveloperProfiles();
+                        checkUserInDB();
                     });
             }
             // This is portion of login to make a folder in s3 for the currentUser
@@ -240,6 +241,8 @@ export const homeScreen = () => {
             }
             
             await serverApi.getLessons();
+
+            utils.updateSidebarNameTitle();
 
             modal.style.display = "none";
             utils.navigateToPage('dashboard');
