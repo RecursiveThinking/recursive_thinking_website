@@ -1,82 +1,4 @@
-# AWS Notes
-
-## When you Deploy the Stack for the First Time
-
-For the First time, after the stack successfully deploys - and to connect your FrontEnd (DevDay Website) to the AWS Backend Stack, you'll need to:
-
-- Create a Folder in your project called "secrets" (and yes, name it secrets because we have git ignored this folder...)
-
-### File 01: cognitoCreds.js
-
-- Inside the secrets folder, make a file named cognitoCreds.js
-
-- Inside cognitoCreds.js, paste this code:
-
-```javascript
-    import creds from './cognitoSecrets.json'
-    
-    export const credentials = creds
-```
-### File 02: s3UploadSecrets.js
-
-- Inside the secrets folder, make a file named s3UploadSecrets.js
-
-- Inside s3UploadSecrets.js, paste this code:
-
-```javascript
-    import s3UploadSecrets from './s3UploadSecrets.json'
-
-    export const s3UploadCreds = s3UploadSecrets
-```
-
-### ++++ cognitoCreds.js - OLD INSTRCUTIONS ++++
-
-( The below instructions will still (for File 01 - cognitoCreds.js ) work BUT its OLD! ) 
-
-When you deploy your backend stack, you'll need to copy and save the following Outputs from the script log:
-
-    CognitoUserPoolId : <currentValueForStackDeployed>
-    CognitoClientId : <currentValueForStackDeployed>
-    BASE API URL : <currentValueForStackDeployed>
-
-For Example, A Recent AWS Stack Deployment Yielded this:
-
-    CognitoUserPoolId : us-west-2_aNGi5YoeN
-    CognitoClientId : r05v9bom94rthtepealmhr8tm
-    BASE API URL : https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod
-
-In cognitoCreds.js, paste the following code in (but you will need to update each of these items anytime you delete and rebuild the stack): 
-
-```javascript
-    export const credentials = {
-        region: '',
-        userPoolId: '',
-        userPoolWebClientId: '',
-        apiUrl: ''
-    }
-```
-
-### A Finished Config File Should Look Something Like this:
-
-```javascript
-    export const credentials = {
-        region: 'us-west-2',
-        userPoolId: 'us-west-2_Ll0gsVsni',
-        userPoolWebClientId: '5hch7trbdtsnha391ntejst7bb',
-        apiUrl: 'https://93lkkahf1b.execute-api.us-west-2.amazonaws.com/Prod'
-    }
-```
-
-## Some Notes:
-    
-    region:  <this value should be the first part of userPoolId> (In this Case: 'us-west-2')
-
-    userPoolId: <this value should be CognitoUserPoolId in your Stack Output> (In this Case: 'us-west-2_aNGi5YoeN')
-    
-    userPoolWebClientId: <this value should be CognitoClientId from your Stack Output> (In this Case: 'r05v9bom94rthtepealmhr8tm')
-    
-    apiUrl: <this value should be BASE API URL from your Stack Output> (In this Case: 'https://biqaidzr66.execute-api.us-west-2.amazonaws.com/Prod')
-    
+# AWS Backend Notes
 
 ## Did you Not Save the Information When you Built Your Stack?
 
@@ -95,6 +17,8 @@ In cognitoCreds.js, paste the following code in (but you will need to update eac
             Pool Id (which also shows the region)
         -->App Clients
             App client id (userPoolWebClientId)
+            
+    (Need to add items from s3Upload)
 --------------------------------------------------------------------------
 
 ## @Avsean - Take it away!
