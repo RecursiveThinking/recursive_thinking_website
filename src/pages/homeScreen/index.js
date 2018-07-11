@@ -99,15 +99,14 @@ export const homeScreen = () => {
     const handleSignUpSubmit = (modal) => {
 
         const modalConfirm = document.getElementById('modalConfirm');
-        const given_name = document.getElementById('signUpName').value;
+        const name = document.getElementById('signUpName').value;
         const username = document.getElementById('signUpUserName').value;
         const email = document.getElementById('signUpEmail').value;
         const password = document.getElementById('signUpPassword').value;
 
         const info = {
-            given_name,
             username,
-            name: username,
+            name,
             email,
             password
         };
@@ -213,6 +212,7 @@ export const homeScreen = () => {
                     .then(async function reGetDevelopers() {
                         await serverApi.getDeveloperProfiles();
                         checkUserInDB();
+                        utils.updateSidebarNameTitle();
                     });
             }
             // This is portion of login to make a folder in s3 for the currentUser
