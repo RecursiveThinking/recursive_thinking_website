@@ -1,4 +1,4 @@
-import { s3UploadCreds } from '../secrets/s3UploadSecrets.js'
+import { s3UploadCreds } from '../credentials/s3UploadSecrets.js'
 // info for s3Bucket
 console.log('s3UploadCreds', s3UploadCreds);
 const bucketName = s3UploadCreds.s3BucketName;
