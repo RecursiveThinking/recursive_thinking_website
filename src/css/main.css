@@ -13,15 +13,10 @@ html {
 
 body {
     font-size: 10px;
-    /* margin: 0; */
-    /* padding: 0; */
-    /* width: 100vw; */
-    /* height: 100vh; */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    /* overflow: hidden; */
 }
 
 /* #mainWindow {
@@ -118,6 +113,12 @@ form button {
     font-size: 2rem;
     letter-spacing: 1.2px;
 }
+
+/* .h1Title {
+    font-size: 6.6rem;
+    letter-spacing: 3px;
+    
+} */
 
 .h2Title {
     font-size: 5rem;
@@ -552,6 +553,10 @@ textarea:focus {
 }
 
 .btnColorGreenDark {
+    background-color: #2d3134;
+}
+
+.bkgrdColorDark {
     background-color: #2d3134;
 }
 
