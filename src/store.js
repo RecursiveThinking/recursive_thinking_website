@@ -56,7 +56,12 @@ export const Store = {
     updateUser: function (userInfo) {
         let keys = Object.keys(userInfo);
         keys.forEach((key) => {
-            this.currentUser[key] = userInfo[key];
+            if(typeof userInfo[key] === "undefined" || userInfo[key] == null){
+                this.currentUser[key] = "";
+            }
+            else{
+                this.currentUser[key] = userInfo[key];
+            }
         });
         console.log(this.currentUser);
     },

@@ -2,10 +2,10 @@ import {Store} from './store.js';
 // userSchema = {
 //     userId: - String - uuid for each user from cognito
 //     username: - String - username from cognito
-//     picture: - String - upload .jpg or .png under 300kb to our S3 save url that comes back, (we could accept gravitar since we can control the url and just ask for gravitar username)
 //     name: 'Porg Dev1'
+//     email: - String - email used for signin/cognito 
+//     picture: - String - upload .jpg or .png under 300kb to our S3 save url that comes back, (we could accept gravitar since we can control the url and just ask for gravitar username),
 //     created - - Date String - JS date string new Date().toString()
-//     birthday: - Date String - JS date string Date().toString()
 //     city: - String - city of residence
 //     state: - String - shorthand state e.g. WA
 //     title: - String -  Title of dev
@@ -1112,7 +1112,7 @@ function updateSidebarNameTitle(){
     if(Store.currentUser.username.length > 0){
         sidebarDeveloperName.innerText = Store.currentUser.username;
     }
-    if(Store.currentUser.title.length > 0){
+    if(Store.currentUser.title && Store.currentUser.title.length > 0){
         sidebarDeveloperTitle.innerText = Store.currentUser.title;
     }
 }
