@@ -42,7 +42,122 @@ export function setup(renderFunction) {
 export const getDashboardModel = () => {
 
     // #TODO: API Call goes here
-    const profileStats = JSON.parse(localStorage.getItem('allProfileStatistics'));
+    // const profileStats = JSON.parse(localStorage.getItem('allProfileStatistics'));
+    let classValueLinkVisits;
+    let valueLinkGitHub;
+    let classValueLinkGitHub;
+    let valueLinkCodePen;
+    let classValueLinkCodePen;
+    let valueLinkPortfolio;
+    let classValueLinkPortfolio;
+    let valueLinkLinkedIn;
+    let classValueLinkLinkedIn;
+    let valueLinkResume;
+    let classValueLinkResume;
+    
+    if(Store.currentUser.profileStatsVisits > 0){
+        classValueLinkVisits = "h1Data fw300 colorGreen"
+    } else {
+        classValueLinkVisits = "h1Data fw300 colorGrayb9"
+    }
+    
+    if(!Store.currentUser.github){
+        valueLinkGitHub = "N/A"
+        classValueLinkGitHub = "h1Data fw300 colorGrayb9"
+    }
+    else {
+        valueLinkGitHub = Store.currentUser.profileStatsViewGithub;
+        if(valueLinkGitHub > 0){
+            classValueLinkGitHub = "h1Data fw300 colorGreen"
+        } else {
+            classValueLinkGitHub = "h1Data fw300 colorGrayb9"
+        }
+    }
+    
+    if(!Store.currentUser.codepen){
+        valueLinkCodePen = "N/A"
+        classValueLinkCodePen = "h1Data fw300 colorGrayb9"
+    }
+    else {
+        valueLinkCodePen = Store.currentUser.profileStatsViewCodePen;
+        if(valueLinkCodePen > 0){
+            classValueLinkCodePen = "h1Data fw300 colorGreen"
+        } else {
+            classValueLinkCodePen = "h1Data fw300 colorGrayb9"
+        }
+    }
+        
+    if(!Store.currentUser.linkedin){
+        valueLinkLinkedIn = "N/A"
+        classValueLinkLinkedIn = "h1Data fw300 colorGrayb9"
+    }
+    else {
+        valueLinkLinkedIn = Store.currentUser.profileStatsViewLinkedIn;
+        if(valueLinkLinkedIn > 0){
+            classValueLinkLinkedIn = "h1Data fw300 colorGreen"
+        } else {
+            classValueLinkLinkedIn = "h1Data fw300 colorGrayb9"
+        }
+    }
+    
+    if(!Store.currentUser.portfolioWebsite){
+        valueLinkPortfolio = "N/A"
+        classValueLinkPortfolio = "h1Data fw300 colorGrayb9"
+    }
+    else {
+        valueLinkPortfolio = Store.currentUser.profileStatsViewPortfolio;
+        if(valueLinkPortfolio > 0){
+            classValueLinkPortfolio = "h1Data fw300 colorGreen"
+        } else {
+            classValueLinkPortfolio = "h1Data fw300 colorGrayb9"
+        }
+    }
+    
+    if(!Store.currentUser.resume){
+        valueLinkResume = "N/A"
+        classValueLinkResume = "h1Data fw300 colorGrayb9"
+    }
+    else {
+        valueLinkResume = Store.currentUser.profileStatsViewResume;
+        if(valueLinkResume > 0){
+            classValueLinkResume = "h1Data fw300 colorGreen"
+        } else {
+            classValueLinkResume = "h1Data fw300 colorGrayb9"
+        }
+    }
+    
+    const profileStats = [
+        {
+            totalCount: Store.currentUser.profileStatsVisits,
+            title: 'Profile Visits',
+            classValue: classValueLinkVisits
+        },
+        {
+            totalCount: valueLinkGitHub,
+            title: 'GitHub Views',
+            classValue: classValueLinkGitHub            
+        },
+        {
+            totalCount: valueLinkCodePen,
+            title: 'CodePen Views',
+            classValue: classValueLinkCodePen            
+        },
+        {
+            totalCount: valueLinkPortfolio,
+            title: 'Portfolio Views',
+            classValue: classValueLinkPortfolio            
+        },
+        {
+            totalCount: valueLinkLinkedIn,
+            title: 'LinkedIn Views',
+            classValue: classValueLinkLinkedIn            
+        },
+        {
+            totalCount: valueLinkResume,
+            title: 'Resume Views',
+            classValue: classValueLinkResume            
+        }
+    ]
 
     const stats1 = profileStats.slice(0, 3);
     const stats2 = profileStats.slice(3);
@@ -74,13 +189,19 @@ export const getDashboardModel = () => {
             stats1: stats1.map((stat) => {
                 return fill(templates.dashboard.individualStat, {
                     statCount: stat.totalCount,
-                    statTitle: stat.title
+                    statTitle: stat.title,
+                    profileStatClass: {
+                        class: stat.classValue
+                    }
                 });
             }),
             stats2: stats2.map((stat) => {
                 return fill(templates.dashboard.individualStat, {
                     statCount: stat.totalCount,
-                    statTitle: stat.title
+                    statTitle: stat.title,
+                    profileStatClass: {
+                        class: stat.classValue
+                    }
                 });
             })
         }),

@@ -31,9 +31,11 @@
 <template id="individualStat">
     <div class="cell">
         <div class="content profileStatsData">
-            <h1 class="h1Data fw300 colorGreen">
+            <!-- <h1 class="h1Data fw300 colorGreen"> -->
+            <h1 slot="profileStatClass">
                 <slot name="statCount"></slot>
             </h1>
+            <!-- <h5 class="h5Data fw500 colorGrayb9"> -->
             <h5 class="h5Data fw500 colorGrayb9">
                 <slot name="statTitle"></slot>
             </h5>
