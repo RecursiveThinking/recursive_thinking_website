@@ -38,11 +38,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev1 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -63,11 +69,17 @@ const allUsers = [{
         state: 'OR',
         title: 'Dev2 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -88,11 +100,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev3 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -113,11 +131,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev4 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -138,11 +162,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev5 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -163,11 +193,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev6 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -188,11 +224,17 @@ const allUsers = [{
         state: 'Porgistan',
         title: 'Porgy Porg Porg',
         employer: '',
-        linkGitHub: 'https://github.com/porgvonporghoven',
-        linkCodePen: 'https://codepen.io/porgvonporghoven/',
-        linkLinkedIn: 'https://www.linkedin.com/in/porgvonporghoven/',
-        linkPortfolio: 'https://www.theporgisindahus.com',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
+        linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: 'Porgy porg porgy porgy. Porghoven porghoven von von von porg porghoven porgy porgy porgy porghoven porgy porgy porg von. Porghoven team player porg porg porghoven porg porghoven porgy porg von porghoven porgy von.&NewLine;&NewLine;Von porghoven porg porghoven porg porg porg porghoven porghoven porghoven detail oriented porg porghoven porghoven. Porgy porgy porg von porgy porg porgy von. Porghoven porgy porgy von.&NewLine;&NewLine;Porgy porgy porg porg porg porgy porgy porg porghoven porgy porgy porghoven porgy. Porgy porg von porghoven von porgy porghoven porghoven super rocket von porgy porgy von von. Porgy porg porghoven porghoven porgy porg.',
         aboutUserYearsOfExperience: '11/07/2016',
         aboutUserTimeWithRT: '02/02/2017',
@@ -213,11 +255,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev8 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -238,11 +286,17 @@ const allUsers = [{
         state: 'WA',
         title: 'Dev9 Title',
         employer: '',
-        linkGitHub: 'https://github.com/',
-        linkCodePen: 'https://codepen.io/',
-        linkLinkedIn: 'https://www.linkedin.com/in/',
+        linkGitHub: '',
+        linkCodePen: '',
+        linkLinkedIn: '',
         linkPortfolio: '',
         linkResume: '',
+        profileStatsVisits: 0,
+        profileStatsViewGithub: 0,
+        profileStatsViewCodePen: 0,
+        profileStatsViewPortfolio: 0,
+        profileStatsViewLinkedIn: 0,
+        profileStatsViewResume: 0,
         aboutUser: '',
         aboutUserYearsOfExperience: '',
         aboutUserTimeWithRT: '',
@@ -554,40 +608,40 @@ localStorage.setItem('allAnswersToQuestions', JSON.stringify(allAnswersToQuestio
 const arrayOfAvatars = ['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png', 'avatar6.png']
 localStorage.setItem('arrayOfAvatars', JSON.stringify(arrayOfAvatars));
 
-const profileVisitsTotal = 27;
-const profileGitHubViews = 10;
-const profileCodePenViews = 8;
-const profilePortfolioViews = 13;
-const profileLinkedInViews = 17;
-const profileResumeViews = 9;
+// const profileVisitsTotal = 27;
+// const profileGitHubViews = 10;
+// const profileCodePenViews = 8;
+// const profilePortfolioViews = 13;
+// const profileLinkedInViews = 17;
+// const profileResumeViews = 9;
 
-// database call for Lessons
-const profileStatistics = [{
-        totalCount: profileVisitsTotal,
-        title: 'Profile Visits'
-    },
-    {
-        totalCount: profileGitHubViews,
-        title: 'GitHub Views'
-    },
-    {
-        totalCount: profileCodePenViews,
-        title: 'CodePen Views'
-    },
-    {
-        totalCount: profilePortfolioViews,
-        title: 'Portfolio Views'
-    },
-    {
-        totalCount: profileLinkedInViews,
-        title: 'LinkedIn Views'
-    },
-    {
-        totalCount: profileResumeViews,
-        title: 'Resume Views'
-    }
-]
-localStorage.setItem('allProfileStatistics', JSON.stringify(profileStatistics));
+// // database call for Lessons
+// const profileStatistics = [{
+//         totalCount: profileVisitsTotal,
+//         title: 'Profile Visits'
+//     },
+//     {
+//         totalCount: profileGitHubViews,
+//         title: 'GitHub Views'
+//     },
+//     {
+//         totalCount: profileCodePenViews,
+//         title: 'CodePen Views'
+//     },
+//     {
+//         totalCount: profilePortfolioViews,
+//         title: 'Portfolio Views'
+//     },
+//     {
+//         totalCount: profileLinkedInViews,
+//         title: 'LinkedIn Views'
+//     },
+//     {
+//         totalCount: profileResumeViews,
+//         title: 'Resume Views'
+//     }
+// ]
+// localStorage.setItem('allProfileStatistics', JSON.stringify(profileStatistics));
 
 // utils
 function randomAvatar() {
@@ -1107,10 +1161,14 @@ function autoComplete(event){
 }
 
 function updateSidebarNameTitle(){
+    const sidebarDeveloperAvatar = document.getElementById('sidebarDeveloperAvatar');
+    console.log('Found', sidebarDeveloperAvatar)
     const sidebarDeveloperName = document.getElementById('sidebarDeveloperName');
     const sidebarDeveloperTitle = document.getElementById('sidebarDeveloperTitle');
+    console.log('At Update', Store.currentUser);
+    sidebarDeveloperAvatar.setAttribute('src', Store.currentUser.picture)
     if(Store.currentUser.username.length > 0){
-        sidebarDeveloperName.innerText = Store.currentUser.username;
+        sidebarDeveloperName.innerText = Store.currentUser.name;
     }
     if(Store.currentUser.title && Store.currentUser.title.length > 0){
         sidebarDeveloperTitle.innerText = Store.currentUser.title;

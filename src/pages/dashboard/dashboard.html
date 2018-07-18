@@ -31,9 +31,11 @@
 <template id="individualStat">
     <div class="cell">
         <div class="content profileStatsData">
-            <h1 class="h1Data fw300 colorGreen">
+            <!-- <h1 class="h1Data fw300 colorGreen"> -->
+            <h1 slot="profileStatClass">
                 <slot name="statCount"></slot>
             </h1>
+            <!-- <h5 class="h5Data fw500 colorGrayb9"> -->
             <h5 class="h5Data fw500 colorGrayb9">
                 <slot name="statTitle"></slot>
             </h5>
@@ -100,7 +102,7 @@
                 <div class="fc-seeMore">
                     <h6 class="h6seeMore fw900 ttup">
                         <!-- is this a method or a link to upcoming lessons -->
-                        <a href="#">See More</a>
+                        <a href="#upcoming-lessons">See More</a>
                     </h6>
                 </div>
             

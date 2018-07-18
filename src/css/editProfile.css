@@ -1,34 +1,47 @@
-#editProfileHTML {
+#editProfileHTML, #setupProfileHTML {
     /* min-height: 100vh; */
     background-color: #eeeeee;
 }
 
-#editProfileHTML .content.container {
+#editProfileHTML .content.container, #setupProfileHTML .content.container {
     /* padding: 3rem 3rem 3rem 3rem; */
     padding: 0;
 }
 
-#editProfileHTML .cardContainer {
+#editProfileHTML .cardContainer, #setupProfileHTML .cardContainer {
     padding: 3rem 3rem 3rem 3rem;
 }
 
-#editProfileHTML .changeProfile.card {
-    background-color: #00b371;
+#editProfileHTML .changeProfile.card  {
+    /* background-color: #00b371; */
     color: #ffffff;
     border: none;
 }
 
-#editProfileHTML .cell > .changeProfile {
+#setupProfileHTML .changeProfile.card {
+    color: #ffffff;
+    border: none;
+}
+
+#editProfileHTML .changeProfile.card.bkgrdColorGreen, #setupProfileHTML .changeProfile.card.bkgrdColorGreen  {
+    background-color: #00b371;
+}
+
+#setupProfileHTML .changeProfile.card.bkgrdColorDark {
+    background-color: #2d3134;
+}
+
+#editProfileHTML .cell > .changeProfile, #setupProfileHTML .cell > .changeProfile {
     display: flex;
     padding: 6rem 0;
 }
 
-#editProfileHTML .cell > .changeProfile.card {
+#editProfileHTML .cell > .changeProfile.card, #setupProfileHTML .cell > .changeProfile.card {
     /* display: none; */
     display: block;
 }
 
-#editProfileHTML .fc-changeProfileText {
+#editProfileHTML .fc-changeProfileText, #setupProfileHTML .fc-changeProfileText {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -38,26 +51,27 @@
     text-align: center;
 }
 
-#editProfileHTML .btn.btnFill.signUp.saveProfile {
+#editProfileHTML .btn.btnFill.signUp.saveProfile, #setupProfileHTML .btn.btnFill.signUp.saveProfile {
     padding: 1rem 6rem;
     border: 1px solid #ffffff;
     margin-left: 11rem;
 }
 
-#editProfileHTML .h2TitleChange {
+#editProfileHTML .h2TitleChange, #setupProfileHTML .h2TitleChange {
     font-size: 3rem;
     letter-spacing: 1.8px;
+    margin: 0 0 2rem 0;
 }
 
-#editProfileHTML .editProfile.card {
+#editProfileHTML .editProfile.card, #setupProfileHTML .editProfile.card {
     padding: 5rem 5rem 5rem 5rem;
 }
 
-#editProfileHTML .fc-topBar {
+#editProfileHTML .fc-topBar, #setupProfileHTML .fc-topBar {
     margin: 0 0 0rem 0;
 }
 
-#editProfileHTML .avatarPicXL {
+#editProfileHTML .avatarPicXL, #setupProfileHTML .avatarPicXL {
     width: 29.3rem;
     height: 29.3rem;
     border-radius: 50%;
@@ -65,7 +79,7 @@
     position: relative;
 }
 
-#editProfileHTML .caption {
+#editProfileHTML .caption, #setupProfileHTML .caption {
     width: 29.3rem;
     /* background-color: red; */
     padding: 2rem 0 0 2rem;
@@ -76,24 +90,24 @@
     text-align: center;
 }
 
-#editProfileHTML .fc-infoCont1 {
+#editProfileHTML .fc-infoCont1, #setupProfileHTML .fc-infoCont1 {
     margin: 0 0 7rem 0;
 }
 
-#editProfileHTML .fc-infoCont2 {
+#editProfileHTML .fc-infoCont2, #setupProfileHTML .fc-infoCont2 {
     margin: 0 0 11.8rem 0;
 }
 
-#editProfileHTML .fc-infoCont3 {
+#editProfileHTML .fc-infoCont3, #setupProfileHTML .fc-infoCont3 {
     margin: 0 0 8rem 0;
 }
 
-#editProfileHTML .fc-form-profile {
+#editProfileHTML .fc-form-profile, #setupProfileHTML .fc-form-profile {
     padding: 3.75rem 0;
     width: 100%;
 }
 
-#editProfileHTML .fc-input-profile {
+#editProfileHTML .fc-input-profile, #setupProfileHTML .fc-input-profile {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -104,24 +118,24 @@
     /* margin: 0 auto; */
 }
 
-#editProfileHTML .fc-input-profile:last-of-type {
+#editProfileHTML .fc-input-profile:last-of-type, #setupProfileHTML .fc-input-profile:last-of-type {
     margin: 0 auto;
 }
 
 
-#editProfileHTML .fc-input-profile label {
+#editProfileHTML .fc-input-profile label, #setupProfileHTML .fc-input-profile label {
     width: 23%;
     text-align: right;
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 }
 
-#editProfileHTML .fc-input-profile input {
+#editProfileHTML .fc-input-profile input, #setupProfileHTML .fc-input-profile input {
     width: 67%;
     margin: 0 0 0 2.5rem;
 }
 
-#editProfileHTML .fc-input-profile .fc-input-profile-cityState {
+#editProfileHTML .fc-input-profile .fc-input-profile-cityState, #setupProfileHTML .fc-input-profile .fc-input-profile-cityState {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -130,13 +144,16 @@
     justify-content: center;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right input {
+#editProfileHTML .fc-about .fc-input-about .fc-right input, #setupProfileHTML .fc-about .fc-input-about .fc-right input {
     width: 100%;
 }
 
 #editProfileHTML .fc-input-profile input, 
 #editProfileHTML .fc-about .fc-input-about .fc-right input,
-#editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input {
+#editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input,
+#setupProfileHTML .fc-input-profile input, 
+#setupProfileHTML .fc-about .fc-input-about .fc-right input,
+#setupProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input {
     padding: 1rem 1rem 1rem 1.5rem;
     text-align: left;
 
@@ -144,7 +161,8 @@
     letter-spacing: 1.1px;
 }
 
-#editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input::-webkit-search-cancel-button {
+#editProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input::-webkit-search-cancel-button,
+#setupProfileHTML .fc-skillCont .fc-form-skills .fc-form-input input::-webkit-search-cancel-button {
     -webkit-appearance: none;
     
     /* custom */
@@ -154,30 +172,35 @@
     box-shadow: 0 0 .125rem .025rem #00b371;
 }
 
-#editProfileHTML .fc-input-profile input::placeholder {
+#editProfileHTML .fc-input-profile input::placeholder,
+#setupProfileHTML .fc-input-profile input::placeholder {
     color: #666666;
     font-weight: 100;
 }
 
-#editProfileHTML .fc-form-about {
+#editProfileHTML .fc-form-about,
+#setupProfileHTML .fc-form-about {
     width: 100%;
 }
 
-#editProfileHTML .fc-form-about .grid .cell {
+#editProfileHTML .fc-form-about .grid .cell,
+#setupProfileHTML .fc-form-about .grid .cell {
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
 }
 
-#editProfileHTML .fc-form-about .grid .cell .aboutTextCol {
+#editProfileHTML .fc-form-about .grid .cell .aboutTextCol,
+#setupProfileHTML .fc-form-about .grid .cell .aboutTextCol {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     
 }
 
-#editProfileHTML .fc-form-about .grid .cell.aboutTextCol .counterBot {
+#editProfileHTML .fc-form-about .grid .cell.aboutTextCol .counterBot,
+#setupProfileHTML .fc-form-about .grid .cell.aboutTextCol .counterBot {
     margin: 1rem 0 0 0;
     font-size: 1.5rem;
     color: #00b371;
@@ -185,7 +208,8 @@
     /* color: red; */
 }
 
-#editProfileHTML .fc-about {
+#editProfileHTML .fc-about,
+#setupProfileHTML .fc-about {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -193,7 +217,8 @@
     width: 100%;
 }
 
-#editProfileHTML .fc-about .fc-input-about {
+#editProfileHTML .fc-about .fc-input-about,
+#setupProfileHTML .fc-about .fc-input-about {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -201,65 +226,78 @@
     width: 100%;
 }
 
-#editProfileHTML .fc-about .fc-input-about:first-of-type{
+#editProfileHTML .fc-about .fc-input-about:first-of-type,
+#setupProfileHTML .fc-about .fc-input-about:first-of-type {
     margin-bottom: 4rem;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right {
+#editProfileHTML .fc-about .fc-input-about .fc-right,
+#setupProfileHTML .fc-about .fc-input-about .fc-right {
     display: flex;
     align-content: flex-start;
     align-items: center;
     text-align: center;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-left {
+#editProfileHTML .fc-about .fc-input-about .fc-left,
+#setupProfileHTML .fc-about .fc-input-about .fc-left {
     width: 65%;
     text-align: right;
     margin: 0 3rem 0 0;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right {
+#editProfileHTML .fc-about .fc-input-about .fc-right,
+#setupProfileHTML .fc-about .fc-input-about .fc-right {
     width: 35%;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right label {
+#editProfileHTML .fc-about .fc-input-about .fc-right label,
+#setupProfileHTML .fc-about .fc-input-about .fc-right label {
     margin: 0 0 0 1rem;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right label:first-of-type {
+#editProfileHTML .fc-about .fc-input-about .fc-right label:first-of-type,
+#setupProfileHTML .fc-about .fc-input-about .fc-right label:first-of-type {
     margin: 0 1rem 0 1rem;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right input {
+#editProfileHTML .fc-about .fc-input-about .fc-right input,
+#setupProfileHTML .fc-about .fc-input-about .fc-right input {
     width: 100%;
 }
 
-#editProfileHTML .fc-about .fc-input-about .fc-right .inputShort {
+#editProfileHTML .fc-about .fc-input-about .fc-right .inputShort,
+#setupProfileHTML .fc-about .fc-input-about .fc-right .inputShort {
     width: 40%;
 }
 
-#editProfileHTML .fc-form-about, .fc-form-skills {
+#editProfileHTML .fc-form-about, .fc-form-skills,
+#setupProfileHTML .fc-form-about, .fc-form-skills {
     padding: 2.4rem 0 7.4rem 0;
 }
 
-#editProfileHTML .fc-form-skills.noBotPad {
+#editProfileHTML .fc-form-skills.noBotPad,
+#setupProfileHTML .fc-form-skills.noBotPad {
     /* background-color: red; */
     padding: 2.4rem 0 0 0;
 }
 
-#editProfileHTML .fc-form-input label {
+#editProfileHTML .fc-form-input label,
+#setupProfileHTML .fc-form-input label {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     margin: 0 0 1.8rem 0;
 }
 
-#editProfileHTML .fc-form-about label {
+#editProfileHTML .fc-form-about label,
+#setupProfileHTML .fc-form-about label {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     text-align: right;
 }
 
-#editProfileHTML .fc-form-about textarea {
+#editProfileHTML .fc-form-about textarea,
+#setupProfileHTML .fc-form-about textarea {
     width: 100%;
     /* display: block; */
     resize: none;
@@ -272,7 +310,8 @@
     letter-spacing: 1.1px;
 }
 
-#editProfileHTML .fc-form-input {
+#editProfileHTML .fc-form-input,
+#setupProfileHTML .fc-form-input {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -281,7 +320,8 @@
     margin: 0 0 2rem 0;
 }
 
-#editProfileHTML .fc-form-input input {
+#editProfileHTML .fc-form-input input,
+#setupProfileHTML .fc-form-input input {
     width: 80%;
 
     padding: 1rem 0 1rem 1.5rem;
@@ -291,7 +331,8 @@
     letter-spacing: 1.1px;
 }
 
-#editProfileHTML .fc-skillItemCont {
+#editProfileHTML .fc-skillItemCont,
+#setupProfileHTML .fc-skillItemCont {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -300,7 +341,8 @@
     /* max-height: 100px; */
 }
 
-#editProfileHTML .fc-skillItemCont > .fc-skillItem {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem,
+#setupProfileHTML .fc-skillItemCont > .fc-skillItem {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -311,27 +353,32 @@
     margin: 0 0 2rem 0;
 }
 
-#editProfileHTML .fc-skillItemCont > .fc-skillItem > h5, #editProfileHTML .editProfile .profileTitle {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > h5, #editProfileHTML .editProfile .profileTitle,
+#setupProfileHTML .fc-skillItemCont > .fc-skillItem > h5, #setupProfileHTML .editProfile .profileTitle {
     font-size: 2rem;
     letter-spacing: 1.2px;
 }
 
-#editProfileHTML .editProfile .profileTitle {
+#editProfileHTML .editProfile .profileTitle,
+#setupProfileHTML .editProfile .profileTitle {
     text-align: center;
 }
 
-#editProfileHTML .fc-skillItemCont > .fc-skillItem > h5 {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > h5,
+#setupProfileHTML .fc-skillItemCont > .fc-skillItem > h5 {
     text-align: right;
     margin-right: 1.25rem;
 }
 
-#editProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemDash {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemDash,
+#setupProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemDash {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
 
 }
 
-#editProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemClose {
+#editProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemClose,
+#setupProfileHTML .fc-skillItemCont > .fc-skillItem > .skillItemClose {
     font-size: 2.4rem;
     letter-spacing: 1.4px;
     border-left: 2px solid #979797;
@@ -341,20 +388,23 @@
     cursor: pointer;
 }
 
-#editProfileHTML #profile-picture {
+#editProfileHTML #profile-picture,
+#setupProfileHTML #profile-picture {
     /* background: #00b371; */
     /* color: white; */
     color: #424041;
     cursor: pointer;
 }
 
-#editProfileHTML #profile-picture>span {
+#editProfileHTML #profile-picture>span,
+#setupProfileHTML #profile-picture>span {
     font-size: 2rem;
     margin-right: 1.7rem;
     cursor: pointer;
 }
 
-#editProfileHTML #profile-picture:hover {
+#editProfileHTML #profile-picture:hover,
+#setupProfileHTML #profile-picture:hover {
     /* background: white; */
     color: #00b371;
 }

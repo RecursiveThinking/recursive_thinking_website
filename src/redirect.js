@@ -5,6 +5,7 @@ import { signOut } from './auth';
 import * as dashboard from './pages/dashboard'
 import * as upcomingLessons from './pages/upcomingLessons'
 import * as voteForLesson from './pages/voteForLesson'
+import * as setupProfile from './pages/setupProfile'
 import * as editProfile from './pages/editProfile'
 import * as viewProfile from './pages/viewProfile'
 import * as interviewPrep from './pages/interviewPrep'
@@ -42,6 +43,9 @@ export default (function() {
                 break;
             case 'edit-profile':
                 editProfile.setup(renderPage)
+                break;
+            case 'setup-profile':
+                setupProfile.setup(renderPage)
                 break;
             case 'view-profile':
                 viewProfile.setup(renderPage);

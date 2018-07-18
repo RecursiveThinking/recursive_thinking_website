@@ -1,14 +1,13 @@
 <template id="page">
-    <section id="editProfileHTML">
+    <section id="setupProfileHTML">
         <div class="content container">
             <!-- THIS SECTION IS FOR THE SAVE CHANGES DROPDOWN -->
             <div class="grid full">
                 <div class="cell">
                     <!-- JUST ADD DISPLAY: BLOCK; to Article -->
-                    <article class="changeProfile card bkgrdColorGreen">
+                    <article class="changeProfile card bkgrdColorDark">
                         <div class="fc-changeProfileText">
-                            <h2 class="h2TitleChange fw300 colorWhiteff">Looks like you've made a change. Save your changes?</h2>
-                            <button id='submitProfileBtn' slot="submitProfileChange" id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
+                            <h1 class="h2Title fw500">Profile Setup</h1>
                         </div>
                     </article>
                 </div>
@@ -17,9 +16,19 @@
                 <div class="grid full">
                     <div class="cell">
                         <article class="editProfile card">
-                            <slot name="editProfile"></slot>
+                            <slot name="setupProfile"></slot>
                         </article>
                     </div>
+                </div>
+            </div>
+            <div class="grid full">
+                <div class="cell">
+                    <!-- JUST ADD DISPLAY: BLOCK; to Article -->
+                    <article class="changeProfile card bkgrdColorGreen">
+                        <div class="fc-changeProfileText">
+                            <button id='submitProfileBtn' slot="submitProfileChange" id="btnSaveProfileChanges" class="btn btnFill signUp saveProfile ttup">Save Changes</button>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
@@ -129,15 +138,6 @@
                                 </div>
                                 <div class="fc-right">
                                     <input class="colorGray42 fw300" type="number" name="experience" placeholder="Total Experience" slot="profileAboutUserYearsOfExperience">
-                                </div>
-                            </div>
-                            <div class="fc-input-about">
-                                <div class="fc-left">
-                                    <label class="colorGray42 fw900" for="aboutTimeWithRT">Time with Recursive Thinking:</label>
-                                </div>
-                                <div class="fc-right">
-                                    <input class="inputShort colorGray42 fw300" type="number" min="0" name="timeWithRT" placeholder="Y" slot="profileAboutUserTimeWithRTYear">
-                                    <label for="timeWithRT" class="colorGray42 fw900">Y</label>
                                 </div>
                             </div>
                         </div>
