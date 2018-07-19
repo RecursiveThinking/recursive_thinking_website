@@ -241,7 +241,7 @@ export const homeScreen = () => {
             }
             
             await serverApi.getLessons();
-
+            await serverApi.getAllSkills();
             utils.updateSidebarNameTitle();
 
             modal.style.display = "none";

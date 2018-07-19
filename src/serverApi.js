@@ -52,6 +52,29 @@ async function getDeveloperProfiles() {
     Store.updateDevelopers(developers);
 }
 
+async function getAllSkills(){
+    const resourceProfessional = "/skillsProfessional/";
+    const resourceSoftware = "/skillsSoftware/";
+    const resourceLanguage = "/skillsLanguage";
+    const options = {
+        method: "GET"
+    }
+
+    // let skillsProfessional = initFetchCall(resourceProfessional, options);
+    // let skillsSoftware = initFetchCall(resourceSoftware, options);
+    // let skillsLanguage = initFetchCall(resourceLanguage, options);
+
+    const promises = [initFetchCall(resourceProfessional, options), initFetchCall(resourceSoftware, options), initFetchCall(resourceLanguage, options)];
+
+    const [skillsProfessional, skillsSoftware, skillsLanguage] = await Promise.all(promises);
+
+    console.log(skillsProfessional, skillsSoftware, skillsLanguage);
+    Store.skillsProfessional = skillsProfessional;
+    Store.skillsSoftware = skillsSoftware;
+    Store.skillsLanguage = skillsLanguage;
+    console.log(Store);
+}
+
 // For now taughtBy will be a string of a username, however it should eventually be an array of valid userIds
 async function postLessonById(lesson){
     const resource = `/lessons/${lesson.Id}`;
@@ -193,6 +216,7 @@ async function initFetchCall(resource, options) {
 export default {
     getDeveloperProfiles,
     postDeveloperById,
+    getAllSkills,
     getLessons,
     postLessonById,
     postUpcomingLessons,
