@@ -27,7 +27,14 @@ async function postDeveloperById(user) {
 
 async function postEditProfile() {
     const resource = `/developers/${Store.currentUser.userId}/edit`;
-    const body = Object.assign(Store["updatedUser"]);
+    
+    // Testing if the backend works with updated skills array's - to be removed once this portion of editProfile front end is working
+    Store.updatedUser.skillsSoftware = ["axure", "sketch"];
+    Store.updatedUser.skillsLanguages = ["JavaScript", "C#"];
+    Store.updatedUser.skillsProfessional = ["userresearch", "visualDesign"];
+
+    const body = JSON.parse(JSON.stringify(Store["updatedUser"]));
+
     const options = {
         method: "POST",
         body
@@ -60,18 +67,14 @@ async function getAllSkills(){
         method: "GET"
     }
 
-    // let skillsProfessional = initFetchCall(resourceProfessional, options);
-    // let skillsSoftware = initFetchCall(resourceSoftware, options);
-    // let skillsLanguage = initFetchCall(resourceLanguage, options);
-
     const promises = [initFetchCall(resourceProfessional, options), initFetchCall(resourceSoftware, options), initFetchCall(resourceLanguage, options)];
 
     const [skillsProfessional, skillsSoftware, skillsLanguage] = await Promise.all(promises);
 
-    console.log(skillsProfessional, skillsSoftware, skillsLanguage);
     Store.skillsProfessional = skillsProfessional;
     Store.skillsSoftware = skillsSoftware;
     Store.skillsLanguage = skillsLanguage;
+
     console.log(Store);
 }
 

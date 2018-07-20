@@ -8,7 +8,7 @@ export const Store = {
     updateUser: function (userInfo) {
         let keys = Object.keys(userInfo);
         keys.forEach((key) => {
-            if(typeof userInfo[key] === "undefined" || userInfo[key] == null){
+            if(typeof userInfo[key] === "undefined" || userInfo[key] == null || userInfo[key] == " "){
                 this.currentUser[key] = "";
             }
             else{
@@ -62,9 +62,9 @@ function getDefaultUser(){
         experience: '',
         timeWithRT: '',
         rank: '',
-        skillsProfessional: {},
-        skillsSoftware: {},
-        skillsLanguages: {},
+        skillsProfessional: [],
+        skillsSoftware: [],
+        skillsLanguages: [],
         lessonsAttending: []
     };
     return newUser;
