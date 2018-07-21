@@ -1047,7 +1047,7 @@ let allSkillsProfessionalArray = Object.values(allSkillsProfessionalObj);
 let allSkillsSoftwareArray = Object.values(allSkillsSoftwareObj);
 let allProgrammingLanguagesArray = Object.values(allProgrammingLanguagesObj);
 let allSkillsArray = [...Object.values(allSkillsProfessionalObj), ...Object.values(allSkillsSoftwareObj), ...Object.values(allProgrammingLanguagesObj)]
-console.log(allSkillsArray);
+// console.log(allSkillsArray);
 
 function autoComplete(event){
     let currentFocus;
