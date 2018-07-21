@@ -1,5 +1,5 @@
 import creds from '../secrets/cognitoSecrets.json'
-console.log(creds);
+// console.log(creds);
 
 export const credentials = creds
-console.log(credentials);
+// console.log(credentials);
