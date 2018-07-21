@@ -91,7 +91,6 @@ export const getEditProfileModel = () => {
 
     let age = utils.getAgeEditProfile(new Date(currentUser.birthday));
     // let age = new Date(currentUser.birthday);
-    // console.log(age);
     let skillsProfessionalArray = utils.returnArrayOfApplicableItems('skillsProfessional', currentUser.skillsProfessional);
     let skillsSoftwareArray = utils.returnArrayOfApplicableItems('skillsSoftware', currentUser.skillsSoftware);
     let skillsLanguageArray = utils.returnArrayOfApplicableItems('skillsLanguage', currentUser.skillsLanguages);
