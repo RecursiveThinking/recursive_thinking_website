@@ -15,16 +15,23 @@ export function setup(renderFunction) {
 export const getUpcomingLessonsModel = () => {
     
   // #TODO: API Call goes here
-  const allLessons = JSON.parse(localStorage.getItem('allLessons'));
+  // const allLessons = JSON.parse(localStorage.getItem('allLessons'));
   // const currentUser = data.getCurrentUser();
   const currentUser = Store.currentUser;
   // console.log(currentUser);
   // const allLessons = Object.entries(serverApi.getLessons());
-  console.log('allLessons', allLessons);
-  // fs.writeFileSync(`./allLessons.json`, allLessons, 'utf8')
+  const allLessons = Object.values(Store.lessons);
+
+  // only scheduled lessons that are before todays date
+  const scheduledLessons = allLessons.filter(item => item.scheduled === true)
+  // console.log('scheduledLessons', scheduledLessons);
+  // order lessons, earliest first...
+  // 
+  const orderedScheduledLessons = scheduledLessons.sort((a, b) => new Date(a.date) > new Date(b.date))
+  // console.log('ordered', orderedScheduledLessons);
   
   return {
-      upcomingLessons: allLessons.map(lesson => {
+      upcomingLessons: orderedScheduledLessons.map(lesson => {
           let formattedDate = utils.getFormattedDate(new Date(lesson.date));
           return fill(templates.upcomingLessons.lessonSummary, {
               day: formattedDate.dateOfMonth,
