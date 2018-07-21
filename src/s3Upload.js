@@ -1,6 +1,6 @@
 import { s3UploadCreds } from '../credentials/s3UploadSecrets.js'
 // info for s3Bucket
-console.log('s3UploadCreds', s3UploadCreds);
+// console.log('s3UploadCreds', s3UploadCreds);
 const bucketName = s3UploadCreds.s3BucketName;
 const bucketRegion = s3UploadCreds.region;
 const IdentityPoolId = s3UploadCreds.IdentityPoolId;
