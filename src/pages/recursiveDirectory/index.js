@@ -8,6 +8,8 @@ import {
     data
 } from '../../global';
 
+import allUsersFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingDeveloperProfiles.json'
+
 import recursiveDirectoryHtml from './recursiveDirectory.html'
 importTemplate("recursiveDirectory", recursiveDirectoryHtml)
 
@@ -29,7 +31,8 @@ export function setup(renderFunction) {
 export const getRecursiveDirectoryModel = () => {
 
     // #TODO: API Call goes here
-    const allUsers = JSON.parse(localStorage.getItem('allUsers'));
+    // const allUsers = JSON.parse(localStorage.getItem('allUsers'));
+    const allUsers = allUsersFromData
 
     return {
         recursiveDirectory: allUsers.map((user) => fill(templates.recursiveDirectory.developer, {
@@ -42,7 +45,7 @@ export const getRecursiveDirectoryModel = () => {
             picture: {
                 // insert these attributes into the element tagged as a slot
                 // src: `./images/${randomAvatar()}`,
-                src: `${user.image}`,
+                src: `${user.picture}`,
                 alt: `Profile picture for ${user.name}`
             }
         }))
