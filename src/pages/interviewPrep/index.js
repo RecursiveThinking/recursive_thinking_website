@@ -6,6 +6,10 @@ import {
     allSkillsSoftwareObj,
     allProgrammingLanguagesObj
 } from '../../global';
+
+import interviewQuestionsFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingInterviewQuestions.json'
+
+
 import interviewPrepHtml from './interviewPrep.html'
 importTemplate("interviewPrep", interviewPrepHtml)
 
@@ -13,20 +17,19 @@ export function setup(renderFunction) {
     renderFunction(
         fill(templates.interviewPrep.page, getInterviewPrepModel())
     );
-
+    
     modalInterview();
     loadDocumentElements();
 };
 
 export const getInterviewPrepModel = () => {
     
+    
     // #TODO: API Call goes here
-    // const allInterviewQuestions = JSON.parse(localStorage.getItem('allInterviewQuestions'));
-    const allInterviewQuestions = data.getAllInterviewQuestions();
-    // console.log(allInterviewQuestions);
-    const allAnswersToQuestions = data.getAllAnswersToQuestions();
-    // console.log(allAnswersToQuestions);
     const currentUser = data.getCurrentUser();
+    
+    const allInterviewQuestions = interviewQuestionsFromData
+    console.log('allInterviewQuestions', allInterviewQuestions);
     // console.log("currentUser at InterviewPrep", currentUser);
     return {
         interviewPrep: allInterviewQuestions.map(question => {
