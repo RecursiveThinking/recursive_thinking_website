@@ -3,6 +3,8 @@ import { importTemplate, templates, fill } from '../../templater';
 import { Store } from '../../store.js';
 import serverApi from '../../serverApi.js';
 
+import lessonsFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingLessons.json'
+
 import upcomingLessonsHtml from './upcomingLessons.html'
 importTemplate("upcomingLessons", upcomingLessonsHtml)
 
@@ -15,13 +17,11 @@ export function setup(renderFunction) {
 export const getUpcomingLessonsModel = () => {
     
   // #TODO: API Call goes here
-  // const allLessons = JSON.parse(localStorage.getItem('allLessons'));
-  // const currentUser = data.getCurrentUser();
   const currentUser = Store.currentUser;
-  // console.log(currentUser);
-  // const allLessons = Object.entries(serverApi.getLessons());
-  const allLessons = Object.values(Store.lessons);
 
+  // const allLessons = Object.values(Store.lessons);
+  const allLessons = lessonsFromData                                                     ;
+  console.log('allLessons', allLessons);
   // only scheduled lessons that are before todays date
   const scheduledLessons = allLessons.filter(item => item.scheduled === true)
   // console.log('scheduledLessons', scheduledLessons);
