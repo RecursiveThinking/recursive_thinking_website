@@ -1,6 +1,10 @@
 import { importTemplate, templates, fill } from '../../templater';
 import { utils, data } from '../../global';
 import {Store} from '../../store.js';
+
+// turn off once Api Call is made
+import lessonsFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingLessons.json'
+
 import dashboardHtml from './dashboard.html';
 importTemplate("dashboard", dashboardHtml)
 
@@ -163,26 +167,67 @@ export const getDashboardModel = () => {
     const stats2 = profileStats.slice(3);
 
     // All Upcoming lesson data should come from the user profile, for now we are simply using generic dummy lesson data
-    const upComingLessons = data.getAllLessons();
-    const upComingLessonDate = utils.getFormattedDate(new Date(upComingLessons[0].date));
-    const filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(upComingLessons[0].lessonTaughtBy);
-
+    // const upComingLessons = data.getAllLessons();
+    // const upComingLessonDate = utils.getFormattedDate(new Date(upComingLessons[0].date));
+    // const filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(upComingLessons[0].lessonTaughtBy);
+    
+    const allLessons = lessonsFromData;
+    // for upcoming lessons, filter out all lessons that scheduled, orderd by date, then just take the first.
+    // all scheduled lessons
+    let allUpComingLessons = allLessons.filter(item => item.scheduled === true)
+    // order lessons
+    let orderedUpComingLessons = allUpComingLessons.sort((a, b) => new Date(a.date) > new Date(b.date));
+    // take only first from orderedUpComingLessons
+    let upComingLesson = orderedUpComingLessons[0];
+    console.log(upComingLesson);
+    // return formated date to be used how we want
+    const upComingLessonDate = utils.getFormattedDate(new Date(upComingLesson.date));
+    console.log(upComingLessonDate);
+    // const filteredTaughtByUserArray = utils.returnFilteredTaughtByUserArray(upComingLesson.lessonTaughtBy);
+    
     // Individual Lesson for upComingLesson Template
-    const upComingLesson = {
-        lessonTitle: upComingLessons[0].title,
+    const upComingLessonModel = {
+        lessonTitle: upComingLesson.title,
         lessonDateDay: upComingLessonDate.dateOfMonth,
         lessonDateMonth: upComingLessonDate.monthAsString,
         lessonDateYear: upComingLessonDate.year,
-        lessonDescription: upComingLessons[0].description,
-        lessonTeachers: filteredTaughtByUserArray.map((userObj) => fill(templates.voteForLesson.displayTaughtByLessons, {
-            imgAttrs: {
-                src: `${userObj["image"]}`,
-                alt: `Lesson will be taught by ${userObj["name"]}`
-            }
-        }))
+        lessonDescription: upComingLesson.description,
+        // lessonTeachers: filteredTaughtByUserArray.map((userObj) => fill(templates.voteForLesson.displayTaughtByLessons, {
+        //     imgAttrs: {
+        //         src: `${userObj["image"]}`,
+        //         alt: `Lesson will be taught by ${userObj["name"]}`
+        //     }
+        // }))
     };
-
-    let lessonsAttending = upComingLessons.slice(0, 3);
+    // console.log('model', upComingLessonModel);
+    
+    // Build Array of Lessons Attending
+    let lessonsAttending = Store.currentUser.lessonsAttending;
+    console.log('lessAttend', lessonsAttending);
+    // empty lesson attending array
+    let getAllLessonsAttending = [];
+    // loop through all stored lessons attending (they are just Ids)
+    for(let i = 0; i < lessonsAttending.length; i += 1){
+        // find value of index of this id
+        let allLessonIndex = allLessons.findIndex(allLessItem => allLessItem['Id'] === lessonsAttending[i]);
+        // if all lessons has an index for the lessonAttending id, then push it into the array
+        if(allLessonIndex !== -1){
+            getAllLessonsAttending.push(allLessons[allLessonIndex])
+        }
+        else {
+            console.log('Not Found');
+        }
+    }
+    // only show the three most recent
+    let nearestThreeLessonsAttending;
+    // so if the array is longer than three, slice it
+    if(getAllLessonsAttending.length > 3){
+        nearestThreeLessonsAttending = getAllLessonsAttending.slice(0, 3);
+    } else {
+        // otherwise, set it equal
+        nearestThreeLessonsAttending = getAllLessonsAttending
+    }
+    console.log('nearThree', nearestThreeLessonsAttending);
 
     return {
         profileStats: fill(templates.dashboard.profileStats, {
@@ -207,16 +252,16 @@ export const getDashboardModel = () => {
         }),
 
         upComingLesson: fill(templates.dashboard.upComingLesson, {
-            lessonTitle: upComingLesson.lessonTitle,
-            lessonDateDay: upComingLesson.lessonDateDay,
-            lessonDateMonth: upComingLesson.lessonDateMonth,
-            lessonDateYear: upComingLesson.lessonDateYear,
-            lessonDescription: upComingLesson.lessonDescription,
-            lessonTaughtBy: upComingLesson.lessonTeachers,
+            lessonTitle: upComingLessonModel.lessonTitle,
+            lessonDateDay: upComingLessonModel.lessonDateDay,
+            lessonDateMonth: upComingLessonModel.lessonDateMonth,
+            lessonDateYear: upComingLessonModel.lessonDateYear,
+            lessonDescription: upComingLessonModel.lessonDescription,
+            // lessonTaughtBy: upComingLessonModel.lessonTeachers,
         }),
 
         lessonsAttending: fill(templates.dashboard.lessonsAttending, {
-            individualLessons: lessonsAttending.map((lesson) => {
+            individualLessons: nearestThreeLessonsAttending.map((lesson) => {
                 const lessonDate = utils.getFormattedDate(new Date(lesson.date));
                 return fill(templates.dashboard.individualLesson, {
                     lessonTitle: lesson.title,
