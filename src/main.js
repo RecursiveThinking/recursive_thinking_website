@@ -1,7 +1,7 @@
 import { global } from './global';
 import layout from './layout';
 import redirect from './redirect';
-import { credentials } from '../credentials/cognitoCreds.js';
+import credentials from '../secrets/cognitoSecrets.json';
 import Amplify from 'aws-amplify';
 
 import './index.html'

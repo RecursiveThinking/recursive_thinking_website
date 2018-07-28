@@ -1,7 +1,7 @@
 import {
     User
 } from './auth';
-import {credentials} from '../credentials/cognitoCreds.js';
+import credentials from '../secrets/cognitoSecrets.json';
 import {Store} from '../src/store.js';
 
 let apiUrl = credentials.apiUrl;
