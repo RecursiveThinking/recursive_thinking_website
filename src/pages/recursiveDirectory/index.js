@@ -8,7 +8,7 @@ import {
     data
 } from '../../global';
 
-import allUsersFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingDeveloperProfiles.json'
+import allUsersFromData from '../../../data_returns/RecursiveThinkingDeveloperProfiles.json'
 
 import recursiveDirectoryHtml from './recursiveDirectory.html'
 importTemplate("recursiveDirectory", recursiveDirectoryHtml)
