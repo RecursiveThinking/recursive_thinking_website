@@ -3,7 +3,7 @@ import { importTemplate, templates, fill } from '../../templater';
 import { Store } from '../../store.js';
 import serverApi from '../../serverApi.js';
 
-import lessonsFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingLessons.json'
+import lessonsFromData from '../../../data_returns/RecursiveThinkingLessons.json'
 
 import upcomingLessonsHtml from './upcomingLessons.html'
 importTemplate("upcomingLessons", upcomingLessonsHtml)
@@ -16,9 +16,9 @@ export function setup(renderFunction) {
 
 export const getUpcomingLessonsModel = () => {
     
-  // #TODO: API Call goes here
+  // #TODO: API Call - Users - goes here
   const currentUser = Store.currentUser;
-
+  // #TODO: API Call - Lessons - goes here
   // const allLessons = Object.values(Store.lessons);
   const allLessons = lessonsFromData                                                     ;
   console.log('allLessons', allLessons);
@@ -30,6 +30,13 @@ export const getUpcomingLessonsModel = () => {
   const orderedScheduledLessons = scheduledLessons.sort((a, b) => new Date(a.date) > new Date(b.date))
   // console.log('ordered', orderedScheduledLessons);
   
+  let allUpComingLessons = document.querySelectorAll('.fc-upComingLesson');
+  console.log(allUpComingLessons);
+  
+  // function that returns an index
+  // lessontodisplay(arrayofUpcomingLessons, id)
+  // if 
+  
   return {
       upcomingLessons: orderedScheduledLessons.map(lesson => {
           let formattedDate = utils.getFormattedDate(new Date(lesson.date));
@@ -38,9 +45,13 @@ export const getUpcomingLessonsModel = () => {
               month: formattedDate.monthAsString,
               year: formattedDate.year,
               // this function
-              isStar: utils.getBoolIfUserAttending(lesson._id, currentUser.lessonsAttending),
-              title: lesson.title
+              title: lesson.title,
+              divAttr: {
+                class: utils.getBoolIfUserAttending(lesson.Id, currentUser.lessonsAttending),
+                data: lesson.Id
+              }
           })
       })
+      // selectedLesson:
   }
 };
