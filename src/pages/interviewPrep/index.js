@@ -7,7 +7,7 @@ import {
     allProgrammingLanguagesObj
 } from '../../global';
 
-import interviewQuestionsFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingInterviewQuestions.json'
+import interviewQuestionsFromData from '../../../data_returns/RecursiveThinkingInterviewQuestions.json'
 
 
 import interviewPrepHtml from './interviewPrep.html'
