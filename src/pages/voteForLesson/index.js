@@ -3,6 +3,7 @@ import { utils, data } from '../../global';
 import uuidV1 from 'uuid/v1';
 import serverApi from '../../serverApi.js';
 import { Store } from '../../store.js';
+
 import voteForLessonHtml from './voteForLesson.html'
 importTemplate("voteForLesson", voteForLessonHtml)
 
@@ -21,7 +22,7 @@ export const model = () => {
     // var allLessons = JSON.parse(localStorage.getItem('allLessons'));
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let lessonLimit = 4;
-    const allLessons = Object.values(Store.lessons);
+    // const allLessons = Object.values(Store.lessons);
     // only unscheduled lessons
     let lessonsNotScheduled = allLessons.filter(lesson => lesson.scheduled === false)
     // only lessons that are currently valid (less than 30 days old)
