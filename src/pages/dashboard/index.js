@@ -3,7 +3,7 @@ import { utils, data } from '../../global';
 import {Store} from '../../store.js';
 
 // turn off once Api Call is made
-import lessonsFromData from '../../../../recursive_thinking_website_sandbox/dynamoDB_mock_data_returns/RecursiveThinkingLessons.json'
+import lessonsFromData from '../../../data_returns/RecursiveThinkingLessons.json'
 
 import dashboardHtml from './dashboard.html';
 importTemplate("dashboard", dashboardHtml)
