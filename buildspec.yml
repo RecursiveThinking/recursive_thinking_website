@@ -1,9 +1,0 @@
-version: 0.2
-
-phases:
-  build:
-    commands:
-      - pip install --upgrade awscli
-      - npm install
-      - npm run webpack
-      - aws s3 cp --recursive build/ s3://$WEBSITE_S3_BUCKET --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers

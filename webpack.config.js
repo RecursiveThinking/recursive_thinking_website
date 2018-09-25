@@ -1,81 +1,34 @@
-const path = require('path');
-const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
 module.exports = {
-    entry: `${__dirname}/src/main.js`,
-    plugins: [
-        new CleanWebpackPlugin(['build']),
-        new CopyWebpackPlugin([
-            { from: './buildspec.yml', to: './', force: true }
-        ]),
-        new ExtractTextPlugin("main.css"),
-    ],
-    output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: './[name].js'
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                use: [ 'babel-loader' ],
-                exclude: /node_modules/
-            },
-            {
-                test: /index\.html$/,
-                include: [
-                    path.resolve(__dirname, "src")
-                ],
-                // note: items in the 'use' clause are run bottom -> top
-                use: [
-                    'file-loader?name=[name].[ext]', // run third
-                    'extract-loader', // run second
-                    'html-loader' // run first
-                ],
-            },
-            {
-                test: /\.html$/,
-                use: [ 'html-loader' ],
-                exclude: [ /index\.html$/ ]
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif|ico)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[path][name].[ext]',
-                        context: 'src' // without this, images get output as 'src/images/path/to/img.png' instead of 'images/path/to/img.png'
-                    }
-                }]
-            },
-            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    use: [ 
-                        'css-loader',
-                        'postcss-loader'
-                    ]
-                }),
-                exclude: /node_modules/
-            },
-            {
-                test: /\.json$/,
-                use: [ 'json-loader' ],
-                exclude: /node_modules/
-            }
-        ]
-    },
-    stats: {
-        colors: true
-    },
-    devtool: 'source-map',
-    devServer: {
-        // NOTE: The dev server DOES NOT write to the disk -- it keeps assets in memory instead 
-        // When you use webpack-dev-server, the build folder will be deleted. Don't worry!
-        contentBase: './build', // serve static assets from here
-        open: true // opens browser automagically
+  entry: ['./src/index.js'],
+  output: {
+    path: __dirname,
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [
+      {
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['react', 'es2015', 'stage-1']
+        }
+      },
+      {
+        test: /\.json$/,
+        use: [ 'json-loader' ]
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx', 'json']
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
     }
+  }
 };

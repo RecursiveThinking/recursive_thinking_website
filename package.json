@@ -1,47 +1,32 @@
 {
-  "name": "recursive_thinking_website",
+  "name": "redux-simple-starter",
   "version": "1.0.0",
-  "description": "A website for a developer network called Recursive Thinking",
-  "main": "layout.html",
+  "description": "Simple starter package for Redux with React and Babel support",
+  "main": "index.js",
+  "repository": "git@github.com:StephenGrider/ReduxSimpleStarter.git",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server",
-    "server": "npm run start",
-    "dev-server": "npm run start"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test:watch": "npm run test -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RecursiveThinking/recursive_thinking_website.git"
-  },
-  "author": "Recursive Thinking Developers",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RecursiveThinking/recursive_thinking_website/issues"
-  },
-  "homepage": "https://github.com/RecursiveThinking/recursive_thinking_website#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "clean-webpack-plugin": "^0.1.18",
-    "copy-webpack-plugin": "^4.4.1",
-    "css-loader": "^0.28.10",
-    "extract-loader": "^1.0.2",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.11",
-    "html-loader": "^0.5.5",
-    "html-webpack-prefix-plugin": "^0.1.1",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "json-loader": "^0.5.7",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.16.5"
   },
   "dependencies": {
-    "aws-amplify": "^0.4.8",
-    "postcss": "^6.0.19",
-    "postcss-cssnext": "^3.1.0",
-    "postcss-loader": "^2.1.1",
-    "uuid": "^3.2.1"
+    "babel-preset-stage-1": "^6.1.18",
+    "lodash": "^3.10.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "redux-promise": "^0.6.0"
   }
 }
