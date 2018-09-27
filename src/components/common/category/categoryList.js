@@ -13,7 +13,7 @@ categoriesArray.forEach(item => {
   categoriesObj[item['Id']] = item
 })
 
-console.log(categoriesObj)
+// console.log(categoriesObj)
 
 const categoryList = ({lessonCategories}) => {
   
@@ -33,7 +33,7 @@ const categoryList = ({lessonCategories}) => {
         }
       }
     )
-    console.log('catsRenderArr', catsToRenderArr)
+    // console.log('catsRenderArr', catsToRenderArr)
       
     let allCats = catsToRenderArr.map(catItem => {
       return (
