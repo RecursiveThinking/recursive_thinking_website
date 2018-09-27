@@ -7,14 +7,13 @@ import Content from './content/content';
 import Footer from './footer/footer';
 
 // Component imports (that change)
-// import HomeScreen from './homeScreen/homeScreen'
+import HomeScreen from './homeScreen/homeScreen'
 import Dash from '../containers/dash/dash'
 import RecursiveDirectory from '../containers/recursiveDirectory/recursiveDirectory'
 import ScheduledLessons from '../containers/scheduledLessons/scheduledLessons'
 import UnscheduledLessons from '../containers/unscheduledLessons/unscheduledLessons'
 import InterviewQuestions from '../containers/interviewQuestions/interviewQuestions'
-// import Modal from './common/modal/modal'
-// import ProfileSetup from './profile/setup/profileSetup'
+import ProfileSetup from './profile/setup/profileSetup'
 import AdminPanel from '../containers/adminPanel/adminPanel'
 
 
@@ -33,7 +32,7 @@ export default class App extends Component {
     return (
       <div className="mainApp">
         {/* <HomeScreen /> */}
-        <HeaderApp />
+        {/* <HeaderApp /> */}
         {/* <ProfileSetup /> */}
         <div className="mainContainer">
           <div className="grid grid--185">
@@ -42,18 +41,9 @@ export default class App extends Component {
                 {/* <Dash /> */}
                 {/* <ScheduledLessons /> */}
                 {/* <UnscheduledLessons /> */}
-                {/* <InterviewQuestions /> */}
+                <InterviewQuestions />
                 {/* <RecursiveDirectory /> */}
-                {/* <main className="content">
-                  <Modal show={this.state.show} handleClose={this.hideModal}>
-                    <p>Modal</p>
-                  </Modal>
-                  <button
-                    type="button"
-                    onClick={this.showModal}
-                  >Open</button>
-                </main> */}
-                <AdminPanel />
+                {/* <AdminPanel /> */}
             </div>
           </div>
         </div>
