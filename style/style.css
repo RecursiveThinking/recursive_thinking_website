@@ -207,12 +207,19 @@ legend {
 }
 
 .fc-form-input {
-    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
     
     margin-top: 1.8rem;
+}
+
+.fc-input-width90 {
+    width: 90%;
+}
+
+.fc-input-width80 {
+    width: 80%;
 }
 
 fieldset {
@@ -225,6 +232,10 @@ fieldset:first-of-type {
 
 .fieldsetSkills {
     margin-top: 5rem;
+}
+
+.fc-fieldset > .fc-form-input:first-of-type {
+    margin-top: 15rem;
 }
 
 fieldset > .grid > .grid-cell > .fc-form-input:first-of-type {
@@ -761,19 +772,38 @@ main ul, ul li {
     position: fixed;
     top: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 5;
 }
 
-.modal-main {
+.modalCard {
     position:fixed;
     background: white;
-    width: 80%;
+    width: 75%;
     height: auto;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-55%);
+    padding: 5rem 5rem;
+}
+
+.modalClose {
+    position: fixed;
+    top: 2.5rem;
+    right: 2.5rem;
+    color: var(--grey-cc);
+}
+
+.modalClose:hover {
+    color: var(--grey-2d3134)
+}
+
+.modalHR {
+    border-top: 0;
+    border-bottom: 1px solid #c6c6c6;
+    width: 100%;
 }
 
 .display-block {
@@ -1125,6 +1155,10 @@ h5 {
 .mch {
     margin-left: auto;
     margin-right: auto;
+}
+
+.mt130 {
+    margin-top: 13rem;
 }
 
 .mt50 {
