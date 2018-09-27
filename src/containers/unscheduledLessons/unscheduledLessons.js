@@ -3,15 +3,31 @@ import { connect } from 'react-redux';
 
 import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 import { fetchLessons } from '../../actions/index'
-
+import Modal from '../../components/common/modal/modal'
+import { SubmitLessonRequestModalForm } from '../../components/forms/forms_modals'
 
 class UnscheduledLessons extends Component {
+  constructor(props){
+    super(props)
+    
+    this.state = {
+      showSubmitLessonModal: false,
+    }
+  }
+  
   componentDidMount(){
     this.props.fetchLessons();
   }
   
+  showModalSubmitLesson = () => {
+    this.setState({ showSubmitLessonModal: true })
+  }
+  
+  hideModalSubmitLesson = () => {
+    this.setState({ showSubmitLessonModal: false })
+  }
+  
   render(){
-    
     // if(this.props.unscheduledLessons.length === 0){}
     return (
       <main>
@@ -22,12 +38,12 @@ class UnscheduledLessons extends Component {
               <article className="cardFull ta-cent">
                 <h3 className="fs33 fw300 ls14 fcBlack">Want to learn something specific? Have something to teach?</h3>
                 <h2 className="fs50 fw300 ls14 fcBlack my15">Submit a lesson request</h2>
-                <button
-                  onClick={this.handleClick}
-                  className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35"
-                >
-                  Submit Lesson
-                </button>
+                <button onClick={this.showModalSubmitLesson} className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Lesson</button>
+                  <Modal 
+                    content={<SubmitLessonRequestModalForm />}
+                    show={this.state.showSubmitLessonModal}
+                    handleClose={this.hideModalSubmitLesson}
+                  />
               </article>
             </div>
           </div>
