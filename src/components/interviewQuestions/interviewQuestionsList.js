@@ -6,7 +6,14 @@ const interviewQuestionsList = ({...props}) => {
   let allInterviewQuestionsListJSX = props.allInterviewQuestionsArr.map(intQuestion => {
     return (
       <li key={intQuestion.Id} className="grid-cell">
-        <InterviewQuestionsListItem intQuestion={intQuestion} lookupTableInterviewQuestionsAnswers={props.lookupTableInterviewQuestionsAnswers}/>
+        <InterviewQuestionsListItem 
+          allUsersArr={props.allUsersArr}
+          lookupTableUsers={props.lookupTableUsers}
+          intQuestion={intQuestion}
+          currentUser={props.currentUser}
+          allInterviewQuestionsAnswersArr={props.allInterviewQuestionsAnswers}
+          lookupTableInterviewQuestionsAnswers={props.lookupTableInterviewQuestionsAnswers}
+        />
       </li>
     )
   })
