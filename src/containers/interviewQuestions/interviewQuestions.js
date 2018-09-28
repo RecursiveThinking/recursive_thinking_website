@@ -1,19 +1,37 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 
-import { fetchInterviewQuestions, fetchInterviewQuestionsAnswers } from '../../actions/index'
+import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers } from '../../actions/index'
 import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
 
-// const InterviewQuestions = require('!json-loader!../../../data_returns/RecursiveThinkingInterviewQuestions.json');
+import Modal from '../../components/common/modal/modal'
+import { SubmitInterviewQuestionModalForm } from '../../components/forms/forms_modals'
 
 class InterviewQuestions extends Component {
+  constructor(props){
+    super(props)
+    
+    this.state = {
+      showSubmitInterviewQuestionModal: false,
+    }
+  }
+  
   componentDidMount(){
+    this.props.fetchUsers();
     this.props.fetchInterviewQuestions();
     this.props.fetchInterviewQuestionsAnswers();
   }
   
+  showModalSubmitInterviewQuestion = () => {
+    this.setState({ showSubmitInterviewQuestionModal: true })
+  }
+  
+  hideModalSubmitInterviewQuestion = () => {
+    this.setState({ showSubmitInterviewQuestionModal: false })
+  }
+  
   render(){
-    console.log('props', this.props)
+    // console.log('props', this.props)
     return (
       <main>
         <div className="dropdown">
@@ -22,13 +40,20 @@ class InterviewQuestions extends Component {
               <article className="cardFull ta-cent">
                 <h3 className="fs33 fw300 ls14 fcBlack">Have you come across an interview question you would like to share?</h3>
                 <h2 className="fs50 fw300 ls14 fcBlack mt15">Submit an Interview Question</h2>
-                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Interview Question</button>
+                <button onClick={this.showModalSubmitInterviewQuestion} className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Interview Question</button>
+                <Modal 
+                  content={<SubmitInterviewQuestionModalForm />}
+                  show={this.state.showSubmitInterviewQuestionModal}
+                  handleClose={this.hideModalSubmitInterviewQuestion}
+                />
               </article>
             </div>
           </div>
         </div>
         <div className="contentList">
-          <InterviewQuestionsList 
+          <InterviewQuestionsList
+            allUsersArr={this.props.allUsers}
+            lookupTableUsers={this.props.lookupTableUsers}
             allInterviewQuestionsArr={this.props.allInterviewQuestions} 
             lookupTableInterviewQuestions={this.props.lookupTableInterviewQuestions}
             allInterviewQuestionsAnswersArr={this.props.allInterviewQuestionsAnswers}
@@ -43,6 +68,8 @@ class InterviewQuestions extends Component {
 
 function mapStateToProps(state){
   return {
+    allUsers: state.users.allUsers,
+    lookupTableUsers: state.users.lookupTableAllUsers,
     allInterviewQuestions: state.interviewQuestions.allInterviewQuestions,
     lookupTableInterviewQuestions: state.interviewQuestions.lookupTableInterviewQuestions,
     allInterviewQuestionsAnswers: state.interviewQuestionsAnswers.allInterviewQuestionsAnswers,
@@ -51,4 +78,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {fetchInterviewQuestions, fetchInterviewQuestionsAnswers})(InterviewQuestions);
+export default connect(mapStateToProps, {fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers})(InterviewQuestions);
