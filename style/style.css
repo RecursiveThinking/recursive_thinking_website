@@ -731,10 +731,10 @@ main ul, ul li {
     align-items: flex-start;
 }
 
-.fc-replies .answers {
+/* .fc-replies .answers { */
     /* display: none; */
-    display: block;
-}
+    /* display: block; */
+/* } */
 
 .fc-replies.open .fc-answers {
     display: flex;
@@ -742,19 +742,19 @@ main ul, ul li {
     margin: 1.9em 0;
 }
 
-.fc-replies.open .fc-answers .fc-author {
+/* .fc-replies.open .fc-answers .fc-author {
     display: flex;
     flex-direction: row;
-}
+} */
 
 .fc-replies.open .fc-answers h5, .fc-replies.open .fc-answers p {
     font-size: 1.6rem;
     letter-spacing: 1px;
 }
 
-.fc-replies.open .fc-answers .fc-author .h5TitleDate {
+/* .fc-replies.open .fc-answers .fc-author .h5TitleDate {
     margin: 0 0 0 .5rem;
-} 
+}  */
 
 .fc-replies.open .fc-answers p {
     margin: 1rem 0 2rem 0;
@@ -762,6 +762,14 @@ main ul, ul li {
 
 .fc-replies.open > button {
     align-self: flex-end;
+}
+
+.listOptions i {
+    margin-left: 2rem;
+}
+
+.listOptions i:first-of-type {
+    margin-left: 0;
 }
 
 /* ============================================ */
@@ -958,6 +966,14 @@ footer {
 
 .fcOrangeff9a23 {
     color: var(--orange-ff9a23)
+}
+
+.fcAlert {
+    color: var(--orange-ff9a23)
+}
+
+.fcWarn {
+    color: var(--warn)
 }
 
 .op50 {
@@ -1239,6 +1255,18 @@ h5 {
 
 .mb05 {
     margin-bottom: .5rem;
+}
+
+.ml40 {
+    margin-left: 4rem;
+}
+
+.ml30 {
+    margin-left: 3rem;
+}
+
+.ml20 {
+    margin-left: 2rem;
 }
 
 .mtNeg125 {
@@ -1604,7 +1632,8 @@ h5 {
 .grid--1of2 > .grid-cell,
 .grid--1of4 > .grid-cell:first-of-type,
 .grid--1of3 > .grid-cell:first-of-type,
-.grid--185 > .grid-cell:first-of-type {
+.grid--185 > .grid-cell:first-of-type,
+.grid--3of4 > .grid-cell:first-of-type {
     flex: 0 0 100%;
 }
 
@@ -1655,6 +1684,9 @@ h5 {
     .grid--1of3 > .grid-cell:first-of-type {
         flex: 0 0 100%;
     }
+    .grid--3of4 > .grid-cell:first-of-type {
+        flex: 0 0 100%;
+    }
 }
 
 /* Large screens */
@@ -1703,6 +1735,9 @@ h5 {
     }
     .grid--1of3 > .grid-cell:first-of-type {
         flex: 0 0 30%;
+    }
+    .grid--3of4 > .grid-cell:first-of-type {
+        flex: 0 0 75%;
     }
     .grid--gutters.grid--nested .grid-cell:first-of-type .demo {
         margin-right: 0;
