@@ -56,4 +56,7 @@ export default class utilityMethods {
     })
     return createOptionList
   }
+  static isNil(value) {
+    return value == null;
+  }
 }
