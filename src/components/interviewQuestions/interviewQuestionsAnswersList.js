@@ -26,20 +26,14 @@ const interviewQuestionsAnswersList = ({...props}) => {
     let allAnswers = allAnswersArray.map(answer => {
       // get date in custom format
       let formattedDate = DateMethods.getFormattedDate(answer['createdAt']);
-      // matches user Id to user obj, returns userObj
-      // let answerWrittenByUser = UtilityMethods.getObjectByKey(props.lookupTableUsers, answer['_createdByUser'])
-      // console.log(answerWrittenByUser.name)
-      // let userName = answerWrittenByUser.name
-      // console.log(userName)
+
       let answerWrittenByUser = ''
       if(props.lookupTableUsers[answer['_createdByUser']]){
         answerWrittenByUser = props.lookupTableUsers[answer['_createdByUser']].name
       }
-      // console.log(answerWrittenByUser)
-      // console.log(props.currentUser.userId, props.currentUser.admin, answer['_createdByUser'])
-      // console.log('answerUSerID', answer['_createdByUser'])
+
       let optionList = UtilityMethods.generateOptionsList(props.currentUser.userId, props.currentUser.admin, answer['_createdByUser'], 'fs16')
-      console.log(optionList)
+      // console.log(optionList)
       // this returns each li
       return (
         <li key={answer.Id} className="fc-answers">
