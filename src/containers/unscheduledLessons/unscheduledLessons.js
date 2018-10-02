@@ -10,8 +10,9 @@ class UnscheduledLessons extends Component {
   constructor(props){
     super(props)
     
+    // init state
     this.state = {
-      showSubmitLessonModal: false,
+      showModal: false,
     }
   }
   
@@ -19,12 +20,8 @@ class UnscheduledLessons extends Component {
     this.props.fetchLessons();
   }
   
-  showModalSubmitLesson = () => {
-    this.setState({ showSubmitLessonModal: true })
-  }
-  
-  hideModalSubmitLesson = () => {
-    this.setState({ showSubmitLessonModal: false })
+  handleToggleModal(){
+    this.setState({ showModal: !this.state.showModal })
   }
   
   render(){
@@ -38,12 +35,15 @@ class UnscheduledLessons extends Component {
               <article className="cardFull ta-cent">
                 <h3 className="fs33 fw300 ls14 fcBlack">Want to learn something specific? Have something to teach?</h3>
                 <h2 className="fs50 fw300 ls14 fcBlack my15">Submit a lesson request</h2>
-                <button onClick={this.showModalSubmitLesson} className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Lesson</button>
-                  <Modal 
+                <button onClick={() => this.handleToggleModal()} className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Lesson</button>
+                {
+                  this.state.showModal &&
+                  
+                  <Modal
+                    onCloseRequest={() => this.handleToggleModal()}
                     content={<SubmitLessonRequestModalForm />}
-                    show={this.state.showSubmitLessonModal}
-                    handleClose={this.hideModalSubmitLesson}
                   />
+                }
               </article>
             </div>
           </div>
