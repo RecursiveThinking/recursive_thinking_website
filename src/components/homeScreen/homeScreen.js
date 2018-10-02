@@ -11,17 +11,13 @@ class HomeScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      showSignUp: false,
+      showModal: false,
     }
   }
   
-  showModalSignUp = () => {
-    this.setState({ showSignUp: true });
-  };
-
-  hideModalSignUp = () => {
-    this.setState({ showSignUp: false });
-  };
+  handleToggleModal(){
+    this.setState({ showModal: !this.state.showModal})
+  }
   
   render(){
     let userArray = [
@@ -57,12 +53,15 @@ class HomeScreen extends Component {
                 <h5 className="ls14 fw300">Learning to Code? Learning UX Design? Furthering your Skills?</h5>
                 <h2 className="fs50 mt10 fw300">Join Recursive Thinking!</h2>
                 <nav>
-                  <button onClick={this.showModalSignUp} type="button" className="btn btnFillClrSchGreen00b371 signUpLrg fs30 fw500 mt35">Sign Up</button>
+                  <button onClick={() => this.handleToggleModal()} type="button" className="btn btnFillClrSchGreen00b371 signUpLrg fs30 fw500 mt35">Sign Up</button>
+                  {
+                    this.state.showModal &&
+                    
                     <Modal 
-                      content={<SignUpModalForm />}
-                      show={this.state.showSignUp}
-                      handleClose={this.hideModalSignUp}
+                    onCloseRequest={() => this.handleToggleModal()}
+                    content={<SignUpModalForm />}
                     />
+                  }
                 </nav>
                 
               </div>  
