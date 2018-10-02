@@ -18,7 +18,7 @@ class InterviewQuestionsListItem extends Component {
     this.state = {
       isIntQuestAnswerClassOpen: 'fc-replies',
       answerBlockClassString: 'answers display-none',
-      showIntQuestionAnswerModal: false,
+      showModalAnswer: false,
     }
   }
   
@@ -36,16 +36,8 @@ class InterviewQuestionsListItem extends Component {
     }
   }
   
-  showModalIntQuestAnswers = () => {
-    this.setState({ showIntQuestionAnswerModal: true})
-  }
-  
-  hideModalIntQuestAnswers = () => {
-    this.setState({ showIntQuestionAnswerModal: false})
-  }
-  
-  buildListOptions = () => {
-    
+  handleToggleModalAnswer(){
+    this.setState({ showModalAnswer: !this.state.showModalAnswer})
   }
   
 
@@ -99,12 +91,15 @@ class InterviewQuestionsListItem extends Component {
               />
               
             </div>
-            <button onClick={this.showModalIntQuestAnswers} className="btn btnFillClrSchGreen00b371 fs20 fw500 pdTB15LR4">Answer Question</button>
-              <Modal 
-                content={<SubmitInterviewQuestionAnswersModalForm />}
-                show={this.state.showIntQuestionAnswerModal}
-                handleClose={this.hideModalIntQuestAnswers}
-              />
+            <button onClick={() => this.handleToggleModalAnswer()} className="btn btnFillClrSchGreen00b371 fs20 fw500 pdTB15LR4">Answer Question</button>
+              {
+                this.state.showModalAnswer && 
+                
+                <Modal 
+                  onCloseRequest={() => this.handleToggleModalAnswer()}
+                  content={<SubmitInterviewQuestionAnswersModalForm />}
+                />
+              }
           </div>
         </div>
       </article>
