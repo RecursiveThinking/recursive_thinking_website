@@ -12,7 +12,7 @@ class InterviewQuestions extends Component {
     super(props)
     
     this.state = {
-      showSubmitInterviewQuestionModal: false,
+      showModalQuestion: false,
     }
   }
   
@@ -22,12 +22,8 @@ class InterviewQuestions extends Component {
     this.props.fetchInterviewQuestionsAnswers();
   }
   
-  showModalSubmitInterviewQuestion = () => {
-    this.setState({ showSubmitInterviewQuestionModal: true })
-  }
-  
-  hideModalSubmitInterviewQuestion = () => {
-    this.setState({ showSubmitInterviewQuestionModal: false })
+  handleToggleModalQuestion(){
+    this.setState({ showModalQuestion: !this.state.showModalQuestion });
   }
   
   render(){
@@ -40,12 +36,15 @@ class InterviewQuestions extends Component {
               <article className="cardFull ta-cent">
                 <h3 className="fs33 fw300 ls14 fcBlack">Have you come across an interview question you would like to share?</h3>
                 <h2 className="fs50 fw300 ls14 fcBlack mt15">Submit an Interview Question</h2>
-                <button onClick={this.showModalSubmitInterviewQuestion} className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Interview Question</button>
-                <Modal 
-                  content={<SubmitInterviewQuestionModalForm />}
-                  show={this.state.showSubmitInterviewQuestionModal}
-                  handleClose={this.hideModalSubmitInterviewQuestion}
-                />
+                <button onClick={() => this.handleToggleModalQuestion()} className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt35">Submit Interview Question</button>
+                { 
+                  this.state.showModalQuestion &&
+                    
+                  <Modal 
+                    onCloseRequest={() => this.handleToggleModalQuestion()}
+                    content={<SubmitInterviewQuestionModalForm />}
+                  />
+                }
               </article>
             </div>
           </div>
