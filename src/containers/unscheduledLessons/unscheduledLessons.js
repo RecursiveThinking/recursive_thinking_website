@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 import { fetchLessons } from '../../actions/index'
 import Modal from '../../components/common/modal/modal'
-import { SubmitLessonRequestModalForm } from '../../components/forms/forms_modals'
+import { SubmitLessonRequestFormEx } from '../../components/forms/forms_modals'
 
 class UnscheduledLessons extends Component {
   constructor(props){
@@ -41,17 +41,13 @@ class UnscheduledLessons extends Component {
                   
                   <Modal
                     onCloseRequest={() => this.handleToggleModal()}
-                    content={<SubmitLessonRequestModalForm />}
+                    content={<SubmitLessonRequestFormEx />}
                   />
                 }
               </article>
             </div>
           </div>
         </div>
-        {/* <Modal>
-          
-        </Modal> */}
-        {/* here is where unscheduled  lessons List will go*/}
         <div className="contentList"> 
           <UnscheduledLessonsList currentUser={this.props.currentUser} allUnscheduledLessonsArray={this.props.unscheduledLessons}/>
         </div>
