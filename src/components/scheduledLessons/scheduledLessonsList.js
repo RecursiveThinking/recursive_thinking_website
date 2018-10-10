@@ -7,13 +7,16 @@ import ScheduledLessonsListItem from '../../components/scheduledLessons/schedule
 
 import LessonMethods from '../../functions/lessonMethods'
 
+import DM from '../../standards/dictModel'
+
 const ScheduledLessonsList = ({...props}) => {
+  const { user: { lessonStatus }, lesson: { Id }} = DM;
   // map the lesson list to return JSX
   let allScheduledLessonsListItems = props.scheduledLessons.map(lessonItem => {
-    let currentUserLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser['lessonStatus'], lessonItem.Id);
+    let currentUserLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser[lessonStatus], lessonItem[Id]);
     return (
       <li
-        key={lessonItem.Id}
+        key={lessonItem[Id]}
         onClick = {() => props.actions.selectedLesson(lessonItem)}
       >
         <ScheduledLessonsListItem lesson={lessonItem} currentUserLessonStatus={currentUserLessonStatus} />
