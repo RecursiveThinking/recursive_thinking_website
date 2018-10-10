@@ -1,6 +1,6 @@
 import React from 'react';
 
-const dashboardProfileStatListItem = ({stat, key}) => {
+const dashboardProfileStatListItem = ({stat}) => {
   // init an empty string to hold style per list item
   let h1Style = ""
   if(stat[0]){
@@ -19,12 +19,10 @@ const dashboardProfileStatListItem = ({stat, key}) => {
   }
   
   return (
-    <li key={key} className="grid-cell">
-      <div className="profileStatsData">
-        <h1 className={h1Style}>{stat[0]}</h1>
-        <h5 className="fs18 ls12 fw500 fcGreyb9">{stat[1]}</h5>
-      </div>
-    </li>
+    <div className="profileStatsData">
+      <h1 className={h1Style}>{stat[0]}</h1>
+      <h5 className="fs18 ls12 fw500 fcGreyb9">{stat[1]}</h5>
+    </div>
   )
 }
 
