@@ -2,10 +2,13 @@ import React from 'react';
 
 import RecursiveDirectoryListItem from './recursiveDirectoryListItem'
 
+import DM from '../../standards/dictModel'
+
 const recursiveDirectoryList = ({usersForDirectory}) => {
+  const { user: { userId }} = DM
   const allDirectory = usersForDirectory.map(user => {
     return (
-      <li key={user.userId} className="grid-cell">
+      <li key={user[userId]} className="grid-cell">
         <RecursiveDirectoryListItem user={user} />
       </li>
     )
