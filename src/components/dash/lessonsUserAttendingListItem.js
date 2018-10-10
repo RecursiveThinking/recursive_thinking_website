@@ -2,10 +2,11 @@ import React from 'react';
 
 import DateMethods from '../../functions/dateMethods'
 
+import DM from '../../standards/dictModel'
+
 const lessonsUserAttendingListItem = ({lessonAttend}) => {
-  console.log('lesson title', lessonAttend['title']);
-  // console.log('lesson date', lessonAttend.date);
-  let formattedDate = DateMethods.getFormattedDate(lessonAttend.date);
+  const { lesson: { date, title}} = DM
+  let formattedDate = DateMethods.getFormattedDate(lessonAttend[date]);
   
   return (
     <article className="mt15">
@@ -17,7 +18,7 @@ const lessonsUserAttendingListItem = ({lessonAttend}) => {
         </div>
       </div>
       <div className="fc-lessonInfoCont">
-        <h5 className="fw300 ls14 fcGrey66 mtNeg10">{lessonAttend['title']}</h5>
+        <h5 className="fw300 ls14 fcGrey66 mtNeg10">{lessonAttend[title]}</h5>
       </div>
       <hr className="mt15" />
     </article>
