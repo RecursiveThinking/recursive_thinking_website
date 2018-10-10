@@ -5,7 +5,7 @@ import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers } f
 import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
 
 import Modal from '../../components/common/modal/modal'
-import { SubmitInterviewQuestionModalForm } from '../../components/forms/forms_modals'
+import { SubmitInterviewQuestionFormEx } from '../../components/forms/forms_modals'
 
 class InterviewQuestions extends Component {
   constructor(props){
@@ -27,7 +27,7 @@ class InterviewQuestions extends Component {
   }
   
   render(){
-    // console.log('props', this.props)
+    const { allUsers, lookupTableUsers, allInterviewQuestions, lookupTableInterviewQuestions, allInterviewQuestionsAnswers, lookupTableInterviewQuestionsAnswers, currentUser } = this.props;
     return (
       <main>
         <div className="dropdown">
@@ -42,7 +42,7 @@ class InterviewQuestions extends Component {
                     
                   <Modal 
                     onCloseRequest={() => this.handleToggleModalQuestion()}
-                    content={<SubmitInterviewQuestionModalForm />}
+                    content={<SubmitInterviewQuestionFormEx />}
                   />
                 }
               </article>
@@ -51,13 +51,13 @@ class InterviewQuestions extends Component {
         </div>
         <div className="contentList">
           <InterviewQuestionsList
-            allUsersArr={this.props.allUsers}
-            lookupTableUsers={this.props.lookupTableUsers}
-            allInterviewQuestionsArr={this.props.allInterviewQuestions} 
-            lookupTableInterviewQuestions={this.props.lookupTableInterviewQuestions}
-            allInterviewQuestionsAnswersArr={this.props.allInterviewQuestionsAnswers}
-            lookupTableInterviewQuestionsAnswers={this.props.lookupTableInterviewQuestionsAnswers}
-            currentUser={this.props.currentUser}
+            allUsersArr={allUsers}
+            lookupTableUsers={lookupTableUsers}
+            allInterviewQuestionsArr={allInterviewQuestions} 
+            lookupTableInterviewQuestions={lookupTableInterviewQuestions}
+            allInterviewQuestionsAnswersArr={allInterviewQuestionsAnswers}
+            lookupTableInterviewQuestionsAnswers={lookupTableInterviewQuestionsAnswers}
+            currentUser={currentUser}
           />
         </div>
       </main>
