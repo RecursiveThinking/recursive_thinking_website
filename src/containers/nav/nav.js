@@ -1,65 +1,79 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
+import { BrowserRouter as Route, Link} from 'react-router-dom'
 
-// destructure currentUser off props
+import { ROUTES_NAV } from '../navAndContent/navAndContent'
+
+
+
+import DM from '../../standards/dictModel'
+
 class Nav extends Component {
   render(){
+    // destructure currentUser off props
+    const { currentUser } = this.props;
+    const { user: { avatar, name, title, admin }} = DM;
     // construct image path string
-    const userPicturePath = `../../../public/images/${this.props.currentUser.avatar}`;
+    const userPicturePath = `../../../public/images/${currentUser[avatar]}`;
     
     const NAV_BAR = [
       // class, id, Title, icon class
-      [ 'sidebar-item', 'dashboard', 'Dashboard', 'fa fa-tachometer fs24'],
-      [ 'sidebar-item', 'scheduled-lessons', 'Scheduled Lessons', 'fa fa-calendar fs24'],
-      [ 'sidebar-item', 'unscheduled-lessons', 'Vote For Lessons', 'fa fa-thumbs-up fs24'],
-      [ 'sidebar-item', 'interview-prep', 'Interview Prep', 'fa fa-object-group fs24'],
-      [ 'sidebar-item', 'recursive-directory', 'Recursive Directory', 'fa fa-address-book-o fs24'],
-      [ 'sidebar-item', 'edit-profile', 'Edit Profile', 'fa fa-user fs24'],
-      // [ 'sidebar-item', 'home', 'Home Screen', 'fa fa-home fs24'],
-      [ 'sidebar-item', 'sign-out', 'Sign Out', 'fa fa-sign-out fs24'],
-      [ 'sidebar-item', 'admin-panel', 'Admin Panel', 'fa fa-lock fs24'],
+      [ 'sidebar-item', '/dashboard', 'Dashboard', 'fa fa-tachometer fs24'],
+      [ 'sidebar-item', '/schedLessons', 'Scheduled Lessons', 'fa fa-calendar fs24'],
+      [ 'sidebar-item', '/unSchedLessons', 'Vote For Lessons', 'fa fa-thumbs-up fs24'],
+      [ 'sidebar-item', '/interviewQuestions', 'Interview Prep', 'fa fa-object-group fs24'],
+      [ 'sidebar-item', '/recursiveDirectory', 'Recursive Directory', 'fa fa-address-book-o fs24'],
+      [ 'sidebar-item', '/editProfile', 'Edit Profile', 'fa fa-user fs24'],
+      // ,
     ]
+    if(this.props.currentUser['admin'] === true){
+      NAV_BAR.push([ 'sidebar-item', '/adminDash', 'Admin Panel', 'fa fa-lock fs24'])
+    }
+    
     // return <div className="grid grid--full lg-grid--fit">
-    let allMenuItems = NAV_BAR.map(item => {
-      if(item[2] ==='Admin Panel'){
-        if(this.props.currentUser['admin'] === true){
-          return (
-            <article className={item[0]} data-pageid={item[1]}>
-              <h6 className="sidebarTitle">{item[2]}</h6>
-              <span><i className={item[3]}></i></span>
-            </article>
-          )
-        }
-      }
-      else {      
-        return (
-          <article className={item[0]} data-pageid={item[1]}>
+    let allMenuItems = NAV_BAR.map((item, index) => {
+      return (
+        <Link to={item[1]}>
+          <article key={index} className={item[0]}>
             <h6 className="sidebarTitle">{item[2]}</h6>
             <span><i className={item[3]}></i></span>
           </article>
-        )
-      }
+        </Link>
+      )
     })
-    
-    return <div className="grid-cell">
+    return (
       <nav className="navMain">
         {/* <aside id="sidebar" className="sidebar" style="visibility:hidden"> */}
         <aside id="sidebar" className="sidebar fc--disp-flex fc--fdir-col">
           <article>
             <div className="fc-devInfo fc--disp-flex fc--fdir-col fc--aItem-ce">
               <img className="sidebarImage avatarS avatarBS" src={userPicturePath} />
-              <h2 className="devName fs24 fw300 ls14 ta-cent">{this.props.currentUser.name}</h2>
-              <h3 className="devTitle fs16 fw100 fcWhite ls10 ta-cent">{this.props.currentUser.title}</h3>
+              <h2 className="devName fs24 fw300 ls14 ta-cent">{currentUser[name]}</h2>
+              <h3 className="devTitle fs16 fw100 fcWhite ls10 ta-cent">{currentUser[title]}</h3>
             </div>
           </article>
           <div className="sidebarLinksContainer fc--disp-flex fc--fdir-col">
             {allMenuItems}
-
+            <Link to="/signout">
+              <article key={allMenuItems.length} className="sidebar-item">
+                <h6 className="sidebarTitle">Sign Out</h6>
+                <span><i className="fa fa-sign-out fs24"></i></span>
+              </article>
+            </Link>
+            {/* MAP ROUTES */}
+            {
+              ROUTES_NAV.map((route, index) => (
+                <Route
+                  key={index}
+                  path={route.path}
+                />
+              ))
+            }
+            <Route key={ROUTES_NAV.length} path="/signout" />
           </div>
         </aside>
       </nav>
-    </div>
-    {/* </div> */}
+    )
   }
 }
 
@@ -72,36 +86,3 @@ function mapStateToProps(state){
 
 // connect react/redux
 export default connect(mapStateToProps)(Nav)
-
-{/* <article className="sidebar-item" data-pageid="dashboard">
-  <h6 className="sidebarTitle">Dashboard</h6>
-  <span><i className="fa fa-tachometer fs24"></i></span>
-</article>
-<article className="sidebar-item" data-pageid="upcoming-lessons">
-  <h6 className="sidebarTitle">Upcoming Lessons</h6>
-  <span><i className="fa fa-calendar fs24"></i></span>
-</article>
-<article id="btnSidebarVoteLessons" className="sidebar-item" data-pageid="vote-for-lessons">
-  <h6 className="sidebarTitle">Vote For Lessons</h6>
-  <span><i className="fa fa-thumbs-up fs24"></i></span>
-</article>
-<article id="btnSidebarInterviewPrep" className="sidebar-item" data-pageid="interview-prep">
-  <h6 className="sidebarTitle">Interview Prep</h6>
-  <span><i className="fa fa-object-group fs24"></i></span>
-</article>
-<article className="sidebar-item" data-pageid="recursive-directory">
-  <h6 className="sidebarTitle">Recursive Directory</h6>
-  <span><i className="fa fa-address-book-o fs24"></i></span>
-</article>
-<article className="sidebar-item" data-pageid="edit-profile">
-  <h6 className="sidebarTitle">Edit Profile</h6>
-  <span><i className="fa fa-user fs24"></i></span>
-</article>
-<article className="sidebar-item home" data-pageid="home">
-  <h6 className="sidebarTitle">Home Screen</h6>
-  <span><i className="fa fa-home fs24"></i></span>
-</article>
-<article className="sidebar-item" data-pageid="sign-out">
-  <h6 className="sidebarTitle">Sign Out</h6>
-  <span><i className="fa fa-sign-out fs24"></i></span>
-</article> */}
