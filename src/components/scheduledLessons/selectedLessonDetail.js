@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React from 'react';
 
 import LessonTaughtByThumbList from '../common/lesson/lessonTaughtByThumbList'
 import SelectedLessonDetailAttendeesList from './selectedLessonDetailAttendeesList'
@@ -7,31 +6,27 @@ import SelectedLessonDetailAttendeesList from './selectedLessonDetailAttendeesLi
 import DateMethods from '../../functions/dateMethods'
 import LessonMethods from '../../functions/lessonMethods'
 
+import DM from '../../standards/dictModel'
+
 const SelectedLessonDetail = ({...props}) => {
+
+    const { user: { lessonStatus }, lesson: { title, description, date, lessonTaughtBy, lessonAttendees }} = DM;
     let selectedLesson = {}
     if(props.scheduledLessons.length && !props.selectedLesson){
       selectedLesson = props.scheduledLessons[0]
     }
-    // else if(!props.scheduledLessons.length && !props.selectedLesson){
-    //   return (
-    //     <article className="card">
-    //       <div>Wait!</div>
-    //     </article>
-    //   )
-    // }
     else {
       selectedLesson = props.selectedLesson
     }
     // get formattedDate object for date
-    let formattedDate = DateMethods.getFormattedDate(selectedLesson.date);
+    let formattedDate = DateMethods.getFormattedDate(selectedLesson[date]);
     // returns an array of userObj beloing to people who are teaching
-    let taughtByArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson['lessonTaughtBy'], props.allUsers)
+    let taughtByArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson[lessonTaughtBy], props.allUsers)
     // returns an array of userObj belonging to users who are attending
-    let selectedLessonAttendeesArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson['lessonAttendees'])
+    let selectedLessonAttendeesArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson[lessonAttendees])
     // formats the styling for a viewed lesson, based on wether or not the currentUser's status with that lesson
     // if returns true, returns a number, if return null, then no status for lesson
-    let userLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser['lessonStatus'], selectedLesson.Id);
-    // console.log(userLessonStatus);
+    let userLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser[lessonStatus], selectedLesson.Id);
     // attending === 1, maybe === 2, not === 3 if null, then all buttons live
     let buttonStatusObj = LessonMethods.getButtonStatusForLesson(userLessonStatus)
     
@@ -56,8 +51,8 @@ const SelectedLessonDetail = ({...props}) => {
         </div>
         <hr />  
         <div className="fc-lessonInfoCont">
-          <h5 className="fw300 ls14 fcBlack mt15">{selectedLesson['title']}</h5>
-          <p className="fs16 fw300 ls10 fcBlack mt10">{selectedLesson['description']}</p>
+          <h5 className="fw300 ls14 fcBlack mt15">{selectedLesson[title]}</h5>
+          <p className="fs16 fw300 ls10 fcBlack mt10">{selectedLesson[description]}</p>
         </div>
         <hr className="mt20" />
         <div className="fc-taughtBy">
@@ -74,13 +69,5 @@ const SelectedLessonDetail = ({...props}) => {
       </article>
     )
 }
-
-// function mapStateToProps(state){
-//   return {
-//     selectedLesson: state.selectedLesson,
-//     scheduledLessonList: state.scheduledLessonList,
-//     currentUser: state.currentUser
-//   }
-// }
 
 export default SelectedLessonDetail;
