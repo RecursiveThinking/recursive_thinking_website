@@ -15,9 +15,9 @@ categoriesArray.forEach(item => {
 
 // console.log(categoriesObj)
 
-const categoryList = ({lessonCategories}) => {
+const categoryList = ({categories}) => {
   
-  if(!lessonCategories.length){
+  if(!categories.length){
     // console.log('there is nothing to render')
     return (
       ""
@@ -27,9 +27,9 @@ const categoryList = ({lessonCategories}) => {
   } else {
     // create empty array
     let catsToRenderArr = [];
-    lessonCategories.forEach((lesson, index) => {
-        if(categoriesObj[lessonCategories[index]]){
-          catsToRenderArr.push(categoriesObj[lessonCategories[index]])
+    categories.forEach((category, index) => {
+        if(categoriesObj[categories[index]]){
+          catsToRenderArr.push(categoriesObj[categories[index]])
         }
       }
     )
