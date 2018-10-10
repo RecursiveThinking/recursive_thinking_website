@@ -5,14 +5,23 @@ import LessonTaughtByThumbList from '../common/lesson/lessonTaughtByThumbList'
 import DateMethods from '../../functions/dateMethods'
 import LessonMethods from '../../functions/lessonMethods'
 
+import DM from '../../standards/dictModel'
+
 const Users = require('!json-loader!../../../data_returns/RecursiveThinkingDeveloperProfiles.json')
 
 const upComingLesson = ({upComingLesson}) => {
-  // upComingLesson = []
+  const { lesson: {
+      title,
+      date,
+      description,
+      lessonTaughtBy
+    }
+  } = DM 
+  
   if(upComingLesson.length){
     const nextLesson = upComingLesson[0];
-    let formattedDate = DateMethods.getFormattedDate(nextLesson.date)
-    let taughtByArray = upComingLesson[0]['lessonTaughtBy'];
+    let formattedDate = DateMethods.getFormattedDate(nextLesson[date])
+    let taughtByArray = upComingLesson[0][lessonTaughtBy];
     let taughtByUserArray = LessonMethods.getArrayofTaughtByUserObjs(taughtByArray, Users);
     // taughtByUserArray is an array of our taughtBy Users (objects), so we can pass that to our LessonTaughtByThumbList
     
@@ -29,8 +38,8 @@ const upComingLesson = ({upComingLesson}) => {
         </div>
         <hr />
         <div className="fc-lessonInfoCont">
-          <h5 className="fw300 ls14 fcBlack mt15">{nextLesson['title']}</h5>
-          <p className="fs16 fw300 ls10 fcBlack mt10">{nextLesson['description']}</p>
+          <h5 className="fw300 ls14 fcBlack mt15">{nextLesson[title]}</h5>
+          <p className="fs16 fw300 ls10 fcBlack mt10">{nextLesson[description]}</p>
         </div>
         <hr className="mt20" />
         <div className="fc-taughtBy">
