@@ -14,7 +14,7 @@ const lessonsUserAttendingList = ({lessonsAttending}) => {
     <ul>
       {attendingLessons}
       <div className="fc-seeMore">
-        <h5 className="ls14 fw900 ttup ta-right mt15"><a className="" href="#upcoming-lessons">See More</a></h5>
+        <h5 className="ls14 fw900 ttup ta-right mt15"><a href="/schedLessons">See More</a></h5>
       </div>
     </ul>
   )
