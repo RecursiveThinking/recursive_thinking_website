@@ -4,7 +4,7 @@ import CategoryList from '../../components/common/category/categoryList'
 import InterviewQuestionsAnswersList from './interviewQuestionsAnswersList'
 
 import Modal from '../../components/common/modal/modal'
-import { SubmitInterviewQuestionAnswersModalForm } from '../forms/forms_modals'
+import { SubmitInterviewQuestionAnswerFormEx } from '../forms/forms_modals'
 
 import DM from '../../standards/dictModel'
 
@@ -74,7 +74,7 @@ class InterviewQuestionsListItem extends Component {
         </p>
         <hr className="mt30"/>
         
-        <CategoryList lessonCategories={this.props.intQuestion[DM.intQuestion.categories]} />
+        <CategoryList categories={this.props.intQuestion[DM.intQuestion.categories]} />
         
         <div className="mt20">
           <div className={this.state.isIntQuestAnswerClassOpen}>
@@ -97,7 +97,8 @@ class InterviewQuestionsListItem extends Component {
                 
                 <Modal 
                   onCloseRequest={() => this.handleToggleModalAnswer()}
-                  content={<SubmitInterviewQuestionAnswersModalForm />}
+                  content={<SubmitInterviewQuestionAnswerFormEx intQuestion={this.props.intQuestion} />}
+                  
                 />
               }
           </div>
