@@ -9,8 +9,7 @@ import LessonsUserAttending from '../../components/dash/lessonsUserAttending'
 
 import LessonMethods from '../../functions/lessonMethods'
 
-// loads our fake info from DB
-// const Lessons = require('!json-loader!../../../data_returns/RecursiveThinkingLessons.json')
+import DM from '../../standards/dictModel'
 
 class Dash extends Component {
   
@@ -19,19 +18,31 @@ class Dash extends Component {
   }
   
   render(){
-    console.log('Dash', this.props)
+    const { currentUser, scheduledLessons } = this.props
+    const { 
+      user: { 
+        profileStatsVisits, 
+        profileStatsViewsGithub, 
+        profileStatsViewsCodePen,
+        profileStatsViewsPortfolio,
+        profileStatsViewsLinkedIn,
+        profileStatsViewsResume,
+        lessonStatus
+      },
+      lesson: {}
+    } = DM
     // make an array of profileStats
     const profileStats = [
-      this.props.currentUser.profileStatsVisits,
-      this.props.currentUser.profileStatsViewsGithub,
-      this.props.currentUser.profileStatsViewsCodePen,
-      this.props.currentUser.profileStatsViewsPortfolio,
-      this.props.currentUser.profileStatsViewsLinkedIn,
-      this.props.currentUser.profileStatsViewsResume
+      currentUser[profileStatsVisits],
+      currentUser[profileStatsViewsGithub],
+      currentUser[profileStatsViewsCodePen],
+      currentUser[profileStatsViewsPortfolio],
+      currentUser[profileStatsViewsLinkedIn],
+      currentUser[profileStatsViewsResume]
     ]
     
     // UpComing Lessons
-    const lessonsAttending = LessonMethods.getCurrentUserLessonsAttendingArray(this.props.currentUser.lessonStatus, this.props.scheduledLessons)
+    const lessonsAttending = LessonMethods.getCurrentUserLessonsAttendingArray(currentUser[lessonStatus], scheduledLessons)
     // limit to the next three lessons
     if(lessonsAttending.length > 3){
       lessonsAttending.length = 3
@@ -49,7 +60,7 @@ class Dash extends Component {
         <div className="grid grid--1of2">
           <div className="grid-cell">
             {/* in this cell goes the next upcoming lesson */}
-            <UpComingLesson upComingLesson={this.props.scheduledLessons}/>
+            <UpComingLesson upComingLesson={scheduledLessons}/>
           </div>
           <div className="grid-cell">
             {/* in this cell goes a list of the next three lessons the user is attending  */}
