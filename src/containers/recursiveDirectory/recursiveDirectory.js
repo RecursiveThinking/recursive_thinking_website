@@ -3,17 +3,19 @@ import { connect } from 'react-redux'
 import { fetchUsers } from '../../actions/index'
 
 import RecursiveDirectoryList from '../../components/recursiveDirectory/recursiveDirectoryList'
-// import { bindActionCreators } from 'redux';
 
+import DM from '../../standards/dictModel'
 class RecursiveDirectory extends Component {
   componentDidMount(){
     this.props.fetchUsers();
   }
   
   render(){    
+    const { allUsers, currentUser } = this.props
+    const { user: { userId }} = DM;
     // need to map an array of users not including the current one
-    let allUsersExcludingCurrent = this.props.allUsers.filter(user => user.userId !== this.props.currentUser.userId)
-    console.log('allUsersButCurrent', allUsersExcludingCurrent);
+    let allUsersExcludingCurrent = allUsers.filter(user => user[userId] !== currentUser[userId])
+
     return (
       <main className="content">
         <RecursiveDirectoryList usersForDirectory={allUsersExcludingCurrent} />
@@ -26,7 +28,7 @@ class RecursiveDirectory extends Component {
 function mapStateToProps(state){
   return {
     allUsers: state.users.allUsers,
-    lookupTableUsers: state.users.lookupTableUsers,
+    lookupTableUsers: state.users.lookupTableAllUsers,
     currentUser: state.currentUser
   }
 }
