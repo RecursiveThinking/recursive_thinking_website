@@ -1,6 +1,16 @@
 import React from 'react'
 
+import DM from '../../standards/dictModel'
+
+import {TABLE_NAMES} from './adminPanelList'
+
 const adminPanelListItem = ({...props}) => {
+  const {
+    user: { email },
+    lesson: { scheduled, lessonVotes, _lessonCreatedBy }
+  } = DM;
+  const { users, lessons, interviewQuestions, interviewQuestionsAnswers} = TABLE_NAMES;
+  
   let tableHeadingJSX  = props.tableHeadingArr.map(attr => {
     return (
       <th className="ta-cent">{attr}</th>
@@ -10,8 +20,8 @@ const adminPanelListItem = ({...props}) => {
     let tableBodyJSX = props.tableBodyArr.map((obj, index) => {
       let tableData = props.tableHeadingArr.map(attr => {
         function genRenderString(attr){
-          if(props.table === 'users'){
-            if(attr === 'email'){
+          if(props.table === users){
+            if(attr === email){
               return (
                 <a href="#">{obj[attr]}</a>
                 )
@@ -27,18 +37,15 @@ const adminPanelListItem = ({...props}) => {
                 return obj[attr]
               }
             }
-        else if(props.table === 'lessons'){
-          if(attr === 'scheduled'){
+        else if(props.table === lessons){
+          if(attr === scheduled){
             return returnTrueOrFalse(obj[attr])
           } 
-          else if(attr === 'lessonVotes'){
+          else if(attr === lessonVotes){
             return obj[attr].length
           }
-          else if(attr === '_lessonCreatedBy'){
-            console.log(props.lookupTableUsers)
-            // console.log('userId', obj[attr])
+          else if(attr === _lessonCreatedBy){
             let content = getUserObjById(obj[attr], props.lookupTableUsers)
-            console.log(content)
             if(typeof(content) === 'string'){
               return content;
             } else {
@@ -54,8 +61,8 @@ const adminPanelListItem = ({...props}) => {
         }
       }
       function genClassName(attr){
-        if(props.table === 'users'){
-          if(attr === 'email'){
+        if(props.table === users){
+          if(attr === email){
             return "ta-cent"
           } 
           else if(obj[attr] === true || obj[attr] === false){
@@ -68,8 +75,8 @@ const adminPanelListItem = ({...props}) => {
             return "ta-left"
           }
         }
-        if(props.table === 'lessons'){
-          if(attr === 'lessonVotes' || attr === 'scheduled'){
+        if(props.table === lessons){
+          if(attr === lessonVotes || attr === scheduled){
             // return "ta-cent"
           }
           else {
@@ -107,7 +114,7 @@ const adminPanelListItem = ({...props}) => {
     }
   }
   return (
-    <li className="grid grid--full">
+    // <li className="grid grid--full">
       <article className="card width100P">
         <h4>{props.title}</h4>
         <hr />
@@ -122,7 +129,7 @@ const adminPanelListItem = ({...props}) => {
           </tbody>
         </table>
       </article>
-    </li>
+    // </li>
   )
 }
 
