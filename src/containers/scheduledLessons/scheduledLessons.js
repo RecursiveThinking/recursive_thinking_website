@@ -14,7 +14,6 @@ class ScheduledLessons extends Component {
   }
   
   render(){
-    console.log('props', this.props)
     // what happens if we have nothing?
     // let scheduledLessons = this.props.scheduledLessons;
     if(this.props.scheduledLessons.length === 0){
@@ -25,16 +24,15 @@ class ScheduledLessons extends Component {
       )
     }
     else {
+      const { currentUser, selectedLesson, scheduledLessons, allUsers } = this.props;
       return (
         <main className="content">
           <div className="grid grid--1of3">
             <div className="grid-cell">
-              {/* <ScheduledLessonsList currentUser={this.props.currentUser}/> */}
-              <ScheduledLessonsList currentUser={this.props.currentUser} scheduledLessons={this.props.scheduledLessons} />
+              <ScheduledLessonsList currentUser={currentUser} scheduledLessons={scheduledLessons} />
             </div>
             <div className="grid-cell">
-              {/* <SelectedLessonDetail currentUser={this.props.currentUser} /> */}
-              <SelectedLessonDetail currentUser={this.props.currentUser} selectedLesson={this.props.selectedLesson} allUsers={this.props.allUsers} scheduledLessons={this.props.scheduledLessons}/>
+              <SelectedLessonDetail currentUser={currentUser} selectedLesson={selectedLesson} allUsers={allUsers} scheduledLessons={scheduledLessons}/>
             </div>
           </div>
         </main>
