@@ -3,8 +3,11 @@ import React from 'react';
 import DateMethods from '../../functions/dateMethods'
 import LessonMethods from '../../functions/lessonMethods'
 
+import DM from '../../standards/dictModel'
+
 const scheduledLessonsListItem = ({lesson, currentUserLessonStatus}) => {
-  let formattedDate = DateMethods.getFormattedDate(lesson.date)
+  const { lesson: { title, date } } = DM;
+  let formattedDate = DateMethods.getFormattedDate(lesson[date])
   // style formatting for star
   let styleLessonStatusStar = LessonMethods.getStyleForLessonStatusStarString(currentUserLessonStatus)
   // console.log(lesson.Id, currentUserLessonStatus, styleLessonStatusStar);
@@ -19,11 +22,10 @@ const scheduledLessonsListItem = ({lesson, currentUserLessonStatus}) => {
         </div>
         <div className="fc-star fc--disp-flex fc--fdir-row fc--jCont-fe">
           <i className={styleLessonStatusStar}></i>
-          {/* <i className="fa fa-star"></i> */}
         </div>
       </div>
       <div className="fc-lessonInfoCont">
-        <h5 className="fw300 ls14 fcGrey66 mtNeg10">{lesson['title']}</h5>
+        <h5 className="fw300 ls14 fcGrey66 mtNeg10">{lesson[title]}</h5>
       </div>
       <hr className="mt15" />
     </article>
