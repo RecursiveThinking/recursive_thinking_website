@@ -2,6 +2,8 @@ import {
   combineReducers
 } from 'redux';
 
+import { reducer as formReducer } from 'redux-form'
+
 import UsersReducer from './reducer_users'
 import CurrentUserReducer from './reducer_currentUser'
 import LessonsReducer from './reducer_lessons'
@@ -16,7 +18,8 @@ const rootReducer = combineReducers({
   lessons: LessonsReducer,
   interviewQuestions: InterviewQuestionsReducer,
   interviewQuestionsAnswers: InterviewQuestionsAnswersReducer,
-  selectedLesson: SelectedLessonReducer
+  selectedLesson: SelectedLessonReducer,
+  form: formReducer
 });
 
 // console.log(rootReducer)
