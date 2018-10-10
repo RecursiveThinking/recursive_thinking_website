@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
-
-// Component imports
-import HeaderApp from './headerApp/headerApp';
-import Nav from '../containers/nav/nav';
-import Content from './content/content';
-import Footer from './footer/footer';
+import {BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 
 // Component imports (that change)
-import HomeScreen from './homeScreen/homeScreen'
-import Dash from '../containers/dash/dash'
-import RecursiveDirectory from '../containers/recursiveDirectory/recursiveDirectory'
-import ScheduledLessons from '../containers/scheduledLessons/scheduledLessons'
-import UnscheduledLessons from '../containers/unscheduledLessons/unscheduledLessons'
-import InterviewQuestions from '../containers/interviewQuestions/interviewQuestions'
+import PublicHomeScreen from './homeScreen/homeScreen'
 import ProfileSetup from './profile/setup/profileSetup'
-import AdminPanel from '../containers/adminPanel/adminPanel'
+import MainApp from './mainApp/mainApp'
 
 
-import Random from '../functions/random'
+// import Random from '../functions/random'
 // loads our fake info from DB
-const Users = require('!json-loader!../../data_returns/RecursiveThinkingDeveloperProfiles.json')
-const Lessons = require('!json-loader!../../data_returns/RecursiveThinkingLessons.json')
+// const Users = require('!json-loader!../../data_returns/RecursiveThinkingDeveloperProfiles.json')
+// const Lessons = require('!json-loader!../../data_returns/RecursiveThinkingLessons.json')
 
 // export default class App extends Component {
 export default class App extends Component {
@@ -30,25 +20,21 @@ export default class App extends Component {
     // Optimize Data Model here
     // console.log(currentUser);
     return (
-      <div className="mainApp">
-        {/* <HomeScreen /> */}
-        {/* <HeaderApp /> */}
-        {/* <ProfileSetup /> */}
-        <div className="mainContainer">
-          <div className="grid grid--185">
-            <Nav/>
-            <div className="grid-cell">
-                {/* <Dash /> */}
-                {/* <ScheduledLessons /> */}
-                {/* <UnscheduledLessons /> */}
-                <InterviewQuestions />
-                {/* <RecursiveDirectory /> */}
-                {/* <AdminPanel /> */}
-            </div>
-          </div>
+      <Router>
+        <div className="mainApp">
+          <Route exact path="/" component={PublicHomeScreen} />
+          <Route path="/setupProfile" component={ProfileSetup}/>
+          <Route path="/dashboard" component={MainApp}/>
+          <Route path="/schedLessons" component={MainApp}/>
+          <Route path="/unschedLessons" component={MainApp}/>
+          <Route path="/interviewQuestions" component={MainApp}/>
+          <Route path="/recursiveDirectory" component={MainApp}/>
+          <Route path="/editProfile" component={MainApp}/>
+          <Route path="/adminDash" component={MainApp}/>          
+          <Route path="/signout" component={ () => ( <Redirect to="/" />) }/>
         </div>
-        <Footer />
-      </div>
+      </Router>
+        
     )
   }
 }
