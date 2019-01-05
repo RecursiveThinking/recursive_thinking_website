@@ -8,15 +8,14 @@ import LessonMethods from '../../functions/lessonMethods'
 import DM from '../../standards/dictModel'
 
 const upComingLesson = ({upComingLessons, allUsersArr}) => {
-  const { lesson: {
+  const { 
+    lesson: {
       title,
       date,
       description,
       lessonTaughtBy
     }
-  } = DM 
-  
-  // upComingLessons.length = 0;
+  } = DM
   
   if(upComingLessons.length){
     const nextLesson = upComingLessons[0];
