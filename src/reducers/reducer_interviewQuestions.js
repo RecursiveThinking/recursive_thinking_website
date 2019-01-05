@@ -1,6 +1,6 @@
 import UtilityMethods from '../functions/utilityMethods'
 
-import { FETCH_INTERVIEW_QUESTIONS, FETCHING } from '../actions/index'
+import { FETCH_INTERVIEW_QUESTIONS, FETCHING } from '../actions/action_types'
 
 const initialState = {
   allInterviewQuestions: FETCHING,
@@ -15,7 +15,7 @@ export default function(state = initialState, action){
       if(action.payload.body && action.payload.status.statusCode === 200){
         return {
           allInterviewQuestions: action.payload.body,
-          allInterviewQuestionsAPIResponse: action.payload.status,        
+          allInterviewQuestionsAPIResponse: action.payload.status,
           lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id')
         }
       } else {

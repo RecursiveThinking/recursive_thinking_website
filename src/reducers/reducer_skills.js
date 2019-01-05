@@ -1,4 +1,4 @@
-import { FETCH_SKILLS } from '../actions';
+import { FETCH_SKILLS } from '../actions/action_types';
 import SKILL_MODEL from '../standards/skillModel'
 import UtilityMethods from '../functions/utilityMethods';
 

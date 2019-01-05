@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchLessons, FETCHING } from '../../actions/index'
+import { fetchUsers, fetchLessons } from '../../actions'
+import { FETCHING } from '../../actions/action_types'
 
 import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
@@ -21,6 +22,7 @@ class UnscheduledLessons extends Component {
   }
   
   componentDidMount(){
+    this.props.fetchUsers();
     this.props.fetchLessons();
   }
   
@@ -30,19 +32,20 @@ class UnscheduledLessons extends Component {
   
   render(){
     const {
+      allUsers,
       allLessons,
       unscheduledLessons,
       currentUser
     } = this.props
     
-    if(!allLessons || !unscheduledLessons){
+    if(!allUsers || !allLessons || !unscheduledLessons){
       return (
         <main className="content">
           <DefaultErrorPage />
         </main>
       )
     }
-    else if(allLessons === FETCHING || unscheduledLessons === FETCHING){
+    else if(allUsers === FETCHING || allLessons === FETCHING || unscheduledLessons === FETCHING){
       return (
         <main className="content">
           <DefaultLoadingPage />
@@ -73,7 +76,8 @@ class UnscheduledLessons extends Component {
           </section>
           <div className="contentList"> 
             <UnscheduledLessonsList 
-              currentUser={currentUser} 
+              currentUser={currentUser}
+              allUsersArr = {allUsers}
               allUnscheduledLessonsArr={unscheduledLessons}
             />
           </div>
@@ -85,10 +89,11 @@ class UnscheduledLessons extends Component {
 
 function mapStateToProps(state){
   return {
+    allUsers: state.users.allUsers,
     allLessons: state.lessons.allLessons,
     unscheduledLessons: state.lessons.unscheduledLessons,
-    currentUser: state.currentUser
+    currentUser: state.auth.currentUser
   }
 }
 
-export default connect(mapStateToProps, {fetchLessons})(UnscheduledLessons);
+export default connect(mapStateToProps, {fetchUsers, fetchLessons})(UnscheduledLessons);

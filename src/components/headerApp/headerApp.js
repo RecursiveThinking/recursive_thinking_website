@@ -1,13 +1,17 @@
 import React from 'react';
+import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
-const headerApp = () => {
-  return(
-    <header>
+// const headerApp = () => {
+  const headerApp = () => {
+    return (
       <div className="grid grid--cols-2">
         <div className="grid-cell fc--disp-flex fc-logo">
           <div className="fc--disp-flex ">
             <figure>
-              <img src="../../../public/images/recursivelogo.png" />
+              <img 
+                src={`${PATH_FOR_IMAGES}recursivelogo.png`}
+                alt="Recursive Thinking Logo"
+                />
             </figure>
           </div>
         </div>
@@ -22,8 +26,7 @@ const headerApp = () => {
           </div>
         </div>
       </div>
-  </header>
-  )
+    )
 }
 
 export default headerApp

@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Route} from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
+import { fetchUsers } from '../../actions'
+
 import { ROUTES_NAV } from '../mainApp/mainApp'
 import AdminPanel from '../adminPanel/adminPanel'
 
 import DM from '../../standards/dictModel'
-import ROUTES from '../../standards/routes'
+import { ROUTES_REACT } from '../../standards/routes'
+import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 const {
   dashboard,
@@ -18,7 +21,7 @@ const {
   profile_edit,
   admindashboard,
   signout
-} = ROUTES;
+} = ROUTES_REACT;
 
 const { 
   user: { 
@@ -28,12 +31,22 @@ const {
     admin 
   }
 } = DM;
+
 class Nav extends Component {
+  
   render(){
     // destructure currentUser off props
     const { currentUser } = this.props;
+    
+    if(!currentUser){
+      console.log('No Current User')
+      return (
+        <div>Loading... </div>
+      )
+    }
+    // console.log('currUser - Nav', currentUser)
     // construct image path string
-    const userPicturePath = `../../../public/images/${currentUser[avatar]}`;
+    const userPicturePath = `${PATH_FOR_IMAGES}${currentUser[avatar]}`;
     
     const NAV_BAR = [
       // class, id, Title, icon class
@@ -64,13 +77,16 @@ class Nav extends Component {
         </NavLink>
       )
     })
+    
+    // console.log('currentUser @ Nav', currentUser)
+    
     return (
       <nav className="navMain">
         {/* <aside id="sidebar" className="sidebar" style="visibility:hidden"> */}
         <aside id="sidebar" className="sidebar fc--disp-flex fc--fdir-col">
           <article>
             <div className="fc-devInfo fc--disp-flex fc--fdir-col fc--aItem-ce">
-              <img className="sidebarImage avatarS avatarBS" src={userPicturePath} />
+              <img className="sidebarImage avatarS avatarBS" src={userPicturePath} alt={currentUser[name]}/>
               <h5 className="devName fs24 fw300 ls14 ta-cent">{currentUser[name]}</h5>
               <h6 className="devTitle fs16 fw100 fcWhite ls10 ta-cent">{currentUser[title]}</h6>
             </div>
@@ -105,9 +121,9 @@ class Nav extends Component {
 // map state to props
 function mapStateToProps(state){
   return {
-    currentUser: state.currentUser
+    currentUser: state.auth.currentUser
   }
 }
 
 // connect react/redux
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps, { fetchUsers })(Nav)

@@ -1,19 +1,19 @@
 import React from 'react';
 import DashboardProfileStatListItem from './dashboardProfileStatListItem'
 
-import DM from '../../standards/dictModel'
+// import DM from '../../standards/dictModel'
 
 const dashboardProfileStatList = ({...props}) => {
-  const { 
-    user: {
-      profileStatsVisits,
-      profileStatsViewsGithub,
-      profileStatsViewsCodePen,
-      profileStatsViewsPortfolio,
-      profileStatsViewsLinkedIn,
-      profileStatsViewsResume
-    }
-  } = DM;
+  // const { 
+    // user: {
+      // profileStatsVisits,
+      // profileStatsViewsGithub,
+      // profileStatsViewsCodePen,
+      // profileStatsViewsPortfolio,
+      // profileStatsViewsLinkedIn,
+      // profileStatsViewsResume
+    // }
+  // } = DM;
   const {
     userStats
   } = props

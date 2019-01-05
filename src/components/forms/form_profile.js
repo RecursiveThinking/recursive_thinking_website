@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+
 import DM from '../../standards/dictModel'
 
 const {
@@ -22,7 +24,7 @@ class ProfileForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      avatar: '../../../../public/images/avatar1.png',
+      avatar: `${PATH_FOR_IMAGES}avatar1.png`,
     }
   }
   

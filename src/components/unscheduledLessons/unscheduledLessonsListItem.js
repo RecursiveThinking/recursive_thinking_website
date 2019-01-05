@@ -1,7 +1,5 @@
 import React from 'react';
 
-const Users = require('!json-loader!../../../data_returns/RecursiveThinkingDeveloperProfiles.json')
-
 import LessonMethods from '../../functions/lessonMethods'
 import UtilityMethods from '../../functions/utilityMethods'
 
@@ -10,7 +8,7 @@ import CurrentUserVotedOnLessonButton from './currentUserVotedOnLessonButton'
 
 import DM from '../../standards/dictModel'
 
-const unscheduledLessonListItem = ({currentUser, lesson}) => {
+const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr}) => {
   
   const { 
     lesson: { 
@@ -26,7 +24,8 @@ const unscheduledLessonListItem = ({currentUser, lesson}) => {
     }
   } = DM
   
-  let taughtByUserArray = LessonMethods.getArrayofTaughtByUserObjs(lesson[lessonTaughtBy], Users);
+  let taughtByUserArray = LessonMethods.getArrayofTaughtByUserObjs(lesson[lessonTaughtBy], allUsersArr);
+  // let taughtByUserArray = LessonMethods.getArrayofTaughtByUserObjs(lesson[lessonTaughtBy], Users);
   let voteCount = lesson[lessonVotes].length;
   // this uses includes array method to return true or false
   let boolHasCurrentUserVotedOnLesson = LessonMethods.hasCurrentUserVotedOnLesson(lesson, currentUser[userId]);

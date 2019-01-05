@@ -6,9 +6,9 @@ import CategoryList from '../common/category/categoryList'
 import DM from '../../standards/dictModel'
 
 class SignUpModalForm extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   
   renderField(field){
     const { meta: { touched, error }} = field;
@@ -104,9 +104,9 @@ export const SignUpFormEx = reduxForm({
 })(SignUpModalForm)
 
 export class VerifyAccountModalForm extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   
   renderField(field){
     const { meta: { touched, error }} = field;
@@ -176,9 +176,9 @@ export const VerifyAccountFormEx = reduxForm({
 })(VerifyAccountModalForm)
 
 class SignInModalForm extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   
   renderField(field){
     const { meta: { touched, error }} = field;
@@ -245,9 +245,9 @@ export const SignInFormEx = reduxForm({
 })(SignInModalForm)
 
 class SubmitLessonRequestModalForm extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   
   renderField(field){
     const { meta: { touched, error }} = field;
@@ -327,9 +327,9 @@ export const SubmitLessonRequestFormEx = reduxForm({
 })(SubmitLessonRequestModalForm)
 
 class SubmitInterviewQuestionModalForm extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   
   renderField(field){
     const { meta: { touched, error }} = field;
@@ -406,9 +406,9 @@ export const SubmitInterviewQuestionFormEx = reduxForm({
   form: 'SubmitInterviewQuestionForm'
 })(SubmitInterviewQuestionModalForm)
 class SubmitInterviewQuestionAnswerModalForm extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   
   renderField(field){
     const { meta: { touched, error }} = field;

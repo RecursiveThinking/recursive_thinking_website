@@ -1,10 +1,19 @@
-const ROUTES = {
+export const ROUTES_API = {
+  users: '/users',
+  lessons:'/lessons',
+  interviewquestions: '/interviewquestions',
+  interviewquestionsanswers: '/interviewquestionsanswers',
+  skills: '/skills',
+  homeScreenQuotes: '/homescreenquotes'
+}
+
+export const ROUTES_REACT = {
   root: '/',
   dashboard: '/dashboard',
   scheduledlessons: '/scheduledlessons',
   unscheduledlessons: '/unscheduledlessons',
-  interviewquestions: '/interviewquestions',
   recursivedirectory: '/recursivedirectory',
+  interviewquestions: '/interviewquestions',
   profile_view: '/profile/view',
   profile_view_id: '/profile/view/:id',
   profile_edit: '/profile/edit',
@@ -15,4 +24,3 @@ const ROUTES = {
   signout: '/signout'
 }
 
-export default ROUTES

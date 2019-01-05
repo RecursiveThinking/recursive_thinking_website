@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchUsers, FETCHING } from '../../actions/index'
+import { fetchUsers } from '../../actions'
+import { FETCHING } from '../../actions/action_types'
 
 import RecursiveDirectoryList from '../../components/recursiveDirectory/recursiveDirectoryList'
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
@@ -13,6 +14,7 @@ import DM from '../../standards/dictModel'
 const { 
   user: { userId }
 } = DM;
+
 class RecursiveDirectory extends Component {
   componentDidMount(){
     this.props.fetchUsers();
@@ -24,7 +26,6 @@ class RecursiveDirectory extends Component {
       allUsersAPIResponse, 
       currentUser 
     } = this.props
-      
     
     // need to map an array of users not including the current one
     // console.log(this.props)
@@ -65,7 +66,7 @@ function mapStateToProps(state){
     allUsers: state.users.allUsers,
     allUsersAPIResponse: state.users.allUsersAPIResponse,
     lookupTableUsers: state.users.lookupTableAllUsers,
-    currentUser: state.currentUser
+    currentUser: state.auth.currentUser
   }
 }
 

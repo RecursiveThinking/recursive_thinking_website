@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers, fetchSkills } from '../../../actions/index'
+import { fetchUsers, fetchSkills } from '../../../actions'
 
 import { Link } from 'react-router-dom'
 
 import RecursiveDirectoryListItemSm from '../../../components/recursiveDirectory/recursiveDirectoryListItemSm'
 
 import CategoryList from '../../../components/common/category/categoryList'
+import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 import DM from '../../../standards/dictModel'
 
 class ViewProfile extends Component{
@@ -28,11 +29,13 @@ class ViewProfile extends Component{
     }
     // const selectedUser = currentUser
     if(!selectedUser){
-      <div>Loading!!!</div>
+      return (
+        <div>Loading!!! </div>
+      )
     }
     
     // destructuring
-    const { currentUser, allSkills, lookupTableAllSkills } = this.props;
+    const { allSkills, lookupTableAllSkills } = this.props;
     const { 
       user: { 
               avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
@@ -47,7 +50,7 @@ class ViewProfile extends Component{
     // selectedUser[linkResume] = ' '
     
     // set avatar link
-    const imageSrc = `../../../../public/images/${selectedUser[avatar]}`
+    const imageSrc = `${PATH_FOR_IMAGES}${selectedUser[avatar]}`
     
     // this makes the link list (Github, Codepen, etc.)
     const icons = [ 
@@ -76,10 +79,10 @@ class ViewProfile extends Component{
         iconClass = `fs45 ${iconItem[1]} mb10`
         headingClass = `fs12 fw300 ls08`
         hrefLink = iconItem[2]
-        console.log('link', hrefLink, iconItem)
+        // console.log('link', hrefLink, iconItem)
         return (
           <li className="icon fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce height50P width50P">
-            <a href={hrefLink} target="_blank" className="fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce">
+            <a className="fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce" href={hrefLink} target="_blank" rel="noopener noreferrer">
               <i className={iconClass}></i>
               <h6 className={headingClass}>{iconItem[0]}</h6>
             </a>
@@ -242,7 +245,11 @@ class ViewProfile extends Component{
                       <div className="grid-cell">
                         {/* avatar and text */}
                         <div className="fc-twothirdsLeftViewProfile fc--disp-flex fc--fdir-row fc--jCont-fs fc--aItems-ce ">
-                          <img className="avatarM avatarBS" src={imageSrc} />
+                          <img 
+                            className="avatarM avatarBS" 
+                            src={imageSrc}
+                            alt={selectedUser[name]}
+                          />
                           <div className="fc-twothirdsLeftViewProfile-sub fc--disp-flex fc--fdir-col fc--fwrap-yes fc--jCont-ce fc--aItems-fs">
                             <h3 className="fs33 fw500 ls22 fcGrey424041">{selectedUser[name]}</h3>
                             <h5 className="fw300 ls14 fcGrey424041">{selectedUser[title]}</h5>
@@ -357,7 +364,7 @@ class ViewProfile extends Component{
 function mapStateToProps(state){
   return {
     allUsers: state.users.allUsers,
-    currentUser: state.currentUser,
+    currentUser: state.auth.currentUser,
     lookupTableAllUsers: state.users.lookupTableAllUsers,
     allSkills: state.skills.allSkills,
     lookupTableAllSkills: state.skills.lookupTableAllSkills

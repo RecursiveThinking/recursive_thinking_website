@@ -7,8 +7,6 @@ import LessonMethods from '../../functions/lessonMethods'
 
 import DM from '../../standards/dictModel'
 
-// const Users = require('!json-loader!../../../data_returns/RecursiveThinkingDeveloperProfiles.json')
-
 const upComingLesson = ({upComingLessons, allUsersArr}) => {
   const { lesson: {
       title,

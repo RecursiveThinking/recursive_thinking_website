@@ -3,11 +3,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import DM from '../../standards/dictModel';
-import ROUTES from '../../standards/routes';
+import { ROUTES_REACT } from '../../standards/routes';
+import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 const {
   profile_view
-} = ROUTES;
+} = ROUTES_REACT;
 
 const recursiveDirectoryListItemSm = ({user}) => {
   const {
@@ -20,7 +21,7 @@ const recursiveDirectoryListItemSm = ({user}) => {
       title
     }
   } = DM;
-  const imagePathBuild = `/public/images/${user[avatar]}`;
+  const imagePathBuild = `${PATH_FOR_IMAGES}${user[avatar]}`;
   const concatLocation = `${user[city]}, ${user[state]}`
   return (
     <NavLink to={`${profile_view}/${user[userId]}`} >

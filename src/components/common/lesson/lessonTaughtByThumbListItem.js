@@ -2,11 +2,12 @@ import React from 'react';
 
 import { Link } from 'react-router-dom'
 
-import ROUTES from '../../../standards/routes'
+import { ROUTES_REACT } from '../../../standards/routes'
+import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 
 const {
   profile_view
-} = ROUTES
+} = ROUTES_REACT
 
 const lessonTaughtByThumbListItem = ({userId, avatar, altName}) => {
   // console.log(avatar);
@@ -14,7 +15,7 @@ const lessonTaughtByThumbListItem = ({userId, avatar, altName}) => {
   
   // let splitNameString = avatar.split('/');
   // let imageName = splitNameString[splitNameString.length - 1]  
-  let avatarSrcPath = `/public/images/${avatar}`
+  let avatarSrcPath = `${PATH_FOR_IMAGES}${avatar}`
   
   return (
     <figure className="avatarTip">

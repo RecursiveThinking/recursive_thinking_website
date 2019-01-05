@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { selectedLesson } from '../../actions/index'
 import { bindActionCreators } from 'redux'
@@ -11,6 +11,8 @@ import DM from '../../standards/dictModel'
 
 const ScheduledLessonsList = ({...props}) => {
   const { user: { lessonStatus }, lesson: { Id }} = DM;
+  
+  // console.log('props.scheduledLessons', props.scheduledLessons)
   
   if(props.scheduledLessons.length){
     // map the lesson list to return JSX

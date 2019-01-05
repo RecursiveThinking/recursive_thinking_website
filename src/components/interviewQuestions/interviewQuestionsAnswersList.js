@@ -5,10 +5,7 @@ import React from 'react'
 import UtilityMethods from '../../functions/utilityMethods'
 import DateMethods from '../../functions/dateMethods'
 
-import DM from '../../standards/dictModel'
-
-// const AnswersToInterviewQuestions = require('!json-loader!../../../data_returns/RecursiveThinkingInterviewQuestionsAnswers.json');
-// const Users = require('!json-loader!../../../data_returns/RecursiveThinkingDeveloperProfiles.json')
+// import DM from '../../standards/dictModel'
 
 const interviewQuestionsAnswersList = ({...props}) => {
   // console.log(intQuestionAnswers)

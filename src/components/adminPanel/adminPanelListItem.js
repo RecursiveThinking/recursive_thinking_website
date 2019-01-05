@@ -9,7 +9,7 @@ const adminPanelListItem = ({...props}) => {
     user: { email },
     lesson: { scheduled, lessonVotes, _lessonCreatedBy }
   } = DM;
-  const { users, lessons, interviewQuestions, interviewQuestionsAnswers} = TABLE_NAMES;
+  const { users, lessons } = TABLE_NAMES;
   
   let tableHeadingJSX  = props.tableHeadingArr.map(attr => {
     return (
@@ -23,7 +23,7 @@ const adminPanelListItem = ({...props}) => {
           if(props.table === users){
             if(attr === email){
               return (
-                <a href="#">{obj[attr]}</a>
+                <a href="/">{obj[attr]}</a>
                 )
               }
               else if(obj[attr] === true || obj[attr] === false){

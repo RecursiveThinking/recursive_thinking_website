@@ -1,11 +1,8 @@
-const Users = require('!json-loader!../../data_returns/RecursiveThinkingDeveloperProfiles.json');
-// const Lessons = require('!json-loader!../../data_returns/RecursiveThinkingLessons.json');
-
 import OrderMethods from './orderMethods'
 
 export default class LessonMethods {
-  constructor(){
-  }
+  // constructor(){
+  // }
   static getArrayOfScheduledLessons = (lessonArray) => {
     if(!lessonArray.length){
       return lessonArray;
@@ -82,10 +79,10 @@ export default class LessonMethods {
     // console.log('log', allUsersArray)
     // console.log(inputArray.length, taughtByUserArray);
     inputArray.forEach(lessonId => {
-      let foundIndex = Users.findIndex(user => {
+      let foundIndex = allUsersArray.findIndex(user => {
         return user['userId'] === lessonId
       })
-      taughtByUserArray.push(Users[foundIndex])
+      taughtByUserArray.push(allUsersArray[foundIndex])
     })
     return taughtByUserArray;
   }

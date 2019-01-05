@@ -65,6 +65,13 @@ const dictModel = {
     _createdByUser: '_createdByUser',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+  },
+  homeScreenQuote: {
+    Id: 'Id',
+    quote: 'quote',
+    _createdByUser: '_createdByUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   }
 }
 

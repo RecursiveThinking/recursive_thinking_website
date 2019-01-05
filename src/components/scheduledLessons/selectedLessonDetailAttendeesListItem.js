@@ -3,15 +3,16 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import DM from '../../standards/dictModel'
-import ROUTES from '../../standards/routes'
+import { ROUTES_REACT } from '../../standards/routes'
+import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 const {
   profile_view
-} = ROUTES
+} = ROUTES_REACT
 
 const selectedLessonDetailAttendeesListItem = ({attendingUserObj}) => {
   const { user: { userId, name, avatar}} = DM;
-  let avatarSrcPath = `/public/images/${attendingUserObj[avatar]}`
+  let avatarSrcPath = `${PATH_FOR_IMAGES}${attendingUserObj[avatar]}`
   let altString = `A Photo of ${attendingUserObj[name]}`
   return (
     <div className="fc--disp-flex">

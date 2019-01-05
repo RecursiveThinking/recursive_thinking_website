@@ -2,10 +2,6 @@ import React from 'react'
 
 // import CategoryListItem from './categoryListItem'
 
-// const ProfileSkillsLanguages = require('!json-loader!../../../../data_returns/RecursiveThinkingProfileSkillsLanguage.json');
-// const ProfileSkillsProfessional = require('!json-loader!../../../../data_returns/RecursiveThinkingProfileSkillsProfessional.json');
-// const ProfileSkillsSoftware = require('!json-loader!../../../../data_returns/RecursiveThinkingProfileSkillsSoftware.json');
-
 // const categoriesArray = [...ProfileSkillsLanguages, ...ProfileSkillsProfessional, ...ProfileSkillsSoftware];
 // const categoriesObj = {};
 

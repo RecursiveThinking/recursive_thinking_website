@@ -52,10 +52,7 @@ class Slider extends Component {
   }
   
   render(){
-    // console.log('props @ slider', this.props)
     const { userInfoQuoteArr } = this.props;
-    console.log('user', userInfoQuoteArr)
-    console.log('curr', this.state.currentIndex)
     
     let renderDots = userInfoQuoteArr.map((item, index) => {
       let dotClass = '';
@@ -68,10 +65,6 @@ class Slider extends Component {
         <li key={index} className={dotClass}></li>
       )
     })
-    
-    // window.setInterval(() => {
-    //   this.goToNextSlide()
-    // }, 3000)
     
     return (
       <section className="secCarouselQuotes">
@@ -92,7 +85,7 @@ class Slider extends Component {
         <RightArrow 
           goToNextSlide={this.goToNextSlide}
         />
-        <ul className="fc--disp-flex fc--jCont-ce">
+        <ul className="fc--disp-flex fc--jCont-ce mt20">
           {renderDots}
         </ul>
       </section>

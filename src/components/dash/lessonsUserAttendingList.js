@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 import LessonsUserAttendingListItem from './lessonsUserAttendingListItem'
 
-import ROUTES from '../../standards/routes'
+import { ROUTES_REACT } from '../../standards/routes'
 
 const {
   scheduledlessons
-} = ROUTES
+} = ROUTES_REACT
 const lessonsUserAttendingList = ({lessonsAttending}) => {
   let attendingLessons = lessonsAttending.map(lessonToRender => {
     return (

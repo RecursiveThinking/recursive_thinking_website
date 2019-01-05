@@ -1,7 +1,9 @@
 import React from 'react'
 
+import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
+
 const errorPage = () => {
-  let imagePath = `../../../../public/images/error/error_domo.png`
+  let imagePath = `${PATH_FOR_IMAGES}error/error_domo.png`
   return (
     <article className='card ta-cent'>
       <img className='errorPhoto' src={imagePath} alt=""/>

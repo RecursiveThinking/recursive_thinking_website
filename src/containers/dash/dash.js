@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
-import { fetchUsers, fetchLessons, FETCHING } from '../../actions/index'
+import { fetchUsers, fetchLessons } from '../../actions'
+import { FETCHING } from '../../actions/action_types'
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
@@ -25,8 +26,9 @@ const {
     profileStatsViewsResume,
     lessonStatus
   },
-  lesson: {}
+  // lesson: {}
 } = DM;
+
 class Dash extends Component {
   
   componentDidMount(){
@@ -39,7 +41,7 @@ class Dash extends Component {
       currentUser, 
       scheduledLessons, 
       allUsers, 
-      lookupTableAllUsers 
+      // lookupTableAllUsers 
     } = this.props;
     
     // make an array of profileStats
@@ -106,7 +108,7 @@ class Dash extends Component {
 
 function mapStateToProps(state){
   return {
-    currentUser: state.currentUser,
+    currentUser: state.auth.currentUser,
     allUsers: state.users.allUsers,
     lookupTableAllUsers: state.users.lookupTableAllUsers,
     allLessons: state.lessons.allLessons,

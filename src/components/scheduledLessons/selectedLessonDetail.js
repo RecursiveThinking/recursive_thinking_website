@@ -34,7 +34,7 @@ const SelectedLessonDetail = ({...props}) => {
       // returns an array of userObj beloing to people who are teaching
       let taughtByArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson[lessonTaughtBy], props.allUsers)
       // returns an array of userObj belonging to users who are attending
-      let selectedLessonAttendeesArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson[lessonAttendees])
+      let selectedLessonAttendeesArrayOfUserObj = LessonMethods.getArrayOfUserObjects(selectedLesson[lessonAttendees], props.allUsers)
       // formats the styling for a viewed lesson, based on wether or not the currentUser's status with that lesson
       // if returns true, returns a number, if return null, then no status for lesson
       let userLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser[lessonStatus], selectedLesson.Id);

@@ -1,102 +1,151 @@
-// const Users = require('!json-loader!../../data_returns/RecursiveThinkingDeveloperProfiles.json')
-// const Lessons = require('!json-loader!../../data_returns/RecursiveThinkingLessons.json')
-
 // this is the entire object.
-import { credentials } from '../../credentials/cognitoCreds'
+import { CREDENTIALS } from '../_credentials/cognitoCreds'
 
-const API_GATEWAY_INVOKE_URL = credentials.apiUrl
+// import ApiMethods from '../functions/apiMethods';
+// import LessonMethods from '../functions/lessonMethods';
+// import OrderMethods from '../functions/orderMethods';
 
-import ApiMethods from '../functions/apiMethods'
-import LessonMethods from '../functions/lessonMethods';
-import OrderMethods from '../functions/orderMethods';
+import {
+  SIGN_UP,
+  SIGN_IN,
+  // SIGN_OUT,
+  FETCH_USERS,
+  FETCH_LESSONS,
+  SELECTED_LESSON,
+  FETCH_INTERVIEW_QUESTIONS,
+  FETCH_INTERVIEW_QUESTIONS_ANSWERS,
+  FETCH_SKILLS,
+  FETCH_HOMESCREEN_QUOTES
+} from './action_types'
 
-export const FETCH_USERS = 'FETCH_USERS';
-export const FETCH_LESSONS = 'FETCH_LESSONS';
-export const FETCH_INTERVIEW_QUESTIONS = 'FETCH_INTERVIEW_QUESTIONS'
-export const FETCH_INTERVIEW_QUESTIONS_ANSWERS = 'FETCH_INTERVIEW_QUESTIONS_ANSWERS';
-export const FETCH_SKILLS = 'FETCH_SKILLS';
-export const FETCH_HOMESCREEN_QUOTES = 'FETCH_HOMESCREEN_QUOTES';
-export const FETCHING = 'FETCHING';
+import { ROUTES_API } from '../standards/routes'
 
-export const SELECTED_LESSON = 'SELECTED_LESSON';
+const API_GATEWAY_INVOKE_URL = CREDENTIALS.apiUrl;
 
-const API_URL_AND_OPTIONS = {
-  getAllUsers: {
-    url: '/users',
-    options: {
-      method: 'GET'
-    }
-  },
-  getAllLessons: {
-    url: '/lessons',
-    options: {
-      method: 'GET'
-    }
-  },
-  getAllInterviewQuestions: {
-    url: '/interviewquestions',
-    options: {
-      method: 'GET'
-    }
-  },
-  getAllInterviewQuestionsAnswers: {
-    url: '/interviewquestionsanswers',
-    options: {
-      method: 'GET'
-    }
-  },
-  getAllSkills: {
-    url: '/skills',
-    options: {
-      method: 'GET'
-    }
-  },
-  getAllHomeScreenQuotes: {
-    url: '/homescreenquotes',
-    options: {
-      method: 'GET'
-    }
-  }
+// const API_URL_AND_OPTIONS = {
+//   getAllUsers: {
+//     url: '/users',
+//     options: {
+//       method: 'GET'
+//     }
+//   },
+//   getAllLessons: {
+//     url: '/lessons',
+//     options: {
+//       method: 'GET'
+//     }
+//   },
+//   getAllInterviewQuestions: {
+//     url: '/interviewquestions',
+//     options: {
+//       method: 'GET'
+//     }
+//   },
+//   getAllInterviewQuestionsAnswers: {
+//     url: '/interviewquestionsanswers',
+//     options: {
+//       method: 'GET'
+//     }
+//   },
+//   getAllSkills: {
+//     url: '/skills',
+//     options: {
+//       method: 'GET'
+//     }
+//   },
+//   getAllHomeScreenQuotes: {
+//     url: '/homescreenquotes',
+//     options: {
+//       method: 'GET'
+//     }
+//   }
+// }
+
+const HTTP_METHODS = {
+  get: 'GET',
+  post: 'POST',
+  delete: 'DELETE',
+  put: 'PUT',
+  patch: 'PATCH'
 }
 
-export function fetchUsers(){
-  // API CALL HERE
-  const URL = `${API_GATEWAY_INVOKE_URL}${API_URL_AND_OPTIONS.getAllUsers.url}`
-  const response = ApiMethods.initFetchCall(URL, API_URL_AND_OPTIONS.getAllUsers.options)
-    // .then(responseArr => {
-    //   const allUsersButCurrent = 
-    // })
+const OPTIONS = {
+  // mode: 'cors',
+  // credentials: 'same-origin',
+  // headers: {
+  //   'Content-Type': 'application/json; charset=utf-8'
+  // }
+}
+
+const initFetchCall = (urlPath, optionConfig) => {
+  return fetch(urlPath, optionConfig)
+    .then(response => response.json())
+    // .catch(error => error)
+}
+
+export const signUp = () => {
   return {
-    type: FETCH_USERS,
-    payload: response
+    type: SIGN_UP,
+    payload: {}
   }
 }
 
-export function fetchLessons(){
-  // API CALL HERE
-  const URL = `${API_GATEWAY_INVOKE_URL}${API_URL_AND_OPTIONS.getAllLessons.url}`
-  const response = ApiMethods.initFetchCall(URL, API_URL_AND_OPTIONS.getAllLessons.options)
-    .then( response => {
-      // if well formed - this would be { body: , status: }
-      if(response.body && response.status.statusCode === 200){
-        // with this conditional we know the req was successful, and have an array back (but array could be empty)
-        const scheduledLessons = LessonMethods.getArrayOfScheduledLessons(response.body, 'date')
-        const unscheduledLessons = LessonMethods.getArrayOfUnscheduledLessons(response.body, 'date')
-        return {
-          body: response.body,
-          status: response.status,
-          scheduledLessons: scheduledLessons,
-          unscheduledLessons: unscheduledLessons
-        }
-      } else {
-        // we have an error
-        return response;
-      }
+export const signIn = (userId) => {
+  return {
+    type: SIGN_IN,
+    payload: userId
+  }
+}
+
+export const signOut = (userId) => {
+  return {
+    type: SIGN_IN,
+    payload: userId
+  }
+}
+
+export const fetchUsers = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}`
+  let funcOptions = { ...OPTIONS };
+  funcOptions.method = HTTP_METHODS.get;
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions)
+    
+    dispatch({
+      type: FETCH_USERS,
+      payload: response
     })
-  // console.log('response', response)
-  return {
-    type: FETCH_LESSONS,
-    payload: response
+  }
+}
+
+export const fetchHomeScreenQuotes = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.homeScreenQuotes}`;
+  let funcOptions = { ...OPTIONS }
+  funcOptions.method = HTTP_METHODS.get
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions)
+    dispatch({
+      type: FETCH_HOMESCREEN_QUOTES,
+      payload: response
+    })
+  }
+}
+
+export const fetchLessons = () => {
+  // API CALL HERE
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}`
+  let funcOptions = { ...OPTIONS }
+  funcOptions.method = HTTP_METHODS.get
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions)
+    
+    dispatch({
+      type: FETCH_LESSONS,
+      payload: response
+    })
   }
 }
 
@@ -111,49 +160,48 @@ export function selectedLesson(lesson){
   }
 }
 
-export function fetchInterviewQuestions(){
-  const URL = `${API_GATEWAY_INVOKE_URL}${API_URL_AND_OPTIONS.getAllInterviewQuestions.url}`
-  const response = ApiMethods.initFetchCall(URL, API_URL_AND_OPTIONS.getAllInterviewQuestions.options)
-    // .then( responseObj => {
-    //   if(responseObj.body.length){
-    //     
-    //     return allInterviewQuestionsOrdered;
-    //   }
-    //   else {
-    //     return responseObj.body
-    //   }
-    // })
-    // .catch(err => {console.log(err)})
-  return {
-    type: FETCH_INTERVIEW_QUESTIONS,
-    payload: response
+export const fetchInterviewQuestions = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}`
+  let funcOptions = { ...OPTIONS };
+  funcOptions.method = HTTP_METHODS.get;
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions);
+    
+    dispatch({
+      type: FETCH_INTERVIEW_QUESTIONS,
+      payload: response
+    })
   }
 }
 
-export function fetchInterviewQuestionsAnswers(){
-  const URL = `${API_GATEWAY_INVOKE_URL}${API_URL_AND_OPTIONS.getAllInterviewQuestionsAnswers.url}`
-  const response = ApiMethods.initFetchCall(URL, API_URL_AND_OPTIONS.getAllInterviewQuestionsAnswers.options)
-
-  return {
-    type: FETCH_INTERVIEW_QUESTIONS_ANSWERS,
-    payload: response
+export const fetchInterviewQuestionsAnswers = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}`
+  let funcOptions = { ...OPTIONS };
+  funcOptions.method = HTTP_METHODS.get;
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions);
+    
+    dispatch({
+      type: FETCH_INTERVIEW_QUESTIONS_ANSWERS,
+      payload: response
+    })
   }
 }
 
-export function fetchSkills(){
-  const URL = `${API_GATEWAY_INVOKE_URL}${API_URL_AND_OPTIONS.getAllSkills.url}`
-  const response = ApiMethods.initFetchCall(URL, API_URL_AND_OPTIONS.getAllSkills.options)
-  return {
-    type: FETCH_SKILLS,
-    payload: response
+export const fetchSkills = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.skills}`;
+  let funcOptions = { ...OPTIONS };
+  funcOptions.method = HTTP_METHODS.get;
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions);
+    
+    dispatch({
+        type: FETCH_SKILLS,
+        payload: response
+    })
   }
 }
 
-export function fetchHomeScreenQuotes(){
-  const URL = `${API_GATEWAY_INVOKE_URL}${API_URL_AND_OPTIONS.getAllHomeScreenQuotes.url}`
-  const response = ApiMethods.initFetchCall(URL, API_URL_AND_OPTIONS.getAllHomeScreenQuotes.options)
-  return {
-    type: FETCH_HOMESCREEN_QUOTES,
-    payload: response
-  }
-}

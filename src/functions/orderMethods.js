@@ -1,7 +1,7 @@
 export default class OrderMethods {
-  constructor(){
+  // constructor(){
     
-  }
+  // }
   // closest first
   static orderArrayByDateAscending = (inputArray, attr) => {
     let orderArraysAscend = inputArray.sort((itemA, itemB) => {

@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 
-import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills, FETCHING } from '../../actions/index'
+import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills } from '../../actions'
+import { FETCHING } from '../../actions/action_types'
 import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
 
-import FilterMethods from '../../functions/filterMethods'
 import OrderMethods from '../../functions/orderMethods'
-import LogServices from '../../services/logService'
 
 import Modal from '../../components/common/modal/modal'
 import { SubmitInterviewQuestionFormEx } from '../../components/forms/forms_modals'
@@ -65,13 +64,6 @@ class InterviewQuestions extends Component {
     this.props.fetchInterviewQuestionsAnswers();
     this.props.fetchSkills();
   }
-  
-
-  // shouldComponentUpdate(nextProps, nextState){
-  // }
-  
-  // componentWillUpdate(nextProps, nextState){
-  // }
   
   handleToggleModalQuestion(){
     this.setState({ showModalQuestion: !this.state.showModalQuestion });
@@ -140,12 +132,6 @@ class InterviewQuestions extends Component {
       lookupTableAllSkills, 
       currentUser 
     } = this.props;
-    
-    // console.log('hey', (allUsers === FETCHING || allInterviewQuestions === FETCHING || allInterviewQuestionsAnswers === FETCHING || allSkills === FETCHING))
-    
-    // console.log('render', (allUsers.length && allInterviewQuestions.length && allInterviewQuestionsAnswers.length && allSkills.length))
-    
-    // console.log('render', (Array.isArray(allUsers)))
     
     
     if(!allUsers || !allInterviewQuestions || !allInterviewQuestionsAnswers || !allSkills ){
@@ -243,7 +229,7 @@ function mapStateToProps(state){
     lookupTableInterviewQuestionsAnswers: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers,
     allSkills: state.skills.allSkills,
     lookupTableAllSkills: state.skills.lookupTableAllSkills,
-    currentUser: state.currentUser,
+    currentUser: state.auth.currentUser,
   }
 }
 

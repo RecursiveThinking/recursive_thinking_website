@@ -1,14 +1,13 @@
-import { FETCH_HOMESCREEN_QUOTES, FETCHING } from '../actions/index'
+import { FETCH_HOMESCREEN_QUOTES, FETCHING } from '../actions/action_types'
 
 const initialState = {
-  allHomeScreenQuotes: [],
+  allHomeScreenQuotes: FETCHING,
   allHomeScreenQuotesAPIResponse: FETCHING
 }
 
 export default function(state = initialState, action){
   switch(action.type){
     case FETCH_HOMESCREEN_QUOTES: 
-      // console.log('action @ Homescreen', action.payload)
       if(action.payload.body && action.payload.status.statusCode === 200){
         // if a well formed payload
         return {

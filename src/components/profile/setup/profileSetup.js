@@ -5,7 +5,7 @@ import Footer from '../../footer/footer'
 
 import { ProfileFormEx } from '../../forms/form_profile'
 
-import DM from '../../../standards/dictModel'
+// import DM from '../../../standards/dictModel'
 
 const profileSetup = () => {
   return (
