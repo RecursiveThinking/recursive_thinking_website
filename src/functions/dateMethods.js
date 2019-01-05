@@ -18,7 +18,7 @@ export default class dateMethods {
   static getFormattedDate(dateToFormat){
     dateToFormat = new Date(dateToFormat)
     const dayOfWeek = this.getDayOfWeek(dateToFormat.getDay());
-    const dateOfMonth = dateToFormat.getDate();
+    let dateOfMonth = dateToFormat.getDate();
     const year = dateToFormat.getFullYear();
     const monthAsNumberIndex = dateToFormat.getMonth();
     const monthAsNumber = monthAsNumberIndex + 1;
@@ -26,7 +26,12 @@ export default class dateMethods {
     const upComingDateStringEuroNamingNumber = `${year} ${monthAsNumber} ${dateOfMonth}`
     const upComingDateStringAmericanNaming = `${monthAsString} ${dateOfMonth}, ${year}`
     const upComingDateStringAmericanWithSlash = `${monthAsNumber}/${dateOfMonth}/${year}`
-
+    
+    if(Number(dateOfMonth) < 10){
+      // console.log('type of', typeof dateOfMonth)
+      dateOfMonth = `0${dateOfMonth}`
+    }
+    
     return {
         dayOfWeek: dayOfWeek,
         dateOfMonth: dateOfMonth,
