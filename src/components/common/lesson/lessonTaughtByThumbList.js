@@ -7,7 +7,11 @@ const lessonTaughtByThumbList = ({taughtByUserArray}) => {
   let lessonAvatars = taughtByUserArray.map(userTeach => {
     return (
       <li key={userTeach.userId} >
-        <LessonTaughtByThumbListItem avatar={userTeach.avatar} altName={userTeach.name} />
+        <LessonTaughtByThumbListItem 
+          avatar={userTeach.avatar} 
+          altName={userTeach.name} 
+          userId={userTeach.userId}
+        />
       </li>
     )
   })

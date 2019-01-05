@@ -116,7 +116,7 @@ const adminPanelListItem = ({...props}) => {
   return (
     // <li className="grid grid--full">
       <article className="card width100P">
-        <h4>{props.title}</h4>
+        <h5 className="fw700 ls14 ttup fcGrey424041 mb10">{props.title}</h5>
         <hr />
         <table className="width100P">
           <thead>

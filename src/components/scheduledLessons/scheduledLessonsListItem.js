@@ -13,19 +13,19 @@ const scheduledLessonsListItem = ({lesson, currentUserLessonStatus}) => {
   // console.log(lesson.Id, currentUserLessonStatus, styleLessonStatusStar);
   
   return (
-    <article className="mt15">
+    <article className="">
       <div className="fc-dateRow fc--disp-flex fc--fdir-row fc--fwrap-no fc--aItem-ce">
-        <h1 className="fs575 ls44 fw300 fcGreenRT">{formattedDate['dateOfMonth']}</h1>
+        <h1 className="fs60 ls44 fw300 fcGreenRT">{formattedDate['dateOfMonth']}</h1>
         <div className="fc-dateRowMonthYear fc--disp-flex fc--fdir-col fc--fwrap-no fc--aCont-sb">
-          <h5 className="fw500 ls14 ttup fcBlack">{formattedDate['monthAsString']}</h5>
-          <h5 className="fw500 ls14 ttup fcBlack">{formattedDate['year']}</h5>
+          <h6 className="fw600 ls20 ttup fs22 fcGrey06">{formattedDate['monthAsString']}</h6>
+          <h6 className="fw600 ls20 ttup fs22 fcGrey06">{formattedDate['year']}</h6>
         </div>
         <div className="fc-star fc--disp-flex fc--fdir-row fc--jCont-fe">
           <i className={styleLessonStatusStar}></i>
         </div>
       </div>
       <div className="fc-lessonInfoCont">
-        <h5 className="fw300 ls14 fcGrey66 mtNeg10">{lesson[title]}</h5>
+        <h6 className="fw300 fs22 ls18 fcGrey66 mtNeg10">{lesson[title]}</h6>
       </div>
       <hr className="mt15" />
     </article>

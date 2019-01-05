@@ -1,19 +1,25 @@
-export default class orderMethods {
+export default class OrderMethods {
   constructor(){
     
   }
   // closest first
-  static orderArrayByDateAscending = (inputArray, dateProp) => {
+  static orderArrayByDateAscending = (inputArray, attr) => {
     let orderArraysAscend = inputArray.sort((itemA, itemB) => {
-      return new Date(itemA[dateProp]) > new Date(itemB[dateProp])
+      return new Date(itemA[attr]) - new Date(itemB[attr])
     })
     return orderArraysAscend
   }
   // farthest first
-  static orderArrayByDateDecending = (inputArray) => {
+  static orderArrayByDateDecending = (inputArray, attr) => {
     let orderArraysDecend = inputArray.sort((itemA, itemB) => {
-      return new Date(itemA.date) < new Date(itemB.date)
+      return new Date(itemB[attr]) - new Date(itemA[attr])
     })
     return orderArraysDecend
+  }
+  static orderArrayAscendingByAttr = (inputArray, attr) => {
+    return inputArray.sort((itemA, itemB) => itemA[attr] - itemB[attr])
+  }
+  static orderArrayDecendingByAttr = (inputArray, attr) => {
+    return inputArray.sort((itemA, itemB) => itemB[attr] - itemA[attr])
   }
 }

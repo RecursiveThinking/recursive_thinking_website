@@ -32,7 +32,7 @@ const interviewQuestionsAnswersList = ({...props}) => {
         answerWrittenByUser = props.lookupTableUsers[answer['_createdByUser']].name
       }
 
-      let optionList = UtilityMethods.generateOptionsList(props.currentUser.userId, props.currentUser.admin, answer['_createdByUser'], 'fs16')
+      let optionList = UtilityMethods.generateOptionsList(props.currentUser.userId, props.currentUser.admin, answer['_createdByUser'], 'fs14')
       // console.log(optionList)
       // this returns each li
       return (
@@ -41,19 +41,21 @@ const interviewQuestionsAnswersList = ({...props}) => {
             <div className="grid grid--cols-2">
               <div className="grid-cell">
                 {/* <h5 className="colorBlack fw900">{answerWrittenBy.name}</h5> */}
-                <h5 className="colorBlack fw900">{answerWrittenByUser}</h5>
+                <h6 className="fs16 fw900 ls10 fcBlack">{answerWrittenByUser}</h6>
               </div>
               <div className="grid-cell">
                 <div className="fc--disp-flex fc--fdir-row fc--jCont-fe fc--aItem-ce">
-                  <div className="listOptions">
-                    {optionList}
+                  <div className="listOptions fc--disp-flex">
+                    <ul>
+                      {optionList}
+                    </ul>
                   </div>
-                  <h5 className="h5TitleDate colorGray55 fw300 ml20">{formattedDate['upComingDateStringAmericanWithSlash']}</h5>
+                  <h6 className="fs16 fcGrey55 fw300 ml20">{formattedDate['upComingDateStringAmericanWithSlash']}</h6>
                 </div>
               </div>
             </div>
           {/* </div> */}
-          <p className="colorGray55 fw300">{answer['description']}</p>
+          <p className="fs14 colorGray55 ls08 fw300">{answer['description']}</p>
           <hr />
         </li>
       );

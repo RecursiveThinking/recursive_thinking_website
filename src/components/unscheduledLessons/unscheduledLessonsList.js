@@ -2,20 +2,37 @@ import React from 'react';
 
 import UnscheduledLessonsListItem from './unscheduledLessonsListItem'
 
-const unscheduledLesonsList = ({currentUser, allUnscheduledLessonsArray}) => {
-  let unscheduledListJSX = allUnscheduledLessonsArray.map(lesson => {
-    return (
-      <li key={lesson.Id} className="grid-cell">
-        <UnscheduledLessonsListItem currentUser={currentUser} lesson={lesson}/>
-      </li>
-    )
-  })
+const unscheduledLesonsList = ({ allUnscheduledLessonsArr, currentUser }) => {
   
-  return (
-    <ul className="grid grid--cols-2">
-      {unscheduledListJSX}
-    </ul>
-  )
+  // allUnscheduledLessonsArr.length = 0
+  if(allUnscheduledLessonsArr.length){  
+    let unscheduledListJSX = allUnscheduledLessonsArr.map(lesson => {
+      return (
+        <li key={lesson.Id} className="grid-cell">
+          <UnscheduledLessonsListItem currentUser={currentUser} lesson={lesson}/>
+        </li>
+      )
+    })
+    
+    return (
+      <ul className="grid grid--cols-2">
+        {unscheduledListJSX}
+      </ul>
+    )
+  } else {
+    return(
+      <article className="card">
+        <h5 className="fw700 ls14 ttup fcGrey424041">Lessons to Vote On</h5>
+        <hr className="mt10" />
+        <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There are no lessons to vote on!</h5>
+        <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
+          To create a lesson, select the "Submit Lesson" on the upper right and fill out the form.
+          <br /><br />
+          Afterwards, vote for lessons you would like to attend.  Lessons that receive 10 votes will be scheduled for the next available Saturday.
+        </p>
+      </article>
+    )
+  }
 }
 
 export default unscheduledLesonsList;

@@ -79,7 +79,7 @@ export default class LessonMethods {
   }
   static getArrayOfUserObjects = (inputArray, allUsersArray) => {
     let taughtByUserArray = []
-    console.log('log', allUsersArray)
+    // console.log('log', allUsersArray)
     // console.log(inputArray.length, taughtByUserArray);
     inputArray.forEach(lessonId => {
       let foundIndex = Users.findIndex(user => {
@@ -115,16 +115,16 @@ export default class LessonMethods {
     let returnString = ''
     if(status === null){
       // haven't clicked
-      returnString = "fa fa-star-o fs50 fcGreyb9 op50"
+      returnString = "fa fa-star-o fs48 fcGreyb9 op50"
     }
     else if(status === 0){
-      returnString = "fa fa-times fcGreyb9 fs50 mtNeg125"
+      returnString = "fa fa-times fcGreyb9 fs48 mtNeg125"
     }
     else if(status === 1){
-      returnString = "fa fa-star fs50 fcOrangeff9a23"
+      returnString = "fa fa-star fs48 fcOrangeff9a23"
     }
     else if(status === 2){
-      returnString = "fa fa-star-half-o fs50 fcOrangeff9a23 op50"
+      returnString = "fa fa-star-half-o fs48 fcOrangeff9a23 op50"
     }
     return returnString;
   }
@@ -138,24 +138,24 @@ export default class LessonMethods {
     let btnStyleForMaybeAttending = ''
     let btnStyleForNotAttending = ''
     if (status === null) {
-      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 fs20 ls12 fw500 ta-cent`
-      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 fs20 ls12 fw500 ta-cent`
-      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 fs20 ls12 fw500 ta-cent`
+      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 fs16 ls12 fw500 ta-cent`
+      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 fs16 ls12 fw500 ta-cent`
+      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 fs16 ls12 fw500 ta-cent`
     } else if (status === 0) {
       //then not attending
-      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 btnOutlineClrSchUnavailable fs20 ls12 fw500 ta-cent`
-      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 btnOutlineClrSchUnavailable fs20 ls12 fw500 ta-cent`
-      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 btnSelected fs20 ls12 fw500 ta-cent`
+      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 btnOutlineClrSchUnavailable fs16 ls12 fw500 ta-cent`
+      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 btnOutlineClrSchUnavailable fs16 ls12 fw500 ta-cent`
+      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 btnSelected fs16 ls12 fw500 ta-cent`
     } else if (status === 1) {
       // then attending
-      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 btnSelected fs20 ls12 fw500 ta-cent`
-      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 btnOutlineClrSchUnavailable fs20 ls12 fw500 ta-cent`
-      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 btnOutlineClrSchUnavailable fs20 ls12 fw500 ta-cent`
+      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 btnSelected fs16 ls12 fw500 ta-cent`
+      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 btnOutlineClrSchUnavailable fs16 ls12 fw500 ta-cent`
+      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 btnOutlineClrSchUnavailable fs16 ls12 fw500 ta-cent`
     } else if (status === 2) {
       // then maybe attending
-      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 btnOutlineClrSchUnavailable fs20 ls12 fw500 ta-cent`
-      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 btnSelected fs20 ls12 fw500 ta-cent`
-      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 btnOutlineClrSchUnavailable fs20 ls12 fw500 ta-cent`
+      btnStyleForAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen00b371 btnOutlineClrSchUnavailable fs16 ls12 fw500 ta-cent`
+      btnStyleForMaybeAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen006842 btnSelected fs16 ls12 fw500 ta-cent`
+      btnStyleForNotAttending = `grid-cell fc--disp-flex fc--jCont-ce fc--aItem-ce btn btnFillClrSchGreen2d3134 btnOutlineClrSchUnavailable fs16 ls12 fw500 ta-cent`
     }
 
     return {

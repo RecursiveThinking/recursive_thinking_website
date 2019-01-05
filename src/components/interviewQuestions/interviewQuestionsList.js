@@ -3,16 +3,28 @@ import React from 'react';
 import InterviewQuestionsListItem from './interviewQuestionsListItem'
 
 const interviewQuestionsList = ({...props}) => {
+  const {
+    allUsersArr,
+    lookupTableUsers,
+    currentUser, 
+    allInterviewQuestionsAnswers,
+    lookupTableInterviewQuestionsAnswers,
+    allSkillsArr,
+    lookupTableAllSkills
+  } = props
+  
   let allInterviewQuestionsListJSX = props.allInterviewQuestionsArr.map(intQuestion => {
     return (
       <li key={intQuestion.Id} className="grid-cell">
         <InterviewQuestionsListItem 
-          allUsersArr={props.allUsersArr}
-          lookupTableUsers={props.lookupTableUsers}
+          allUsersArr={allUsersArr}
+          lookupTableUsers={lookupTableUsers}
           intQuestion={intQuestion}
-          currentUser={props.currentUser}
-          allInterviewQuestionsAnswersArr={props.allInterviewQuestionsAnswers}
-          lookupTableInterviewQuestionsAnswers={props.lookupTableInterviewQuestionsAnswers}
+          currentUser={currentUser}
+          allInterviewQuestionsAnswersArr={allInterviewQuestionsAnswers}
+          lookupTableInterviewQuestionsAnswers={lookupTableInterviewQuestionsAnswers}
+          allSkillsArr={allSkillsArr}
+          lookupTableAllSkills={lookupTableAllSkills}
         />
       </li>
     )

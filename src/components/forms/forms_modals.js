@@ -14,20 +14,21 @@ class SignUpModalForm extends Component {
     const { meta: { touched, error }} = field;
     const errorInput = `fc-field-row fc--disp-flex fc--fdir-row width100P ${touched && error ? 'input-invalid' : ''}`
     return(
-      <div className='fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width80P'>
-        {/* <div className='fc-field-row fc--disp-flex fc--fdir-row width100P'> */}
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
+        {/* <div className="fc-field-row fc--disp-flex fc--fdir-row width100P"> */}
         <div className={errorInput}>
-          <label className="ta-right" htmlFor={field.name}>{field.label}</label>
+          <label className={field.labelStyle} htmlFor={field.name}>{field.label}</label>
           <input 
             {...field.input}
-            type="text"
+            className={field.inputStyle}
+            type={field.type}
             placeholder={field.placeholder}
           />
         </div>
         <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
           <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P">
             <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
-              {touched ? error : ''}
+              {touched ? error : ""}
             </div>
           </div>
         </div>
@@ -38,42 +39,56 @@ class SignUpModalForm extends Component {
   render(){
     return (
       <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-        <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Sign Up</h2>
-        <hr className="modalHR mt35" />
+        <h2 className="fs33 fw300 ls24 fcBlack ta-cent">Sign Up</h2>
+        <hr className="modalHR mt10" />
         <form action="">
           <div className="fc-fieldset">
             <Field
-              label='Name:'
-              name='name'
-              placeholder='Name'
+              label="Name:"
+              name="name"
+              type="text"
+              placeholder="Please Enter Your First and Last Name"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
             <Field 
-              label='Username:'
-              name='username'
-              placeholder='Username'
+              label="Username:"
+              name="username"
+              type="type"
+              placeholder="Username"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
             <Field 
-              label='Email:'
-              name='email'
-              placeholder='Email'
+              label="Email:"
+              name="email"
+              type="text"
+              placeholder="Email"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
             <Field 
-              label='Password:'
-              name='password'
-              placeholder='Password'
+              label="Password:"
+              name="password"
+              type="text"
+              placeholder="Password"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
             <Field 
-              label='Confirm Password:'
-              name='confirmpassword'
-              placeholder='Confirm Password'
+              label="Confirm Password:"
+              name="confirmpassword"
+              placeholder="Confirm Password"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
           </div>
-          <hr className="modalHR mt130" />
+          <hr className="modalHR mt80" />
           <div className="ta-cent">
             <button type="submit" className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Sign Up</button>
           </div>
@@ -92,27 +107,60 @@ export class VerifyAccountModalForm extends Component {
   constructor(props){
     super(props)
   }
+  
+  renderField(field){
+    const { meta: { touched, error }} = field;
+    const errorInput = `fc-field-row fc--disp-flex fc--fdir-row width100P ${touched && error ? 'input-invalid' : ''}`
+    return(
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
+        {/* <div className="fc-field-row fc--disp-flex fc--fdir-row width100P"> */}
+        <div className={errorInput}>
+          <label className={field.labelStyle} htmlFor={field.name}>{field.label}</label>
+          <input 
+            {...field.input}
+            className={field.inputStyle}
+            type={field.type}
+            placeholder={field.placeholder}
+          />
+        </div>
+        <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
+          <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P">
+            <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
+              {touched ? error : ""}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
   render(){
     return (
       <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-        <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Verify Your Account</h2>
-        <hr className="modalHR mt35" />
+        <h2 className="fs33 fw300 ls24 fcBlack ta-cent">Verify Account</h2>
+        <hr className="modalHR mt10" />
         <form action="">
           <div className="fc-fieldset">
-            <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width80P">
-              <div className="fc-field-row fc--disp-flex fc--fdir-row width100P">
-                <label htmlFor="confirmUsername">Username:</label>
-                <input type="text" name="confirmUsername" placeholder="Username" />
-              </div>
-            </div>
-            <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width80P">
-              <div className="fc-field-row fc--disp-flex fc--fdir-row width100P">
-                <label htmlFor="confirmCode">Verification Code:</label>
-                <input type="text" name="confirmCode" placeholder="Confirmation Code" />
-              </div>
-            </div>
+            <Field
+              label="Username:"
+              name="confirmUsername"
+              type="text"
+              placeholder="Enter Username"
+              component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
+            />
+            <Field 
+              label="Verification Code:"
+              name="confirmCode"
+              type="type"
+              placeholder="Enter Confirmation Code"
+              component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
+            />
           </div>
-          <hr className="modalHR mt130" />
+          <hr className="modalHR mt80" />
           <div className="ta-cent">
             <button type="submit" className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Verify Your Account</button>
           </div>
@@ -121,6 +169,11 @@ export class VerifyAccountModalForm extends Component {
     )
   }
 }
+
+export const VerifyAccountFormEx = reduxForm({
+  validate: validate,
+  form: 'VerifyAccountForm'
+})(VerifyAccountModalForm)
 
 class SignInModalForm extends Component {
   constructor(props){
@@ -131,19 +184,20 @@ class SignInModalForm extends Component {
     const { meta: { touched, error }} = field;
     const errorInput = `fc-field-row fc--disp-flex fc--fdir-row width100P ${touched && error ? 'input-invalid' : ''}`
     return (
-      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width80P">
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
         <div className={errorInput}>
-          <label htmlFor={field.name}>{field.label}</label>
+          <label className={field.labelStyle} htmlFor={field.name}>{field.label}</label>
           <input
             {...field.input}
-            type="text"
+            className={field.inputStyle}
+            type={field.type}
             placeholder={field.placeholder}
           />
         </div>
         <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
           <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P">
             <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
-              { touched ? error : ''}
+              { touched ? error : ""}
             </div>
           </div>
         </div>
@@ -159,19 +213,23 @@ class SignInModalForm extends Component {
         <form action="">
           <div className="fc-fieldset">
             <Field 
-              label='Email:'
-              name='emailLogin'
-              placeholder='Email'
+              label="Email:"
+              name="emailLogin"
+              placeholder="Email"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
             <Field 
-              label='Password:'
-              name='passwordLogin'
-              placeholder='Password'
+              label="Password:"
+              name="passwordLogin"
+              placeholder="Password"
               component={this.renderField}
+              labelStyle="width20P"
+              inputStyle="width80P"
             />
           </div>
-          <hr className="modalHR mt130" />
+          <hr className="modalHR mt80" />
           <div className="ta-cent">
             <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Sign In</button>
           </div>
@@ -195,21 +253,22 @@ class SubmitLessonRequestModalForm extends Component {
     const { meta: { touched, error }} = field;
     const errorInput = `fc-field-row-full fc--disp-flex fc--fdir-row mt10 ${touched && error ? 'input-invalid' : ''}`
     return(
-      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width90P mt25">
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
         <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
-          <label htmlFor={field.name}>{field.label}</label>
+          <label htmlFor={field.name} className={field.labelStyle}>{field.label}</label>
         </div>
         <div className={errorInput}>
           <input 
             {...field.input}
-            type="text"
+            className={field.inputStyle}
+            type={field.type}
             placeholder={field.placeholder}
           />
         </div>
         <div className="error fc-field-row-full fc--disp-flex fc--fdir-row width100P">
           {/* <div className=" fc--disp-flex fc--fdir-row fc--jCont-fs width90P"> */}
             <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
-              { touched ? error : '' }
+              { touched ? error : "" }
             </div>
           {/* </div> */}
         </div>
@@ -220,30 +279,39 @@ class SubmitLessonRequestModalForm extends Component {
   render(){
     return (
       <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-        <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Submit a Lesson Request</h2>
-        <hr className="modalHR mt35" />
+        <h2 className="fs33 fw300 ls24 fcBlack ta-cent">Submit a Lesson Request</h2>
+        <hr className="modalHR mt10" />
         <form action="">
           <div className="fc-fieldset">
             <Field
-              label='Title:'
-              name='lessonTitle'
-              placeholder='Lesson Title'
+              label="Title:"
+              name="lessonTitle"
+              type="text"
+              placeholder="Lesson Title"
               component={this.renderField}
+              labelStyle="width100P"
+              inputStyle="width100P"
             />
             <Field
-              label='Description:'
-              name='lessonDescription'
-              placeholder='Lesson Description'
+              label="Description:"
+              name="lessonDescription"
+              type="text"
+              placeholder="Lesson Description"
               component={this.renderField}
+              labelStyle="width100P"
+              inputStyle="width100P"
             />
             <Field 
-              label='Taught by:'
-              name='lessonTaughtby'
-              placeholder='Select Users To Teach This Lesson'
+              label="Taught by:"
+              name="lessonTaughtby"
+              type="text"
+              placeholder="Select Users To Teach This Lesson"
               component={this.renderField}
+              labelStyle="width100P"
+              inputStyle="width100P"
             />
           </div> 
-          <hr className="modalHR mt130" />
+          <hr className="modalHR mt80" />
           <div className="ta-cent">
             <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Submit Lesson</button>
           </div>
@@ -267,20 +335,21 @@ class SubmitInterviewQuestionModalForm extends Component {
     const { meta: { touched, error }} = field;
     const errorInput = `fc-field-row-full fc--disp-flex fc--fdir-row mt10 ${touched && error ? 'input-invalid' : ''}`
     return(
-      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width90P mt25">
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
         <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
-          <label htmlFor={field.name}>{field.label}</label>
+          <label htmlFor={field.name} className={field.labelStyle}>{field.label}</label>
         </div>
         <div className={errorInput}>
           <input 
             {...field.input}
-            type="text"
+            className={field.inputStyle}
+            type={field.type}
             placeholder={field.placeholder}
           />
         </div>
         <div className="error fc-field-row-full fc--disp-flex fc--fdir-row width100P">
           <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
-            { touched ? error : '' }
+            { touched ? error : "" }
           </div>
         </div>
       </div>
@@ -290,30 +359,39 @@ class SubmitInterviewQuestionModalForm extends Component {
   render(){
     return (
       <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-        <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Submit an Interview Question</h2>
-        <hr className="modalHR mt35" />
+        <h2 className="fs33 fw300 ls24 fcBlack ta-cent">Submit an Interview Question</h2>
+        <hr className="modalHR mt10" />
         <form action="">
           <div className="fc-fieldset">
             <Field 
-              label='Question Title:'
-              name='interviewQuestionTitle'
-              placeholder='Question Title'
+              label="Question Title:"
+              name="interviewQuestionTitle"
+              type="text"
+              placeholder="Question Title"
               component={this.renderField}
+              labelStyle="width100P"
+              inputStyle="width100P"
             />
             <Field 
-              label='Question Details:'
-              name='interviewQuestionDetails'
-              placeholder='Question Details'
+              label="Question Details:"
+              name="interviewQuestionDetails"
+              type="text"
+              placeholder="Question Details"
               component={this.renderField}
+              labelStyle="width100P"
+              inputStyle="width100P"
             />
             <Field
-              label='Tag profession, skills and languages'
-              name='interviewQuestionTags'
-              placeholder='Enter at Least One Tag for this Interview Question'
+              label="Tag profession, skills and languages:"
+              name="interviewQuestionTags"
+              type="text"
+              placeholder="Enter at Least One Tag for this Interview Question"
               component={this.renderField}
+              labelStyle="width100P"
+              inputStyle="width100P"
             />
           </div>
-          <hr className="modalHR mt130" />
+          <hr className="modalHR mt80" />
           <div className="ta-cent">
             <button type="submit" className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Submit Interview Question</button>
           </div>
@@ -349,7 +427,7 @@ class SubmitInterviewQuestionAnswerModalForm extends Component {
         </div>
         <div className="error fc-field-row-full fc-disp-flex fc-fdir-row width100P">
           <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
-            { touched ? error : ''}
+            { touched ? error : ""}
           </div>
         </div>
       </div>
@@ -357,7 +435,7 @@ class SubmitInterviewQuestionAnswerModalForm extends Component {
   }
   
   render(){
-    // const { intQuestion } = this.props
+    // const { allSkillsArr, lookupTableAllSkills } = this.props
     // const { intQuestion: { title, description, categories }} = DM
     return (
       <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
@@ -371,15 +449,19 @@ class SubmitInterviewQuestionAnswerModalForm extends Component {
           </p>
           <hr className="modalHR mt30"/>
         
-          <CategoryList lessonCategories={this.props.intQuestion[DM.intQuestion.categories]} />
+          <CategoryList 
+            categories={this.props.intQuestion[DM.intQuestion.categories]}
+            allSkillsArr={this.props.allSkillsArr}
+            lookupTableAllSkills={this.props.lookupTableAllSkills}
+          />
         </div>
         
         <form action="">
           <div className="fc-fieldset">
             <Field
-              label='Your Reply:'
-              name='interviewQuestionAnswerDescription'
-              placeholder='Please Enter Your Reply'
+              label="Your Reply:"
+              name="interviewQuestionAnswerDescription"
+              placeholder="Please Enter Your Reply"
               component={this.renderField}
             />
           </div>
@@ -401,12 +483,13 @@ export const SubmitInterviewQuestionAnswerFormEx = reduxForm({
 function validate(values){
   const errors = {};
   // logic
+  // signup
   if(!values.name){ errors.name = 'Please Enter Your Full Name' }
   if(!values.username){ errors.username = 'Please Enter A Username' }
   if(!values.email){ errors.email = 'Please Enter A Valid Email Address' }
   if(!values.password){ errors.password = 'Please Enter A Valid Password' }
   if(!values.confirmpassword){ errors.confirmpassword = 'Please Confirm Your Password' }
-  // these are login modal
+  // these are signin modal
   if(!values.emailLogin){ errors.emailLogin = 'Please enter a Valid Email/Password Combination' }
   if(!values.passwordLogin){ errors.passwordLogin = 'Please enter a Valid Email/Password Combination' }
   // lesson modal

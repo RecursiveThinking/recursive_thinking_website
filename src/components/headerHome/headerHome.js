@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Modal from '../common/modal/modal'
-import { SignUpFormEx, VerifyAccountModalForm, SignInFormEx } from '../forms/forms_modals'
+import { SignUpFormEx, VerifyAccountFormEx, SignInFormEx } from '../forms/forms_modals'
 
 class HeaderHome extends Component {
   constructor(props){
@@ -18,6 +18,9 @@ class HeaderHome extends Component {
   handleToggleModalSignIn(){
     this.setState( {showModalSignIn: !this.state.showModalSignIn} )
   }
+  handleToggleModalVerifyAccount(){
+    this.setState( {showModalVerifyAccount: !this.state.showModalVerifyAccount} )
+  }
   
   render(){
     return (
@@ -33,9 +36,9 @@ class HeaderHome extends Component {
           <div className="grid-cell fc--disp-flex fc--aItem-ce">
             <div className="fc-nav fc--disp-flex">
               <nav>
-                <a href="/dashboard"><button type="button" className="btn btnOutlineClrSchGreen00b371 signIn fs20 ls12">Dash</button></a>
-                <a href="/setupProfile"><button type="button" className="btn btnOutlineClrSchGreen00b371 signIn fs20 ls12">SetupProfile</button></a>
-                <button onClick={() => this.handleToggleModalSignUp()} type="button" className="btn btnFillClrSchGreen00b371 signUp fs20 ls12">Sign Up</button>
+                <a href="/dashboard"><button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">Dash</button></a>
+                <a href="/setupProfile"><button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SP</button></a>
+                <button onClick={() => this.handleToggleModalSignUp()} type="button" className="btn btnFillClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12">Sign Up</button>
                   {
                     this.state.showModalSignUp && 
                     
@@ -44,13 +47,22 @@ class HeaderHome extends Component {
                       content={<SignUpFormEx />}
                     />
                   }
-                <button onClick={() => this.handleToggleModalSignIn()} type="button" className="btn btnOutlineClrSchGreen00b371 signIn fs20 ls12">Sign In</button> 
+                <button onClick={() => this.handleToggleModalSignIn()} type="button" className="btn btnOutlineClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12">Sign In</button> 
                   {
                     this.state.showModalSignIn &&
                     
                     <Modal
                       onCloseRequest={() => this.handleToggleModalSignIn()}
                       content={<SignInFormEx />}
+                    />
+                  }
+                <button onClick={() => this.handleToggleModalVerifyAccount()} type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">VA</button> 
+                  {
+                    this.state.showModalVerifyAccount &&
+                    
+                    <Modal
+                      onCloseRequest={() => this.handleToggleModalVerifyAccount()}
+                      content={<VerifyAccountFormEx />}
                     />
                   }
               </nav>

@@ -27,32 +27,38 @@ export default class utilityMethods {
   }
   static generateOptionsList(currentUserId, isCurrentUserAdmin, itemCreatedByUserId, size){
     let optionListVar = [ 'ban', 'edit', 'delete']
-    function returnOptionsList(item, currentUser, isCurrentUserAdmin, itemCreatedBy){
+    function returnOptionsList(item, currentUser, isCurrentUserAdmin, itemCreatedBy, sizeP, indexP){
       if(item === 'ban'){
-        let classString = `${size} fcAlert fa fa-ban`
+        let classString = `${sizeP} fcAlert fa fa-ban`
         return (
-          <i className={classString}></i>
+          <li key={indexP}>
+            <i className={classString}></i>
+          </li>
         )
       }
       else if(item === 'edit'){
         if(currentUser === itemCreatedBy || isCurrentUserAdmin){
-          let classString = `${size} fcGreenRT fa fa-pencil`
+          let classString = `${sizeP} fcGreenRT fa fa-pencil`
           return (
-            <i className={classString}></i>
+            <li key={indexP}>
+              <i className={classString}></i>
+            </li>
           )
         }
       }
       else if(item === 'delete'){
         if(currentUser === itemCreatedBy || isCurrentUserAdmin){
-          let classString = `${size} fcWarn fa fa-trash-o`
+          let classString = `${sizeP} fcWarn fa fa-trash-o`
           return (
-            <i className={classString}></i>
+            <li key={indexP}>
+              <i className={classString}></i>
+            </li>
           )
         }
       }
     }
-    let createOptionList = optionListVar.map(listItem => {
-      return returnOptionsList(listItem, currentUserId, isCurrentUserAdmin, itemCreatedByUserId, size)
+    let createOptionList = optionListVar.map((listItem, index) => {
+      return returnOptionsList(listItem, currentUserId, isCurrentUserAdmin, itemCreatedByUserId, size, index)
     })
     return createOptionList
   }

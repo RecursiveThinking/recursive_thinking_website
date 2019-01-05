@@ -1,18 +1,28 @@
 import UtilityMethods from '../functions/utilityMethods'
 
-import { FETCH_INTERVIEW_QUESTIONS_ANSWERS } from '../actions/index';
+import { FETCH_INTERVIEW_QUESTIONS_ANSWERS, FETCHING } from '../actions/index';
 
 const initialState = {
-  allInterviewQuestionsAnswers: [],
-  lookupTableInterviewQuestionsAnswers: {}
+  allInterviewQuestionsAnswers: FETCHING,
+  allInterviewQuestionsAnswersAPIResponse: {},
+  lookupTableInterviewQuestionsAnswers: FETCHING
 }
 
 export default function(state = initialState, action){
   switch(action.type){
     case FETCH_INTERVIEW_QUESTIONS_ANSWERS:
-      return {
-        allInterviewQuestionsAnswers: action.payload,        
-        lookupTableInterviewQuestionsAnswers: UtilityMethods.createObjectFromArrayByProp(action.payload, 'Id')
+      if(action.payload.body && action.payload.status.statusCode === 200){
+        return {
+          allInterviewQuestionsAnswers: action.payload,
+          allInterviewQuestionsAnswersAPIResponse: action.payload.status,        
+          lookupTableInterviewQuestionsAnswers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id')
+        }
+      } else {
+        return {
+          allInterviewQuestionsAnswers: null,
+          allInterviewQuestionsAnswersAPIResponse: action.payload,
+          lookupTableInterviewQuestionsAnswers: null
+        }
       }
     default:
       return state;

@@ -1,18 +1,15 @@
 export default class ApiMethods {
   static initFetchCall(urlPath, configOptions){
     return fetch(urlPath)
-                    .then(response => response.json())
-                    .catch(error => {
-                      console.log(error);
-                      return error;
-                    })
-  }
-  static postData(urlPath, configOptions){
-    return fetch(urlPath)
-                    .then(response => response.json())
-                    .catch(error => {
-                      console.log(error);
-                      return error;
-                    })
+        .then(response => {
+            let res = response.json()
+            // console.log('res', res)
+            return res
+          }
+          )
+        .catch(error => {
+          // console.log(error);
+          return error;
+        })
   }
 }
