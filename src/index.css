@@ -68,8 +68,6 @@ body {
   margin: 0 auto;
 }
 
-
-
 /* ============================================ */
 /*                     Header                   */
 /* ============================================ */
@@ -82,7 +80,7 @@ header {
   padding: 1.5rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   background-color: var(--white-ff);
-  z-index: 2;
+  z-index: 10;
 }
 
 header img {
@@ -91,7 +89,7 @@ header img {
 }
 
 .bannerImage {
-  background-image: url("../assets/images/banner.jpg");
+  /* background-image: url("../assets/images/banner.jpg"); */
   height: 100vh;
   width: 100vw;
   background-size: cover;
@@ -546,7 +544,7 @@ fieldset>.grid>.grid-cell>textarea {
   font-weight: 300;
 }
 
-d input[type=email]:focus,
+input[type=email]:focus,
 input[type=date]:focus,
 input[type=password]:focus,
 input[type=number]:focus,
@@ -557,6 +555,21 @@ fieldset>.grid>.grid-cell>textarea:focus {
   box-shadow: 0 0 .125rem .025rem var(--green-00b371);
   border: var(--input-brdr-thickness) solid var(--green-00b371);
   outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: var(--input-brdr-thickness) solid var(--grey-97);
+  -webkit-text-fill-color: var(--grey-06);
+  -webkit-box-shadow: 0 0 0px 1000px rgb(247, 247, 247) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .inputSearch {
@@ -655,15 +668,22 @@ fieldset>.grid>.grid-cell>textarea:focus {
 }
 
 .contentFullWrapper {
-  position: fixed;
-  top: 8.65rem;
-  left: 0;
+  /* position: fixed; */
+  /* top: 8.65rem; */
+  /* left: 0; */
   width: 100%;
   /* minus header and footer */
-  height: calc(100% - 13.85rem);
+  /* height: calc(100% - 13.85rem); */
   /* height: 100%; */
   background-color: var(--grey-ee);
-  overflow-y: none;
+  overflow-y: auto;
+}
+
+.up {
+  position: relative;
+  bottom: 0rem;
+  height: 100%;
+  width: 100%;
 }
 
 .content {
@@ -680,9 +700,9 @@ fieldset>.grid>.grid-cell>textarea:focus {
   padding: 1.5rem;
 }
 
-.contentList {
+/* .contentList {
   padding: 1.5rem;
-}
+} */
 
 .dropdown {
   padding: 0;
@@ -754,7 +774,9 @@ fieldset>.grid>.grid-cell>textarea:focus {
 }
 
 .profileSetup,
-.profileEdit {
+.profileEdit,
+.lessonCreate,
+.lessonEdit {
   background-color: var(--white-ff);
   box-shadow: 0 0.05rem .4rem 0 rgba(0, 0, 0, 0.5);
   border: solid 1px var(--grey-c6);
@@ -795,20 +817,22 @@ fieldset>.grid>.grid-cell>textarea:focus {
 
 }
 
-.submitNewBar {
+.contentPageTitleBar {
+  position: relative;
+  z-index: 5;
   background-color: var(--white-ff);
   box-shadow: 0 0.05rem .4rem 0 rgba(0, 0, 0, 0.5);
   padding: 2rem 2rem;
 }
 
-.fc-submitNewText {
+.fc-contentPageTitleBarText {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
 }
 
-.fc-submitNewButton {
+.fc-contentPageTitleBarButton {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
@@ -893,12 +917,21 @@ ul li {
 } */
 
 .fc-directoryCardSmContParent {
-  max-height: 100vh;
+  /* max-height: 100vh; */
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: var(--white-ff);
   box-shadow: 0 0.05rem .4rem 0 rgba(0, 0, 0, 0.5);
 }
+
+.fc-directoryCardSmContChild {
+  width: 100%;
+  /* height: 100%; */
+  overflow: auto;
+  margin-right: 16px;
+}
+
+.fc-directoryCardSmContChild::-webkit-scrollbar {display:none;}
 
 .fc-directoryCardSm {
   padding: 1.5rem 0;
@@ -1308,6 +1341,7 @@ ul li {
 
 footer {
   position: fixed;
+  z-index: 10;
   bottom: 0;
   left: 0;
   width: 100%;
