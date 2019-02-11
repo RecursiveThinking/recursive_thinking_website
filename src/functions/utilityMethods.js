@@ -1,4 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { ROUTES_REACT } from '../standards/routes'
+
+const {
+  lessons_edit,
+  lessons_edit_id
+} = ROUTES_REACT
 
 export default class utilityMethods {
   static getArrayOfObjectsByKey(lookupTable, arrayOfKeys){
@@ -25,9 +33,9 @@ export default class utilityMethods {
     //   return null
     // }
   }
-  static generateOptionsList(currentUserId, isCurrentUserAdmin, itemCreatedByUserId, size){
+  static generateOptionsList(currentUserId, isCurrentUserAdmin, pathForLink, itemCreatedByUserId, itemId, size){
     let optionListVar = [ 'ban', 'edit', 'delete']
-    function returnOptionsList(item, currentUser, isCurrentUserAdmin, itemCreatedBy, sizeP, indexP){
+    function returnOptionsList(item, currentUser, isCurrentUserAdmin, pathForLink, itemCreatedBy, itemIdent, sizeP, indexP){
       if(item === 'ban'){
         let classString = `${sizeP} fcAlert fa fa-ban`
         return (
@@ -41,7 +49,9 @@ export default class utilityMethods {
           let classString = `${sizeP} fcGreenRT fa fa-pencil`
           return (
             <li key={indexP}>
-              <i className={classString}></i>
+              <Link to={`${pathForLink}/${itemIdent}`}>
+                <i className={classString}></i>
+              </Link>
             </li>
           )
         }
@@ -58,7 +68,7 @@ export default class utilityMethods {
       }
     }
     let createOptionList = optionListVar.map((listItem, index) => {
-      return returnOptionsList(listItem, currentUserId, isCurrentUserAdmin, itemCreatedByUserId, size, index)
+      return returnOptionsList(listItem, currentUserId, isCurrentUserAdmin, pathForLink, itemCreatedByUserId, itemId, size, index)
     })
     return createOptionList
   }
