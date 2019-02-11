@@ -2,9 +2,9 @@ const dictModel = {
   user: {
     userId: 'userId',
     username: 'username',
-    avatar: 'avatar',
     name: 'name',
     email: 'email',
+    avatar: 'avatar',
     city: 'city',
     state: 'state', 
     title: 'title',
@@ -62,6 +62,14 @@ const dictModel = {
     Id: 'Id',
     title: 'title',
     description: 'description',
+    _createdByUser: '_createdByUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  },
+  profileSkill: {
+    Id: 'Id', 
+    name: 'name',
+    _usersWithSkill: '_usersWithSkill',
     _createdByUser: '_createdByUser',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
