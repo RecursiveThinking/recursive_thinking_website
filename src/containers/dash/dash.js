@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
-import { fetchUsers, fetchLessons } from '../../actions'
+import { fetchUsers, fetchLessons, fetchCurrentUser } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
@@ -34,6 +34,7 @@ class Dash extends Component {
   componentDidMount(){
     this.props.fetchUsers();
     this.props.fetchLessons();
+    this.props.fetchCurrentUser();
   }
   
   render(){
@@ -120,4 +121,4 @@ function mapStateToProps(state){
 //   return bindActionCreators({fetchLessons: fetchLessons})(dispatch);
 // }
 
-export default connect(mapStateToProps, { fetchUsers, fetchLessons })(Dash);
+export default connect(mapStateToProps, { fetchUsers, fetchLessons, fetchCurrentUser })(Dash);
