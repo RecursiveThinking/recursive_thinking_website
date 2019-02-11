@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
@@ -9,9 +10,12 @@ import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPag
 
 import OrderMethods from '../../functions/orderMethods'
 
-import Modal from '../../components/common/modal/modal'
-import { SubmitInterviewQuestionFormEx } from '../../components/forms/forms_modals'
+// import Modal from '../../components/common/modal/modal'
+// import { CreateInterviewQuestionAnswerFormEx } from '../../components/forms/forms_interviewquestionanswer'
 import { DropDownSort, DropDownFilter } from '../../components/common/dropdown/sortAndFilter';
+import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
+import { ROUTES_REACT } from '../../standards/routes';
+import { TITLE_BAR_INTERVIEWQUESTIONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
 
 class InterviewQuestions extends Component {
   constructor(props){
@@ -156,26 +160,7 @@ class InterviewQuestions extends Component {
       // allInterviewQuestionsToRender = OrderMethods.orderArrayFromAttrByParam(allInterviewQuestionsToRender, <param>, 'createdAt')
       return (
         <main>
-          <section className="submitNewBar">
-            <div className="grid grid--cols-2">
-              <div className="grid-cell fc--disp-flex fc-submitNewText">
-                <h6 className="fs22 fw600 ls12 fcGrey424041">Submit an Interview Question</h6>
-                <h6 className="fs16 fw300 ls08 fcGrey424041">Have you come across an interview question you would like to share?</h6>
-              </div>
-              <div className="grid-cell fc--disp-flex fc-submitNewButton">
-                <button onClick={() => this.handleToggleModalQuestion()} className="btn btnFillClrSchGreen00b371 pdTB1p25LR2p5 fs16 fw500 ls12">Submit Interview Question</button>
-                { 
-                  this.state.showModalQuestion &&
-                  
-                  <Modal 
-                  onCloseRequest={() => this.handleToggleModalQuestion()}
-                  content={<SubmitInterviewQuestionFormEx />}
-                  />
-                }
-              </div>
-            </div>
-          </section>
-          
+          <ContentPageTitleBar content={TITLE_BAR_INTERVIEWQUESTIONS} />
           <div className="contentList">
             <div className="fc-sortFilter">
               <div className="grid grid--1of2">

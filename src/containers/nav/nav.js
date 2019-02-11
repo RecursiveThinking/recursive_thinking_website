@@ -35,7 +35,6 @@ const {
 class Nav extends Component {
   
   render(){
-    // destructure currentUser off props
     const { currentUser } = this.props;
     
     if(!currentUser){
@@ -44,8 +43,7 @@ class Nav extends Component {
         <div>Loading... </div>
       )
     }
-    // console.log('currUser - Nav', currentUser)
-    // construct image path string
+    
     const userPicturePath = `${PATH_FOR_IMAGES}${currentUser[avatar]}`;
     
     const NAV_BAR = [
@@ -58,7 +56,7 @@ class Nav extends Component {
       [ 'sidebar-item', profile_edit, 'Edit Profile', 'fa fa-user fs20'],
       // [ 'sidebar-item', signout, 'Sign Out', 'fa fa-sign-out fs24']
     ]
-    if(this.props.currentUser[admin] === true){
+    if(currentUser[admin] === true){
       NAV_BAR.push([ 'sidebar-item', admindashboard, 'Admin Panel', 'fa fa-lock fs20'])
       ROUTES_NAV.push({
         path: admindashboard,
@@ -69,7 +67,8 @@ class Nav extends Component {
     // return <div className="grid grid--full lg-grid--fit">
     let allMenuItems = NAV_BAR.map((item, index) => {
       return (
-        <NavLink key={index} to={item[1]} activeClassName="active">
+        // <NavLink key={index} to={item[1]} activeClassName="active">
+        <NavLink key={index} to={item[1]}>
           <article  className={item[0]}>
             <h6 className="fs14 fw500 ls18 ttup fcWhite">{item[2]}</h6>
             <span><i className={item[3]}></i></span>

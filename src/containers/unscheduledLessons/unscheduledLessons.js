@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { fetchUsers, fetchLessons } from '../../actions'
+import { fetchUsers, fetchLessons, fetchCurrentUser } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
+import { ROUTES_REACT } from '../../standards/routes'
 
 import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
 
-import Modal from '../../components/common/modal/modal'
-import { SubmitLessonRequestFormEx } from '../../components/forms/forms_modals'
+import { TITLE_BAR_LESSONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
+import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
 
 class UnscheduledLessons extends Component {
   constructor(props){
@@ -17,17 +19,13 @@ class UnscheduledLessons extends Component {
     
     // init state
     this.state = {
-      showModal: false,
     }
   }
   
   componentDidMount(){
     this.props.fetchUsers();
     this.props.fetchLessons();
-  }
-  
-  handleToggleModal(){
-    this.setState({ showModal: !this.state.showModal })
+    this.props.fetchCurrentUser();
   }
   
   render(){
@@ -37,6 +35,8 @@ class UnscheduledLessons extends Component {
       unscheduledLessons,
       currentUser
     } = this.props
+    
+    console.log('currentUser @ unscheduled Lessons: ', currentUser)
     
     if(!allUsers || !allLessons || !unscheduledLessons){
       return (
@@ -55,25 +55,9 @@ class UnscheduledLessons extends Component {
     else {
       return (
         <main>
-          <section className="submitNewBar">
-            <div className="grid grid--cols-2">
-              <div className="grid-cell fc--disp-flex fc-submitNewText">
-                <h6 className="fs22 fw600 ls12 fcGrey424041">Submit a Lesson Request</h6>
-                <h6 className="fs16 fw300 ls08 fcGrey424041">Want to learn something specific? Have something to teach?</h6>
-              </div>
-              <div className="grid-cell fc--disp-flex fc-submitNewButton">
-                <button onClick={() => this.handleToggleModal()} className="btn btnFillClrSchGreen00b371 pdTB1p25LR2p5 fs16 fw500 ls12">Submit Lesson</button>
-                  {
-                    this.state.showModal &&
-                    
-                    <Modal
-                      onCloseRequest={() => this.handleToggleModal()}
-                      content={<SubmitLessonRequestFormEx />}
-                    />
-                  }
-              </div>
-            </div>
-          </section>
+          <ContentPageTitleBar
+            content={TITLE_BAR_LESSONS}
+          />
           <div className="contentList"> 
             <UnscheduledLessonsList 
               currentUser={currentUser}
@@ -96,4 +80,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, fetchLessons})(UnscheduledLessons);
+export default connect(mapStateToProps, {fetchUsers, fetchLessons,fetchCurrentUser })(UnscheduledLessons);

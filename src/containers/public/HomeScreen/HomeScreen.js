@@ -5,7 +5,7 @@ import { fetchUsers, fetchHomeScreenQuotes } from '../../../actions/index'
 
 import Header from '../../../components/public/header/header';
 import Modal from '../../../components/common/modal/modal'
-import { SignUpFormEx } from '../../../components/forms/forms_modals'
+import { SignUpFormEx } from '../../../components/forms/forms_auth'
 import PersonQuoteListItem from './personQuoteListItem';
 import Footer from '../../../components/footer/footer'
 
@@ -13,7 +13,6 @@ import Slider from '../../../components/common/slider/slider'
 
 // import DefaultErrorPage from '../../../components/defaults/errorPage/errorPage'
 // import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage'
-
 
 import DM from '../../../standards/dictModel'
 
@@ -123,7 +122,6 @@ class PublicHomeScreen extends Component {
                     />
                   }
                 </nav>
-                
               </div>  
             </div>
           </div>   

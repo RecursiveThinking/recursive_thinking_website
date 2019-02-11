@@ -12,13 +12,41 @@ import RecursiveDirectory from '../recursiveDirectory/recursiveDirectory';
 import ViewProfile from '../profile/view/profileView';
 import EditProfile from '../../components/profile/edit/profileEdit';
 import Footer from '../../components/footer/footer';
+import ContentPageWithTitleBar from '../../components/common/contentPage/contentPageWithTitleBar'
+import { 
+  TITLE_BAR_LESSONS_CREATE,
+  TITLE_BAR_LESSONS_EDIT,
+  TITLE_BAR_INTERVIEWQUESTIONS_CREATE, 
+  TITLE_BAR_INTERVIEWQUESTIONS_EDIT, 
+  TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_CREATE,
+  TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT
+} from '../../components/common/contentPage/contentPageTitleBarInfo'
+
+
+// form Components
+import LessonCreate from '../../components/forms/form_lessonCreate';
+import LessonEdit from '../../components/forms/form_lessonEdit';
+import InterviewQuestionCreate from '../../components/forms/form_interviewquestionCreate';
+import InterviewQuestionEdit from '../../components/forms/form_interviewquestionEdit';
+import InterviewQuestionAnswerCreate from '../../components/forms/form_interviewquestionanswerCreate'
+import InterviewQuestionAnswerEdit from '../../components/forms/form_interviewquestionanswerEdit'
 
 import { ROUTES_REACT } from '../../standards/routes'
+
+// action
+import { fetchCurrentUser } from '../../actions/index'
 
 const {
   dashboard,
   scheduledlessons,
   unscheduledlessons,
+  lessons_create,
+  lessons_edit,
+  lessons_edit_id,
+  interviewquestions_create,
+  interviewquestions_edit,
+  interviewquestionsanswers_create,
+  interviewquestionsanswers_edit,
   interviewquestions,
   recursivedirectory,
   profile_edit,
@@ -56,9 +84,83 @@ export const ROUTES_NAV = [
   }
 ]
 
+export const REST_ROUTES_COMPONENTS = [
+  {
+    path: lessons_create,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props}
+        titleBarContent={TITLE_BAR_LESSONS_CREATE}
+        formContent={
+          <LessonCreate />
+        }
+      />
+    )}
+  },
+  {
+    path: lessons_edit_id,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={
+          <LessonEdit 
+            {...props}
+          />}
+        titleBarContent={TITLE_BAR_LESSONS_EDIT}
+      />
+    )}
+  },
+  {
+    path: interviewquestions_create,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props}
+        formContent={<InterviewQuestionCreate />}
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_CREATE}
+      />
+    )}
+  },
+  {
+    path: interviewquestions_edit,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={
+          <InterviewQuestionEdit 
+            {...props}
+          />}
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_EDIT}
+        
+      />
+    )}
+  },
+  {
+    path: interviewquestionsanswers_create,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={<InterviewQuestionAnswerCreate />}
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_CREATE}
+      />
+    )}
+  },
+  {
+    path: interviewquestionsanswers_edit,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={<InterviewQuestionAnswerEdit />}
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT}
+      />
+    )}
+  }
+]
+
 class MainApp extends Component {
   constructor(props){
     super(props)
+    
+    // console.log('init props', props)
     
     this.state = {
       headerHeight: '',
@@ -73,18 +175,18 @@ class MainApp extends Component {
     window.addEventListener('load', this.handleWindowResize)
     window.addEventListener('resize', this.handleWindowResize);
     // console.log('window', window)
+    window.addEventListener('onbeforeunload', this.handleWindowResize)
+    // console.log('compDidMount', this.props, 'state', this.state)
+    this.props.fetchCurrentUser();
   }
   
   componentWillUnmount(){
     window.removeEventListener('load', this.handleWindowResize)
     window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('onbeforeunload', this.handleWindowResize)
   }
   
   handleWindowResize = () => {
-    // console.log('state b4', this.state)
-    // console.log('headerTarget', this.headerTarget)
-    // console.log('H', this.headerTarget.clientHeight, 'F', this.footerTarget.clientHeight, 'CH', this.contentTarget.clientHeight, 'WOH', window.innerHeight,'WIW', window.innerWidth)
-    
     this.setState({
       headerHeight: this.headerTarget.clientHeight,
       footerHeight: this.footerTarget.clientHeight,
@@ -93,7 +195,6 @@ class MainApp extends Component {
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth
     })
-    // console.log('state after', this.state)
   }
   
   render(){
@@ -108,6 +209,7 @@ class MainApp extends Component {
         footerHeight
       } = this.state
       
+      
       if(!currentUser){
         return (
           <div>
@@ -117,13 +219,13 @@ class MainApp extends Component {
       } else if(headerHeight === 0 || footerHeight === 0){
         return (
           
-          <div>
+          <>
             <header ref={ node => { if(node !== null){this.headerTarget = node}}}>
             </header>
               Loading!!!
             <footer ref={ node => { if(node !== null){this.footerTarget = node}}}>
             </footer>
-          </div>
+          </>
         )
       } else {
         
@@ -159,7 +261,16 @@ class MainApp extends Component {
                     {
                       ROUTES_NAV.map((route, index) => (
                         <Route 
-                          key={index}
+                          key={`RN_${index}`}
+                          path={route.path}
+                          component={route.main}
+                        />
+                      ))
+                    }
+                    {
+                      REST_ROUTES_COMPONENTS.map((route, index) => (
+                        <Route 
+                          key={`RRC_${index}`}
                           path={route.path}
                           component={route.main}
                         />
@@ -190,4 +301,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(MainApp);
+export default connect(mapStateToProps, { fetchCurrentUser })(MainApp);

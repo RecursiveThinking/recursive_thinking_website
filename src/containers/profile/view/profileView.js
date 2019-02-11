@@ -5,35 +5,90 @@ import { fetchUsers, fetchSkills } from '../../../actions'
 import { Link } from 'react-router-dom'
 
 import RecursiveDirectoryListItemSm from '../../../components/recursiveDirectory/recursiveDirectoryListItemSm'
+import ContentPageTitleBar from '../../../components/common/contentPage/contentPageTitleBar';
+import { TITLE_BAR_USER_PROFILE_VIEW } from '../../../components/common/contentPage/contentPageTitleBarInfo';
 
 import CategoryList from '../../../components/common/category/categoryList'
+import { ROUTES_REACT } from '../../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 import DM from '../../../standards/dictModel'
 
+const {
+  recursivedirectory
+} = ROUTES_REACT
 class ViewProfile extends Component{
+  constructor(props){
+    super(props)
+    
+    this.state = {
+      contentHeight: ''
+    }
+  }
+  
   componentDidMount(){
-    // const userId = this.props.match.params.id;
-    // console.log('this is id', match)
     this.props.fetchUsers();
     this.props.fetchSkills();
+    this.handleWindowResize()
+    // window.addEventListener('load', this.handleWindowResize)
+    window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('onbeforeunload', this.handleWindowResize)
   }
-
+  
+  componentDidUpdate(){
+    this.handleWindowResize()
+  }
+  
+  componentWillUnmount(){
+    // window.removeEventListener('load', this.handleWindowResize)
+    window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('onbeforeunload', this.handleWindowResize)
+  }
+  
+  handleWindowResize = () => {
+    if(this.state.contentHeight !== this.contentTarget.clientHeight){
+      this.setState({
+        contentHeight: this.contentTarget.clientHeight
+      })
+    }
+  }
+  
   render(){
     
+    const {
+      contentHeight
+    } = this.state;
+    
     const userId = this.props.match.params.id;
+    
     let selectedUser = '';
+    
     if(this.props.lookupTableAllUsers[userId]){
       selectedUser = this.props.lookupTableAllUsers[userId];
     } else {
-      console.log('no user')
-    }
-    // const selectedUser = currentUser
-    if(!selectedUser){
-      return (
-        <div>Loading!!! </div>
-      )
+      console.log('No User')
     }
     
+    // const selectedUser = currentUser
+    
+    if(contentHeight === 0){
+      return (
+        <div className="content"
+          ref={ node => { if(node !== null){this.contentTarget = node}}}
+        >
+        </div>
+      )
+    }
+    else if(!selectedUser){
+      return (
+        <div className="content"
+          ref={ node => { if(node !== null){this.contentTarget = node}}}
+        >
+          Loading!
+        </div>
+      )
+    }
+    else {
+    console.log('hit here', contentHeight)
     // destructuring
     const { allSkills, lookupTableAllSkills } = this.props;
     const { 
@@ -122,7 +177,8 @@ class ViewProfile extends Component{
         avgMonth: 2629746000
       }
       
-      if(typeof date !== 'date'){
+      if(typeof date !== 'object'){
+      // if(date instanceof Date){
         date = new Date(date);
       }
       let now = new Date();
@@ -222,6 +278,15 @@ class ViewProfile extends Component{
     // let otherProfilesArr = this.props.allUsers.filter((userObj) => {
     //   return userObj.userId !== userId
     // })
+    
+    const contentSideStyle = {
+      height: contentHeight
+    }
+    
+    const contentSideStyleChild = {
+      height: (contentHeight * .99)
+    }
+    
     let profilesToRender = this.props.allUsers.map((user) => {
       return (
         <li key={user[userId]} className="fc--disp-flex fc--fdir-row">
@@ -229,135 +294,142 @@ class ViewProfile extends Component{
         </li>
       )
     })
-    
-    return(
-      <main>
-        <div className="grid grid--3of4">
-          <div className="grid-cell">
-            <div className="content">              
-              <Link to="/recursiveDirectory">
-                <button className="btn btnFillClrSchGreen00b371 pdTB1LR2 mt15 mb15 ml15 fs20 fw500 ls12" >&#60;   Return to Directory</button>
-              </Link>
-              <article className="cardNoPadding">
-                <div className="grid grid--full">
-                  <div className="grid-cell">
-                    <div className="grid grid--2of3">
-                      <div className="grid-cell">
-                        {/* avatar and text */}
-                        <div className="fc-twothirdsLeftViewProfile fc--disp-flex fc--fdir-row fc--jCont-fs fc--aItems-ce ">
-                          <img 
-                            className="avatarM avatarBS" 
-                            src={imageSrc}
-                            alt={selectedUser[name]}
-                          />
-                          <div className="fc-twothirdsLeftViewProfile-sub fc--disp-flex fc--fdir-col fc--fwrap-yes fc--jCont-ce fc--aItems-fs">
-                            <h3 className="fs33 fw500 ls22 fcGrey424041">{selectedUser[name]}</h3>
-                            <h5 className="fw300 ls14 fcGrey424041">{selectedUser[title]}</h5>
-                            <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt10">
-                              <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
-                                Location:
-                              </h6>
-                              <h6 className="fs14 fw500 ls08 fcGrey424041">
-                                {selectedUser[city]}, {selectedUser[state]}
-                              </h6>
-                            </div>
-                            <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt0125">
-                              <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
-                                Company:
-                              </h6>
-                              <h6 className="fs14 fw500 ls08 fcGrey424041">
-                                {selectedUser[employer]}
-                              </h6>
+      return(
+        <main>
+          <ContentPageTitleBar content={TITLE_BAR_USER_PROFILE_VIEW}/>
+          <div className="grid grid--3of4">
+            <div className="grid-cell"
+              // ref={ node => { if(node !== null){this.contentTarget = node}}}
+            >
+              {/* need this height */}
+              <div className="content"
+                ref={ node => { if(node !== null){this.contentTarget = node}}}
+              >              
+                {/* <Link to={recursivedirectory}>
+                  <button className="btn btnFillClrSchGreen00b371 pdTB1LR2 mt15 mb15 ml15 fs20 fw500 ls12" >&#60;   Return to Directory</button>
+                </Link> */}
+                <article className="cardNoPadding">
+                  <div className="grid grid--full">
+                    <div className="grid-cell">
+                      <div className="grid grid--2of3">
+                        <div className="grid-cell">
+                          {/* avatar and text */}
+                          <div className="fc-twothirdsLeftViewProfile fc--disp-flex fc--fdir-row fc--jCont-fs fc--aItems-ce ">
+                            <img 
+                              className="avatarM avatarBS" 
+                              src={imageSrc}
+                              alt={selectedUser[name]}
+                            />
+                            <div className="fc-twothirdsLeftViewProfile-sub fc--disp-flex fc--fdir-col fc--fwrap-yes fc--jCont-ce fc--aItems-fs">
+                              <h3 className="fs33 fw500 ls22 fcGrey424041">{selectedUser[name]}</h3>
+                              <h5 className="fw300 ls14 fcGrey424041">{selectedUser[title]}</h5>
+                              <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt10">
+                                <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
+                                  Location:
+                                </h6>
+                                <h6 className="fs14 fw500 ls08 fcGrey424041">
+                                  {selectedUser[city]}, {selectedUser[state]}
+                                </h6>
+                              </div>
+                              <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt0125">
+                                <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
+                                  Company:
+                                </h6>
+                                <h6 className="fs14 fw500 ls08 fcGrey424041">
+                                  {selectedUser[employer]}
+                                </h6>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="grid-cell">
-                        {/* links */}
-                        <div className="fc--disp-flex fc--fdir-col height100P">
-                          <ul className="fc--disp-flex fc--fdir-row fc--fwrap-yes height75P">
-                            {/* icon list */}
-                            {iconList}
-                          </ul>
-                          {/* portfolio link */}
-                          {portText}
+                        <div className="grid-cell">
+                          {/* links */}
+                          <div className="fc--disp-flex fc--fdir-col height100P">
+                            <ul className="fc--disp-flex fc--fdir-row fc--fwrap-yes height75P">
+                              {/* icon list */}
+                              {iconList}
+                            </ul>
+                            {/* portfolio link */}
+                            {portText}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </article>
-              <article className="cardNoPadding mt30">
-                <div className="grid grid--2of3">
-                  <div className="grid-cell">
-                    <div className="fc-twothirdsLeftViewProfile">
-                      <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
-                      <hr />
-                      <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15">
-                        {selectedUser[bio]}
-                      </p>
+                </article>
+                <article className="cardNoPadding mt30">
+                  <div className="grid grid--2of3">
+                    <div className="grid-cell">
+                      <div className="fc-twothirdsLeftViewProfile">
+                        <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
+                        <hr />
+                        <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15">
+                          {selectedUser[bio]}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="grid-cell">
+                      <div className="fc--disp-flex fc--fdir-col fc--jCont-ce height100P">
+                          {/* years */}
+                          {experienceJSX}
+                          {/* {selectedUser[experience]} */}
+                        
+                          {/* time rec */}
+                          {timeWithRTJSX}
+                      </div>
                     </div>
                   </div>
-                  <div className="grid-cell">
-                    <div className="fc--disp-flex fc--fdir-col fc--jCont-ce height100P">
-                        {/* years */}
-                        {experienceJSX}
-                        {/* {selectedUser[experience]} */}
-                      
-                        {/* time rec */}
-                        {timeWithRTJSX}
-                    </div>
+                </article>
+                <article className="card mt30">
+                  <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
+                  <hr />
+                  <div className="">
+                    <CategoryList 
+                      categories={selectedUser[skillsProfessional]}
+                      allSkillsArr={allSkills}
+                      lookupTableAllSkills={lookupTableAllSkills}
+                    />
                   </div>
-                </div>
-              </article>
-              <article className="card mt30">
-                <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
-                <hr />
-                <div className="">
-                  <CategoryList 
-                    categories={selectedUser[skillsProfessional]}
-                    allSkillsArr={allSkills}
-                    lookupTableAllSkills={lookupTableAllSkills}
-                  />
-                </div>
-              </article>
-              <article className="card mt30">
-                <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
-                <hr />
-                <div className="">
-                  <CategoryList 
-                    categories={selectedUser[skillsSoftware]}
-                    allSkillsArr={allSkills}
-                    lookupTableAllSkills={lookupTableAllSkills}
-                  />
-                </div>
-              </article>
-              <article className="card mt30">
-                <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
-                <hr />
-                <div className="">
-                  <CategoryList 
-                    categories={selectedUser[skillsLanguages]}
-                    allSkillsArr={allSkills}
-                    lookupTableAllSkills={lookupTableAllSkills}
-                  />
-                </div>
-              </article>
+                </article>
+                <article className="card mt30">
+                  <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
+                  <hr />
+                  <div className="">
+                    <CategoryList 
+                      categories={selectedUser[skillsSoftware]}
+                      allSkillsArr={allSkills}
+                      lookupTableAllSkills={lookupTableAllSkills}
+                    />
+                  </div>
+                </article>
+                <article className="card mt30">
+                  <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
+                  <hr />
+                  <div className="">
+                    <CategoryList 
+                      categories={selectedUser[skillsLanguages]}
+                      allSkillsArr={allSkills}
+                      lookupTableAllSkills={lookupTableAllSkills}
+                    />
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div className="grid-cell">
+              {/* <h1>HERE</h1> */}
+              <aside className="fc-directoryCardSmContParent" style={contentSideStyle} >
+              {/*  */}
+                {/* <div className="fc-directoryCardSmContChild"> */}
+                  <ul className="fc-directoryCardSmContChild" style={contentSideStyle} >
+                    {profilesToRender}
+                  </ul>
+                {/* </div> */}
+              </aside>
             </div>
           </div>
-          <div className="grid-cell">
-            {/* <h1>HERE</h1> */}
-            <aside className="fc-directoryCardSmContParent">
-              {/* <div className="fc-directoryCardSmContChild"> */}
-                <ul>
-                  {profilesToRender}
-                </ul>
-              {/* </div> */}
-            </aside>
-          </div>
-        </div>
-</main>
-    )
+        </main>
+      )
+    }
   }
 }
 
