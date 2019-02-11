@@ -1,15 +1,22 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 
 import CategoryList from '../../components/common/category/categoryList'
 import InterviewQuestionsAnswersList from './interviewQuestionsAnswersList'
 
-import Modal from '../../components/common/modal/modal'
-import { SubmitInterviewQuestionAnswerFormEx } from '../forms/forms_modals'
+// import Modal from '../../components/common/modal/modal'
+// import { CreateInterviewQuestionAnswerFormEx } from '../forms/forms_interviewquestionanswer'
+import { ROUTES_REACT } from '../../standards/routes'
 
 import DM from '../../standards/dictModel'
 
 import DateMethods from '../../functions/dateMethods'
 import UtilityMethods from '../../functions/utilityMethods';
+
+const {
+  interviewquestionsanswers_create,
+  interviewquestions_edit
+} = ROUTES_REACT
 
 class InterviewQuestionsListItem extends Component {
   constructor(props){
@@ -59,6 +66,7 @@ class InterviewQuestionsListItem extends Component {
         admin
       },
       intQuestion: {
+        Id,
         title,
         description,
         categories,
@@ -74,7 +82,7 @@ class InterviewQuestionsListItem extends Component {
     } else {
       ANSWER_STRING = `${intQuestion.answersToQuestion.length} Answers`
     }
-    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], intQuestion[_createdByUser], 'fs18')
+    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_edit, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
     // need to make an array to pass to the categoryList
     let formattedDate = DateMethods.getFormattedDate(intQuestion[createdAt])
     return (
@@ -119,21 +127,23 @@ class InterviewQuestionsListItem extends Component {
               />
               
             </div>
-            <button onClick={() => this.handleToggleModalAnswer()} className="btn btnFillClrSchGreen00b371 fs16 fw500 ls12 ta-cent pdTB1p25LR2p5">Answer Question</button>
-              {
+            <Link to={interviewquestionsanswers_create}>
+              <button className="btn btnFillClrSchGreen00b371 fs16 fw500 ls12 ta-cent pdTB1p25LR2p5">Answer Question</button>
+            </Link>
+              {/* {
                 this.state.showModalAnswer && 
                 
                 <Modal 
                   onCloseRequest={() => this.handleToggleModalAnswer()}
                   content={
-                    <SubmitInterviewQuestionAnswerFormEx 
+                    <CreateInterviewQuestionAnswerFormEx 
                       intQuestion={intQuestion} 
                       allSkillsArr={allSkillsArr}
                       lookupTableAllSkills={lookupTableAllSkills}
                     />
                   }
                 />
-              }
+              } */}
           </div>
         </div>
       </article>

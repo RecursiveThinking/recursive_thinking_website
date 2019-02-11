@@ -1,5 +1,7 @@
 import React from 'react';
-import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+import { Link } from 'react-router-dom';
+import { ROUTES_REACT } from '../../standards/routes';
+import { PATH_FOR_IMAGES } from '../../standards/publicPaths';
 
 // const headerApp = () => {
   const headerApp = () => {
@@ -16,9 +18,15 @@ import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
           </div>
         </div>
         <div className="grid-cell fc--disp-flex fc-search">
-          <a href="/"><button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">Home</button></a>
-          <a href="/dashboard"><button type="button" className="btn btnTemp btnPadTB1 btnPadLR1  fs16 ls12">Dash</button></a>
-          <a href="/setupProfile"><button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SetupProfile</button></a>
+          <Link to={ROUTES_REACT.root}>
+            <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">Home</button>
+          </Link>
+          <Link to={ROUTES_REACT.dashboard}>
+            <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1  fs16 ls12">Dash</button>
+          </Link>
+          <Link to={ROUTES_REACT.profile_create}>
+            <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SetupProfile</button>
+          </Link>
           <div className="fc--disp-flex search">
             <div className="searchBar">
               <input className="inputSearch" type="search" placeholder="Search" />
