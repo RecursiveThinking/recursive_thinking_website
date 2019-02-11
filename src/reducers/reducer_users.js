@@ -12,11 +12,12 @@ export default function (state = initialState, action) {
   
   switch(action.type){
     case FETCH_USERS:
-      if(action.payload.body && action.payload.status.statusCode === 200){
+      // if(action.payload.body && action.payload.statusCode === 200){
+      if(action.payload){
         return {
-          allUsers: action.payload.body,
-          allUsersAPIResponse: action.payload.status,     
-          lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'userId')
+          allUsers: action.payload,
+          allUsersAPIResponse: 200,     
+          lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload, 'userId')
         }
       } else {
         console.log('is API Error Object', action.payload)

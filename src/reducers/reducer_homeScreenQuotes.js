@@ -8,11 +8,12 @@ const initialState = {
 export default function(state = initialState, action){
   switch(action.type){
     case FETCH_HOMESCREEN_QUOTES: 
-      if(action.payload.body && action.payload.status.statusCode === 200){
+      // if(action.payload.body && action.payload.status.statusCode === 200){
+      if(action.payload){
         // if a well formed payload
         return {
-          allHomeScreenQuotes: action.payload.body,
-          allHomeScreenQuotesAPIResponse: action.payload.status.statusCode
+          allHomeScreenQuotes: action.payload,
+          allHomeScreenQuotesAPIResponse: 200
         }
       } else {
         return {

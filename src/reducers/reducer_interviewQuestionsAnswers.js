@@ -11,11 +11,12 @@ const initialState = {
 export default function(state = initialState, action){
   switch(action.type){
     case FETCH_INTERVIEW_QUESTIONS_ANSWERS:
-      if(action.payload.body && action.payload.status.statusCode === 200){
+      // if(action.payload.body && action.payload.status.statusCode === 200){
+      if(action.payload){
         return {
-          allInterviewQuestionsAnswers: action.payload.body,
-          allInterviewQuestionsAnswersAPIResponse: action.payload.status,        
-          lookupTableInterviewQuestionsAnswers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id')
+          allInterviewQuestionsAnswers: action.payload,
+          allInterviewQuestionsAnswersAPIResponse: 200,        
+          lookupTableInterviewQuestionsAnswers: UtilityMethods.createObjectFromArrayByProp(action.payload, 'Id')
         }
       } else {
         return {
