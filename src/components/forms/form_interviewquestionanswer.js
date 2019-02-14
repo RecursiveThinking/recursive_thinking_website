@@ -10,7 +10,8 @@ import ValidationMethods from '../../functions/validationMethods'
 import DM from '../../standards/dictModel'
 
 class InterviewQuestionAnswerForm extends Component {
-  onSubmit(formValues){
+  onSubmit = (formValues) => {
+    console.log('formVals @ Interview Questions Answer', formValues)    
     this.props.onSubmit(formValues);
   }
   
@@ -41,40 +42,56 @@ class InterviewQuestionAnswerForm extends Component {
   render(){
     // const { allSkillsArr, lookupTableAllSkills } = this.props
     // const { intQuestion: { title, description, categories }} = DM
+    const {
+      content,
+      intQuestion
+    } = this.props;
+    const {
+      intQuestion: {
+        title,
+        categories
+      }
+    } = DM
+    console.log('intQuest @ intQuestAns Form: ', intQuestion)
     return (
-      <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-        <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Reply to Interview Question</h2>
-        <hr className="modalHR mt35" />
-        <div className="">
-          <h5 className="fw500 ls18 fcGreyb9 mt30">{this.props.intQuestion[DM.intQuestion.title]}</h5>
-          <hr className="modalHR mt20" />
-          <p className="fs16 ls10 fw300 fcBlack mt20">
-            {this.props.intQuestion[DM.intQuestion.description]}
-          </p>
-          <hr className="modalHR mt30"/>
-        
-          <CategoryList 
-            categories={this.props.intQuestion[DM.intQuestion.categories]}
-            allSkillsArr={this.props.allSkillsArr}
-            lookupTableAllSkills={this.props.lookupTableAllSkills}
-          />
-        </div>
-        
-        <form action="">
-          <div className="fc-fieldset">
-            <Field
-              label="Your Reply:"
-              name="interviewQuestionAnswerDescription"
-              placeholder="Please Enter Your Reply"
-              component={this.renderField}
-            />
-          </div>
-          <hr className="modalHR mt130" />
-          <div className="ta-cent">
-            <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Submit Answer</button>
-          </div>
-        </form>
-      </fieldset>
+      <section style={{padding: '1.5rem 1.5rem'}}>
+        <article className="card fc--disp-flex fc--fdir-col">
+          {/* <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce"> */}
+            {/* <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Reply to Interview Question</h2> */}
+            {/* <hr className="modalHR mt35" /> */}
+            <div className="">
+              <h5 className="fw600 ls16 fcGrey424041">{content.heading}{intQuestion[title]}</h5>
+              {/* <h5 className="fw500 ls18 fcGreyb9 mt30">{this.props.intQuestion[DM.intQuestion.title]}</h5> */}
+              <hr className="mt20" />
+              <p className="fs16 fw300 ls10 fcGrey424041 mt25">
+                {this.props.intQuestion[DM.intQuestion.description]}
+              </p>
+              <hr className="mt25"/>
+            
+              <CategoryList 
+                categories={intQuestion[categories]}
+                allSkillsArr={this.props.allSkillsArr}
+                lookupTableAllSkills={this.props.lookupTableAllSkills}
+              />
+            </div>
+            
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+              <div className="fc-fieldset">
+                <Field
+                  label="Enter your Answer"
+                  name="interviewQuestionAnswerDescription"
+                  placeholder="Description"
+                  component={this.renderField}
+                  />
+              </div>
+              <hr className="modalHR mt130" />
+              <div className="ta-cent">
+                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Submit Answer</button>
+              </div>
+            </form>
+          {/* </fieldset> */}
+        </article>
+      </section>
     )
   }
 }
