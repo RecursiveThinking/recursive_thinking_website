@@ -7,20 +7,22 @@ import LessonForm from './form_lesson'
 import { FORM_HEADING_LESSON_CREATE } from '../common/formContent/formContent'
 import { Lesson } from '../../models/models';
 
-import { fetchCurrentUser } from '../../actions/index'
+import { getCurrentUserById } from '../../actions/index'
 
 
 class LessonCreate extends Component {
   componentDidMount(){
-    this.props.fetchCurrentUser();
+    this.props.getCurrentUserById();
   }
   
   onSubmit = (formValues) => {
-    const createdByUserId = this.props.currentUser.attributes.sub;
+    // const createdByUserId = this.props.currentUser.attributes.sub;
+    const createdByUserId = this.props.currentUser.userId;
     // console.log('formVals @ lessonCreate Component', formValues, createdByUserId)
     let newLesson = new Lesson(formValues.lessonTitle, formValues.lessonDescription, createdByUserId)
     // action creator
     this.props.createLesson(newLesson);
+    // redirect to /lessons/unscheduledlessons
   }
   
   render(){
@@ -43,5 +45,5 @@ function mapStateToProps(state){
 
 export default connect (
   mapStateToProps,
-  { createLesson, fetchCurrentUser }
+  { createLesson, getCurrentUserById }
 )(LessonCreate)

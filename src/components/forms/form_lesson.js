@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import FormAction from '../common/formAction/formAction';
+import { FORM_ACTION_LESSONS_CREATE } from '../common/formAction/formActionInfo';
+
 import ValidationMethods from '../../functions/validationMethods';
 
 class LessonForm extends Component {
