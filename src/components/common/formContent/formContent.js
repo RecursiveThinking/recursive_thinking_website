@@ -13,3 +13,11 @@ export const FORM_HEADING_INTERVIEWQUESTION_CREATE = {
 export const FORM_HEADING_INTERVIEWQUESTION_EDIT = {
   heading: 'Edit This Interview Question'
 }
+
+export const FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE = {
+  heading: 'Create A Interview Question'
+}
+
+export const FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT = {
+  heading: 'Edit: '
+}
