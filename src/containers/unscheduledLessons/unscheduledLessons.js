@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchUsers, fetchLessons, fetchCurrentUser } from '../../actions'
+import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
 import { ROUTES_REACT } from '../../standards/routes'
 
@@ -25,7 +25,11 @@ class UnscheduledLessons extends Component {
   componentDidMount(){
     this.props.fetchUsers();
     this.props.fetchLessons();
-    this.props.fetchCurrentUser();
+    this.props.getCurrentUserById();
+  }
+  
+  handleDeleteItem = (lessonId) => {
+    console.log('log id of the lesson: ', lessonId)
   }
   
   render(){
@@ -63,6 +67,7 @@ class UnscheduledLessons extends Component {
               currentUser={currentUser}
               allUsersArr = {allUsers}
               allUnscheduledLessonsArr={unscheduledLessons}
+              handleDeleteItem={this.handleDeleteItem}
             />
           </div>
         </main>
@@ -80,4 +85,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, fetchLessons,fetchCurrentUser })(UnscheduledLessons);
+export default connect(mapStateToProps, {fetchUsers, fetchLessons, getCurrentUserById })(UnscheduledLessons);
