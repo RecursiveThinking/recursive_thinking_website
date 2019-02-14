@@ -13,6 +13,7 @@ const {
   unscheduledlessons,
   lessons_create,
   lessons_edit_id,
+  lessons_delete_id,
   interviewquestions,
   interviewquestions_create,
   interviewquestions_edit,
@@ -43,6 +44,7 @@ class App extends Component {
           <Route path={unscheduledlessons} component={MainApp}/>
           <Route path={lessons_create} component={MainApp}/>
           <Route path={lessons_edit_id} component={MainApp}/>
+          <Route path={lessons_delete_id} component={MainApp}/>
           <Route path={interviewquestions_create} exact component={MainApp}/>
           <Route path={interviewquestions_edit} exact component={MainApp}/>
           <Route path={interviewquestions} component={MainApp}/>

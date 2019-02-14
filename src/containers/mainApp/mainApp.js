@@ -18,6 +18,7 @@ import {
   TITLE_BAR_LESSONS_EDIT,
   TITLE_BAR_INTERVIEWQUESTIONS_CREATE, 
   TITLE_BAR_INTERVIEWQUESTIONS_EDIT, 
+  TITLE_BAR_INTERVIEWQUESTIONS_DELETE, 
   TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_CREATE,
   TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT
 } from '../../components/common/contentPage/contentPageTitleBarInfo'
@@ -26,15 +27,20 @@ import {
 // form Components
 import LessonCreate from '../../components/forms/form_lessonCreate';
 import LessonEdit from '../../components/forms/form_lessonEdit';
+import LessonDelete from '../../components/forms/form_lessonDelete';
+
 import InterviewQuestionCreate from '../../components/forms/form_interviewquestionCreate';
 import InterviewQuestionEdit from '../../components/forms/form_interviewquestionEdit';
+import InterviewQuestionDelete from '../../components/forms/form_interviewquestionDelete';
+
 import InterviewQuestionAnswerCreate from '../../components/forms/form_interviewquestionanswerCreate'
 import InterviewQuestionAnswerEdit from '../../components/forms/form_interviewquestionanswerEdit'
+import InterviewQuestionAnswerDelete from '../../components/forms/form_interviewquestionanswerDelete'
 
 import { ROUTES_REACT } from '../../standards/routes'
 
 // action
-import { fetchCurrentUser } from '../../actions/index'
+import { getCurrentUserById } from '../../actions/index'
 
 const {
   dashboard,
@@ -43,10 +49,16 @@ const {
   lessons_create,
   lessons_edit,
   lessons_edit_id,
+  lessons_delete_id,
   interviewquestions_create,
   interviewquestions_edit,
+  interviewquestions_edit_id,
+  interviewquestions_delete_id,
   interviewquestionsanswers_create,
+  interviewquestionsanswers_create_id,
   interviewquestionsanswers_edit,
+  interviewquestionsanswers_edit_id,
+  interviewquestionsanswers_delete_id,
   interviewquestions,
   recursivedirectory,
   profile_edit,
@@ -111,6 +123,19 @@ export const REST_ROUTES_COMPONENTS = [
     )}
   },
   {
+    path: lessons_delete_id,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={
+          <LessonDelete 
+            {...props}
+          />}
+        titleBarContent={TITLE_BAR_LESSONS_EDIT}
+      />
+    )}
+  },
+  {
     path: interviewquestions_create,
     main: (props) => { return (
       <ContentPageWithTitleBar 
@@ -121,7 +146,7 @@ export const REST_ROUTES_COMPONENTS = [
     )}
   },
   {
-    path: interviewquestions_edit,
+    path: interviewquestions_edit_id,
     main: (props) => { return (
       <ContentPageWithTitleBar 
         {...props} 
@@ -130,26 +155,59 @@ export const REST_ROUTES_COMPONENTS = [
             {...props}
           />}
         titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_EDIT}
-        
       />
     )}
   },
   {
-    path: interviewquestionsanswers_create,
+    path: interviewquestions_delete_id,
     main: (props) => { return (
       <ContentPageWithTitleBar 
         {...props} 
-        formContent={<InterviewQuestionAnswerCreate />}
+        formContent={
+          <InterviewQuestionDelete 
+            {...props}
+          />}
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_DELETE}
+      />
+    )}
+  },
+  {
+    path: interviewquestionsanswers_create_id,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={
+          <InterviewQuestionAnswerCreate 
+            {...props}
+          />
+        }
         titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_CREATE}
       />
     )}
   },
   {
-    path: interviewquestionsanswers_edit,
+    path: interviewquestionsanswers_edit_id,
     main: (props) => { return (
       <ContentPageWithTitleBar 
         {...props} 
-        formContent={<InterviewQuestionAnswerEdit />}
+        formContent={
+          <InterviewQuestionAnswerEdit 
+            {...props}
+          />
+        }
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT}
+      />
+    )}
+  },
+  {
+    path: interviewquestionsanswers_delete_id,
+    main: (props) => { return (
+      <ContentPageWithTitleBar 
+        {...props} 
+        formContent={
+          <InterviewQuestionAnswerDelete
+            {...props}
+          />}
         titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT}
       />
     )}
@@ -177,7 +235,7 @@ class MainApp extends Component {
     // console.log('window', window)
     window.addEventListener('onbeforeunload', this.handleWindowResize)
     // console.log('compDidMount', this.props, 'state', this.state)
-    this.props.fetchCurrentUser();
+    this.props.getCurrentUserById();
   }
   
   componentWillUnmount(){
@@ -301,4 +359,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, { fetchCurrentUser })(MainApp);
+export default connect(mapStateToProps, { getCurrentUserById })(MainApp);
