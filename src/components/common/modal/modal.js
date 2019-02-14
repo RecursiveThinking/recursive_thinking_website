@@ -43,6 +43,17 @@ class Modal extends Component {
     }
   }
   
+  renderCloseButton(){
+    return (
+      <div className="modalClose">
+        <i 
+          onClick={this.props.onCloseRequest}
+          className="fs33 fw300 fa fa-times">
+        </i>
+      </div>
+    )
+  }
+  
   render(){
     console.log('props @ modal', this.props)
     // console.log('content', this.props.content.type)
@@ -50,6 +61,9 @@ class Modal extends Component {
     return (
       <div className="modal">
         <section className="modalCard" ref={node => (this.modal = node)}>
+          {/* {
+            this.props.showCloseButton && this.renderCloseButton()
+          } */}
           <div className="modalClose">
             <i 
               onClick={this.props.onCloseRequest}
