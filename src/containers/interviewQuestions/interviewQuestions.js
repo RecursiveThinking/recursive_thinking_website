@@ -124,6 +124,10 @@ class InterviewQuestions extends Component {
     })
   }
   
+  // handleDeleteItem = (intQuestionId) => {
+  //   console.log('log id of the intQuestion: ', intQuestionId)
+  // }
+  
   render(){
     const { 
       allUsers, 
@@ -196,6 +200,7 @@ class InterviewQuestions extends Component {
               allSkillsArr={allSkills}
               lookupTableAllSkills={lookupTableAllSkills}
               currentUser={currentUser}
+              // handleDeleteItem={this.handleDeleteItem}
             />
           </div>
         </main>
