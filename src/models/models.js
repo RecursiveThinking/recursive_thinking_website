@@ -81,18 +81,20 @@ export class InterviewQuestion {
     this.description = description;
     this.categories = categories;
     this.answersToQuestion = [];
-    this._createByUser = currentUserId;
+    this._createdByUser = currentUserId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
   }
 }
 
 export class InterviewQuestionAnswer {
-  constructor(title, description, currentUserId){
+  constructor(description, currentUserId){
     this.Id = v1();
-    this.title = title;
+    // this.title = title;
     this.description = description;
-    this._createByUser = currentUserId;
+    this._createdByUser = currentUserId;
+    this.upVotes = [];
+    this.downVotes = [];
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
   }
@@ -103,7 +105,7 @@ export class ProfileSkill {
     this.Id = v1();
     this.name = name;
     this._usersWithSkill = Array.from(currentUserId);
-    this._createByUser = currentUserId;
+    this._createdByUser = currentUserId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
   }
