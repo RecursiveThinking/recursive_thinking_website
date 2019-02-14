@@ -2,14 +2,19 @@ import React from 'react';
 
 import UnscheduledLessonsListItem from './unscheduledLessonsListItem'
 
-const unscheduledLesonsList = ({ allUnscheduledLessonsArr, currentUser, allUsersArr }) => {
+const unscheduledLesonsList = ({ allUnscheduledLessonsArr, currentUser, allUsersArr, handleDeleteItem }) => {
   
   // allUnscheduledLessonsArr.length = 0
   if(allUnscheduledLessonsArr.length){  
     let unscheduledListJSX = allUnscheduledLessonsArr.map(lesson => {
       return (
         <li key={lesson.Id} className="grid-cell">
-          <UnscheduledLessonsListItem currentUser={currentUser} lesson={lesson} allUsersArr={allUsersArr}/>
+          <UnscheduledLessonsListItem 
+            currentUser={currentUser} 
+            lesson={lesson} 
+            allUsersArr={allUsersArr}
+            handleDeleteItem={handleDeleteItem}
+          />
         </li>
       )
     })

@@ -32,7 +32,7 @@ const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr}) => {
   // this uses includes array method to return true or false
   let boolHasCurrentUserVotedOnLesson = LessonMethods.hasCurrentUserVotedOnLesson(lesson, currentUser[userId]);
   // console.log(boolHasCurrentUserVotedOnLesson)
-  let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.lessons_edit, lesson[_lessonCreatedBy], lesson[Id], 'fs20')
+  let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.lessons_edit, ROUTES_REACT.lessons_edit, ROUTES_REACT.lessons_delete, lesson[_lessonCreatedBy], lesson[Id], 'fs20')
   
   return (
     <article className="card fc--disp-flex fc--fdir-col">
