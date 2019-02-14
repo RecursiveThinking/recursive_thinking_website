@@ -1,7 +1,7 @@
 // this is the entire object.
-import { CREDENTIALS } from '../_credentials/cognitoCreds'
+import { CREDENTIALS } from '../credentials/cognitoCreds'
 import AWS from 'aws-sdk'
-
+// import { browserHistory } from 'react-router'
 
 import { getSignInUserSession, getCurrentAuthenticatedUser } from '../functions/authMethods';
 // import LessonMethods from '../functions/lessonMethods';
@@ -11,19 +11,35 @@ import {
   // SIGN_UP,
   // SIGN_IN,
   // SIGN_OUT,
-  FETCH_CURRENT_USER,
   FETCH_USERS,
+  GET_CURRENT_USER_BY_ID,
+  
   FETCH_LESSONS,
   CREATE_LESSON,
   GET_LESSON_BY_ID,
   EDIT_LESSON_BY_ID,
   DELETE_LESSON_BY_ID,
   SELECTED_LESSON,
+  
   FETCH_INTERVIEW_QUESTIONS,
   CREATE_INTERVIEW_QUESTION,
+  GET_INTERVIEW_QUESTION_BY_ID,
+  EDIT_INTERVIEW_QUESTION_BY_ID,
+  DELETE_INTERVIEW_QUESTION_BY_ID,
+  
   FETCH_INTERVIEW_QUESTIONS_ANSWERS,
+  CREATE_INTERVIEW_QUESTION_ANSWER,
+  GET_INTERVIEW_QUESTION_ANSWER_BY_ID,
+  EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID,
+  DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
+  
   FETCH_SKILLS,
-  FETCH_HOMESCREEN_QUOTES
+  CREATE_SKILL,
+  GET_SKILL_BY_ID,
+  EDIT_SKILL_BY_ID,
+  DELETE_SKILL_BY_ID,
+  
+  FETCH_HOMESCREEN_QUOTES,
 } from './action_types'
 
 import { ROUTES_API } from '../standards/routes'
@@ -46,7 +62,7 @@ const OPTIONS = {
   }
 }
 
-const initFetchCall = async (urlPath, optionConfig, endPointNeedsAuth, endPointNeedsACAOHeader) => {
+const initFetchCall = async (urlPath, optionConfig, endPointNeedsAuth) => {
 
   if(endPointNeedsAuth === true){
     const userInfo = await getSignInUserSession();
@@ -56,22 +72,26 @@ const initFetchCall = async (urlPath, optionConfig, endPointNeedsAuth, endPointN
     optionConfig.headers['Content-Type'] = 'application/json';
     // console.log('optionConfig', optionConfig)
   }
-  if(endPointNeedsACAOHeader === true){
-    optionConfig.headers['Access-Control-Allow-Origin'] = '*'
-  }
+  // if(endPointNeedsACAOHeader === true){
+  //   optionConfig.headers['Access-Control-Allow-Origin'] = '*'
+  // }
   console.log('optConfig', optionConfig)
   return fetch(urlPath, optionConfig)
     .then(response => response.json())
     .catch(error => error)
 }
 
-export const fetchCurrentUser = () => {
+export const getCurrentUserById = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}`
+  let funcOptions = {...OPTIONS}
+  funcOptions.method = HTTP_METHODS.get
   // console.log('currentUser', currentUser)
   return async dispatch => {
-    const currentUser = await getCurrentAuthenticatedUser()
+    // const currentUser = await getCurrentAuthenticatedUser()
+    const currentUser = await initFetchCall(URL, funcOptions, true)
     // console.log('userAtt', currentUser)
     dispatch({
-      type: FETCH_CURRENT_USER,
+      type: GET_CURRENT_USER_BY_ID,
       payload: currentUser
     })
   }
@@ -138,6 +158,8 @@ export const createLesson = (newLesson) => {
       type: CREATE_LESSON,
       payload: response
     })
+    // browserHistory.push('/lessons/unscheduledlessons')
+    // dispatch(push('/lessons/unscheduledlessons'))
   }
   
 }
@@ -150,6 +172,7 @@ export const getLessonById = (lessonId) => {
   
   return async (dispatch) => {
     const response = await initFetchCall(URL, funcOptions, true)
+    console.log('response @ getLessonByID: ', response)
     dispatch({
       type: GET_LESSON_BY_ID,
       payload: response
@@ -232,7 +255,19 @@ export const createInterviewQuestion = (newInterviewQuestion) => {
 }
 
 export const getInterviewQuestionById = (interviewquestionId) => {
+  console.log('intQuestId @ getInterviewQuestionById action: ', interviewquestionId);
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${interviewquestionId}`;
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.get;
   
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions, true);
+    console.log('response @ getIntQuestionByID: ', response)
+    dispatch({
+      type: GET_INTERVIEW_QUESTION_BY_ID,
+      payload: response
+    })
+  }
 }
 
 export const editInterviewQuestionById = (interviewquestionId, formValues) => {
@@ -240,7 +275,18 @@ export const editInterviewQuestionById = (interviewquestionId, formValues) => {
 }
 
 export const deleteInterviewQuestionById = (interviewquestionId) => {
+  console.log('intQuestId @ deleteIQById action: ', interviewquestionId)
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${interviewquestionId}`
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.delete;
   
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions, true);
+    dispatch({
+      type: DELETE_INTERVIEW_QUESTION_BY_ID,
+      payload: response
+    })
+  }
 }
 
 export const fetchInterviewQuestionsAnswers = () => {
@@ -260,19 +306,58 @@ export const fetchInterviewQuestionsAnswers = () => {
 
 }
 
-export const createInterviewQuestionAnswer = () => {
+export const createInterviewQuestionAnswer = (newInterviewQuestionAnswer) => {
+  console.log('newIntQuestAnswer @ createIntQuestionAnswer action: ', newInterviewQuestionAnswer);
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}`
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.post;
+  funcOptions.body = JSON.stringify(AWS.DynamoDB.Converter.marshall(newInterviewQuestionAnswer));
+  console.log('funcOptions @ createIntQuestionAnswer: ', funcOptions);
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions, true);
+    dispatch({
+      type: CREATE_INTERVIEW_QUESTION_ANSWER,
+      payload: response
+    })
+  }
   
 }
 
-export const getInterviewQuestionAnswerById = () => {
+export const getInterviewQuestionAnswerById = (interviewquestionanswerId) => {
+  console.log('intQuestionAnswerId @ getInterviewQuestionAnswerById action: ', interviewquestionanswerId);
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${interviewquestionanswerId}`;
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.get;
   
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions, true);
+    console.log('response @ getIntQuestionAnswerById: ', response);
+    dispatch({
+      type: GET_INTERVIEW_QUESTION_ANSWER_BY_ID,
+      payload: response
+    })
+  }
 }
 
 export const editInterviewQuestionAnswerById = () => {
   
 }
 
-export const deleteInterviewQuestionAnswerById = () => {
+export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId) => {
+  console.log('intQuestAnswerId @ deleteIQAById action: ', interviewquestionanswerId);
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${interviewquestionanswerId}`;
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.delete;
+  
+  return async (dispatch) => {
+    const response = await initFetchCall(URL, funcOptions, true);
+    console.log('response @ deleteIntQuestionAnswerById: ', response);
+    dispatch({
+      type: DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
+      payload: response
+    })
+  }
   
 }
 
