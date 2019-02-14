@@ -33,15 +33,16 @@ export default class utilityMethods {
     //   return null
     // }
   }
-  static generateOptionsList(currentUserId, isCurrentUserAdmin, pathForLink, itemCreatedByUserId, itemId, size){
+  static generateOptionsList(currentUserId, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedByUserId, itemId, size){
     let optionListVar = [ 'ban', 'edit', 'delete']
-    function returnOptionsList(item, currentUser, isCurrentUserAdmin, pathForLink, itemCreatedBy, itemIdent, sizeP, indexP){
+    function returnOptionsList(item, currentUser, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, itemIdent, sizeP, indexP){
       if(item === 'ban'){
         let classString = `${sizeP} fcAlert fa fa-ban`
         return (
-          <li key={indexP}>
-            <i className={classString}></i>
-          </li>
+          // <li key={indexP}>
+          //   <i className={classString}></i>
+          // </li>
+          null
         )
       }
       else if(item === 'edit'){
@@ -49,7 +50,7 @@ export default class utilityMethods {
           let classString = `${sizeP} fcGreenRT fa fa-pencil`
           return (
             <li key={indexP}>
-              <Link to={`${pathForLink}/${itemIdent}`}>
+              <Link to={`${pathForEditLink}/${itemIdent}`}>
                 <i className={classString}></i>
               </Link>
             </li>
@@ -61,14 +62,58 @@ export default class utilityMethods {
           let classString = `${sizeP} fcWarn fa fa-trash-o`
           return (
             <li key={indexP}>
-              <i className={classString}></i>
+              <Link to={`${pathForDeleteLink}/${itemIdent}`}>
+                <i className={classString}></i>
+              </Link>
             </li>
           )
         }
       }
     }
     let createOptionList = optionListVar.map((listItem, index) => {
-      return returnOptionsList(listItem, currentUserId, isCurrentUserAdmin, pathForLink, itemCreatedByUserId, itemId, size, index)
+      return returnOptionsList(listItem, currentUserId, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedByUserId, itemId, size, index)
+    })
+    return createOptionList
+  }
+  static generateOptionsListAnswers(currentUserId, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedByUserId, itemId, size){
+    let optionListVar = [ 'ban', 'edit', 'delete']
+    function returnOptionsListAnswers(item, currentUser, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, answerId, sizeP, indexP){
+      if(item === 'ban'){
+        let classString = `${sizeP} fcAlert fa fa-ban`
+        return (
+          // <li key={indexP}>
+          //   <i className={classString}></i>
+          // </li>
+          null
+        )
+      }
+      else if(item === 'edit'){
+        if(currentUser === itemCreatedBy || isCurrentUserAdmin){
+          let classString = `${sizeP} fcGreenRT fa fa-pencil`
+          return (
+            <li key={indexP}>
+              <Link to={`/interviewquestions/${questionId}/answers/edit/${answerId}`}>
+                <i className={classString}></i>
+              </Link>
+            </li>
+          )
+        }
+      }
+      else if(item === 'delete'){
+        if(currentUser === itemCreatedBy || isCurrentUserAdmin){
+          let classString = `${sizeP} fcWarn fa fa-trash-o`
+          return (
+            <li key={indexP}>
+              <Link to={`/interviewquestions/${questionId}/answers/delete/${answerId}`}>
+                <i className={classString}></i>
+              </Link>
+            </li>
+          )
+        }
+      }
+    }
+    let createOptionList = optionListVar.map((listItem, index) => {
+      return returnOptionsListAnswers(listItem, currentUserId, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedByUserId, itemId, size, index)
     })
     return createOptionList
   }
