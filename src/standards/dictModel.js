@@ -60,7 +60,7 @@ const dictModel = {
   },
   intQuestionAnswer: {
     Id: 'Id',
-    title: 'title',
+    // title: 'title',
     description: 'description',
     _createdByUser: '_createdByUser',
     createdAt: 'createdAt',
