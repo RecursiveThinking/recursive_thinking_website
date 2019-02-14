@@ -56,6 +56,13 @@ export const TITLE_BAR_LESSONS_EDIT = {
   link: unscheduledlessons
 }
 
+// export const TITLE_BAR_LESSONS_DELETE = {
+//   heading: 'Delete This Lesson Request',
+//   subheading: 'Or Click on the Button to Return to All Lessons',
+//   buttontext: 'Go Back to Unscheduled Lessons',
+//   link: unscheduledlessons
+// }
+
 export const TITLE_BAR_INTERVIEWQUESTIONS = {
   heading: 'Submit an Interview Question',
   subheading: 'Have you come across an interview question you would like to share?',
@@ -71,6 +78,13 @@ export const TITLE_BAR_INTERVIEWQUESTIONS_CREATE = {
 }
 
 export const TITLE_BAR_INTERVIEWQUESTIONS_EDIT = {
+  heading: 'Edit Your Interview Question Below',
+  subheading: 'Or Click on the Button to Return to All Interview Questions',
+  buttontext: 'Go Back to Interview Questions',
+  link: interviewquestions
+}
+
+export const TITLE_BAR_INTERVIEWQUESTIONS_DELETE = {
   heading: 'Edit Your Interview Question Below',
   subheading: 'Or Click on the Button to Return to All Interview Questions',
   buttontext: 'Go Back to Interview Questions',
