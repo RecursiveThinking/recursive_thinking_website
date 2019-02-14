@@ -6,8 +6,8 @@
 
 import { Auth } from 'aws-amplify';
 
-export const signUp = ({username, password, email, name}) => {
-  Auth.signUp(
+export const signUp = async ({username, password, email, name}) => {
+  await Auth.signUp(
     {
       username,
       password,
@@ -17,8 +17,14 @@ export const signUp = ({username, password, email, name}) => {
         // other custom attributes 
       }
     })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+    .then(data => {
+      console.log('data: ', data)
+      return data;
+    })
+    .catch(err => {
+      console.log('err: ', err)
+      return err;
+    });
 }
 
 export const confirmSignUp = ({username, code}) => {
