@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Modal from '../../common/modal/modal'
 import { SignUpFormEx, VerifyAccountFormEx, SignInFormEx } from '../../forms/forms_auth'
 
-
 import { ROUTES_REACT } from '../../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 
@@ -74,7 +73,8 @@ class Header extends Component {
                       onCloseRequest={() => this.handleToggleModalSignUp()}
                       content={
                         <SignUpFormEx 
-                          handleToggleModalSignUpClose={() => this.handleToggleModalSignUp()}
+                          closeModalSignup={() => this.handleToggleModalSignUp()}
+                          openModalVerifyAccount={() => this.handleToggleModalVerifyAccount()}
                         />
                       }
                     />
@@ -89,7 +89,11 @@ class Header extends Component {
                     
                     <Modal
                       onCloseRequest={() => this.handleToggleModalSignIn()}
-                      content={<SignInFormEx />}
+                      content={
+                        <SignInFormEx 
+                      
+                        />
+                      }
                     />
                   }
                 <button 
@@ -101,7 +105,11 @@ class Header extends Component {
                     
                     <Modal
                       onCloseRequest={() => this.handleToggleModalVerifyAccount()}
-                      content={<VerifyAccountFormEx />}
+                      content={
+                        <VerifyAccountFormEx
+                      
+                        />
+                      }
                     />
                   }
               </nav>
