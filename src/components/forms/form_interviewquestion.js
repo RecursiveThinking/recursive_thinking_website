@@ -7,7 +7,7 @@ import { FORM_ACTION_INTERVIEWQUESTIONS_CREATE } from '../common/formAction/form
 import ValidationMethods from '../../functions/validationMethods'
 
 class InterviewQuestionForm extends Component {
-  onSubmit(formValues){
+  onSubmit = (formValues) =>{
     console.log('formVals @ Interview Questions', formValues)
     this.props.onSubmit(formValues);
   }
@@ -38,14 +38,18 @@ class InterviewQuestionForm extends Component {
   }
   
   render(){
+    const {
+      content
+    } = this.props
     return (
       <form
         className="height100P"
         onSubmit={this.props.handleSubmit(this.onSubmit)}
+        style={{padding: '1.5rem 1.5rem'}}
       >
           <article className="card">
             <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-              <h2 className="fs33 fw300 ls24 fcBlack ta-cent">Submit an Interview Question</h2>
+              <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2>
               <hr className="modalHR mt10" />
                 <div className="fc-fieldset">
                   <Field 

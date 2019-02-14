@@ -14,22 +14,32 @@ class InterviewQuestionEdit extends Component {
   onSubmit = (formValues) => {
     console.log('formVals @ InterviewQuestion Edit', formValues)
     // action creator
-    // this.props.editLessonById(formValues)
+    // this.props.editInterviewQuestionById(formValues)
   }
   
   render(){
-    
     console.log('props @ IntQuestEdit: ', this.props);
     console.log('params', this.props.match.params.id);
-    
+    // if no intQuestion
+    if(!this.props.interviewQuestionById){
+      return (
+        <div>
+          Loading!
+        </div>
+      )
+    }
+    const {
+      title,
+      description
+    } = this.props.interviewQuestionById
     return(
       <>
         <InterviewQuestionForm 
           onSubmit={this.onSubmit}
           content={FORM_HEADING_INTERVIEWQUESTION_EDIT}
           initialValues={{
-            interviewQuestionTitle: 'IntQuest Title',
-            interviewQuestionDetails: 'IntQuest Details'
+            interviewQuestionTitle: title,
+            interviewQuestionDetails: description
           }}
         />
       </>

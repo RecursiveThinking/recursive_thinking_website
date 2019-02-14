@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
-import { createInterviewQuestion } from '../../actions'
+// import { createInterviewQuestion } from '../../actions'
 
 import InterviewQuestionForm from './form_interviewquestion';
 import { FORM_HEADING_INTERVIEWQUESTION_CREATE } from '../common/formContent/formContent';
 import { InterviewQuestion } from '../../models/models'
 
-import { fetchCurrentUser } from '../../actions/index'
+import { getCurrentUserById, createInterviewQuestion } from '../../actions/index'
 
 class InterviewQuestionCreate extends Component {
   componentDidMount(){
-    this.props.fetchCurrentUser();
+    this.props.getCurrentUserById();
   }
   
   onSubmit = (formValues) => {
-    const createdByUserId = this.props.currentUser.attributes.sub;
+    // const createdByUserId = this.props.currentUser.attributes.sub;
+    const createdByUserId = this.props.currentUser.userId;
     console.log('formVals @ intQuestCreate Component: ', formValues, createdByUserId)
-    const newInterviewQuestion = new InterviewQuestion(formValues.interviewQuestionTitle, formValues.interviewQuestionDetails, createdByUserId)
+    const newInterviewQuestion = new InterviewQuestion(formValues.interviewQuestionTitle, formValues.interviewQuestionDetails, [], createdByUserId)
     console.log('newIntQuest @ intQuestCreate: ', newInterviewQuestion)
     this.props.createInterviewQuestion(newInterviewQuestion)
   }
@@ -42,5 +43,5 @@ function mapStateToProps(state){
 
 export default connect(
   mapStateToProps,
-  { createInterviewQuestion, fetchCurrentUser }
+  { createInterviewQuestion, getCurrentUserById }
 )(InterviewQuestionCreate)
