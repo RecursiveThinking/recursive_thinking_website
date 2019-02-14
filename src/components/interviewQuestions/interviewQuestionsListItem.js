@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import CategoryList from '../../components/common/category/categoryList'
 import InterviewQuestionsAnswersList from './interviewQuestionsAnswersList'
 
-// import Modal from '../../components/common/modal/modal'
+import Modal from '../../components/common/modal/modal'
 // import { CreateInterviewQuestionAnswerFormEx } from '../forms/forms_interviewquestionanswer'
 import { ROUTES_REACT } from '../../standards/routes'
 
@@ -25,7 +25,7 @@ class InterviewQuestionsListItem extends Component {
     this.state = {
       isIntQuestAnswerClassOpen: 'fc-replies',
       answerBlockClassString: 'answers display-none',
-      showModalAnswer: false,
+      // showModalAnswer: false,
     }
   }
   
@@ -47,7 +47,16 @@ class InterviewQuestionsListItem extends Component {
     this.setState({ showModalAnswer: !this.state.showModalAnswer})
   }
   
-
+  handleToggleModalDelete = () => {
+    this.setState({ showModalDelete: !this.state.showModalDelete})    
+  }
+  
+  handleDeleteItem = (intQuestionId) => {
+    console.log('log id of the intQuestion: ', intQuestionId)
+    this.setState({ showModalDelete: !this.state.showModalDelete})
+  }
+  
+  
   render(){
     const {
       allUsersArr,
@@ -76,13 +85,16 @@ class InterviewQuestionsListItem extends Component {
       }
     } = DM;
     
+    // console.log('intQuestListItem: ', intQuestion[Id])
+    
     let ANSWER_STRING = '';
     if(this.state.isIntQuestAnswerClassOpen === 'fc-replies open'){
       ANSWER_STRING = `Answers`
     } else {
       ANSWER_STRING = `${intQuestion.answersToQuestion.length} Answers`
     }
-    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_edit, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
+    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_ban,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_delete, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
+    // console.log('optionList', currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_edit, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
     // need to make an array to pass to the categoryList
     let formattedDate = DateMethods.getFormattedDate(intQuestion[createdAt])
     return (
@@ -92,9 +104,9 @@ class InterviewQuestionsListItem extends Component {
             <h5 className="fw600 ls16 fcGrey424041">{intQuestion[title]}</h5>
           </div>
           <div className="grid-cell fc--disp-flex fc--jCont-fe fc--aItem-ce">
-            <div className="listOptions fc--disp-flex">
+            <ul className="listOptions fc--disp-flex">
               {optionList}
-            </div>
+            </ul>
             <h6 className="fs18 fw300 ls16 fcGrey64 ml40">{formattedDate['upComingDateStringAmericanNaming']}</h6>
           </div>
         </div>
@@ -124,10 +136,11 @@ class InterviewQuestionsListItem extends Component {
                 intQuestionAnswers={intQuestion[answersToQuestion]}
                 allInterviewQuestionsAnswersArr={allInterviewQuestionsAnswers}
                 lookupTableInterviewQuestionsAnswers={lookupTableInterviewQuestionsAnswers}
+                intQuestionId={intQuestion[Id]}
               />
               
             </div>
-            <Link to={interviewquestionsanswers_create}>
+            <Link to={`${interviewquestionsanswers_create}/${intQuestion[Id]}`}>
               <button className="btn btnFillClrSchGreen00b371 fs16 fw500 ls12 ta-cent pdTB1p25LR2p5">Answer Question</button>
             </Link>
               {/* {
@@ -140,6 +153,19 @@ class InterviewQuestionsListItem extends Component {
                       intQuestion={intQuestion} 
                       allSkillsArr={allSkillsArr}
                       lookupTableAllSkills={lookupTableAllSkills}
+                    />
+                  }
+                />
+              } */}
+              
+              {/* {
+                this.state.showModalDelete && 
+                
+                <Modal 
+                  onCloseRequest={() => this.handleToggleModalDelete()}
+                  content={
+                    <DeleteInterviewQuestionFormEx
+                      intQuestion={intQuestion}
                     />
                   }
                 />
