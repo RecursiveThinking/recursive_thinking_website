@@ -12,6 +12,7 @@ import React from 'react'
 // console.log(categoriesObj)
 
 const categoryList = ({categories, allSkillsArr, lookupTableAllSkills}) => {
+  // console.log('categories', categories, 'allSkillsArr', allSkillsArr, 'lookupTableAllSkills', lookupTableAllSkills)
   if(!categories.length){
     // console.log('there is nothing to render')
     return (
