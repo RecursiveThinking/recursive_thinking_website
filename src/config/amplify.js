@@ -1,6 +1,6 @@
-import Creds from '../_credentials/secrets/cognitoSecrets.json'
+import Creds from '../credentials/secrets/cognitoSecrets.json'
 // console.log(creds);
-import s3Creds from '../_credentials/secrets/s3UploadSecrets.json'
+import s3Creds from '../credentials/secrets/s3UploadSecrets.json'
 import Amplify from 'aws-amplify';
 
 Amplify.configure({
