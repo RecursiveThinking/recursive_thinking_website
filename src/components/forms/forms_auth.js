@@ -5,30 +5,56 @@ import ValidationMethods from '../../functions/validationMethods'
 import { signUp, confirmSignUp, signIn, signInGetUserInfo } from '../../functions/authMethods'
 
 class SignUpModalForm extends Component {
-  // constructor(props){
-  //   super(props);
+  constructor(props){
+    super(props);
     
   //   // this.handleModalCloseOnSubmit = this.handleModalCloseOnSubmit.bind(this);
-  // }
+    // this.closeModalSignup = this.closeModalSignup.bind(this);
+    // this.openModalVerifyAccount = this.openModalVerifyAccount.bind();
+  }
   
   componentDidMount(){
   }
   
+  
+  
   onSubmit(formValues){
-    // const { handleModalCloseOnSubmit } = this.props
+    // const { 
+    //   closeModalSignup,
+    //   openModalVerifyAccount
+    // } = this.props
     // redux form does the event.prevent default automatically 
     // also, don't need event at all, but we do need to pass a param that represents the formValues
     // console.log('formVals', formValues);
     // console.log('auth meth', signUp)
+    // console.log('this.props @ onSubmit: ', this.props)
     const params = {
       username: formValues.username,
       password: formValues.password,
       email: formValues.email,
       name: formValues.name
     }
-    signUp(params);
-    // this.props.closeModalAfterSubmit();
-    // console.log('want to close the modal here', handleModalCloseOnSubmit)
+    // this is async
+    // {
+    //   code: "UsernameExistsException"
+    //   message: "User already exists"
+    //   name: "UsernameExistsException"
+    // }
+    signUp(params)
+      .then(whatReturns => {
+        // here close
+        // if( whatReturns.user){
+          // this.props.closeModalSignup();
+          // this.props.openModalVerifyAccount();
+          // closeModalSignup();
+          // openModalVerifyAccount();
+          
+        // }
+        return whatReturns;
+      })
+      .catch(error => {
+        // here don't close
+      })
   }
   
   renderField(field){
@@ -58,7 +84,7 @@ class SignUpModalForm extends Component {
   }
   
   render(){
-    console.log('this.props in form', this.props)
+    console.log('this.props in SignUp form', this.props)
     return (
       <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
         <h2 className="fs33 fw300 ls24 fcBlack ta-cent">Sign Up</h2>
@@ -394,7 +420,7 @@ function validate(values){
   if(values.confirmCode){
     const confirmCodeCharLimit = 6
     if(!ValidationMethods.isWordOverCharLimit(values.confirmCode, confirmCodeCharLimit)){ errors.confirmCode = `Confirmation Codes must be at least ${confirmCodeCharLimit} Characters`}
-    if(!ValidationMethods.isValidVerificationCode(values.confirmCode)){ errors.confirmCode = `Invalid Confirmation Code`}
+    // if(!ValidationMethods.isValidVerificationCode(values.confirmCode)){ errors.confirmCode = `Invalid Confirmation Code`}
   }
   // these are signin modal
   if(!values.usernameLogin || !values.passwordLogin){ errors.passwordLogin = 'Please enter a Valid Username/Password Combination' }
