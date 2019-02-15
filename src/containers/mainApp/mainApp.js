@@ -16,11 +16,13 @@ import ContentPageWithTitleBar from '../../components/common/contentPage/content
 import { 
   TITLE_BAR_LESSONS_CREATE,
   TITLE_BAR_LESSONS_EDIT,
+  TITLE_BAR_LESSONS_DELETE,
   TITLE_BAR_INTERVIEWQUESTIONS_CREATE, 
   TITLE_BAR_INTERVIEWQUESTIONS_EDIT, 
   TITLE_BAR_INTERVIEWQUESTIONS_DELETE, 
   TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_CREATE,
-  TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT
+  TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT,
+  TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_DELETE
 } from '../../components/common/contentPage/contentPageTitleBarInfo'
 
 
@@ -131,7 +133,7 @@ export const REST_ROUTES_COMPONENTS = [
           <LessonDelete 
             {...props}
           />}
-        titleBarContent={TITLE_BAR_LESSONS_EDIT}
+        titleBarContent={TITLE_BAR_LESSONS_DELETE}
       />
     )}
   },
@@ -208,7 +210,7 @@ export const REST_ROUTES_COMPONENTS = [
           <InterviewQuestionAnswerDelete
             {...props}
           />}
-        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT}
+        titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_DELETE}
       />
     )}
   }
