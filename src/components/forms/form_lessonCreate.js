@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createLesson } from '../../actions'
 
 import LessonForm from './form_lesson'
-import { FORM_HEADING_LESSON_CREATE } from '../common/formContent/formContent'
+import { FORM_HEADING_LESSON_CREATE } from './formContent/formContent'
 import { Lesson } from '../../models/models';
 
 import { getCurrentUserById } from '../../actions/index'

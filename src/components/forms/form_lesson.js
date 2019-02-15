@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import FormAction from '../common/formAction/formAction';
-import { FORM_ACTION_LESSONS_CREATE } from '../common/formAction/formActionInfo';
-
 import ValidationMethods from '../../functions/validationMethods';
 
 class LessonForm extends Component {
@@ -38,7 +35,21 @@ class LessonForm extends Component {
       </div>
     )
   }
-
+  
+  renderHeadingContent(){
+    const {
+      content
+    } = this.props;
+    if(!this.props.lesson){
+      return (
+        <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5>
+      )
+    } else {
+      return (
+        <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}{this.props.lesson['title']}</h5>
+      )
+    }
+  }
   
   render(){
     const {
@@ -48,7 +59,9 @@ class LessonForm extends Component {
       <section style={{padding: '1.5rem 1.5rem'}}>
         <article className="card">
           <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-            <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2>
+            {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
+            {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
+            <h5 className="fw700 ls14 ttup fcGrey424041">{this.renderHeadingContent()}</h5>
             <hr className="modalHR mt10" />
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <div className="fc-fieldset">
@@ -82,7 +95,11 @@ class LessonForm extends Component {
               </div> 
               <hr className="modalHR mt80" />
               <div className="ta-cent">
-                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Submit Lesson</button>
+                {
+                  this.props.anyTouched && !this.props.invalid &&
+                  
+                  <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+                }
               </div>
             </form>
           </fieldset>

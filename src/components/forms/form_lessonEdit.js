@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getLessonById, editLessonById } from '../../actions'
 
 import LessonForm from './form_lesson'
-import { FORM_HEADING_LESSON_EDIT } from '../common/formContent/formContent'
+import { FORM_HEADING_LESSON_EDIT } from './formContent/formContent'
 
 class LessonEdit extends Component {
   
@@ -43,6 +43,7 @@ class LessonEdit extends Component {
             lessonTitle: title,
             lessonDescription: description
           }}
+          lesson={this.props.lessonById}
         />
       </>
     )
