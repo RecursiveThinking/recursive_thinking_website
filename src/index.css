@@ -1986,6 +1986,18 @@ h5 {
   color: var(--white-ff);
 }
 
+.btn.btnFillClrSchWarn {
+  border: var(--btn-brdr-thickness) solid var(--warn);
+  background-color: var(--warn);
+  color: var(--white-ff);
+}
+
+.btn.btnFillClrSchWarn:hover {
+  border: var(--btn-brdr-thickness) solid var(--warn);
+  background-color: var(--white-ff);
+  color: var(--warn);
+}
+
 .btn.btnOutlineClrSchGreen2d3134,
 .btn.btnFillClrSchGreen2d3134:hover {
   border: var(--btn-brdr-thickness) solid var(--green-2d3134);
@@ -2008,13 +2020,15 @@ h5 {
   color: var(--grey-b9);
 }
 
-.btn.btnTemp {
+.btn.btnTemp,
+.btn.btnFillGreyB9:hover {
   border: var(--btn-brdr-thickness) solid var(--grey-b9);
   background-color: var(--white-ff);
   color: var(--grey-b9);
 }
 
-.btn.btnTemp:hover {
+.btn.btnTemp:hover,
+.btn.btnFillGreyB9 {
   border: var(--btn-brdr-thickness) solid var(--grey-b9);
   background-color: var(--grey-b9);
   color: var(--white-ff);
