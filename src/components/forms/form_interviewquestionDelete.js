@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ModalDelete from '../common/modal/modalDelete';
+// import ModalDelete from '../common/modal/modalDelete';
 
 import { connect } from 'react-redux';
 import { getInterviewQuestionById, deleteInterviewQuestionById } from '../../actions/index';
