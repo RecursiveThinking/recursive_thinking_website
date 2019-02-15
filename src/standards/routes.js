@@ -36,7 +36,7 @@ export const ROUTES_REACT = {
   
   interviewquestionsanswers: `${ROUTES_API.interviewquestionsanswers}`,
   // interviewquestionsanswers_create: `${ROUTES_API.interviewquestionsanswers}${CEDV.create}`,
-  interviewquestionsanswers_create: `${ROUTES_API.interviewquestions}${CEDV.create}`,
+  interviewquestionsanswers_create: `${ROUTES_API.interviewquestions}`,
   // interviewquestionsanswers_create_id: `${ROUTES_API.interviewquestionsanswers}${CEDV.create}/:id`,
   interviewquestionsanswers_create_id: `${ROUTES_API.interviewquestions}/:id/answers${CEDV.create}`,
   interviewquestionsanswers_edit: `${ROUTES_API.interviewquestions}/:questId/answers${CEDV.edit}`,
