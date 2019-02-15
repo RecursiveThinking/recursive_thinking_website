@@ -140,7 +140,7 @@ class InterviewQuestionsListItem extends Component {
               />
               
             </div>
-            <Link to={`${interviewquestionsanswers_create}/${intQuestion[Id]}`}>
+            <Link to={`${interviewquestionsanswers_create}/${intQuestion[Id]}/answers/create`}>
               <button className="btn btnFillClrSchGreen00b371 fs16 fw500 ls12 ta-cent pdTB1p25LR2p5">Answer Question</button>
             </Link>
               {/* {
