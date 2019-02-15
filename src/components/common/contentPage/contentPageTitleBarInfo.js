@@ -44,24 +44,24 @@ export const TITLE_BAR_LESSONS = {
 
 export const TITLE_BAR_LESSONS_CREATE = {
   heading: 'Create A Lesson',
-  subheading: 'Or Click on the Button to Return to All Lessons',
+  subheading: 'Or Click on the Button to Return to All Unscheduled Lessons',
   buttontext: 'Go Back to Unscheduled Lessons',
   link: unscheduledlessons
 }
 
 export const TITLE_BAR_LESSONS_EDIT = {
   heading: 'Edit This Lesson Request',
-  subheading: 'Or Click on the Button to Return to All Lessons',
+  subheading: 'Or Click on the Button to Return to All Unscheduled Lessons',
   buttontext: 'Go Back to Unscheduled Lessons',
   link: unscheduledlessons
 }
 
-// export const TITLE_BAR_LESSONS_DELETE = {
-//   heading: 'Delete This Lesson Request',
-//   subheading: 'Or Click on the Button to Return to All Lessons',
-//   buttontext: 'Go Back to Unscheduled Lessons',
-//   link: unscheduledlessons
-// }
+export const TITLE_BAR_LESSONS_DELETE = {
+  heading: 'Delete Lesson',
+  subheading: 'Or Click on the Button to Return to All Unscheduled Lessons',
+  buttontext: 'Go Back to Unscheduled Lessons',
+  link: unscheduledlessons
+}
 
 export const TITLE_BAR_INTERVIEWQUESTIONS = {
   heading: 'Submit an Interview Question',
@@ -85,9 +85,9 @@ export const TITLE_BAR_INTERVIEWQUESTIONS_EDIT = {
 }
 
 export const TITLE_BAR_INTERVIEWQUESTIONS_DELETE = {
-  heading: 'Edit Your Interview Question Below',
+  heading: 'Delete Interview Question',
   subheading: 'Or Click on the Button to Return to All Interview Questions',
-  buttontext: 'Go Back to Interview Questions',
+  buttontext: 'Go Back to Unscheduled Lessons',
   link: interviewquestions
 }
 
@@ -100,6 +100,13 @@ export const TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_CREATE = {
 
 export const TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_EDIT = {
   heading: 'Edit Your Interview Question Answer Below',
+  subheading: 'Or Click on the Button to Return to All Interview Questions',
+  buttontext: 'Go Back to Interview Questions',
+  link: interviewquestions
+}
+
+export const TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_DELETE = {
+  heading: 'Delete Interview Question Answer',
   subheading: 'Or Click on the Button to Return to All Interview Questions',
   buttontext: 'Go Back to Interview Questions',
   link: interviewquestions
