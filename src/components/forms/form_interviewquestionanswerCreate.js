@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import InterviewQuestionAnswerForm from './form_interviewquestionanswer';
 import { InterviewQuestionAnswer } from '../../models/models'
 import { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer } from '../../actions/index'
-import { FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE } from '../common/formContent/formContent'
+import { FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE } from './formContent/formContent'
 
 
 class InterviewQuestionCreate extends Component {

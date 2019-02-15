@@ -78,7 +78,7 @@ class InterviewQuestionAnswerForm extends Component {
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <div className="fc-fieldset">
                 <Field
-                  label="Enter your Answer"
+                  label={content.labelAnswer}
                   name="interviewQuestionAnswerDescription"
                   placeholder="Description"
                   component={this.renderField}
@@ -86,7 +86,11 @@ class InterviewQuestionAnswerForm extends Component {
               </div>
               <hr className="modalHR mt130" />
               <div className="ta-cent">
-                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">Submit Answer</button>
+                {
+                  this.props.anyTouched && !this.props.invalid &&
+                  
+                  <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+                }
               </div>
             </form>
           {/* </fieldset> */}

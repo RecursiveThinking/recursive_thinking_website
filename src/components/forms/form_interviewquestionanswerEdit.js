@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById } from '../../actions';
 
 import InterviewQuestionAnswerForm from './form_interviewquestionanswer';
-import { FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT } from '../common/formContent/formContent'
+import { FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT } from './formContent/formContent'
 
 class InterviewQuestionAnswerEdit extends Component {
   componentDidMount(){
