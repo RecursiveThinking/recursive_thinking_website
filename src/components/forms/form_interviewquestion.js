@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import FormAction from '../common/formAction/formAction'
-import { FORM_ACTION_INTERVIEWQUESTIONS_CREATE } from '../common/formAction/formActionInfo'
-
 import ValidationMethods from '../../functions/validationMethods'
 
 class InterviewQuestionForm extends Component {
@@ -37,56 +34,76 @@ class InterviewQuestionForm extends Component {
     )
   }
   
+  renderHeadingContent(){
+    const {
+      content
+    } = this.props;
+    if(!this.props.intQuestion){
+      return (
+        <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5>
+      )
+    } else {
+      return (
+        <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}{this.props.intQuestion['title']}</h5>
+      )
+    }
+  }
+  
   render(){
     const {
       content
     } = this.props
+    
     return (
-      <form
-        className="height100P"
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-        style={{padding: '1.5rem 1.5rem'}}
-      >
-          <article className="card">
-            <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-              <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2>
-              <hr className="modalHR mt10" />
-                <div className="fc-fieldset">
-                  <Field 
-                    label="Question Title:"
-                    name="interviewQuestionTitle"
-                    type="text"
-                    placeholder="Question Title"
-                    component={this.renderField}
-                    labelStyle="width100P"
-                    inputStyle="width100P"
-                    />
-                  <Field 
-                    label="Question Details:"
-                    name="interviewQuestionDetails"
-                    type="text"
-                    placeholder="Question Details"
-                    component={this.renderField}
-                    labelStyle="width100P"
-                    inputStyle="width100P"
-                    />
-                  {/* <Field
-                    label="Tag profession, skills and languages:"
-                    name="interviewQuestionTags"
-                    type="text"
-                    placeholder="Enter at Least One Tag for this Interview Question"
-                    component={this.renderField}
-                    labelStyle="width100P"
-                    inputStyle="width100P"
-                  /> */}
-                </div>
-            </fieldset>
-          </article>
-      {
-        this.props.anyTouched && !this.props.invalid &&
-        <FormAction content={FORM_ACTION_INTERVIEWQUESTIONS_CREATE}/>
-      }
-      </form>
+      <section style={{padding: '1.5rem 1.5rem'}}>
+        <article className="card">
+          <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+            {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
+            {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
+            <h5 className="fw700 ls14 ttup fcGrey424041">{this.renderHeadingContent()}</h5>
+            <hr className="modalHR mt10" />
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+              <div className="fc-fieldset">
+                <Field 
+                  label="Question Title:"
+                  name="interviewQuestionTitle"
+                  type="text"
+                  placeholder="Question Title"
+                  component={this.renderField}
+                  labelStyle="width100P"
+                  inputStyle="width100P"
+                  />
+                <Field 
+                  label="Question Details:"
+                  name="interviewQuestionDetails"
+                  type="text"
+                  placeholder="Question Details"
+                  component={this.renderField}
+                  labelStyle="width100P"
+                  inputStyle="width100P"
+                  />
+                {/* <Field
+                  label="Tag profession, skills and languages:"
+                  name="interviewQuestionTags"
+                  type="text"
+                  placeholder="Enter at Least One Tag for this Interview Question"
+                  component={this.renderField}
+                  labelStyle="width100P"
+                  inputStyle="width100P"
+                /> */}
+              </div>
+              <hr className="modalHR mt80" />
+            <div className="ta-cent">
+              {
+                this.props.anyTouched && !this.props.invalid &&
+                
+                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+              }
+            </div>
+            </form>
+          </fieldset>
+        </article>
+      </section>
     )
   }
 }

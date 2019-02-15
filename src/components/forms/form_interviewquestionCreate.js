@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import { createInterviewQuestion } from '../../actions'
 
 import InterviewQuestionForm from './form_interviewquestion';
-import { FORM_HEADING_INTERVIEWQUESTION_CREATE } from '../common/formContent/formContent';
+import { FORM_HEADING_INTERVIEWQUESTION_CREATE } from './formContent/formContent';
 import { InterviewQuestion } from '../../models/models'
 
 import { getCurrentUserById, createInterviewQuestion } from '../../actions/index'
