@@ -18,16 +18,7 @@ class SignUpModalForm extends Component {
   
   
   
-  onSubmit(formValues){
-    // const { 
-    //   closeModalSignup,
-    //   openModalVerifyAccount
-    // } = this.props
-    // redux form does the event.prevent default automatically 
-    // also, don't need event at all, but we do need to pass a param that represents the formValues
-    // console.log('formVals', formValues);
-    // console.log('auth meth', signUp)
-    // console.log('this.props @ onSubmit: ', this.props)
+  onSubmit = (formValues) => {
     const params = {
       username: formValues.username,
       password: formValues.password,
@@ -40,20 +31,16 @@ class SignUpModalForm extends Component {
     //   message: "User already exists"
     //   name: "UsernameExistsException"
     // }
+    // console.log(this.props, 'IN ON SUBMITOUTSIDE SIGNUP')
     signUp(params)
-      .then(whatReturns => {
-        // here close
-        // if( whatReturns.user){
-          // this.props.closeModalSignup();
-          // this.props.openModalVerifyAccount();
-          // closeModalSignup();
-          // openModalVerifyAccount();
-          
-        // }
-        return whatReturns;
+      .then(data => {
+        console.log('data: ', data);
+        this.props.closeModalSignup();
+        this.props.openModalVerifyAccount();
       })
-      .catch(error => {
+      .catch(err => {
         // here don't close
+        console.log('err: ', err)
       })
   }
   
@@ -155,14 +142,29 @@ export const SignUpFormEx = reduxForm({
 })(SignUpModalForm)
 
 export class VerifyAccountModalForm extends Component {
-  onSubmit(formValues){
+  onSubmit = (formValues) => {
     // {confirmUsername: "sethborne", confirmCode: "175433"}
     // console.log('formVals @ Verify Account', formValues)
     const params = {
       username: formValues.confirmUsername,
       code: formValues.confirmCode
     }
-    confirmSignUp(params);
+    
+    // {
+    //   code: "CodeMismatchException", 
+    //   name: "CodeMismatchException", 
+    //   message: "Invalid verification code provided, please try again."
+    // }
+
+    confirmSignUp(params)
+      .then(data => {
+        console.log('data: ', data);
+        this.props.closeModalVerifyAccount();
+        this.props.openModalSignin();
+      })
+      .catch(err => {
+        console.log('err: ', err);
+      })
   }
   
   renderField(field){
@@ -233,57 +235,52 @@ export const VerifyAccountFormEx = reduxForm({
 })(VerifyAccountModalForm)
 
 class SignInModalForm extends Component {
-  onSubmit(formValues){
+  onSubmit = (formValues) => {
     console.log('formVals @ SignIn', formValues)
     // {emailLogin: "sethborne@gmail.com", passwordLogin: "sethseth"}
     const params = {
       username: formValues.usernameLogin,
       password: formValues.passwordLogin
     }
-    // const signInObj = async () => {
-    //   await signIn(params)
-    // }
-    
-    // signInGetUserInfo(
-    //   signIn(params)
-    //     .then(val => {
-    //       console.log('val', val)
-    //       return val
-    //     })
-    //     .catch(err => {
-    //       console.log('err', err)
-    //       return err
-    //     })
-    //   )
-    //   .then(token => {
-    //     console.log('token', token);
-    //   })
-    //   .catch(err => {
-    //     console.log('err @ getInfo', err)
-    //   })
-    
-    // console.log('signInObj: ', signInObj)
     
     signIn(params)
       .then(val => {
-        console.log('val', val)
+        console.log('val', val);
         // return val
         signInGetUserInfo(val)
           .then(userInfo => {
-            console.log('userInfo', userInfo)
+            console.log('userInfo', userInfo);
+            // successful obj at this place.
+            // { 
+            //   attributes: {
+            //     sub: "07c81143-9660-4737-a63a-e5ab1e14e7ef", 
+            //     email_verified: true, 
+            //     name: "Tim Tam", 
+            //     email: "sethborne@gmail.com"
+            //   }
+            //   id: "us-west-2:f25eb9a3-3561-418b-99b4-0efdc9f99427"
+            //   username: "timtam" 
+            // }
+            // need to make an action request here, if there is a user that has this id in the Database
+            // if there is a userId that matches
+              // then check if isProfileSetup is true
+              // if true - then navigate to dashboard
+              // if false - need to construct a new user
+            
+            // need to navigate away here
+            return userInfo;
           })
           .catch(err => {
-            console.log('err', err)
+            console.log('err', err);
+            // this error would need to go to the signinform
             return err;
           })
       })
       .catch(err => {
-        console.log('err', err)
-        return err
+        console.log('err', err);
+        // this error would need to go to the signinform
+        return err;
       })
-      
-    
-    signInGetUserInfo(signIn(params))
   }
   
   renderField(field){
