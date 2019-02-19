@@ -62,6 +62,8 @@ const dictModel = {
     Id: 'Id',
     // title: 'title',
     description: 'description',
+    upVotes: 'upVotes',
+    downVotes: 'downVotes',
     _createdByUser: '_createdByUser',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
