@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 // import ModalDelete from '../common/modal/modalDelete';
-
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getLessonById, deleteLessonById } from '../../actions/index'
 
-import { Link } from 'react-router-dom'
+import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
 
 import { ROUTES_REACT } from '../../standards/routes'
 
@@ -21,7 +21,7 @@ class LessonDelete extends Component {
   // }
   
   componentDidMount(){
-    console.log('props @ ', this.props)
+    console.log('props @ lessonDelete', this.props)
     this.props.getLessonById(this.props.match.params.id);
   }
   
@@ -46,13 +46,15 @@ class LessonDelete extends Component {
     const { lessonById } = this.props;
     if(!lessonById){
       return (
-        <div>Loading!!!</div>
+        // <DefaultLoadingPage />
+        <div>Loading</div>
       )
     } else {
       console.log('this props', this.props)
       const { id } = this.props.match.params;
+      // const { Id } = this.props.lessonById;
       console.log('id', id)
-      const { unscheduledlessons } = ROUTES_REACT;
+      // const { unscheduledlessons } = ROUTES_REACT;
       return(
         <article className="card">
           <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
@@ -81,7 +83,7 @@ class LessonDelete extends Component {
               <div className="ta-cent">
                 <Link
                   className=""
-                  to={ unscheduledlessons }
+                  to={ ROUTES_REACT.unscheduledlessons }
                 >
                   <button className="btn btnFillGreyB9 pdTB2LR8 fs20 fw500 ls12 mt30">Cancel</button>
                 
@@ -122,6 +124,7 @@ class LessonDelete extends Component {
 function mapStateToProps(state, ownProps){
   return {
     lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
+    // lessonById: state.lessons.lessonById
   }
 }
 
