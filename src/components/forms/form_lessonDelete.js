@@ -60,7 +60,7 @@ class LessonDelete extends Component {
           <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
             <h5 className="fw700 ls14 ttup fcGrey424041">Delete Lesson: {lessonById.title}</h5>
             <hr className="modalHR mt10" />
-            <form>
+            {/* <form> */}
               <div className="fc-fieldset">
                 <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
                   <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
@@ -94,7 +94,7 @@ class LessonDelete extends Component {
                 >Delete Lesson</button>
               </div>
               {/* btn btnFillClrSchWarn btnOutlineClrSchUnavailable btnVoted fs16 fw500 ls12 ta-cent pdTB1p25LR2p5 */}
-            </form>
+            {/* </form> */}
           </fieldset>
         </article>
       )
