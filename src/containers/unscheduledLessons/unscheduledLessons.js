@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
-import { ROUTES_REACT } from '../../standards/routes'
+// import { ROUTES_REACT } from '../../standards/routes'
 
 import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';

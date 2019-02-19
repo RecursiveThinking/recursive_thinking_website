@@ -20,9 +20,12 @@ const SelectedLessonDetail = ({...props}) => {
         lessonAttendees 
       }
     } = DM;
+    const {
+      scheduledLessons,
+    } = props
     let selectedLesson = {}
-    if(props.scheduledLessons.length && !props.selectedLesson){
-      selectedLesson = props.scheduledLessons[0]
+    if(scheduledLessons.length && !props.selectedLesson){
+      selectedLesson = scheduledLessons[0]
     }
     else {
       selectedLesson = props.selectedLesson
@@ -47,9 +50,19 @@ const SelectedLessonDetail = ({...props}) => {
           <hr className="mt10" />
           {/* <div className="fc-selectedLessonButtons"> */}
           <div className="grid grid--cols-3 fc-selectedLessonButtons">
-            <div className={buttonStatusObj.btnStyleForAttending}>Attending</div>
-            <div className={buttonStatusObj.btnStyleForMaybeAttending}>Maybe</div>
-            <div className={buttonStatusObj.btnStyleForNotAttending}>Not Attending</div>
+            <div 
+              className={buttonStatusObj.btnStyleForAttending}
+              onClick={props.updateSelectedLesson(selectedLesson, 1)}
+            >Attending
+            </div>
+            <div 
+              className={buttonStatusObj.btnStyleForMaybeAttending}
+            >Maybe
+            </div>
+            <div 
+              className={buttonStatusObj.btnStyleForNotAttending}
+            >Not Attending
+            </div>
           </div>
           {/* </div> */}
           <hr className="mt10" />  

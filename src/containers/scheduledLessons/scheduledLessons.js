@@ -17,6 +17,10 @@ class ScheduledLessons extends Component {
     this.props.fetchUsers();
   }
   
+  updateSelectedLesson(lessonToUpdate, status){
+    console.log('lessonToUpdate: ', lessonToUpdate, 'status: ', status)
+  }
+  
   render(){
     
     const { 
@@ -51,10 +55,19 @@ class ScheduledLessons extends Component {
         <main className="content">
           <div className="grid grid--1of3">
             <div className="grid-cell">
-              <ScheduledLessonsList currentUser={currentUser} scheduledLessons={scheduledLessons} />
+              <ScheduledLessonsList 
+                currentUser={currentUser} 
+                scheduledLessons={scheduledLessons} 
+              />
             </div>
             <div className="grid-cell">
-              <SelectedLessonDetail currentUser={currentUser} selectedLesson={selectedLesson} allUsers={allUsers} scheduledLessons={scheduledLessons}/>
+              <SelectedLessonDetail 
+                currentUser={currentUser} 
+                selectedLesson={selectedLesson} 
+                allUsers={allUsers} 
+                scheduledLessons={scheduledLessons}
+                updateSelectedLesson={() => this.updateSelectedLesson()}
+              />
             </div>
           </div>
         </main>
