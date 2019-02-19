@@ -9,8 +9,7 @@ import CurrentUserVotedOnLessonButton from './currentUserVotedOnLessonButton'
 import DM from '../../standards/dictModel'
 import { ROUTES_REACT } from '../../standards/routes'
 
-const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr}) => {
-  
+const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr, toggleLessonVote}) => {
   const { 
     lesson: {
       Id, 
@@ -57,7 +56,11 @@ const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr}) => {
       <div className="fc-informationButtonDisplay mt20">
         {/* this is # of votes */}
         <h5 className="fw900 ls14 fcGreenRT">{voteCount} Votes</h5>
-        <CurrentUserVotedOnLessonButton boolHasCurrentUserVotedOnLesson={boolHasCurrentUserVotedOnLesson} />
+        <CurrentUserVotedOnLessonButton 
+          boolHasCurrentUserVotedOnLesson={boolHasCurrentUserVotedOnLesson}
+          lesson={lesson}
+          toggleLessonVote={toggleLessonVote}
+        />
       </div>
     </article>
   )

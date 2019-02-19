@@ -2,7 +2,7 @@ import React from 'react';
 
 import UnscheduledLessonsListItem from './unscheduledLessonsListItem'
 
-const unscheduledLesonsList = ({ allUnscheduledLessonsArr, currentUser, allUsersArr, handleDeleteItem }) => {
+const unscheduledLesonsList = ({ allUnscheduledLessonsArr, currentUser, allUsersArr, toggleLessonVote }) => {
   
   // allUnscheduledLessonsArr.length = 0
   if(allUnscheduledLessonsArr.length){  
@@ -13,7 +13,7 @@ const unscheduledLesonsList = ({ allUnscheduledLessonsArr, currentUser, allUsers
             currentUser={currentUser} 
             lesson={lesson} 
             allUsersArr={allUsersArr}
-            handleDeleteItem={handleDeleteItem}
+            toggleLessonVote={toggleLessonVote}
           />
         </li>
       )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
-import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions'
+import { fetchUsers, fetchLessons, getCurrentUserById, editLessonById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
 // import { ROUTES_REACT } from '../../standards/routes'
 
@@ -12,6 +12,8 @@ import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPag
 
 import { TITLE_BAR_LESSONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
 import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
+
+import DM from '../../standards/dictModel'
 
 class UnscheduledLessons extends Component {
   constructor(props){
@@ -28,8 +30,25 @@ class UnscheduledLessons extends Component {
     this.props.getCurrentUserById();
   }
   
-  handleDeleteItem = (lessonId) => {
-    console.log('log id of the lesson: ', lessonId)
+  toggleLessonVote = (lesson, action) => {
+    const { lesson: { lessonVotes }, user: { userId } } = DM;
+    const { currentUser } = this.props;
+    // console.log('lesson', lesson)
+    let updatedLesson = { ...lesson };
+    if(action === 'add'){
+      // console.log('uL V A b', updatedLesson[lessonVotes])
+      updatedLesson[lessonVotes].push(currentUser[userId])
+      // console.log('uL V A a', updatedLesson[lessonVotes])
+      this.props.editLessonById(updatedLesson)
+    }
+    else if(action === 'remove'){
+      // splice
+      // console.log('uL V R b', updatedLesson[lessonVotes])
+      const newVoteArray = lesson[lessonVotes].filter( Id => Id !== currentUser[userId] )
+      updatedLesson[lessonVotes] = newVoteArray
+      // console.log('uL V R a', updatedLesson[lessonVotes])
+      this.props.editLessonById(updatedLesson)
+    }
   }
   
   render(){
@@ -67,7 +86,7 @@ class UnscheduledLessons extends Component {
               currentUser={currentUser}
               allUsersArr = {allUsers}
               allUnscheduledLessonsArr={unscheduledLessons}
-              handleDeleteItem={this.handleDeleteItem}
+              toggleLessonVote={this.toggleLessonVote}
             />
           </div>
         </main>
@@ -85,4 +104,9 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, fetchLessons, getCurrentUserById })(UnscheduledLessons);
+export default connect(mapStateToProps, {
+  fetchUsers, 
+  fetchLessons, 
+  getCurrentUserById,
+  editLessonById
+})(UnscheduledLessons);
