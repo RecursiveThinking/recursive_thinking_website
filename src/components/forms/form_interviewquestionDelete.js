@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // import ModalDelete from '../common/modal/modalDelete';
-
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getInterviewQuestionById, deleteInterviewQuestionById } from '../../actions/index';
 
-import { Link } from 'react-router-dom';
-
 import { ROUTES_REACT } from '../../standards/routes';
+
+import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
 
 class InterviewQuestionDelete extends Component {
   constructor(props){
@@ -46,7 +46,7 @@ class InterviewQuestionDelete extends Component {
     const { interviewQuestionById } = this.props;
     if(!interviewQuestionById){
       return (
-        <div>Loading!!!</div>
+        <DefaultLoadingPage />
       )
     } else {
       console.log('this props', this.props)
@@ -88,8 +88,8 @@ class InterviewQuestionDelete extends Component {
                 </Link>
                 <button 
                   className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 mt30"
-                  onClick={() => {this.props.getInterviewQuestionById(id)}}
-                >Delete Lesson</button>
+                  onClick={() => {this.props.deleteInterviewQuestionById(id)}}
+                >Delete Interview Question</button>
               </div>
               {/* btn btnFillClrSchWarn btnOutlineClrSchUnavailable btnVoted fs16 fw500 ls12 ta-cent pdTB1p25LR2p5 */}
             </form>
@@ -123,7 +123,8 @@ class InterviewQuestionDelete extends Component {
 
 function mapStateToProps(state, ownProps){
   return {
-    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById
   }
 }
 

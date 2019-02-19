@@ -19,7 +19,7 @@ class InterviewQuestionCreate extends Component {
     const createdByUserId = this.props.currentUser.userId;
     console.log('formVals @ intQuestCreate Component: ', formValues, createdByUserId)
     const newInterviewQuestion = new InterviewQuestion(formValues.interviewQuestionTitle, formValues.interviewQuestionDetails, [], createdByUserId)
-    console.log('newIntQuest @ intQuestCreate: ', newInterviewQuestion)
+    console.log('newIntQuest @ intQuestCreate: ', JSON.stringify(newInterviewQuestion))
     this.props.createInterviewQuestion(newInterviewQuestion)
   }
   

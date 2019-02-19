@@ -60,7 +60,7 @@ class InterviewQuestionForm extends Component {
           <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
             {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
             {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
-            <h5 className="fw700 ls14 ttup fcGrey424041">{this.renderHeadingContent()}</h5>
+            {this.renderHeadingContent()}
             <hr className="modalHR mt10" />
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <div className="fc-fieldset">

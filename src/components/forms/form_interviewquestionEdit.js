@@ -13,8 +13,12 @@ class InterviewQuestionEdit extends Component {
   
   onSubmit = (formValues) => {
     console.log('formVals @ InterviewQuestion Edit', formValues)
-    // action creator
-    // this.props.editInterviewQuestionById(formValues)
+    let newInterviewQuestion = this.props.interviewQuestionById;
+    newInterviewQuestion.title = formValues.interviewQuestionTitle;
+    newInterviewQuestion.description = formValues.interviewQuestionDetails;
+    newInterviewQuestion.updatedAt = new Date().toString();
+    console.log('newIntQuestion: ', JSON.stringify(newInterviewQuestion))
+    this.props.editInterviewQuestionById(newInterviewQuestion)
   }
   
   render(){
