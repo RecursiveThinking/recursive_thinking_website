@@ -59,15 +59,15 @@ export default function(state = initialState, action){
       // return state
     case DELETE_LESSON_BY_ID:
       console.log('at delete lessons case reducer', action.payload)
-      // let deleteState = [ ...state.allLessons ].filter(lesson => lesson.Id !== action.payload.body.Id);
-      // return{
-      //   allLessons: deleteState,
-      //   lookupTableAllLessons: UtilityMethods.createObjectFromArrayByProp(deleteState, 'Id'),
-      //   scheduledLessons: LessonMethods.getArrayOfScheduledLessons(deleteState, 'date'),
-      //   unscheduledLessons: LessonMethods.getArrayOfUnscheduledLessons(deleteState, 'date'),
-      //   lessonById: null
-      // }
-      return state
+      let deleteState = [ ...state.allLessons ].filter(lesson => lesson.Id !== action.payload.body.Id);
+      return{
+        allLessons: deleteState,
+        lookupTableAllLessons: UtilityMethods.createObjectFromArrayByProp(deleteState, 'Id'),
+        scheduledLessons: LessonMethods.getArrayOfScheduledLessons(deleteState, 'date'),
+        unscheduledLessons: LessonMethods.getArrayOfUnscheduledLessons(deleteState, 'date'),
+        lessonById: null
+      }
+      // return state
     default: 
       return state
   }
