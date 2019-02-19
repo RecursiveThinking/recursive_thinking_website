@@ -11,7 +11,7 @@ const interviewQuestionsList = ({...props}) => {
     lookupTableInterviewQuestionsAnswers,
     allSkillsArr,
     lookupTableAllSkills,
-    handleDeleteItem
+    // handleDeleteItem
   } = props
   
   let allInterviewQuestionsListJSX = props.allInterviewQuestionsArr.map(intQuestion => {

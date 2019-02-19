@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
@@ -14,7 +14,7 @@ import OrderMethods from '../../functions/orderMethods'
 // import { CreateInterviewQuestionAnswerFormEx } from '../../components/forms/forms_interviewquestionanswer'
 import { DropDownSort, DropDownFilter } from '../../components/common/dropdown/sortAndFilter';
 import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
-import { ROUTES_REACT } from '../../standards/routes';
+// import { ROUTES_REACT } from '../../standards/routes';
 import { TITLE_BAR_INTERVIEWQUESTIONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
 
 class InterviewQuestions extends Component {
