@@ -27,17 +27,23 @@ export const signUp = async ({username, password, email, name}) => {
     });
 }
 
-export const confirmSignUp = ({username, code}) => {
+export const confirmSignUp = async ({username, code}) => {
   // After retrieveing the confirmation code from the user
-  Auth.confirmSignUp(
+  return Auth.confirmSignUp(
     username, 
     code, 
     {
       // Optional. Force user confirmation irrespective of existing alias. By default set to True.
       forceAliasCreation: true    
     })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+    .then(data => {
+      console.log('data @ confirmSignUp: ', data)
+      return data
+    })
+    .catch(err => {
+      console.log('err @ confirmSignUp: ', err)
+      return err
+    });
 }
 
 export const resendSignUp = (username) => {
@@ -106,13 +112,16 @@ export const signIn = async ({username, password}) => {
 }
 
 export const signInGetUserInfo = async () => {
-    await Auth.currentUserInfo()
+    return Auth.currentUserInfo()
       .then((user) => {
-          console.log('current user info ', user);
-          // do something with signed in user credential
-          return user;
+        console.log('current user info ', user);
+        // do something with signed in user credential
+        return user;
       })
-      .catch(err => console.log("There was a problem getting user info ", err));
+      .catch(err => {
+        console.log("There was a problem getting user info ", err);
+        return err;
+      });
 };
 
 export const getSignInUserSession = async () => {
