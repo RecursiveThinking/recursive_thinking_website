@@ -1,39 +1,24 @@
-import { FETCH_SKILLS } from '../actions/action_types';
-import SKILL_MODEL from '../standards/skillModel'
+import { 
+  FETCHING,
+  FETCH_SKILLS 
+} from '../actions/action_types';
 import UtilityMethods from '../functions/utilityMethods';
 
 let initialState = {
-  allSkills: [],
+  allSkills: FETCHING,
   lookupTableAllSkills: {},
-  allSkillsAPIResponse: {},
-  allSkillsLanguage: {},
-  allSkillsProfessional: {},
-  allSkillsSoftware: {}
+  skillById: {}
 }
 
-const { language, professional, software } = SKILL_MODEL
 export default function( state = initialState, action ){
   switch(action.type){
     case FETCH_SKILLS:
-      if(action.payload){
-        return {
-          allSkills: action.payload,
-          lookupTableAllSkills: UtilityMethods.createObjectFromArrayByProp(action.payload, 'Id'),
-          allSkillsAPIResponse: 200,
-          allSkillsLanguage: action.payload.filter(item => item.type === SKILL_MODEL[language]),
-          allSkillsProfessional: action.payload.filter(item => item.type === SKILL_MODEL[professional]),
-          allSkillsSoftware: action.payload.filter(item => item.type === SKILL_MODEL[software])
-        }
-      } else {
-        return {
-          allSkills: null,
-          lookupTableAllSkills: null,
-          allSkillsAPIResponse: action.payload,
-          allSkillsLanguage: null,
-          allSkillsProfessional: null,
-          allSkillsSoftware: null
-        }
-      }
+    console.log('at fetch allSkills case reducer', action.payload.body)
+    return {
+      allSkills: action.payload.body,
+      lookupTableAllSkills: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id'),
+      skillById: null
+    }
     default:
       return state
   }

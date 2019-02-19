@@ -6,6 +6,7 @@ import { reducer as formReducer } from 'redux-form'
 
 import UsersReducer from './reducer_users';
 import AuthReducer from './reducer_authReducer';
+import ErrorsReducer from './reducer_errors';
 import LessonsReducer from './reducer_lessons';
 import SelectedLessonReducer from './reducer_selectedLesson';
 import InterviewQuestionsReducer from './reducer_interviewQuestions';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   // mapping of state.
   users: UsersReducer,
   auth: AuthReducer,
+  errors: ErrorsReducer,
   lessons: LessonsReducer,
   interviewQuestions: InterviewQuestionsReducer,
   interviewQuestionsAnswers: InterviewQuestionsAnswersReducer,

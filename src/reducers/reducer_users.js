@@ -15,15 +15,15 @@ export default function (state = initialState, action) {
       // if(action.payload.body && action.payload.statusCode === 200){
       if(action.payload){
         return {
-          allUsers: action.payload,
-          allUsersAPIResponse: 200,     
-          lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload, 'userId')
+          allUsers: action.payload.body,
+          allUsersAPIResponse: action.payload.status,     
+          lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'userId')
         }
       } else {
-        console.log('is API Error Object', action.payload)
+        console.log('is API Error Object', action.payload.body)
         return {
           allUsers: null,
-          allUsersAPIResponse: action.payload,
+          allUsersAPIResponse: action.payload.body,
           lookupTableAllUsers: null
         }
       }
