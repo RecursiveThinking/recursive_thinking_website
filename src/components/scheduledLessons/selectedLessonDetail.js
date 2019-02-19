@@ -52,15 +52,17 @@ const SelectedLessonDetail = ({...props}) => {
           <div className="grid grid--cols-3 fc-selectedLessonButtons">
             <div 
               className={buttonStatusObj.btnStyleForAttending}
-              onClick={props.updateSelectedLesson(selectedLesson, 1)}
+              onClick={() => {props.updateSelectedLesson(selectedLesson, 1)}}
             >Attending
             </div>
             <div 
               className={buttonStatusObj.btnStyleForMaybeAttending}
+              onClick={() => {props.updateSelectedLesson(selectedLesson, 2)}}
             >Maybe
             </div>
             <div 
               className={buttonStatusObj.btnStyleForNotAttending}
+              onClick={() => {props.updateSelectedLesson(selectedLesson, 0)}}
             >Not Attending
             </div>
           </div>

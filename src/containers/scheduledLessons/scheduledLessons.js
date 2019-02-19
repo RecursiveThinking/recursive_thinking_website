@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLessons, fetchUsers } from '../../actions'
+import { fetchLessons, fetchUsers, getCurrentUserById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
 
 // import LessonMethods from '../../functions/lessonMethods'
@@ -15,10 +15,15 @@ class ScheduledLessons extends Component {
   componentDidMount(){
     this.props.fetchLessons();
     this.props.fetchUsers();
+    this.props.getCurrentUserById();
   }
   
-  updateSelectedLesson(lessonToUpdate, status){
+  updateSelectedLesson = (lessonToUpdate, status) => {
+    // const { currentUser } = this.props;
     console.log('lessonToUpdate: ', lessonToUpdate, 'status: ', status)
+    console.log('currentUser: ', this.props.currentUser);
+    // need to do two things here, if attending, lessonToUpdate gets the currentUsers Id, and the Users status gets the lessonID with a value of 1
+    // if not attending or maybe, users status gets a lessonID and appropriate value
   }
   
   render(){
@@ -66,7 +71,7 @@ class ScheduledLessons extends Component {
                 selectedLesson={selectedLesson} 
                 allUsers={allUsers} 
                 scheduledLessons={scheduledLessons}
-                updateSelectedLesson={() => this.updateSelectedLesson()}
+                updateSelectedLesson={this.updateSelectedLesson}
               />
             </div>
           </div>
@@ -91,5 +96,5 @@ function mapStateToProps(state){
 //   return bindActionCreators({fetchAllLessons: fetchAllLessons}, dispatch)
 // }
 
-export default connect(mapStateToProps, { fetchLessons, fetchUsers })(ScheduledLessons);
+export default connect(mapStateToProps, { fetchLessons, fetchUsers, getCurrentUserById })(ScheduledLessons);
 // export default connect(mapStateToProps, mapDispatchToProps)(ScheduledLessons);
