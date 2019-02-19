@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import Modal from '../../common/modal/modal'
 import { SignUpFormEx, VerifyAccountFormEx, SignInFormEx } from '../../forms/forms_auth'
@@ -25,11 +25,11 @@ class Header extends Component {
   handleToggleModalSignUp(){
     this.setState( {showModalSignUp: !this.state.showModalSignUp} )
   }
-  handleToggleModalSignIn(){
-    this.setState( {showModalSignIn: !this.state.showModalSignIn} )
-  }
   handleToggleModalVerifyAccount(){
     this.setState( {showModalVerifyAccount: !this.state.showModalVerifyAccount} )
+  }
+  handleToggleModalSignIn(){
+    this.setState( {showModalSignIn: !this.state.showModalSignIn} )
   }
   
   render(){
@@ -80,6 +80,23 @@ class Header extends Component {
                     />
                   }
                 <button 
+                  onClick={() => this.handleToggleModalVerifyAccount()}
+                  type="button" 
+                  className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">VA</button> 
+                  {
+                    this.state.showModalVerifyAccount &&
+                    
+                    <Modal
+                      onCloseRequest={() => this.handleToggleModalVerifyAccount()}
+                      content={
+                        <VerifyAccountFormEx
+                          closeModalVerifyAccount={() => this.handleToggleModalVerifyAccount()}
+                          openModalSignin={() => this.handleToggleModalSignIn()}
+                        />
+                      }
+                    />
+                  }
+                <button 
                   onClick={() => this.handleToggleModalSignIn()} 
                   type="button" 
                   className="btn btnOutlineClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12"
@@ -91,23 +108,7 @@ class Header extends Component {
                       onCloseRequest={() => this.handleToggleModalSignIn()}
                       content={
                         <SignInFormEx 
-                      
-                        />
-                      }
-                    />
-                  }
-                <button 
-                  onClick={() => this.handleToggleModalVerifyAccount()}
-                  type="button" 
-                  className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">VA</button> 
-                  {
-                    this.state.showModalVerifyAccount &&
-                    
-                    <Modal
-                      onCloseRequest={() => this.handleToggleModalVerifyAccount()}
-                      content={
-                        <VerifyAccountFormEx
-                      
+                          closeModalSignIn={() => this.handleToggleModalSignIn()}
                         />
                       }
                     />
