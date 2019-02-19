@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import InterviewQuestionAnswerForm from './form_interviewquestionanswer';
 import { InterviewQuestionAnswer } from '../../models/models'
-import { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer } from '../../actions/index'
+import { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer, editInterviewQuestionById } from '../../actions/index'
 import { FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE } from './formContent/formContent'
 
 
@@ -18,7 +18,12 @@ class InterviewQuestionCreate extends Component {
     const createdByUserId = this.props.currentUser.userId;
     console.log('formVals @ intQuestAnswerCreate Component: ', formValues, createdByUserId)
     const newInterviewQuestionAnswer = new InterviewQuestionAnswer(formValues.interviewQuestionAnswerDescription, createdByUserId)
-    this.props.createInterviewQuestionAnswer(newInterviewQuestionAnswer)
+    // console.log('newIntQuestAns JSON: ', JSON.stringify(newInterviewQuestionAnswer));
+    const newInterviewQuestionAnswerId = newInterviewQuestionAnswer.Id
+    this.props.createInterviewQuestionAnswer(newInterviewQuestionAnswer);
+    // let editInterviewQuestion = this.props.interviewQuestionById;
+    // editInterviewQuestion.answersToQuestion.push(newInterviewQuestionAnswerId)
+    // this.props.editInterviewQuestionById(editInterviewQuestion);
   }
   
   render(){
@@ -57,11 +62,12 @@ function mapStateToProps(state, ownProps){
     currentUser: state.auth.currentUser,
     allSkills: state.skills.allSkills,
     lookupTableAllSkills: state.skills.lookupTableAllSkills,
-    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById
   }
 }
 
 export default connect(
   mapStateToProps,
-  { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer }
+  { getCurrentUserById, getInterviewQuestionById, editInterviewQuestionById, createInterviewQuestionAnswer }
 )(InterviewQuestionCreate)
