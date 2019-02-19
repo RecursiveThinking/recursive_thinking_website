@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+// import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+// import { BrowserRouter as Route, Switch, Redirect } from 'react-router-dom'
+import { Router, Route, Redirect } from 'react-router-dom'
 
 import HomeScreen from '../containers/public/HomeScreen/HomeScreen';
 import ProfileCreate from '../containers/profile/create/profileCreate';
 import MainApp from '../containers/mainApp/mainApp';
+
+import history from '../history';
 
 import { ROUTES_REACT } from '../standards/routes';
 const {
@@ -30,26 +34,23 @@ const {
   signout
 } = ROUTES_REACT
 
-
-
 class App extends Component {
   render(){
     return(
-      <Router>
-        <Switch>
+      <Router history={history}>
         <div className="mainApp">
           <Route path={root} exact component={HomeScreen} />
-          <Route path={dashboard} component={MainApp}/>
+          <Route path={dashboard} exact component={MainApp}/>
           <Route path={scheduledlessons} component={MainApp}/>
-          <Route path={unscheduledlessons} component={MainApp}/>
+          <Route path={unscheduledlessons} exact component={MainApp}/>
           <Route path={lessons_create} component={MainApp}/>
           <Route path={lessons_edit_id} component={MainApp}/>
           <Route path={lessons_delete_id} component={MainApp}/>
           <Route path={interviewquestions_create} exact component={MainApp}/>
           <Route path={interviewquestions_edit} exact component={MainApp}/>
           <Route path={interviewquestions} component={MainApp}/>
-          <Route path={interviewquestionsanswers_create} component={MainApp} />
-          <Route path={interviewquestionsanswers_edit} component={MainApp} />
+          <Route path={interviewquestionsanswers_create} exact component={MainApp} />
+          <Route path={interviewquestionsanswers_edit} exact component={MainApp} />
           <Route path={recursivedirectory} component={MainApp}/>
           <Route path={profile_edit} component={MainApp}/>
           <Route path={profile_view_id} component={MainApp}/>
@@ -57,7 +58,6 @@ class App extends Component {
           <Route path={admindashboard} component={MainApp}/>
           <Route path={signout} render={ () => ( <Redirect to="/" /> ) } />
         </div>
-        </Switch>
       </Router>
     )
   }
