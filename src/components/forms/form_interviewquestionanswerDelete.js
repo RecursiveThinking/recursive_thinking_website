@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES_REACT } from '../../standards/routes';
 import DM from '../../standards/dictModel';
 
+import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
 class InterviewQuestionAnswerDelete extends Component {
   constructor(props){
     super(props);
@@ -26,18 +27,18 @@ class InterviewQuestionAnswerDelete extends Component {
   // }
   
   componentDidMount(){
-    console.log('props @ CDM InterviewQuestionAnswerDelete: ', this.props)
     this.props.getInterviewQuestionById(this.props.match.params.questId)    
     this.props.getInterviewQuestionAnswerById(this.props.match.params.ansId)
+    console.log('props @ CDM InterviewQuestionAnswerDelete: ', this.props)
   }
   
-  deleteInterviewQuestionAnswer(questionId, questionObj, answerId){
+  deleteInterviewQuestionAnswer = (questionId, answerId) => {
     const {
       intQuestion: {
         answersToQuestion
       }
     } = DM;
-    console.log('questionATQ: ', questionObj[answersToQuestion])
+    console.log('questionId: ', questionId, 'answerId: ', answerId)
     // need a new method 
     // this.props.updateInterviewQuestionById(questionObj);
     this.props.deleteInterviewQuestionAnswerById(answerId);
@@ -66,12 +67,15 @@ class InterviewQuestionAnswerDelete extends Component {
   
   renderContent(){
     
-    if(!this.props.interviewQuestionAnswerById && !this.props.interviewQuestionById){
+    if(!this.props.interviewQuestionAnswerById || !this.props.interviewQuestionById){
       return (
-        <div>Loading!!!</div>
+        // <div>Loading!!!</div>
+        <DefaultLoadingPage />
       )
     } else {
       const { questId, ansId } = this.props.match.params;
+      console.log('')
+      console.log('questionId: ', questId, 'answerId: ', ansId)
       const {
         interviewQuestionById,
         interviewQuestionAnswerById
@@ -82,7 +86,7 @@ class InterviewQuestionAnswerDelete extends Component {
           <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
             <h5 className="fw700 ls14 ttup fcGrey424041">Delete Interview Question Answer: </h5>
             <hr className="modalHR mt10" />
-            <form>
+            {/* <form> */}
               <div className="fc-fieldset">
                 <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
                   <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
@@ -106,11 +110,11 @@ class InterviewQuestionAnswerDelete extends Component {
                 </Link>
                 <button 
                   className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 mt30"
-                  onClick={() => {this.props.deleteInterviewQuestionAnswer(questId, interviewQuestionById, ansId)}}
+                  onClick={() => {this.deleteInterviewQuestionAnswer(questId, ansId)}}
                 >Delete Answer</button>
               </div>
               {/* btn btnFillClrSchWarn btnOutlineClrSchUnavailable btnVoted fs16 fw500 ls12 ta-cent pdTB1p25LR2p5 */}
-            </form>
+            {/* </form> */}
           </fieldset>
         </article>
       )
@@ -144,8 +148,10 @@ class InterviewQuestionAnswerDelete extends Component {
 
 function mapStateToProps(state, ownProps){
   return {
-    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.questId],
-    interviewQuestionAnswerById: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers[ownProps.match.params.ansId]
+    // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.questId],
+    // interviewQuestionAnswerById: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers[ownProps.match.params.ansId]
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById,
+    interviewQuestionAnswerById: state.interviewQuestionsAnswers.interviewQuestionAnswerById
   }
 }
 

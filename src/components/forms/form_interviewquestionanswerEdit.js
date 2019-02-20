@@ -6,6 +6,8 @@ import { getInterviewQuestionById, getInterviewQuestionAnswerById, editInterview
 import InterviewQuestionAnswerForm from './form_interviewquestionanswer';
 import { FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT } from './formContent/formContent'
 
+import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
+
 class InterviewQuestionAnswerEdit extends Component {
   componentDidMount(){
     this.props.getInterviewQuestionById(this.props.match.params.questId)
@@ -14,19 +16,25 @@ class InterviewQuestionAnswerEdit extends Component {
   
   onSubmit = (formValues) => {
     console.log('formVals @ InterviewQuestionAnswer Edit', formValues)
+    // interviewQuestionAnswerDescription: "Here is an answer to build an accordian234234234"
+    // get interview question answer
+    console.log('intQuestAns @ onSubmit: ', this.props.interviewQuestionAnswerById)
+    let newInterviewQuestionAnswer = { ...this.props.interviewQuestionAnswerById };
+    newInterviewQuestionAnswer.description = formValues.interviewQuestionAnswerDescription;
     // action creator
-    // this.props.editInterviewQuestionAnswerById(formValues)
+    this.props.editInterviewQuestionAnswerById(newInterviewQuestionAnswer)
   }
   
   render(){
     console.log('props @ IntQuestAnsEdit: ', this.props);
     console.log('params', this.props.match.params.id);
     // if no intQuestionAnswer
-    if(!this.props.interviewQuestionAnswerById && !this.props.interviewQuestionById){
+    if(!this.props.interviewQuestionAnswerById || !this.props.interviewQuestionById){
       return (
-        <div>
-          Loading!!!
-        </div>
+        // <div>Loading!!!</div>
+        <section style={{padding: '1.5rem 1.5rem'}}>
+          <DefaultLoadingPage />
+        </section>
       )
     }
     const {
