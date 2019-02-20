@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import CategoryList from '../../components/common/category/categoryList'
 import InterviewQuestionsAnswersList from './interviewQuestionsAnswersList'
 
-import Modal from '../../components/common/modal/modal'
+// import Modal from '../../components/common/modal/modal'
 // import { CreateInterviewQuestionAnswerFormEx } from '../forms/forms_interviewquestionanswer'
 import { ROUTES_REACT } from '../../standards/routes'
 
@@ -15,7 +15,7 @@ import UtilityMethods from '../../functions/utilityMethods';
 
 const {
   interviewquestionsanswers_create,
-  interviewquestions_edit
+  // interviewquestions_edit
 } = ROUTES_REACT
 
 class InterviewQuestionsListItem extends Component {
@@ -50,12 +50,6 @@ class InterviewQuestionsListItem extends Component {
   handleToggleModalDelete = () => {
     this.setState({ showModalDelete: !this.state.showModalDelete})    
   }
-  
-  handleDeleteItem = (intQuestionId) => {
-    console.log('log id of the intQuestion: ', intQuestionId)
-    this.setState({ showModalDelete: !this.state.showModalDelete})
-  }
-  
   
   render(){
     const {

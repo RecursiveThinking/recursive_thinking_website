@@ -26,7 +26,6 @@ const interviewQuestionsList = ({...props}) => {
           lookupTableInterviewQuestionsAnswers={lookupTableInterviewQuestionsAnswers}
           allSkillsArr={allSkillsArr}
           lookupTableAllSkills={lookupTableAllSkills}
-          // handleDeleteItem={handleDeleteItem}
         />
       </li>
     )
