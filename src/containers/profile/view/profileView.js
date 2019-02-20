@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers, fetchSkills } from '../../../actions'
+import { fetchUsers, fetchSkills, getCurrentUserById } from '../../../actions'
 
 import { Link } from 'react-router-dom'
 
@@ -28,6 +28,7 @@ class ViewProfile extends Component{
   componentDidMount(){
     this.props.fetchUsers();
     this.props.fetchSkills();
+    this.props.getCurrentUserById();
     this.handleWindowResize()
     // window.addEventListener('load', this.handleWindowResize)
     window.addEventListener('resize', this.handleWindowResize);
@@ -50,6 +51,10 @@ class ViewProfile extends Component{
         contentHeight: this.contentTarget.clientHeight
       })
     }
+  }
+  
+  iterateUserProfileLInks = () => {
+    
   }
   
   render(){
@@ -93,7 +98,7 @@ class ViewProfile extends Component{
     const { allSkills, lookupTableAllSkills } = this.props;
     const { 
       user: { 
-              avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
+              userId, avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
             }
     } = DM
     // end destructuring
@@ -109,11 +114,11 @@ class ViewProfile extends Component{
     
     // this makes the link list (Github, Codepen, etc.)
     const icons = [ 
-                    ['Github', 'fa fa fa-git-square', selectedUser[linkGithub]],
-                    ['CodePen', 'fa fa fa-codepen', selectedUser[linkCodepen]],
-                    ['LinkedIn', 'fa fa-linkedin-square', selectedUser[linkLinkedIn]],
-                    ['Resume', 'fa fa-id-card-o', selectedUser[linkResume]]
-                  ]
+      ['Github', 'fa fa fa-git-square', selectedUser[linkGithub]],
+      ['CodePen', 'fa fa fa-codepen', selectedUser[linkCodepen]],
+      ['LinkedIn', 'fa fa-linkedin-square', selectedUser[linkLinkedIn]],
+      ['Resume', 'fa fa-id-card-o', selectedUser[linkResume]]
+    ]
     
     const iconList = icons.map(iconItem => {
       let iconClass, headingClass, hrefLink = ''
@@ -131,13 +136,20 @@ class ViewProfile extends Component{
 
       }
       else {
+        // this link is setup
         iconClass = `fs45 ${iconItem[1]} mb10`
         headingClass = `fs12 fw300 ls08`
         hrefLink = iconItem[2]
         // console.log('link', hrefLink, iconItem)
         return (
           <li className="icon fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce height50P width50P">
-            <a className="fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce" href={hrefLink} target="_blank" rel="noopener noreferrer">
+            <a 
+              className="fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce" 
+              href={hrefLink} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              // onClick={}
+            >
               <i className={iconClass}></i>
               <h6 className={headingClass}>{iconItem[0]}</h6>
             </a>
@@ -157,9 +169,14 @@ class ViewProfile extends Component{
           </div>
         )
       } else {
+        // this has a link
         return (
           <div className="port fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce height25P"> 
-            <a href={linkValue} target="/">
+            <a 
+              href={linkValue} 
+              target="/"
+              // onClick={}
+            >
               <h6 className="fs18 ls 12">Portfolio</h6>
             </a>
           </div>
@@ -287,7 +304,9 @@ class ViewProfile extends Component{
       height: (contentHeight * .99)
     }
     
-    let profilesToRender = this.props.allUsers.map((user) => {
+    const profileArray = this.props.allUsers.filter( user => user[userId] !== this.props.currentUser[userId])
+    
+    let profilesToRender = profileArray.map((user) => {
       return (
         <li key={user[userId]} className="fc--disp-flex fc--fdir-row">
           <RecursiveDirectoryListItemSm user={user}/>
@@ -443,4 +462,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, { fetchUsers, fetchSkills })(ViewProfile)
+export default connect(mapStateToProps, { fetchUsers, fetchSkills, getCurrentUserById })(ViewProfile)
