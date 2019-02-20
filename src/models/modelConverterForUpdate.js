@@ -1,12 +1,12 @@
-let genObj = {
-  Key: {},
-  ExpressionAttributeNames: {},
-  ExpressionAttributeValues: {},
-  UpdateExpression: ""
-}
 
 class ModelConverterForUpdate {
   static returnBodyObject(dictModelObject, object){
+    const genObj = {
+      Key: {},
+      ExpressionAttributeNames: {},
+      ExpressionAttributeValues: {},
+      UpdateExpression: ""
+    }
     // console.log('in model converter: ', dictModelObject, object)
     if(object.userId){
       genObj.Key.userId = object.userId
