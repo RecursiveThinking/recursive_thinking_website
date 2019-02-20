@@ -15,11 +15,13 @@ import {
   // SIGN_UP,
   // SIGN_IN,
   // SIGN_OUT,
-  FETCH_USERS, CREATE_USER,
-  GET_USER_BY_ID, EDIT_USER_BY_ID, DELETE_USER_BY_ID,
+  FETCH_USERS, 
+  // CREATE_USER,
+  // GET_USER_BY_ID, EDIT_USER_BY_ID, DELETE_USER_BY_ID,
   
-  ERRORS_FETCH_USERS, ERRORS_CREATE_USER,
-  ERRORS_GET_USER_BY_ID, ERRORS_EDIT_USER_BY_ID, ERRORS_DELETE_USER_BY_ID,
+  ERRORS_FETCH_USERS, 
+  // ERRORS_CREATE_USER,
+  // ERRORS_GET_USER_BY_ID, ERRORS_EDIT_USER_BY_ID, ERRORS_DELETE_USER_BY_ID,
   
   GET_CURRENT_USER_BY_ID, 
   
@@ -41,11 +43,13 @@ import {
   ERRORS_FETCH_INTERVIEW_QUESTIONS_ANSWERS, ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, 
   ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
   
-  FETCH_SKILLS, CREATE_SKILL,
-  GET_SKILL_BY_ID, EDIT_SKILL_BY_ID, DELETE_SKILL_BY_ID,
+  FETCH_SKILLS, 
+  // CREATE_SKILL,
+  // GET_SKILL_BY_ID, EDIT_SKILL_BY_ID, DELETE_SKILL_BY_ID,
   
-  ERRORS_FETCH_SKILLS, ERRORS_CREATE_SKILL,
-  ERRORS_GET_SKILL_BY_ID, ERRORS_EDIT_SKILL_BY_ID, ERRORS_DELETE_SKILL_BY_ID,
+  ERRORS_FETCH_SKILLS, 
+  // ERRORS_CREATE_SKILL,
+  // ERRORS_GET_SKILL_BY_ID, ERRORS_EDIT_SKILL_BY_ID, ERRORS_DELETE_SKILL_BY_ID,
   
   FETCH_HOMESCREEN_QUOTES,
   
@@ -194,15 +198,15 @@ export const createUser = (newUser) => {
   
 }
 
-export const getUserById = () => {
+export const getUserById = (userId) => {
   
 }
 
-export const editUserById = () => {
+export const editUserById = (edittedUser) => {
   
 }
 
-export const deleteUserById = () => {
+export const deleteUserById = (userId) => {
   
 }
 
@@ -336,7 +340,7 @@ export const deleteLessonById = (lessonId) => {
         return err;
       })
     console.log('right before redirect')
-    // history.push(ROUTES_REACT.unscheduledlessons)    
+    history.push(ROUTES_REACT.unscheduledlessons)    
   }
 }
 
@@ -456,7 +460,7 @@ export const editInterviewQuestionById = (edittedInterviewQuestion) => {
   }
 }
 
-export const deleteInterviewQuestionById = (interviewquestionId, intQuestToDelete) => {
+export const deleteInterviewQuestionById = (interviewquestionId) => {
   console.log('intQuestId @ deleteIQById action: ', interviewquestionId)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${interviewquestionId}`
   let funcOptions = {...OPTIONS};
@@ -477,7 +481,7 @@ export const deleteInterviewQuestionById = (interviewquestionId, intQuestToDelet
         dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID, payload: err })
         return err;
       })
-    history.push(ROUTES_REACT.unscheduledlessons)
+    history.push(ROUTES_REACT.interviewquestions)
   }
 }
 
@@ -540,17 +544,48 @@ export const getInterviewQuestionAnswerById = (interviewquestionanswerId) => {
   funcOptions.method = HTTP_METHODS.get;
   
   return async (dispatch) => {
-    const response = await initFetchCall(URL, funcOptions, true);
-    console.log('response @ getIntQuestionAnswerById: ', response);
-    dispatch({
-      type: GET_INTERVIEW_QUESTION_ANSWER_BY_ID,
-      payload: response
-    })
+    const response = await initFetchCall(URL, funcOptions, true)
+      .then(res => {
+        const { status } = res;
+        console.log('response @ getIntQuestionAnswerById: ', response);
+        if(status === 200){
+          dispatch({ type: GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
+        }
+        return res;
+      })
+      .catch(err => {
+        dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
+        return err;
+      })
   }
 }
 
-export const editInterviewQuestionAnswerById = () => {
+export const editInterviewQuestionAnswerById = (edittedInterviewQuestionAnswer) => {
+  console.log('InterviewQuestionAnswerId @ editInterviewQuestionById action: ', edittedInterviewQuestionAnswer.Id)
+  console.log('edittedIntQuestAns @ editInterviewQuestionAnswerById action: ', edittedInterviewQuestionAnswer)
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${edittedInterviewQuestionAnswer.Id}`
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.put
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.intQuestionAnswer, edittedInterviewQuestionAnswer))
+  console.log('funcOptions @ editIntQuestAnswer: ', funcOptions)
   
+  return async (dispatch) => {
+    // const response = 
+    await initFetchCall(URL, funcOptions, true)
+      .then(res => {
+        const { status } = res;
+        if(status === 200){
+          dispatch({ type: EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
+        }
+        return res;
+      })
+      .catch(err => {
+        dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
+      })
+    history.push(ROUTES_REACT.interviewquestions)
+  }
 }
 
 export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId) => {
@@ -560,12 +595,22 @@ export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId) => 
   funcOptions.method = HTTP_METHODS.delete;
   
   return async (dispatch) => {
-    const response = await initFetchCall(URL, funcOptions, true);
-    console.log('response @ deleteIntQuestionAnswerById: ', response);
-    dispatch({
-      type: DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
-      payload: response
-    })
+    // const response = 
+    await initFetchCall(URL, funcOptions, true)
+      .then(res => {
+        const { status } = res
+        console.log('deleteIntQuestAnsId Resopnse: ', res);
+        if(status === 200){
+          dispatch({ type: DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+        }
+        return res;
+      })
+      .catch(err => {
+        dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
+        return err
+      })
+    // console.log('response @ deleteIntQuestionAnswerById: ', response);
   }
   
 }
