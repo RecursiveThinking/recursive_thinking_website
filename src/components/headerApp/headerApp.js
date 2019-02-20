@@ -27,11 +27,11 @@ import { PATH_FOR_IMAGES } from '../../standards/publicPaths';
           <Link to={ROUTES_REACT.profile_create}>
             <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SetupProfile</button>
           </Link>
-          <div className="fc--disp-flex search">
+          {/* <div className="fc--disp-flex search">
             <div className="searchBar">
               <input className="inputSearch" type="search" placeholder="Search" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     )
