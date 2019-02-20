@@ -134,17 +134,6 @@ const initFetchCall = async (urlPath, optionConfig, doesEndPointNeedAuth) => {
     //   // return Promise.reject(error)
     //   // return error
     })
-    // .then(response => {
-    //   status = response.status;
-    //   return response.json()
-    // })
-    // .then(data => {
-    //   return { 
-    //     status: status,
-    //     body: data
-    //   }
-    // })
-    // .catch(err => err)
   }
 
 const errorNotExistPayload = {
@@ -245,20 +234,24 @@ export const createLesson = (newLesson) => {
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.lesson, newLesson));
   console.log(funcOptions.body)
   return async (dispatch) => {
-    const response = await initFetchCall(URL, funcOptions, true)
+    // const response = 
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
+        console.log('createLessonIdResponse: ', res)        
         if(status === 200){
           dispatch({ type: CREATE_LESSON, payload: res })
           dispatch({ type: ERRORS_CREATE_LESSON, payload: errorNotExistPayload })
         }
+        console.log('createLesson before reroute to unscheduled lessons')
+        history.push(ROUTES_REACT.unscheduledlessons)
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_CREATE_LESSON, payload: err })
+        history.push(ROUTES_REACT.lessons_create)        
         return err;
       })
-    history.push(ROUTES_REACT.unscheduledlessons)
   }
 }
 
@@ -304,14 +297,16 @@ export const editLessonById = (edittedLesson) => {
           dispatch({ type: EDIT_LESSON_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: errorNotExistPayload })
         }
+        console.log('history push to unsched')
+        history.push(ROUTES_REACT.unscheduledlessons) 
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: err })
+        console.log('history push to lessons id /id')        
+        history.push(`${ROUTES_REACT.lessons_edit}/${edittedLesson.Id}`)
         return err;
       })
-    console.log('history push?')
-    history.push(ROUTES_REACT.unscheduledlessons) 
   }
 }
 
@@ -330,17 +325,18 @@ export const deleteLessonById = (lessonId) => {
         console.log('deleteLessonIdResponse: ', res)
         // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: DELETE_LESSON_BY_ID, payload: response })
+          dispatch({ type: DELETE_LESSON_BY_ID, payload: res })
           dispatch({ type: ERRORS_DELETE_LESSON_BY_ID, payload: errorNotExistPayload })
         }
+        console.log('right before push to unsched lessons')
+        history.push(ROUTES_REACT.unscheduledlessons)
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_DELETE_LESSON_BY_ID, payload: err })
+        history.push(`${ROUTES_REACT.lessons_delete}/${lessonId}`)
         return err;
       })
-    console.log('right before redirect')
-    history.push(ROUTES_REACT.unscheduledlessons)    
   }
 }
 
@@ -449,10 +445,12 @@ export const editInterviewQuestionById = (edittedInterviewQuestion) => {
           dispatch({ type: EDIT_INTERVIEW_QUESTION_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
+        history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: err })
+        // history.push(ROUTES_REACT.interviewquestions)
         return err;
       })
     // console.log('history push?')
@@ -511,7 +509,7 @@ export const fetchInterviewQuestionsAnswers = () => {
   }
 }
 
-export const createInterviewQuestionAnswer = (newInterviewQuestionAnswer) => {
+export const createInterviewQuestionAnswer = (newInterviewQuestionAnswer, edittedIntQuest) => {
   console.log('newIntQuestAnswer @ createIntQuestionAnswer action: ', newInterviewQuestionAnswer);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}`
   let funcOptions = {...OPTIONS};
@@ -524,6 +522,7 @@ export const createInterviewQuestionAnswer = (newInterviewQuestionAnswer) => {
       .then(res => {
         const { status } = res;
         if(status === 200){
+          // dispatch(editInterviewQuestionById(edittedIntQuest))
           dispatch({ type: CREATE_INTERVIEW_QUESTION_ANSWER, payload: res })
           dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, payload: errorNotExistPayload })
         }
