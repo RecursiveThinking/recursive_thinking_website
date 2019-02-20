@@ -18,12 +18,18 @@ class InterviewQuestionCreate extends Component {
     const createdByUserId = this.props.currentUser.userId;
     console.log('formVals @ intQuestAnswerCreate Component: ', formValues, createdByUserId)
     const newInterviewQuestionAnswer = new InterviewQuestionAnswer(formValues.interviewQuestionAnswerDescription, createdByUserId)
-    // console.log('newIntQuestAns JSON: ', JSON.stringify(newInterviewQuestionAnswer));
-    const newInterviewQuestionAnswerId = newInterviewQuestionAnswer.Id
+    console.log('newIntQuestAns JSON: ', JSON.stringify(newInterviewQuestionAnswer));
+    // const newInterviewQuestionAnswerId = newInterviewQuestionAnswer.Id
+    console.log('newIntQuestAns: ', newInterviewQuestionAnswer)
     this.props.createInterviewQuestionAnswer(newInterviewQuestionAnswer);
-    // let editInterviewQuestion = this.props.interviewQuestionById;
-    // editInterviewQuestion.answersToQuestion.push(newInterviewQuestionAnswerId)
-    // this.props.editInterviewQuestionById(editInterviewQuestion);
+    
+    let editInterviewQuestion = {...this.props.interviewQuestionById};
+    editInterviewQuestion.answersToQuestion.push(newInterviewQuestionAnswer.Id)
+    console.log('editIntQuest: ', editInterviewQuestion)
+    this.props.editInterviewQuestionById(editInterviewQuestion);
+    
+    // this.props.createInterviewQuestionAnswer(newInterviewQuestionAnswer, editInterviewQuestion);
+    
   }
   
   render(){

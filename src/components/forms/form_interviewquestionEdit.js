@@ -57,8 +57,8 @@ class InterviewQuestionEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
-    interviewQuestionById: state.interviewQuestions.interviewQuestionById
+    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    // interviewQuestionById: state.interviewQuestions.interviewQuestionById
   }
 }
 
