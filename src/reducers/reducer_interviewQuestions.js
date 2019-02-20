@@ -48,13 +48,12 @@ export default function(state = initialState, action){
       }
     case DELETE_INTERVIEW_QUESTION_BY_ID:
       console.log('at delete intQuestion case reducer', action.payload.body)
-      // let deleteState = [ ...state.allInterviewQuestions ].filter(intQuestion => intQuestion.Id !== action.payload.body.Id)
-      // return {
-      //   allInterviewQuestions: deleteState,
-      //   lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(deleteState, 'Id'),
-      //   interviewQuestionById: null
-      // }
-      return state
+      let deleteState = [ ...state.allInterviewQuestions ].filter(intQuestion => intQuestion.Id !== action.payload.body.Id)
+      return {
+        allInterviewQuestions: deleteState,
+        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(deleteState, 'Id'),
+        interviewQuestionById: null
+      }
     default:
       return state  
   }
