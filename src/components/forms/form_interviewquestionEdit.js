@@ -6,6 +6,8 @@ import { getInterviewQuestionById, editInterviewQuestionById } from '../../actio
 import InterviewQuestionForm from './form_interviewquestion';
 import { FORM_HEADING_INTERVIEWQUESTION_EDIT } from './formContent/formContent';
 
+import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
+
 class InterviewQuestionEdit extends Component {
   componentDidMount(){
     this.props.getInterviewQuestionById(this.props.match.params.id)
@@ -27,9 +29,10 @@ class InterviewQuestionEdit extends Component {
     // if no intQuestion
     if(!this.props.interviewQuestionById){
       return (
-        <div>
-          Loading!
-        </div>
+        // <div>Loading!</div>
+        <section style={{padding: '1.5rem 1.5rem'}}>
+          <DefaultLoadingPage />
+        </section>
       )
     }
     const {
@@ -54,7 +57,8 @@ class InterviewQuestionEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById
   }
 }
 
