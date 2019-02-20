@@ -46,8 +46,8 @@ class LessonDelete extends Component {
     const { lessonById } = this.props;
     if(!lessonById){
       return (
-        // <DefaultLoadingPage />
-        <div>Loading</div>
+        <DefaultLoadingPage />
+        // <div>Loading</div>
       )
     } else {
       console.log('this props', this.props)
@@ -123,8 +123,8 @@ class LessonDelete extends Component {
 
 function mapStateToProps(state, ownProps){
   return {
-    lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
-    // lessonById: state.lessons.lessonById
+    // lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
+    lessonById: state.lessons.lessonById
   }
 }
 

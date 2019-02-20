@@ -6,6 +6,8 @@ import { getLessonById, editLessonById } from '../../actions'
 import LessonForm from './form_lesson'
 import { FORM_HEADING_LESSON_EDIT } from './formContent/formContent'
 
+import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
+
 class LessonEdit extends Component {
   
   componentDidMount(){
@@ -29,9 +31,10 @@ class LessonEdit extends Component {
     console.log('params', this.props.match.params.id)
     if(!this.props.lessonById){
       return (
-        <div>
-          Loading!
-        </div>
+        // <div>Loading!</div>
+        <section style={{padding: '1.5rem 1.5rem'}}>
+          <DefaultLoadingPage />
+        </section>
       )
     } 
     // else {
