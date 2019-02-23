@@ -18,7 +18,7 @@ const {
   unscheduledlessons,
   interviewquestions,
   recursivedirectory,
-  profile_edit,
+  users_edit,
   admindashboard,
   signout
 } = ROUTES_REACT;
@@ -53,7 +53,7 @@ class Nav extends Component {
       [ 'sidebar-item', unscheduledlessons, 'Vote For Lessons', 'fa fa-thumbs-up fs20'],
       [ 'sidebar-item', interviewquestions, 'Interview Prep', 'fa fa-object-group fs20'],
       [ 'sidebar-item', recursivedirectory, 'Recursive Directory', 'fa fa-address-book-o fs20'],
-      [ 'sidebar-item', profile_edit, 'Edit Profile', 'fa fa-user fs20'],
+      [ 'sidebar-item', users_edit, 'Edit Profile', 'fa fa-user fs20'],
       // [ 'sidebar-item', signout, 'Sign Out', 'fa fa-sign-out fs24']
     ]
     if(currentUser[admin] === true){

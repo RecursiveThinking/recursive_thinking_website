@@ -10,11 +10,13 @@ import ScheduledLessons from '../scheduledLessons/scheduledLessons';
 import UnscheduledLessons from '../unscheduledLessons/unscheduledLessons';
 import InterviewQuestions from '../interviewQuestions/interviewQuestions';
 import RecursiveDirectory from '../recursiveDirectory/recursiveDirectory';
-import ViewProfile from '../profile/view/profileView';
-import EditProfile from '../../components/profile/edit/profileEdit';
+import ViewUser from '../user/view/viewUser';
+// import UserEdit from '../../components/user/edit/userEdit';
+import UserEdit from '../../components/forms/form_userEdit';
 import Footer from '../../components/footer/footer';
 import ContentPageWithTitleBar from '../../components/common/contentPage/contentPageWithTitleBar'
-import { 
+import {
+  TITLE_BAR_USER_EDIT, 
   TITLE_BAR_LESSONS_CREATE,
   TITLE_BAR_LESSONS_EDIT,
   TITLE_BAR_LESSONS_DELETE,
@@ -64,8 +66,8 @@ const {
   interviewquestionsanswers_delete_id,
   interviewquestions,
   recursivedirectory,
-  profile_edit,
-  profile_view_id
+  users_edit,
+  users_view_id
 } = ROUTES_REACT
 
 export const ROUTES_NAV = [
@@ -90,12 +92,17 @@ export const ROUTES_NAV = [
     main: () => { return (<RecursiveDirectory />)}
   },
   {
-    path: profile_edit,
-    main: () => { return (<EditProfile />)}
+    path: users_edit,
+    main: (props) => { return (<UserEdit 
+      {...props} 
+      titleBarContent={TITLE_BAR_USER_EDIT}
+      sectionStyle={{padding: '1.5rem 1.5rem'}}
+      cardStyle={{padding: '5.5rem 5.5rem'}}
+    />)}
   },
   {
-    path: profile_view_id,
-    main: (props) => { return (<ViewProfile {...props} />)}
+    path: users_view_id,
+    main: (props) => { return (<ViewUser {...props} />)}
   }
 ]
 
@@ -105,10 +112,10 @@ export const REST_ROUTES_COMPONENTS = [
     main: (props) => { return (
       <ContentPageWithTitleBar 
         {...props}
-        titleBarContent={TITLE_BAR_LESSONS_CREATE}
         formContent={
           <LessonCreate />
         }
+        titleBarContent={TITLE_BAR_LESSONS_CREATE}
       />
     )}
   },
@@ -143,7 +150,9 @@ export const REST_ROUTES_COMPONENTS = [
     main: (props) => { return (
       <ContentPageWithTitleBar 
         {...props}
-        formContent={<InterviewQuestionCreate />}
+        formContent={
+          <InterviewQuestionCreate />
+        }
         titleBarContent={TITLE_BAR_INTERVIEWQUESTIONS_CREATE}
       />
     )}
