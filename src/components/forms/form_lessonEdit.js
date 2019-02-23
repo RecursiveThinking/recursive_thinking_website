@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { getLessonById, editLessonById } from '../../actions'
 
 import LessonForm from './form_lesson'
@@ -17,7 +18,6 @@ class LessonEdit extends Component {
   
   onSubmit = (formValues) => {
     console.log('formVals @ Lesson Edit', formValues)
-    //action creator
     let newLesson = this.props.lessonById;
     newLesson.title = formValues.lessonTitle
     newLesson.description = formValues.lessonDescription
@@ -31,10 +31,14 @@ class LessonEdit extends Component {
     console.log('params', this.props.match.params.id)
     if(!this.props.lessonById){
       return (
-        // <div>Loading!</div>
-        <section style={{padding: '1.5rem 1.5rem'}}>
-          <DefaultLoadingPage />
-        </section>
+        <>
+          {/* <ContentPageTitleBar 
+            content={TITLE_BAR_LESSONS_EDIT}
+          /> */}
+          <section style={{padding: '1.5rem 1.5rem'}}>
+            <DefaultLoadingPage />
+          </section>
+        </>
       )
     } 
     // else {
@@ -62,13 +66,16 @@ class LessonEdit extends Component {
 const mapStateToProps = (state, ownProps) => {
   console.log('MSTP @ Lesson: ', state, ownProps)
   return { 
-    lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
-    // lesson: null
+    lessonById: state.lessons.lessonById
+    // lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
   }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ getLessonById, editLessonById }, dispatch);
 }
 
 export default connect (
   mapStateToProps,
-  { getLessonById, editLessonById }
-  //fetch and editlessons
+  mapDispatchToProps
 )(LessonEdit)

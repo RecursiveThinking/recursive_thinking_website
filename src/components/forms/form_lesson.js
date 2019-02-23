@@ -55,6 +55,7 @@ class LessonForm extends Component {
     const {
       content
     } = this.props;
+    
     return (
       <section style={{padding: '1.5rem 1.5rem'}}>
         <article className="card">

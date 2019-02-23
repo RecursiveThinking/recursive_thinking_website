@@ -25,29 +25,11 @@ class LessonDelete extends Component {
     this.props.getLessonById(this.props.match.params.id);
   }
   
-  // renderModalButtons(){
-  //   const { id } = this.props.match.params;
-  //   const { unscheduledlessons } = ROUTES_REACT;
-  //   return (
-  //     <>
-  //       <Link
-  //         className=""
-  //         to={ unscheduledlessons }
-  //       >Cancel</Link>
-  //       <button
-  //         className=""
-  //         onClick={() => {this.props.deleteLessonById(id)}}
-  //       >Delete</button>
-  //     </>
-  //   )
-  // }
-  
   renderContent(){
     const { lessonById } = this.props;
     if(!lessonById){
       return (
         <DefaultLoadingPage />
-        // <div>Loading</div>
       )
     } else {
       console.log('this props', this.props)
