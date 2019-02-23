@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
-import { createUser, editUserById } from '../../actions';
+import { editUserById, getCurrentUserById } from '../../actions';
 
 import UserForm from './form_user';
-import { FORM_HEADING_USER_EDIT } from './formContent';
-
-import { getCurrentUserById } from '../../actions/index';
+import ContentPageWithTitleBar from '../../components/common/contentPage/contentPageWithTitleBar'
+// import { TITLE_BAR_USER_EDIT } from '../../components/common/contentPage/contentPageTitleBarInfo'
+import { FORM_HEADING_USER_EDIT } from './formContent/formContent';
 
 import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
+import DM from '../../standards/dictModel'
 
 class UserEdit extends Component {
   componentDidMount(){
@@ -16,17 +17,16 @@ class UserEdit extends Component {
   }
   
   onSubmit = (formValues) => {
-    
+    console.log('sdf')
   }
   
   mapInitialValues = (dictModel, currentUserObj) => {
     // this will need to return an object
-    return {}
+    // return {}
   }
   
   render(){
-    console.log('props @ UserEdit', this.props);
-    console.log('params @ UserEdit', this.props.match.params.id)
+    console.log('props @ userEdit', this.props);
     if(!this.props.currentUser){
       return (
         <section style={{padding: '1.5rem 1.5rem'}}>
@@ -34,13 +34,38 @@ class UserEdit extends Component {
         </section>
       )
     }
+    const {
+      currentUser
+    } = this.props
+    const {
+      user
+    } = DM
+    console.log('user: ', user.name)
+    console.log('currentUser: ', currentUser)
+    console.log('currentUser Name: ', currentUser[user.name])
+    // const initValues = {
+    //   name: currentUser[user.name],
+    //   email: currentUser[user.email]
+    // }
+    // console.log('initValues: ', initValues)
+    const initName = currentUser['name'];
     return (
       <>
-        <UserForm 
-          onSubmit={this.onSubmit}
-          content={FORM_HEADING_USER_EDIT}
-          initialValues={this.mapInitialValues}
-          user={this.props.user}
+        <ContentPageWithTitleBar 
+        {...this.props} 
+        formContent={
+          <UserForm 
+            {...this.props}
+            onSubmit={this.onSubmit}
+            content={FORM_HEADING_USER_EDIT}
+            initialValues={{
+              userName: initName,
+              email: 'seth@gmail.com'
+            }}
+            // initialValues={initValues}
+            // lesson={this.props.lessonById}
+          />}
+        titleBarContent={this.props.titleBarContent}
         />
       </>
     )
@@ -54,7 +79,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect (
-  mapStateToProps,
-  { getCurrentUserById, editUserById}
-)(UserEdit)
+export default connect( mapStateToProps, { getCurrentUserById, editUserById})(UserEdit)

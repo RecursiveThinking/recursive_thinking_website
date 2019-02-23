@@ -118,271 +118,275 @@ class UserForm extends Component {
         </div>
       )
     }
-    
+    console.log('this.props @ userForm: ', this.props)
     return(
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <div className="grid grid--1of4">
-          <div className="grid-cell">
-            {/* this would come from the setup/avatardefault */}
-            <div className="fc--fdir-col fc--jCont-ce">
-              <img className="avatarL" name="avatar" src={this.state.avatar} alt=""/>
-              <div className="caption ta-cent">
-                <label id="profile-picture">
-                  <span className="fs20 fw500 ls12 ">Add Profile Picture</span>
-                  {/* style={{visibility: 'hidden'}}  */}
-                  {/* {{marginRight: spacing + 'em'}} */}
-                  {/* type="file" */}
-                  {/* <input id="file" style={{visibility: 'hidden'}}  /> */}
-                </label>
+      <section style={this.props.sectionStyle}>
+        <article className="card" style={this.props.cardStyle}>
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <div className="grid grid--1of4">
+              <div className="grid-cell">
+                {/* this would come from the setup/avatardefault */}
+                <div className="fc--fdir-col fc--jCont-ce">
+                  <img className="avatarL" name="avatar" src={this.state.avatar} alt=""/>
+                  <div className="caption ta-cent">
+                    <label id="profile-picture">
+                      <span className="fs20 fw500 ls12 ">Add Profile Picture</span>
+                      {/* style={{visibility: 'hidden'}}  */}
+                      {/* {{marginRight: spacing + 'em'}} */}
+                      {/* type="file" */}
+                      {/* <input id="file" style={{visibility: 'hidden'}}  /> */}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="grid-cell">  
+                <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">Basic Information</h5>
+                  </legend>
+                  <hr className="mt10" />
+                  <div className="fc-fieldset">
+                    <Field
+                      label="Name:"
+                      name={name}
+                      type="text" 
+                      placeholder="Your First and Last Name"
+                      component={this.renderField}
+                      labelStyle="width20P"
+                      inputStyle="width80P"
+                    />
+                    <Field
+                      label="City:"
+                      name={city}
+                      type="text" 
+                      placeholder="Your City"
+                      component={this.renderField}
+                      labelStyle="width20P"
+                      inputStyle="width80P"
+                    />
+                    <Field
+                      label="State:"
+                      name={state}
+                      type="text" 
+                      placeholder="Your State"
+                      component={this.renderField}
+                      labelStyle="width20P"
+                      inputStyle="width80P"
+                    />
+                  </div>
+                </fieldset>
               </div>
             </div>
-          </div>
-          <div className="grid-cell">  
-            <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">Basic Information</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="fc-fieldset">
-                <Field
-                  label="Name:"
-                  name={name}
-                  type="text" 
-                  placeholder="Your First and Last Name"
-                  component={this.renderField}
-                  labelStyle="width20P"
-                  inputStyle="width80P"
-                />
-                <Field
-                  label="City:"
-                  name={city}
-                  type="text" 
-                  placeholder="Your City"
-                  component={this.renderField}
-                  labelStyle="width20P"
-                  inputStyle="width80P"
-                />
-                <Field
-                  label="State:"
-                  name={state}
-                  type="text" 
-                  placeholder="Your State"
-                  component={this.renderField}
-                  labelStyle="width20P"
-                  inputStyle="width80P"
-                />
-              </div>
-            </fieldset>
-          </div>
-        </div>
-          {/* Professional Status */}
-        <div className="grid grid--full">
-          <div className="grid-cell">
-            <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">Professional Status</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="fc-fieldset">
-                <Field 
-                  label="Job Title:"
-                  name={title}
-                  type="text" 
-                  placeholder="Your Current Job Title"
-                  component={this.renderField}
-                  labelStyle="width15P"
-                  inputStyle="width85P"
-                />
-                <Field 
-                  label="Employer:"
-                  name={employer}
-                  type="text" 
-                  placeholder="Your Current Employer"
-                  component={this.renderField}
-                  labelStyle="width15P"
-                  inputStyle="width85P"
-                />  
-              </div>
-            </fieldset>
-          </div>
-        </div>
-        {/* Links */}
-        <div className="grid grid--full">
-          <div className="grid-cell">
-            <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">Links</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="fc-fieldset">
-                  <Field 
-                    label="GitHub:"
-                    name={linkGithub}
-                    type="text"                               
-                    placeholder="Your GitHub URL"
-                    component={this.renderField}
-                    labelStyle="width15P"
-                    inputStyle="width85P"
-                  />
-                  <Field 
-                    label="CodePen:"
-                    name={linkCodepen}
-                    type="text"                                
-                    placeholder="Your CodePen URL"
-                    component={this.renderField}
-                    labelStyle="width15P"
-                    inputStyle="width85P"
-                  />
-                  <Field 
-                    label="LinkedIn:"
-                    name={linkLinkedIn}
-                    type="text"
-                    placeholder="Your LinkedIn URL"
-                    component={this.renderField}
-                    labelStyle="width15P"
-                    inputStyle="width85P"
-                  />
-                  <Field 
-                    label="Portfolio:"
-                    name={linkPortfolioWebsite}
-                    type="text"
-                    placeholder="Your Portfolio URL"
-                    component={this.renderField}
-                    labelStyle="width15P"
-                    inputStyle="width85P"
-                  /> 
-                  <Field 
-                    label="Resume:"
-                    name={linkResume}
-                    type="text"
-                    placeholder="Upload your Resume"
-                    component={this.renderField}
-                    labelStyle="width15P"
-                    inputStyle="width85P"
-                  />
-                {/* 
-                <div className="fc-form-input">
-                  <label htmlFor="name">Resume</label>
-                  <div className="fc-form-input-with-button">
-                    <input type="text" name="title" placeholder="Your Resume" />
-                    <button className="btn btnFillClrSchGreen00b371">Upload</button>
-                  </div>
-                </div> */}
-              </div>
-            </fieldset> 
-          </div>
-        </div>
-        {/* About */}
-        <div className="grid grid--full">
-          <div className="grid-cell">
-            <fieldset>
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="grid grid--1of2 mt30">
-                <div className="grid-cell">
-                  <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea>
-                </div>
-                <div className="grid-cell fc--disp-flex fc--fdir-col fc--jCont-ce">
-                  {/* <div className="fc--disp-flex fc--fdir-col fc--jCont-ce"> */}
+              {/* Professional Status */}
+            <div className="grid grid--full">
+              <div className="grid-cell">
+                <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">Professional Status</h5>
+                  </legend>
+                  <hr className="mt10" />
                   <div className="fc-fieldset">
                     <Field 
-                      label="When Did you Start Programming?"
-                      name={experience}
-                      type="date"                                  
-                      placeholder="Enter Date"
+                      label="Job Title:"
+                      name={title}
+                      type="text" 
+                      placeholder="Your Current Job Title"
                       component={this.renderField}
-                      labelStyle="width65P"
-                      inputStyle="width35P"
+                      labelStyle="width15P"
+                      inputStyle="width85P"
                     />
-                    {/* <Field 
-                      label="When Did you Start Coming to Recursive Thinking?"
-                      name={timeWithRT}
-                      type="date"
-                      placeholder="Enter Date"
+                    <Field 
+                      label="Employer:"
+                      name={employer}
+                      type="text" 
+                      placeholder="Your Current Employer"
                       component={this.renderField}
-                      labelStyle="width65P"
-                      inputStyle="width35P"
-                    /> */}
+                      labelStyle="width15P"
+                      inputStyle="width85P"
+                    />  
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            {/* Links */}
+            <div className="grid grid--full">
+              <div className="grid-cell">
+                <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">Links</h5>
+                  </legend>
+                  <hr className="mt10" />
+                  <div className="fc-fieldset">
+                      <Field 
+                        label="GitHub:"
+                        name={linkGithub}
+                        type="text"                               
+                        placeholder="Your GitHub URL"
+                        component={this.renderField}
+                        labelStyle="width15P"
+                        inputStyle="width85P"
+                      />
+                      <Field 
+                        label="CodePen:"
+                        name={linkCodepen}
+                        type="text"                                
+                        placeholder="Your CodePen URL"
+                        component={this.renderField}
+                        labelStyle="width15P"
+                        inputStyle="width85P"
+                      />
+                      <Field 
+                        label="LinkedIn:"
+                        name={linkLinkedIn}
+                        type="text"
+                        placeholder="Your LinkedIn URL"
+                        component={this.renderField}
+                        labelStyle="width15P"
+                        inputStyle="width85P"
+                      />
+                      <Field 
+                        label="Portfolio:"
+                        name={linkPortfolioWebsite}
+                        type="text"
+                        placeholder="Your Portfolio URL"
+                        component={this.renderField}
+                        labelStyle="width15P"
+                        inputStyle="width85P"
+                      /> 
+                      <Field 
+                        label="Resume:"
+                        name={linkResume}
+                        type="text"
+                        placeholder="Upload your Resume"
+                        component={this.renderField}
+                        labelStyle="width15P"
+                        inputStyle="width85P"
+                      />
+                    {/* 
+                    <div className="fc-form-input">
+                      <label htmlFor="name">Resume</label>
+                      <div className="fc-form-input-with-button">
+                        <input type="text" name="title" placeholder="Your Resume" />
+                        <button className="btn btnFillClrSchGreen00b371">Upload</button>
+                      </div>
+                    </div> */}
+                  </div>
+                </fieldset> 
+              </div>
+            </div>
+            {/* About */}
+            <div className="grid grid--full">
+              <div className="grid-cell">
+                <fieldset>
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
+                  </legend>
+                  <hr className="mt10" />
+                  <div className="grid grid--1of2 mt30">
+                    <div className="grid-cell">
+                      <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea>
+                    </div>
+                    <div className="grid-cell fc--disp-flex fc--fdir-col fc--jCont-ce">
+                      {/* <div className="fc--disp-flex fc--fdir-col fc--jCont-ce"> */}
+                      <div className="fc-fieldset">
+                        <Field 
+                          label="When Did you Start Programming?"
+                          name={experience}
+                          type="date"                                  
+                          placeholder="Enter Date"
+                          component={this.renderField}
+                          labelStyle="width65P"
+                          inputStyle="width35P"
+                        />
+                        {/* <Field 
+                          label="When Did you Start Coming to Recursive Thinking?"
+                          name={timeWithRT}
+                          type="date"
+                          placeholder="Enter Date"
+                          component={this.renderField}
+                          labelStyle="width65P"
+                          inputStyle="width35P"
+                        /> */}
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <fieldset className="fieldsetSkills">
+              {/* Professional Skills */}
+              <div className="grid grid--full">
+                <div className="grid-cell">
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
+                  </legend>
+                  <hr className="mt10" />
+                  <div className="grid grid--1of2">
+                    <div className="grid-cell">
+                      <div className="fc-form-input-col">
+                        <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Professional Skills</label>
+                        <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Professional Skill"/>
+                      </div>
+                    </div>
+                    <div className="grid-cell">
+                      {allProfessionalSkills}
+                    </div>
                   </div>
                 </div>
               </div>
             </fieldset>
-          </div>
-        </div>
-        <fieldset className="fieldsetSkills">
-          {/* Professional Skills */}
-          <div className="grid grid--full">
-            <div className="grid-cell">
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="grid grid--1of2">
+            <fieldset className="fieldsetSkills">
+              {/* Software Skills */}
+              <div className="grid grid--full">
                 <div className="grid-cell">
-                  <div className="fc-form-input-col">
-                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Professional Skills</label>
-                    <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Professional Skill"/>
-                  </div>
-                </div>
-                <div className="grid-cell">
-                  {allProfessionalSkills}
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
+                  </legend>
+                  <hr className="mt10" />
+                  <div className="grid grid--1of2">
+                    <div className="grid-cell">
+                      <div className="fc-form-input-col">
+                        <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Software Skills</label>
+                        <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Software Skill"/>
+                      </div>
+                    </div>
+                    <div className="grid-cell">
+                      {allSoftwareSkills}
+                    </div>
+                  </div>                     
                 </div>
               </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset className="fieldsetSkills">
-          {/* Software Skills */}
-          <div className="grid grid--full">
-            <div className="grid-cell">
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="grid grid--1of2">
+            </fieldset>
+            <fieldset className="fieldsetSkills">
+              {/* Language */}
+              <div className="grid grid--full">
                 <div className="grid-cell">
-                  <div className="fc-form-input-col">
-                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Software Skills</label>
-                    <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Software Skill"/>
-                  </div>
+                  <legend>
+                    <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
+                  </legend>
+                  <hr className="mt10" />
+                  <div className="grid grid--1of2">
+                    <div className="grid-cell">
+                      <div className="fc-form-input-col">
+                        <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Coding Languages</label>
+                        <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Language"/>
+                      </div>
+                    </div>
+                    <div className="grid-cell">
+                      {allLanguageSkills}
+                    </div>
+                  </div>                      
                 </div>
-                <div className="grid-cell">
-                  {allSoftwareSkills}
-                </div>
-              </div>                     
-            </div>
-          </div>
-        </fieldset>
-        <fieldset className="fieldsetSkills">
-          {/* Language */}
-          <div className="grid grid--full">
-            <div className="grid-cell">
-              <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
-              </legend>
-              <hr className="mt10" />
-              <div className="grid grid--1of2">
-                <div className="grid-cell">
-                  <div className="fc-form-input-col">
-                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Coding Languages</label>
-                    <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Language"/>
-                  </div>
-                </div>
-                <div className="grid-cell">
-                  {allLanguageSkills}
-                </div>
-              </div>                      
-            </div>
-          </div>
-        </fieldset>
-      </form>
+              </div>
+            </fieldset>
+          </form>
+        </article>
+      </section> 
     )
   }
 }
 
-export const UserFormEx = reduxForm({
+export default reduxForm({
   validate: validate,
   form: 'UserForm'
 })(UserForm)
