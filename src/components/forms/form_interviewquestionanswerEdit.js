@@ -22,7 +22,7 @@ class InterviewQuestionAnswerEdit extends Component {
     let newInterviewQuestionAnswer = { ...this.props.interviewQuestionAnswerById };
     newInterviewQuestionAnswer.description = formValues.interviewQuestionAnswerDescription;
     // action creator
-    this.props.editInterviewQuestionAnswerById(newInterviewQuestionAnswer)
+    this.props.editInterviewQuestionAnswerById(newInterviewQuestionAnswer, this.props.interviewQuestionById.Id)
   }
   
   render(){

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-// import ModalDelete from '../common/modal/modalDelete';
-
 import { connect } from 'react-redux';
 import { 
-  getInterviewQuestionById, 
+  getInterviewQuestionById,
+  editInterviewQuestionById, 
   getInterviewQuestionAnswerById, 
   deleteInterviewQuestionAnswerById 
 } from '../../actions/index';
 
 import { Link } from 'react-router-dom';
-
 import { ROUTES_REACT } from '../../standards/routes';
+
 import DM from '../../standards/dictModel';
 
 import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
@@ -32,50 +31,28 @@ class InterviewQuestionAnswerDelete extends Component {
     console.log('props @ CDM InterviewQuestionAnswerDelete: ', this.props)
   }
   
-  deleteInterviewQuestionAnswer = (questionId, answerId) => {
+  deleteInterviewQuestionAnswer = (intQuest, intQuestAns) => {
     const {
       intQuestion: {
         answersToQuestion
       }
     } = DM;
-    console.log('questionId: ', questionId, 'answerId: ', answerId)
-    // need a new method 
-    // this.props.updateInterviewQuestionById(questionObj);
-    this.props.deleteInterviewQuestionAnswerById(answerId);
+    let intQuestToUpdate = { ...intQuest }
+    intQuestToUpdate[answersToQuestion] = intQuestToUpdate[answersToQuestion].filter(intQuestAnsArrItem => intQuestAnsArrItem.Id !== intQuestAns.Id)
+    this.props.editInterviewQuestionById(intQuestToUpdate);
+    this.props.deleteInterviewQuestionAnswerById(intQuestAns, intQuest.Id);
   }
-  
-  // renderModalButtons(){
-  //   const { questId, ansId } = this.props.match.params;
-  //   const {
-  //     interviewQuestionById,
-  //     interviewQuestionAnswerById
-  //   } = this.props;
-  //   const { interviewquestions } = ROUTES_REACT;
-  //   return (
-  //     <>
-  //       <Link
-  //         className=""
-  //         to={interviewquestions}
-  //       >Cancel</Link>
-  //       <button
-  //         className=""
-  //         // onClick={() => {this.props.deleteInterviewQuestionAnswer(questId, interviewQuestionById, ansId)}}
-  //       >Delete</button>
-  //     </>
-  //   )
-  // }
   
   renderContent(){
     
     if(!this.props.interviewQuestionAnswerById || !this.props.interviewQuestionById){
       return (
-        // <div>Loading!!!</div>
         <DefaultLoadingPage />
       )
     } else {
-      const { questId, ansId } = this.props.match.params;
-      console.log('')
-      console.log('questionId: ', questId, 'answerId: ', ansId)
+      // const { questId, ansId } = this.props.match.params;
+      // console.log('')
+      // console.log('questionId: ', questId, 'answerId: ', ansId)
       const {
         interviewQuestionById,
         interviewQuestionAnswerById
@@ -86,7 +63,6 @@ class InterviewQuestionAnswerDelete extends Component {
           <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
             <h5 className="fw700 ls14 ttup fcGrey424041">Delete Interview Question Answer: </h5>
             <hr className="modalHR mt10" />
-            {/* <form> */}
               <div className="fc-fieldset">
                 <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
                   <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
@@ -110,11 +86,9 @@ class InterviewQuestionAnswerDelete extends Component {
                 </Link>
                 <button 
                   className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 mt30"
-                  onClick={() => {this.deleteInterviewQuestionAnswer(questId, ansId)}}
+                  onClick={() => {this.deleteInterviewQuestionAnswer(interviewQuestionById, interviewQuestionAnswerById)}}
                 >Delete Answer</button>
               </div>
-              {/* btn btnFillClrSchWarn btnOutlineClrSchUnavailable btnVoted fs16 fw500 ls12 ta-cent pdTB1p25LR2p5 */}
-            {/* </form> */}
           </fieldset>
         </article>
       )
@@ -126,7 +100,7 @@ class InterviewQuestionAnswerDelete extends Component {
     console.log('props @ IntQuestAnsDelete: ', this.props);
     console.log('questId', this.props.match.params.questId, 'ansId', this.props.match.params.ansId);
     return (
-      <section>
+      <section style={{padding: '1.5rem 1.5rem'}}>
         {this.renderContent()}
       </section>
     )
@@ -155,4 +129,4 @@ function mapStateToProps(state, ownProps){
   }
 }
 
-export default connect(mapStateToProps, { getInterviewQuestionById, getInterviewQuestionAnswerById, deleteInterviewQuestionAnswerById})(InterviewQuestionAnswerDelete)
+export default connect(mapStateToProps, { getInterviewQuestionById, editInterviewQuestionById, getInterviewQuestionAnswerById, deleteInterviewQuestionAnswerById})(InterviewQuestionAnswerDelete)
