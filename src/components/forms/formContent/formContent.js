@@ -1,6 +1,11 @@
-export const FORM_HEADING_USER_EDIT = {
+export const FORM_HEADING_USER_CREATE = {
   heading: 'Create A Lesson',
   buttonText: 'Submit Lesson'
+}
+
+export const FORM_HEADING_USER_EDIT = {
+  heading: 'Edit User Profile: ',
+  buttonText: 'Submit Editted User'
 }
 
 export const FORM_HEADING_LESSON_CREATE = {

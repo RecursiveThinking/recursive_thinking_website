@@ -119,6 +119,11 @@ class UserForm extends Component {
       )
     }
     console.log('this.props @ userForm: ', this.props)
+    
+    const {
+      content
+    } = this.props;
+    
     return(
       <section style={this.props.sectionStyle}>
         <article className="card" style={this.props.cardStyle}>
@@ -313,8 +318,7 @@ class UserForm extends Component {
                 </fieldset>
               </div>
             </div>
-            <fieldset className="fieldsetSkills">
-              {/* Professional Skills */}
+            {/* <fieldset className="fieldsetSkills">
               <div className="grid grid--full">
                 <div className="grid-cell">
                   <legend>
@@ -334,9 +338,8 @@ class UserForm extends Component {
                   </div>
                 </div>
               </div>
-            </fieldset>
-            <fieldset className="fieldsetSkills">
-              {/* Software Skills */}
+            </fieldset> */}
+            {/* <fieldset className="fieldsetSkills">
               <div className="grid grid--full">
                 <div className="grid-cell">
                   <legend>
@@ -356,9 +359,8 @@ class UserForm extends Component {
                   </div>                     
                 </div>
               </div>
-            </fieldset>
-            <fieldset className="fieldsetSkills">
-              {/* Language */}
+            </fieldset> */}
+            {/* <fieldset className="fieldsetSkills">
               <div className="grid grid--full">
                 <div className="grid-cell">
                   <legend>
@@ -378,7 +380,15 @@ class UserForm extends Component {
                   </div>                      
                 </div>
               </div>
-            </fieldset>
+            </fieldset> */}
+            <hr className="modalHR mt80" />
+              <div className="ta-cent">
+                {
+                  this.props.anyTouched && !this.props.invalid &&
+                  
+                  <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+                }
+              </div>
           </form>
         </article>
       </section> 
