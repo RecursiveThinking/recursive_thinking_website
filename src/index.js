@@ -11,14 +11,7 @@ import App from './components/App';
 import reducers from './reducers'
 // import * as serviceWorker from './serviceWorker';
 
-// import history from './history'
-
-// import createBrowserHistory from 'history/createBrowserHistory';
-
 import './config/amplify'
-
-// export const history = createBrowserHistory();
-// export const customHistory = createBrowserHistory();
 
 const composeEnhancers = 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -31,9 +24,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <Router history={history}> */}
-      <App />
-    {/* </Router> */}
+    <App />
   </Provider>,
   document.getElementById('root')
 );

@@ -4,12 +4,15 @@ import React, { Component } from 'react'
 import { Router, Route, Redirect } from 'react-router-dom'
 
 import HomeScreen from '../containers/public/HomeScreen/HomeScreen';
-import ProfileCreate from '../containers/profile/create/profileCreate';
+import CreateUser from '../containers/user/create/createUser';
 import MainApp from '../containers/mainApp/mainApp';
 
-import history from '../history';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import { ROUTES_REACT } from '../standards/routes';
+
+import SetupUser from '../containers/user/setup/setupUser';
+
 const {
   root,
   dashboard,
@@ -24,15 +27,18 @@ const {
   interviewquestionsanswers_create,
   interviewquestionsanswers_edit,
   recursivedirectory,
-  profile_edit,
-  // profile_edit_id,
-  profile_create,
-  // profile_setup_id,
-  // profile_view,
-  profile_view_id,
+  users_edit,
+  // users_edit_id,
+  users_create,
+  users_setup,  
+  users_setup_id,
+  // users_view,
+  users_view_id,
   admindashboard,
   signout
 } = ROUTES_REACT
+
+export const history = createBrowserHistory();
 
 class App extends Component {
   render(){
@@ -52,9 +58,11 @@ class App extends Component {
           <Route path={interviewquestionsanswers_create} exact component={MainApp} />
           <Route path={interviewquestionsanswers_edit} exact component={MainApp} />
           <Route path={recursivedirectory} component={MainApp}/>
-          <Route path={profile_edit} component={MainApp}/>
-          <Route path={profile_view_id} component={MainApp}/>
-          <Route path={profile_create} component={ProfileCreate}/>
+          <Route path={users_edit} component={MainApp}/>
+          <Route path={users_view_id} component={MainApp}/>
+          <Route path={users_create} component={CreateUser}/>
+          <Route path={users_setup} component={SetupUser}/>
+          <Route path={users_setup_id} component={SetupUser}/>
           <Route path={admindashboard} component={MainApp}/>
           <Route path={signout} render={ () => ( <Redirect to="/" /> ) } />
         </div>
