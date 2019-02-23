@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 
-import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
+import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions/index'
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
@@ -32,8 +32,8 @@ const {
 class Dash extends Component {
   
   componentDidMount(){
-    this.props.fetchUsers();
     this.props.fetchLessons();
+    this.props.fetchUsers();
     this.props.getCurrentUserById();
   }
   
@@ -117,8 +117,10 @@ function mapStateToProps(state){
   }
 }
 
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators({fetchLessons: fetchLessons})(dispatch);
-// }
+function mapDispatchToProps(dispatch){
+  // return bindActionCreators({fetchLessons: fetchLessons}, dispatch);
+  return bindActionCreators({fetchUsers, fetchLessons, getCurrentUserById}, dispatch);
+}
 
-export default connect(mapStateToProps, { fetchUsers, fetchLessons, getCurrentUserById })(Dash);
+export default connect(mapStateToProps, mapDispatchToProps)(Dash);
+// export default connect(mapStateToProps, {fetchUsers, fetchLessons, getCurrentUserById})(Dash);
