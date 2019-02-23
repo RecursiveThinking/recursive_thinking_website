@@ -24,7 +24,7 @@ class UserForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      avatar: `${PATH_FOR_IMAGES}avatar1.png`,
+      // avatar: `${PATH_FOR_IMAGES}avatar1.png`,
     }
   }
   

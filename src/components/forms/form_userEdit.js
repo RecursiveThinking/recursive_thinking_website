@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { editUserById, getCurrentUserById } from '../../actions';
 
 import UserForm from './form_user';
@@ -10,7 +11,6 @@ import { FORM_HEADING_USER_EDIT } from './formContent/formContent';
 
 import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
 import DM from '../../standards/dictModel'
-import { bindActionCreators } from 'C:/Users/workstation/AppData/Local/Microsoft/TypeScript/3.3/node_modules/redux';
 import { ROUTES_REACT } from '../../standards/routes';
 
 class UserEdit extends Component {
