@@ -125,7 +125,7 @@ export const signInGetUserInfo = async () => {
 };
 
 export const getSignInUserSession = async () => {
-  //Get current user's session
+  //Get current user's from  session
   return Auth.currentSession()
       .then((user) => {
           console.log('current user session @ auth', user);

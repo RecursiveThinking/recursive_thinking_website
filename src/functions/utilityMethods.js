@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { ROUTES_REACT } from '../standards/routes'
+// import { ROUTES_REACT } from '../standards/routes'
 
-const {
-  lessons_edit,
-  lessons_edit_id
-} = ROUTES_REACT
+// const {
+  // lessons_edit,
+  // lessons_edit_id
+// } = ROUTES_REACT
 
 export default class utilityMethods {
   static getArrayOfObjectsByKey(lookupTable, arrayOfKeys){
@@ -37,7 +37,7 @@ export default class utilityMethods {
     let optionListVar = [ 'ban', 'edit', 'delete']
     function returnOptionsList(item, currentUser, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, itemIdent, sizeP, indexP){
       if(item === 'ban'){
-        let classString = `${sizeP} fcAlert fa fa-ban`
+        // let classString = `${sizeP} fcAlert fa fa-ban`
         return (
           // <li key={indexP}>
           //   <i className={classString}></i>
@@ -79,7 +79,7 @@ export default class utilityMethods {
     let optionListVar = [ 'ban', 'edit', 'delete']
     function returnOptionsListAnswers(item, currentUser, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, answerId, sizeP, indexP){
       if(item === 'ban'){
-        let classString = `${sizeP} fcAlert fa fa-ban`
+        // let classString = `${sizeP} fcAlert fa fa-ban`
         return (
           // <li key={indexP}>
           //   <i className={classString}></i>
