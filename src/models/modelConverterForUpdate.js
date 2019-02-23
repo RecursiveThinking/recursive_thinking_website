@@ -15,8 +15,8 @@ class ModelConverterForUpdate {
     }
     // make both EAN and EAV
     for(let key in object){
-      if(key === dictModelObject.Id){
-        
+      if(key === dictModelObject.Id || key === dictModelObject.userId){
+        // don't do anything because you can't put the ID in with the names/values, its already the key
       } else { 
         let tempEAN = `#${key}`;
         genObj.ExpressionAttributeNames[tempEAN] = dictModelObject[key];

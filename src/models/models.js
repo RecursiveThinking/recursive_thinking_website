@@ -1,7 +1,7 @@
 import v1 from 'uuid/v1'
 
 const empty = ' ';
-
+const viewDefaultVal = 0
 export class CogUser {
   constructor(userId, username, name, email){
     this.userId = userId;
@@ -12,18 +12,9 @@ export class CogUser {
 }
 
 // export class RegUser extends CogUser {
-export class User {
-  constructor(userId, username, name, email){
-  // constructor(){
-    // super();
-    // this.userId = super.userId;
-    // this.username = super.username;
-    // this.name = super.name;
-    // this.email = super.email;
-    this.userId = userId;
-    this.username = username;
-    this.name = name;
-    this.email = email;
+export class User extends CogUser{
+  constructor({userId, username, name, email}){
+    super(userId, username, name, email)
     this.avatar = empty;
     this.city = empty;
     this.state = empty;
@@ -35,12 +26,12 @@ export class User {
     this.linkPortfolioWebsite = empty;
     this.linkResume = empty;
     this.bio = empty;
-    this.profileStatsVisits = empty;
-    this.profileStatsViewsGithub = empty;
-    this.profileStatsViewsCodePen = empty;
-    this.profileStatsViewsPortfolio = empty;
-    this.profileStatsViewsLinkedIn = empty;
-    this.profileStatsViewsResume = empty;
+    this.profileStatsVisits = viewDefaultVal;
+    this.profileStatsViewsGithub = viewDefaultVal;
+    this.profileStatsViewsCodePen = viewDefaultVal;
+    this.profileStatsViewsPortfolio = viewDefaultVal;
+    this.profileStatsViewsLinkedIn = viewDefaultVal;
+    this.profileStatsViewsResume = viewDefaultVal;
     this.experience = empty;
     this.timeWithRT = new Date().toString();
     this.rank = empty;
