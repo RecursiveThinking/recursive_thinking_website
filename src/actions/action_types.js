@@ -1,8 +1,5 @@
-// export const SIGN_IN = 'SIGN_IN';
-// export const SIGN_UP = 'SIGN_UP'
-// export const SIGN_OUT = 'SIGN_OUT'
-
 export const GET_CURRENT_USER_BY_ID = 'GET_CURRENT_USER_BY_ID'
+export const ERRORS_CURRENT_USER_BY_ID = 'ERRORS_CURRENT_USER_BY_ID';
 
 export const FETCH_USERS = 'FETCH_USERS';
 export const CREATE_USER = 'CREATE_USER';
