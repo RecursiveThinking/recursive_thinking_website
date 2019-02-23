@@ -12,7 +12,7 @@ import DefaultLoadingPage from '../../../components/defaults/loadingPage/loading
 import { history } from '../../../components/App';
 
 import { CogUser, User } from '../../../models/models'
-import { createUser, getAuthUserById } from '../../../actions/index'
+import { createUser, getAuthUserById, getCurrentUserById } from '../../../actions/index'
 
 import { ROUTES_REACT } from '../../../standards/routes'
 
@@ -106,7 +106,7 @@ class CreateUser extends Component {
       // , { setupUserId: currentUser.userId }
       console.log('current user', this.props.currentUser)
     }
-    else {
+    else if(this.props.currentUser.isProfileSetup){
       console.log('USER IS SETUP!')
       history.push(ROUTES_REACT.dashboard)
     }
@@ -174,4 +174,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, { getAuthUserById, createUser })(CreateUser);
+export default connect(mapStateToProps, { getAuthUserById, createUser, getCurrentUserById })(CreateUser);
