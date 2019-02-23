@@ -6,7 +6,7 @@ import { ROUTES_REACT } from '../../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 
 const {
-  profile_view
+  users_view
 } = ROUTES_REACT
 
 const lessonTaughtByThumbListItem = ({userId, avatar, altName}) => {
@@ -19,7 +19,7 @@ const lessonTaughtByThumbListItem = ({userId, avatar, altName}) => {
   
   return (
     <figure className="avatarTip">
-      <Link to={`${profile_view}/${userId}`}>
+      <Link to={`${users_view}/${userId}`}>
         <img className="avatarXXS" src={avatarSrcPath} alt={altString} />
       </Link>
       <span className="fs10 ls10 avatarTipText">{altName}</span>

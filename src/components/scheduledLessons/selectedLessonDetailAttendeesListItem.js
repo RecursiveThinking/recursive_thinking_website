@@ -7,7 +7,7 @@ import { ROUTES_REACT } from '../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 const {
-  profile_view
+  users_view
 } = ROUTES_REACT
 
 const selectedLessonDetailAttendeesListItem = ({attendingUserObj}) => {
@@ -16,7 +16,7 @@ const selectedLessonDetailAttendeesListItem = ({attendingUserObj}) => {
   let altString = `A Photo of ${attendingUserObj[name]}`
   return (
     <div className="fc--disp-flex">
-      <Link to={`${profile_view}/${attendingUserObj[userId]}`}>
+      <Link to={`${users_view}/${attendingUserObj[userId]}`}>
         <img className="avatarXXS fi--aSelf-ce" src={avatarSrcPath} alt={altString} />
       </Link>
       <h5 className="fw300 ls18 fs22 fcGrey424041 fi--aSelf-ce">{attendingUserObj[name]}</h5>

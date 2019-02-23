@@ -12,14 +12,16 @@ import DM from '../../standards/dictModel'
 const ScheduledLessonsList = ({...props}) => {
   const { user: { lessonStatus }, lesson: { Id }} = DM;
   
-  // console.log('props.scheduledLessons', props.scheduledLessons)
+  console.log('props @ scheduledLessons', props.scheduledLessons)
   console.log('object: ', props.currentUser[lessonStatus])
-  console.log('array length: ', Object.entries(props.currentUser[lessonStatus]).length === 0)
+  // console.log('array length: ', Object.entries(props.currentUser[lessonStatus]).length === 0)
   // && props.currentUser[lessonStatus].constructor === Object
   
-  if(props.scheduledLessons.length && Object(props.currentUser[lessonStatus]).length){
+  // if(props.scheduledLessons.length && Object(props.currentUser[lessonStatus]).length){
+  if(props.scheduledLessons.length){
     // map the lesson list to return JSX
     let allScheduledLessonsListItems = props.scheduledLessons.map(lessonItem => {
+      // Object(props.currentUser[lessonStatus]).length
       let currentUserLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser[lessonStatus], lessonItem[Id]);
       return (
         <li

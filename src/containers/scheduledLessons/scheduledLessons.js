@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLessons, fetchUsers, getCurrentUserById } from '../../actions'
+import { fetchLessons, fetchUsers, getCurrentUserById, editUserById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
 
 // import LessonMethods from '../../functions/lessonMethods'
@@ -10,6 +10,8 @@ import SelectedLessonDetail from '../../components/scheduledLessons/selectedLess
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
 
+import { ROUTES_REACT } from '../../standards/routes'
+
 class ScheduledLessons extends Component {
   
   componentDidMount(){
@@ -18,12 +20,15 @@ class ScheduledLessons extends Component {
     this.props.getCurrentUserById();
   }
   
-  updateSelectedLesson = (lessonToUpdate, status) => {
+  updateSelectedLesson = (lessonObjToAdd, status) => {
     // const { currentUser } = this.props;
-    console.log('lessonToUpdate: ', lessonToUpdate, 'status: ', status)
+    console.log('lessonObjToAdd: ', lessonObjToAdd, 'status: ', status)
     console.log('currentUser: ', this.props.currentUser);
     // need to do two things here, if attending, lessonToUpdate gets the currentUsers Id, and the Users status gets the lessonID with a value of 1
     // if not attending or maybe, users status gets a lessonID and appropriate value
+    let updateUserLessonStatus = { ...this.props.currentUser }
+    updateUserLessonStatus.lessonStatus[lessonObjToAdd.Id] = status;
+    this.props.editUserById(updateUserLessonStatus, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
   }
   
   render(){
@@ -96,5 +101,5 @@ function mapStateToProps(state){
 //   return bindActionCreators({fetchAllLessons: fetchAllLessons}, dispatch)
 // }
 
-export default connect(mapStateToProps, { fetchLessons, fetchUsers, getCurrentUserById })(ScheduledLessons);
+export default connect(mapStateToProps, { fetchLessons, fetchUsers, getCurrentUserById, editUserById })(ScheduledLessons);
 // export default connect(mapStateToProps, mapDispatchToProps)(ScheduledLessons);
