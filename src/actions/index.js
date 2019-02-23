@@ -7,7 +7,7 @@ import { getSignInUserSession } from '../functions/authMethods';
 // import LessonMethods from '../functions/lessonMethods';
 import ModelConverterForUpdate from '../models/modelConverterForUpdate';
 
-import dictModel from '../standards/dictModel'
+import DM from '../standards/dictModel'
 
 import { history } from '../components/App';
 
@@ -229,7 +229,7 @@ export const createUser = (newUser) => {
   let funcOptions = { 
     ...OPTIONS,
     method: HTTP_METHODS.post,
-    body: JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.user, newUser))
+    body: JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, newUser))
   };
   console.log('funcOptions', funcOptions);
   return async (dispatch) => {
@@ -266,7 +266,7 @@ export const getUserById = (userId) => {
   // console.log('currentUser', currentUser)
   return async dispatch => {
     // const currentUser = await getCurrentAuthenticatedUser()
-    await initFetchCall(URL, funcOptions, true)
+    await initFetchCall(URL, funcOptions, false)
       .then(res => {
         const { status } = res;
         console.log('res @ getUserByID: ', res)
@@ -283,8 +283,36 @@ export const getUserById = (userId) => {
   }
 }
 
-export const editUserById = (edittedUser) => {
+export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
+  const {
+    user
+  } = DM
+  console.log('userObj @ editUserById action: ', edittedUser);
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${edittedUser.userId}`;
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.put;
+  edittedUser[user.updatedAt] = new Date().toString();
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, edittedUser));
+  console.log('funcOptions @ editUserById: ', funcOptions.body);
   
+  return async (dispatch) => {
+    await initFetchCall(URL, funcOptions, false)
+      .then(res => {
+        const { status } = res;
+        console.log('res @ editUserById: ', res);
+        if(status === 200){
+          dispatch({ type: EDIT_USER_BY_ID, payload: res });
+          dispatch({ type: ERRORS_EDIT_USER_BY_ID, payload: errorNotExistPayload });
+        }
+        history.push(thenPushPath)
+        return res;
+      })
+      .catch(err => {
+        dispatch({ type: ERRORS_EDIT_USER_BY_ID, payload: err})
+        history.push(catchPushPath)        
+        return err;
+      })
+  }
 }
 
 export const deleteUserById = (userId) => {
@@ -323,7 +351,7 @@ export const createLesson = (newLesson) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}`
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.post;
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.lesson, newLesson));
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.lesson, newLesson));
   console.log(funcOptions.body)
   return async (dispatch) => {
     await initFetchCall(URL, funcOptions, true)
@@ -376,7 +404,7 @@ export const editLessonById = (edittedLesson) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}/${edittedLesson.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.lesson, edittedLesson))
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.lesson, edittedLesson))
   console.log(funcOptions.body)
   
   return async (dispatch) => {
@@ -474,7 +502,7 @@ export const createInterviewQuestion = (newInterviewQuestion) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.post;
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.intQuestion, newInterviewQuestion));
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestion, newInterviewQuestion));
   console.log('funcOptions @ createIntQuestion: ', funcOptions);
   
   return async (dispatch) => {
@@ -528,7 +556,7 @@ export const editInterviewQuestionById = (edittedInterviewQuestion) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${edittedInterviewQuestion.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.intQuestion, edittedInterviewQuestion))
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestion, edittedInterviewQuestion))
   console.log(funcOptions.body)
   
   return async (dispatch) => {
@@ -613,7 +641,7 @@ export const createInterviewQuestionAnswer = (newInterviewQuestionAnswer, intQue
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.post;
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.intQuestionAnswer, newInterviewQuestionAnswer));
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestionAnswer, newInterviewQuestionAnswer));
   console.log('funcOptions @ createIntQuestionAnswer: ', funcOptions);
   
   return async (dispatch) => {
@@ -667,7 +695,7 @@ export const editInterviewQuestionAnswerById = (edittedInterviewQuestionAnswer, 
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${edittedInterviewQuestionAnswer.Id}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(dictModel.intQuestionAnswer, edittedInterviewQuestionAnswer))
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestionAnswer, edittedInterviewQuestionAnswer))
   console.log('funcOptions @ editIntQuestAnswer: ', funcOptions)
   
   return async (dispatch) => {
