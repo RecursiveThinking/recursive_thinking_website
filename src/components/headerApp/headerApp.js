@@ -24,7 +24,7 @@ import { PATH_FOR_IMAGES } from '../../standards/publicPaths';
           <Link to={ROUTES_REACT.dashboard}>
             <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1  fs16 ls12">Dash</button>
           </Link>
-          <Link to={ROUTES_REACT.profile_create}>
+          <Link to={ROUTES_REACT.users_create}>
             <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SetupProfile</button>
           </Link>
           {/* <div className="fc--disp-flex search">
