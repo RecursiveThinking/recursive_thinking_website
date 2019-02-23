@@ -3,32 +3,37 @@ import { ROUTES_REACT } from '../../../standards/routes'
 const {
   unscheduledlessons,
   lessons_create,
-  lessons_edit,
+  // lessons_edit,
   interviewquestions,
   interviewquestions_create,
-  interviewquestions_edit,
-  interviewquestionsanswers_create,
-  interviewquestionsanswers_edit,
-  profile_create,
-  profile_edit,
+  // interviewquestions_edit,
+  // interviewquestionsanswers_create,
+  // interviewquestionsanswers_edit,
   recursivedirectory
 } = ROUTES_REACT
 
-export const TITLE_BAR_USER_PROFILE_CREATE = {
+export const TITLE_BAR_USER_CREATE = {
   heading: 'Create Your User Profile',
   subheading: 'Please fill in all Fields Below and Submit Your Profile',
   buttontext: '',
-  link: interviewquestions
+  link: null
 }
 
-export const TITLE_BAR_USER_PROFILE_EDIT = {
+export const TITLE_BAR_USER_SETUP = {
+  heading: 'Setup Your User Profile',
+  subheading: 'Please fill in all Fields Below and Submit Your Profile',
+  buttontext: '',
+  link: null
+}
+
+export const TITLE_BAR_USER_EDIT = {
   heading: 'Edit Your User Profile',
   subheading: 'Please Edit the Required Fields and Resubmit Your Profile',
   buttontext: '',
-  link: interviewquestions
+  link: null
 }
 
-export const TITLE_BAR_USER_PROFILE_VIEW = {
+export const TITLE_BAR_USER_VIEW = {
   heading: 'View Users Profiles',
   subheading: 'Otherwise Click the Button to Return to the Previous Page',
   buttontext: 'Return to Directory',
