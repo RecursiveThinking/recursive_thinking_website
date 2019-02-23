@@ -1,31 +1,28 @@
-import { FETCH_USERS, FETCHING } from '../actions/action_types'
+import { FETCH_USERS, FETCHING, GET_USER_BY_ID } from '../actions/action_types'
 
 import UtilityMethods from '../functions/utilityMethods';
 
 let initialState = {
   allUsers: FETCHING,
-  allUsersAPIResponse: {},
-  lookupTableAllUsers: FETCHING
+  lookupTableAllUsers: {},
+  userById: FETCHING
 }
 
 export default function (state = initialState, action) {
   
   switch(action.type){
     case FETCH_USERS:
-      // if(action.payload.body && action.payload.statusCode === 200){
-      if(action.payload){
-        return {
-          allUsers: action.payload.body,
-          allUsersAPIResponse: action.payload.status,     
-          lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'userId')
-        }
-      } else {
-        console.log('is API Error Object', action.payload.body)
-        return {
-          allUsers: null,
-          allUsersAPIResponse: action.payload.body,
-          lookupTableAllUsers: null
-        }
+      console.log('at fetch allUsers case reducer', action.payload.body)
+      return {
+        allUsers: action.payload.body,     
+        lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'userId'),
+        userById: null
+      }
+    case GET_USER_BY_ID:
+      console.log('at fetch allUsers case reducer', action.payload.body)
+      return {
+        ...state,
+        userById: action.payload.body
       }
     default:
       return state
