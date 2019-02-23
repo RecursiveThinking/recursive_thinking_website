@@ -4,18 +4,25 @@ import { Field, reduxForm } from 'redux-form';
 import ValidationMethods from '../../functions/validationMethods'
 import { signUp, confirmSignUp, signIn, signInGetUserInfo } from '../../functions/authMethods'
 
+import { history } from '../App'
+
+import { ROUTES_REACT } from '../../standards/routes'
+
+const {
+  // dashboard,
+  users_create
+} = ROUTES_REACT;
 class SignUpModalForm extends Component {
-  constructor(props){
-    super(props);
+  // constructor(props){
+    // super(props);
     
-  //   // this.handleModalCloseOnSubmit = this.handleModalCloseOnSubmit.bind(this);
+    // this.handleModalCloseOnSubmit = this.handleModalCloseOnSubmit.bind(this);
     // this.closeModalSignup = this.closeModalSignup.bind(this);
     // this.openModalVerifyAccount = this.openModalVerifyAccount.bind();
-  }
+  // }
   
   componentDidMount(){
   }
-  
   
   
   onSubmit = (formValues) => {
@@ -161,6 +168,7 @@ export class VerifyAccountModalForm extends Component {
         console.log('data: ', data);
         this.props.closeModalVerifyAccount();
         this.props.openModalSignin();
+        return data
       })
       .catch(err => {
         console.log('err: ', err);
@@ -268,11 +276,12 @@ class SignInModalForm extends Component {
               // if false - need to construct a new user
             
             // need to navigate away here
+            history.push(users_create, { userInfo: userInfo})
             return userInfo;
           })
           .catch(err => {
             console.log('err', err);
-            // this error would need to go to the signinform
+            // this error would need to go to the signinform, how?
             return err;
           })
       })
