@@ -31,7 +31,8 @@ const dictModel = {
     admin: 'admin',
     inactive: 'inactive',
     isProfileSetup: 'isProfileSetup',
-    lastActive: 'lastActive',
+    lastLogin: 'lastLogin',
+    lastLogout: 'lastLogout',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   },

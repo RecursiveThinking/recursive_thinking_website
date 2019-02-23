@@ -44,12 +44,14 @@ export const ROUTES_REACT = {
   interviewquestionsanswers_delete: `${ROUTES_API.interviewquestions}/:questId/answers${CEDV.delete}`,
   interviewquestionsanswers_delete_id: `${ROUTES_API.interviewquestions}/:questId/answers${CEDV.delete}/:ansId`,
   
-  profile_view: `${ROUTES_API.users}${CEDV.view}`,
-  profile_view_id: `${ROUTES_API.users}${CEDV.view}/:id`,
-  profile_edit: `${ROUTES_API.users}${CEDV.edit}`,
-  profile_edit_id: `${ROUTES_API.users}${CEDV.edit}/:id`,
-  profile_create: `${ROUTES_API.users}${CEDV.create}`,
-  profile_create_id: `${ROUTES_API.users}${CEDV.create}/:id`,
+  users_create: `${ROUTES_API.users}${CEDV.create}`,
+  users_create_id: `${ROUTES_API.users}${CEDV.create}/:id`,
+  users_setup: `${ROUTES_API.users}/setup`,  
+  users_setup_id: `${ROUTES_API.users}/setup/:id`,
+  users_view: `${ROUTES_API.users}${CEDV.view}`,
+  users_view_id: `${ROUTES_API.users}${CEDV.view}/:id`,
+  users_edit: `${ROUTES_API.users}${CEDV.edit}`,
+  users_edit_id: `${ROUTES_API.users}${CEDV.edit}/:id`,
   admindashboard: '/admindashboard',
   signout: '/signout'
 }
