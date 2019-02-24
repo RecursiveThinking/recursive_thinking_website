@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
+// import { s3UploadCreds } from '../../../credentials/s3UploadSecrets'
+
 import HeaderApp from '../../../components/headerApp/headerApp';
 import Footer from '../../../components/footer/footer'
 
@@ -9,7 +11,7 @@ import { TITLE_BAR_USER_CREATE } from '../../../components/common/contentPage/co
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage'
 
-import { history } from '../../../components/App';
+import { history } from '../../../index';
 
 import { CogUser, User } from '../../../models/models'
 import { createUser, getAuthUserById, getCurrentUserById } from '../../../actions/index'
@@ -30,22 +32,22 @@ class CreateUser extends Component {
   }
   
   componentDidMount(){
-    window.addEventListener('load', this.handleWindowResize)
-    // window.addEventListener('load', this.checkIfUserSetup)
-    window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('onbeforeunload', this.handleWindowResize)
-    this.props.getAuthUserById(this.props.location.state.userInfo.attributes.sub)
+    // window.addEventListener('load', this.handleWindowResize)
+    // // window.addEventListener('load', this.checkIfUserSetup)
+    // window.addEventListener('resize', this.handleWindowResize);
+    // window.addEventListener('onbeforeunload', this.handleWindowResize)
+    this.props.getAuthUserById(this.props.location.state.userInfo.attributes.sub);
+    this.handleWindowResize();
   }
   // b3cb6ece-b05d-4a22-b50f-1281d710e847
   componentDidUpdate(){
-    this.checkIfUserSetup()
+    this.checkIfUserSetup();
   }
   
   componentWillUnmount(){
-    window.removeEventListener('load', this.handleWindowResize)
-    // window.removeEventListener('load', this.checkIfUserSetup)
-    window.removeEventListener('resize', this.handleWindowResize);
-    window.removeEventListener('onbeforeunload', this.handleWindowResize)
+    // window.removeEventListener('load', this.handleWindowResize)
+    // window.removeEventListener('resize', this.handleWindowResize);
+    // window.removeEventListener('onbeforeunload', this.handleWindowResize)
   }
   
   handleWindowResize = () => {
@@ -77,6 +79,7 @@ class CreateUser extends Component {
       },
       username
     } = this.props.location.state.userInfo
+    // not setup
     if(!this.props.currentUser.userId){
       console.log('no current user', this.props.currentUser)
       console.log('at checkIfUserisSetup @ createUser: ')
@@ -92,10 +95,12 @@ class CreateUser extends Component {
       console.log('newCogUser: ', newCogUser)
       let newUser = new User(newCogUser)
       console.log('newUser: ', newUser)
+      // create s3 buckets for user avatar/resume
+      
       // // action creator - create user
       this.props.createUser(newUser);
       // action creator - getCurrentUserById
-      history.push(`${ROUTES_REACT.users_setup}/${newUser.userId}`)
+      // history.push(`${ROUTES_REACT.users_setup}/${newUser.userId}`)
       // , { setupUserId: newUser.userId }
     }
     else if(!this.props.currentUser.isProfileSetup){

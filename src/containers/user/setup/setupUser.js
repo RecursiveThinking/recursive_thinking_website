@@ -30,15 +30,17 @@ class SetupUser extends Component {
   }
   
   componentDidMount(){
-    window.addEventListener('load', this.handleWindowResize)
-    window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('onbeforeunload', this.handleWindowResize)
+    // window.addEventListener('load', this.handleWindowResize)
+    // window.addEventListener('resize', this.handleWindowResize);
+    // window.addEventListener('onbeforeunload', this.handleWindowResize)
+    this.props.getCurrentUserById();
+    this.handleWindowResize();
   }
-  
+
   componentWillUnmount(){
-    window.removeEventListener('load', this.handleWindowResize)
-    window.removeEventListener('resize', this.handleWindowResize);
-    window.removeEventListener('onbeforeunload', this.handleWindowResize)
+    // window.removeEventListener('load', this.handleWindowResize)
+    // window.removeEventListener('resize', this.handleWindowResize);
+    // window.removeEventListener('onbeforeunload', this.handleWindowResize)
   }
   
   handleWindowResize = () => {
@@ -62,8 +64,6 @@ class SetupUser extends Component {
         </main>
       )
     } else {
-      // <article className="profileSetup">
-      // </article>
       return (
         <>
           <UserEdit 
