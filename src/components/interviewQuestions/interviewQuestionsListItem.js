@@ -24,7 +24,7 @@ class InterviewQuestionsListItem extends Component {
     
     this.state = {
       isIntQuestAnswerClassOpen: 'fc-replies',
-      answerBlockClassString: 'answers display-none',
+      answerBlockClassString: 'answers display-none width100P',
       // showModalAnswer: false,
     }
   }
@@ -38,7 +38,7 @@ class InterviewQuestionsListItem extends Component {
     } else {
       this.setState({ 
         isIntQuestAnswerClassOpen: 'fc-replies open',
-        answerBlockClassString: 'answers display-block'
+        answerBlockClassString: 'answers display-block width100P'
       })
     }
   }
