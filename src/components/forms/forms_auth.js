@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import ValidationMethods from '../../functions/validationMethods'
 import { signUp, confirmSignUp, signIn, signInGetUserInfo } from '../../functions/authMethods'
 
-import { history } from '../App'
+import { history } from '../../index'
 
 import { ROUTES_REACT } from '../../standards/routes'
 
@@ -276,7 +276,7 @@ class SignInModalForm extends Component {
               // if false - need to construct a new user
             
             // need to navigate away here
-            history.push(users_create, { userInfo: userInfo})
+            history.push(users_create, {userInfo: userInfo})
             return userInfo;
           })
           .catch(err => {
