@@ -9,7 +9,7 @@ import ModelConverterForUpdate from '../models/modelConverterForUpdate';
 
 import DM from '../standards/dictModel'
 
-import { history } from '../components/App';
+import {history} from '../index';
 
 import {
   FETCH_USERS, 
@@ -156,9 +156,9 @@ export const getAuthUserById = (currentUserId) => {
   }
 }
 
-export const getCurrentUserById = (currentUserId) => {
+export const getCurrentUserById = () => {
   
-  return async dispatch => {
+  return async (dispatch) => {
     await getSignInUserSession()
       .then(userInSesson => {
         console.log('currentAuthedUser: ', userInSesson)
@@ -178,7 +178,7 @@ export const currentUser = (userId) => {
   let funcOptions = {...OPTIONS}
   funcOptions.method = HTTP_METHODS.get
   // console.log('currentUser', currentUser)
-  return async dispatch => {
+  return async (dispatch) => {
     // const currentUser = await getCurrentAuthenticatedUser()
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
@@ -238,6 +238,7 @@ export const createUser = (newUser) => {
         const { status } = res;
         console.log('createUserIdResponse: ', res)
         if(status === 200){
+          dispatch(currentUser(res.body.userId))
           dispatch({ type: CREATE_USER, payload: res })
           dispatch({ type: ERRORS_CREATE_USER, payload: errorNotExistPayload })
         }
@@ -246,8 +247,7 @@ export const createUser = (newUser) => {
           history.push(ROUTES_REACT.dashboard)
         } else {
           console.log('route from createUser to editUser')
-          
-          history.push(ROUTES_REACT.profile_edit)
+          history.push(`${ROUTES_REACT.users_setup}/${res.body.userId}`)
         }
         return res
       })
@@ -363,7 +363,9 @@ export const createLesson = (newLesson) => {
           dispatch({ type: ERRORS_CREATE_LESSON, payload: errorNotExistPayload })
         }
         console.log('createLesson before reroute to unscheduled lessons')
+        console.log('this is history before history.push', history)        
         history.push(ROUTES_REACT.unscheduledlessons)
+        console.log('this is history after history.push', history)
         return res;
       })
       .catch(err => {
@@ -513,13 +515,13 @@ export const createInterviewQuestion = (newInterviewQuestion) => {
           dispatch({ type: CREATE_INTERVIEW_QUESTION, payload: res })
           dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: errorNotExistPayload })
         }
-        console.log('history push to intQuest @ createLessonId')        
+        console.log('history push to intQuest @ createintQuestId')        
         history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: err })
-        console.log('history push to back to createIntQuest @ createLessonId')                
+        console.log('history push to back to createIntQuest @ createintQuestId')                
         history.push(ROUTES_REACT.interviewquestions_create)        
         return err;
       })
