@@ -82,6 +82,15 @@ export const ROUTES_NAV = [
   {
     path: unscheduledlessons,
     main: () => { return (<UnscheduledLessons />)}
+    // main: (props) => { return (
+    //   <ContentPageWithTitleBar 
+    //     {...props}
+    //     formContent={
+    //       <UnscheduledLessons />
+    //     }
+    //     titleBarContent={TITLE_BAR_LESSONS_CREATE}
+    //   />
+    //   )}
   },
   {
     path: interviewquestions,
@@ -231,6 +240,8 @@ class MainApp extends Component {
     super(props)
     
     // console.log('init props', props)
+    this.headerTarget = React.createRef();
+    this.footerTarget = React.createRef(); 
     
     this.state = {
       headerHeight: '',
@@ -242,18 +253,19 @@ class MainApp extends Component {
   }
   
   componentDidMount(){
-    window.addEventListener('load', this.handleWindowResize)
-    window.addEventListener('resize', this.handleWindowResize);
+    // window.addEventListener('load', this.handleWindowResize)
+    // window.addEventListener('resize', this.handleWindowResize);
     // console.log('window', window)
-    window.addEventListener('onbeforeunload', this.handleWindowResize)
+    // window.addEventListener('onbeforeunload', this.handleWindowResize)
     // console.log('compDidMount', this.props, 'state', this.state)
     this.props.getCurrentUserById();
+    this.handleWindowResize();
   }
   
   componentWillUnmount(){
-    window.removeEventListener('load', this.handleWindowResize)
-    window.removeEventListener('resize', this.handleWindowResize);
-    window.removeEventListener('onbeforeunload', this.handleWindowResize)
+    // window.removeEventListener('load', this.handleWindowResize)
+    // window.removeEventListener('resize', this.handleWindowResize);
+    // window.removeEventListener('onbeforeunload', this.handleWindowResize)
   }
   
   handleWindowResize = () => {
@@ -308,17 +320,18 @@ class MainApp extends Component {
           marginBottom: footerHeight,
           height: (contentHeight),
         }
+        console.log('this.state; ', this.state)
         return (
           <>
             <header ref={ node => { if(node !== null){this.headerTarget = node}}}>
               <HeaderApp  />
             </header>
-            <Router>
+            {/* <Router> */}
               <div className="grid grid--185" >
                 <div className="grid-cell">
                   <div className="navWrapper"
                     style={navWrapper}
-                    ref={ node => { if(node !== null){this.navTarget = node}}}
+                    // ref={ node => { if(node !== null){this.navTarget = node}}}
                   >
                     <Nav />
                   </div>
@@ -326,7 +339,7 @@ class MainApp extends Component {
                 <div className="grid-cell">
                   <div className="contentWrapper" 
                     style={contentWrapper}
-                    ref={ node => { if(node !== null){this.contentTarget = node}}}
+                    // ref={ node => { if(node !== null){this.contentTarget = node}}}
                   >
                     {
                       ROUTES_NAV.map((route, index) => (
@@ -349,7 +362,7 @@ class MainApp extends Component {
                   </div>
                 </div>
               </div>
-            </Router>
+            {/* </Router> */}
             <footer ref={ node => { if(node !== null){this.footerTarget = node}}}>
               <Footer />
             </footer>

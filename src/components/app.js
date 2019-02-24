@@ -7,7 +7,8 @@ import HomeScreen from '../containers/public/HomeScreen/HomeScreen';
 import CreateUser from '../containers/user/create/createUser';
 import MainApp from '../containers/mainApp/mainApp';
 
-import createBrowserHistory from 'history/createBrowserHistory';
+// import createBrowserHistory from 'history/createBrowserHistory';
+// import createHistory from 'history/createBrowserHistory';
 
 import { ROUTES_REACT } from '../standards/routes';
 
@@ -26,6 +27,7 @@ const {
   interviewquestions_edit,
   interviewquestionsanswers_create,
   interviewquestionsanswers_edit,
+  interviewquestionsanswers_edit_id,
   recursivedirectory,
   users_edit,
   // users_edit_id,
@@ -38,12 +40,12 @@ const {
   signout
 } = ROUTES_REACT
 
-export const history = createBrowserHistory();
+// export const history = createHistory();
 
 class App extends Component {
   render(){
     return(
-      <Router history={history}>
+      // <Router history={history}>
         <div className="mainApp">
           <Route path={root} exact component={HomeScreen} />
           <Route path={dashboard} exact component={MainApp}/>
@@ -55,8 +57,8 @@ class App extends Component {
           <Route path={interviewquestions_create} exact component={MainApp}/>
           <Route path={interviewquestions_edit} exact component={MainApp}/>
           <Route path={interviewquestions} component={MainApp}/>
-          <Route path={interviewquestionsanswers_create} exact component={MainApp} />
-          <Route path={interviewquestionsanswers_edit} exact component={MainApp} />
+          <Route path={`${interviewquestionsanswers_create}/:id/answers/create`} exact component={MainApp} />
+          <Route path={interviewquestionsanswers_edit_id} exact component={MainApp} />
           <Route path={recursivedirectory} component={MainApp}/>
           <Route path={users_edit} component={MainApp}/>
           <Route path={users_view_id} component={MainApp}/>
@@ -66,7 +68,7 @@ class App extends Component {
           <Route path={admindashboard} component={MainApp}/>
           <Route path={signout} render={ () => ( <Redirect to="/" /> ) } />
         </div>
-      </Router>
+      // </Router>
     )
   }
 }
