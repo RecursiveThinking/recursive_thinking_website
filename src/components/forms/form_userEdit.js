@@ -91,8 +91,6 @@ class UserEdit extends Component {
       bio: currentUser[user.bio],
       experience: currentUser[user.experience],
     }
-    // console.log('initValues: ', initValues)
-    const initName = currentUser[user.name];
     return (
       <>
         <ContentPageWithTitleBar 
@@ -103,8 +101,6 @@ class UserEdit extends Component {
               onSubmit={this.onSubmit}
               content={FORM_HEADING_USER_EDIT}
               initialValues={initValues}
-              // initialValues={initValues}
-              // lesson={this.props.lessonById}
             />}
           titleBarContent={this.props.titleBarContent}
         />
