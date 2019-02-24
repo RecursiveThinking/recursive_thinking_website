@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { fetchUsers, fetchLessons, getCurrentUserById, editLessonById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
@@ -104,9 +104,9 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   fetchUsers, 
   fetchLessons, 
   getCurrentUserById,
   editLessonById
-})(UnscheduledLessons);
+})(UnscheduledLessons));
