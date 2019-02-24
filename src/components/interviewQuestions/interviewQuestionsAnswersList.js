@@ -54,6 +54,7 @@ const interviewQuestionsAnswersList = ({...props}) => {
 
       return (
         <li key={answer[Id]} className="fc-answers">
+        <hr className="mb20" />
           <div className="grid grid--cols-2">
             <div className="grid-cell">
               <h6 className="fs16 fw900 ls10 fcBlack">{answerWrittenByUser}</h6>
