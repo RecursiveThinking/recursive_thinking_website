@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { FETCHING } from '../../actions/action_types'
 import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions/index'
@@ -75,11 +75,8 @@ class Dash extends Component {
       // scheduledLessons.length = 0
       // UpComing Lessons
       let lessonsAttending = OrderMethods.orderArrayByDateAscending(LessonMethods.getCurrentUserLessonsAttendingArray(currentUser[lessonStatus], scheduledLessons), 'date')
-      // lessonsAttending.sort((a, b) => { 
-      //   console.log('a: ', a.date, 'b: ', b.date)
-      //   return a.date - b.date 
-      // })
-      console.log('upcoming: ', lessonsAttending)
+
+      // console.log('upcoming: ', lessonsAttending)
       // limit to the next three lessons
       if(lessonsAttending.length > 3){
         lessonsAttending.length = 3
@@ -124,9 +121,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  // return bindActionCreators({fetchLessons: fetchLessons}, dispatch);
   return bindActionCreators({fetchUsers, fetchLessons, getCurrentUserById}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dash);
-// export default connect(mapStateToProps, {fetchUsers, fetchLessons, getCurrentUserById})(Dash);
