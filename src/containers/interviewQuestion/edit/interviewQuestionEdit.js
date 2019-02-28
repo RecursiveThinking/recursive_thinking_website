@@ -19,7 +19,6 @@ class InterviewQuestionEdit extends Component {
     let newInterviewQuestion = this.props.interviewQuestionById;
     newInterviewQuestion.title = formValues.interviewQuestionTitle;
     newInterviewQuestion.description = formValues.interviewQuestionDetails;
-    newInterviewQuestion.updatedAt = new Date().toString();
     console.log('newIntQuestion: ', JSON.stringify(newInterviewQuestion))
     this.props.editInterviewQuestionById(newInterviewQuestion)
   }

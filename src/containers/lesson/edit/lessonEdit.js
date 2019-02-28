@@ -19,10 +19,9 @@ class LessonEdit extends Component {
   onSubmit = (formValues) => {
     console.log('formVals @ Lesson Edit', formValues)
     let newLesson = this.props.lessonById;
-    newLesson.title = formValues.lessonTitle
-    newLesson.description = formValues.lessonDescription
-    newLesson.updatedAt = new Date().toString();
-    console.log('newLesson', JSON.stringify(newLesson))
+    newLesson.title = formValues.lessonTitle;
+    newLesson.description = formValues.lessonDescription;
+    // console.log('newLesson', JSON.stringify(newLesson))
     this.props.editLessonById(newLesson);
   }
   

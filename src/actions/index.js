@@ -285,13 +285,16 @@ export const getUserById = (userId) => {
 
 export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
   const {
-    user
+    user: {
+      updatedAt
+    }
   } = DM
   console.log('userObj @ editUserById action: ', edittedUser);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${edittedUser.userId}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
-  edittedUser[user.updatedAt] = new Date().toString();
+  // revise updatedAt
+  edittedUser[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, edittedUser));
   // console.log('funcOptions @ editUserById: ', funcOptions.body);
   
@@ -401,11 +404,13 @@ export const getLessonById = (lessonId) => {
 }
 
 export const editLessonById = (edittedLesson, thenPushPath, catchPushPath) => {
+  const { lesson: { updatedAt } } = DM
   // console.log('lessonId @ editLessonById action: ', edittedLesson.Id)
   console.log('lessonObj @ editLessonById action: ', edittedLesson)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}/${edittedLesson.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
+  edittedLesson[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.lesson, edittedLesson))
   console.log(funcOptions.body)
   
@@ -418,13 +423,13 @@ export const editLessonById = (edittedLesson, thenPushPath, catchPushPath) => {
           dispatch({ type: EDIT_LESSON_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: errorNotExistPayload })
         }
-        console.log('history push to unsched @ editLessonId')
+        console.log(`@ editLesson then: ${thenPushPath}`)
         history.push(thenPushPath) 
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: err })
-        console.log('history push to back to editLesson @ editLessonId')        
+        console.log(`@ editLesson catch: ${catchPushPath}`)        
         history.push(catchPushPath)
         return err;
       })
@@ -553,11 +558,13 @@ export const getInterviewQuestionById = (interviewquestionId) => {
 }
 
 export const editInterviewQuestionById = (edittedInterviewQuestion) => {
+  const { intQuestion: { updatedAt }} = DM;
   console.log('InterviewQuestionId @ editInterviewQuestionById action: ', edittedInterviewQuestion.Id)
   console.log('formVals @ editInterviewQuestionById action: ', edittedInterviewQuestion)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${edittedInterviewQuestion.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
+  edittedInterviewQuestion[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestion, edittedInterviewQuestion))
   console.log(funcOptions.body)
   
@@ -570,13 +577,13 @@ export const editInterviewQuestionById = (edittedInterviewQuestion) => {
           dispatch({ type: EDIT_INTERVIEW_QUESTION_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
-        console.log('history push to intQuest @ editLessonId')        
+        console.log(`@ editIntQuestion then: ${ROUTES_REACT.interviewquestions}`)        
         history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: err })
-        console.log('history push to back to editIntQuest @ editLessonId')        
+        console.log(`@ editIntQuestion then: ${ROUTES_REACT.interviewquestions_edit}/${edittedInterviewQuestion.Id}`)
         history.push(`${ROUTES_REACT.interviewquestions_edit}/${edittedInterviewQuestion.Id}`)
         return err;
       })
@@ -692,13 +699,15 @@ export const getInterviewQuestionAnswerById = (interviewquestionanswerId) => {
 }
 
 export const editInterviewQuestionAnswerById = (edittedInterviewQuestionAnswer, intQuestId) => {
+  const { intQuestionAnswer: { updatedAt } } = DM
   console.log('InterviewQuestionAnswerId @ editInterviewQuestionById action: ', edittedInterviewQuestionAnswer.Id)
   console.log('edittedIntQuestAns @ editInterviewQuestionAnswerById action: ', edittedInterviewQuestionAnswer)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${edittedInterviewQuestionAnswer.Id}`
   let funcOptions = {...OPTIONS};
-  funcOptions.method = HTTP_METHODS.put
-  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestionAnswer, edittedInterviewQuestionAnswer))
-  console.log('funcOptions @ editIntQuestAnswer: ', funcOptions)
+  funcOptions.method = HTTP_METHODS.put;
+  edittedInterviewQuestionAnswer[updatedAt] = new Date().toString();
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestionAnswer, edittedInterviewQuestionAnswer));
+  console.log('funcOptions @ editIntQuestAnswer: ', funcOptions);
   
   return async (dispatch) => {
     // const response = 

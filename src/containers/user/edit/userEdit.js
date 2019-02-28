@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchSkills, editUserById, getCurrentUserById } from '../../../actions';
+import { fetchSkills, editUserById, getCurrentUserById, getUserById } from '../../../actions';
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
 import ContentPageWithTitleBar from '../../../components/common/contentPage/contentPageWithTitleBar';
@@ -15,6 +15,7 @@ import DM from '../../../standards/dictModel';
 class UserEdit extends Component {
   componentDidMount(){
     this.props.getCurrentUserById();
+    this.props.getUserById(this.props.match.params.id);
     this.props.fetchSkills();
   }
   
@@ -119,12 +120,13 @@ const mapStateToProps = (state, ownProps) => {
   // console.log('MSTP @ UserEdit: ', state, ownProps);
   return {
     currentUser: state.auth.currentUser,
+    userById: state.users.userById,
     allSkills: state.skills
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchSkills, getCurrentUserById, editUserById }, dispatch)
+  return bindActionCreators({ fetchSkills, getCurrentUserById, editUserById, getUserById }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(UserEdit)
