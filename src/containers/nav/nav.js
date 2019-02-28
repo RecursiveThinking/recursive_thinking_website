@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { BrowserRouter as Route} from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
@@ -12,7 +13,6 @@ import { ROUTES_REACT } from '../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 import DM from '../../standards/dictModel'
-import { bindActionCreators } from 'redux';
 
 const {
   dashboard,
@@ -21,6 +21,7 @@ const {
   interviewquestions,
   recursivedirectory,
   users_edit,
+  users_edit_id,
   admindashboard,
   signout
 } = ROUTES_REACT;

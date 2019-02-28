@@ -64,6 +64,7 @@ const {
   interviewquestions,
   recursivedirectory,
   users_edit,
+  users_edit_id,
   users_view_id
 } = ROUTES_REACT
 
