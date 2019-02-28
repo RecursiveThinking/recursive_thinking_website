@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+// import Taggle from 'taggle'
 
 import DM from '../../standards/dictModel'
 
-import Taggle from 'taggle'
-
-console.log('Taggle', Taggle)
+// console.log('Taggle', Taggle)
 
 const {
   user: {
@@ -158,10 +156,10 @@ class UserForm extends Component {
       
     // })
     
-    function getArrayOfSkills(type){
-      let array = []
-      return array;
-    }
+    // function getArrayOfSkills(type){
+    //   let array = []
+    //   return array;
+    // }
     
     // function getNoSkillMessage(skillType){
     //   let titleString = ''

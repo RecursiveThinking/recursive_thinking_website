@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import ValidationMethods from '../../functions/validationMethods';
+// import ValidationMethods from '../../functions/validationMethods';
 
 class LessonForm extends Component {
   onSubmit = (formValues) => {
