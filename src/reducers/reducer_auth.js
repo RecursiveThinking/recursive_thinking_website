@@ -5,7 +5,7 @@ import {
   GET_CURRENT_USER_BY_ID
 } from '../actions/action_types'
 
-const USERARR_INDEX = 3;
+const USERARR_INDEX = 0;
 // const USERARR_INDEX = 16;
 
 const INITIAL_STATE = {
