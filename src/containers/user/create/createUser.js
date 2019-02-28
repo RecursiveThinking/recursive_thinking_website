@@ -16,6 +16,7 @@ import { history } from '../../../index';
 import { CogUser, User } from '../../../models/models'
 import { createUser, getAuthUserById, getCurrentUserById } from '../../../actions/index'
 
+import { createAssetFoldersForUser } from '../../../functions/s3Methods'
 import { ROUTES_REACT } from '../../../standards/routes'
 
 class CreateUser extends Component {
@@ -81,11 +82,8 @@ class CreateUser extends Component {
     } = this.props.location.state.userInfo
     // not setup
     if(!this.props.currentUser.userId){
-      console.log('no current user', this.props.currentUser)
-      console.log('at checkIfUserisSetup @ createUser: ')
-      // console.log('currUser not in DB: ', cogSessUser)
-      // console.log('idToken', cogSessUser.idToken)
-      // console.log('payload', cogSessUser.idToken.payload)
+      // console.log('no current user', this.props.currentUser)
+      // console.log('at checkIfUserisSetup @ createUser: ')
       
       const cogId = sub;
       const cogUsername = username;
@@ -98,10 +96,14 @@ class CreateUser extends Component {
       // create s3 buckets for user avatar/resume
       
       // // action creator - create user
-      this.props.createUser(newUser);
-      // action creator - getCurrentUserById
-      // history.push(`${ROUTES_REACT.users_setup}/${newUser.userId}`)
-      // , { setupUserId: newUser.userId }
+      this.props.createUser(newUser)
+        // .then(res => {
+        //   console.log('will this log?')
+        //   return res
+        // })
+        // .catch(err => err)
+      createAssetFoldersForUser(newUser.userId, 'avatar');
+      createAssetFoldersForUser(newUser.userId, 'resume')
     }
     else if(!this.props.currentUser.isProfileSetup){
       const {

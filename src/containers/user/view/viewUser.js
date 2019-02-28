@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers, fetchSkills, getCurrentUserById } from '../../../actions'
+import { fetchUsers, fetchSkills, getCurrentUserById, getUserById,editUserById } from '../../../actions'
 
 // import { Link } from 'react-router-dom'
 
@@ -9,13 +9,14 @@ import ContentPageTitleBar from '../../../components/common/contentPage/contentP
 import { TITLE_BAR_USER_VIEW } from '../../../components/common/contentPage/contentPageTitleBarInfo';
 
 import CategoryList from '../../../components/common/category/categoryList'
-// import { ROUTES_REACT } from '../../../standards/routes'
+import { ROUTES_REACT } from '../../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 import DM from '../../../standards/dictModel'
 
-// const {
-  // recursivedirectory
-// } = ROUTES_REACT
+const {
+  users_view
+} = ROUTES_REACT
+
 class ViewUser extends Component{
   constructor(props){
     super(props)
@@ -25,10 +26,13 @@ class ViewUser extends Component{
     }
   }
   
+
+  
   componentDidMount(){
     this.props.fetchUsers();
     this.props.fetchSkills();
     this.props.getCurrentUserById();
+    this.props.getUserById(this.props.match.params.id);
     this.handleWindowResize()
     // window.addEventListener('load', this.handleWindowResize)
     window.addEventListener('resize', this.handleWindowResize);
@@ -53,8 +57,14 @@ class ViewUser extends Component{
     }
   }
   
-  iterateUserProfileLInks = () => {
+  iterateUserProfileLinks = (userObj, propToUpdate) => {
+    console.log('updateUser: (before): ', userObj, propToUpdate, userObj[propToUpdate])
     
+    let updateUserObj = { ...userObj };
+    updateUserObj[propToUpdate] += 1;
+    console.log('updateUser: (after): ', userObj, propToUpdate, userObj[propToUpdate], updateUserObj[propToUpdate])
+    this.props.editUserById(updateUserObj, `${users_view}/${updateUserObj.userId}`, `${users_view}/${updateUserObj.userId}`);
+    this.props.getUserById(updateUserObj.userId);
   }
   
   render(){
@@ -63,15 +73,23 @@ class ViewUser extends Component{
       contentHeight
     } = this.state;
     
-    const userId = this.props.match.params.id;
+    // const currentUserId = this.props.match.params.id;
     
-    let selectedUser = '';
+    const { 
+      user: { 
+              userId, avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, profileStatsVisits, profileStatsViewsGithub, profileStatsViewsCodePen, profileStatsViewsPortfolio, profileStatsViewsLinkedIn, profileStatsViewsResume, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
+            }
+    } = DM
     
-    if(this.props.lookupTableAllUsers[userId]){
-      selectedUser = this.props.lookupTableAllUsers[userId];
-    } else {
-      console.log('No User')
-    }
+    // let selectedUser = '';
+    
+    // if(this.props.userById){
+    //   selectedUser = this.props.userById;
+    //   // update profileStatsVisits
+      
+    // } else {
+    //   console.log('No User')
+    // }
     
     // const selectedUser = currentUser
     
@@ -83,7 +101,7 @@ class ViewUser extends Component{
         </div>
       )
     }
-    else if(!selectedUser){
+    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING'){
       return (
         <div className="content"
           ref={ node => { if(node !== null){this.contentTarget = node}}}
@@ -93,31 +111,40 @@ class ViewUser extends Component{
       )
     }
     else {
+      
+    // if(this.props.userById){
+    console.log('userById: ', this.props.userById)
+    // selectedUser = this.props.userById;
+    const {
+      userById
+    } = this.props
+      // update profileStatsVisits
+      
+    // } else {
+      // console.log('No User')
+    // }
+    
     console.log('hit here', contentHeight)
     // destructuring
     const { allSkills, lookupTableAllSkills } = this.props;
-    const { 
-      user: { 
-              userId, avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
-            }
-    } = DM
+    
     // end destructuring
     
     // test links
-    // selectedUser[linkGithub] = 'https://github.com/sethborne'
-    // selectedUser[linkCodepen] = 'https://codepen.io/sethborne/'
-    // selectedUser[linkLinkedIn] = ' '
-    // selectedUser[linkResume] = ' '
+    // userById[linkGithub] = 'https://github.com/sethborne'
+    // userById[linkCodepen] = 'https://codepen.io/sethborne/'
+    // userById[linkLinkedIn] = ' '
+    // userById[linkResume] = ' '
     
     // set avatar link
-    const imageSrc = `${PATH_FOR_IMAGES}${selectedUser[avatar]}`
+    const imageSrc = `${PATH_FOR_IMAGES}${userById[avatar]}`
     
     // this makes the link list (Github, Codepen, etc.)
     const icons = [ 
-      ['Github', 'fa fa fa-git-square', selectedUser[linkGithub]],
-      ['CodePen', 'fa fa fa-codepen', selectedUser[linkCodepen]],
-      ['LinkedIn', 'fa fa-linkedin-square', selectedUser[linkLinkedIn]],
-      ['Resume', 'fa fa-id-card-o', selectedUser[linkResume]]
+      ['Github', 'fa fa fa-git-square', userById[linkGithub], profileStatsViewsGithub],
+      ['CodePen', 'fa fa fa-codepen', userById[linkCodepen], profileStatsViewsCodePen],
+      ['LinkedIn', 'fa fa-linkedin-square', userById[linkLinkedIn], profileStatsViewsLinkedIn],
+      ['Resume', 'fa fa-id-card-o', userById[linkResume], profileStatsViewsResume]
     ]
     
     const iconList = icons.map(iconItem => {
@@ -148,7 +175,7 @@ class ViewUser extends Component{
               href={hrefLink} 
               target="_blank" 
               rel="noopener noreferrer"
-              // onClick={}
+              onClick={() => this.iterateUserProfileLinks(userById, iconItem[3])}
             >
               <i className={iconClass}></i>
               <h6 className={headingClass}>{iconItem[0]}</h6>
@@ -175,7 +202,7 @@ class ViewUser extends Component{
             <a 
               href={linkValue} 
               target="/"
-              // onClick={}
+              onClick={() => this.iterateUserProfileLinks(userById, profileStatsViewsPortfolio)}
             >
               <h6 className="fs18 ls 12">Portfolio</h6>
             </a>
@@ -183,8 +210,8 @@ class ViewUser extends Component{
         )
       }
     }
-    // selectedUser[linkPortfolioWebsite] = ' '
-    let portText = checkPortValue(selectedUser[linkPortfolioWebsite])
+    // userById[linkPortfolioWebsite] = ' '
+    let portText = checkPortValue(userById[linkPortfolioWebsite])
     // end portfolio link
     
     // this gets 
@@ -289,8 +316,8 @@ class ViewUser extends Component{
       }
     }
     
-    let experienceJSX = getDateForProfile(selectedUser[experience], experience)
-    let timeWithRTJSX = getDateForProfile(selectedUser[timeWithRT], timeWithRT)
+    let experienceJSX = getDateForProfile(userById[experience], experience)
+    let timeWithRTJSX = getDateForProfile(userById[timeWithRT], timeWithRT)
     
     // let otherProfilesArr = this.props.allUsers.filter((userObj) => {
     //   return userObj.userId !== userId
@@ -304,15 +331,18 @@ class ViewUser extends Component{
     //   height: (contentHeight * .99)
     // }
     
-    const profileArray = this.props.allUsers.filter( user => user[userId] !== this.props.currentUser[userId])
+      const profileArray = this.props.allUsers.filter(user => user[userId] !== this.props.currentUser[userId])
     
-    let profilesToRender = profileArray.map((user) => {
-      return (
-        <li key={user[userId]} className="fc--disp-flex fc--fdir-row">
-          <RecursiveDirectoryListItemSm user={user}/>
-        </li>
-      )
-    })
+      let profilesToRender = profileArray.map((user) => {
+        return (
+          <li key={user[userId]} className="fc--disp-flex fc--fdir-row">
+            <RecursiveDirectoryListItemSm user={user}/>
+          </li>
+        )
+      })
+    
+      // this.iterateUserProfileLinks(userById, profileStatsVisits)
+    
       return(
         <main>
           <ContentPageTitleBar content={TITLE_BAR_USER_VIEW}/>
@@ -337,17 +367,17 @@ class ViewUser extends Component{
                             <img 
                               className="avatarM avatarBS" 
                               src={imageSrc}
-                              alt={selectedUser[name]}
+                              alt={userById[name]}
                             />
                             <div className="fc-twothirdsLeftViewProfile-sub fc--disp-flex fc--fdir-col fc--fwrap-yes fc--jCont-ce fc--aItems-fs">
-                              <h3 className="fs33 fw500 ls22 fcGrey424041">{selectedUser[name]}</h3>
-                              <h5 className="fw300 ls14 fcGrey424041">{selectedUser[title]}</h5>
+                              <h3 className="fs33 fw500 ls22 fcGrey424041">{userById[name]}</h3>
+                              <h5 className="fw300 ls14 fcGrey424041">{userById[title]}</h5>
                               <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt10">
                                 <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
                                   Location:
                                 </h6>
                                 <h6 className="fs14 fw500 ls08 fcGrey424041">
-                                  {selectedUser[city]}, {selectedUser[state]}
+                                  {userById[city]}, {userById[state]}
                                 </h6>
                               </div>
                               <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt0125">
@@ -355,7 +385,7 @@ class ViewUser extends Component{
                                   Company:
                                 </h6>
                                 <h6 className="fs14 fw500 ls08 fcGrey424041">
-                                  {selectedUser[employer]}
+                                  {userById[employer]}
                                 </h6>
                               </div>
                             </div>
@@ -383,7 +413,7 @@ class ViewUser extends Component{
                         <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
                         <hr />
                         <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15">
-                          {selectedUser[bio]}
+                          {userById[bio]}
                         </p>
                       </div>
                     </div>
@@ -391,7 +421,7 @@ class ViewUser extends Component{
                       <div className="fc--disp-flex fc--fdir-col fc--jCont-ce height100P">
                           {/* years */}
                           {experienceJSX}
-                          {/* {selectedUser[experience]} */}
+                          {/* {userById[experience]} */}
                         
                           {/* time rec */}
                           {timeWithRTJSX}
@@ -404,7 +434,7 @@ class ViewUser extends Component{
                   <hr />
                   <div className="">
                     <CategoryList 
-                      categories={selectedUser[skillsProfessional]}
+                      categories={userById[skillsProfessional]}
                       allSkillsArr={allSkills}
                       lookupTableAllSkills={lookupTableAllSkills}
                     />
@@ -415,7 +445,7 @@ class ViewUser extends Component{
                   <hr />
                   <div className="">
                     <CategoryList 
-                      categories={selectedUser[skillsSoftware]}
+                      categories={userById[skillsSoftware]}
                       allSkillsArr={allSkills}
                       lookupTableAllSkills={lookupTableAllSkills}
                     />
@@ -426,7 +456,7 @@ class ViewUser extends Component{
                   <hr />
                   <div className="">
                     <CategoryList 
-                      categories={selectedUser[skillsLanguages]}
+                      categories={userById[skillsLanguages]}
                       allSkillsArr={allSkills}
                       lookupTableAllSkills={lookupTableAllSkills}
                     />
@@ -458,8 +488,9 @@ function mapStateToProps(state){
     currentUser: state.auth.currentUser,
     lookupTableAllUsers: state.users.lookupTableAllUsers,
     allSkills: state.skills.allSkills,
-    lookupTableAllSkills: state.skills.lookupTableAllSkills
+    lookupTableAllSkills: state.skills.lookupTableAllSkills,
+    userById: state.users.userById
   }
 }
 
-export default connect(mapStateToProps, { fetchUsers, fetchSkills, getCurrentUserById })(ViewUser)
+export default connect(mapStateToProps, { fetchUsers, fetchSkills, getCurrentUserById, getUserById, editUserById })(ViewUser)
