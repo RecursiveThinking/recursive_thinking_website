@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-import { fetchUsers, fetchLessons, getCurrentUserById, editLessonById } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
-// import { ROUTES_REACT } from '../../standards/routes'
+import { fetchUsers, fetchLessons, getCurrentUserById, editLessonById } from '../../actions'
 
-import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
 
-import { TITLE_BAR_LESSONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
 import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
+import { TITLE_BAR_LESSONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
+import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 
-import DM from '../../standards/dictModel'
 import LessonMethods from '../../functions/lessonMethods';
 import DateMethods from '../../functions/dateMethods';
-import { bindActionCreators } from 'C:/Users/workstation/AppData/Local/Microsoft/TypeScript/3.3/node_modules/redux';
+
+import DM from '../../standards/dictModel'
 
 class UnscheduledLessons extends Component {
   constructor(props){
@@ -68,23 +67,16 @@ class UnscheduledLessons extends Component {
         updatedLesson[date] = this.state.nextAvailableSaturday
       }
       updatedLesson[lessonVotes].push(currentUser[userId]);
-      // console.log('uL V A b', updatedLesson[lessonVotes])
-      // console.log('uL V A a', updatedLesson[lessonVotes])
       this.props.editLessonById(updatedLesson)
     }
     else if(action === 'remove'){
-      // splice
-      // console.log('uL V R b', updatedLesson[lessonVotes])
       const newVoteArray = lesson[lessonVotes].filter( Id => Id !== currentUser[userId] )
       updatedLesson[lessonVotes] = newVoteArray
-      // console.log('uL V R a', updatedLesson[lessonVotes])
       this.props.editLessonById(updatedLesson)
     }
   }
   
   render(){
-    console.log('this.state: ', this.state)
-    
     const {
       allUsers,
       allLessons,
@@ -138,14 +130,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchUsers, fetchLessons, getCurrentUserById, editLessonById}, dispatch)
+  return bindActionCreators({ fetchUsers, fetchLessons, getCurrentUserById, editLessonById }, dispatch)
 }
-
-// export default withRouter(connect(mapStateToProps, {
-//   fetchUsers, 
-//   fetchLessons, 
-//   getCurrentUserById,
-//   editLessonById
-// })(UnscheduledLessons));
 
 export default connect(mapStateToProps, mapDispatchToProps)(UnscheduledLessons);
