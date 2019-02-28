@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { fetchUsers } from '../../actions'
-import { FETCHING } from '../../actions/action_types'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import RecursiveDirectoryList from '../../components/recursiveDirectory/recursiveDirectoryList'
-import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
-import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
+import { FETCHING } from '../../actions/action_types';
+import { fetchUsers } from '../../actions';
+
+import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
+import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
+
+import RecursiveDirectoryList from '../../components/recursiveDirectory/recursiveDirectoryList';
 
 import { LogServices } from '../../services/logService'
 
@@ -71,10 +74,10 @@ function mapStateToProps(state){
 }
 
 // map action to props
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators( {allUsers: allUsers}, dispatch)
-// }
+function mapDispatchToProps(dispatch){
+  return bindActionCreators( { fetchUsers }, dispatch)
+}
 
 // connect react/redux
-export default connect(mapStateToProps, {fetchUsers})(RecursiveDirectory)
+export default connect(mapStateToProps, mapDispatchToProps)(RecursiveDirectory)
 
