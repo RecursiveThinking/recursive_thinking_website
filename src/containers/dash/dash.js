@@ -13,6 +13,7 @@ import UpComingLesson from '../../components/dash/upComingLesson'
 import LessonsUserAttending from '../../components/dash/lessonsUserAttending'
 
 import LessonMethods from '../../functions/lessonMethods'
+import OrderMethods from '../../functions/orderMethods'
 
 import DM from '../../standards/dictModel'
 
@@ -73,7 +74,12 @@ class Dash extends Component {
       // turn this on to show default messages
       // scheduledLessons.length = 0
       // UpComing Lessons
-      const lessonsAttending = LessonMethods.getCurrentUserLessonsAttendingArray(currentUser[lessonStatus], scheduledLessons)
+      let lessonsAttending = OrderMethods.orderArrayByDateAscending(LessonMethods.getCurrentUserLessonsAttendingArray(currentUser[lessonStatus], scheduledLessons), 'date')
+      // lessonsAttending.sort((a, b) => { 
+      //   console.log('a: ', a.date, 'b: ', b.date)
+      //   return a.date - b.date 
+      // })
+      console.log('upcoming: ', lessonsAttending)
       // limit to the next three lessons
       if(lessonsAttending.length > 3){
         lessonsAttending.length = 3
