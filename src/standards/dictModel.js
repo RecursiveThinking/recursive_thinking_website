@@ -55,6 +55,8 @@ const dictModel = {
     description: 'description',
     categories: 'categories',
     answersToQuestion: 'answersToQuestion',
+    upVotes: 'upVotes',
+    downVotes: 'downVotes',
     _createdByUser: '_createdByUser',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
