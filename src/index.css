@@ -394,10 +394,12 @@ fieldset>.grid>.grid-cell>.fc-form-input:first-of-type {
 
 .fc-field>.fc-field-row>input,
 .fc-field>.fc-field-row-full>input,
+.fc-field>.fc-field-row-full>textarea,
 .fc-form-input>.fc-form-input-with-button>input,
 .fc-form-input-full>input,
 .fc-form-input-col>input,
-fieldset>.grid>.grid-cell>textarea {
+fieldset>.grid>.grid-cell>textarea,
+fieldset>.grid>.grid-cell>div>textarea {
   display: flex;
   justify-content: flex-start;
 
@@ -469,11 +471,13 @@ fieldset>.grid>.grid-cell>textarea {
   width: 15%;
 }
 
-fieldset>.grid>.grid-cell>textarea {
+fieldset>.grid>.grid-cell>div>textarea,
+.fc-field>.fc-field-row-full>textarea {
   width: 100%;
   resize: none;
 
   padding: 1rem 2rem;
+  /* white-space: pre-line; */
 }
 
 .fc-about-exp {
@@ -551,7 +555,9 @@ input[type=number]:focus,
 input[type=search]:focus,
 input[type=text]:focus,
 input[type=url]:focus,
-fieldset>.grid>.grid-cell>textarea:focus {
+fieldset>.grid>.grid-cell>textarea:focus,
+fieldset>.grid>.grid-cell>div>textarea:focus,
+.fc-field>.fc-field-row-full>textarea:focus {
   box-shadow: 0 0 .125rem .025rem var(--green-00b371);
   border: var(--input-brdr-thickness) solid var(--green-00b371);
   outline: none;
@@ -1088,6 +1094,7 @@ ul li {
   max-height: 25rem;
   min-height: 25rem;
   overflow: auto;
+  /* white-space: pre-line; */
 }
 
 
@@ -1220,7 +1227,7 @@ ul li {
   /* padding: 1rem 0rem 0rem; */
   background-color: var(--white-ff);
   /* max-height: 4.7rem; */
-  max-height: 23.5rem;
+  max-height: 40.0rem;
   overflow-y: auto;
 
   width: 100%;
@@ -1766,6 +1773,14 @@ h5 {
 
 .ls08 {
   letter-spacing: .08rem;
+}
+
+/* ============================================ */
+/*             Paragraph Displays               */
+/* ============================================ */
+
+.wspl {
+  white-space: pre-line;
 }
 
 /* ============================================ */
