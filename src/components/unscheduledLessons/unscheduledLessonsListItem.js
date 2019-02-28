@@ -1,13 +1,13 @@
 import React from 'react';
 
-import LessonMethods from '../../functions/lessonMethods'
-import UtilityMethods from '../../functions/utilityMethods'
-
 import LessonTaughtByThumbList from '../common/lesson/lessonTaughtByThumbList'
 import CurrentUserVotedOnLessonButton from './currentUserVotedOnLessonButton'
 
-import DM from '../../standards/dictModel'
+import LessonMethods from '../../functions/lessonMethods'
+import UtilityMethods from '../../functions/utilityMethods'
+
 import { ROUTES_REACT } from '../../standards/routes'
+import DM from '../../standards/dictModel'
 
 const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr, toggleLessonVote}) => {
   const { 

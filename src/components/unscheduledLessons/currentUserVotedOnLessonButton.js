@@ -18,7 +18,6 @@ const currentUserVotedOnLessonButton = ({boolHasCurrentUserVotedOnLesson, toggle
         onClick={() => {toggleLessonVote(lesson, 'add')}}        
       >Add Vote!</button>
     )
-    // pdTB2LR5
   }
 }
 
