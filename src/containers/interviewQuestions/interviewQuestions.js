@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-// import { Link } from 'react-router-dom'
 
-import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills } from '../../actions'
 import { FETCHING } from '../../actions/action_types'
-import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
+import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills } from '../../actions'
+
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
 
-import OrderMethods from '../../functions/orderMethods'
-
-// import Modal from '../../components/common/modal/modal'
-// import { CreateInterviewQuestionAnswerFormEx } from '../../components/forms/forms_interviewquestionanswer'
-import { DropDownSort, DropDownFilter } from '../../components/common/dropdown/sortAndFilter';
 import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
-// import { ROUTES_REACT } from '../../standards/routes';
 import { TITLE_BAR_INTERVIEWQUESTIONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
-import { bindActionCreators } from 'redux';
+
+import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
+import { DropDownSort, DropDownFilter } from '../../components/common/dropdown/sortAndFilter';
+
+import OrderMethods from '../../functions/orderMethods'
 
 class InterviewQuestions extends Component {
   constructor(props){
@@ -76,7 +74,6 @@ class InterviewQuestions extends Component {
         //   key: 'sortBy'
         // }
       ],
-      // sortByOrderType: 'ascending',
       sortByOrderType: '',
       filterIntQuestBy: [],
       filterBy: [
@@ -281,6 +278,7 @@ class InterviewQuestions extends Component {
           // then return the items that match the items ID in the _createdByUser category
           return intQuestion._createdByUser === itemToFilter.Id
         }
+        return [];
       })
     }
     // console.log('will just return')
