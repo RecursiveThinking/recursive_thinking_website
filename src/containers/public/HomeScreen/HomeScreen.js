@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { fetchUsers, fetchHomeScreenQuotes } from '../../../actions/index'
+import { fetchUsers, fetchHomeScreenQuotes } from '../../../actions/index';
 
 import Header from '../../../components/public/header/header';
-import Modal from '../../../components/common/modal/modal'
-import { SignUpFormEx } from '../../../components/forms/forms_auth'
-import PersonQuoteListItem from './personQuoteListItem';
-import Footer from '../../../components/footer/footer'
+import Footer from '../../../components/footer/footer';
 
-import Slider from '../../../components/common/slider/slider'
+import Slider from '../../../components/common/slider/slider';
+import PersonQuoteListItem from '../../../components/public/personQuoteListItem/personQuoteListItem';
+import Modal from '../../../components/common/modal/modal';
 
-// import DefaultErrorPage from '../../../components/defaults/errorPage/errorPage'
-// import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage'
+import { SignUpFormEx } from '../../../components/forms/forms_auth';
 
-import DM from '../../../standards/dictModel'
+import DM from '../../../standards/dictModel';
 
 class PublicHomeScreen extends Component {
   constructor(props){
@@ -160,4 +159,8 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, fetchHomeScreenQuotes})(PublicHomeScreen);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchUsers, fetchHomeScreenQuotes}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PublicHomeScreen);
