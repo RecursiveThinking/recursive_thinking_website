@@ -7,7 +7,7 @@ import { ROUTES_REACT } from '../../standards/routes';
 import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 const {
-  profile_view
+  users_view
 } = ROUTES_REACT;
 
 const recursiveDirectoryListItemSm = ({user}) => {
@@ -24,7 +24,7 @@ const recursiveDirectoryListItemSm = ({user}) => {
   const imagePathBuild = `${PATH_FOR_IMAGES}${user[avatar]}`;
   const concatLocation = `${user[city]}, ${user[state]}`
   return (
-    <NavLink to={`${profile_view}/${user[userId]}`} >
+    <NavLink to={`${users_view}/${user[userId]}`} >
       <article className="fc-directoryCardSm fc--disp-flex fc--fdir-row fc--aItem-ce">
         <img src={imagePathBuild} alt="" className="avatarXXS"/>
         <div className="fc--disp-flex fc--fdir-col ml15">
