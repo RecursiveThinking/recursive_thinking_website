@@ -54,7 +54,8 @@ export default class dateMethods {
     // First checks to see if the user submitted date argument is valid. If it isn't it will return an error message. If it is, the function will use that date to find next Saturday. The date needs to be converted to milliseconds first 
     else {
       let checkBadDate = Date.parse(optionalDate);
-      if (isNaN(checkBadDate) == true){
+      // was ==
+      if (isNaN(checkBadDate) === true){
         return 'Error, please check your date';
       }
       let dateConversion = new Date(optionalDate);
