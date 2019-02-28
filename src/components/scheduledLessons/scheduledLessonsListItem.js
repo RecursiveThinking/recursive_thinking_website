@@ -1,16 +1,15 @@
 import React from 'react';
 
-import DateMethods from '../../functions/dateMethods'
-import LessonMethods from '../../functions/lessonMethods'
+import DateMethods from '../../functions/dateMethods';
+import LessonMethods from '../../functions/lessonMethods';
 
-import DM from '../../standards/dictModel'
+import DM from '../../standards/dictModel';
 
 const scheduledLessonsListItem = ({lesson, currentUserLessonStatus}) => {
   const { lesson: { title, date } } = DM;
-  let formattedDate = DateMethods.getFormattedDate(lesson[date])
+  let formattedDate = DateMethods.getFormattedDate(lesson[date]);
   // style formatting for star
-  let styleLessonStatusStar = LessonMethods.getStyleForLessonStatusStarString(currentUserLessonStatus)
-  // console.log(lesson.Id, currentUserLessonStatus, styleLessonStatusStar);
+  let styleLessonStatusStar = LessonMethods.getStyleForLessonStatusStarString(currentUserLessonStatus);
   
   return (
     <article className="">
