@@ -7,12 +7,28 @@ export class DropDownSort extends Component {
     super(props)
     this.state = {
       listOpen: false,
-      headerTitle: this.props.title
+      headerTitle: this.props.title,
+      timeOut: null
     }
   }
-  // console.log('props', props)
-  handleClickOutside(){
-    this.setState({listOpen: false})
+  
+  componentDidUpdate(){
+    const { listOpen } = this.state;
+    setTimeout(() => {
+      if(listOpen){
+        window.addEventListener('click', this.close);
+      } else {
+        window.removeEventListener('click', this.close)
+      }
+    }, 0);
+  }
+  
+  componentWillUnmount(){
+    window.removeEventListener('click', this.close)
+  }
+  
+  close = (timeOut) => {
+    this.setState({ listOpen: false })
   }
   
   selectItem = (title, id, stateKey) => {
@@ -60,7 +76,7 @@ export class DropDownSort extends Component {
                     <li 
                       key={listItem.id}
                       // className="listItem fs20 fw500 ls14"
-                      className={listItem.selected ? "listItem fs20 fw500 ls14 fcGrey424041 selected" : "listItem fs20 fw500 fcGrey424041 ls14"}
+                      className={listItem.selected ? "listItem fs16 fw500 ls10 fcGrey424041 selected" : "listItem fs16 fw500 ls10 fcGrey424041"}
                       onClick={() => this.selectItem(listItem.title, listItem.id, listItem.key)}
                     >{listItem.title}
                     </li>
@@ -81,8 +97,28 @@ export class DropDownFilter extends Component {
     super(props)
     this.state = {
       listOpen: false,
-      headerTitle: this.props.title
+      headerTitle: this.props.title,
+      timeOut: null
     }
+  }
+  
+  componentDidUpdate(){
+    const { listOpen } = this.state;
+    setTimeout(() => {
+      if(listOpen){
+        window.addEventListener('click', this.close)
+      } else {
+        window.removeEventListener('click', this.close)
+      }
+    }, 0);
+  }
+  
+  componentWillUnmount(){
+    window.removeEventListener('click', this.close)
+  }
+  
+  close = (timeOut) => {
+    this.setState({ listOpen: false });
   }
   
   static getDerivedStateFromProps(nextProps){
@@ -96,18 +132,14 @@ export class DropDownFilter extends Component {
     }
   }
   
-  // console.log('props', props)
-  handleClickOutside(){
-    this.setState({listOpen: false})
-  }
-  
   toggleList(){
     this.setState((prevState) => ({ listOpen: !prevState.listOpen }))
   }
+  
   render(){
     const {
       list,
-      toggleItem
+      toggleSelected
     } = this.props
     const {
       listOpen,
@@ -133,6 +165,54 @@ export class DropDownFilter extends Component {
           </div>
           {
             listOpen &&   
+            // <ul className="list">
+            <ul 
+              className="list"
+              // onClick={e => e.stopPropagation()}
+            >
+              {
+                list.map((ulTitle) => {
+                  return (
+                    <ul 
+                      className="listTitle fs20 fw500 fcGrey424041 ls14"
+                      // onClick={e => e.stopPropagation()}
+                      key={ulTitle.id}
+                    >{ulTitle.title}
+                      {
+                        // listOpen &&  
+                        
+                        ulTitle.items.map((listItems, index) => {
+                        const {
+                          Id,
+                          name,
+                          count,
+                          selected,
+                          childKey
+                        } = listItems
+                        // console.log('info', Id, name, selected, childKey)
+                        // console.log('ulTitle props: ', ulTitle)
+                        return (  
+                          <li 
+                            // className="listItem fs20 fw500 ls14" 
+                            className={selected ? "listItem fs16 fw500 ls10 fcGrey424041 selected" : "listItem fs16 fw500 ls10 fcGrey424041"}
+                            key={Id}
+                            onClick={() => toggleSelected(ulTitle.id, ulTitle.parentKey, Id, index, childKey, name)}
+                          >{name} ({count})
+                            {selected && <FontAwesomeIcon iconNameForClass="fa fa-check" />}
+                          </li>
+                        )
+                      })
+                    }
+                    </ul>
+                    )
+                    // { listItems.selected && <FontAwesomeIcon iconNameForClass="fa fa-check" /> }
+                })
+              }
+            {/* </ul> */}
+            </ul>
+          }
+          {/* {
+            listOpen &&   
             <ul className="list">
               {
                 list.map((listItem) => {
@@ -156,7 +236,7 @@ export class DropDownFilter extends Component {
                 })
               }
             </ul>
-          }
+          } */}
         </div>
       </div>
     )
