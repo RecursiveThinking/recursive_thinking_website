@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 
 import Modal from '../../common/modal/modal'
 import { SignUpFormEx, VerifyAccountFormEx, SignInFormEx } from '../../forms/forms_auth'
