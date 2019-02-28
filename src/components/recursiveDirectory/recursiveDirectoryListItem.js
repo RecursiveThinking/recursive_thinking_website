@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Link } from "react-router-dom"
 
-import DM from '../../standards/dictModel'
 import { ROUTES_REACT } from '../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+import DM from '../../standards/dictModel'
 
 const {
   users_view
@@ -17,8 +17,6 @@ const recursiveDirectoryListItem = ({user}) => {
   return (
     <article className="card fc-directoryCard fc--disp-flex fc--fdir-col">
       <Link to={`${users_view}/${user[userId]}`} className="fc--disp-flex fc--fdir-col">
-        {/* <div className="fi--aSelf-ce">
-        </div> */}
         <img 
           className="avatarM avatarBS fi--aSelf-ce" 
           src={imagePathBuild}

@@ -2,9 +2,9 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import DM from '../../standards/dictModel';
 import { ROUTES_REACT } from '../../standards/routes';
 import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+import DM from '../../standards/dictModel';
 
 const {
   users_view

@@ -7,7 +7,6 @@ import DM from '../../standards/dictModel'
 const recursiveDirectoryList = ({usersForDirectory}) => {
   const { user: { userId }} = DM
   
-  // usersForDirectory.length = 0;
   if(usersForDirectory.length){
     const allDirectory = usersForDirectory.map(user => {
       return (
