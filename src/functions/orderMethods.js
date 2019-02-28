@@ -16,6 +16,31 @@ export default class OrderMethods {
     })
     return orderArraysDecend
   }
+  static orderByAlphaAscending = (inputArray, attr) => {
+    let orderAlphaAscend = inputArray.sort((itemA, itemB) => {
+      let itemAFirstWord = itemA[attr].toLowerCase().split(' ');
+      let itemBFirstWord = itemB[attr].toLowerCase().split(' ');
+      console.log('iA: ', itemAFirstWord, 'iB: ', itemBFirstWord)      
+      if(itemAFirstWord < itemBFirstWord){ return -1 }
+      if(itemAFirstWord > itemBFirstWord){ return 1 }
+      return 0;
+    })
+    console.log('alphascend: ', orderAlphaAscend)
+    return orderAlphaAscend
+  }
+  static orderByAlphaDecending = (inputArray, attr) => {
+    let orderAlphaDecend = inputArray.sort((itemA, itemB) => {
+      let itemAFirstWord = itemA[attr].toLowerCase().split(' ');
+      let itemBFirstWord = itemB[attr].toLowerCase().split(' ');
+      console.log('iA: ', itemAFirstWord, 'iB: ', itemBFirstWord)
+      if(itemAFirstWord > itemBFirstWord){ return -1 }
+      if(itemAFirstWord < itemBFirstWord){ return 1 }
+      return 0;
+    })
+    console.log('alphascend: ', orderAlphaDecend)
+    return orderAlphaDecend
+    
+  }
   static orderArrayAscendingByAttr = (inputArray, attr) => {
     return inputArray.sort((itemA, itemB) => itemA[attr] - itemB[attr])
   }

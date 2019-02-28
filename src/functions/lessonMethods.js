@@ -1,4 +1,5 @@
 import OrderMethods from './orderMethods'
+import DateMethods from './dateMethods';
 
 export default class LessonMethods {
   // constructor(){
@@ -35,6 +36,20 @@ export default class LessonMethods {
     let orderedUnscheduledLessAscend = OrderMethods.orderArrayByDateAscending(unschedLessonsWithinTimeFrame, 'createdAt')
     return orderedUnscheduledLessAscend;
   }
+  static getDateOfLastScheduledLesson = (allLessons) => {
+    // filter all lessons that are scheduled
+    let scheduledLessonsArr = allLessons.filter(lesson => lesson.scheduled === true);
+    // filter any that have passed
+    let validLessonsArr = LessonMethods.filterScheduledLessonsByToday(scheduledLessonsArr)
+    // order by most recent first
+    let orderSchedLessonsAscend = OrderMethods.orderArrayByDateAscending(validLessonsArr, 'date');
+    if(orderSchedLessonsAscend.length){
+      return orderSchedLessonsAscend.pop();
+    } else {
+      return DateMethods.whenIsNextSaturdayNoon();
+    }
+  }
+  
   static getValidUnscheduledLessons = (unscheduledLessonArray) => {
     
     // method recieves an array of lessons and returns an array of those lessons that are within X number of days from now
