@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
-import AdminPanelList from '../../components/adminPanel/adminPanelList'
 import { fetchUsers, fetchLessons, fetchInterviewQuestions, fetchInterviewQuestionsAnswers} from '../../actions/index'
+
+import AdminPanelList from '../../components/adminPanel/adminPanelList'
 
 class AdminPanel extends Component {
   componentDidMount(){
@@ -44,4 +46,8 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, fetchLessons, fetchInterviewQuestions, fetchInterviewQuestionsAnswers})(AdminPanel)
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchUsers, fetchLessons, fetchInterviewQuestions, fetchInterviewQuestionsAnswers}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPanel)
