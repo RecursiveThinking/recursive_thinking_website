@@ -63,7 +63,7 @@ class InterviewQuestionAnswerForm extends Component {
               <h5 className="fw600 ls16 fcGrey424041">{content.heading}{intQuestion[title]}</h5>
               {/* <h5 className="fw500 ls18 fcGreyb9 mt30">{this.props.intQuestion[DM.intQuestion.title]}</h5> */}
               <hr className="mt20" />
-              <p className="fs16 fw300 ls10 fcGrey424041 mt25">
+              <p className="fs16 fw300 ls10 fcGrey424041 mt25 wspl">
                 {this.props.intQuestion[DM.intQuestion.description]}
               </p>
               <hr className="mt25"/>

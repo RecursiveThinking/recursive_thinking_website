@@ -41,7 +41,7 @@ const upComingLesson = ({upComingLessons, allUsersArr}) => {
         <hr />
         <div className="fc-lessonInfoCont">
           <h6 className="fw300 fs22 ls18 fcBlack mt15">{nextLesson[title]}</h6>
-          <p className="fw300 fs16 ls10 fcGrey424041 mt10">{nextLesson[description]}</p>
+          <p className="fw300 fs16 ls10 fcGrey424041 mt10 wspl">{nextLesson[description]}</p>
         </div>
         <hr className="mt20" />
         <div className="fc-taughtBy">

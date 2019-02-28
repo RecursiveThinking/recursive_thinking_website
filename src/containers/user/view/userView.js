@@ -408,7 +408,7 @@ class UserView extends Component{
                       <div className="fc-twothirdsLeftViewProfile">
                         <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
                         <hr />
-                        <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15">
+                        <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15 wspl">
                           {userById[bio]}
                         </p>
                       </div>

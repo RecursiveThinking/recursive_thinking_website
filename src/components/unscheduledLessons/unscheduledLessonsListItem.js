@@ -46,7 +46,7 @@ const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr, toggleLess
         </div>
       </div>
       <hr className="mt20" />
-      <p className="fc-lessonText fs16 fw300 ls10 fcGrey424041 mt10">{lesson[description]}</p>
+      <p className="fc-lessonText fs16 fw300 ls10 fcGrey424041 mt10 wspl">{lesson[description]}</p>
       <hr className="mt10" />
       <div className="fc-taughtBy">
         <h5 className="fw300 ls18 fs22 ttup fcBlack mt10">Taught By:</h5>

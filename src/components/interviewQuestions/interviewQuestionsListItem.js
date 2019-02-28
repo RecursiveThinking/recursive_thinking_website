@@ -99,7 +99,7 @@ class InterviewQuestionsListItem extends Component {
         <div className="fc--disp-flex fc--jCont-sb fc--aItem-ce">
         </div>
         <hr className="mt20" />
-        <p className="fs16 fw300 ls10 fcGrey424041 mt25">
+        <p className="fs16 fw300 ls10 fcGrey424041 mt25 wspl">
           {intQuestion[description]}
         </p>
         <hr className="mt25"/>

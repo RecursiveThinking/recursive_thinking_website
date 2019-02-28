@@ -60,7 +60,7 @@ const interviewQuestionsAnswersList = ({...props}) => {
               <h6 className="fs16 fcGrey55 fw300 ml20">{formattedDate['upComingDateStringAmericanWithSlash']}</h6>
             </div>
           </div>
-          <p className="fs14 colorGray55 ls08 fw300">{answer[description]}</p>
+          <p className="fs14 colorGray55 ls08 fw300 wspl">{answer[description]}</p>
           <hr />
         </li>
       );

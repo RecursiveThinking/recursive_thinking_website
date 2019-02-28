@@ -78,7 +78,7 @@ const SelectedLessonDetail = ({...props}) => {
           <hr />  
           <div className="fc-lessonInfoCont">
             <h6 className="fw300 ls18 fs22 fcBlack mt15">{selectedLesson[title]}</h6>
-            <p className="fs16 fw300 ls10 fcGrey424041 mt10">{selectedLesson[description]}</p>
+            <p className="fs16 fw300 ls10 fcGrey424041 mt10 wspl">{selectedLesson[description]}</p>
           </div>
           <hr className="mt20" />
           <div className="fc-taughtBy">
