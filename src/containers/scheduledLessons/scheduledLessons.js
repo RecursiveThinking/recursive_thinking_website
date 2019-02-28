@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { fetchLessons, fetchUsers, getCurrentUserById, editUserById, editLessonById } from '../../actions'
-import { FETCHING } from '../../actions/action_types'
+import { connect } from 'react-redux';
 
-// import LessonMethods from '../../functions/lessonMethods'
+import { FETCHING } from '../../actions/action_types'
+import { fetchLessons, fetchUsers, getCurrentUserById, editUserById, editLessonById } from '../../actions'
+
+import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
+import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
 
 import ScheduledLessonsList from '../../components/scheduledLessons/scheduledLessonsList'
 import SelectedLessonDetail from '../../components/scheduledLessons/selectedLessonDetail'
-import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
-import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
 
 import { ROUTES_REACT } from '../../standards/routes'
 
@@ -27,14 +27,6 @@ class ScheduledLessons extends Component {
     this.props.fetchUsers();
     this.props.getCurrentUserById();
   }
-  
-  // componentDidUpdate(prevProps){
-  //   if(this.props.selectedLesson !== prevProps.selectedLesson){
-  //     console.log('log @ CDU in scheduled lessons')
-  //     this.props.fetchLessons();
-  //     this.props.getCurrentUserById();
-  //   }
-  // }
   
   updateSelectedLesson = (lessonObjToAdd, status) => {
     // const { currentUser } = this.props;
@@ -72,19 +64,14 @@ class ScheduledLessons extends Component {
       scheduledLessons, 
       allUsers,
     } = this.props;
-
-    // console.log('ScheduledLessons @ SL', scheduledLessons)
     
     if(!allUsers || !scheduledLessons ){
-      // console.log('ScheduledLessons @ SL IF', scheduledLessons)
-      
       return (
         <main className="content">
           <DefaultErrorPage />
         </main>
       )
     }
-    // else if(allUsers === FETCHING || scheduledLessons === FETCHING || allLessonsAPIResponse === FETCHING){
     else if(allUsers === FETCHING || scheduledLessons === FETCHING){
       return (
         <main className="content">
@@ -133,4 +120,3 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduledLessons);
-// export default connect(mapStateToProps, mapDispatchToProps)(ScheduledLessons);
