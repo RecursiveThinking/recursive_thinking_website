@@ -240,8 +240,8 @@ class MainApp extends Component {
     super(props)
     
     // console.log('init props', props)
-    this.headerTarget = React.createRef();
-    this.footerTarget = React.createRef(); 
+    // this.headerTarget = React.createRef();
+    // this.footerTarget = React.createRef(); 
     
     this.state = {
       headerHeight: '',
@@ -253,8 +253,8 @@ class MainApp extends Component {
   }
   
   componentDidMount(){
-    // window.addEventListener('load', this.handleWindowResize)
-    // window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('load', this.handleWindowResize)
+    window.addEventListener('resize', this.handleWindowResize);
     // console.log('window', window)
     // window.addEventListener('onbeforeunload', this.handleWindowResize)
     // console.log('compDidMount', this.props, 'state', this.state)
@@ -262,9 +262,15 @@ class MainApp extends Component {
     this.handleWindowResize();
   }
   
+  componentDidUpdate(){
+    // window.addEventListener('resize', this.handleWindowResize);
+    // window.addEventListener('onbeforeunload', this.handleWindowResize)
+    
+  }
+  
   componentWillUnmount(){
-    // window.removeEventListener('load', this.handleWindowResize)
-    // window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('load', this.handleWindowResize)
+    window.removeEventListener('resize', this.handleWindowResize);
     // window.removeEventListener('onbeforeunload', this.handleWindowResize)
   }
   

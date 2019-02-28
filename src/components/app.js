@@ -24,10 +24,12 @@ const {
   lessons_delete_id,
   interviewquestions,
   interviewquestions_create,
-  interviewquestions_edit,
+  interviewquestions_edit_id,
+  interviewquestions_delete_id,
   interviewquestionsanswers_create,
-  interviewquestionsanswers_edit,
+  // interviewquestionsanswers_edit,
   interviewquestionsanswers_edit_id,
+  interviewquestionsanswers_delete_id,
   recursivedirectory,
   users_edit,
   // users_edit_id,
@@ -52,19 +54,21 @@ class App extends Component {
           <Route path={scheduledlessons} component={MainApp}/>
           <Route path={unscheduledlessons} exact component={MainApp}/>
           <Route path={lessons_create} component={MainApp}/>
-          <Route path={lessons_edit_id} component={MainApp}/>
-          <Route path={lessons_delete_id} component={MainApp}/>
-          <Route path={interviewquestions_create} exact component={MainApp}/>
-          <Route path={interviewquestions_edit} exact component={MainApp}/>
+          <Route path={lessons_edit_id} exact component={MainApp}/>
+          <Route path={lessons_delete_id} exact component={MainApp}/>
+          <Route path={interviewquestions_delete_id} exact component={MainApp}/>
+          <Route path={interviewquestions_edit_id} exact component={MainApp}/>
+          <Route path={interviewquestions_create} component={MainApp}/>
           <Route path={interviewquestions} component={MainApp}/>
           <Route path={`${interviewquestionsanswers_create}/:id/answers/create`} exact component={MainApp} />
           <Route path={interviewquestionsanswers_edit_id} exact component={MainApp} />
+          <Route path={interviewquestionsanswers_delete_id} exact component={MainApp} />
           <Route path={recursivedirectory} component={MainApp}/>
-          <Route path={users_edit} component={MainApp}/>
-          <Route path={users_view_id} component={MainApp}/>
+          <Route path={users_edit} exact component={MainApp}/>
+          <Route path={users_view_id} exact component={MainApp}/>
           <Route path={users_create} component={CreateUser}/>
-          <Route path={users_setup} component={SetupUser}/>
-          <Route path={users_setup_id} component={SetupUser}/>
+          <Route path={users_setup} exact component={SetupUser}/>
+          <Route path={users_setup_id} exact component={SetupUser}/>
           <Route path={admindashboard} component={MainApp}/>
           <Route path={signout} render={ () => ( <Redirect to="/" /> ) } />
         </div>
