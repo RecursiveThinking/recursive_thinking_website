@@ -15,7 +15,7 @@ export class CogUser {
 export class User extends CogUser{
   constructor({userId, username, name, email}){
     super(userId, username, name, email)
-    this.avatar = empty;
+    this.avatar = 'avatar_default.png';
     this.city = empty;
     this.state = empty;
     this.title = empty;
@@ -66,12 +66,14 @@ export class Lesson {
 }
 
 export class InterviewQuestion {
-  constructor(title, description, categories, currentUserId){
+  constructor(title, description, categories = [], currentUserId){
     this.Id = v1();
     this.title = title;
     this.description = description;
     this.categories = categories;
     this.answersToQuestion = [];
+    this.upVotes = [];
+    this.downVotes = [];
     this._createdByUser = currentUserId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
@@ -83,19 +85,20 @@ export class InterviewQuestionAnswer {
     this.Id = v1();
     // this.title = title;
     this.description = description;
-    this._createdByUser = currentUserId;
     this.upVotes = [];
     this.downVotes = [];
+    this._createdByUser = currentUserId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
   }
 }
 
-export class ProfileSkill {
+export class SkillOrCategory {
   constructor(name, currentUserId){
     this.Id = v1();
     this.name = name;
     this._usersWithSkill = Array.from(currentUserId);
+    this._interviewquestionsWithCategory = [];
     this._createdByUser = currentUserId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
