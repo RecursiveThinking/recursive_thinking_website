@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from "react-router-dom"
-// import { Router, Route } from 'react-router-dom'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { BrowserRouter as Route } from 'react-router-dom';
+
+// action
+import { getCurrentUserById } from '../../actions/index'
 
 import HeaderApp from '../../components/headerApp/headerApp';
 import Nav from '../nav/nav';
+import Footer from '../../components/footer/footer';
+// Containers
 import Dash from '../dash/dash';
 import ScheduledLessons from '../scheduledLessons/scheduledLessons';
 import UnscheduledLessons from '../unscheduledLessons/unscheduledLessons';
 import InterviewQuestions from '../interviewQuestions/interviewQuestions';
 import RecursiveDirectory from '../recursiveDirectory/recursiveDirectory';
-import ViewUser from '../user/view/viewUser';
-// import UserEdit from '../../components/user/edit/userEdit';
-import UserEdit from '../../components/forms/form_userEdit';
-import Footer from '../../components/footer/footer';
+import UserView from '../user/view/userView';
+import UserEdit from '../user/edit/userEdit';
 import ContentPageWithTitleBar from '../../components/common/contentPage/contentPageWithTitleBar'
 import {
   TITLE_BAR_USER_EDIT, 
@@ -28,40 +32,33 @@ import {
   TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_DELETE
 } from '../../components/common/contentPage/contentPageTitleBarInfo'
 
+// Components
+import LessonCreate from '../lesson/create/lessonCreate';
+import LessonEdit from '../lesson/edit/lessonEdit';
+import LessonDelete from '../lesson/delete/lessonDelete';
 
-// form Components
-import LessonCreate from '../../components/forms/form_lessonCreate';
-import LessonEdit from '../../components/forms/form_lessonEdit';
-import LessonDelete from '../../components/forms/form_lessonDelete';
+import InterviewQuestionCreate from '../interviewQuestion/create/interviewQuestionCreate';
+import InterviewQuestionEdit from '../interviewQuestion/edit/interviewQuestionEdit';
+import InterviewQuestionDelete from '../interviewQuestion/delete/interviewQuestionDelete';
 
-import InterviewQuestionCreate from '../../components/forms/form_interviewquestionCreate';
-import InterviewQuestionEdit from '../../components/forms/form_interviewquestionEdit';
-import InterviewQuestionDelete from '../../components/forms/form_interviewquestionDelete';
-
-import InterviewQuestionAnswerCreate from '../../components/forms/form_interviewquestionanswerCreate'
-import InterviewQuestionAnswerEdit from '../../components/forms/form_interviewquestionanswerEdit'
-import InterviewQuestionAnswerDelete from '../../components/forms/form_interviewquestionanswerDelete'
+import InterviewQuestionAnswerCreate from '../interviewQuestionAnswer/create/interviewQuestionAnswerCreate'
+import InterviewQuestionAnswerEdit from '../interviewQuestionAnswer/edit/interviewQuestionAnswerEdit'
+import InterviewQuestionAnswerDelete from '../interviewQuestionAnswer/delete/interviewQuestionAnswerDelete'
 
 import { ROUTES_REACT } from '../../standards/routes'
 
-// action
-import { getCurrentUserById } from '../../actions/index'
 
 const {
   dashboard,
   scheduledlessons,
   unscheduledlessons,
   lessons_create,
-  // lessons_edit,
   lessons_edit_id,
   lessons_delete_id,
   interviewquestions_create,
-  // interviewquestions_edit,
   interviewquestions_edit_id,
   interviewquestions_delete_id,
-  // interviewquestionsanswers_create,
   interviewquestionsanswers_create_id,
-  // interviewquestionsanswers_edit,
   interviewquestionsanswers_edit_id,
   interviewquestionsanswers_delete_id,
   interviewquestions,
@@ -82,15 +79,6 @@ export const ROUTES_NAV = [
   {
     path: unscheduledlessons,
     main: () => { return (<UnscheduledLessons />)}
-    // main: (props) => { return (
-    //   <ContentPageWithTitleBar 
-    //     {...props}
-    //     formContent={
-    //       <UnscheduledLessons />
-    //     }
-    //     titleBarContent={TITLE_BAR_LESSONS_CREATE}
-    //   />
-    //   )}
   },
   {
     path: interviewquestions,
@@ -111,7 +99,7 @@ export const ROUTES_NAV = [
   },
   {
     path: users_view_id,
-    main: (props) => { return (<ViewUser {...props} />)}
+    main: (props) => { return (<UserView {...props} />)}
   }
 ]
 
@@ -238,8 +226,7 @@ export const REST_ROUTES_COMPONENTS = [
 class MainApp extends Component {
   constructor(props){
     super(props)
-    
-    // console.log('init props', props)
+
     // this.headerTarget = React.createRef();
     // this.footerTarget = React.createRef(); 
     
@@ -255,17 +242,9 @@ class MainApp extends Component {
   componentDidMount(){
     window.addEventListener('load', this.handleWindowResize)
     window.addEventListener('resize', this.handleWindowResize);
-    // console.log('window', window)
     // window.addEventListener('onbeforeunload', this.handleWindowResize)
-    // console.log('compDidMount', this.props, 'state', this.state)
     this.props.getCurrentUserById();
     this.handleWindowResize();
-  }
-  
-  componentDidUpdate(){
-    // window.addEventListener('resize', this.handleWindowResize);
-    // window.addEventListener('onbeforeunload', this.handleWindowResize)
-    
   }
   
   componentWillUnmount(){
@@ -390,4 +369,8 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, { getCurrentUserById })(MainApp);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ getCurrentUserById }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainApp);

@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Route} from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
-import { fetchUsers } from '../../actions'
+import { fetchUsers, getCurrentUserById } from '../../actions'
 
-import { ROUTES_NAV } from '../mainApp/mainApp'
 import AdminPanel from '../adminPanel/adminPanel'
 
-import DM from '../../standards/dictModel'
+import { ROUTES_NAV } from '../mainApp/mainApp'
 import { ROUTES_REACT } from '../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+
+import DM from '../../standards/dictModel'
+import { bindActionCreators } from 'redux';
 
 const {
   dashboard,
@@ -54,7 +56,6 @@ class Nav extends Component {
       [ 'sidebar-item', interviewquestions, 'Interview Prep', 'fa fa-object-group fs20'],
       [ 'sidebar-item', recursivedirectory, 'Recursive Directory', 'fa fa-address-book-o fs20'],
       [ 'sidebar-item', users_edit, 'Edit Profile', 'fa fa-user fs20'],
-      // [ 'sidebar-item', signout, 'Sign Out', 'fa fa-sign-out fs24']
     ]
     if(currentUser[admin] === true){
       NAV_BAR.push([ 'sidebar-item', admindashboard, 'Admin Panel', 'fa fa-lock fs20'])
@@ -76,8 +77,6 @@ class Nav extends Component {
         </NavLink>
       )
     })
-    
-    // console.log('currentUser @ Nav', currentUser)
     
     return (
       <nav className="navMain">
@@ -124,5 +123,9 @@ function mapStateToProps(state){
   }
 }
 
+function mapDispatchToProps(dispatch){
+  return bindActionCreators( { fetchUsers, getCurrentUserById }, dispatch)
+}
+
 // connect react/redux
-export default connect(mapStateToProps, { fetchUsers })(Nav)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)
