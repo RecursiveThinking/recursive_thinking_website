@@ -5,6 +5,10 @@ import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
 
 import DM from '../../standards/dictModel'
 
+import Taggle from 'taggle'
+
+console.log('Taggle', Taggle)
+
 const {
   user: {
     name,
@@ -17,14 +21,22 @@ const {
     linkLinkedIn,
     linkPortfolioWebsite,
     linkResume,
-    experience
+    experience,
+    skillsProfessional,
+    skillsSoftware,
+    skillsLanguages
   }
 } = DM
+
+
 class UserForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // avatar: `${PATH_FOR_IMAGES}avatar1.png`,
+      skillsProfessional: this.props.currentUser.skillsProfessional,
+      skillsSoftware: this.props.currentUser.skillsSoftware,
+      skillsLanguages: this.props.currentUser.skillsLanguages,
+      allSkills: this.props.allSkills
     }
   }
   
@@ -59,70 +71,135 @@ class UserForm extends Component {
     )
   }
   
+  returnSkillSections = (skillArray) => {
+    console.log('skillArray', skillArray)
+    let skillSectionJSX = skillArray.map(skillCategory => {
+      const {
+        id,
+        headingText,
+        labelText,
+        inputName,
+        placeholder,
+        arrayToPlace
+      } = skillCategory
+      console.log('skillCategory: ', skillCategory)
+      return (
+        <fieldset className="fieldsetSkills">
+          <div className="grid grid--full">
+            <div className="grid-cell">
+              <legend>
+                <h5 className="fw700 ls14 ttup fcGrey424041">{headingText}</h5>
+              </legend>
+              <hr className="mt10" />
+              <div className="grid grid--1of2">
+                <div className="grid-cell">
+                  <div className="fc-form-input-col">
+                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">{labelText}}</label>
+                    <input id={id} className="mt20" type="search" name={inputName} placeholder={placeholder}/>
+                  </div>
+                </div>
+                <div className="grid-cell">{arrayToPlace}</div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      )
+    })
+    console.log('skillSectionJSX: ', skillSectionJSX)
+    return skillSectionJSX;
+  }
+  
   render(){
-    const STRING_OBJ = {
-      professional: 'professional',
-      software: 'software',
-      language: 'language'
-    }
+    const {
+      content,
+      currentUser
+    } = this.props;
     
-    let allProfessionalSkills = returnSkillsArray(STRING_OBJ.professional);
-    let allSoftwareSkills = returnSkillsArray(STRING_OBJ.software);
-    let allLanguageSkills = returnSkillsArray(STRING_OBJ.language);
+    let allProfessionalSkills = currentUser[skillsProfessional];
+    let allSoftwareSkills = currentUser[skillsSoftware];
+    let allLanguageSkills = currentUser[skillsLanguages];
     
-    function returnSkillsArray(type) {
-      // is this an api call?
-      let skillArray = [];
-      if(type === STRING_OBJ.professional){
-        skillArray = getArrayOfSkills();
-        if(skillArray.length === 0){
-          return getNoSkillMessage(STRING_OBJ.professional)
-        }
+    const skillArray = [
+      {
+        id: 'skillsProfessional',
+        headingText: 'Professional Skills',
+        labelText: 'Search For Professional Skills',
+        inputName: 'skillsProfessional',
+        placeholder: 'Find Professional Skill',
+        arrayToPlace: allProfessionalSkills
+      },
+      {
+        id: 'skillsSoftware',
+        headingText: 'Software Skills',
+        labelText: 'Search For Software Skills',
+        inputName: 'skillsSoftware',
+        placeholder: 'Find Software Skill',
+        arrayToPlace: allSoftwareSkills
+      },
+      {
+        id: 'skillsLanguages',
+        headingText: 'Language Skills',
+        labelText: 'Search For Language Skills',
+        inputName: 'skillsLanguages',
+        placeholder: 'Find Language Skill',
+        arrayToPlace: allLanguageSkills
       }
-      else if(type === STRING_OBJ.software){
-        skillArray = getArrayOfSkills();
-        if(skillArray.length === 0){
-          return getNoSkillMessage(STRING_OBJ.software)
-        }
-      }
-      else if(type === STRING_OBJ.language){
-        skillArray = getArrayOfSkills();
-        if(skillArray.length === 0){
-          return getNoSkillMessage(STRING_OBJ.language)
-        }
-      }
-    }
+    ]
+    
+    // new Taggle('skillsProfessional')
+    
+    // console.log('skillsProfessionalTaggle: ', skillsProfessional)
+    
+    // var skillsSoftwareTaggle = new Taggle(skillArray[1].id, {
+      
+    // })
+    
+    // var skillsLanguagesTaggle = new Taggle(skillArray[2].id, {
+      
+    // })
     
     function getArrayOfSkills(type){
       let array = []
       return array;
     }
     
-    function getNoSkillMessage(skillType){
-      let titleString = ''
-      if(skillType === STRING_OBJ.professional || skillType === STRING_OBJ.software){
-        titleString = `You have not added any ${skillType} skills yet.`
-      }
-      else if(skillType === STRING_OBJ.language){
-        titleString = `You have not added any ${skillType}s yet.`
-      }
-      return (
-        <div className="fc-noSkillMessage">
-          <h5 className="fw600 ls14 fcGrey424041">{titleString}</h5>
-          <br />
-          <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
-            Search for a skill to add it to your profile.
-            <br /><br />
-            If you do not see the skill you are looking for simply hit enter to add to the list.
-          </p>
-        </div>
-      )
-    }
-    console.log('this.props @ userForm: ', this.props)
+    // function getNoSkillMessage(skillType){
+    //   let titleString = ''
+    //   if(skillType === STRING_OBJ.professional || skillType === STRING_OBJ.software){
+    //     titleString = `You have not added any ${skillType} skills yet.`
+    //   }
+    //   else if(skillType === STRING_OBJ.language){
+    //     titleString = `You have not added any ${skillType}s yet.`
+    //   }
+    //   return (
+    //     <div className="fc-noSkillMessage">
+    //       <h5 className="fw600 ls14 fcGrey424041">{titleString}</h5>
+    //       <br />
+    //       <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
+    //         Search for a skill to add it to your profile.
+    //         <br /><br />
+    //         If you do not see the skill you are looking for simply hit enter to add to the list.
+    //       </p>
+    //     </div>
+    //   )
+    // }
+    // console.log('this.props @ userForm: ', this.props)
     
-    const {
-      content
-    } = this.props;
+    // https://s3-us-west-2.amazonaws.com/
+    // recursivethinking-rct-user-assets-us-west-2-sethborne-gmail-com/
+    // 2392a91b-bf90-4569-b2f1-9d81e8a845c1/
+    // avatar/
+    // avatar_default.png
+    
+    const S3_PATH = 'https://s3-us-west-2.amazonaws.com/';
+    const S3_BUCKET = 'recursivethinking-rct-user-assets-us-west-2-sethborne-gmail-com/';
+    const CURR_USER_ID = `${currentUser.userId}/`;
+    const AVATAR_FOLDER = `avatar/`;
+    const USER_AVATAR = `${currentUser.avatar}`
+    
+    const AVATAR_PATH_FINAL = `${S3_PATH}${S3_BUCKET}${CURR_USER_ID}${AVATAR_FOLDER}${USER_AVATAR}`
+    
+    console.log('this.props: ', this.props, 'this.state: ', this.state)
     
     return(
       <section style={this.props.sectionStyle}>
@@ -132,7 +209,7 @@ class UserForm extends Component {
               <div className="grid-cell">
                 {/* this would come from the setup/avatardefault */}
                 <div className="fc--fdir-col fc--jCont-ce">
-                  <img className="avatarL" name="avatar" src={this.state.avatar} alt=""/>
+                  <img className="avatarL" name="avatar" src={AVATAR_PATH_FINAL} alt=""/>
                   <div className="caption ta-cent">
                     <label id="profile-picture">
                       <span className="fs20 fw500 ls12 ">Add Profile Picture</span>
@@ -318,69 +395,10 @@ class UserForm extends Component {
                 </fieldset>
               </div>
             </div>
-            {/* <fieldset className="fieldsetSkills">
-              <div className="grid grid--full">
-                <div className="grid-cell">
-                  <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="grid grid--1of2">
-                    <div className="grid-cell">
-                      <div className="fc-form-input-col">
-                        <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Professional Skills</label>
-                        <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Professional Skill"/>
-                      </div>
-                    </div>
-                    <div className="grid-cell">
-                      {allProfessionalSkills}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </fieldset> */}
-            {/* <fieldset className="fieldsetSkills">
-              <div className="grid grid--full">
-                <div className="grid-cell">
-                  <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="grid grid--1of2">
-                    <div className="grid-cell">
-                      <div className="fc-form-input-col">
-                        <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Software Skills</label>
-                        <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Software Skill"/>
-                      </div>
-                    </div>
-                    <div className="grid-cell">
-                      {allSoftwareSkills}
-                    </div>
-                  </div>                     
-                </div>
-              </div>
-            </fieldset> */}
-            {/* <fieldset className="fieldsetSkills">
-              <div className="grid grid--full">
-                <div className="grid-cell">
-                  <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="grid grid--1of2">
-                    <div className="grid-cell">
-                      <div className="fc-form-input-col">
-                        <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">Search For Coding Languages</label>
-                        <input className="mt20" type="search" name="skillsProfessional" placeholder="Find Language"/>
-                      </div>
-                    </div>
-                    <div className="grid-cell">
-                      {allLanguageSkills}
-                    </div>
-                  </div>                      
-                </div>
-              </div>
-            </fieldset> */}
+            <div id="skillsProfessional"></div>
+            {/* <div id={skillArray[1].id}></div> */}
+            {/* <div id={skillArray[2].id}></div> */}
+            {this.returnSkillSections(skillArray)}
             <hr className="modalHR mt80" />
               <div className="ta-cent">
                 {

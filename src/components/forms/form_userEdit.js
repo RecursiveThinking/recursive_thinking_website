@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { editUserById, getCurrentUserById } from '../../actions';
+import { fetchSkills, editUserById, getCurrentUserById } from '../../actions';
 
 import UserForm from './form_user';
 import ContentPageWithTitleBar from '../../components/common/contentPage/contentPageWithTitleBar'
@@ -16,6 +16,7 @@ import { ROUTES_REACT } from '../../standards/routes';
 class UserEdit extends Component {
   componentDidMount(){
     this.props.getCurrentUserById();
+    this.props.fetchSkills();
   }
   
   // {
@@ -29,7 +30,16 @@ class UserEdit extends Component {
   //   linkLinkedIn: "asdf"
   //   linkPortfolioWebsite: "asdfasdf"
   //   bio: 
-  //   experience: "2019-02-06"
+  //   experience: "2019-02-06",
+  //   skillsProfessional = [];
+  //   skillsSoftware = [];
+  //   skillsLanguages = [];
+  // }
+  
+  // componentDidUpdate(prevProps){
+  //   if (this.props.currentUser !== prevProps.currentUser) {
+  //     this.props.getCurrentUserById();
+  //   }
   // }
   
   onSubmit = (formValues) => {
@@ -90,6 +100,9 @@ class UserEdit extends Component {
       linkPortfolioWebsite: currentUser[user.linkPortfolioWebsite],
       bio: currentUser[user.bio],
       experience: currentUser[user.experience],
+      skillsProfessional: currentUser[user.skillsProfessional],
+      skillsSoftware: currentUser[user.skillsSoftware],
+      skillsLanguages: currentUser[user.skillsLanguages]
     }
     return (
       <>
@@ -101,6 +114,7 @@ class UserEdit extends Component {
               onSubmit={this.onSubmit}
               content={FORM_HEADING_USER_EDIT}
               initialValues={initValues}
+              currentUser={this.props.currentUser}
             />}
           titleBarContent={this.props.titleBarContent}
         />
@@ -112,12 +126,13 @@ class UserEdit extends Component {
 const mapStateToProps = (state, ownProps) => {
   console.log('MSTP @ UserEdit: ', state, ownProps);
   return {
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    allSkills: state.skills
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({getCurrentUserById, editUserById}, dispatch)
+  return bindActionCreators({fetchSkills, getCurrentUserById, editUserById}, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(UserEdit)
