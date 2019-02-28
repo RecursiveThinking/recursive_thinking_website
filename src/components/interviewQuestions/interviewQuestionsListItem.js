@@ -1,21 +1,17 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'
 
+import InterviewQuestionsAnswersList from '../interviewQuestionsAnswers/interviewQuestionsAnswersList'
 import CategoryList from '../../components/common/category/categoryList'
-import InterviewQuestionsAnswersList from './interviewQuestionsAnswersList'
-
-// import Modal from '../../components/common/modal/modal'
-// import { CreateInterviewQuestionAnswerFormEx } from '../forms/forms_interviewquestionanswer'
-import { ROUTES_REACT } from '../../standards/routes'
-
-import DM from '../../standards/dictModel'
 
 import DateMethods from '../../functions/dateMethods'
 import UtilityMethods from '../../functions/utilityMethods';
 
+import { ROUTES_REACT } from '../../standards/routes'
+import DM from '../../standards/dictModel'
+
 const {
-  interviewquestionsanswers_create,
-  // interviewquestions_edit
+  interviewquestionsanswers_create
 } = ROUTES_REACT
 
 class InterviewQuestionsListItem extends Component {
@@ -25,7 +21,6 @@ class InterviewQuestionsListItem extends Component {
     this.state = {
       isIntQuestAnswerClassOpen: 'fc-replies',
       answerBlockClassString: 'answers display-none width100P',
-      // showModalAnswer: false,
     }
   }
   
@@ -79,8 +74,6 @@ class InterviewQuestionsListItem extends Component {
       }
     } = DM;
     
-    // console.log('intQuestListItem: ', intQuestion[Id])
-    
     let ANSWER_STRING = '';
     if(this.state.isIntQuestAnswerClassOpen === 'fc-replies open'){
       ANSWER_STRING = `Answers`
@@ -88,8 +81,7 @@ class InterviewQuestionsListItem extends Component {
       ANSWER_STRING = `${intQuestion.answersToQuestion.length} Answers`
     }
     let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_ban,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_delete, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
-    // console.log('optionList', currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_edit, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
-    // need to make an array to pass to the categoryList
+    
     let formattedDate = DateMethods.getFormattedDate(intQuestion[createdAt])
     return (
       <article className="card fc--disp-flex fc--fdir-col">
