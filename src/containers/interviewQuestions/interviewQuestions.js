@@ -12,7 +12,8 @@ import ContentPageTitleBar from '../../components/common/contentPage/contentPage
 import { TITLE_BAR_INTERVIEWQUESTIONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
 
 import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
-import { DropDownSort, DropDownFilter } from '../../components/common/dropdown/sortAndFilter';
+import { DropDownSort } from '../../components/common/dropdown/sort';
+import { DropDownFilter } from '../../components/common/dropdown/filter';
 
 import OrderMethods from '../../functions/orderMethods'
 
