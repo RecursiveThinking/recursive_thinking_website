@@ -7,6 +7,7 @@ import { getInterviewQuestionById, deleteInterviewQuestionById } from '../../act
 import { ROUTES_REACT } from '../../standards/routes';
 
 import DefaultLoadingPage from '../defaults/loadingPage/loadingPage';
+import { bindActionCreators } from 'redux';
 
 class InterviewQuestionDelete extends Component {
   constructor(props){
@@ -128,4 +129,8 @@ function mapStateToProps(state, ownProps){
   }
 }
 
-export default connect(mapStateToProps, { getInterviewQuestionById, deleteInterviewQuestionById })(InterviewQuestionDelete)
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ getInterviewQuestionById, deleteInterviewQuestionById }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InterviewQuestionDelete)
