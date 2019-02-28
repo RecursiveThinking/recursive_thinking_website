@@ -293,7 +293,7 @@ export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
   funcOptions.method = HTTP_METHODS.put;
   edittedUser[user.updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, edittedUser));
-  console.log('funcOptions @ editUserById: ', funcOptions.body);
+  // console.log('funcOptions @ editUserById: ', funcOptions.body);
   
   return async (dispatch) => {
     await initFetchCall(URL, funcOptions, false)
@@ -400,7 +400,7 @@ export const getLessonById = (lessonId) => {
   }
 }
 
-export const editLessonById = (edittedLesson) => {
+export const editLessonById = (edittedLesson, thenPushPath, catchPushPath) => {
   // console.log('lessonId @ editLessonById action: ', edittedLesson.Id)
   console.log('lessonObj @ editLessonById action: ', edittedLesson)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}/${edittedLesson.Id}`;
@@ -419,13 +419,13 @@ export const editLessonById = (edittedLesson) => {
           dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: errorNotExistPayload })
         }
         console.log('history push to unsched @ editLessonId')
-        history.push(ROUTES_REACT.unscheduledlessons) 
+        history.push(thenPushPath) 
         return res;
       })
       .catch(err => {
         dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: err })
         console.log('history push to back to editLesson @ editLessonId')        
-        history.push(`${ROUTES_REACT.lessons_edit}/${edittedLesson.Id}`)
+        history.push(catchPushPath)
         return err;
       })
   }
