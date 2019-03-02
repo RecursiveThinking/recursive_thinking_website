@@ -34,6 +34,32 @@ class InterviewQuestionForm extends Component {
     )
   }
   
+  renderTextArea(field){
+    const { meta: { touched, error }} = field;
+    const errorInput = `fc-field-row-full fc--disp-flex fc--fdir-row mt10 ${touched && error ? 'input-invalid' : ''}`
+    return(
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
+        <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
+          <label htmlFor={field.name} className={field.labelStyle}>{field.label}</label>
+        </div>
+        <div className={errorInput}>
+          <textarea 
+            {...field.input}
+            className={field.textAreaStyle}
+            placeholder={field.placeholder}
+            cols={field.cols}
+            rows={field.rows}
+          />
+        </div>
+        <div className="error fc-field-row-full fc--disp-flex fc--fdir-row width100P">
+          <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
+            { touched ? error : "" }
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
   renderHeadingContent(){
     const {
       content
@@ -65,22 +91,24 @@ class InterviewQuestionForm extends Component {
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <div className="fc-fieldset">
                 <Field 
-                  label="Question Title:"
+                  label="Title:"
                   name="interviewQuestionTitle"
                   type="text"
-                  placeholder="Question Title"
+                  placeholder="Enter Title"
                   component={this.renderField}
                   labelStyle="width100P"
                   inputStyle="width100P"
                   />
                 <Field 
-                  label="Question Details:"
+                  label="Description:"
                   name="interviewQuestionDetails"
                   type="text"
-                  placeholder="Question Details"
-                  component={this.renderField}
+                  placeholder="Enter Description"
+                  component={this.renderTextArea}
                   labelStyle="width100P"
-                  inputStyle="width100P"
+                  textAreaStyle="width100P"
+                  cols={"30"}
+                  rows={"10"}
                   />
                 {/* <Field
                   label="Tag profession, skills and languages:"

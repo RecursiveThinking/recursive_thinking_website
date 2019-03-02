@@ -19,6 +19,7 @@ const {
     linkLinkedIn,
     linkPortfolioWebsite,
     linkResume,
+    bio,
     experience,
     skillsProfessional,
     skillsSoftware,
@@ -69,6 +70,31 @@ class UserForm extends Component {
     )
   }
   
+  renderTextArea(field){
+    const { meta: { touched, error }} = field;
+    const errorInput = `width100P ${touched && error ? 'input-invalid' : ''}`
+    return(
+      <>
+        <div className={errorInput}>
+          <textarea 
+            {...field.input}
+            className={field.textAreaStyle}
+            placeholder={field.placeholder}
+            cols={field.cols}
+            rows={field.rows}
+          />
+        </div>
+        <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
+          <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width90P">
+            <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
+              {touched ? error : ''}
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+  
   returnSkillSections = (skillArray) => {
     console.log('skillArray', skillArray)
     let skillSectionJSX = skillArray.map(skillCategory => {
@@ -80,7 +106,7 @@ class UserForm extends Component {
         placeholder,
         arrayToPlace
       } = skillCategory
-      console.log('skillCategory: ', skillCategory)
+      // console.log('skillCategory: ', skillCategory)
       return (
         <fieldset className="fieldsetSkills">
           <div className="grid grid--full">
@@ -103,7 +129,7 @@ class UserForm extends Component {
         </fieldset>
       )
     })
-    console.log('skillSectionJSX: ', skillSectionJSX)
+    // console.log('skillSectionJSX: ', skillSectionJSX)
     return skillSectionJSX;
   }
   
@@ -206,15 +232,12 @@ class UserForm extends Component {
             <div className="grid grid--1of4">
               <div className="grid-cell">
                 {/* this would come from the setup/avatardefault */}
-                <div className="fc--fdir-col fc--jCont-ce">
+                <div className="fc--fdir-col fc--jCont-ce ta-cent">
                   <img className="avatarL" name="avatar" src={AVATAR_PATH_FINAL} alt=""/>
-                  <div className="caption ta-cent">
+                  <div className="caption">
                     <label id="profile-picture">
-                      <span className="fs20 fw500 ls12 ">Add Profile Picture</span>
-                      {/* style={{visibility: 'hidden'}}  */}
-                      {/* {{marginRight: spacing + 'em'}} */}
-                      {/* type="file" */}
-                      {/* <input id="file" style={{visibility: 'hidden'}}  /> */}
+                      <span className="fs20 fw500 ls12">Add Profile Picture</span>
+                      {/* <input id="file" type="file" style={{visibility: 'hidden'}}/> */}
                     </label>
                   </div>
                 </div>
@@ -364,29 +387,27 @@ class UserForm extends Component {
                   <hr className="mt10" />
                   <div className="grid grid--1of2 mt30">
                     <div className="grid-cell">
-                      <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea>
+                      {/* <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea> */}
+                      <Field
+                        name={bio}
+                        cols={"30"}
+                        rows={"10"} 
+                        component={this.renderTextArea}
+                        placeholder="Write Your About Statement Here"
+                        textAreaStyle=""
+                      />
                     </div>
                     <div className="grid-cell fc--disp-flex fc--fdir-col fc--jCont-ce">
-                      {/* <div className="fc--disp-flex fc--fdir-col fc--jCont-ce"> */}
                       <div className="fc-fieldset">
                         <Field 
                           label="When Did you Start Programming?"
                           name={experience}
                           type="date"                                  
-                          placeholder="Enter Date"
+                          // placeholder="Enter Date"
                           component={this.renderField}
                           labelStyle="width65P"
                           inputStyle="width35P"
                         />
-                        {/* <Field 
-                          label="When Did you Start Coming to Recursive Thinking?"
-                          name={timeWithRT}
-                          type="date"
-                          placeholder="Enter Date"
-                          component={this.renderField}
-                          labelStyle="width65P"
-                          inputStyle="width35P"
-                        /> */}
                       </div>
                     </div>
                   </div>

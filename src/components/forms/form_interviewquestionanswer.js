@@ -15,19 +15,21 @@ class InterviewQuestionAnswerForm extends Component {
     this.props.onSubmit(formValues);
   }
   
-  renderField(field){
+  renderTextArea(field){
     const { meta: { touched, error }} = field;
     const errorInput = `fc-field-row-full fc--disp-flex fc--fdir-row mt10 ${touched && error ? 'input-invalid' : ''}`
     return(
       <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P mt25">
         <div className="fc-field-row-full fc-disp-flex fc-fdir-row mt10">
-          <label htmlFor={field.name}>{field.label}</label>
+          <label htmlFor={field.name} className={field.labelStyle}>{field.label}</label>
         </div>
         <div className={errorInput}>
-          <input 
+          <textarea 
             {...field.input}
-            type="text"
+            className={field.textAreaStyle}
             placeholder={field.placeholder}
+            cols={field.cols}
+            rows={field.rows}
           />
         </div>
         <div className="error fc-field-row-full fc-disp-flex fc-fdir-row width100P">
@@ -81,8 +83,10 @@ class InterviewQuestionAnswerForm extends Component {
                   label={content.labelAnswer}
                   name="interviewQuestionAnswerDescription"
                   placeholder="Description"
-                  component={this.renderField}
-                  />
+                  component={this.renderTextArea}
+                  cols={"30"}
+                  rows={"10"}
+                />
               </div>
               <hr className="modalHR mt130" />
               <div className="ta-cent">
