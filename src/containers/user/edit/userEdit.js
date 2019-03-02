@@ -78,7 +78,7 @@ class UserEdit extends Component {
     const {
       user
     } = DM
-    console.log('user: ', user.name)
+    // console.log('user: ', user.name)
     console.log('currentUser: ', currentUser)
     console.log('currentUser Name: ', currentUser[user.name])
     const initValues = {
@@ -108,6 +108,7 @@ class UserEdit extends Component {
               content={FORM_HEADING_USER_EDIT}
               initialValues={initValues}
               currentUser={this.props.currentUser}
+              userById={this.props.userById}
             />}
           titleBarContent={this.props.titleBarContent}
         />

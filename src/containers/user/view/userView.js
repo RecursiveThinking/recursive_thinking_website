@@ -4,14 +4,16 @@ import { connect } from 'react-redux'
 
 import { fetchUsers, fetchSkills, getCurrentUserById, getUserById, editUserById } from '../../../actions'
 
+import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+
 import ContentPageTitleBar from '../../../components/common/contentPage/contentPageTitleBar';
 import { TITLE_BAR_USER_VIEW } from '../../../components/common/contentPage/contentPageTitleBarInfo';
-import CategoryList from '../../../components/common/category/categoryList'
-import RecursiveDirectoryListItemSm from '../../../components/recursiveDirectory/recursiveDirectoryListItemSm'
+import CategoryList from '../../../components/common/category/categoryList';
+import RecursiveDirectoryListItemSm from '../../../components/recursiveDirectory/recursiveDirectoryListItemSm';
 
-import { ROUTES_REACT } from '../../../standards/routes'
-import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
-import DM from '../../../standards/dictModel'
+import { ROUTES_REACT } from '../../../standards/routes';
+import { PATH_FOR_IMAGES } from '../../../standards/publicPaths';
+import DM from '../../../standards/dictModel';
 
 const {
   users_view
@@ -37,8 +39,11 @@ class UserView extends Component{
     window.addEventListener('onbeforeunload', this.handleWindowResize)
   }
   
-  componentDidUpdate(){
-    this.handleWindowResize()
+  componentDidUpdate(prevProps, prevState){
+    this.handleWindowResize();
+    if(prevProps.userById.userId !== this.props.match.params.id){
+      this.props.getUserById(this.props.match.params.id);
+    }
   }
   
   componentWillUnmount(){
@@ -63,6 +68,18 @@ class UserView extends Component{
     this.props.editUserById(updateUserObj, `${users_view}/${updateUserObj.userId}`, `${users_view}/${updateUserObj.userId}`);
     this.props.getUserById(updateUserObj.userId);
   }
+  
+  // else if(this.props.userById.userId !== this.props.match.params.id){
+  //   return (
+  //     <div className="content"
+  //       ref={ node => { if(node !== null){this.contentTarget = node}}}
+  //     >
+  //       <section style={{padding: '1.5rem 1.5rem'}}>
+  //         <DefaultLoadingPage />
+  //       </section>
+  //     </div>
+  //   )
+  // }
   
   render(){
     const {
@@ -93,16 +110,21 @@ class UserView extends Component{
       return (
         <div className="content"
           ref={ node => { if(node !== null){this.contentTarget = node}}}
-        >
+        > 
+          <section style={{padding: '1.5rem 1.5rem'}}>
+            <DefaultLoadingPage />
+          </section>
         </div>
       )
     }
-    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING'){
+    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING' || this.props.userById === 'FETCHING'){
       return (
         <div className="content"
           ref={ node => { if(node !== null){this.contentTarget = node}}}
         >
-          Loading!
+          <section style={{padding: '1.5rem 1.5rem'}}>
+            <DefaultLoadingPage />
+          </section>
         </div>
       )
     }
@@ -120,7 +142,7 @@ class UserView extends Component{
       // console.log('No User')
     // }
     
-    console.log('hit here', contentHeight)
+    // console.log('hit here', contentHeight)
     // destructuring
     const { allSkills, lookupTableAllSkills } = this.props;
     
@@ -337,8 +359,6 @@ class UserView extends Component{
         )
       })
     
-      // this.iterateUserProfileLinks(userById, profileStatsVisits)
-    
       return(
         <main>
           <ContentPageTitleBar content={TITLE_BAR_USER_VIEW}/>
@@ -350,9 +370,6 @@ class UserView extends Component{
               <div className="content"
                 ref={ node => { if(node !== null){this.contentTarget = node}}}
               >              
-                {/* <Link to={recursivedirectory}>
-                  <button className="btn btnFillClrSchGreen00b371 pdTB1LR2 mt15 mb15 ml15 fs20 fw500 ls12" >&#60;   Return to Directory</button>
-                </Link> */}
                 <article className="cardNoPadding">
                   <div className="grid grid--full">
                     <div className="grid-cell">

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { history } from '../../../index';
 
-import { createUser, getAuthUserById, getCurrentUserById } from '../../../actions/index'
+import { createUser, getCurrentUserById } from '../../../actions/index'
 
 import HeaderApp from '../../../components/headerApp/headerApp';
 import Footer from '../../../components/footer/footer'
@@ -37,12 +37,13 @@ class CreateUser extends Component {
     // // window.addEventListener('load', this.checkIfUserSetup)
     // window.addEventListener('resize', this.handleWindowResize);
     // window.addEventListener('onbeforeunload', this.handleWindowResize)
-    this.props.getAuthUserById(this.props.location.state.userInfo.attributes.sub);
+    // this.props.getAuthUserById(this.props.location.state.userObjForCognito.sub);
+    this.props.getCurrentUserById();
     this.handleWindowResize();
   }
 
   componentDidUpdate(){
-    this.checkIfUserSetup();
+    // this.checkIfUserSetup();
   }
   
   componentWillUnmount(){
@@ -61,82 +62,106 @@ class CreateUser extends Component {
     })
   }
   
-  // {
-  //   attributes:
-  //     email: "sethborne@gmail.com"
-  //     email_verified: true
-  //     name: "Seth Borne"
-  //     sub: "b3cb6ece-b05d-4a22-b50f-1281d710e847"
-  //   id: "us-west-2:063d1912-a95e-48ed-a09d-2af690fb8f0d"
-  //   username: "sethborne"
+  // checkIfUserSetup = () => {
+  //   const {
+  //     sub,
+  //     username,
+  //     name,
+  //     email
+  //   } = this.props.location.state.userObjForCognito;
+    
+  //   console.log('userObjPassed: ', this.props.location.state.userObjForCognito)
+  //   // not setup
+  //   if(!this.props.currentUser.userId){
+  //     const cogId = sub;
+  //     const cogUsername = username;
+  //     const cogName = name;
+  //     const cogEmail = email
+  //     let newCogUser = new CogUser(cogId, cogUsername, cogName, cogEmail)
+  //     console.log('newCogUser: ', newCogUser)
+  //     let newUser = new User(newCogUser)
+  //     console.log('newUser: ', newUser)
+  //     // create s3 buckets for user avatar/resume
+      
+  //     // // action creator - create user
+  //     this.props.createUser(newUser)
+  //       // .then(res => {
+  //       //   console.log('will this log?')
+  //       //   return res
+  //       // })
+  //       // .catch(err => err)
+  //     createAssetFoldersForUser(newUser.userId, 'avatar');
+  //     createAssetFoldersForUser(newUser.userId, 'resume')
+  //   }
+  //   else if(!this.props.currentUser.isProfileSetup){
+  //     const {
+  //       currentUser
+  //     } = this.props
+  //     history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
+  //     // , { setupUserId: currentUser.userId }
+  //     console.log('current user', this.props.currentUser)
+  //   }
+  //   else if(this.props.currentUser.isProfileSetup){
+  //     console.log('USER IS SETUP!')
+  //     history.push(ROUTES_REACT.dashboard)
+  //   }
   // }
   
-  checkIfUserSetup = () => {
-    const {
-      attributes: {
-        name,
-        sub,
-        email
-      },
-      username
-    } = this.props.location.state.userInfo
-    // not setup
-    if(!this.props.currentUser.userId){
-      const cogId = sub;
-      const cogUsername = username;
-      const cogName = name;
-      const cogEmail = email
-      let newCogUser = new CogUser(cogId, cogUsername, cogName, cogEmail)
-      console.log('newCogUser: ', newCogUser)
-      let newUser = new User(newCogUser)
-      console.log('newUser: ', newUser)
-      // create s3 buckets for user avatar/resume
-      
-      // // action creator - create user
-      this.props.createUser(newUser)
-        // .then(res => {
-        //   console.log('will this log?')
-        //   return res
-        // })
-        // .catch(err => err)
-      createAssetFoldersForUser(newUser.userId, 'avatar');
-      createAssetFoldersForUser(newUser.userId, 'resume')
-    }
-    else if(!this.props.currentUser.isProfileSetup){
-      const {
-        currentUser
-      } = this.props
-      history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
-      // , { setupUserId: currentUser.userId }
-      console.log('current user', this.props.currentUser)
-    }
-    else if(this.props.currentUser.isProfileSetup){
-      console.log('USER IS SETUP!')
-      history.push(ROUTES_REACT.dashboard)
-    }
+  createNewUser = (sub, username, name, email) => {
+    let newCogUser = new CogUser(sub, username, name, email);
+    console.log('newCogUser: ', newCogUser)
+    let newUser = new User(newCogUser)
+    console.log('newUser: ', newUser)
+    createAssetFoldersForUser(newUser.userId, 'avatar');
+    createAssetFoldersForUser(newUser.userId, 'resume')
+    this.props.createUser(newUser)
   }
   
-  renderContent(headerHeight, footerHeight){
-    
-    
+  renderContent(headerHeight, footerHeight, contentWrapper){
     if(headerHeight === 0 || footerHeight === 0 || !this.props.currentUser.userId){
+      console.log('this.props @ createUser: ',this.props.location.state.userObjForCognito)
+      const {
+        sub,
+        username,
+        name,
+        email
+      } = this.props.location.state.userObjForCognito;
+      this.createNewUser(sub, username, name, email)
       return (
-        <article style={{padding: '1.5rem 1.5rem'}}>
+        <>
           <DefaultLoadingPage />
-        </article>
+        </>
       )
-    } else {
+    } 
+    else if(this.props.currentUser.userId && !this.props.currentUser.isProfileSetup){
+      const { currentUser } = this.props;
+      console.log('user it not setup: go to userEdit')
+      history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
       return (
-        <article className="profileSetup">
-        
-        </article>
+        <>
+          Moving on to UserEdit!
+        </>
+      )
+    }
+    else if(this.props.currentUser.userId && this.props.currentUser.isProfileSetup){
+      console.log('user setup: go to dashboard')
+      history.push(ROUTES_REACT.dashboard)
+      return (
+        <>
+          Go To Dashboard!
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          Hopefully we never get here!
+        </>
       )
     }
   }
   
   render(){
-    console.log('this.props @ createUser: ', this.props.location.state.userInfo.attributes.sub)
-    
     const {
       headerHeight,
       contentHeight,
@@ -148,6 +173,7 @@ class CreateUser extends Component {
       marginBottom: footerHeight,
       height: (contentHeight)
     }
+    
     return (
       <main className="wrapper">
         <header ref={ node => { if(node !== null){this.headerTarget = node} }}>
@@ -160,7 +186,7 @@ class CreateUser extends Component {
               ref={ node => { if(node !== null){this.contentTarget = node}}}
             >
               <ContentPageTitleBar content={TITLE_BAR_USER_CREATE} />
-              {this.renderContent(headerHeight, footerHeight)}
+              {this.renderContent(headerHeight, footerHeight, contentWrapper)}
             </div>
           </div>
         </div>
@@ -179,7 +205,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getAuthUserById, createUser, getCurrentUserById }, dispatch)
+  return bindActionCreators({ createUser, getCurrentUserById }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
