@@ -7,6 +7,7 @@ import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions/inde
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
+import SecondaryLoadingPage from '../../components/defaults/loadingPage/secondaryLoadingPage';
 
 import DashboardProfileStatList from '../../components/dash/dashboardProfileStatList'
 import UpComingLesson from '../../components/dash/upComingLesson'
@@ -38,6 +39,43 @@ class Dash extends Component {
     this.props.getCurrentUserById();
   }
   
+  renderStatList = (profileStats, currentUser) => {
+    if(currentUser === FETCHING){
+      return (
+        <SecondaryLoadingPage />
+      )
+    }
+    else if(!currentUser.userId){
+      return (
+        <SecondaryLoadingPage />
+        // <DashboardProfileStatList />
+      )
+    }
+    return (
+      <DashboardProfileStatList userStats={profileStats} />
+    )
+  }
+  
+  renderUpComingLesson = (scheduledLessons, allUsers) => {
+    console.log('schedLessons: ', scheduledLessons, 'allUsers: ', allUsers)
+    if(scheduledLessons === FETCHING && allUsers === FETCHING){
+      return (
+        <SecondaryLoadingPage />
+      )
+    }
+    else if(scheduledLessons === FETCHING || allUsers === FETCHING){
+      return (
+        <SecondaryLoadingPage />
+      )
+    } 
+    return (
+      <UpComingLesson 
+        upComingLessons={scheduledLessons}
+        allUsersArr={allUsers}
+      />
+    )
+  }
+  
   render(){
     const { 
       currentUser, 
@@ -63,7 +101,8 @@ class Dash extends Component {
         </main>
       )
     }
-    else if(scheduledLessons === FETCHING || allUsers === FETCHING){
+    // else if(scheduledLessons === FETCHING || allUsers === FETCHING || currentUser === FETCHING){
+    else if(scheduledLessons === FETCHING && allUsers === FETCHING && currentUser === FETCHING){
       return (
         <main className="content">
           <DefaultLoadingPage />
@@ -87,16 +126,18 @@ class Dash extends Component {
             <div className="grid-cell">
               {/* in this cell goes dashboardProfileStatList */}
               {/* recives profilesStats as props */}
-              <DashboardProfileStatList userStats={profileStats} />
+              {/* <DashboardProfileStatList userStats={profileStats} /> */}
+              {this.renderStatList(profileStats, currentUser)}
             </div>
           </div>
           <div className="grid grid--1of2">
             <div className="grid-cell">
               {/* in this cell goes the next upcoming lesson */}
-              <UpComingLesson 
+              {/* <UpComingLesson 
                 upComingLessons={scheduledLessons}
                 allUsersArr={allUsers}
-              />
+              /> */}
+              {this.renderUpComingLesson(scheduledLessons, allUsers)}
             </div>
             <div className="grid-cell">
               {/* in this cell goes a list of the next three lessons the user is attending  */}
