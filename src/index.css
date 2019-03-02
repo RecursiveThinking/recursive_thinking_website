@@ -1470,6 +1470,15 @@ footer {
   height: 100%;
 }
 
+.loadingScreenSecondary {
+  height: calc(100vh - 60vh);
+}
+
+.loadingScreenAnimationSecondary {
+  /* width: 100%; */
+  height: 100%;
+}
+
 /* ============================================ */
 /*                  Font Colors                 */
 /* ============================================ */
