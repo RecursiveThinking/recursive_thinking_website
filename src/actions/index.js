@@ -3,7 +3,7 @@ import { CREDENTIALS } from '../credentials/cognitoCreds'
 // import AWS from 'aws-sdk'
 // import { browserHistory } from 'react-router'
 
-import { getSignInUserSession } from '../functions/authMethods';
+import { getCurrentUserFromSession } from '../functions/authMethods';
 // import LessonMethods from '../functions/lessonMethods';
 import ModelConverterForUpdate from '../models/modelConverterForUpdate';
 
@@ -82,9 +82,10 @@ const OPTIONS = {
 const initFetchCall = async (urlPath, optionConfig, doesEndPointNeedAuth) => {
 
   if(doesEndPointNeedAuth === true){
-    const userInfo = await getSignInUserSession();
+    const userInfo = await getCurrentUserFromSession();
+    console.log('userInfo @ fetch call: ', userInfo)
     const token = userInfo.idToken.jwtToken;
-    // console.log('token @ auth in initFetch', token)
+    console.log('token @ auth in initFetch', token)
     optionConfig.headers['Authorization'] = token;
     optionConfig.headers['Content-Type'] = 'application/json';
     // console.log('optionConfig', optionConfig)
@@ -132,42 +133,44 @@ const errorNotExistPayload = {
   body: null
 }
 
-export const getAuthUserById = (currentUserId) => {
-  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${currentUserId}`
-  let funcOptions = {...OPTIONS}
-  funcOptions.method = HTTP_METHODS.get
-  // console.log('currentUser', currentUser)
-  return async dispatch => {
-    // const currentUser = await getCurrentAuthenticatedUser()
-    await initFetchCall(URL, funcOptions, true)
-      .then(res => {
-        const { status } = res;
-        console.log('res @ getCurrentUserByID: ', res)
-        if(status === 200){
-          dispatch({ type: GET_CURRENT_USER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
-        }
-        return res;
-      })
-      .catch(err => {
-        dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: err })
-        return err;
-      })
-  }
-}
+// export const getAuthUserById = (currentUserId) => {
+//   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${currentUserId}`
+//   let funcOptions = {...OPTIONS}
+//   funcOptions.method = HTTP_METHODS.get
+//   // console.log('currentUser', currentUser)
+//   return async dispatch => {
+//     // const currentUser = await getCurrentAuthenticatedUser()
+//     await initFetchCall(URL, funcOptions, true)
+//       .then(res => {
+//         const { status } = res;
+//         console.log('res @ getCurrentUserByID: ', res)
+//         if(status === 200){
+//           dispatch({ type: GET_CURRENT_USER_BY_ID, payload: res })
+//           dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
+//         }
+//         return res;
+//       })
+//       .catch(err => {
+//         dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: err })
+//         return err;
+//       })
+//   }
+// }
 
 export const getCurrentUserById = () => {
   
   return async (dispatch) => {
-    await getSignInUserSession()
+    await getCurrentUserFromSession()
       .then(userInSesson => {
         console.log('currentAuthedUser: ', userInSesson)
         dispatch(currentUser(userInSesson.idToken.payload.sub))
+        // dispatch()
         // console.log('user', user)
         return userInSesson;
       })
       .catch(err => {
         console.log('error at getCurrentUserById: ', err)
+        // else we should signout and boot the person back to '/'?
         return err;
       })
   }
