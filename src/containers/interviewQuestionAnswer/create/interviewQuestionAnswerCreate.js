@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer, editInterviewQuestionById } from '../../../actions/index'
 
+import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage'
+
 import { FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE } from '../../../components/forms/formContent/formContent'
 import InterviewQuestionAnswerForm from '../../../components/forms/form_interviewquestionanswer';
 
@@ -35,9 +37,11 @@ class InterviewQuestionCreate extends Component {
     console.log('params: ', this.props.match.params.id);
     if(!this.props.interviewQuestionById){
       return (
-        <div>
-          Loading!
-        </div>
+        <>
+          <section style={{padding: '1.5rem 1.5rem'}}>
+            <DefaultLoadingPage />
+          </section>
+        </>
       )
     }
     const {
