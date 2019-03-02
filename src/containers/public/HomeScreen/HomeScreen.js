@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { fetchUsers, fetchHomeScreenQuotes } from '../../../actions/index';
 
-import Header from '../../../components/public/header/header';
+import Header from '../header/header';
 import Footer from '../../../components/footer/footer';
 
 import Slider from '../../../components/common/slider/slider';
