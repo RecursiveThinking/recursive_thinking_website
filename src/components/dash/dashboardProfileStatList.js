@@ -14,6 +14,20 @@ const dashboardProfileStatList = ({...props}) => {
       // profileStatsViewsResume
     // }
   // } = DM;
+  
+  if(!props.userStats){
+    return (
+      <article className="card fc--disp-flex fc--fdir-col">
+      {/* fcGreyb9 */}
+        <h5 className="fw700 ls14 ttup fcGrey424041 mb10">Profile Statistics</h5>
+        <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There is not currently a Current User!</h5>
+        <p className="fs18 fw300 ls12 fcGrey81 mt15 ta-cent">
+        {/* fcGrey81 */}
+          To submit a new lesson, please select Vote for Lessons from the Nav bar, then click "Submit a Lesson", located at the top of the page.
+        </p>
+    </article>
+    )
+  }
   const {
     userStats
   } = props
