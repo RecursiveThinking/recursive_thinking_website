@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form';
 
 import ValidationMethods from '../../functions/validationMethods'
-import { signUp, confirmSignUp, signIn, signInGetUserInfo } from '../../functions/authMethods'
+import { signUp, confirmSignUp, signIn } from '../../functions/authMethods'
 
 import { history } from '../../index'
 
 import { ROUTES_REACT } from '../../standards/routes'
+import { CognitoRefreshToken } from 'amazon-cognito-identity-js';
 
 const {
   // dashboard,
@@ -42,11 +43,19 @@ class SignUpModalForm extends Component {
     signUp(params)
       .then(data => {
         console.log('data: ', data);
-        this.props.closeModalSignup();
-        this.props.openModalVerifyAccount();
+        if(data){
+          this.props.closeModalSignup();
+          this.props.openModalVerifyAccount();
+        }
       })
       .catch(err => {
         // here don't close
+        // {
+        //   code: "UsernameExistsException"
+        //   message: "User already exists"
+        //   name: "UsernameExistsException"
+        // }
+        validate(err)
         console.log('err: ', err)
       })
   }
@@ -252,38 +261,41 @@ class SignInModalForm extends Component {
     }
     
     signIn(params)
-      .then(val => {
-        console.log('val', val);
-        // return val
-        signInGetUserInfo(val)
-          .then(userInfo => {
-            console.log('userInfo', userInfo);
-            // successful obj at this place.
-            // { 
-            //   attributes: {
-            //     sub: "07c81143-9660-4737-a63a-e5ab1e14e7ef", 
-            //     email_verified: true, 
-            //     name: "Tim Tam", 
-            //     email: "sethborne@gmail.com"
-            //   }
-            //   id: "us-west-2:f25eb9a3-3561-418b-99b4-0efdc9f99427"
-            //   username: "timtam" 
-            // }
-            // need to make an action request here, if there is a user that has this id in the Database
-            // if there is a userId that matches
-              // then check if isProfileSetup is true
-              // if true - then navigate to dashboard
-              // if false - need to construct a new user
-            
-            // need to navigate away here
-            history.push(users_create, {userInfo: userInfo})
-            return userInfo;
-          })
-          .catch(err => {
-            console.log('err', err);
-            // this error would need to go to the signinform, how?
-            return err;
-          })
+      .then(cogUserObj => {
+        console.log('cogUserObj', cogUserObj);
+        // { Returns CognitoUser Object
+          // signInUserSession: CognitoUserSession Obj {
+          //   accessToken: CognitoAccessToken Obj {
+          //     jwtToken: "AS_STRING"
+          //     payload: {
+          //       client_id: "AS_STRING"
+          //       sub: "AS_STRING"
+          //       username: "AS_STRING"
+          //     }
+          //   }
+          //   idToken: CognitoIDToken {
+          //      jwtToken: "AS_STRING"
+          //      payload: {
+          //        cognito:username: "AS_STRING"
+          //        email: "AS_STRING"
+          //        name: "AS_STRING"
+          //        sub: "AS_STRING"
+          //      }
+          //   }
+          //   refreshToken: CognitoRefreshToken {
+          //     token: "AS_STRING"
+          //   }
+          //   }
+        // }
+        const userObjForCognito = {
+          sub: cogUserObj.signInUserSession.idToken.payload.sub,
+          username: cogUserObj.signInUserSession.idToken.payload['cognito:username'],
+          name: cogUserObj.signInUserSession.idToken.payload.name,
+          email: cogUserObj.signInUserSession.idToken.payload.email
+        }
+        // need to navigate away here so we can get to the create user page
+        history.push(users_create, {userObjForCognito: userObjForCognito})
+        return cogUserObj;
       })
       .catch(err => {
         console.log('err', err);
@@ -389,6 +401,9 @@ function validate(values){
       errors.username = 'Usernames can not have Spaces'
     }
   }
+  // code: "UsernameExistsException"
+  // message: "User already exists"
+  // name: "UsernameExistsException"
   if(!values.email){ errors.email = 'Please Enter A Valid Email Address' }
   if(values.email){
     // email regex

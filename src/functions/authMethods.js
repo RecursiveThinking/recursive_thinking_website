@@ -49,10 +49,10 @@ export const confirmSignUp = async ({username, code}) => {
 export const resendSignUp = (username) => {
   Auth.resendSignUp(username)
     .then(() => {
-      console.log('code resent successfully');
+      console.log('@ resent SignUp Code - successfully');
     })
-    .catch(event => {
-    console.log(event);
+    .catch(error => {
+      console.log('@ resent SignUp Code - err: ', error);
   });
 }
 
@@ -111,20 +111,37 @@ export const signIn = async ({username, password}) => {
   }
 }
 
-export const signInGetUserInfo = async () => {
-    return Auth.currentUserInfo()
-      .then((user) => {
-        console.log('current user info ', user);
-        // do something with signed in user credential
-        return user;
-      })
-      .catch(err => {
-        console.log("There was a problem getting user info ", err);
-        return err;
-      });
-};
+// export const signInGetUserInfo = async () => {
+//     return Auth.currentUserInfo()
+//       .then((user) => {
+//         console.log('current user info ', user);
+//         // do something with signed in user credential
+//         return user;
+//       })
+//       .catch(err => {
+//         console.log("There was a problem getting user info ", err);
+//         return err;
+//       });
+// };
+// You can call Auth.currentAuthenticatedUser() to get the current authenticated user object.
 
-export const getSignInUserSession = async () => {
+//  This method can be used to check if a user is logged in when the page is loaded. It will throw an error if there is no user logged in. This method should be called after the Auth module is configured or the user is logged in. To ensure that you can listen on the auth events configured or signIn. Learn how to listen on auth events.
+
+export const getCurrentAuthenticatedUser = async () => {
+  return Auth.currentAuthenticatedUser({
+    bypassCache: false
+  })
+    .then(user => {
+      console.log('user @ auth getCurAuthUser: ', user)
+      return user;
+    })
+    .catch(err => console.log('err @ auth getCurAuthUser: ', err))
+}
+
+// Retrieve Current User Session
+// Auth.currentSession() returns a CognitoUserSession object which contains JWT accessToken, idToken, and refreshToken.
+
+export const getCurrentUserFromSession = async () => {
   //Get current user's from  session
   return Auth.currentSession()
       .then((user) => {
@@ -137,13 +154,3 @@ export const getSignInUserSession = async () => {
       .catch(err => console.log("There was a problem getting session ", err));
 };
 
-export const getCurrentAuthenticatedUser = async () => {
-  return Auth.currentAuthenticatedUser({
-    bypassCache: false
-  })
-    .then(user => {
-      console.log('user @ auth getCurAuthUser: ', user)
-      return user;
-    })
-    .catch(err => console.log('err @ auth getCurAuthUser: ', err))
-}
