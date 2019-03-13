@@ -50,12 +50,12 @@ export class User extends CogUser{
 }
 
 export class Lesson {
-  constructor(title, description, currentUserId){
+  constructor(title, description, lessonTaughtBy, currentUserId){
     this.Id = v1();
     this.title = title;
     this.date = empty;
     this.description = description;
-    this.lessonTaughtBy = [];
+    this.lessonTaughtBy = lessonTaughtBy;
     this.lessonAttendees = [];
     this.lessonVotes = [];
     this.scheduled = false;
@@ -94,12 +94,14 @@ export class InterviewQuestionAnswer {
 }
 
 export class SkillOrCategory {
-  constructor(name, currentUserId){
-    this.Id = v1();
-    this.name = name;
-    this._usersWithSkill = Array.from(currentUserId);
+  constructor(tag, currentUserId){
+    console.log('tag @ model: ', tag, currentUserId)
+    // this.Id = v1();
+    this.id = v1();
+    this.name = tag.name;
+    this._usersWithSkill = Array.of(currentUserId.userId);
     this._interviewquestionsWithCategory = [];
-    this._createdByUser = currentUserId;
+    this._createdByUser = currentUserId.userId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
   }
