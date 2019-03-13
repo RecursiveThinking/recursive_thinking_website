@@ -16,7 +16,7 @@ const categoryList = ({categories, allSkillsArr, lookupTableAllSkills}) => {
   if(!categories.length){
     // console.log('there is nothing to render')
     return (
-      ""
+      null
       // <h1>There are no Categories</h1>
       // <hr className="mt10" />
     )
@@ -33,7 +33,7 @@ const categoryList = ({categories, allSkillsArr, lookupTableAllSkills}) => {
       
     let allCats = catsToRenderArr.map(catItem => {
       return (
-        <li key={catItem.Id} className="tag fs16 ls10 fcGrey424041 ta-cent">
+        <li key={catItem.id} className="tag fs16 ls10 fcGrey424041 ta-cent">
           {/* <CategoryListItem catItem={catItem} /> */}
           {catItem.name}
         </li>
