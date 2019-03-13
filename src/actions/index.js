@@ -22,7 +22,7 @@ import {
   
   GET_CURRENT_USER_BY_ID,
   
-  ERRORS_CURRENT_USER_BY_ID,
+  ERRORS_GET_CURRENT_USER_BY_ID,
   
   FETCH_LESSONS, CREATE_LESSON,
   GET_LESSON_BY_ID, EDIT_LESSON_BY_ID, DELETE_LESSON_BY_ID, SELECTED_LESSON,
@@ -79,11 +79,31 @@ const OPTIONS = {
   }
 }
 
+export const isPayloadEmpty = (obj) => {
+  for(var key in obj) {
+    if(obj.hasOwnProperty(key))
+        return false;
+  }
+  return true;
+}
+
+export const checkThenReturnAppropriateResBody = (responseBody) => {
+  // this will check to see if the response body is an empty object ( because .get Dynamo method returns an empty object in the body id nothing is found.  Yeah, its stupid... )
+  if(isPayloadEmpty(responseBody)){
+    // the response body is an empty object, overwrite the body to evaluate falsy
+    responseBody = null;
+  } else { 
+    // the response body is a valid object, so return it of the key from the DB (Item)
+    responseBody = responseBody.Item
+  }
+  return responseBody
+}
+
 const initFetchCall = async (urlPath, optionConfig, doesEndPointNeedAuth) => {
 
   if(doesEndPointNeedAuth === true){
     const userInfo = await getCurrentUserFromSession();
-    console.log('userInfo @ fetch call: ', userInfo)
+    console.log('userFromSession: ', userInfo)
     const token = userInfo.idToken.jwtToken;
     console.log('token @ auth in initFetch', token)
     optionConfig.headers['Authorization'] = token;
@@ -133,30 +153,6 @@ const errorNotExistPayload = {
   body: null
 }
 
-// export const getAuthUserById = (currentUserId) => {
-//   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${currentUserId}`
-//   let funcOptions = {...OPTIONS}
-//   funcOptions.method = HTTP_METHODS.get
-//   // console.log('currentUser', currentUser)
-//   return async dispatch => {
-//     // const currentUser = await getCurrentAuthenticatedUser()
-//     await initFetchCall(URL, funcOptions, true)
-//       .then(res => {
-//         const { status } = res;
-//         console.log('res @ getCurrentUserByID: ', res)
-//         if(status === 200){
-//           dispatch({ type: GET_CURRENT_USER_BY_ID, payload: res })
-//           dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
-//         }
-//         return res;
-//       })
-//       .catch(err => {
-//         dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: err })
-//         return err;
-//       })
-//   }
-// }
-
 export const getCurrentUserById = () => {
   
   return async (dispatch) => {
@@ -177,6 +173,10 @@ export const getCurrentUserById = () => {
 }
 
 export const currentUser = (userId) => {
+  console.log('lessonId @ getLessonById action: ', userId)
+  // userId = "9sdd7120-8ed0-11e8-b260-d5e4455e16bd"
+  // \/ GOOD /\ BAD
+  // userId = "9cdd7120-8ed0-11e8-b260-d5e4455e16bd"
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${userId}`
   let funcOptions = {...OPTIONS}
   funcOptions.method = HTTP_METHODS.get
@@ -187,14 +187,29 @@ export const currentUser = (userId) => {
       .then(res => {
         const { status } = res;
         console.log('res @ getUserByID: ', res)
+        // console.log('typeof res: ', typeof res)
         if(status === 200){
+          res.body = checkThenReturnAppropriateResBody(res.body)
+          console.log('res.body: ', res.body) 
           dispatch({ type: GET_CURRENT_USER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
+          dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
         }
         return res;
+        // if(typeof res === 'object'){
+        //   // console.log('Then the request was invalid and did not get to the lambda');
+        //   let customError = {
+        //     body: {
+        //       status: 502,
+        //       message: 'The request was invalid, and failed at the Lambda. Typically, this is because the request payload was ill-formed. Check your Cloudwatch Logs for the full error.'
+        //     }
+        //   }
+        //   dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: customError })
+        //   return res;
+        // }
+        // return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_CURRENT_USER_BY_ID, payload: err })
+        dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: err })
         return err;
       })
   }
@@ -263,6 +278,10 @@ export const createUser = (newUser) => {
 }
 
 export const getUserById = (userId) => {
+  console.log('lessonId @ getLessonById action: ', userId)
+  // userId = "9sdd7120-8ed0-11e8-b260-d5e4455e16bd"
+  // \/ GOOD /\ BAD
+  // userId = "9cdd7120-8ed0-11e8-b260-d5e4455e16bd"
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${userId}`
   let funcOptions = {...OPTIONS}
   funcOptions.method = HTTP_METHODS.get
@@ -274,6 +293,8 @@ export const getUserById = (userId) => {
         const { status } = res;
         console.log('res @ getUserByID: ', res)
         if(status === 200){
+          res.body = checkThenReturnAppropriateResBody(res.body)
+          console.log('res.body: ', res.body)          
           dispatch({ type: GET_USER_BY_ID, payload: res })
           dispatch({ type: ERRORS_GET_USER_BY_ID, payload: errorNotExistPayload })
         }
@@ -287,11 +308,7 @@ export const getUserById = (userId) => {
 }
 
 export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
-  const {
-    user: {
-      updatedAt
-    }
-  } = DM
+  const { user: { updatedAt } } = DM
   console.log('userObj @ editUserById action: ', edittedUser);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${edittedUser.userId}`;
   let funcOptions = {...OPTIONS};
@@ -322,7 +339,7 @@ export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
 }
 
 export const deleteUserById = (userId) => {
-  
+  // this should just make users inactive.
 }
 
 export const fetchLessons = () => {
@@ -383,7 +400,10 @@ export const createLesson = (newLesson) => {
 }
 
 export const getLessonById = (lessonId) => {
-  console.log('lessonId @ getLessonById action: ', lessonId)
+  // console.log('lessonId @ getLessonById action: ', lessonId)
+  // lessonId = "8d57c8d7-8e19-11e8-924a-a70245d1837e"
+  // \/ GOOD /\ BAD
+  // lessonId = "8c57c8d7-8e19-11e8-924a-a70245d1837e"
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}/${lessonId}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.get
@@ -394,6 +414,7 @@ export const getLessonById = (lessonId) => {
         const { status } = res;
         console.log('res @ getLessonByID: ', res)
         if(status === 200){
+          res.body = checkThenReturnAppropriateResBody(res.body)
           dispatch({ type: GET_LESSON_BY_ID, payload: res })
           dispatch({ type: ERRORS_GET_LESSON_BY_ID, payload: errorNotExistPayload })
         }
@@ -415,14 +436,14 @@ export const editLessonById = (edittedLesson, thenPushPath, catchPushPath) => {
   funcOptions.method = HTTP_METHODS.put;
   edittedLesson[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.lesson, edittedLesson))
-  console.log(funcOptions.body)
+  // console.log(funcOptions.body)
   
   return async (dispatch) => {
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          console.log('res @ edit', res)
+          console.log('res @ editLesson if: ', res)
           dispatch({ type: EDIT_LESSON_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: errorNotExistPayload })
         }
@@ -538,16 +559,22 @@ export const createInterviewQuestion = (newInterviewQuestion) => {
 
 export const getInterviewQuestionById = (interviewquestionId) => {
   console.log('intQuestId @ getInterviewQuestionById action: ', interviewquestionId);
+  // interviewquestionId = "870e9780-8e21-11e8-ad35-63bc93d0cda5"
+  // \/ GOOD /\ BAD
+  // interviewquestionId = "870d9780-8e21-11e8-ad35-63bc93d0cda5"
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${interviewquestionId}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.get
   
   return async (dispatch) => {
-    const response = await initFetchCall(URL, funcOptions, true)
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('response @ getIntQuestionByID: ', response)
+        console.log('response @ getIntQuestionByID: ', res)
         if(status === 200){
+          // then got a response
+          res.body = checkThenReturnAppropriateResBody(res.body)
+          console.log('res.body: ', res.body)
           dispatch({ type: GET_INTERVIEW_QUESTION_BY_ID, payload: res })
           dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
@@ -562,21 +589,21 @@ export const getInterviewQuestionById = (interviewquestionId) => {
 
 export const editInterviewQuestionById = (edittedInterviewQuestion) => {
   const { intQuestion: { updatedAt }} = DM;
-  console.log('InterviewQuestionId @ editInterviewQuestionById action: ', edittedInterviewQuestion.Id)
-  console.log('formVals @ editInterviewQuestionById action: ', edittedInterviewQuestion)
+  // console.log('InterviewQuestionId @ editInterviewQuestionById action: ', edittedInterviewQuestion.Id)
+  console.log('editIntQuestionObj @ editInterviewQuestionById action: ', edittedInterviewQuestion)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${edittedInterviewQuestion.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
   edittedInterviewQuestion[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestion, edittedInterviewQuestion))
-  console.log(funcOptions.body)
+  // console.log(funcOptions.body)
   
   return async (dispatch) => {
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          console.log('res @ edit', res)
+          console.log('res @ editIntQuestion if: ', res)
           dispatch({ type: EDIT_INTERVIEW_QUESTION_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
@@ -718,6 +745,7 @@ export const editInterviewQuestionAnswerById = (edittedInterviewQuestionAnswer, 
       .then(res => {
         const { status } = res;
         if(status === 200){
+          dispatch(editInterviewQuestionById(intQuestId));
           dispatch({ type: EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
         }
@@ -731,7 +759,7 @@ export const editInterviewQuestionAnswerById = (edittedInterviewQuestionAnswer, 
   }
 }
 
-export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId, intQuestId) => {
+export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId, intQuestObj) => {
   console.log('intQuestAnswerId @ deleteIQAById action: ', interviewquestionanswerId);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${interviewquestionanswerId}`;
   let funcOptions = {...OPTIONS};
@@ -751,7 +779,7 @@ export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId, int
       })
       .catch(err => {
         dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
-        history.push(`${ROUTES_REACT.interviewquestions}/${intQuestId}/answers/delete/${interviewquestionanswerId}`)                
+        history.push(`${ROUTES_REACT.interviewquestions}/${intQuestObj.Id}/answers/delete/${interviewquestionanswerId}`)                
         return err
       })
     // console.log('response @ deleteIntQuestionAnswerById: ', response);
