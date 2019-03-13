@@ -13,22 +13,22 @@ const initialState = {
 }
 
 export default function(state = initialState, action){
-  // console.log('action', action, action.payload)
+  console.log('@ intQuestion reducer: ', 'state: ', state, 'action: ', action)
   switch(action.type){
     case FETCH_INTERVIEW_QUESTIONS:
       console.log('at fetch allIntQuestion case reducer', action.payload.body)
       return {
+        ...state,
         allInterviewQuestions: action.payload.body,
-        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id'),
-        interviewQuestionById: null
+        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id')
       }
     case CREATE_INTERVIEW_QUESTION:
       console.log('at create intQuestion case reducer', action.payload.body)
       let createState = [ ...state.allInterviewQuestions, action.payload.body]
       return {
+        ...state,
         allInterviewQuestions: createState,
-        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(createState, 'Id'),
-        interviewQuestionById: null
+        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(createState, 'Id')
       }
     case GET_INTERVIEW_QUESTION_BY_ID:
       console.log('at get intQuestion case reducer', action.payload.body)
@@ -50,9 +50,9 @@ export default function(state = initialState, action){
       console.log('at delete intQuestion case reducer', action.payload.body)
       let deleteState = [ ...state.allInterviewQuestions ].filter(intQuestion => intQuestion.Id !== action.payload.body.Id)
       return {
+        ...state,
         allInterviewQuestions: deleteState,
-        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(deleteState, 'Id'),
-        interviewQuestionById: null
+        lookupTableInterviewQuestions: UtilityMethods.createObjectFromArrayByProp(deleteState, 'Id')
       }
     default:
       return state  

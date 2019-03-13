@@ -16,7 +16,7 @@ export default function( state = initialState, action ){
     console.log('at fetch allSkills case reducer', action.payload.body)
     return {
       allSkills: action.payload.body,
-      lookupTableAllSkills: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'Id'),
+      lookupTableAllSkills: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'id'),
       skillById: null
     }
     default:
