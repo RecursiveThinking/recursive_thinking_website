@@ -3,11 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { getLessonById, editLessonById } from '../../../actions'
+import { FETCHING } from '../../../actions/action_types'
+
+import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+import DefaultMessage from '../../../components/defaults/defaultMessage/defaultMessage';
+import { DEFAULT_MESSAGE_LESSON_BY_ID_ITEM_NOT_FOUND } from '../../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
 
 import { FORM_HEADING_LESSON_EDIT } from '../../../components/forms/formContent/formContent'
 import LessonForm from '../../../components/forms/form_lesson'
 
-import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
 
 class LessonEdit extends Component {
   
@@ -28,18 +32,22 @@ class LessonEdit extends Component {
   render () {
     console.log('props @ LessonEdit', this.props);
     console.log('params', this.props.match.params.id)
+    if(this.props.lessonById === FETCHING){
+      return (
+        <section style={{padding: '1.5rem 1.5rem'}}>
+          <DefaultLoadingPage />
+        </section>
+      )
+    }
     if(!this.props.lessonById){
       return (
-        <>
-          {/* <ContentPageTitleBar 
-            content={TITLE_BAR_LESSONS_EDIT}
-          /> */}
-          <section style={{padding: '1.5rem 1.5rem'}}>
-            <DefaultLoadingPage />
-          </section>
-        </>
+        <section>
+          <DefaultMessage
+            content={DEFAULT_MESSAGE_LESSON_BY_ID_ITEM_NOT_FOUND}
+          />
+        </section>
       )
-    } 
+    }
     // else {
     const {
       title,
@@ -63,7 +71,7 @@ class LessonEdit extends Component {
 }
 
 function mapStateToProps(state, ownProps){
-  console.log('MSTP @ Lesson: ', state, ownProps)
+  // console.log('MSTP @ Lesson: ', state, ownProps)
   return { 
     lessonById: state.lessons.lessonById
     // lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
