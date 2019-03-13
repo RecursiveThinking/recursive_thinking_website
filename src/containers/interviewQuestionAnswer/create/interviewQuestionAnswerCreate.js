@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer, editInterviewQuestionById } from '../../../actions/index'
+import { getCurrentUserById, getInterviewQuestionById, createInterviewQuestionAnswer, editInterviewQuestionById, fetchSkills } from '../../../actions/index'
+import { FETCHING } from '../../../actions/action_types'
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage'
 
@@ -15,6 +16,7 @@ class InterviewQuestionCreate extends Component {
   componentDidMount(){
     this.props.getCurrentUserById();
     this.props.getInterviewQuestionById(this.props.match.params.id);
+    this.props.fetchSkills();
   }
   
   onSubmit = (formValues) => {
@@ -35,7 +37,7 @@ class InterviewQuestionCreate extends Component {
   render(){
     console.log('props @ IntQuestAnswerCreate: ', this.props);
     console.log('params: ', this.props.match.params.id);
-    if(!this.props.interviewQuestionById){
+    if(this.props.interviewQuestionById === FETCHING || this.props.allSkills === FETCHING ){
       return (
         <>
           <section style={{padding: '1.5rem 1.5rem'}}>
@@ -76,7 +78,7 @@ function mapStateToProps(state, ownProps){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getCurrentUserById, getInterviewQuestionById, editInterviewQuestionById, createInterviewQuestionAnswer }, dispatch)
+  return bindActionCreators({ getCurrentUserById, getInterviewQuestionById, editInterviewQuestionById, createInterviewQuestionAnswer, fetchSkills }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(InterviewQuestionCreate)

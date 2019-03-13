@@ -24,10 +24,6 @@ class InterviewQuestionAnswerDelete extends Component {
     }
   }
   
-  // handleToggleModalIQADelete(){
-  //   this.setState({showModalIQAnswerDelete: !this.state.showModalIQAnswerDelete})
-  // }
-  
   componentDidMount(){
     this.props.getInterviewQuestionById(this.props.match.params.questId)    
     this.props.getInterviewQuestionAnswerById(this.props.match.params.ansId)
@@ -35,13 +31,13 @@ class InterviewQuestionAnswerDelete extends Component {
   }
   
   deleteInterviewQuestionAnswer = (intQuest, intQuestAns) => {
-    const {
-      intQuestion: {
-        answersToQuestion
-      }
-    } = DM;
+    const { intQuestion: { answersToQuestion } } = DM;
     let intQuestToUpdate = { ...intQuest }
-    intQuestToUpdate[answersToQuestion] = intQuestToUpdate[answersToQuestion].filter(intQuestAnsArrItem => intQuestAnsArrItem.Id !== intQuestAns.Id)
+    // console.log('intQuest Ans Arr Before: ', temp)
+    intQuestToUpdate[answersToQuestion] = intQuestToUpdate[answersToQuestion].filter(intQuestAnsArrItem =>
+      intQuestAnsArrItem !== intQuestAns.Id
+    )
+    // console.log('intQuest Ans Arr After: ', temp)    
     this.props.editInterviewQuestionById(intQuestToUpdate);
     this.props.deleteInterviewQuestionAnswerById(intQuestAns, intQuest.Id);
   }

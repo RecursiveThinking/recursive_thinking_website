@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById } from '../../../actions';
+import { getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById, fetchSkills } from '../../../actions';
+import { FETCHING } from '../../../actions/action_types'
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
 
@@ -11,8 +12,9 @@ import InterviewQuestionAnswerForm from '../../../components/forms/form_intervie
 
 class InterviewQuestionAnswerEdit extends Component {
   componentDidMount(){
-    this.props.getInterviewQuestionById(this.props.match.params.questId)
-    this.props.getInterviewQuestionAnswerById(this.props.match.params.ansId)
+    this.props.getInterviewQuestionById(this.props.match.params.questId);
+    this.props.getInterviewQuestionAnswerById(this.props.match.params.ansId);
+    this.props.fetchSkills();
   }
   
   onSubmit = (formValues) => {
@@ -30,7 +32,7 @@ class InterviewQuestionAnswerEdit extends Component {
     console.log('props @ IntQuestAnsEdit: ', this.props);
     console.log('params', this.props.match.params.id);
     // if no intQuestionAnswer
-    if(!this.props.interviewQuestionAnswerById || !this.props.interviewQuestionById){
+    if(this.props.interviewQuestionAnswerById === FETCHING || this.props.interviewQuestionById === FETCHING || this.props.fetchSkills === FETCHING){
       return (
         // <div>Loading!!!</div>
         <section style={{padding: '1.5rem 1.5rem'}}>
@@ -73,7 +75,7 @@ function mapStateToProps(state, ownProps){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById }, dispatch)
+  return bindActionCreators({ getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById,  }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(InterviewQuestionAnswerEdit)
