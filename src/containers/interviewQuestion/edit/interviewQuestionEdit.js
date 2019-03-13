@@ -3,8 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { getInterviewQuestionById, editInterviewQuestionById } from '../../../actions'
+import { FETCHING } from '../../../actions/action_types';
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+import DefaultMessage from '../../../components/defaults/defaultMessage/defaultMessage'
+import { DEFAULT_MESSAGE_INTERVIEW_QUESTION_BY_ID_ITEM_NOT_FOUND } from '../../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
 
 import { FORM_HEADING_INTERVIEWQUESTION_EDIT } from '../../../components/forms/formContent/formContent';
 import InterviewQuestionForm from '../../../components/forms/form_interviewquestion';
@@ -26,12 +29,20 @@ class InterviewQuestionEdit extends Component {
   render(){
     console.log('props @ IntQuestEdit: ', this.props);
     console.log('params', this.props.match.params.id);
-    // if no intQuestion
-    if(!this.props.interviewQuestionById){
+    // if no intQuestion      
+    if(this.props.interviewQuestionById === FETCHING){
       return (
-        // <div>Loading!</div>
         <section style={{padding: '1.5rem 1.5rem'}}>
           <DefaultLoadingPage />
+        </section>
+      )
+    }
+    if(!this.props.interviewQuestionById){
+      return (
+        <section style={{padding: '1.5rem 1.5rem'}}>
+          <DefaultMessage
+            content={DEFAULT_MESSAGE_INTERVIEW_QUESTION_BY_ID_ITEM_NOT_FOUND}
+          />
         </section>
       )
     }
@@ -57,8 +68,7 @@ class InterviewQuestionEdit extends Component {
 
 function mapStateToProps(state, ownProps){
   return {
-    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
-    // interviewQuestionById: state.interviewQuestions.interviewQuestionById
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById
   }
 }
 
