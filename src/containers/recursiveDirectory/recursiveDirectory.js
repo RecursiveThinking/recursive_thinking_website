@@ -26,7 +26,6 @@ class RecursiveDirectory extends Component {
   render(){
     const { 
       allUsers, 
-      allUsersAPIResponse, 
       currentUser 
     } = this.props
     
@@ -35,7 +34,7 @@ class RecursiveDirectory extends Component {
     // if allUsers comes back null (error),
     // allUsers = null;
     if(!allUsers){
-      LogServices.log(allUsersAPIResponse)
+      // LogServices.log(allUsersAPIResponse)
       //  render the error page
       return (
         <main className="content">
