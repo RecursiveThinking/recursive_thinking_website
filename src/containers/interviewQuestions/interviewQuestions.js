@@ -123,7 +123,9 @@ class InterviewQuestions extends Component {
       updatefilterIntQuest.push({
         [childId]: {
           filterType: parentKey,
+          // HERE
           Id: childId,
+          // id: childId,
           name: name,
         }
       })
@@ -169,7 +171,8 @@ class InterviewQuestions extends Component {
         let skillDropDown = props.allSkills.map((skillItem, index) => {
           return {
               index: index,
-              Id: skillItem.Id,
+              // Id: skillItem.Id,
+              Id: skillItem.id,
               name: skillItem.name,
               count: skillItem._interviewquestionsWithCategory.length,
               selected: false,
