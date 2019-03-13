@@ -6,6 +6,7 @@ import { FETCHING } from '../../actions/action_types'
 import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions/index'
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
+import DefaultErrorMessage from '../../components/defaults/errorMessage/errorMessage'
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
 import SecondaryLoadingPage from '../../components/defaults/loadingPage/secondaryLoadingPage';
 
@@ -17,6 +18,7 @@ import LessonMethods from '../../functions/lessonMethods'
 import OrderMethods from '../../functions/orderMethods'
 
 import DM from '../../standards/dictModel'
+import { generateErrorMessageContent } from '../../components/defaults/errorMessage/errorMessageContent/errorMessageContent';
 
 const { 
   user: { 
@@ -40,17 +42,26 @@ class Dash extends Component {
   }
   
   renderStatList = (profileStats, currentUser) => {
+    const { errors: { errorsCurrentUser } } = this.props;
     if(currentUser === FETCHING){
       return (
         <SecondaryLoadingPage />
       )
     }
-    else if(!currentUser.userId){
+    else if(errorsCurrentUser){
       return (
-        <SecondaryLoadingPage />
-        // <DashboardProfileStatList />
+        <DefaultErrorMessage 
+          heading='Current User By Id'
+          errorObj={errorsCurrentUser}
+        />
       )
     }
+    // else if(!currentUser.userId){
+    //   return (
+    //     <SecondaryLoadingPage />
+    //     // <DashboardProfileStatList />
+    //   )
+    // }
     return (
       <DashboardProfileStatList userStats={profileStats} />
     )
@@ -150,14 +161,15 @@ class Dash extends Component {
     
   }
 }
-
+// errorsCurrentUser, errorsGetAllUsers, errorsGetAllLessons
 function mapStateToProps(state){
   return {
     currentUser: state.auth.currentUser,
     allUsers: state.users.allUsers,
     lookupTableAllUsers: state.users.lookupTableAllUsers,
     allLessons: state.lessons.allLessons,
-    scheduledLessons: state.lessons.scheduledLessons
+    scheduledLessons: state.lessons.scheduledLessons,
+    errors: state.errors
   }
 }
 
