@@ -9,33 +9,33 @@ export const FORM_HEADING_USER_EDIT = {
 }
 
 export const FORM_HEADING_LESSON_CREATE = {
-  heading: 'Create A Lesson',
+  heading: 'Lesson Information',
   buttonText: 'Submit Lesson'
 }
 
 export const FORM_HEADING_LESSON_EDIT = {
-  heading: 'Edit Lesson: ',
+  heading: 'Edit Information for Lesson: ',
   buttonText: 'Submit Editted Lesson'
 }
 
 export const FORM_HEADING_INTERVIEWQUESTION_CREATE = {
-  heading: 'Create An Interview Question',
+  heading: 'Interview Question Information',
   buttonText: 'Submit Interview Question'
 }
 
 export const FORM_HEADING_INTERVIEWQUESTION_EDIT = {
-  heading: 'Edit Interview Question: ',
+  heading: 'Edit Information for Interview Question: ',
   buttonText: 'Submit Editted Interview Question'
 }
 
 export const FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE = {
-  heading: 'Create An Answer To: ',
+  heading: 'Answer Information for: ',
   labelAnswer: 'Submit Your Answer',
   buttonText: 'Submit Answer'
 }
 
 export const FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT = {
-  heading: 'Edit Answer To: ',
+  heading: 'Edit Information for: ',
   labelAnswer: 'Edit Your Answer',
   buttonText: 'Submit Editted Answer'
 }
