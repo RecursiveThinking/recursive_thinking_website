@@ -45,5 +45,11 @@ Amplify.configure({
       
       // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
       // authenticationFlowType: 'USER_PASSWORD_AUTH'
+  },
+  Storage: {
+    AWSS3: {
+      bucket: s3Creds.s3BucketName,
+      region: s3Creds.region
+    }
   }
 });
