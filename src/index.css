@@ -302,7 +302,8 @@ fieldset {
 }
 
 .grid.grid--1of4>.grid-cell>fieldset:nth-of-type(1),
-.modal>.modalCard>fieldset {
+.modal>.modalCard>fieldset,
+.grid>.grid-cell>.noMargin {
   margin-top: 0;
 }
 
@@ -394,10 +395,12 @@ fieldset>.grid>.grid-cell>.fc-form-input:first-of-type {
 
 .fc-field>.fc-field-row>input,
 .fc-field>.fc-field-row-full>input,
+.fc-field>.fc-field-row-full>.react-tags,
 .fc-field>.fc-field-row-full>textarea,
 .fc-form-input>.fc-form-input-with-button>input,
 .fc-form-input-full>input,
 .fc-form-input-col>input,
+.fc-form-input-col>.react-tags,
 fieldset>.grid>.grid-cell>textarea,
 fieldset>.grid>.grid-cell>div>textarea {
   display: flex;
@@ -412,7 +415,21 @@ fieldset>.grid>.grid-cell>div>textarea {
   font-weight: 500;
 }
 
-.input-invalid>input {
+.fc-form-input-col>.react-tags {
+  padding: .5rem .5rem;
+  margin-top: 2rem;
+}
+
+/* .fc-field>.fc-field-row-full>.react-tags {
+  
+} */
+
+.fc-form-input-col>.react-tags>.react-tags__search {
+  
+}
+
+.fc-field>.fc-field-row-full.input-invalid>input,
+.fc-field>.fc-field-row-full.input-invalid>textarea {
   box-shadow: 0 0 .125rem .025rem var(--warn);
   border: var(--input-brdr-thickness) solid var(--warn);
   outline: var(--input-brdr-thickness) solid var(--warn);
@@ -1097,35 +1114,6 @@ ul li {
   /* white-space: pre-line; */
 }
 
-
-.fc-Tags {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.tag {
-  padding: 1rem 2rem;
-  /* border: 1px solid #00b371; */
-  border: 1px solid var(--green-00b371);
-  border-radius: 2.5rem;
-  margin: .5rem;
-}
-
-/* .tag:hover {
-  border: 1px solid var(--green-00b371);
-  background-color: var(--green-00b371);
-  color: var(--white-ff);
-} */
-
-.fc-Tags li:first-child {
-  margin-left: 0;
-}
-
-
 .fc-informationButtonDisplay {
   display: flex;
   flex-direction: row;
@@ -1396,6 +1384,19 @@ footer {
   margin-right: 0;
 }
 
+.errorTxtRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.errorTxtRow > h5 {
+  margin-left: 1rem;
+}
+
+.errorTxtRow > h5 > h5 {
+  margin-left: 1rem;
+}
+
 /* ============================================ */
 /*                   Avatars                    */
 /* ============================================ */
@@ -1477,6 +1478,354 @@ footer {
 .loadingScreenAnimationSecondary {
   /* width: 100%; */
   height: 100%;
+}
+
+/* ============================================ */
+/*          react tags - categories             */
+/* ============================================ */
+
+.react-tags {
+  position: relative;
+  /* padding: .5rem 0 0 .5rem; */
+  border: 1px solid #D1D1D1;
+  border-radius: 1px;
+
+  /* shared font styles */
+  font-size: 1rem;
+  line-height: 1.2;
+
+  /* clicking anywhere will focus the input */
+  cursor: text;
+  
+  width: 100%;
+}
+
+.react-tags.is-focused {
+  border-color: #B1B1B1;
+}
+
+.react-tags__selected {
+  display: inline;
+}
+
+.react-tags__selected-tag {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0 .5rem .5rem 0;
+  padding: .5rem .75rem;
+  border: 1px solid #D1D1D1;
+  border-radius: 2px;
+  background: #F1F1F1;
+
+  /* match the font styles */
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.react-tags__selected-tag:after {
+  content: '\2715';
+  color: #AAA;
+  margin-left: 8px;
+}
+
+.react-tags__selected-tag:hover,
+.react-tags__selected-tag:focus {
+  border-color: #B1B1B1;
+}
+
+.react-tags__search {
+  display: inline-block;
+
+  /* match tag layout */
+  padding: 1.5rem 1rem;
+  /* margin-bottom: 6px; */
+
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+
+  .react-tags__search {
+    /* this will become the offsetParent for suggestions */
+    position: relative;
+  }
+
+}
+
+.react-tags__search input {
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
+
+  /* remove styles and layout from this element */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+
+  /* match the font styles */
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.react-tags__search input::-ms-clear {
+  display: none;
+}
+
+.react-tags__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+
+  .react-tags__suggestions {
+    width: 240px;
+  }
+
+}
+
+.react-tags__suggestions ul {
+  margin: 4px -1px;
+  padding: 0;
+  list-style: none;
+  background: white;
+  border: 1px solid #D1D1D1;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.react-tags__suggestions li {
+  border-bottom: 1px solid #ddd;
+  padding: 6px 8px;
+}
+
+.react-tags__suggestions li mark {
+  text-decoration: underline;
+  background: none;
+  font-weight: 600;
+}
+
+.react-tags__suggestions li:hover {
+  cursor: pointer;
+  background: #eee;
+}
+
+.react-tags__suggestions li.is-active {
+  background: #b7cfe0;
+}
+
+.react-tags__suggestions li.is-disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+/* ============================================ */
+/*            react tags - lessons              */
+/* ============================================ */
+
+.react-tags {
+  position: relative;
+  /* padding: .5rem 0 0 .5rem; */
+  border: 1px solid #D1D1D1;
+  border-radius: 1px;
+
+  /* shared font styles */
+  font-size: 1rem;
+  line-height: 1.2;
+
+  /* clicking anywhere will focus the input */
+  cursor: text;
+}
+
+.react-tags.is-focused {
+  border-color: #B1B1B1;
+}
+
+.react-tags-lesson__selected {
+  display: inline;
+}
+
+.react-tags-lesson__selected-tag {
+  display: inline-block;
+  box-sizing: border-box;
+  /* margin: 0 .5rem .5rem 0; */
+  margin: .5rem;
+  /* padding: .5rem .75rem; */
+  padding: 1rem 2rem;  
+  border: var(--brdr-profile-thickness) solid var(--green-00b371);
+  border-radius: 2rem;
+  background: var(--green-00b371);
+  color: var(--white-ff);
+  /* match the font styles */
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.react-tags-lesson__selected-tag > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  height: 80%;
+}
+
+.react-tags-lesson__selected-tag:after {
+  content: '\2715';
+  /* color: #AAA; */
+  color: var(--white);
+  margin-left: 8px;
+}
+
+.react-tags-lesson__selected-tag:hover,
+.react-tags-lesson__selected-tag:focus {
+  border-color: #B1B1B1;
+}
+
+.react-tags-lesson__search {
+  display: inline-block;
+
+  /* match tag layout */
+  padding: 1.5rem 1rem;
+  /* margin-bottom: 6px; */
+
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+
+  .react-tags-lesson__search {
+    /* this will become the offsetParent for suggestions */
+    position: relative;
+  }
+
+}
+
+.react-tags-lesson__search input {
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
+
+  /* remove styles and layout from this element */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+
+  /* match the font styles */
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.react-tags-lesson__search input::-ms-clear {
+  display: none;
+}
+
+.react-tags-lesson__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+
+  .react-tags-lesson__suggestions {
+    width: 240px;
+  }
+
+}
+
+.react-tags-lesson__suggestions ul {
+  margin: 4px -1px;
+  padding: 0;
+  list-style: none;
+  background: white;
+  border: 1px solid #D1D1D1;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.react-tags-lesson__suggestions li {
+  border-bottom: 1px solid #ddd;
+  padding: 6px 8px;
+}
+
+.react-tags-lesson__suggestions li mark {
+  text-decoration: underline;
+  background: none;
+  font-weight: 600;
+}
+
+.react-tags-lesson__suggestions li:hover {
+  cursor: pointer;
+  background: #eee;
+}
+
+.react-tags-lesson__suggestions li.is-active {
+  background: #b7cfe0;
+}
+
+.react-tags-lesson__suggestions li.is-disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+/* ============================================ */
+/*                  skillTags                   */
+/* ============================================ */
+
+.fc-Tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  padding: 1rem 2rem;
+  border: 1px solid var(--green-00b371);
+  border-radius: 2.5rem;
+  margin: .5rem;
+}
+
+.react-tags > .react-tags__selected:focus,
+.react-tags > .react-tags__selected > .react-tags__selected-tag:focus {
+  outline-color: transparent;
+}
+
+/* .tag:hover {
+  border: 1px solid var(--green-00b371);
+  background-color: var(--green-00b371);
+  color: var(--white-ff);
+} */
+
+.react-tags > .react-tags__selected > .react-tags__selected-tag {
+  /* padding: 1rem 2rem; */
+  padding: 1rem 4rem 1rem 2rem;
+  border: 1px solid var(--green-00b371);
+  background-color: transparent;
+  border-radius: 2.5rem;
+  margin: .5rem;
+  /* margin-right: 1.2rem; */
+  font-size: 1.6rem;
+  color: var(--grey-424041);
+}
+
+.react-tags__selected-tag:after {
+  /* close */
+  position: absolute;
+  font-size: 1.2rem;
+  margin: .25rem 1.2rem 0rem;
+  color: var(--grey-64);
+}
+
+.fc-Tags li:first-child {
+  margin-left: 0;
 }
 
 /* ============================================ */
