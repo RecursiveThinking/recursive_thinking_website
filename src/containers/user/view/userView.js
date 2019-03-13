@@ -29,10 +29,10 @@ class UserView extends Component{
   }
 
   componentDidMount(){
+    this.props.getUserById(this.props.match.params.id);
     this.props.fetchUsers();
     this.props.fetchSkills();
     this.props.getCurrentUserById();
-    this.props.getUserById(this.props.match.params.id);
     this.handleWindowResize()
     // window.addEventListener('load', this.handleWindowResize)
     window.addEventListener('resize', this.handleWindowResize);
@@ -69,17 +69,9 @@ class UserView extends Component{
     this.props.getUserById(updateUserObj.userId);
   }
   
-  // else if(this.props.userById.userId !== this.props.match.params.id){
-  //   return (
-  //     <div className="content"
-  //       ref={ node => { if(node !== null){this.contentTarget = node}}}
-  //     >
-  //       <section style={{padding: '1.5rem 1.5rem'}}>
-  //         <DefaultLoadingPage />
-  //       </section>
-  //     </div>
-  //   )
-  // }
+  renderContent = () => {
+    
+  }
   
   render(){
     const {
@@ -117,7 +109,7 @@ class UserView extends Component{
         </div>
       )
     }
-    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING' || this.props.userById === 'FETCHING'){
+    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING' || this.props.userById.userId !== this.props.match.params.id){
       return (
         <div className="content"
           ref={ node => { if(node !== null){this.contentTarget = node}}}
@@ -367,6 +359,7 @@ class UserView extends Component{
               // ref={ node => { if(node !== null){this.contentTarget = node}}}
             >
               {/* need this height */}
+              {/* this.renderContent(); */}
               <div className="content"
                 ref={ node => { if(node !== null){this.contentTarget = node}}}
               >              

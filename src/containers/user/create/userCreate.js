@@ -13,7 +13,7 @@ import DefaultLoadingPage from '../../../components/defaults/loadingPage/loading
 import ContentPageTitleBar from '../../../components/common/contentPage/contentPageTitleBar';
 import { TITLE_BAR_USER_CREATE } from '../../../components/common/contentPage/contentPageTitleBarInfo'
 
-import { createAssetFoldersForUser } from '../../../functions/s3Methods'
+import { createAssetFoldersForUser, createAvatarFolder } from '../../../functions/s3Methods'
 
 import { ROUTES_REACT } from '../../../standards/routes'
 
@@ -112,6 +112,7 @@ class CreateUser extends Component {
     console.log('newCogUser: ', newCogUser)
     let newUser = new User(newCogUser)
     console.log('newUser: ', newUser)
+    // createAvatarFolder();
     createAssetFoldersForUser(newUser.userId, 'avatar');
     createAssetFoldersForUser(newUser.userId, 'resume')
     this.props.createUser(newUser)

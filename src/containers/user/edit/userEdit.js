@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchSkills, editUserById, getCurrentUserById, getUserById } from '../../../actions';
+import { getCurrentUserById, fetchSkills, getUserById, editUserById } from '../../../actions';
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
 import ContentPageWithTitleBar from '../../../components/common/contentPage/contentPageWithTitleBar';
 import { FORM_HEADING_USER_EDIT } from '../../../components/forms/formContent/formContent';
 import UserForm from '../../../components/forms/form_user';
+
+import FormMethods from '../../../functions/formMethods'
 
 import { ROUTES_REACT } from '../../../standards/routes';
 import DM from '../../../standards/dictModel';
@@ -65,55 +67,60 @@ class UserEdit extends Component {
   
   render(){
     console.log('props @ userEdit', this.props);
-    if(!this.props.currentUser){
+    if(this.props.currentUser === 'FETCHING' || this.props.allSkills === 'FETCHING'){
       return (
         <section style={{padding: '1.5rem 1.5rem'}}>
           <DefaultLoadingPage />
         </section>
       )
+    } else if (this.props.currentUser !== 'FETCHING' && this.props.allSkills !== 'FETCHING') {
+      const {
+        currentUser
+      } = this.props
+      const {
+        user
+      } = DM
+      // console.log('user: ', user.name)
+      console.log('currentUser: ', currentUser)
+      console.log('currentUser Name: ', currentUser[user.name])
+      const processedCurrentUser = FormMethods.removeSpaceFromDatabaseEntries(currentUser);
+      console.log('processedCurrentUser: ', processedCurrentUser)
+      const initValues = {
+        name: processedCurrentUser[user.name],
+        city: processedCurrentUser[user.city],
+        state: processedCurrentUser[user.state],
+        title: processedCurrentUser[user.title],
+        employer: processedCurrentUser[user.employer],
+        linkGithub: processedCurrentUser[user.linkGithub],
+        linkCodepen: processedCurrentUser[user.linkCodepen],
+        linkLinkedIn: processedCurrentUser[user.linkLinkedIn],
+        linkPortfolioWebsite: processedCurrentUser[user.linkPortfolioWebsite],
+        bio: processedCurrentUser[user.bio],
+        experience: processedCurrentUser[user.experience],
+        skillsProfessional: processedCurrentUser[user.skillsProfessional],
+        skillsSoftware: processedCurrentUser[user.skillsSoftware],
+        skillsLanguages: processedCurrentUser[user.skillsLanguages]
+      }
+      console.log('initialValues: ', initValues)
+      return (
+        <>
+          <ContentPageWithTitleBar 
+            {...this.props} 
+            formContent={
+              <UserForm 
+                {...this.props}
+                onSubmit={this.onSubmit}
+                content={FORM_HEADING_USER_EDIT}
+                initialValues={initValues}
+                currentUser={processedCurrentUser}
+                userById={this.props.userById}
+                allSkills={this.props.allSkills}
+              />}
+            titleBarContent={this.props.titleBarContent}
+          />
+        </>
+      )
     }
-    const {
-      currentUser
-    } = this.props
-    const {
-      user
-    } = DM
-    // console.log('user: ', user.name)
-    console.log('currentUser: ', currentUser)
-    console.log('currentUser Name: ', currentUser[user.name])
-    const initValues = {
-      name: currentUser[user.name],
-      city: currentUser[user.city],
-      state: currentUser[user.state],
-      title: currentUser[user.title],
-      employer: currentUser[user.employer],
-      linkGithub: currentUser[user.linkGithub],
-      linkCodepen: currentUser[user.linkCodepen],
-      linkLinkedIn: currentUser[user.linkLinkedIn],
-      linkPortfolioWebsite: currentUser[user.linkPortfolioWebsite],
-      bio: currentUser[user.bio],
-      experience: currentUser[user.experience],
-      skillsProfessional: currentUser[user.skillsProfessional],
-      skillsSoftware: currentUser[user.skillsSoftware],
-      skillsLanguages: currentUser[user.skillsLanguages]
-    }
-    return (
-      <>
-        <ContentPageWithTitleBar 
-          {...this.props} 
-          formContent={
-            <UserForm 
-              {...this.props}
-              onSubmit={this.onSubmit}
-              content={FORM_HEADING_USER_EDIT}
-              initialValues={initValues}
-              currentUser={this.props.currentUser}
-              userById={this.props.userById}
-            />}
-          titleBarContent={this.props.titleBarContent}
-        />
-      </>
-    )
   }
 }
 
@@ -122,12 +129,12 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: state.auth.currentUser,
     userById: state.users.userById,
-    allSkills: state.skills
+    allSkills: state.skills.allSkills
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchSkills, getCurrentUserById, editUserById, getUserById }, dispatch)
+  return bindActionCreators({ getCurrentUserById, fetchSkills, editUserById, getUserById }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(UserEdit)
