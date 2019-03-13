@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import ValidationMethods from '../../functions/validationMethods'
+import ReactTags from 'react-tag-autocomplete';
+
+import ValidationMethods from '../../functions/validationMethods';
 
 class InterviewQuestionForm extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      allCategoriesForQuestion: [],
+      filterCategories: this.props.allSkills
+    }
+  }
+  
   onSubmit = (formValues) =>{
     console.log('formVals @ Interview Questions', formValues)
     this.props.onSubmit(formValues);
@@ -60,17 +70,53 @@ class InterviewQuestionForm extends Component {
     )
   }
   
+  renderReactTag(field){
+    const { meta: { touched, error }} = field;
+    const errorInput = `fc-field-row-full fc--disp-flex fc--fdir-row mt10 ${touched && error ? 'input-invalid' : ''}`;
+    console.log('field: ', field)
+    return(
+      <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
+        <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
+          <label htmlFor={field.name} className={field.labelStyle}>{field.label}</label>
+        </div>
+        <div className={errorInput}>
+          <ReactTags
+            {...field.input}
+            placeholder={field.placeholder}
+            tags={field.tags}
+            suggestions={field.suggestions}
+            // allowNew={field.allowNew}
+            // autoresize={field.autoresize}
+            autofocus={field.autofocus}
+            minQueryLength={field.minQueryLength}
+            maxSuggestionsLength={field.maxSuggestionsLength}
+            delimiters={field.delimiters}
+            delimiterChars={field.delimiterChars}
+            handleAddition={field.handleAddition}
+            handleDelete={field.handleDelete}
+            classNames={field.classNames}
+          />
+        </div>
+        <div className="error fc-field-row-full fc--disp-flex fc--fdir-row width100P">
+          <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
+            { touched ? error : "" }
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
   renderHeadingContent(){
     const {
       content
     } = this.props;
     if(!this.props.intQuestion){
       return (
-        <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5>
+        <h5 className="fw600 ls12 fcGrey424041">{content.heading}</h5>
       )
     } else {
       return (
-        <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}{this.props.intQuestion['title']}</h5>
+        <h5 className="fw600 ls12 fcGrey424041">{content.heading}{this.props.intQuestion['title']}</h5>
       )
     }
   }
@@ -83,12 +129,17 @@ class InterviewQuestionForm extends Component {
     return (
       <section style={{padding: '1.5rem 1.5rem'}}>
         <article className="card">
-          <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <div className="grid grid--full">
+            <div className="grid-cell">
+            
+          <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
             {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
             {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
-            {this.renderHeadingContent()}
+            <legend>
+              {this.renderHeadingContent()}
+            </legend>
             <hr className="modalHR mt10" />
-            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <div className="fc-fieldset">
                 <Field 
                   label="Title:"
@@ -109,7 +160,27 @@ class InterviewQuestionForm extends Component {
                   textAreaStyle="width100P"
                   cols={"30"}
                   rows={"10"}
-                  />
+                />
+                <Field
+                  label="Tag Categories:"
+                  name="interviewQuestionTags"
+                  component={this.renderReactTag}
+                  labelStyle="width100P"
+                  inputStyle="width100P"
+                  // classNames={userClassNames}
+                  placeholder='Select Category Tags for this Interview Question'
+                  tags={this.state.allCategoriesForQuestion}
+                  suggestions={this.state.filterCategories}
+                  // allowNew={false}
+                  autoresize={true}
+                  // autofocus={true}
+                  minQueryLength={2}
+                  maxSuggestionsLength={4}
+                  delimiters={[9, 13]}
+                  delimiterChars={[',']}
+                  handleAddition={this.handleAddition}
+                  handleDelete={this.handleDelete}
+                />
                 {/* <Field
                   label="Tag profession, skills and languages:"
                   name="interviewQuestionTags"
@@ -122,14 +193,16 @@ class InterviewQuestionForm extends Component {
               </div>
               <hr className="modalHR mt80" />
             <div className="ta-cent">
-              {
+              {/* {
                 this.props.anyTouched && !this.props.invalid &&
+              } */}
                 
                 <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
-              }
             </div>
-            </form>
           </fieldset>
+          </div>
+          </div>
+          </form>
         </article>
       </section>
     )
@@ -145,20 +218,20 @@ function validate(values){
   const errors = {};
   
   // interview question modal
-  if(!values.interviewQuestionTitle){ errors.interviewQuestionTitle = 'Please enter a Valid Title for the Interview Question' }
+  if(!values.interviewQuestionTitle){ errors.interviewQuestionTitle = 'Interview Question Titles can not be Empty' };
   if(values.interviewQuestionTitle){
     const titleCharLimit = 4;
     if(!ValidationMethods.isWordOverCharLimit(values.interviewQuestionTitle, titleCharLimit)){
-      errors.interviewQuestionTitle = `Please enter a Title with at Least ${titleCharLimit} Characters`
+      errors.interviewQuestionTitle = `Interview Question Titles must contain at Least ${titleCharLimit} Characters`
     }
-  }
-  if(!values.interviewQuestionDetails){ errors.interviewQuestionDetails = 'Please enter a Valid Description for the Interview Question' }
+  };
+  if(!values.interviewQuestionDetails){ errors.interviewQuestionDetails = 'Interview Question Descriptions can not be Empty' };
   if(values.interviewQuestionDetails){
     const detailsCharLimit = 10;
     if(!ValidationMethods.isWordOverCharLimit(values.interviewQuestionDetails, detailsCharLimit)){
-      errors.interviewQuestionDetails = `Question Details should have at Least ${detailsCharLimit} Characters`
+      errors.interviewQuestionDetails = `Interview Question Descriptions must contain at Least ${detailsCharLimit} Characters`
     }
-  }
+  };
   // if(!values.interviewQuestionTags){ errors.interviewQuestionTags = 'Please enter a Minimum of One Tag' }
   
   return errors

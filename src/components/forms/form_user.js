@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-// import Taggle from 'taggle'
+import ReactTags from 'react-tag-autocomplete'
 
+import { SkillOrCategory } from '../../models/models';
+
+import Modal from '../../components/common/modal/modal';
 import DM from '../../standards/dictModel'
-
-// console.log('Taggle', Taggle)
 
 const {
   user: {
@@ -27,16 +28,198 @@ const {
   }
 } = DM
 
+const SKILLS_PROFESSIONAL = 'skillsProfessional'
+const SKILLS_SOFTWARE = 'skillsSoftware'
+const SKILLS_LANGUAGES = 'skillsLanguage'
 
 class UserForm extends Component {
   constructor(props){
     super(props);
     this.state = {
       skillsProfessional: this.props.currentUser.skillsProfessional,
+      addToSkillsProfessional: [],
       skillsSoftware: this.props.currentUser.skillsSoftware,
+      addToSkillsSoftware: [],
       skillsLanguages: this.props.currentUser.skillsLanguages,
-      allSkills: this.props.allSkills
+      addToSkillsLanguages: [],
+      allSkills: this.props.allSkills,
+      filterSkills: this.props.allSkills,
+      addToDatabase: [],
+      
+      showModalUserAvatar: false
     }
+  }
+  
+  handleToggleModalUserAvatar = () => {
+    this.setState({ showModalUserAvatar: !this.state.showModalUserAvatar })
+  }
+  
+  // handleDelete (i) {
+  //   const tags = this.state.tags.slice(0)
+  //   tags.splice(i, 1)
+  //   this.setState({ tags })
+  // }
+  
+  // handleAddition (tag) {
+  //   const tags = [].concat(this.state.tags, tag)
+  //   this.setState({ tags })
+  // }
+  
+  updateFilteredArray = () => {
+    console.log('this.state: ', this.state)
+    const {
+      skillsProfessional,
+      addToSkillsProfessional,
+      skillsSoftware,
+      addToSkillsSoftware,
+      skillsLanguages,
+      addToSkillsLanguages,
+      allSkills
+    } = this.state;
+    
+    let allSkillsForUser = [];
+    if(skillsProfessional.length){
+      skillsProfessional.forEach(item => allSkillsForUser.push(item.id))
+    }
+    if(addToSkillsProfessional.length){
+      addToSkillsProfessional.forEach(item => allSkillsForUser.push(item.id))
+    }
+    if(skillsSoftware.length){
+      skillsSoftware.forEach(item => allSkillsForUser.push(item.id))
+    }
+    if(addToSkillsSoftware.length){
+      addToSkillsSoftware.forEach(item => allSkillsForUser.push(item.id))
+    }
+    if(skillsLanguages.length){
+      skillsLanguages.forEach(item => allSkillsForUser.push(item.id))
+    }
+    if(addToSkillsLanguages.length){
+      addToSkillsLanguages.forEach(item => allSkillsForUser.push(item.id))
+    }
+    console.log('allSkillsForUser', allSkillsForUser)
+    // allSkillsForUser [ "skill.id as string" ]
+    let updatedFilterSkills = [ ...allSkills ];
+    // filterSkills = [ skillObj{ id: "string" }]
+    // filter the updated array so it only contains objects whose ids are NOT in the allSkillsForUser
+    updatedFilterSkills = updatedFilterSkills.filter(item => !allSkillsForUser.includes(item.id))
+    console.log('updatedFilterSkills: ', updatedFilterSkills)
+    this.setState({filterSkills: updatedFilterSkills})
+    // return null;
+  }
+  
+  handleAllSkillAdditions = (tag, string) => {
+    if(string === SKILLS_PROFESSIONAL){
+      if(!tag.id){
+        // this is a new tag
+        tag = new SkillOrCategory(tag, this.props.currentUser.userId);
+        const addToDatabase = [].concat(this.state.addToDatabase, tag)
+        const addToSkillsProfessional = [].concat(this.state.addToSkillsProfessional, tag)
+        // const filterSkills = do something to filter
+        this.setState({ addToDatabase, addToSkillsProfessional }, () => this.updateFilteredArray())
+        // this.setState({ addToDatabase, addToSkillsProfessional }, this.updateFilteredArray)
+        // this.updateFilteredArray();
+      } else {
+        // this tag exists
+        tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
+        const addToSkillsProfessional = [].concat(this.state.addToSkillsProfessional, tag)
+        this.setState({ addToSkillsProfessional }, () => this.updateFilteredArray())
+        // this.setState({ addToSkillsProfessional }, this.updateFilteredArray)
+        // this.updateFilteredArray();
+      }
+      
+    }
+    else if(string === SKILLS_SOFTWARE){
+      if(!tag.id){
+        // this is a new tag
+        tag = new SkillOrCategory(tag, this.props.currentUser.userId);
+        const addToDatabase = [].concat(this.state.addToDatabase, tag)
+        const addToSkillsSoftware = [].concat(this.state.addToSkillsSoftware, tag)
+        this.setState({ addToDatabase, addToSkillsSoftware }, () => this.updateFilteredArray())
+      } else {
+        // this tag exists
+        tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
+        const addToSkillsSoftware = [].concat(this.state.addToSkillsSoftware, tag)
+        this.setState({ addToSkillsSoftware }, () => this.updateFilteredArray())
+      }
+    }
+    else if(string === SKILLS_LANGUAGES){
+      if(!tag.id){
+        // this is a new tag
+        tag = new SkillOrCategory(tag, this.props.currentUser.userId);
+        const addToDatabase = [].concat(this.state.addToDatabase, tag)
+        const addToSkillsLanguages = [].concat(this.state.addToSkillsLanguages, tag)
+        // const filterSkills = do something to filter
+        this.setState({ addToDatabase, addToSkillsLanguages }, () => this.updateFilteredArray())
+      } else {
+        // this tag exists
+        tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
+        const addToSkillsLanguages = [].concat(this.state.addToSkillsLanguages, tag)
+        this.setState({ addToSkillsLanguages }, () => this.updateFilteredArray())
+      }
+    }
+  }
+  
+  handleAllSkillDeletions = (i, string) => {
+    const {
+      addToDatabase,
+      addToSkillsProfessional,
+      addToSkillsSoftware,
+      addToSkillsLanguages
+    } = this.state;
+    
+    // i is index in the array it is in for display
+    if(string === SKILLS_PROFESSIONAL){
+      // if in addToDatabase, remove
+      const updatedAddToDatabase = addToDatabase.filter(item => item.id !== addToSkillsProfessional[i].id)
+      this.setState({ addToDatabase: updatedAddToDatabase}, () => this.updateFilteredArray())
+      // remove from addToSkillProfessional
+      const removeSkillProfessional = this.state.addToSkillsProfessional.slice(0)
+      removeSkillProfessional.splice(i, 1)
+      this.setState({ addToSkillsProfessional: removeSkillProfessional }, () => this.updateFilteredArray())
+    }
+    else if(string === SKILLS_SOFTWARE){
+      // if in addToDatabase, remove
+      const updatedAddToDatabase = addToDatabase.filter(item => item.id !== addToSkillsSoftware[i].id)
+      this.setState({ addToDatabase: updatedAddToDatabase}, () => this.updateFilteredArray())
+      // remove from addToSkillSoftware
+      const removeSkillSoftware = addToSkillsSoftware.slice(0)
+      removeSkillSoftware.splice(i, 1)
+      this.setState({ addToSkillsSoftware: removeSkillSoftware }, () => this.updateFilteredArray())
+    }
+    else if(string === SKILLS_LANGUAGES){
+      // if in addToDatabase, remove
+      const updatedAddToDatabase = addToDatabase.filter(item => item.id !== addToSkillsLanguages[i].id)
+      this.setState({ addToDatabase: updatedAddToDatabase}, () => this.updateFilteredArray())
+      // remove from addToSkillLanguages
+      const removeSkillLanguages = addToSkillsLanguages.slice(0)
+      removeSkillLanguages.splice(i, 1)
+      this.setState({ addToSkillsLanguages: removeSkillLanguages }, () => this.updateFilteredArray())
+    }
+  }
+  
+  handleAdditionSkillsProfessional = (tag) => {
+    this.handleAllSkillAdditions(tag, SKILLS_PROFESSIONAL);
+    
+  }
+  
+  handleDeleteSkillsProfessional = (i) => {
+    this.handleAllSkillDeletions(i, SKILLS_PROFESSIONAL);
+  }
+  
+  handleAdditionSkillsSoftware = (tag) => {
+    this.handleAllSkillAdditions(tag, SKILLS_SOFTWARE);    
+  }
+  
+  handleDeleteSkillsSoftware = (i) => {
+    this.handleAllSkillDeletions(i, SKILLS_SOFTWARE);
+  }
+  
+  handleAdditionSkillsLanguages = (tag) => {
+    this.handleAllSkillAdditions(tag, SKILLS_LANGUAGES);    
+  }
+  
+  handleDeleteSkillsLanguages = (i) => {
+    this.handleAllSkillDeletions(i, SKILLS_LANGUAGES);
   }
   
   onSubmit = formValues => {
@@ -104,7 +287,18 @@ class UserForm extends Component {
         labelText,
         inputName,
         placeholder,
-        arrayToPlace
+        tags,
+        suggestions,
+        inputAttributes,
+        allowNew,
+        autoresize,
+        autofocus,
+        minQueryLength,
+        maxSuggestionsLength,
+        delimiters,
+        delimiterChars,
+        handleAddition,
+        handleDelete,
       } = skillCategory
       // console.log('skillCategory: ', skillCategory)
       return (
@@ -118,11 +312,27 @@ class UserForm extends Component {
               <div className="grid grid--1of2">
                 <div className="grid-cell">
                   <div className="fc-form-input-col">
-                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">{labelText}}</label>
-                    <input id={id} className="mt20" type="search" name={inputName} placeholder={placeholder}/>
+                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">{labelText}</label>
+                    {/* <input id={id} className="mt20" type="search" name={inputName} placeholder={placeholder}/> */}
+                    <ReactTags
+                      tags={tags}
+                      suggestions={suggestions}
+                      placeholder={placeholder}
+                      inputAttributes={inputAttributes}
+                      allowNew={allowNew}
+                      autoresize={autoresize}
+                      // autofocus={autofocus}
+                      minQueryLength={minQueryLength}
+                      maxSuggestionsLength={maxSuggestionsLength}
+                      delimiters={delimiters}
+                      delimiterChars={delimiterChars}
+                      handleAddition={handleAddition}
+                      handleDelete={handleDelete}
+                    />
+                    {/* <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre> */}
                   </div>
                 </div>
-                <div className="grid-cell">{arrayToPlace}</div>
+                <div className="grid-cell">{}</div>
               </div>
             </div>
           </div>
@@ -136,12 +346,16 @@ class UserForm extends Component {
   render(){
     const {
       content,
-      currentUser
+      currentUser,
     } = this.props;
     
-    let allProfessionalSkills = currentUser[skillsProfessional];
-    let allSoftwareSkills = currentUser[skillsSoftware];
-    let allLanguageSkills = currentUser[skillsLanguages];
+    const {
+      skillsProfessional,
+      skillsToAddProfessional,
+      skillsSoftware,
+      skillsLanguages,
+      filterSkills
+    } = this.state
     
     const skillArray = [
       {
@@ -149,43 +363,56 @@ class UserForm extends Component {
         headingText: 'Professional Skills',
         labelText: 'Search For Professional Skills',
         inputName: 'skillsProfessional',
-        placeholder: 'Find Professional Skill',
-        arrayToPlace: allProfessionalSkills
+        placeholder: 'Select a Professional Skill',
+        tags: this.state.addToSkillsProfessional,
+        suggestions: filterSkills,
+        allowNew: true,
+        autoresize: true,
+        autofocus: false,
+        minQueryLength: 2,
+        maxSuggestionsLength: 4,
+        delimiters: [9, 13],
+        delimiterChars: [','],
+        handleAddition: this.handleAdditionSkillsProfessional,
+        handleDelete: this.handleDeleteSkillsProfessional
       },
       {
         id: 'skillsSoftware',
         headingText: 'Software Skills',
         labelText: 'Search For Software Skills',
         inputName: 'skillsSoftware',
-        placeholder: 'Find Software Skill',
-        arrayToPlace: allSoftwareSkills
+        placeholder: 'Select a Software Skill',
+        tags: this.state.addToSkillsSoftware,
+        suggestions: filterSkills,
+        allowNew: true,
+        autoresize: true,
+        autofocus: false,
+        minQueryLength: 2,
+        maxSuggestionsLength: 4,
+        delimiters: [9, 13],
+        delimiterChars: [','],
+        handleAddition: this.handleAdditionSkillsSoftware,
+        handleDelete: this.handleDeleteSkillsSoftware
       },
       {
         id: 'skillsLanguages',
         headingText: 'Language Skills',
         labelText: 'Search For Language Skills',
         inputName: 'skillsLanguages',
-        placeholder: 'Find Language Skill',
-        arrayToPlace: allLanguageSkills
+        placeholder: 'Select a Language Skill',
+        tags: this.state.addToSkillsLanguages,
+        suggestions: filterSkills,
+        allowNew: true,
+        autoresize: true,
+        autofocus: false,
+        minQueryLength: 2,
+        maxSuggestionsLength: 4,
+        delimiters: [9, 13],
+        delimiterChars: [','],
+        handleAddition: this.handleAdditionSkillsLanguages,
+        handleDelete: this.handleDeleteSkillsLanguages
       }
     ]
-    
-    // new Taggle('skillsProfessional')
-    
-    // console.log('skillsProfessionalTaggle: ', skillsProfessional)
-    
-    // var skillsSoftwareTaggle = new Taggle(skillArray[1].id, {
-      
-    // })
-    
-    // var skillsLanguagesTaggle = new Taggle(skillArray[2].id, {
-      
-    // })
-    
-    // function getArrayOfSkills(type){
-    //   let array = []
-    //   return array;
-    // }
     
     // function getNoSkillMessage(skillType){
     //   let titleString = ''
@@ -223,7 +450,9 @@ class UserForm extends Component {
     
     const AVATAR_PATH_FINAL = `${S3_PATH}${S3_BUCKET}${CURR_USER_ID}${AVATAR_FOLDER}${USER_AVATAR}`
     
-    console.log('this.props: ', this.props, 'this.state: ', this.state)
+    console.log('===============================')
+    console.log('@ formUser this.props: ', this.props, 'this.state: ', this.state)
+    console.log('right before return in form_user')
     
     return(
       <section style={this.props.sectionStyle}>
@@ -236,8 +465,18 @@ class UserForm extends Component {
                   <img className="avatarL" name="avatar" src={AVATAR_PATH_FINAL} alt=""/>
                   <div className="caption">
                     <label id="profile-picture">
-                      <span className="fs20 fw500 ls12">Add Profile Picture</span>
+                      <span 
+                        onClick={() => this.handleToggleModalUserAvatar()}
+                        className="fs20 fw500 ls12"
+                      >Add Profile Picture</span>
                       {/* <input id="file" type="file" style={{visibility: 'hidden'}}/> */}
+                      {
+                        this.state.showModalUserAvatar &&
+                        
+                        <Modal 
+                          onCloseRequest={() => this.handleToggleModalUserAvatar()}
+                        />
+                      }
                     </label>
                   </div>
                 </div>
@@ -245,7 +484,7 @@ class UserForm extends Component {
               <div className="grid-cell">  
                 <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
                   <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">Basic Information</h5>
+                    <h5 className="fw600 ls12 fcGrey424041">Basic Information</h5>
                   </legend>
                   <hr className="mt10" />
                   <div className="fc-fieldset">
@@ -285,7 +524,7 @@ class UserForm extends Component {
               <div className="grid-cell">
                 <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
                   <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">Professional Status</h5>
+                    <h5 className="fw600 ls12 fcGrey424041">Professional Status</h5>
                   </legend>
                   <hr className="mt10" />
                   <div className="fc-fieldset">
@@ -316,7 +555,7 @@ class UserForm extends Component {
               <div className="grid-cell">
                 <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
                   <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">Links</h5>
+                    <h5 className="fw600 ls12 fcGrey424041">Links</h5>
                   </legend>
                   <hr className="mt10" />
                   <div className="fc-fieldset">
@@ -382,7 +621,7 @@ class UserForm extends Component {
               <div className="grid-cell">
                 <fieldset>
                   <legend>
-                    <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
+                    <h5 className="fw600 ls12 fcGrey424041">About</h5>
                   </legend>
                   <hr className="mt10" />
                   <div className="grid grid--1of2 mt30">
@@ -414,17 +653,15 @@ class UserForm extends Component {
                 </fieldset>
               </div>
             </div>
-            <div id="skillsProfessional"></div>
-            {/* <div id={skillArray[1].id}></div> */}
-            {/* <div id={skillArray[2].id}></div> */}
+            {/* This function renders the three skill inputs */}
             {this.returnSkillSections(skillArray)}
             <hr className="modalHR mt80" />
               <div className="ta-cent">
-                {
+                {/* {
                   this.props.anyTouched && !this.props.invalid &&
+                } */}
                   
                   <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
-                }
               </div>
           </form>
         </article>

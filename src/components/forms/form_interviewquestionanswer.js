@@ -90,11 +90,11 @@ class InterviewQuestionAnswerForm extends Component {
               </div>
               <hr className="modalHR mt130" />
               <div className="ta-cent">
-                {
+                {/* {
                   this.props.anyTouched && !this.props.invalid &&
+                } */}
                   
                   <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
-                }
               </div>
             </form>
           {/* </fieldset> */}
