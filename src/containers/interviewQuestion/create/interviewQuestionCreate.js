@@ -8,6 +8,7 @@ import { FORM_HEADING_INTERVIEWQUESTION_CREATE } from '../../../components/forms
 import InterviewQuestionForm from '../../../components/forms/form_interviewquestion';
 
 import { InterviewQuestion } from '../../../models/models'
+import { FETCHING } from '../../../actions/action_types';
 
 class InterviewQuestionCreate extends Component {
   componentDidMount(){
@@ -15,27 +16,37 @@ class InterviewQuestionCreate extends Component {
     this.props.fetchSkills();
   }
   
-  onSubmit = (formValues) => {
+  onSubmit = (formValues, addToDatabase, addCategoriesToIntQuest, localCategoriesForIntQuest) => {
     // const createdByUserId = this.props.currentUser.attributes.sub;
     const createdByUserId = this.props.currentUser.userId;
-    console.log('formVals @ intQuestCreate Component: ', formValues, createdByUserId)
-    const newInterviewQuestion = new InterviewQuestion(formValues.interviewQuestionTitle, formValues.interviewQuestionDetails, [], createdByUserId)
+    console.log('formVals @ intQuestCreate Component: ', formValues, createdByUserId, 'addCategoriesToIntQuest: ', addCategoriesToIntQuest)
+    let intQuestCategoriesOfIds = [];
+    if(addCategoriesToIntQuest.length){
+      addCategoriesToIntQuest.forEach(categoryObj => intQuestCategoriesOfIds.push(categoryObj.id))
+    }
+    const newInterviewQuestion = new InterviewQuestion(formValues.interviewQuestionTitle, formValues.interviewQuestionDetails, intQuestCategoriesOfIds, createdByUserId)
     console.log('newIntQuest @ intQuestCreate: ', JSON.stringify(newInterviewQuestion))
-    this.props.createInterviewQuestion(newInterviewQuestion)
+    this.props.createInterviewQuestion(newInterviewQuestion);
   }
   
   render(){
     const {
-      allSkills
+      allSkills,
+      currentUser
     } = this.props;
+    if(allSkills !== FETCHING && currentUser !== FETCHING){
+      return (
+        <>
+          <InterviewQuestionForm
+            onSubmit={this.onSubmit}
+            content={FORM_HEADING_INTERVIEWQUESTION_CREATE}
+            allSkills={allSkills}
+          />
+        </>
+      )
+    }
     return (
-      <>
-        <InterviewQuestionForm
-          onSubmit={this.onSubmit}
-          content={FORM_HEADING_INTERVIEWQUESTION_CREATE}
-          allSkills={allSkills}
-        />
-      </>
+      <div>Nothing</div>
     )
   }
 }

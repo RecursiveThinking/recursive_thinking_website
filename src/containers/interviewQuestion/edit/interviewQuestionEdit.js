@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getInterviewQuestionById, editInterviewQuestionById } from '../../../actions'
+import { getCurrentUserById, getInterviewQuestionById, editInterviewQuestionById, fetchSkills, createSkill, editSkillById } from '../../../actions'
 import { FETCHING } from '../../../actions/action_types';
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
@@ -14,23 +14,39 @@ import InterviewQuestionForm from '../../../components/forms/form_interviewquest
 
 class InterviewQuestionEdit extends Component {
   componentDidMount(){
+    this.props.getCurrentUserById();
     this.props.getInterviewQuestionById(this.props.match.params.id)
+    this.props.fetchSkills();
   }
   
-  onSubmit = (formValues) => {
-    console.log('formVals @ InterviewQuestion Edit', formValues)
-    let newInterviewQuestion = this.props.interviewQuestionById;
-    newInterviewQuestion.title = formValues.interviewQuestionTitle;
-    newInterviewQuestion.description = formValues.interviewQuestionDetails;
-    console.log('newIntQuestion: ', JSON.stringify(newInterviewQuestion))
-    this.props.editInterviewQuestionById(newInterviewQuestion)
+  onSubmit = (formValues, addTheseCategoryObjsToDatabase, removeIntQuestIdFromTheseCategoryObjs, addTheseCategoryObjsToIntQuest, localCategoriesForIntQuest) => {
+    // console.log('formVals @ intQuestEdit Component: ', formValues, 'addTheseCategoryObjsToDatabase: ', addTheseCategoryObjsToDatabase, 'removeIntQuestIdFromTheseCategoryObjs: ', removeIntQuestIdFromTheseCategoryObjs, 'addTheseCategoryObjsToIntQuest: ', addTheseCategoryObjsToIntQuest, 'localCategoriesForIntQuest: ', localCategoriesForIntQuest)
+    let edittedInterviewQuestion = this.props.interviewQuestionById;
+    edittedInterviewQuestion.title = formValues.interviewQuestionTitle;
+    edittedInterviewQuestion.description = formValues.interviewQuestionDetails;
+    let updatedIntQuestionCategories = [];
+    localCategoriesForIntQuest.forEach(categoryObj => updatedIntQuestionCategories.push(categoryObj.id));
+    addTheseCategoryObjsToIntQuest.forEach(categoryObj => updatedIntQuestionCategories.push(categoryObj.id))
+    edittedInterviewQuestion.categories = updatedIntQuestionCategories
+    console.log('newIntQuestion: ', JSON.stringify(edittedInterviewQuestion))
+    if(addTheseCategoryObjsToDatabase){
+      // this means we have to create some new skills before we update/edit the intQuestion
+      if(addTheseCategoryObjsToDatabase.length){
+        addTheseCategoryObjsToDatabase.forEach(skillObj => {
+          this.props.createSkill(skillObj)
+        })
+      }
+    } 
+    // else {
+      this.props.editInterviewQuestionById(edittedInterviewQuestion, null, null, removeIntQuestIdFromTheseCategoryObjs, addTheseCategoryObjsToIntQuest)
+    // }
   }
   
   render(){
     console.log('props @ IntQuestEdit: ', this.props);
     console.log('params', this.props.match.params.id);
     // if no intQuestion      
-    if(this.props.interviewQuestionById === FETCHING){
+    if(this.props.interviewQuestionById === FETCHING || this.props.allSkills === FETCHING){
       return (
         <section style={{padding: '1.5rem 1.5rem'}}>
           <DefaultLoadingPage />
@@ -49,7 +65,15 @@ class InterviewQuestionEdit extends Component {
     const {
       title,
       description
-    } = this.props.interviewQuestionById
+    } = this.props.interviewQuestionById;
+    const {
+      allSkills
+    } = this.props;
+    
+    // fill in the categories Array with category objects, not just the Id
+    let dupIntQuestion = { ...this.props.interviewQuestionById };
+    dupIntQuestion.categories = dupIntQuestion.categories.map(categoryid => this.props.lookupTableAllSkills[categoryid])
+    // console.log('dupIntQuestion: ', dupIntQuestion)
     return(
       <>
         <InterviewQuestionForm 
@@ -59,7 +83,8 @@ class InterviewQuestionEdit extends Component {
             interviewQuestionTitle: title,
             interviewQuestionDetails: description
           }}
-          intQuestion={this.props.interviewQuestionById}
+          intQuestion={dupIntQuestion}
+          allSkills={allSkills}          
         />
       </>
     )
@@ -68,12 +93,15 @@ class InterviewQuestionEdit extends Component {
 
 function mapStateToProps(state, ownProps){
   return {
-    interviewQuestionById: state.interviewQuestions.interviewQuestionById
+    currentUser: state.auth.currentUser,    
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById,
+    allSkills: state.skills.allSkills,
+    lookupTableAllSkills: state.skills.lookupTableAllSkills
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getInterviewQuestionById, editInterviewQuestionById }, dispatch)
+  return bindActionCreators({ getCurrentUserById, getInterviewQuestionById, editInterviewQuestionById, fetchSkills, createSkill, editSkillById }, dispatch)
 }
 
 export default connect ( mapStateToProps, mapDispatchToProps )(InterviewQuestionEdit)
