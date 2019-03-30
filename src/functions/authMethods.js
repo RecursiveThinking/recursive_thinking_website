@@ -5,9 +5,13 @@
 */
 
 import { Auth } from 'aws-amplify';
+import { history } from '../index'
+import { SubmissionError } from 'redux-form'
+
+import { ROUTES_REACT } from '../standards/routes';
 
 export const signUp = async ({username, password, email, name}) => {
-  await Auth.signUp(
+  return Auth.signUp(
     {
       username,
       password,
@@ -34,7 +38,7 @@ export const confirmSignUp = async ({username, code}) => {
     code, 
     {
       // Optional. Force user confirmation irrespective of existing alias. By default set to True.
-      forceAliasCreation: true    
+      forceAliasCreation: false    
     })
     .then(data => {
       console.log('data @ confirmSignUp: ', data)
@@ -47,12 +51,20 @@ export const confirmSignUp = async ({username, code}) => {
 }
 
 export const resendSignUp = (username) => {
-  Auth.resendSignUp(username)
+  console.log('@ resentSignUp: ', username)
+  return Auth.resendSignUp(username)
     .then(() => {
-      console.log('@ resent SignUp Code - successfully');
+      console.log('@ resentSignUp - success');
+      // return data
+      return {
+        code: 'UserFoundSuccessfully',
+        name: 'UserFoundSuccessfully',
+        message: 'User was Found'
+      }
     })
-    .catch(error => {
-      console.log('@ resent SignUp Code - err: ', error);
+    .catch(err => {
+      console.log('@ resentSignUp - err: ', err);
+      return err
   });
 }
 
@@ -92,7 +104,7 @@ export const signIn = async ({username, password}) => {
     } else {
         // The user directly signs in
         // currentUser = utils.parseJwt(data.signInUserSession.idToken.jwtToken);
-        console.log(user);
+        console.log('@ authMethod signIn method third if: show cogUser: ', user);
         return user;
     } 
   } catch (err) {
@@ -151,6 +163,28 @@ export const getCurrentUserFromSession = async () => {
           return user;
           // do something with signed in user session
       })
-      .catch(err => console.log("There was a problem getting session ", err));
+      .catch(err => {
+        console.log("There was a problem getting user from session ", err)
+        signOut()
+          .then(data => {
+            console.log('So we will Log them out and return to Root')
+            history.push(ROUTES_REACT.root);
+            return data;
+          })
+          .catch(err => {
+            console.log('err: ', err)
+          })
+      });
 };
 
+export const signOut = async () => {
+  await Auth.signOut()
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  // By doing this, you are revoking all the auth tokens(id token, access token and refresh token)
+  // which means the user is signed out from all the devices
+  // Note: although the tokens are revoked, the AWS credentials will remain valid until they expire (which by default is 1 hour)
+  // Auth.signOut({ global: true })
+  //     .then(data => console.log(data))
+  //     .catch(err => console.log(err));
+}
