@@ -72,9 +72,10 @@ const dictModel = {
     updatedAt: 'updatedAt'
   },
   profileSkill: {
-    Id: 'Id', 
+    id: 'id', 
     name: 'name',
     _usersWithSkill: '_usersWithSkill',
+    _interviewquestionsWithCategory: '_interviewquestionsWithCategory',
     _createdByUser: '_createdByUser',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
