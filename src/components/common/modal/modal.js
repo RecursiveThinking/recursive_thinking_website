@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import UtilityMethods from '../../../functions/utilityMethods'
 
@@ -58,7 +59,7 @@ class Modal extends Component {
     console.log('props @ modal', this.props)
     // console.log('content', this.props.content.type)
     
-    return (
+    return ReactDOM.createPortal(
       <div className="modal">
         <section className="modalCard" ref={node => (this.modal = node)}>
           {/* {
@@ -72,7 +73,8 @@ class Modal extends Component {
           </div>
           {this.props.content}
         </section>
-      </div>
+      </div>,
+      document.querySelector('#modalTarget')
     )
   }
 }
