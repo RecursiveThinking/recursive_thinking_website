@@ -10,12 +10,15 @@ class ModelConverterForUpdate {
     // console.log('in model converter: ', dictModelObject, object)
     if(object.userId){
       genObj.Key.userId = object.userId
+    }
+    else if(object.id){
+      genObj.Key.id = object.id
     } else {
       genObj.Key.Id = object.Id
     }
     // make both EAN and EAV
     for(let key in object){
-      if(key === dictModelObject.Id || key === dictModelObject.userId){
+      if(key === dictModelObject.Id || key === dictModelObject.userId || key === dictModelObject.id){
         // don't do anything because you can't put the ID in with the names/values, its already the key
       } else { 
         let tempEAN = `#${key}`;
