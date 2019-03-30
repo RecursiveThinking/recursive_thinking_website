@@ -14,6 +14,7 @@ import RecursiveDirectoryListItemSm from '../../../components/recursiveDirectory
 import { ROUTES_REACT } from '../../../standards/routes';
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths';
 import DM from '../../../standards/dictModel';
+import { FETCHING } from '../../../actions/action_types';
 
 const {
   users_view
@@ -68,87 +69,163 @@ class UserView extends Component{
     this.props.editUserById(updateUserObj, `${users_view}/${updateUserObj.userId}`, `${users_view}/${updateUserObj.userId}`);
     this.props.getUserById(updateUserObj.userId);
   }
-  
-  renderContent = () => {
+      // this gets 
+  getDateForProfile = (date, profileItem) =>{
+    const DATE_SECS = {
+      solarYear: 31556952000,
+      avgMonth: 2629746000
+    }
+    const {
+      user: {
+        experience,
+        timeWithRT
+      }
+    } = DM
     
+    if(typeof date !== 'object'){
+    // if(date instanceof Date){
+      date = new Date(date);
+    }
+    let now = new Date();
+    let diff = now - date;
+    let years = 0;
+    let months = 0;
+    
+    while(diff > DATE_SECS['avgMonth']){
+      if(diff > DATE_SECS['solarYear']){
+        diff -= DATE_SECS['solarYear']
+        years += 1;
+      } else {
+        diff -= DATE_SECS['avgMonth'];
+        months += 1;
+      }
+    }
+    // console.log(profileItem, years, months)
+    if(profileItem === experience){
+      let experienceString = ''
+      let textString = years < 2 ? 'Year of Experience' : 'Years of Experience'
+      // years = 0
+      // months = 1
+      // diff = 1
+      if(years < 1 && diff > 0){
+        experienceString = '< 1'
+      }
+      else {
+        experienceString = years
+      }
+      return (
+        <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
+          <h2 className="fs48 fw300 ls30 fcGrey424041">{experienceString}</h2>
+          <h6 className="fs18 fw500 ls12 fcGrey81">{textString}</h6>
+        </div>
+      )
+    }
+    else if(profileItem === timeWithRT){
+      let yearString = years === 1 ? 'year' : 'years'
+      let monthString = months === 1 ? 'month' : 'months'
+      // more than a year
+      // years = 0
+      // months = 0
+      // diff = 1
+      if(years > 0){
+        return (
+          <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
+            <div className="fc--disp-flex fc--jCont-ce fc--aItem-ce width100P">
+              <h2 className="fc--disp-flex fs48 fw300 ls30 fcGrey424041">{years}</h2>
+              <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{yearString}</span>
+              <h2 className="fc--disp-flex fs48 fw300 ls30 fcGrey424041 pdl10">{months}</h2>
+              <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
+            </div>
+            <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
+          </div>
+        )
+      }
+      // more than one month but less than one year
+      else if(months > 1){
+        return (
+          <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
+            <div className="fc--disp-flex fc--jCont-ce fc--aItem-ce width100P">
+              <h2 className="fs48 fw300 ls30 fcGrey424041">{months}</h2>
+              <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
+            </div>
+            <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
+          </div>
+        )
+      }
+      // less than one month
+      else if(months === 0 && diff > 0){
+        let timeString = '< 1'
+        monthString = 'month'
+        return (
+          <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
+            <div className="fc--disp-flex fc--jCont-ce fc--aItem-ce width100P">
+              <h2 className="fs48 fw300 ls30 fcGrey424041">{timeString}</h2>
+              <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
+            </div>
+            <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
+          </div>
+        )
+      }
+    }
+    else {
+      return (
+        <div>
+          <p className="">
+            Something Went Wrong...
+          </p>
+        </div>
+      )
+    }
   }
   
-  render(){
+  // this makes the portfolio link
+  checkPortValue = (linkValue) =>{
     const {
-      contentHeight
-    } = this.state;
-    
-    // const currentUserId = this.props.match.params.id;
-    
+      userById
+    } = this.props;
+    const {
+      user: {
+        profileStatsViewsPortfolio
+      }
+    } = DM
+    // linkValue = ' '
+    if(linkValue === ' '){
+      return (
+        <div className="port fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce height25P">  
+          <h6 className="fs18 ls12 fcGreyc6">Portfolio</h6>
+        </div>
+      )
+    } else {
+      // this has a link
+      return (
+        <div className="port fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce height25P"> 
+          <a 
+            href={linkValue} 
+            target="/"
+            onClick={() => this.iterateUserProfileLinks(userById, profileStatsViewsPortfolio)}
+          >
+            <h6 className="fs18 ls 12">Portfolio</h6>
+          </a>
+        </div>
+      )
+    }
+  }
+      
+  renderContent = () => {
+    const {
+      userById,
+      allSkills,
+      lookupTableAllSkills
+    } = this.props
     const { 
       user: { 
               userId, avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, profileStatsVisits, profileStatsViewsGithub, profileStatsViewsCodePen, profileStatsViewsPortfolio, profileStatsViewsLinkedIn, profileStatsViewsResume, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
             }
     } = DM
     
-    // let selectedUser = '';
-    
-    // if(this.props.userById){
-    //   selectedUser = this.props.userById;
-    //   // update profileStatsVisits
-      
-    // } else {
-    //   console.log('No User')
-    // }
-    
-    // const selectedUser = currentUser
-    
-    if(contentHeight === 0){
-      return (
-        <div className="content"
-          ref={ node => { if(node !== null){this.contentTarget = node}}}
-        > 
-          <section style={{padding: '1.5rem 1.5rem'}}>
-            <DefaultLoadingPage />
-          </section>
-        </div>
-      )
-    }
-    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING' || this.props.userById.userId !== this.props.match.params.id){
-      return (
-        <div className="content"
-          ref={ node => { if(node !== null){this.contentTarget = node}}}
-        >
-          <section style={{padding: '1.5rem 1.5rem'}}>
-            <DefaultLoadingPage />
-          </section>
-        </div>
-      )
-    }
-    else {
-      
-    // if(this.props.userById){
-    console.log('userById: ', this.props.userById)
-    // selectedUser = this.props.userById;
-    const {
-      userById
-    } = this.props
-      // update profileStatsVisits
-      
-    // } else {
-      // console.log('No User')
-    // }
-    
-    // console.log('hit here', contentHeight)
-    // destructuring
-    const { allSkills, lookupTableAllSkills } = this.props;
-    
-    // end destructuring
-    
-    // test links
-    // userById[linkGithub] = 'https://github.com/sethborne'
-    // userById[linkCodepen] = 'https://codepen.io/sethborne/'
-    // userById[linkLinkedIn] = ' '
-    // userById[linkResume] = ' '
-    
     // set avatar link
     const imageSrc = `${PATH_FOR_IMAGES}${userById[avatar]}`
-    
+
     // this makes the link list (Github, Codepen, etc.)
     const icons = [ 
       ['Github', 'fa fa fa-git-square', userById[linkGithub], profileStatsViewsGithub],
@@ -156,6 +233,12 @@ class UserView extends Component{
       ['LinkedIn', 'fa fa-linkedin-square', userById[linkLinkedIn], profileStatsViewsLinkedIn],
       ['Resume', 'fa fa-id-card-o', userById[linkResume], profileStatsViewsResume]
     ]
+    
+    // test links
+    // userById[linkGithub] = 'https://github.com/sethborne'
+    // userById[linkCodepen] = 'https://codepen.io/sethborne/'
+    // userById[linkLinkedIn] = ' '
+    // userById[linkResume] = ' '
     
     const iconList = icons.map(iconItem => {
       let iconClass, headingClass, hrefLink = ''
@@ -196,174 +279,22 @@ class UserView extends Component{
     })
     // end link list
     
-    // this makes the portfolio link
-    function checkPortValue(linkValue){
-      // linkValue = ' '
-      if(linkValue === ' '){
-        return (
-          <div className="port fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce height25P">  
-            <h6 className="fs18 ls12 fcGreyc6">Portfolio</h6>
-          </div>
-        )
-      } else {
-        // this has a link
-        return (
-          <div className="port fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce height25P"> 
-            <a 
-              href={linkValue} 
-              target="/"
-              onClick={() => this.iterateUserProfileLinks(userById, profileStatsViewsPortfolio)}
-            >
-              <h6 className="fs18 ls 12">Portfolio</h6>
-            </a>
-          </div>
-        )
-      }
-    }
+
     // userById[linkPortfolioWebsite] = ' '
-    let portText = checkPortValue(userById[linkPortfolioWebsite])
+    let portText = this.checkPortValue(userById[linkPortfolioWebsite])
     // end portfolio link
     
-    // this gets 
-    function getDateForProfile(date, profileItem){
-      const DATE_SECS = {
-        solarYear: 31556952000,
-        avgMonth: 2629746000
-      }
-      
-      if(typeof date !== 'object'){
-      // if(date instanceof Date){
-        date = new Date(date);
-      }
-      let now = new Date();
-      let diff = now - date;
-      let years = 0;
-      let months = 0;
-      while(diff > DATE_SECS['avgMonth']){
-        if(diff > DATE_SECS['solarYear']){
-          diff -= DATE_SECS['solarYear']
-          years += 1;
-        } else {
-          diff -= DATE_SECS['avgMonth'];
-          months += 1;
-        }
-      }
-      // console.log(profileItem, years, months)
-      if(profileItem === experience){
-        let experienceString = ''
-        let textString = years < 2 ? 'Year of Experience' : 'Years of Experience'
-        // years = 0
-        // months = 1
-        // diff = 1
-        if(years < 1 && diff > 0){
-          experienceString = '< 1'
-        }
-        else {
-          experienceString = years
-        }
-        return (
-          <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
-            <h2 className="fs48 fw300 ls30 fcGrey424041">{experienceString}</h2>
-            <h6 className="fs18 fw500 ls12 fcGrey81">{textString}</h6>
-          </div>
-        )
-      }
-      else if(profileItem === timeWithRT){
-        let yearString = years === 1 ? 'year' : 'years'
-        let monthString = months === 1 ? 'month' : 'months'
-        // more than a year
-        // years = 0
-        // months = 0
-        // diff = 1
-        if(years > 0){
-          return (
-            <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
-              <div className="fc--disp-flex fc--jCont-ce fc--aItem-ce width100P">
-                <h2 className="fc--disp-flex fs48 fw300 ls30 fcGrey424041">{years}</h2>
-                <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{yearString}</span>
-                <h2 className="fc--disp-flex fs48 fw300 ls30 fcGrey424041 pdl10">{months}</h2>
-                <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
-              </div>
-              <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
-            </div>
-          )
-        }
-        // more than one month but less than one year
-        else if(months > 1){
-          return (
-            <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
-              <div className="fc--disp-flex fc--jCont-ce fc--aItem-ce width100P">
-                <h2 className="fs48 fw300 ls30 fcGrey424041">{months}</h2>
-                <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
-              </div>
-              <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
-            </div>
-          )
-        }
-        // less than one month
-        else if(months === 0 && diff > 0){
-          let timeString = '< 1'
-          monthString = 'month'
-          return (
-            <div className="fc-profileAboutExp fc--disp-flex fc--fdir-col fc--jCont-ce fc--aCont-ce fc--aItem-ce height50P width100P">
-              <div className="fc--disp-flex fc--jCont-ce fc--aItem-ce width100P">
-                <h2 className="fs48 fw300 ls30 fcGrey424041">{timeString}</h2>
-                <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
-              </div>
-              <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
-            </div>
-          )
-        }
-      }
-      else {
-        return (
-          <div>
-            <p className="">
-              Something Went Wrong...
-            </p>
-          </div>
-        )
-      }
-    }
+    let experienceJSX = this.getDateForProfile(userById[experience], experience)
+    let timeWithRTJSX = this.getDateForProfile(userById[timeWithRT], timeWithRT)
     
-    let experienceJSX = getDateForProfile(userById[experience], experience)
-    let timeWithRTJSX = getDateForProfile(userById[timeWithRT], timeWithRT)
-    
-    // let otherProfilesArr = this.props.allUsers.filter((userObj) => {
-    //   return userObj.userId !== userId
-    // })
-    
-    const contentSideStyle = {
-      height: contentHeight
-    }
-    
-    // const contentSideStyleChild = {
-    //   height: (contentHeight * .99)
-    // }
-    
-      const profileArray = this.props.allUsers.filter(user => user[userId] !== this.props.currentUser[userId])
-    
-      let profilesToRender = profileArray.map((user) => {
-        return (
-          <li key={user[userId]} className="fc--disp-flex fc--fdir-row">
-            <RecursiveDirectoryListItemSm user={user}/>
-          </li>
-        )
-      })
-    
-      return(
-        <main>
-          <ContentPageTitleBar content={TITLE_BAR_USER_VIEW}/>
-          <div className="grid grid--3of4">
-            <div className="grid-cell"
-              // ref={ node => { if(node !== null){this.contentTarget = node}}}
-            >
-              {/* need this height */}
-              {/* this.renderContent(); */}
-              <div className="content"
-                ref={ node => { if(node !== null){this.contentTarget = node}}}
-              >              
-                <article className="cardNoPadding">
+    if(this.props.userById.userId !== this.props.match.params.id){
+      return (
+        <DefaultLoadingPage />
+      )
+    } else {
+      return (
+        <>
+          <article className="cardNoPadding">
                   <div className="grid grid--full">
                     <div className="grid-cell">
                       <div className="grid grid--2of3">
@@ -412,73 +343,133 @@ class UserView extends Component{
                     </div>
                   </div>
                 </article>
-                <article className="cardNoPadding mt30">
-                  <div className="grid grid--2of3">
-                    <div className="grid-cell">
-                      <div className="fc-twothirdsLeftViewProfile">
-                        <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
-                        <hr />
-                        <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15 wspl">
-                          {userById[bio]}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="grid-cell">
-                      <div className="fc--disp-flex fc--fdir-col fc--jCont-ce height100P">
-                          {/* years */}
-                          {experienceJSX}
-                          {/* {userById[experience]} */}
-                        
-                          {/* time rec */}
-                          {timeWithRTJSX}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-                <article className="card mt30">
-                  <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
+          <article className="cardNoPadding mt30">
+            <div className="grid grid--2of3">
+              <div className="grid-cell">
+                <div className="fc-twothirdsLeftViewProfile">
+                  <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
                   <hr />
-                  <div className="">
-                    <CategoryList 
-                      categories={userById[skillsProfessional]}
-                      allSkillsArr={allSkills}
-                      lookupTableAllSkills={lookupTableAllSkills}
-                    />
-                  </div>
-                </article>
-                <article className="card mt30">
-                  <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
-                  <hr />
-                  <div className="">
-                    <CategoryList 
-                      categories={userById[skillsSoftware]}
-                      allSkillsArr={allSkills}
-                      lookupTableAllSkills={lookupTableAllSkills}
-                    />
-                  </div>
-                </article>
-                <article className="card mt30">
-                  <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
-                  <hr />
-                  <div className="">
-                    <CategoryList 
-                      categories={userById[skillsLanguages]}
-                      allSkillsArr={allSkills}
-                      lookupTableAllSkills={lookupTableAllSkills}
-                    />
-                  </div>
-                </article>
+                  <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15 wspl">
+                    {userById[bio]}
+                  </p>
+                </div>
+              </div>
+              <div className="grid-cell">
+                <div className="fc--disp-flex fc--fdir-col fc--jCont-ce height100P">
+                    {/* years */}
+                    {experienceJSX}
+                    {/* {userById[experience]} */}
+                  
+                    {/* time rec */}
+                    {timeWithRTJSX}
+                </div>
+              </div>
+            </div>
+          </article>
+          <article className="card mt30">
+            <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
+            <hr />
+            <div className="">
+              <CategoryList 
+                categories={userById[skillsProfessional]}
+                allSkillsArr={allSkills}
+                lookupTableAllSkills={lookupTableAllSkills}
+              />
+            </div>
+          </article>
+          <article className="card mt30">
+            <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
+            <hr />
+            <div className="">
+              <CategoryList 
+                categories={userById[skillsSoftware]}
+                allSkillsArr={allSkills}
+                lookupTableAllSkills={lookupTableAllSkills}
+              />
+            </div>
+          </article>
+          <article className="card mt30">
+            <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
+            <hr />
+            <div className="">
+              <CategoryList 
+                categories={userById[skillsLanguages]}
+                allSkillsArr={allSkills}
+                lookupTableAllSkills={lookupTableAllSkills}
+              />
+            </div>
+          </article>
+        </>
+      )
+    }
+  }
+  
+  render(){
+    const {
+      contentHeight
+    } = this.state;
+
+    // const selectedUser = currentUser
+    if(contentHeight === 0){
+      return (
+        <div className="content"
+          ref={ node => { if(node !== null){this.contentTarget = node}}}
+        > 
+          <section style={{padding: '1.5rem 1.5rem'}}>
+            <DefaultLoadingPage />
+          </section>
+        </div>
+      )
+    }
+    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING' || this.props.userById === 'FETCHING'){
+      // this.props.userById.userId !== this.props.match.params.id
+      return (
+        <div className="content"
+          ref={ node => { if(node !== null){this.contentTarget = node}}}
+        >
+          <section style={{padding: '1.5rem 1.5rem'}}>
+            <DefaultLoadingPage />
+          </section>
+        </div>
+      )
+    }
+    else {
+      const { user: { userId } } = DM;
+      
+      const profileArray = this.props.allUsers.filter(user => user[userId] !== this.props.currentUser[userId]).filter(user => user.isProfileSetup === true)
+      
+      let profilesToRender = profileArray.map((user) => {
+        return (
+          <li key={user[userId]} className="fc--disp-flex fc--fdir-row">
+            <RecursiveDirectoryListItemSm user={user}/>
+          </li>
+        )
+      })
+      
+      const contentSideStyle = {
+        height: contentHeight
+      }
+
+      return(
+        <main>
+          <ContentPageTitleBar content={TITLE_BAR_USER_VIEW}/>
+          <div className="grid grid--3of4">
+            <div className="grid-cell"
+              // ref={ node => { if(node !== null){this.contentTarget = node}}}
+            >
+              {/* need this height */}
+              {/* this.renderContent(); */}
+              <div className="content"
+                ref={ node => { if(node !== null){this.contentTarget = node}}}
+              >    
+                {this.renderContent()}
               </div>
             </div>
             <div className="grid-cell">
-              {/* <h1>HERE</h1> */}
               <aside className="fc-directoryCardSmContParent" style={contentSideStyle} >
-              {/*  */}
-                {/* <div className="fc-directoryCardSmContChild"> */}
-                  <ul className="fc-directoryCardSmContChild" style={contentSideStyle} >
-                    {profilesToRender}
-                  </ul>
-                {/* </div> */}
+                <ul className="fc-directoryCardSmContChild" style={contentSideStyle} >
+                  {profilesToRender}
+                </ul>
               </aside>
             </div>
           </div>

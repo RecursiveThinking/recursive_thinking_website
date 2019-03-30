@@ -3,21 +3,24 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { history } from '../../../index';
 
-import { createUser, getCurrentUserById } from '../../../actions/index'
+import { getCurrentUserById, createUser, editUserById } from '../../../actions/index'
+import { FETCHING } from '../../../actions/action_types'
 
 import HeaderApp from '../../../components/headerApp/headerApp';
 import Footer from '../../../components/footer/footer'
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage'
 
-import ContentPageTitleBar from '../../../components/common/contentPage/contentPageTitleBar';
+import ContentPageWithTitleBar from '../../../components/common/contentPage/contentPageWithTitleBar';
 import { TITLE_BAR_USER_CREATE } from '../../../components/common/contentPage/contentPageTitleBarInfo'
 
 import { createAssetFoldersForUser, createAvatarFolder } from '../../../functions/s3Methods'
 
 import { ROUTES_REACT } from '../../../standards/routes'
+import DM from '../../../standards/dictModel'
 
 import { CogUser, User } from '../../../models/models'
+
 
 class CreateUser extends Component {
   constructor(props){
@@ -113,14 +116,17 @@ class CreateUser extends Component {
     let newUser = new User(newCogUser)
     console.log('newUser: ', newUser)
     // createAvatarFolder();
+    // s3
     createAssetFoldersForUser(newUser.userId, 'avatar');
-    createAssetFoldersForUser(newUser.userId, 'resume')
+    createAssetFoldersForUser(newUser.userId, 'resume');
+    // dynamo
     this.props.createUser(newUser)
   }
   
   renderContent(headerHeight, footerHeight, contentWrapper){
-    if(headerHeight === 0 || footerHeight === 0 || !this.props.currentUser.userId){
-      console.log('this.props @ createUser: ',this.props.location.state.userObjForCognito)
+    console.log('@ userCreate comp @ renderContent Funcion: showing passed userObjForCognito passed from forms_auth',this.props.location.state.userObjForCognito)
+    // if(headerHeight === 0 || footerHeight === 0 || !this.props.currentUser.userId){
+    if(headerHeight === 0 || footerHeight === 0 || this.props.currentUser === null){
       const {
         sub,
         username,
@@ -138,18 +144,22 @@ class CreateUser extends Component {
       const { currentUser } = this.props;
       console.log('user it not setup: go to userEdit')
       history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
-      return (
-        <>
-          Moving on to UserEdit!
-        </>
-      )
+      // return (
+      //   <>
+      //     Moving on to UserEdit!
+      //   </>
+      // )
     }
     else if(this.props.currentUser.userId && this.props.currentUser.isProfileSetup){
       console.log('user setup: go to dashboard')
-      history.push(ROUTES_REACT.dashboard)
+      const { user: { lastLogin }} = DM;
+      let dupUserObj = { ...this.props.currentUser };
+      dupUserObj[lastLogin] = new Date().toString();
+      this.props.editUserById(dupUserObj, ROUTES_REACT.dashboard, null)
+      // history.push(ROUTES_REACT.dashboard)
       return (
         <>
-          Go To Dashboard!
+          <DefaultLoadingPage />
         </>
       )
     }
@@ -175,6 +185,36 @@ class CreateUser extends Component {
       height: (contentHeight)
     }
     
+    if(this.props.currentUser === FETCHING){
+      // console.log('=========================')
+      // console.log('User Is Fetching: ')
+      return (
+        <main className="wrapper">
+        <header ref={ node => { if(node !== null){this.headerTarget = node} }}>
+          <HeaderApp />
+        </header>
+        <div className="grid grid--full">
+          <div className="grid-cell">
+            <div className="contentWrapper" 
+              style={contentWrapper}
+              ref={ node => { if(node !== null){this.contentTarget = node}}}
+            >
+              <ContentPageWithTitleBar
+                {...this.props} 
+                titleBarContent={TITLE_BAR_USER_CREATE}
+                formContent={
+                  <DefaultLoadingPage />
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <footer ref={ node => { if(node !== null){this.footerTarget = node}}}>
+          <Footer />
+        </footer>
+      </main>
+      )
+    }
     return (
       <main className="wrapper">
         <header ref={ node => { if(node !== null){this.headerTarget = node} }}>
@@ -186,8 +226,11 @@ class CreateUser extends Component {
               style={contentWrapper}
               ref={ node => { if(node !== null){this.contentTarget = node}}}
             >
-              <ContentPageTitleBar content={TITLE_BAR_USER_CREATE} />
-              {this.renderContent(headerHeight, footerHeight, contentWrapper)}
+              <ContentPageWithTitleBar
+                {...this.props} 
+                titleBarContent={TITLE_BAR_USER_CREATE} 
+                formContent={this.renderContent(headerHeight, footerHeight, contentWrapper)}
+              />
             </div>
           </div>
         </div>
@@ -206,7 +249,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ createUser, getCurrentUserById }, dispatch)
+  return bindActionCreators({ getCurrentUserById, createUser, editUserById }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
