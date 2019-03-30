@@ -52,10 +52,10 @@ class RecursiveDirectory extends Component {
     else {
       // allUsers.length = 0;
       let allUsersExcludingCurrent = allUsers.filter(user => user[userId] !== currentUser[userId])
-
+      let allUsersWhoHaveSetupProfile = allUsersExcludingCurrent.filter(user => user.isProfileSetup === true)
       return (
         <main className="content">
-          <RecursiveDirectoryList usersForDirectory={allUsersExcludingCurrent} />
+          <RecursiveDirectoryList usersForDirectory={allUsersWhoHaveSetupProfile} />
         </main>
       )
     }
