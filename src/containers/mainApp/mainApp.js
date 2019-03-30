@@ -45,8 +45,11 @@ import InterviewQuestionAnswerCreate from '../interviewQuestionAnswer/create/int
 import InterviewQuestionAnswerEdit from '../interviewQuestionAnswer/edit/interviewQuestionAnswerEdit'
 import InterviewQuestionAnswerDelete from '../interviewQuestionAnswer/delete/interviewQuestionAnswerDelete'
 
-import { ROUTES_REACT } from '../../standards/routes'
+import AdminPanel from '../adminPanel/adminPanel';
 
+import SignOut from '../../containers/signOut/signOut'
+
+import { ROUTES_REACT } from '../../standards/routes'
 
 const {
   dashboard,
@@ -65,10 +68,12 @@ const {
   recursivedirectory,
   users_edit,
   users_edit_id,
-  users_view_id
+  users_view_id,
+  admindashboard,
+  signout
 } = ROUTES_REACT
 
-export const ROUTES_NAV = [
+export let ROUTES_NAV = [
   {
     path: dashboard,
     main: () => { return (<Dash />)}
@@ -101,6 +106,14 @@ export const ROUTES_NAV = [
   {
     path: users_view_id,
     main: (props) => { return (<UserView {...props} />)}
+  },
+  {
+    path: admindashboard,
+    main: (props) => { return (<AdminPanel />)}
+  },
+  {
+    path: signout,
+    main: (props) => { return (<SignOut />)}
   }
 ]
 

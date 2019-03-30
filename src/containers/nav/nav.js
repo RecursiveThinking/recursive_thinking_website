@@ -60,10 +60,10 @@ class Nav extends Component {
     ]
     if(currentUser[admin] === true){
       NAV_BAR.push([ 'sidebar-item', admindashboard, 'Admin Panel', 'fa fa-lock fs20'])
-      ROUTES_NAV.push({
-        path: admindashboard,
-        main: () => { return (<AdminPanel />)}
-      })
+      // ROUTES_NAV.push({
+      //   path: admindashboard,
+      //   main: () => { return (<AdminPanel />)}
+      // })
     }
     
     // return <div className="grid grid--full lg-grid--fit">
@@ -92,14 +92,14 @@ class Nav extends Component {
           </article>
           <div className="sidebarLinksContainer fc--disp-flex fc--fdir-col">
             {allMenuItems}
-            {/* <NavLink key={allMenuItems.length} to={signout} activeClassName="active" aria-current="true"> */}
-            <a href="/">
+            <NavLink key={allMenuItems.length} to={signout} activeClassName="active" aria-current="true">
+            {/* <a href="/"> */}
               <article  className="sidebar-item">
                 <h6 className="fs14 fw500 ls18 ttup fcWhite">Sign Out</h6>
                 <span><i className="fa fa-sign-out fs24"></i></span>
               </article>
-            </a>
-            {/* </NavLink> */}
+            {/* </a> */}
+            </NavLink>
             {/* MAP ROUTES */}
             {
               ROUTES_NAV.map((route, index) => (
