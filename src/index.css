@@ -53,7 +53,8 @@
   --btn-brdr-thickness: .1rem;
   --input-brdr-thickness: .1rem;
   --brdr-profile-thickness: .1rem;
-  --warn: #da0000;
+  --warn: #ff9a23;
+  --error: #da0000;
 }
 
 /* Base Font Size for all rem values */
@@ -361,6 +362,11 @@ legend {
 }
 
 .fieldsetSkills {
+  /* margin-top: 5rem; */
+  margin: 2.5rem 0 5rem 0;
+}
+
+.fieldsetSkills:first-of-type{
   margin-top: 5rem;
 }
 
@@ -375,7 +381,8 @@ fieldset>.grid>.grid-cell>.fc-form-input:first-of-type {
 
 .fc-field-row>label,
 .fc-field-row-full>label,
-.fc-form-input-full>label {
+.fc-form-input-full>label,
+.dateField > div > label {
   display: flex;
 
   font-size: 2rem;
@@ -402,11 +409,11 @@ fieldset>.grid>.grid-cell>.fc-form-input:first-of-type {
 .fc-form-input-col>input,
 .fc-form-input-col>.react-tags,
 fieldset>.grid>.grid-cell>textarea,
-fieldset>.grid>.grid-cell>div>textarea {
+fieldset>.grid>.grid-cell>.width100P>textarea {
   display: flex;
   justify-content: flex-start;
 
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
 
   border: var(--input-brdr-thickness) solid var(--grey-97);
 
@@ -416,7 +423,7 @@ fieldset>.grid>.grid-cell>div>textarea {
 }
 
 .fc-form-input-col>.react-tags {
-  padding: .5rem .5rem;
+  padding: 0 0 0 1rem;
   margin-top: 2rem;
 }
 
@@ -429,7 +436,15 @@ fieldset>.grid>.grid-cell>div>textarea {
 }
 
 .fc-field>.fc-field-row-full.input-invalid>input,
-.fc-field>.fc-field-row-full.input-invalid>textarea {
+.fc-field>.fc-field-row.input-invalid>input,
+fieldset>.grid>.grid-cell>.width100P.input-invalid>textarea {
+  box-shadow: 0 0 .125rem .025rem var(--error);
+  border: var(--input-brdr-thickness) solid var(--error);
+  outline: var(--input-brdr-thickness) solid var(--error);
+}
+
+.fc-field>.fc-field-row-full.input-warning>input,
+.fc-field>.fc-field-row.input-warning>input {
   box-shadow: 0 0 .125rem .025rem var(--warn);
   border: var(--input-brdr-thickness) solid var(--warn);
   outline: var(--input-brdr-thickness) solid var(--warn);
@@ -440,15 +455,25 @@ fieldset>.grid>.grid-cell>div>textarea {
 }
 
 .fc-field-row>input,
-.fc-field>.fc-field-row-error>.error>div {
+.fc-field>.fc-field-row-error>.error>div,
+.fc-field>.fc-field-row-error>.warn>div {
   margin-left: 3.5rem;
 }
 
 .fc-field>.fc-field-row-error>.error>div,
-.fc-field>.error>div {
+.fc-field>.error>div,
+.grid>.grid-cell>.fc-field-row-error>.error>div {
+  color: var(--error);
+  margin-top: 1rem;
+}
+
+.fc-field>.fc-field-row-error>.warn>div {
   color: var(--warn);
   margin-top: 1rem;
 }
+
+/* .fc-field>.error>div, */
+/* .grid>.grid-cell>.fc-field-row-error>.error>div */
 
 /* .fc-field-row > input {
   width: 80%;
@@ -1284,7 +1309,8 @@ ul li {
 }
 
 .listOptions>li {
-  margin-left: .75rem;
+  /* margin-left: .75rem; */
+  margin-left: 1rem;
 }
 
 .listOptions>li:first-of-type {
@@ -1302,7 +1328,7 @@ ul li {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 10;
+  z-index: 999;
 }
 
 .modalCard {
@@ -1312,7 +1338,7 @@ ul li {
   height: auto;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -55%);
+  transform: translate(-50.2%, -50.2%);
   padding: 5rem 5rem;
 }
 
@@ -1331,6 +1357,10 @@ ul li {
   border-top: 0;
   border-bottom: 1px solid #c6c6c6;
   width: 100%;
+}
+
+.modalNav {
+  cursor: pointer;
 }
 
 .display-block {
@@ -1402,6 +1432,7 @@ footer {
 /* ============================================ */
 
 :root {
+  --XXXS: 4rem;
   --XXS: 7rem;
   --XS: 10.7rem;
   --S: 17.6rem;
@@ -1409,6 +1440,12 @@ footer {
   --L: 29.3rem;
   --XL: 31.0rem;
   --XXL: 42.3rem;
+}
+
+.avatarXXXS {
+  width: var(--XXXS);
+  height: var(--XXXS);
+  border-radius: 50%;
 }
 
 .avatarXXS {
@@ -1478,6 +1515,13 @@ footer {
 .loadingScreenAnimationSecondary {
   /* width: 100%; */
   height: 100%;
+}
+
+.datePicker {
+  margin-left: 3.5rem;
+}
+.dateField > div > label {
+  
 }
 
 /* ============================================ */
@@ -1793,6 +1837,37 @@ footer {
   margin: .5rem;
 }
 
+.userTags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid var(--green-00b371);
+  border-radius: 2.5rem;
+  margin: .5rem;
+  padding: .5rem;
+}
+
+.userTagText {
+  margin-left: 1rem;
+}
+
+.userTagTextSpanMid {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.userTagTextSpanRight {
+  margin-left: 1rem;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.fc-UserTags:nth-of-type(0){
+  margin-left: 0rem;
+}
+
 .react-tags > .react-tags__selected:focus,
 .react-tags > .react-tags__selected > .react-tags__selected-tag:focus {
   outline-color: transparent;
@@ -1827,6 +1902,44 @@ footer {
 .fc-Tags li:first-child {
   margin-left: 0;
 }
+
+.fc-categoryItemCont {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.categoryItem {
+  width: 25%;
+  margin: 0 0 1.5rem 0;
+}
+
+.categoryItem > h5:nth-of-type(2) {
+  margin-left: 1rem;
+}
+
+.categoryItem > h5:nth-of-type(3) {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.skillItem {
+  width: 50%;
+  margin: 0 0 1.5rem 0;
+}
+
+.skillItem > h5:nth-of-type(2) {
+  margin-left: 1rem;
+  margin-top: -.45rem;
+}
+
+.skillItem > h5:nth-of-type(3) {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 
 /* ============================================ */
 /*                  Font Colors                 */
@@ -1891,6 +2004,10 @@ footer {
 
 .fcWarn {
   color: var(--warn)
+}
+
+.fcError {
+  color: var(--error)
 }
 
 .op50 {
@@ -2158,6 +2275,10 @@ h5 {
   margin-top: 8rem;
 }
 
+.mt70 {
+  margin-top: 7rem;
+}
+
 .mt50 {
   margin-top: 5rem;
 }
@@ -2204,6 +2325,10 @@ h5 {
 
 .mtp125 {
   margin-top: .125rem;
+}
+
+.mb70 {
+  margin-bottom: 7rem;
 }
 
 .mb50 {
@@ -2314,6 +2439,10 @@ h5 {
   padding-left: 0.5rem;
 }
 
+.pdLR3 {
+  padding: 0 3rem;
+}
+
 /* ============================================ */
 /*                   Button                     */
 /* ============================================ */
@@ -2371,15 +2500,15 @@ h5 {
 }
 
 .btn.btnFillClrSchWarn {
-  border: var(--btn-brdr-thickness) solid var(--warn);
-  background-color: var(--warn);
+  border: var(--btn-brdr-thickness) solid var(--error);
+  background-color: var(--error);
   color: var(--white-ff);
 }
 
 .btn.btnFillClrSchWarn:hover {
-  border: var(--btn-brdr-thickness) solid var(--warn);
+  border: var(--btn-brdr-thickness) solid var(--error);
   background-color: var(--white-ff);
-  color: var(--warn);
+  color: var(--error);
 }
 
 .btn.btnOutlineClrSchGreen2d3134,
@@ -2437,8 +2566,8 @@ h5 {
 }
 
 .btn.btnFillClrSchWarn.btnOutlineClrSchUnavailable.btnVoted:hover {
-  border: var(--btn-brdr-thickness) solid var(--warn);
-  background-color: var(--warn);
+  border: var(--btn-brdr-thickness) solid var(--error);
+  background-color: var(--error);
   color: var(--white-ff);
 }
 
