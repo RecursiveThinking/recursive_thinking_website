@@ -1,5 +1,5 @@
 // import Random from '../functions/random';
-// import { SIGN_IN, SIGN_UP, SIGN_OUT } from '../actions/action_types';
+import { FETCHING } from '../actions/action_types';
 // import Users from '../_data_returns/RecursiveThinkingDeveloperProfiles.json'
 import { GET_CURRENT_USER_BY_ID } from '../actions/action_types'
 
@@ -9,7 +9,7 @@ import { GET_CURRENT_USER_BY_ID } from '../actions/action_types'
 const INITIAL_STATE = {
   isSignedIn: false,
   // currentUser: Users[USERARR_INDEX]
-  currentUser: {}
+  currentUser: FETCHING
   // currentUserId: Users[Random.getRandomIndex(Users.length)]
 }
 

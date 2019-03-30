@@ -13,7 +13,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action){
-  console.log('@ intQuestion reducer: ', 'state: ', state, 'action: ', action)
+  // console.log('@ intQuestion reducer: ', 'state: ', state, 'action: ', action)
   switch(action.type){
     case FETCH_INTERVIEW_QUESTIONS:
       console.log('at fetch allIntQuestion case reducer', action.payload.body)

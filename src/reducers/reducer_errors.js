@@ -51,7 +51,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action){
-  console.log('@ errors reducer: ', 'state: ', state, 'action: ', action)
+  // console.log('@ errors reducer: ', 'state: ', state, 'action: ', action)
   switch(action.type){
     // ERRORS_CURRENT_USER
     case ERRORS_GET_CURRENT_USER_BY_ID:

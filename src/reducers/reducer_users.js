@@ -5,7 +5,7 @@ import UtilityMethods from '../functions/utilityMethods';
 let initialState = {
   allUsers: FETCHING,
   lookupTableAllUsers: {},
-  userById: FETCHING
+  userById: null
 }
 
 export default function (state = initialState, action) {
@@ -14,9 +14,10 @@ export default function (state = initialState, action) {
     case FETCH_USERS:
       console.log('at fetch allUsers case reducer', action.payload.body)
       return {
-        ...state,
+        // ...state,
         allUsers: action.payload.body,     
         lookupTableAllUsers: UtilityMethods.createObjectFromArrayByProp(action.payload.body, 'userId'),
+        userById: { ...state.userById }
       }
     case GET_USER_BY_ID:
       console.log('at fetch getUserById case reducer', action.payload.body)
