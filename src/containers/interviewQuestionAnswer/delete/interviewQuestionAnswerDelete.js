@@ -56,39 +56,44 @@ class InterviewQuestionAnswerDelete extends Component {
         interviewQuestionById,
         interviewQuestionAnswerById
       } = this.props;
+      console.log('interviewQuestionAnswerById: ', interviewQuestionAnswerById)
       const { interviewquestions } = ROUTES_REACT;
       return(
         <article className="card">
-          <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-            <h5 className="fw700 ls14 ttup fcGrey424041">Delete Interview Question Answer: </h5>
-            <hr className="modalHR mt10" />
-              <div className="fc-fieldset">
-                <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
-                  <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
-                    <label htmlFor="">Answer:</label>
+          <div className="grid grid--full">
+            <div className="grid-cell">
+              <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
+                <h5 className="fw600 ls12 fcGrey424041">Interview Question Answer Information: </h5>
+                <hr className="modalHR mt10" />
+                  <div className="fc-fieldset">
+                    <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
+                      <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
+                        <label htmlFor="">Answer:</label>
+                      </div>
+                      <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
+                        <p className="fs16 fw300 ls10 fcGrey424041 mt10">
+                          {interviewQuestionAnswerById.description}
+                        </p>
+                      </div>                 
+                    </div>
                   </div>
-                  <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
-                    <p>
-                      {interviewQuestionAnswerById.description}
-                    </p>
-                  </div>                 
-                </div>
-              </div>
-              <hr className="modalHR mt80" />
-              <div className="ta-cent">
-                <Link
-                  className=""
-                  to={ interviewquestions }
-                >
-                  <button className="btn btnFillGreyB9 pdTB2LR8 fs20 fw500 ls12 mt30">Cancel</button>
-                
-                </Link>
-                <button 
-                  className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 mt30"
-                  onClick={() => {this.deleteInterviewQuestionAnswer(interviewQuestionById, interviewQuestionAnswerById)}}
-                >Delete Answer</button>
-              </div>
-          </fieldset>
+                  <hr className="modalHR mt80" />
+                  <div className="ta-cent">
+                    <Link
+                      className=""
+                      to={ interviewquestions }
+                    >
+                      <button className="btn btnFillGreyB9 pdTB2LR8 fs20 fw500 ls12 mt30">Cancel</button>
+                    
+                    </Link>
+                    <button 
+                      className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 ml20 mt30"
+                      onClick={() => {this.deleteInterviewQuestionAnswer(interviewQuestionById, interviewQuestionAnswerById)}}
+                    >Delete Answer</button>
+                  </div>
+              </fieldset>
+            </div>
+          </div>
         </article>
       )
     }    

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById, fetchSkills } from '../../../actions';
+import { getCurrentUserById, getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById, fetchSkills } from '../../../actions';
 import { FETCHING } from '../../../actions/action_types'
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
@@ -30,52 +30,61 @@ class InterviewQuestionAnswerEdit extends Component {
   
   render(){
     console.log('props @ IntQuestAnsEdit: ', this.props);
-    console.log('params', this.props.match.params.id);
+    console.log('questId: ', this.props.match.params.questId, 'ansId: ', this.props.match.params.ansId);
     // if no intQuestionAnswer
     if(this.props.interviewQuestionAnswerById === FETCHING || this.props.interviewQuestionById === FETCHING || this.props.fetchSkills === FETCHING){
+    // if(!this.props.interviewQuestionAnswerById || !this.props.interviewQuestionById || !this.props.fetchSkills){
       return (
         // <div>Loading!!!</div>
         <section style={{padding: '1.5rem 1.5rem'}}>
           <DefaultLoadingPage />
         </section>
       )
+    } else {
+      
+      const {
+        description
+      } = this.props.interviewQuestionAnswerById
+      const {
+        allSkills,
+        lookupTableAllSkills,
+        currentUser,
+        interviewQuestionById
+      } = this.props
+      return(
+        <>
+          <InterviewQuestionAnswerForm
+            onSubmit={this.onSubmit}
+            content={FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT}
+            intQuestion={interviewQuestionById}
+            currentUser={currentUser}
+            initialValues={{
+              interviewQuestionAnswerDescription: description
+            }}
+            allSkillsArr={allSkills}
+            lookupTableAllSkills={lookupTableAllSkills}
+            />
+        </>
+      )
     }
-    const {
-      description
-    } = this.props.interviewQuestionAnswerById
-    const {
-      interviewQuestionById,
-      allSkills,
-      lookupTableAllSkills
-    } = this.props
-    return(
-      <>
-        <InterviewQuestionAnswerForm
-          onSubmit={this.onSubmit}
-          content={FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT}
-          intQuestion={interviewQuestionById}
-          initialValues={{
-            interviewQuestionAnswerDescription: description
-          }}
-          allSkillsArr={allSkills}
-          lookupTableAllSkills={lookupTableAllSkills}
-        />
-      </>
-    )
+    
   }
 }
 
 function mapStateToProps(state, ownProps){
   return {
+    currentUser: state.auth.currentUser,
     allSkills: state.skills.allSkills,
     lookupTableAllSkills: state.skills.lookupTableAllSkills,
-    interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.questId],
-    interviewQuestionAnswerById: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers[ownProps.match.params.ansId]
+    // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.questId],
+    // interviewQuestionAnswerById: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers[ownProps.match.params.ansId]
+    interviewQuestionById: state.interviewQuestions.interviewQuestionById,
+    interviewQuestionAnswerById: state.interviewQuestionsAnswers.interviewQuestionAnswerById
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById,  }, dispatch)
+  return bindActionCreators({ getCurrentUserById, getInterviewQuestionById, getInterviewQuestionAnswerById, editInterviewQuestionAnswerById, fetchSkills }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(InterviewQuestionAnswerEdit)
