@@ -66,11 +66,11 @@ export class Lesson {
 }
 
 export class InterviewQuestion {
-  constructor(title, description, categories = [], currentUserId){
+  constructor(title, description, intQuestCategories, currentUserId){
     this.Id = v1();
     this.title = title;
     this.description = description;
-    this.categories = categories;
+    this.categories = intQuestCategories;
     this.answersToQuestion = [];
     this.upVotes = [];
     this.downVotes = [];
@@ -99,9 +99,9 @@ export class SkillOrCategory {
     // this.Id = v1();
     this.id = v1();
     this.name = tag.name;
-    this._usersWithSkill = Array.of(currentUserId.userId);
+    this._usersWithSkill = [];
     this._interviewquestionsWithCategory = [];
-    this._createdByUser = currentUserId.userId;
+    this._createdByUser = currentUserId;
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
   }
