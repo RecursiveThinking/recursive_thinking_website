@@ -24,9 +24,9 @@ const headerApp = () => {
         <Link to={ROUTES_REACT.dashboard}>
           <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1  fs16 ls12">Dash</button>
         </Link>
-        <Link to={ROUTES_REACT.users_create}>
+        {/* <Link to={ROUTES_REACT.users_create}>
           <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SetupProfile</button>
-        </Link>
+        </Link> */}
         {/* <div className="fc--disp-flex search">
           <div className="searchBar">
             <input className="inputSearch" type="search" placeholder="Search" />
