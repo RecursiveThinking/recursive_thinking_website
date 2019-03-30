@@ -56,12 +56,6 @@ class Dash extends Component {
         />
       )
     }
-    // else if(!currentUser.userId){
-    //   return (
-    //     <SecondaryLoadingPage />
-    //     // <DashboardProfileStatList />
-    //   )
-    // }
     return (
       <DashboardProfileStatList userStats={profileStats} />
     )
@@ -78,13 +72,14 @@ class Dash extends Component {
       return (
         <SecondaryLoadingPage />
       )
-    } 
-    return (
-      <UpComingLesson 
-        upComingLessons={scheduledLessons}
-        allUsersArr={allUsers}
-      />
-    )
+    } else {
+      return (
+        <UpComingLesson 
+          upComingLessons={scheduledLessons}
+          allUsersArr={allUsers}
+        />
+      )
+    }
   }
   
   render(){
@@ -112,7 +107,6 @@ class Dash extends Component {
         </main>
       )
     }
-    // else if(scheduledLessons === FETCHING || allUsers === FETCHING || currentUser === FETCHING){
     else if(scheduledLessons === FETCHING && allUsers === FETCHING && currentUser === FETCHING){
       return (
         <main className="content">
