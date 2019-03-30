@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Modal from '../../../components/common/modal/modal'
-import { SignUpFormEx, VerifyAccountFormEx, SignInFormEx } from '../../../components/forms/forms_auth'
+import { SignUpFormEx, VerifyAccountFormEx, ResendVerifyAccountFormEx, SignInFormEx } from '../../../components/forms/forms_auth'
 
 import { ROUTES_REACT } from '../../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
@@ -17,7 +17,8 @@ class Header extends Component {
     this.state = {
       showModalSignUp: false,
       showModalSignIn: false,
-      showModalVerifyAccount: false
+      showModalVerifyAccount: false,
+      showModalResendVerifyAccount: false
     }
   }
 
@@ -29,6 +30,9 @@ class Header extends Component {
   }
   handleToggleModalSignIn(){
     this.setState( {showModalSignIn: !this.state.showModalSignIn} )
+  }
+  handleToggleModalResendVerifyAccount(){
+    this.setState( {showModalResendVerifyAccount: !this.state.showModalResendVerifyAccount} )
   }
   
   render(){
@@ -54,12 +58,12 @@ class Header extends Component {
                 {/* <Link to={profile_create}>
                   <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SP</button>
                 </Link> */}
-                <a href={dashboard}>
+                {/* <a href={dashboard}>
                   <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">Dash</button>
-                </a>
-                <a href={profile_create}>
+                </a> */}
+                {/* <a href={profile_create}>
                   <button type="button" className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">SP</button>
-                </a>
+                </a> */}
                 <button 
                     onClick={() => this.handleToggleModalSignUp()} 
                     type="button" 
@@ -78,10 +82,10 @@ class Header extends Component {
                       }
                     />
                   }
-                <button 
+                {/* <button 
                   onClick={() => this.handleToggleModalVerifyAccount()}
                   type="button" 
-                  className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">VA</button> 
+                  className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">VA</button>  */}
                   {
                     this.state.showModalVerifyAccount &&
                     
@@ -89,8 +93,26 @@ class Header extends Component {
                       onCloseRequest={() => this.handleToggleModalVerifyAccount()}
                       content={
                         <VerifyAccountFormEx
+                          {...this.props}
                           closeModalVerifyAccount={() => this.handleToggleModalVerifyAccount()}
+                          openModalResendVerifyAccount={() => this.handleToggleModalResendVerifyAccount()}
                           openModalSignin={() => this.handleToggleModalSignIn()}
+                        />
+                      }
+                    />
+                  }
+                {/* <button
+                  onClick={() => this.handleToggleModalResendVerifyAccount()}
+                  type="button"
+                  className="btn btnTemp btnPadTB1 btnPadLR1 fs16 ls12">RVA</button> */}
+                  {
+                    this.state.showModalResendVerifyAccount && 
+                    <Modal 
+                      onCloseRequest={() => this.handleToggleModalResendVerifyAccount()}
+                      content={
+                        <ResendVerifyAccountFormEx
+                          closeModalResendVerifyAccount={() => this.handleToggleModalResendVerifyAccount()}
+                          openModalVerifyAccount={() => this.handleToggleModalVerifyAccount()}
                         />
                       }
                     />
