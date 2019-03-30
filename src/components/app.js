@@ -5,6 +5,7 @@ import HomeScreen from '../containers/public/HomeScreen/HomeScreen';
 import userCreate from '../containers/user/create/userCreate';
 import userSetup from '../containers/user/setup/userSetup';
 import MainApp from '../containers/mainApp/mainApp';
+import SignOut from '../containers/signOut/signOut';
 
 import { ROUTES_REACT } from '../standards/routes';
 
@@ -58,7 +59,8 @@ class App extends Component {
         <Route path={users_setup} exact component={userSetup}/>
         <Route path={users_setup_id} exact component={userSetup}/>
         <Route path={admindashboard} component={MainApp}/>
-        <Route path={signout} render={ () => ( <Redirect to="/" /> ) } />
+        {/* <Route path={signout} render={ () => ( <Redirect to="/" /> ) } /> */}
+        <Route path={signout} component={SignOut} />
       </div>
     )
   }
