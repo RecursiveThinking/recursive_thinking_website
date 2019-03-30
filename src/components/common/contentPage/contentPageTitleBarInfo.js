@@ -1,6 +1,7 @@
 import { ROUTES_REACT } from '../../../standards/routes'
 
 const {
+  dashboard,
   unscheduledlessons,
   lessons_create,
   // lessons_edit,
@@ -115,4 +116,18 @@ export const TITLE_BAR_INTERVIEWQUESTIONS_ANSWERS_DELETE = {
   subheading: 'Or Click on the Button to Return to All Interview Questions',
   buttontext: 'Go Back to Interview Questions',
   link: interviewquestions
+}
+
+export const TITLE_BAR_ADMIN_PANEL = {
+  heading: 'The Administrator Panel ',
+  subheading: 'Or Click on the Button to Return to Your Dashboard',
+  buttontext: 'Go Back to Dashboard',
+  link: dashboard
+}
+
+export const TITLE_BAR_SIGN_OUT = {
+  heading: 'Signing Out ',
+  subheading: 'See you Later',
+  buttontext: '',
+  link: null
 }
