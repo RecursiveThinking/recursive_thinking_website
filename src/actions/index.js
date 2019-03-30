@@ -3,7 +3,7 @@ import { CREDENTIALS } from '../credentials/cognitoCreds'
 // import AWS from 'aws-sdk'
 // import { browserHistory } from 'react-router'
 
-import { getCurrentUserFromSession } from '../functions/authMethods';
+import { getCurrentUserFromSession, signOut } from '../functions/authMethods';
 // import LessonMethods from '../functions/lessonMethods';
 import ModelConverterForUpdate from '../models/modelConverterForUpdate';
 
@@ -43,12 +43,12 @@ import {
   ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
   
   FETCH_SKILLS, 
-  // CREATE_SKILL,
-  // GET_SKILL_BY_ID, EDIT_SKILL_BY_ID, DELETE_SKILL_BY_ID,
+  CREATE_SKILL,
+  GET_SKILL_BY_ID, EDIT_SKILL_BY_ID, DELETE_SKILL_BY_ID,
   
   ERRORS_FETCH_SKILLS, 
-  // ERRORS_CREATE_SKILL,
-  // ERRORS_GET_SKILL_BY_ID, ERRORS_EDIT_SKILL_BY_ID, ERRORS_DELETE_SKILL_BY_ID,
+  ERRORS_CREATE_SKILL,
+  ERRORS_GET_SKILL_BY_ID, ERRORS_EDIT_SKILL_BY_ID, ERRORS_DELETE_SKILL_BY_ID,
   
   FETCH_HOMESCREEN_QUOTES,
   
@@ -82,7 +82,7 @@ const OPTIONS = {
 export const isPayloadEmpty = (obj) => {
   for(var key in obj) {
     if(obj.hasOwnProperty(key))
-        return false;
+      return false;
   }
   return true;
 }
@@ -91,9 +91,11 @@ export const checkThenReturnAppropriateResBody = (responseBody) => {
   // this will check to see if the response body is an empty object ( because .get Dynamo method returns an empty object in the body id nothing is found.  Yeah, its stupid... )
   if(isPayloadEmpty(responseBody)){
     // the response body is an empty object, overwrite the body to evaluate falsy
+    console.log('res body is empty, setting to null')
     responseBody = null;
   } else { 
     // the response body is a valid object, so return it of the key from the DB (Item)
+    console.log('res body has return, set to .Item from DynamoDB')
     responseBody = responseBody.Item
   }
   return responseBody
@@ -158,7 +160,7 @@ export const getCurrentUserById = () => {
   return async (dispatch) => {
     await getCurrentUserFromSession()
       .then(userInSesson => {
-        console.log('currentAuthedUser: ', userInSesson)
+        console.log('@ getCurrentUserById Action - userInSesson: ', userInSesson)
         dispatch(currentUser(userInSesson.idToken.payload.sub))
         // dispatch()
         // console.log('user', user)
@@ -173,7 +175,7 @@ export const getCurrentUserById = () => {
 }
 
 export const currentUser = (userId) => {
-  console.log('lessonId @ getLessonById action: ', userId)
+  console.log('userId @ currentUser action: ', userId)
   // userId = "9sdd7120-8ed0-11e8-b260-d5e4455e16bd"
   // \/ GOOD /\ BAD
   // userId = "9cdd7120-8ed0-11e8-b260-d5e4455e16bd"
@@ -183,7 +185,7 @@ export const currentUser = (userId) => {
   // console.log('currentUser', currentUser)
   return async (dispatch) => {
     // const currentUser = await getCurrentAuthenticatedUser()
-    await initFetchCall(URL, funcOptions, true)
+    await initFetchCall(URL, funcOptions, false)
       .then(res => {
         const { status } = res;
         console.log('res @ getUserByID: ', res)
@@ -244,12 +246,11 @@ export const fetchUsers = () => {
 export const createUser = (newUser) => {
   console.log('userValues @ createUser action: ', newUser);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}`
-  let funcOptions = { 
-    ...OPTIONS,
-    method: HTTP_METHODS.post,
-    body: JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, newUser))
-  };
+  let funcOptions = { ...OPTIONS };
+  funcOptions.method = HTTP_METHODS.post;
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, newUser));
   console.log('funcOptions', funcOptions);
+  
   return async (dispatch) => {
     await initFetchCall(URL, funcOptions, false)
       .then(res => {
@@ -260,16 +261,16 @@ export const createUser = (newUser) => {
           dispatch({ type: CREATE_USER, payload: res })
           dispatch({ type: ERRORS_CREATE_USER, payload: errorNotExistPayload })
         }
-        if(res.body.isProfileSetup){
-          console.log('route from createUser to Dashboard')
-          history.push(ROUTES_REACT.dashboard)
-        } else {
-          console.log('route from createUser to editUser')
-          history.push(`${ROUTES_REACT.users_setup}/${res.body.userId}`)
-        }
+        // if(res.body.isProfileSetup){
+        //   console.log('route from createUser to Dashboard')
+        //   history.push(ROUTES_REACT.dashboard)
+        // } else {
+        //   console.log('route from createUser to editUser')
+        //   history.push(`${ROUTES_REACT.users_setup}/${res.body.userId}`)
+        // }
         return res
       })
-      .err(err => {
+      .catch(err => {
         dispatch({ type: ERRORS_CREATE_USER, payload: err})
         history.push(ROUTES_REACT.profile_create)
         return err
@@ -278,7 +279,7 @@ export const createUser = (newUser) => {
 }
 
 export const getUserById = (userId) => {
-  console.log('lessonId @ getLessonById action: ', userId)
+  console.log('userId @ getUserById action: ', userId)
   // userId = "9sdd7120-8ed0-11e8-b260-d5e4455e16bd"
   // \/ GOOD /\ BAD
   // userId = "9cdd7120-8ed0-11e8-b260-d5e4455e16bd"
@@ -286,7 +287,7 @@ export const getUserById = (userId) => {
   let funcOptions = {...OPTIONS}
   funcOptions.method = HTTP_METHODS.get
   // console.log('currentUser', currentUser)
-  return async dispatch => {
+  return async (dispatch) => {
     // const currentUser = await getCurrentAuthenticatedUser()
     await initFetchCall(URL, funcOptions, false)
       .then(res => {
@@ -307,7 +308,39 @@ export const getUserById = (userId) => {
   }
 }
 
-export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
+export const editUserLastLogout = (userObj, thenPushPath, catchPushPath) => {
+  const { user: { lastLogout } } = DM;
+  console.log('userObj @ editUserLastLogout action: ', userObj);
+  let dupUserObj = { ...userObj };
+  dupUserObj[lastLogout] = new Date().toString();
+  //
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${userObj.userId}`;
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.put;
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, dupUserObj));
+  
+  return async (dispatch) => {
+    await initFetchCall(URL, funcOptions, false)
+      .then(res => {
+        console.log('res @ editUserLastLogout action then if: ', res);
+        signOut()
+          .then(data => {
+            history.push(ROUTES_REACT.root);
+            return data;
+          })
+          .catch(err => {
+            return err;
+          })
+        return res;
+      })
+      .catch(err => {
+        console.log('err: ', err);
+        return err;
+      })
+  }
+}
+
+export const editUserById = (edittedUser, thenPushPath, catchPushPath, removeUserIdFromTheseSkillObjs, addUserIdToTheseSkillObjs) => {
   const { user: { updatedAt } } = DM
   console.log('userObj @ editUserById action: ', edittedUser);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${edittedUser.userId}`;
@@ -322,8 +355,37 @@ export const editUserById = (edittedUser, thenPushPath, catchPushPath) => {
     await initFetchCall(URL, funcOptions, false)
       .then(res => {
         const { status } = res;
-        console.log('res @ editUserById: ', res);
         if(status === 200){
+          console.log('res @ editUserById action then if: ', res);
+          // re,pve userId to these skillObjs          
+          if(removeUserIdFromTheseSkillObjs){
+            if(removeUserIdFromTheseSkillObjs.length){
+              removeUserIdFromTheseSkillObjs.forEach(skillObj => {
+                let dupSkillObj = { ...skillObj };
+                const { profileSkill: { _usersWithSkill, updatedAt }} = DM;
+                // remove userId from skillObj
+                console.log('editUserById - remove userId from skill (before): ', edittedUser.userId, dupSkillObj)
+                dupSkillObj[_usersWithSkill] = dupSkillObj[_usersWithSkill].filter(userId => userId !== edittedUser.userId);
+                console.log('editUserById - remove userId from skill (after): ', edittedUser.userId, dupSkillObj)
+                dispatch(editSkillById(dupSkillObj, null, null))
+              })
+            }
+          }
+          // add userId to these skillObjs
+          if(addUserIdToTheseSkillObjs){
+            if(addUserIdToTheseSkillObjs.length){
+              addUserIdToTheseSkillObjs.forEach(skillObj => {
+                let dupSkillObj = { ...skillObj };
+                const { profileSkill: { _usersWithSkill }} = DM;
+                console.log('editUserById = add userId from skill (before): ', edittedUser.userId, dupSkillObj);
+                dupSkillObj[_usersWithSkill].push(edittedUser.userId)
+                console.log('editUserById = add userId from skill (after): ', edittedUser.userId, dupSkillObj);
+                dispatch(editSkillById(dupSkillObj, null, null))
+              })
+            }
+          }
+          // then successfully updated user object before go to reducer, editskills
+          dispatch(getCurrentUserById())
           dispatch({ type: EDIT_USER_BY_ID, payload: res });
           dispatch({ type: ERRORS_EDIT_USER_BY_ID, payload: errorNotExistPayload });
         }
@@ -541,6 +603,13 @@ export const createInterviewQuestion = (newInterviewQuestion) => {
       .then(res => {
         const { status } = res;
         if(status === 200){
+          // if interview question goes thorugh, we need to update the _interviewquestionsWithCategory for each Id in the newInterviewQuestion.categories
+          if(newInterviewQuestion.categories.length){
+            //
+            newInterviewQuestion.categories.forEach(categoryid => {
+              dispatch(editSkillById(categoryid, null, null, null, newInterviewQuestion.Id))
+            })
+          }
           dispatch({ type: CREATE_INTERVIEW_QUESTION, payload: res })
           dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: errorNotExistPayload })
         }
@@ -587,7 +656,7 @@ export const getInterviewQuestionById = (interviewquestionId) => {
   }
 }
 
-export const editInterviewQuestionById = (edittedInterviewQuestion) => {
+export const editInterviewQuestionById = (edittedInterviewQuestion, thenPushPath, catchPushPath, removeTheseCategoryObjsFromIntQuest, addTheseCategoryObjsToIntQuest) => {
   const { intQuestion: { updatedAt }} = DM;
   // console.log('InterviewQuestionId @ editInterviewQuestionById action: ', edittedInterviewQuestion.Id)
   console.log('editIntQuestionObj @ editInterviewQuestionById action: ', edittedInterviewQuestion)
@@ -604,6 +673,32 @@ export const editInterviewQuestionById = (edittedInterviewQuestion) => {
         const { status } = res;
         if(status === 200){
           console.log('res @ editIntQuestion if: ', res)
+          if(removeTheseCategoryObjsFromIntQuest){
+            if(removeTheseCategoryObjsFromIntQuest.length){
+              removeTheseCategoryObjsFromIntQuest.forEach(categoryObj => {
+                let dupCategoryObj = { ...categoryObj };
+                const { profileSkill: { _interviewquestionsWithCategory, updatedAt }} = DM;
+                // remove intQuestion(Id) from _interviewquestionsWithCategory
+                console.log('editIntQuestion - remove intQuestId from category (before): ', dupCategoryObj, edittedInterviewQuestion.Id)
+                dupCategoryObj[_interviewquestionsWithCategory] = dupCategoryObj[_interviewquestionsWithCategory].filter(intQuestionId => intQuestionId !== edittedInterviewQuestion.Id);
+                // dupCategoryObj[updatedAt] = new Date().toString();
+                console.log('editIntQuestion - remove intQuestId from category (after): ', dupCategoryObj, edittedInterviewQuestion.Id)
+                dispatch(editSkillById(dupCategoryObj, null, null))
+              })
+            }
+          }
+          if(addTheseCategoryObjsToIntQuest){
+            if(addTheseCategoryObjsToIntQuest.length){
+              addTheseCategoryObjsToIntQuest.forEach(categoryObj => {
+                let dupCategoryObj = { ...categoryObj };
+                const { profileSkill: { _interviewquestionsWithCategory, updatedAt }} = DM;
+                // add intQuestion(Id) to _interviewquestionsWithCategory
+                dupCategoryObj[_interviewquestionsWithCategory].push(edittedInterviewQuestion.Id);
+                // dupCategoryObj[updatedAt] = new Date().toString();
+                dispatch(editSkillById(dupCategoryObj, null, null));
+              })
+            }
+          }
           dispatch({ type: EDIT_INTERVIEW_QUESTION_BY_ID, payload: res })
           dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
@@ -632,6 +727,12 @@ export const deleteInterviewQuestionById = (interviewquestionId) => {
         const { status } = res
         console.log('deleteIntQuestIdResponse: ', res)
         if(status === 200){
+          // if the question has answers, then delete them.
+          if(res.body.answersToQuestion.length){
+            res.body.answersToQuestion.forEach(intQuestAnswerId => {
+              dispatch(deleteInterviewQuestionAnswerById(intQuestAnswerId, res.body.Id))
+            })
+          }
           dispatch({ type: DELETE_INTERVIEW_QUESTION_BY_ID, payload: res })
           dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload})
         }
@@ -716,6 +817,8 @@ export const getInterviewQuestionAnswerById = (interviewquestionanswerId) => {
         const { status } = res;
         console.log('response @ getIntQuestionAnswerById: ', res);
         if(status === 200){
+          res.body = checkThenReturnAppropriateResBody(res.body)
+          console.log('res.body: ', res.body)
           dispatch({ type: GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
           dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
         }
@@ -813,15 +916,63 @@ export const fetchSkills = () => {
   }
 }
 
-export const createSkill = () => {
-
+export const createSkill = (newSkill, thenPushPath, catchPushPath) => {
+  console.log('newSkill @ createSkill action: ', newSkill);
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.skills}`
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.post;
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.profileSkill, newSkill));
+  console.log('funcOptions @ createSkill: ', funcOptions);
+  
+  return async (dispatch) => {
+    await initFetchCall(URL, funcOptions, true)
+      .then(res => {
+        const { status } = res;
+        if(status === 200){
+          dispatch({ type: CREATE_SKILL, payload: res });
+          dispatch({ type: ERRORS_CREATE_SKILL, payload: errorNotExistPayload });
+        }
+        // history.push()
+        return res;
+      })
+      .catch(err => {
+        dispatch({ type: ERRORS_CREATE_SKILL, payload: err })
+        console.log('history push to back to createSkill @ createSkill')
+        // history.push()
+        return err;
+      })
+  }
 }
 
 export const getSkillById = () => {
   
 }
 
-export const editSkillById = () => {
+export const editSkillById = (edittedSkill, thenPushPath, catchPushPath) => {
+  const { profileSkill: { updatedAt } } = DM  
+  console.log('skillId @ editSkillById action: ', edittedSkill.id)
+  console.log('edittedSkill @ editSkillById action: ', edittedSkill)
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.skills}/${edittedSkill.id}`;
+  let funcOptions = {...OPTIONS};
+  funcOptions.method = HTTP_METHODS.put;
+  edittedSkill[updatedAt] = new Date().toString();
+  funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.profileSkill, edittedSkill));
+  console.log('funcOptions @ editSkill: ', funcOptions);
+  
+  return async (dispatch) => {
+    await initFetchCall(URL, funcOptions, true)
+      .then(res => {
+        const { status } = res;
+        if(status === 200){
+          dispatch({ type: EDIT_SKILL_BY_ID, payload: res });
+          dispatch({ type: ERRORS_EDIT_SKILL_BY_ID, payload: errorNotExistPayload });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: ERRORS_EDIT_SKILL_BY_ID, payload: err })
+        history.push(`${ROUTES_REACT.skills_edit}/${edittedSkill.id}`)
+      })
+  }
   
 }
 
