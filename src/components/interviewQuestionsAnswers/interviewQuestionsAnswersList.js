@@ -45,7 +45,7 @@ const interviewQuestionsAnswersList = ({...props}) => {
         answerWrittenByUser = lookupTableUsers[answer[_createdByUser]].name
       }
 
-      let optionList = UtilityMethods.generateOptionsListAnswers(currentUser.userId, currentUser.admin, intQuestionId, interviewquestionsanswers_edit, interviewquestionsanswers_edit, interviewquestionsanswers_delete, answer[_createdByUser], answer[Id], 'fs14')
+      let optionList = UtilityMethods.generateOptionsListAnswers(currentUser.userId, currentUser.admin, intQuestionId, interviewquestionsanswers_edit, interviewquestionsanswers_edit, interviewquestionsanswers_delete, answer[_createdByUser], answer[Id], 'fs16')
 
       return (
         <li key={answer[Id]} className="fc-answers">
