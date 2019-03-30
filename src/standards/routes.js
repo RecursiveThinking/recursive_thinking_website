@@ -44,6 +44,13 @@ export const ROUTES_REACT = {
   interviewquestionsanswers_delete: `${ROUTES_API.interviewquestions}/:questId/answers${CEDV.delete}`,
   interviewquestionsanswers_delete_id: `${ROUTES_API.interviewquestions}/:questId/answers${CEDV.delete}/:ansId`,
   
+  skills_create: `${ROUTES_API.skills}${CEDV.create}`,
+  skills_create_id: `${ROUTES_API.users}${CEDV.create}/:id`,
+  skills_edit: `${ROUTES_API.users}${CEDV.edit}`,
+  skills_edit_id: `${ROUTES_API.users}${CEDV.edit}/:id`,
+  skills_delete: `${ROUTES_API.users}${CEDV.delete}`,
+  skills_delete_id: `${ROUTES_API.users}${CEDV.delete}/:id`,
+  
   users_create: `${ROUTES_API.users}${CEDV.create}`,
   users_create_id: `${ROUTES_API.users}${CEDV.create}/:id`,
   users_setup: `${ROUTES_API.users}/setup`,  
