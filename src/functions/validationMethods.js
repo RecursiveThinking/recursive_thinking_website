@@ -1,3 +1,5 @@
+
+
 class ValidationMethods {
   static checkForFullName(inputName){
     // this function checks for a first and last name. 
@@ -40,6 +42,20 @@ class ValidationMethods {
     }
   }
   
+  static doesContainNumberOfWords(textAreaValue, wordLimit){
+    let splitAtLineBreak = textAreaValue.trim().split("\n\n");
+    let splitAtSpace = [];
+    splitAtLineBreak.forEach(entry => { 
+      // console.log('entry: ', entry.split(' '))
+      entry.split(' ').forEach(word => splitAtSpace.push(word))
+    })
+    // console.log('check @ doesContainNumberOfWords: ', splitAtLineBreak, splitAtSpace)
+    if(splitAtSpace.length >= wordLimit){
+      return true;
+    }
+    return false;
+  }
+  
   static isEmailAddressValid(emailValue){
     // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -50,6 +66,8 @@ class ValidationMethods {
     const re = /^[0-9]{6}$/
     return re.test(Number(inputCode));
   }
+  
 }
+
 
 export default ValidationMethods
