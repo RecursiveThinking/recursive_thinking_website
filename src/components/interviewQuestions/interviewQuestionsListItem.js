@@ -80,7 +80,7 @@ class InterviewQuestionsListItem extends Component {
     } else {
       ANSWER_STRING = `${intQuestion.answersToQuestion.length} Answers`
     }
-    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_ban,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_delete, intQuestion[_createdByUser], intQuestion[Id], 'fs18')
+    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_ban,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_delete, intQuestion[_createdByUser], intQuestion[Id], 'fs20')
     
     let formattedDate = DateMethods.getFormattedDate(intQuestion[createdAt])
     return (
