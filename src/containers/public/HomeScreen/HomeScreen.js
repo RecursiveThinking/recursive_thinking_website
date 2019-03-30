@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchUsers, fetchHomeScreenQuotes } from '../../../actions/index';
+import { FETCHING } from '../../../actions/action_types';
+import { fetchHomeScreenQuotes } from '../../../actions/index';
 
 import Header from '../header/header';
 import Footer from '../../../components/footer/footer';
@@ -24,7 +25,7 @@ class PublicHomeScreen extends Component {
   }
   
   componentDidMount(){
-    this.props.fetchUsers();
+    // this.props.fetchUsers();
     this.props.fetchHomeScreenQuotes();
   }
   
@@ -32,11 +33,29 @@ class PublicHomeScreen extends Component {
     this.setState( {showModalSignUp: !this.state.showModalSignUp} )
   }
   
+  renderSlider = () => {
+    if(this.props.allHomeScreenQuotes === FETCHING){
+      return (
+        <div>Loading</div>
+      )
+    } 
+    else if (!this.props.allHomeScreenQuotes){
+      return (
+        <div>Hello</div>
+      )
+    }
+    else {
+      return (
+        <Slider userInfoQuoteArr={this.props.allHomeScreenQuotes}/>
+      )
+    }
+  }
+  
   render(){
     // console.log('props', this.props)
     const {
       allHomeScreenQuotes,
-      lookupTableAllUsers
+      // lookupTableAllUsers
     } = this.props;
     const {
       user: {
@@ -68,19 +87,19 @@ class PublicHomeScreen extends Component {
       }
     ]
     // this makes a user 
-    let userInfoQuoteArray = [];
-    for(let i = 0; i < allHomeScreenQuotes.length; i += 1){
-      if(lookupTableAllUsers[allHomeScreenQuotes[i]['_createdByUser']]){
-        let tempUser = lookupTableAllUsers[allHomeScreenQuotes[i]['_createdByUser']]
-        let pushUser = {}
-          pushUser[userId] = tempUser[userId]
-          pushUser[avatar] = tempUser[avatar]
-          pushUser[name] = tempUser[name]
-          pushUser[title] = tempUser[title]
-          pushUser['quote'] = allHomeScreenQuotes[i]['quote']
-        userInfoQuoteArray.push(pushUser)
-      }
-    }
+    // let userInfoQuoteArray = [];
+    // for(let i = 0; i < allHomeScreenQuotes.length; i += 1){
+    //   if(lookupTableAllUsers[allHomeScreenQuotes[i]['_createdByUser']]){
+    //     let tempUser = lookupTableAllUsers[allHomeScreenQuotes[i]['_createdByUser']]
+    //     let pushUser = {}
+    //       pushUser[userId] = tempUser[userId]
+    //       pushUser[avatar] = tempUser[avatar]
+    //       pushUser[name] = tempUser[name]
+    //       pushUser[title] = tempUser[title]
+    //       pushUser['quote'] = allHomeScreenQuotes[i]['quote']
+    //     userInfoQuoteArray.push(pushUser)
+    //   }
+    // }
     
     const personQuoteList = userArray.map((user, index) => {
       return (
@@ -89,6 +108,8 @@ class PublicHomeScreen extends Component {
         </li>
       )
     })
+
+    console.log('this.props: ', this.props)
     
     return (
       <main>
@@ -140,7 +161,8 @@ class PublicHomeScreen extends Component {
             {personQuoteList}
           </ul>
         </section>
-        <Slider userInfoQuoteArr={userInfoQuoteArray}/>
+        {this.renderSlider()}
+        {/* <Slider userInfoQuoteArr={allHomeScreenQuotes}/> */}
         <footer>
           <Footer /> 
         </footer>
@@ -151,16 +173,13 @@ class PublicHomeScreen extends Component {
 
 function mapStateToProps(state){
   return {
-    allUsers: state.users.allUsers,
-    allUsersAPIResponse: state.users.allUsersAPIResponse,
-    lookupTableAllUsers: state.users.lookupTableAllUsers,
-    allHomeScreenQuotes: state.homescreenquotes.allHomeScreenQuotes,
-    allHomeScreenQuotesAPIResponse: state.homescreenquotes.allHomeScreenQuotesAPIResponse
+    // allUsers: state.users.allUsers,
+    allHomeScreenQuotes: state.homescreenquotes.allHomeScreenQuotes
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchUsers, fetchHomeScreenQuotes}, dispatch)
+  return bindActionCreators({ fetchHomeScreenQuotes }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicHomeScreen);
