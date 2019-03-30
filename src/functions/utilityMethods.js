@@ -19,6 +19,9 @@ export default class utilityMethods {
     return returnArray;
   }
   static createObjectFromArrayByProp(arrayToObj, arrayProp){
+    if(!arrayToObj){
+      return null;
+    }
     let returnObj = {}
     arrayToObj.forEach((item) => {
       returnObj[item[arrayProp]] = item;
@@ -37,7 +40,7 @@ export default class utilityMethods {
     let optionListVar = [ 'ban', 'edit', 'delete']
     function returnOptionsList(item, currentUser, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, itemIdent, sizeP, indexP){
       if(item === 'ban'){
-        // let classString = `${sizeP} fcAlert fa fa-ban`
+        // let classString = `${sizeP} fcWarn fa fa-ban`
         return (
           // <li key={indexP}>
           //   <i className={classString}></i>
@@ -59,7 +62,7 @@ export default class utilityMethods {
       }
       else if(item === 'delete'){
         if(currentUser === itemCreatedBy || isCurrentUserAdmin){
-          let classString = `${sizeP} fcWarn fa fa-trash-o`
+          let classString = `${sizeP} fcError fa fa-trash-o`
           return (
             <li key={indexP}>
               <Link to={`${pathForDeleteLink}/${itemIdent}`}>
@@ -79,7 +82,7 @@ export default class utilityMethods {
     let optionListVar = [ 'ban', 'edit', 'delete']
     function returnOptionsListAnswers(item, currentUser, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, answerId, sizeP, indexP){
       if(item === 'ban'){
-        // let classString = `${sizeP} fcAlert fa fa-ban`
+        // let classString = `${sizeP} fcWarn fa fa-ban`
         return (
           // <li key={indexP}>
           //   <i className={classString}></i>
@@ -101,7 +104,7 @@ export default class utilityMethods {
       }
       else if(item === 'delete'){
         if(currentUser === itemCreatedBy || isCurrentUserAdmin){
-          let classString = `${sizeP} fcWarn fa fa-trash-o`
+          let classString = `${sizeP} fcError fa fa-trash-o`
           return (
             <li key={indexP}>
               <Link to={`/interviewquestions/${questionId}/answers/delete/${answerId}`}>
