@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 
 import ReactTags from 'react-tag-autocomplete';
 
+import {PATH_FOR_IMAGES} from '../../standards/publicPaths';
+
 import ValidationMethods from '../../functions/validationMethods';
 
 class LessonForm extends Component {
@@ -10,24 +12,42 @@ class LessonForm extends Component {
     super(props)
     this.state = {
       addToTaughtByUsers: [],
+      localTaughtByUsersArray: [],
       allUsers: this.props.allUsers,
       filterUsers: this.props.allUsers
+    }
+  }
+  
+  componentDidMount(){
+    if(this.props.lesson){
+      const {
+        lessonTaughtBy
+      } = this.props.lesson;
+      this.setState({ localTaughtByUsersArray: lessonTaughtBy}, 
+        () => {
+          console.log('state @ mount: ', this.state)
+          this.updateFilteredArray()
+        })
     }
   }
   
   updateFilteredArray = () => {
     const {
       addToTaughtByUsers,
+      localTaughtByUsersArray,
       allUsers
     } = this.state;
     
     let updatedFilterUsers = [ ...allUsers ];
     console.log('updatedFilterUsers: ', updatedFilterUsers)
-    let addToTaughtByUsersId = [];
-    addToTaughtByUsers.forEach(user => addToTaughtByUsersId.push(user.userId))
-    console.log('addToTaughtByUsersId: ', addToTaughtByUsersId)
+    let filterOutTheseUserIds = [];
+    addToTaughtByUsers.forEach(user => filterOutTheseUserIds.push(user.userId))
+    if(localTaughtByUsersArray.length){
+      localTaughtByUsersArray.forEach(user => filterOutTheseUserIds.push(user.userId))
+    }
+    console.log('filterOutTheseUserIds: ', filterOutTheseUserIds)
     console.log('state', this.state)
-    updatedFilterUsers = updatedFilterUsers.filter(item => !addToTaughtByUsersId.includes(item.userId))
+    updatedFilterUsers = updatedFilterUsers.filter(item => !filterOutTheseUserIds.includes(item.userId))
     console.log('updateFilterUsers: After filter: ', updatedFilterUsers)
     this.setState({filterUsers: updatedFilterUsers})
   }
@@ -43,9 +63,19 @@ class LessonForm extends Component {
     this.setState({ addToTaughtByUsers }, () => this.updateFilteredArray())
   }
   
+  handleDeleteCurrentlyTeaching = (index) => {
+    console.log('delete this tag: ', index)
+    console.log('which is user: ', this.props.lesson.lessonTaughtBy[index])
+    let dupLessonTaughtBy = this.state.localTaughtByUsersArray.slice(0);
+    // this.props.lesson.lessonTaughtBy = this.props.lesson.lessonTaughtBy.splice(index, 1);
+    dupLessonTaughtBy.splice(index, 1);
+    console.log('dupLessonTaughBy After: ', dupLessonTaughtBy)
+    this.setState({ localTaughtByUsersArray: dupLessonTaughtBy })
+  }
+  
   onSubmit = (formValues) => {
     // console.log('formValues @ lessonForm Comp: ', formValues)
-    this.props.onSubmit(formValues, this.state.addToTaughtByUsers)
+    this.props.onSubmit(formValues, this.state.addToTaughtByUsers, this.state.localTaughtByUsersArray)
   }
   
   renderField(field){
@@ -152,6 +182,51 @@ class LessonForm extends Component {
     }
   }
   
+  ifTaughtByArrayRenderUI = () => {
+    if(this.props.lesson){
+      const {
+        localTaughtByUsersArray
+      } = this.state;
+      console.log('+++++++++++++++++++++')
+      console.log('have lessonTaughtByArray: ', localTaughtByUsersArray)
+      // lessonTaughtBy is the array
+      let renderCurrentTeacherSection = localTaughtByUsersArray.map((userObj, index) => {
+        console.log('user.name: ', userObj.name)
+        return (
+          // <div>{user.name}</div>
+          <li className="userTags" key={userObj.userId}>
+              {/* <figure> */}
+              <img className="avatarXXXS" src={`${PATH_FOR_IMAGES}/${userObj.avatar}`} alt={`avatar of ${userObj.name}`}/>
+              {/* </figure> */}
+              <h5 className="userTagText fw300 fs16 ls10 fcGrey424041 ta-cent">{userObj.name}
+              {/* <span className="userTagTextSpanMid fw300 fs16 ls10 fcGrey424041 ta-cent">|</span> */}
+              <span 
+                onClick={() => this.handleDeleteCurrentlyTeaching(index)}
+                className="userTagTextSpanRight fw300 fs16 ls10 fcGrey424041 ta-cent"
+              >X</span></h5>
+          </li>
+        )
+      })
+      return(
+        <>
+          <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
+            <label htmlFor="">Currently Teaching This Lesson:</label>
+          </div>
+          <ul className="fc--disp-flex fc--fwrap--yes">
+            {renderCurrentTeacherSection}
+          </ul>
+        </>
+        // null
+      )
+    } else {
+      console.log('--------------------')
+      console.log('DO NOT HAVE lessonTaughtByArray')
+      return (
+        null
+      )
+    }
+  }
+  
   render(){
     const {
       content
@@ -223,7 +298,10 @@ class LessonForm extends Component {
                   handleAddition={this.handleAddition}
                   handleDelete={this.handleDelete}
                 />
-              </div> 
+              <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
+                {this.ifTaughtByArrayRenderUI()}
+              </div>
+              </div>
               <hr className="modalHR mt80" />
               <div className="ta-cent">
                 {
@@ -232,6 +310,7 @@ class LessonForm extends Component {
                   <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
                 }
               </div>
+              {/* here would be any existing taughtByUsers */}
           </fieldset>
           </div>
           </div>
@@ -259,9 +338,9 @@ function validate(values){
   }
   if(!values.lessonDescription){ errors.lessonDescription = 'Lesson Descriptions can not be Empty' }
   if(values.lessonDescription){
-    const descriptionCharLimit = 10;
-    if(!ValidationMethods.isWordOverCharLimit(values.lessonDescription, descriptionCharLimit)){
-      errors.lessonDescription = `Lesson Descriptions must contain at Least ${descriptionCharLimit} Characters`
+    const descriptionWordLimit = 10;
+    if(!ValidationMethods.doesContainNumberOfWords(values.lessonDescription, descriptionWordLimit)){
+      errors.lessonDescription = `Lesson Descriptions must contain at Least ${descriptionWordLimit} Words`
     }
   }
     

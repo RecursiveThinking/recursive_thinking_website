@@ -5,7 +5,7 @@ import CategoryList from '../common/category/categoryList'
 // import FormAction from '../common/formAction/formAction';
 // import { FORM_ACTION_INTERVIEWQUESTIONSANSWER_CREATE } from '../common/formAction/formActionInfo';
 
-// import ValidationMethods from '../../functions/validationMethods'
+import ValidationMethods from '../../functions/validationMethods'
 
 import DM from '../../standards/dictModel'
 
@@ -114,7 +114,12 @@ function validate(values){
   // logic
   // interview question answer modal
   if(!values.interviewQuestionAnswerDescription){ errors.interviewQuestionAnswerDescription = 'Please enter a Valid Reply to the Interview Question' }
-  
+  if(values.interviewQuestionAnswerDescription){
+    const detailsWordLimit = 10;
+    if(!ValidationMethods.doesContainNumberOfWords(values.interviewQuestionAnswerDescription, detailsWordLimit)){
+      errors.interviewQuestionAnswerDescription = `Interview Question Descriptions must contain at Least ${detailsWordLimit} Words`
+    }
+  };
   // return object - if returns empty validation is good - submit.  if returns an object with something then it is bad.
   return errors
 }

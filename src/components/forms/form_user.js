@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 
 import ReactTags from 'react-tag-autocomplete'
+import DateTimePicker from 'react-widgets/lib/DateTimePicker'
+import ValidationMethods  from '../../functions/validationMethods'
 
 import { SkillOrCategory } from '../../models/models';
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, CODEPEN_API_URL } from '../../credentials/githubApi';
+import { validateGitHubUsername, validateCodePenUsername, validateLinkedIn, validatePortfolioURL } from '../../functions/urlValidationMethods'
 
 import Modal from '../../components/common/modal/modal';
 import DM from '../../standards/dictModel'
+
+import '../../css/react-widgets/react-widgets.css'
+import Moment from 'moment'
+import momentLocalizer from 'react-widgets-moment';
+
+// const  { DOM: { textarea } } = React
+Moment.locale('en')
+momentLocalizer()
 
 const {
   user: {
@@ -28,23 +40,61 @@ const {
   }
 } = DM
 
-const SKILLS_PROFESSIONAL = 'skillsProfessional'
-const SKILLS_SOFTWARE = 'skillsSoftware'
-const SKILLS_LANGUAGES = 'skillsLanguage'
+// const SKILLS_PROFESSIONAL = 'skillsProfessional'
+// const SKILLS_SOFTWARE = 'skillsSoftware'
+// const SKILLS_LANGUAGES = 'skillsLanguage'
+
+const SKILLS_PROFESSIONAL = 'addTheseSkillObjsProfessional'
+const SKILLS_SOFTWARE = 'addTheseSkillObjsSoftware'
+const SKILLS_LANGUAGES = 'addTheseSkillObjsLanguages'
+
+
+
+const asyncValidate = (values) => {
+  // console.log('values @ async: ', values)
+  // console.log('values.linkGithub: ', values.linkGithub)
+  // console.log('values.linkCodepen: ', values.linkCodepen)
+  // if(values.linkCodepen !== '' || values.linkGithub !== ''){
+    const promiseGitHub = new Promise((resolve, reject) => {
+      // console.log('resolve @ promise 1: ')
+      resolve(validateGitHubUsername(values.linkGithub))
+    })
+    const promiseCodePen = new Promise((resolve, reject) => {
+      // console.log('resolve @ promise 2: ')
+      resolve(validateCodePenUsername(values.linkCodepen))
+    })
+    return Promise.all([promiseGitHub, promiseCodePen])
+      .then(val => {
+        // console.log('val: ', val)
+        if(val[0] === false){
+          // console.log('github is false: ')
+          throw ({ linkGithub: 'GitHub Username Not Found'})        
+        }
+        if(val[1] === false){
+          // console.log('codepen is false: ')
+          throw ({ linkCodepen: 'CodePen Username Not Found'})        
+        }
+        return val
+      })
+  // } else {
+  //   return [ true, true]
+  // }
+}
 
 class UserForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      skillsProfessional: this.props.currentUser.skillsProfessional,
-      addToSkillsProfessional: [],
-      skillsSoftware: this.props.currentUser.skillsSoftware,
-      addToSkillsSoftware: [],
-      skillsLanguages: this.props.currentUser.skillsLanguages,
-      addToSkillsLanguages: [],
+      localSkillsForProfessional: this.props.initialValues.skillsProfessional,
+      addTheseSkillObjsProfessional: [],
+      localSkillsForSoftware: this.props.initialValues.skillsSoftware,
+      addTheseSkillObjsSoftware: [],
+      localSkillsForLanguages: this.props.initialValues.skillsLanguages,
+      addTheseSkillObjsLanguages: [],
+      addTheseSkillObjsToDatabase: [],
+      removeUserIdFromTheseSkills: [],
       allSkills: this.props.allSkills,
       filterSkills: this.props.allSkills,
-      addToDatabase: [],
       
       showModalUserAvatar: false
     }
@@ -54,47 +104,36 @@ class UserForm extends Component {
     this.setState({ showModalUserAvatar: !this.state.showModalUserAvatar })
   }
   
-  // handleDelete (i) {
-  //   const tags = this.state.tags.slice(0)
-  //   tags.splice(i, 1)
-  //   this.setState({ tags })
-  // }
-  
-  // handleAddition (tag) {
-  //   const tags = [].concat(this.state.tags, tag)
-  //   this.setState({ tags })
-  // }
-  
   updateFilteredArray = () => {
     console.log('this.state: ', this.state)
     const {
-      skillsProfessional,
-      addToSkillsProfessional,
-      skillsSoftware,
-      addToSkillsSoftware,
-      skillsLanguages,
-      addToSkillsLanguages,
+      localSkillsForProfessional,
+      addTheseSkillObjsProfessional,
+      localSkillsForSoftware,
+      addTheseSkillObjsSoftware,
+      localSkillsForLanguages,
+      addTheseSkillObjsLanguages,
       allSkills
     } = this.state;
     
     let allSkillsForUser = [];
-    if(skillsProfessional.length){
-      skillsProfessional.forEach(item => allSkillsForUser.push(item.id))
+    if(localSkillsForProfessional.length){
+      localSkillsForProfessional.forEach(item => allSkillsForUser.push(item.id))
     }
-    if(addToSkillsProfessional.length){
-      addToSkillsProfessional.forEach(item => allSkillsForUser.push(item.id))
+    if(addTheseSkillObjsProfessional.length){
+      addTheseSkillObjsProfessional.forEach(item => allSkillsForUser.push(item.id))
     }
-    if(skillsSoftware.length){
-      skillsSoftware.forEach(item => allSkillsForUser.push(item.id))
+    if(localSkillsForSoftware.length){
+      localSkillsForSoftware.forEach(item => allSkillsForUser.push(item.id))
     }
-    if(addToSkillsSoftware.length){
-      addToSkillsSoftware.forEach(item => allSkillsForUser.push(item.id))
+    if(addTheseSkillObjsSoftware.length){
+      addTheseSkillObjsSoftware.forEach(item => allSkillsForUser.push(item.id))
     }
-    if(skillsLanguages.length){
-      skillsLanguages.forEach(item => allSkillsForUser.push(item.id))
+    if(localSkillsForLanguages.length){
+      localSkillsForLanguages.forEach(item => allSkillsForUser.push(item.id))
     }
-    if(addToSkillsLanguages.length){
-      addToSkillsLanguages.forEach(item => allSkillsForUser.push(item.id))
+    if(addTheseSkillObjsLanguages.length){
+      addTheseSkillObjsLanguages.forEach(item => allSkillsForUser.push(item.id))
     }
     console.log('allSkillsForUser', allSkillsForUser)
     // allSkillsForUser [ "skill.id as string" ]
@@ -112,17 +151,17 @@ class UserForm extends Component {
       if(!tag.id){
         // this is a new tag
         tag = new SkillOrCategory(tag, this.props.currentUser.userId);
-        const addToDatabase = [].concat(this.state.addToDatabase, tag)
-        const addToSkillsProfessional = [].concat(this.state.addToSkillsProfessional, tag)
+        const addTheseSkillObjsToDatabase = [].concat(this.state.addTheseSkillObjsToDatabase, tag)
+        const addTheseSkillObjsProfessional = [].concat(this.state.addTheseSkillObjsProfessional, tag)
         // const filterSkills = do something to filter
-        this.setState({ addToDatabase, addToSkillsProfessional }, () => this.updateFilteredArray())
+        this.setState({ addTheseSkillObjsToDatabase, addTheseSkillObjsProfessional }, () => this.updateFilteredArray())
         // this.setState({ addToDatabase, addToSkillsProfessional }, this.updateFilteredArray)
         // this.updateFilteredArray();
       } else {
         // this tag exists
         tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
-        const addToSkillsProfessional = [].concat(this.state.addToSkillsProfessional, tag)
-        this.setState({ addToSkillsProfessional }, () => this.updateFilteredArray())
+        const addTheseSkillObjsProfessional = [].concat(this.state.addTheseSkillObjsProfessional, tag)
+        this.setState({ addTheseSkillObjsProfessional }, () => this.updateFilteredArray())
         // this.setState({ addToSkillsProfessional }, this.updateFilteredArray)
         // this.updateFilteredArray();
       }
@@ -132,74 +171,73 @@ class UserForm extends Component {
       if(!tag.id){
         // this is a new tag
         tag = new SkillOrCategory(tag, this.props.currentUser.userId);
-        const addToDatabase = [].concat(this.state.addToDatabase, tag)
-        const addToSkillsSoftware = [].concat(this.state.addToSkillsSoftware, tag)
-        this.setState({ addToDatabase, addToSkillsSoftware }, () => this.updateFilteredArray())
+        const addTheseSkillObjsToDatabase = [].concat(this.state.addTheseSkillObjsToDatabase, tag)
+        const addTheseSkillObjsSoftware = [].concat(this.state.addTheseSkillObjsSoftware, tag)
+        this.setState({ addTheseSkillObjsToDatabase, addTheseSkillObjsSoftware }, () => this.updateFilteredArray())
       } else {
         // this tag exists
         tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
-        const addToSkillsSoftware = [].concat(this.state.addToSkillsSoftware, tag)
-        this.setState({ addToSkillsSoftware }, () => this.updateFilteredArray())
+        const addTheseSkillObjsSoftware = [].concat(this.state.addTheseSkillObjsSoftware, tag)
+        this.setState({ addTheseSkillObjsSoftware }, () => this.updateFilteredArray())
       }
     }
     else if(string === SKILLS_LANGUAGES){
       if(!tag.id){
         // this is a new tag
         tag = new SkillOrCategory(tag, this.props.currentUser.userId);
-        const addToDatabase = [].concat(this.state.addToDatabase, tag)
-        const addToSkillsLanguages = [].concat(this.state.addToSkillsLanguages, tag)
+        const addTheseSkillObjsToDatabase = [].concat(this.state.addTheseSkillObjsToDatabase, tag)
+        const addTheseSkillObjsLanguages = [].concat(this.state.addTheseSkillObjsLanguages, tag)
         // const filterSkills = do something to filter
-        this.setState({ addToDatabase, addToSkillsLanguages }, () => this.updateFilteredArray())
+        this.setState({ addTheseSkillObjsToDatabase, addTheseSkillObjsLanguages }, () => this.updateFilteredArray())
       } else {
         // this tag exists
         tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
-        const addToSkillsLanguages = [].concat(this.state.addToSkillsLanguages, tag)
-        this.setState({ addToSkillsLanguages }, () => this.updateFilteredArray())
+        const addTheseSkillObjsLanguages = [].concat(this.state.addTheseSkillObjsLanguages, tag)
+        this.setState({ addTheseSkillObjsLanguages }, () => this.updateFilteredArray())
       }
     }
   }
   
   handleAllSkillDeletions = (i, string) => {
     const {
-      addToDatabase,
-      addToSkillsProfessional,
-      addToSkillsSoftware,
-      addToSkillsLanguages
+      addTheseSkillObjsToDatabase,
+      addTheseSkillObjsProfessional,
+      addTheseSkillObjsSoftware,
+      addTheseSkillObjsLanguages
     } = this.state;
     
     // i is index in the array it is in for display
     if(string === SKILLS_PROFESSIONAL){
       // if in addToDatabase, remove
-      const updatedAddToDatabase = addToDatabase.filter(item => item.id !== addToSkillsProfessional[i].id)
+      const updatedAddToDatabase = addTheseSkillObjsToDatabase.filter(item => item.id !== addTheseSkillObjsProfessional[i].id)
       this.setState({ addToDatabase: updatedAddToDatabase}, () => this.updateFilteredArray())
       // remove from addToSkillProfessional
-      const removeSkillProfessional = this.state.addToSkillsProfessional.slice(0)
+      const removeSkillProfessional = this.state.addTheseSkillObjsProfessional.slice(0)
       removeSkillProfessional.splice(i, 1)
-      this.setState({ addToSkillsProfessional: removeSkillProfessional }, () => this.updateFilteredArray())
+      this.setState({ addTheseSkillObjsProfessional: removeSkillProfessional }, () => this.updateFilteredArray())
     }
     else if(string === SKILLS_SOFTWARE){
       // if in addToDatabase, remove
-      const updatedAddToDatabase = addToDatabase.filter(item => item.id !== addToSkillsSoftware[i].id)
+      const updatedAddToDatabase = addTheseSkillObjsToDatabase.filter(item => item.id !== addTheseSkillObjsSoftware[i].id)
       this.setState({ addToDatabase: updatedAddToDatabase}, () => this.updateFilteredArray())
       // remove from addToSkillSoftware
-      const removeSkillSoftware = addToSkillsSoftware.slice(0)
+      const removeSkillSoftware = addTheseSkillObjsSoftware.slice(0)
       removeSkillSoftware.splice(i, 1)
-      this.setState({ addToSkillsSoftware: removeSkillSoftware }, () => this.updateFilteredArray())
+      this.setState({ addTheseSkillObjsSoftware: removeSkillSoftware }, () => this.updateFilteredArray())
     }
     else if(string === SKILLS_LANGUAGES){
       // if in addToDatabase, remove
-      const updatedAddToDatabase = addToDatabase.filter(item => item.id !== addToSkillsLanguages[i].id)
+      const updatedAddToDatabase = addTheseSkillObjsToDatabase.filter(item => item.id !== addTheseSkillObjsLanguages[i].id)
       this.setState({ addToDatabase: updatedAddToDatabase}, () => this.updateFilteredArray())
       // remove from addToSkillLanguages
-      const removeSkillLanguages = addToSkillsLanguages.slice(0)
+      const removeSkillLanguages = addTheseSkillObjsLanguages.slice(0)
       removeSkillLanguages.splice(i, 1)
-      this.setState({ addToSkillsLanguages: removeSkillLanguages }, () => this.updateFilteredArray())
+      this.setState({ addTheseSkillObjsLanguages: removeSkillLanguages }, () => this.updateFilteredArray())
     }
   }
   
   handleAdditionSkillsProfessional = (tag) => {
     this.handleAllSkillAdditions(tag, SKILLS_PROFESSIONAL);
-    
   }
   
   handleDeleteSkillsProfessional = (i) => {
@@ -222,18 +260,98 @@ class UserForm extends Component {
     this.handleAllSkillDeletions(i, SKILLS_LANGUAGES);
   }
   
-  onSubmit = formValues => {
+  handleDeleteCurrentCategory = (stateArray, identifier, index) => {
+    console.log('stateArray: ', stateArray, 'identifier: ', identifier, 'index: ', index, 'this: ', this)
+    // state array is a copy of the particular piece of state, so can generically dup it here:
+    let dupStateArray = stateArray.slice(0);
+    // copy remove array, and add to it the item removing from particular state array
+    let dupRemoveUserIdFromTheseSkills = this.state.removeUserIdFromTheseSkills.slice(0);
+    dupRemoveUserIdFromTheseSkills.push(dupStateArray.splice(index, 1)[0])
+    if(identifier === SKILLS_PROFESSIONAL){
+      // set stateProfessional here
+      this.setState({
+        localSkillsForProfessional: dupStateArray,
+        removeUserIdFromTheseSkills: dupRemoveUserIdFromTheseSkills
+      }, () => { 
+        console.log('state after delete from UI (professional): ', this.state)
+        this.updateFilteredArray() 
+      })
+    }
+    else if(identifier === SKILLS_SOFTWARE){
+      // set stateSoftware here
+      this.setState({
+        localSkillsForSoftware: dupStateArray,
+        removeUserIdFromTheseSkills: dupRemoveUserIdFromTheseSkills
+      }, () => { 
+        console.log('state after delete from UI (software): ', this.state)
+        this.updateFilteredArray() 
+      })
+    }
+    else if(identifier === SKILLS_LANGUAGES){
+      // set stateLanguages here
+      this.setState({
+        localSkillsForLanguages: dupStateArray,
+        removeUserIdFromTheseSkills: dupRemoveUserIdFromTheseSkills
+      }, () => { 
+        console.log('state after delete from UI (languages): ', this.state)
+        this.updateFilteredArray() 
+      })
+    }
+  }
+  
+  componentDidMount(){
+    // need to filter out any existing skills from the filter skills
+    this.updateFilteredArray();
+  }
+  
+  onSubmit = (formValues) => {
     // console.log('formValues @ userForm Edit: ', formValues)
-    this.props.onSubmit(formValues)
+    if(formValues.linkGithub !== ''){
+      const GITHUB_URL = `https://github.com/`
+      formValues.linkGithub = `${GITHUB_URL}${formValues.linkGithub}/`
+    }
+    if(formValues.linkCodepen !== ''){
+      const CODEPEN_URL = `https://codepen.io/`
+      formValues.linkCodepen = `${CODEPEN_URL}${formValues.linkCodepen}/`
+    }
+    const {
+      addTheseSkillObjsToDatabase,
+      removeUserIdFromTheseSkills,
+      addTheseSkillObjsProfessional,
+      localSkillsForProfessional,
+      addTheseSkillObjsSoftware,
+      localSkillsForSoftware,
+      addTheseSkillObjsLanguages,
+      localSkillsForLanguages
+    } = this.state;
+    this.props.onSubmit(formValues, addTheseSkillObjsToDatabase, removeUserIdFromTheseSkills, addTheseSkillObjsProfessional, localSkillsForProfessional, addTheseSkillObjsSoftware, localSkillsForSoftware, addTheseSkillObjsLanguages, localSkillsForLanguages)
   }
   
   renderField(field){
-    const { meta: { touched, error }} = field;
-    const errorInput = `fc-field-row fc--disp-flex fc--fdir-row width100P ${touched && error ? 'input-invalid' : ''}`
+    const { meta: {asyncValidating, touched, error, warning }} = field;
+    // if(error){
+    //   console.log('error: ', error)
+    // }
+    // else if(warning){
+    //   console.log('warning: ', warning)
+    // }
+    // console.log('this.props @ renderField: ', field)
+    
+    const inputStyle = `fc-field-row fc--disp-flex fc--fdir-row width100P ${touched && ((error ? 'input-invalid' : '') || (warning ? 'input-warning' : '') )} ${asyncValidating ? 'async-validating' : ''}`
+    const returnErrorJSX = (styleType, message) => {
+      return (
+        <div className={styleType}>
+          <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
+            {touched ? message : ''}
+          </div>
+        </div>
+      )
+    }
+    
     return(
       <div className='fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P'>
         {/* <div className='fc-field-row fc--disp-flex fc--fdir-row width100P'> */}
-        <div className={errorInput}>
+        <div className={inputStyle}>
           <label className={field.labelStyle} htmlFor={field.name}>{field.label}</label>
           <input 
             {...field.input}
@@ -243,11 +361,7 @@ class UserForm extends Component {
           />
         </div>
         <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
-          <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width90P">
-            <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
-              {touched ? error : ''}
-            </div>
-          </div>
+          { touched && (( error && returnErrorJSX(field.errorStyle, error) ) || ( warning && returnErrorJSX(field.warnStyle, warning) )) }
         </div>
       </div>
     )
@@ -256,10 +370,11 @@ class UserForm extends Component {
   renderTextArea(field){
     const { meta: { touched, error }} = field;
     const errorInput = `width100P ${touched && error ? 'input-invalid' : ''}`
+    // console.log('field @ renderTextArea: ', field)
     return(
       <>
         <div className={errorInput}>
-          <textarea 
+          <textarea
             {...field.input}
             className={field.textAreaStyle}
             placeholder={field.placeholder}
@@ -268,7 +383,7 @@ class UserForm extends Component {
           />
         </div>
         <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
-          <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width90P">
+          <div className="error fc--disp-flex fc--fdir-row fc--jCont-fs width100P">
             <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
               {touched ? error : ''}
             </div>
@@ -278,8 +393,60 @@ class UserForm extends Component {
     )
   }
   
+  returnSkillJSXPerCategory = (stateArray, identifier) => {
+    // console.log('stateArray: ', stateArray)
+    // stateArray = [];
+    let defaultSkillHeading = '';
+    if(!stateArray.length){
+      // default message
+      if(identifier === SKILLS_PROFESSIONAL){
+        defaultSkillHeading = 'You have not added any professional skills yet.'
+      }
+      else if(identifier === SKILLS_SOFTWARE){
+        defaultSkillHeading = 'You have not added any software skills yet.'
+      }
+      else if(identifier === SKILLS_LANGUAGES){
+        defaultSkillHeading = 'You have not added any language skills yet.'        
+      }
+      return (
+        <div className="fc-field-row-full fc--disp-flex fc--fdir-col mt70 mb70 pdLR3 ta-cent">
+          <h6 className="fw500 fs20 ls12 fcGrey424041">{defaultSkillHeading}</h6>
+          <h6 className="fw300 fs14 ls10 fcGrey81 mt20">Search for a skill to add it to your profile.</h6>
+          <h6 className="fw300 fs14 ls10 fcGrey81 mt10">If you do not see the skill you are looking for, simply type out the new skill, then hit Tab or Enter to add the skill to the list.</h6>
+        </div>
+      )
+    } else {
+      // this is for the map
+      let returnSkillJSX = stateArray.map((categoryObj, index) => {
+        // console.log('identifier: ', identifier, 'categoryObj: ', categoryObj, 'index: ', index)
+        return (
+          <li 
+            className="fc--disp-flex fc--fdir-row fc--fwrap-no fc--jCont-fe fc--aItem-ce skillItem"
+            key={categoryObj.id}
+          >
+            <h5 className="fw300 fs16 ls10 fcGrey424041 ta-right">{categoryObj.name}</h5>
+            <h5 className="fw300 fs18 ls10 fcGrey424041">|</h5>
+            <h5 
+              className="fw300 fs20 ls12 fcGreenRT"
+              onClick={() => this.handleDeleteCurrentCategory(stateArray, identifier, index)}
+            >X</h5>
+          </li>
+        )
+      })
+      return (
+        <>
+          <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt20 mb20">
+            <ul className="fc--disp-flex fc--fdir-row fc--fwrap-yes fc--jCont-fs mt20 width100P">
+              {returnSkillJSX}
+            </ul>
+          </div>
+        </>
+      )
+    }
+  }
+  
   returnSkillSections = (skillArray) => {
-    console.log('skillArray', skillArray)
+    // console.log('skillArray', skillArray)
     let skillSectionJSX = skillArray.map(skillCategory => {
       const {
         id,
@@ -299,20 +466,23 @@ class UserForm extends Component {
         delimiterChars,
         handleAddition,
         handleDelete,
+        stateArray,
+        identifier
       } = skillCategory
       // console.log('skillCategory: ', skillCategory)
+      // console.log('identifier @ returnSkillSections: ', identifier)
       return (
-        <fieldset className="fieldsetSkills">
+        <fieldset key={id} className="fieldsetSkills">
           <div className="grid grid--full">
             <div className="grid-cell">
               <legend>
-                <h5 className="fw700 ls14 ttup fcGrey424041">{headingText}</h5>
+                <h5 className="fw600 ls12 fcGrey424041">{headingText}</h5>
               </legend>
               <hr className="mt10" />
-              <div className="grid grid--1of2">
+              <div className="grid grid--1of2 fc--disp-flex fc--fdir-row fc--jCont-ce">
                 <div className="grid-cell">
-                  <div className="fc-form-input-col">
-                    <label htmlFor="" className="fs24 fw300 ls14 fcGrey424041 mt45">{labelText}</label>
+                  <div className="fc-form-input-col width90P">
+                    <label htmlFor="" className="fs20 fw300 ls14 fcGrey424041 mt45">{labelText}</label>
                     {/* <input id={id} className="mt20" type="search" name={inputName} placeholder={placeholder}/> */}
                     <ReactTags
                       tags={tags}
@@ -332,7 +502,7 @@ class UserForm extends Component {
                     {/* <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre> */}
                   </div>
                 </div>
-                <div className="grid-cell">{}</div>
+                <div className="grid-cell">{this.returnSkillJSXPerCategory(stateArray, identifier)}</div>
               </div>
             </div>
           </div>
@@ -343,6 +513,43 @@ class UserForm extends Component {
     return skillSectionJSX;
   }
   
+  renderDateTimePicker = (field) => {
+    const { meta: { touched, error, warning }, input: { onChange, value }, showTime} = field;
+    // const {  } = field;
+    const inputStyle = `fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce width100P ${touched && ((error ? 'input-invalid' : '') || (warning ? 'input-warning' : '') )}`
+    const returnErrorJSX = (styleType, message) => {
+      return (
+        <div className={styleType}>
+          <div className="fc--disp-flex fc--fdir-row fc--jCont-fs fs16">
+            {touched ? message : ''}
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className='dateField fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce width100P'>
+        <div className={inputStyle}>
+          <label className="width50P ta-right">When Did you Start Programming?</label>
+          <div className="datePicker width50P">
+            <DateTimePicker
+              onChange={onChange}
+              format="DD MMM YYYY"
+              time={showTime}
+              value={!value ? null : new Date(value)}
+              max={new Date()}
+            />
+          </div>
+        </div>
+        <div className="fc-field-row-error fc--disp-flex fc--fdir-row fc--jCont-fe width100P">
+          { touched && (( error && returnErrorJSX(field.errorStyle, error) ) || ( warning && returnErrorJSX(field.warnStyle, warning) )) }
+        </div>
+      </div>
+      
+    )
+  }
+  
+
+  
   render(){
     const {
       content,
@@ -350,12 +557,16 @@ class UserForm extends Component {
     } = this.props;
     
     const {
-      skillsProfessional,
-      skillsToAddProfessional,
-      skillsSoftware,
-      skillsLanguages,
+      localSkillsForProfessional,
+      addTheseSkillObjsProfessional,
+      localSkillsForSoftware,
+      addTheseSkillObjsSoftware,
+      localSkillsForLanguages,
+      addTheseSkillObjsLanguages,
       filterSkills
     } = this.state
+    
+    // console.log('localSkillsForProfessional: ', localSkillsForProfessional, 'localSkillsForSoftware: ', localSkillsForSoftware, 'localSkillsForLanguages: ', localSkillsForLanguages)
     
     const skillArray = [
       {
@@ -364,7 +575,7 @@ class UserForm extends Component {
         labelText: 'Search For Professional Skills',
         inputName: 'skillsProfessional',
         placeholder: 'Select a Professional Skill',
-        tags: this.state.addToSkillsProfessional,
+        tags: addTheseSkillObjsProfessional,
         suggestions: filterSkills,
         allowNew: true,
         autoresize: true,
@@ -374,7 +585,10 @@ class UserForm extends Component {
         delimiters: [9, 13],
         delimiterChars: [','],
         handleAddition: this.handleAdditionSkillsProfessional,
-        handleDelete: this.handleDeleteSkillsProfessional
+        handleDelete: this.handleDeleteSkillsProfessional,
+        stateArray: localSkillsForProfessional,
+        // identifier: arrayIdentifier[addTheseSkillObjsProfessional]
+        identifier: SKILLS_PROFESSIONAL
       },
       {
         id: 'skillsSoftware',
@@ -382,7 +596,7 @@ class UserForm extends Component {
         labelText: 'Search For Software Skills',
         inputName: 'skillsSoftware',
         placeholder: 'Select a Software Skill',
-        tags: this.state.addToSkillsSoftware,
+        tags: addTheseSkillObjsSoftware,
         suggestions: filterSkills,
         allowNew: true,
         autoresize: true,
@@ -392,7 +606,9 @@ class UserForm extends Component {
         delimiters: [9, 13],
         delimiterChars: [','],
         handleAddition: this.handleAdditionSkillsSoftware,
-        handleDelete: this.handleDeleteSkillsSoftware
+        handleDelete: this.handleDeleteSkillsSoftware,
+        stateArray: localSkillsForSoftware,
+        identifier: SKILLS_SOFTWARE
       },
       {
         id: 'skillsLanguages',
@@ -400,7 +616,7 @@ class UserForm extends Component {
         labelText: 'Search For Language Skills',
         inputName: 'skillsLanguages',
         placeholder: 'Select a Language Skill',
-        tags: this.state.addToSkillsLanguages,
+        tags: addTheseSkillObjsLanguages,
         suggestions: filterSkills,
         allowNew: true,
         autoresize: true,
@@ -410,38 +626,13 @@ class UserForm extends Component {
         delimiters: [9, 13],
         delimiterChars: [','],
         handleAddition: this.handleAdditionSkillsLanguages,
-        handleDelete: this.handleDeleteSkillsLanguages
+        handleDelete: this.handleDeleteSkillsLanguages,
+        stateArray: localSkillsForLanguages,
+        identifier: SKILLS_LANGUAGES
       }
     ]
     
-    // function getNoSkillMessage(skillType){
-    //   let titleString = ''
-    //   if(skillType === STRING_OBJ.professional || skillType === STRING_OBJ.software){
-    //     titleString = `You have not added any ${skillType} skills yet.`
-    //   }
-    //   else if(skillType === STRING_OBJ.language){
-    //     titleString = `You have not added any ${skillType}s yet.`
-    //   }
-    //   return (
-    //     <div className="fc-noSkillMessage">
-    //       <h5 className="fw600 ls14 fcGrey424041">{titleString}</h5>
-    //       <br />
-    //       <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
-    //         Search for a skill to add it to your profile.
-    //         <br /><br />
-    //         If you do not see the skill you are looking for simply hit enter to add to the list.
-    //       </p>
-    //     </div>
-    //   )
-    // }
-    // console.log('this.props @ userForm: ', this.props)
-    
-    // https://s3-us-west-2.amazonaws.com/
-    // recursivethinking-rct-user-assets-us-west-2-sethborne-gmail-com/
-    // 2392a91b-bf90-4569-b2f1-9d81e8a845c1/
-    // avatar/
-    // avatar_default.png
-    
+
     const S3_PATH = 'https://s3-us-west-2.amazonaws.com/';
     const S3_BUCKET = 'recursivethinking-rct-user-assets-us-west-2-sethborne-gmail-com/';
     const CURR_USER_ID = `${currentUser.userId}/`;
@@ -450,9 +641,9 @@ class UserForm extends Component {
     
     const AVATAR_PATH_FINAL = `${S3_PATH}${S3_BUCKET}${CURR_USER_ID}${AVATAR_FOLDER}${USER_AVATAR}`
     
-    console.log('===============================')
-    console.log('@ formUser this.props: ', this.props, 'this.state: ', this.state)
-    console.log('right before return in form_user')
+    // console.log('===============================')
+    // console.log('@ formUser this.props: ', this.props, 'this.state: ', this.state)
+    // console.log('right before return in form_user')
     
     return(
       <section style={this.props.sectionStyle}>
@@ -494,8 +685,10 @@ class UserForm extends Component {
                       type="text" 
                       placeholder="Your First and Last Name"
                       component={this.renderField}
-                      labelStyle="width20P"
+                      labelStyle="width20P ta-right"
                       inputStyle="width80P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
+                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
                     />
                     <Field
                       label="City:"
@@ -503,8 +696,9 @@ class UserForm extends Component {
                       type="text" 
                       placeholder="Your City"
                       component={this.renderField}
-                      labelStyle="width20P"
+                      labelStyle="width20P ta-right"
                       inputStyle="width80P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
                     />
                     <Field
                       label="State:"
@@ -512,8 +706,9 @@ class UserForm extends Component {
                       type="text" 
                       placeholder="Your State"
                       component={this.renderField}
-                      labelStyle="width20P"
+                      labelStyle="width20P ta-right"
                       inputStyle="width80P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
                     />
                   </div>
                 </fieldset>
@@ -534,8 +729,9 @@ class UserForm extends Component {
                       type="text" 
                       placeholder="Your Current Job Title"
                       component={this.renderField}
-                      labelStyle="width15P"
+                      labelStyle="width15P ta-right"
                       inputStyle="width85P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
                     />
                     <Field 
                       label="Employer:"
@@ -545,6 +741,7 @@ class UserForm extends Component {
                       component={this.renderField}
                       labelStyle="width15P"
                       inputStyle="width85P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
                     />  
                   </div>
                 </fieldset>
@@ -563,19 +760,23 @@ class UserForm extends Component {
                         label="GitHub:"
                         name={linkGithub}
                         type="text"                               
-                        placeholder="Your GitHub URL"
+                        placeholder="Your GitHub Username"
                         component={this.renderField}
                         labelStyle="width15P"
                         inputStyle="width85P"
+                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
                       />
                       <Field 
                         label="CodePen:"
                         name={linkCodepen}
                         type="text"                                
-                        placeholder="Your CodePen URL"
+                        placeholder="Your CodePen Username"
                         component={this.renderField}
                         labelStyle="width15P"
                         inputStyle="width85P"
+                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
                       />
                       <Field 
                         label="LinkedIn:"
@@ -585,6 +786,8 @@ class UserForm extends Component {
                         component={this.renderField}
                         labelStyle="width15P"
                         inputStyle="width85P"
+                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
                       />
                       <Field 
                         label="Portfolio:"
@@ -594,8 +797,10 @@ class UserForm extends Component {
                         component={this.renderField}
                         labelStyle="width15P"
                         inputStyle="width85P"
+                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
                       /> 
-                      <Field 
+                      {/* <Field 
                         label="Resume:"
                         name={linkResume}
                         type="text"
@@ -603,7 +808,9 @@ class UserForm extends Component {
                         component={this.renderField}
                         labelStyle="width15P"
                         inputStyle="width85P"
-                      />
+                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                      /> */}
                     {/* 
                     <div className="fc-form-input">
                       <label htmlFor="name">Resume</label>
@@ -627,6 +834,7 @@ class UserForm extends Component {
                   <div className="grid grid--1of2 mt30">
                     <div className="grid-cell">
                       {/* <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea> */}
+                      {/* <Field */}
                       <Field
                         name={bio}
                         cols={"30"}
@@ -638,14 +846,12 @@ class UserForm extends Component {
                     </div>
                     <div className="grid-cell fc--disp-flex fc--fdir-col fc--jCont-ce">
                       <div className="fc-fieldset">
-                        <Field 
-                          label="When Did you Start Programming?"
+                        <Field
+                          // name="dob"
                           name={experience}
-                          type="date"                                  
-                          // placeholder="Enter Date"
-                          component={this.renderField}
-                          labelStyle="width65P"
-                          inputStyle="width35P"
+                          showTime={false}
+                          component={this.renderDateTimePicker}
+                          // containerClassName=""
                         />
                       </div>
                     </div>
@@ -672,11 +878,104 @@ class UserForm extends Component {
 
 export default reduxForm({
   validate: validate,
+  asyncValidate: asyncValidate,
+  warn: warn,
   form: 'UserForm'
 })(UserForm)
 
+// name, - required
+// city, - required
+// state, - required
+// title, - required
+// employer, - required
+// linkGithub, - suggested
+// linkCodepen, - suggested
+// linkLinkedIn, - suggested
+// linkPortfolioWebsite, - suggested
+// linkResume, - suggested
+// bio, - required
+// experience, - required
+
 function validate(values){
   const errors = {};
+  if(!values.name){ errors.name = 'Please Enter Your Full Name'}
+  if(values.name){
+    if(!ValidationMethods.checkForFullName(values.name)){
+      errors.name = 'Please Enter a Valid First and Last Name'
+    }
+    if(ValidationMethods.checkForFullName(values.name)){
+      const charMin = 2;
+      if(!ValidationMethods.isEachWordOverCharLimit(values.name.split(' '), charMin)){
+        errors.name = `All Name Values Must Have at Least ${charMin} Characters`
+      }
+    }
+  }
+  // city
+  if(!values.city){ errors.city = 'Please Enter the Name of the City in Which you Reside'}
+  if(values.city){
+    const cityNameCharLimit = 2;
+    if(!ValidationMethods.isWordOverCharLimit(values.city, cityNameCharLimit)){
+      errors.city = `All City Names Must Have at Least ${cityNameCharLimit} Characters`
+    }
+  }
+  // state - come back to this
+  
+  // title
+  if(!values.title){ errors.title = 'Please Enter Your Current Job Title'};
+  if(values.title){
+    const titleCharLimit = 2;
+    if(!ValidationMethods.isWordOverCharLimit(values.title, titleCharLimit)){
+      errors.title = `All Titles Must have at Least ${titleCharLimit} Characters`;
+    }
+  }
+  if(!values.employer){ errors.employer = 'Please Enter the Name of Your Current Employer' }
+  if(values.employer){
+    const employerCharMin = 2;
+    if(!ValidationMethods.isWordOverCharLimit(values.employer, employerCharMin)){
+      errors.employer = `All Employer Names Must have at Least ${employerCharMin} Characters`;
+    }
+  }
+  if(!values.bio){ errors.bio = 'Please Enter a Short Description about Yourself'}
+  if(values.bio){
+    const bioWordLimit = 10;
+    if(!ValidationMethods.doesContainNumberOfWords(values.bio, bioWordLimit)){
+      errors.bio = `All Bios Must Have at Least ${bioWordLimit} words`
+    }
+  }
+  
+  if(!values.experience){ errors.experience = 'Please Enter a Date'}
   
   return errors;
+}
+
+function warn(values){
+  const warnings = {};
+  // github - linkGithub
+  if(!values.linkGithub){ warnings.linkGithub = 'Please Enter your Github Username' }
+  // codepen
+  if(!values.linkCodepen){ warnings.linkCodepen = 'Please Enter your Codepen Username'}
+  // linkedIn
+  if(!values.linkLinkedIn){ warnings.linkLinkedIn = 'Please Enter your LinkedIn URL'}
+  // then run the validation
+  if(values.linkLinkedIn){
+    const validLinkedInURL = 'https://www.linkedin.com/in/<username>'
+    const validation = validateLinkedIn(values.linkLinkedIn);
+    // console.log('validation @ linkLinkedIn: ', validation)
+    if(!validation.protocol || !validation.hostname || !validation.pathname){ warnings.linkLinkedIn = `The URL provided does not match:  ${validLinkedInURL}`}
+  }
+  
+  // portfolio
+  if(!values.linkPortfolioWebsite){ warnings.linkPortfolioWebsite = 'Please Enter your Portfolio Website URL'}
+  if(values.linkPortfolioWebsite){
+    const validation = validatePortfolioURL(values.linkPortfolioWebsite);
+    // console.log('validation @ portfolio: ', validation)
+    if(!validation.protocol || !validation.hostname){
+      warnings.linkPortfolioWebsite = 'Valid Website Urls should match: http://www.website.com';
+    }
+  }
+  
+  // resume
+  if(!values.linkResume){ warnings.linkResume = 'Please Upload a Current Resume (pdf)'}
+  
+  return warnings;
 }
