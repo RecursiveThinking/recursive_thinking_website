@@ -1,7 +1,7 @@
 const DICTIONARY_EXCLUDE_FROM_TITLE_CASE = {
   articles: [ 'a', 'an', 'the' ],
-  coordConj: [ 'and', 'but', 'or', 'for', 'nor' ],
-  prepositions: [ 'on', 'at', 'to', 'from', 'by' ]
+  coordConj: [ 'and', 'but', 'or', 'for', 'nor', 'yet', 'so' ],
+  prepositions: [ 'on', 'at', 'to', 'from', 'by', 'as', 'per', 'off', 'of', 'in', 'up', 'till', 'unto', 'via', 'with' ]
 }
 
 class FormMethods {
