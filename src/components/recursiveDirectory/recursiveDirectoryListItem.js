@@ -3,7 +3,8 @@ import React from 'react';
 import { Link } from "react-router-dom"
 
 import { ROUTES_REACT } from '../../standards/routes'
-import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+// import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+import { PUBLIC_S3_URL } from '../../standards/publicPaths'
 import DM from '../../standards/dictModel'
 
 const {
@@ -12,7 +13,7 @@ const {
 
 const recursiveDirectoryListItem = ({user}) => {
   const { user: { userId, avatar, name, city, state, title}} = DM;
-  const imagePathBuild = `${PATH_FOR_IMAGES}${user[avatar]}`
+  const imagePathBuild = `${PUBLIC_S3_URL}${user[userId]}/avatar/${user[avatar]}`
   const concatLocation = `${user[city]}, ${user[state]}`
   return (
     <article className="card fc-directoryCard fc--disp-flex fc--fdir-col">

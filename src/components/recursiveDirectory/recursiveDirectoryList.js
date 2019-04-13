@@ -2,6 +2,9 @@ import React from 'react';
 
 import RecursiveDirectoryListItem from './recursiveDirectoryListItem'
 
+import DefaultMessage from '../../components/defaults/defaultMessage/defaultMessage'
+import { DEFAULT_MESSAGE_RECURSIVE_DIRECTORY_NO_USERS } from '../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
+
 import DM from '../../standards/dictModel'
 
 const recursiveDirectoryList = ({usersForDirectory}) => {
@@ -24,16 +27,9 @@ const recursiveDirectoryList = ({usersForDirectory}) => {
   } else {
     // the list has no length
     return (
-      <article className="card">
-        <h5 className="fw700 ls14 ttup fcGrey424041">Recursive Directory</h5>
-        <hr className="mt10" />
-        <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There are no registered users, other than yourself!</h5>
-        <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
-          Seems like you may need to go out, make some friends and invite them to join the organization!
-          <br /><br />
-          Then you'll feel better and will never see this page again! (Well, unless everyone abandons the organization but you...but lets not think about that.)
-        </p>
-      </article>
+      <DefaultMessage
+        content={DEFAULT_MESSAGE_RECURSIVE_DIRECTORY_NO_USERS}
+      />
     )
   }
 }
