@@ -5,9 +5,14 @@ import LessonTaughtByThumbList from '../common/lesson/lessonTaughtByThumbList'
 import DateMethods from '../../functions/dateMethods'
 import LessonMethods from '../../functions/lessonMethods'
 
+import DefaultMessage from '../defaults/defaultMessage/defaultMessage';
+import { DEFAULT_MESSAGE_DASHBOARD_UPCOMING_LESSONS_NOT_FOUND } from '../defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
+import { CARD_TITLE_DASHBOARD_UPCOMING_LESSON } from '../../components/common/content/contentInfo'
+
 import DM from '../../standards/dictModel'
 
 const upComingLesson = ({upComingLessons, allUsersArr}) => {
+  // 
   const { 
     lesson: {
       title,
@@ -15,8 +20,8 @@ const upComingLesson = ({upComingLessons, allUsersArr}) => {
       description,
       lessonTaughtBy
     }
-  } = DM
-  
+  } = DM;
+  // upComingLessons.length = 0
   if(upComingLessons.length){
     const nextLesson = upComingLessons[0];
     let formattedDate = DateMethods.getFormattedDate(nextLesson[date])
@@ -29,7 +34,7 @@ const upComingLesson = ({upComingLessons, allUsersArr}) => {
     return (
       <article className="card">
         {/* fcGreyb9 */}
-        <h5 className="fw700 ls14 ttup fcGrey424041">Upcoming Lesson</h5>
+        <h5 className="fw600 ls14 fcGrey424041">{CARD_TITLE_DASHBOARD_UPCOMING_LESSON.title}</h5>
         <hr className="mt10"/>
         <div className="fc-dateRow fc--disp-flex fc--fdir-row fc--fwrap-no fc--aItem-ce">
           <h1 className="fs60 ls44 fw300 fcGreenRT">{formattedDate['dateOfMonth']}</h1>
@@ -54,15 +59,18 @@ const upComingLesson = ({upComingLessons, allUsersArr}) => {
   // has no length
   else {
     return (
-      <article className="card">
-        <h5 className="fw700 ls14 ttup fcGrey424041">Upcoming Lessons</h5>
-        <hr className="mt10" />
-        <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There are no lessons currently scheduled!</h5>
-        <p className="fs18 fw300 ls12 fcGrey81 mt15 ta-cent">
-        {/* fcGrey81 */}
-          To submit a new lesson, please select Vote for Lessons from the Nav bar, then click "Submit a Lesson", located at the top of the page.
-        </p>
-      </article>
+      // <article className="card">
+      //   <h5 className="fw600 ls14 fcGrey424041">Upcoming Lessons</h5>
+      //   <hr className="mt10" />
+      //   <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There are no lessons currently scheduled!</h5>
+      //   <p className="fs18 fw300 ls12 fcGrey81 mt15 ta-cent">
+      //   {/* fcGrey81 */}
+      //     To submit a new lesson, please select Vote for Lessons from the Nav bar, then click "Submit a Lesson", located at the top of the page.
+      //   </p>
+      // </article>
+      <DefaultMessage
+        content={DEFAULT_MESSAGE_DASHBOARD_UPCOMING_LESSONS_NOT_FOUND}
+      />
     )
   }
 }

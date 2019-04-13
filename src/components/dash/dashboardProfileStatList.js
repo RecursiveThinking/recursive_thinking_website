@@ -1,9 +1,14 @@
 import React from 'react';
 import DashboardProfileStatListItem from './dashboardProfileStatListItem'
 
+import DefaultMessage from '../defaults/defaultMessage/defaultMessage';
+import { DEFAULT_MESSAGE_DASHBOARD_PROFILE_STATISTICS_NOT_FOUND } from '../defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
+
+import { CARD_TITLE_DASHBOARD_PROFILE_STATISTICS } from '../../components/common/content/contentInfo';
+
 // import DM from '../../standards/dictModel'
 
-const dashboardProfileStatList = ({...props}) => {
+const dashboardProfileStatList = ({userStats}) => {
   // const { 
     // user: {
       // profileStatsVisits,
@@ -14,24 +19,14 @@ const dashboardProfileStatList = ({...props}) => {
       // profileStatsViewsResume
     // }
   // } = DM;
-  
-  if(!props.userStats){
+  // userStats = null;
+  if(!userStats){
     return (
-      <article className="card fc--disp-flex fc--fdir-col">
-      {/* fcGreyb9 */}
-        <h5 className="fw700 ls14 ttup fcGrey424041 mb10">Profile Statistics</h5>
-        <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There is not currently a Current User!</h5>
-        <p className="fs18 fw300 ls12 fcGrey81 mt15 ta-cent">
-        {/* fcGrey81 */}
-          To submit a new lesson, please select Vote for Lessons from the Nav bar, then click "Submit a Lesson", located at the top of the page.
-        </p>
-    </article>
+      <DefaultMessage
+        content={DEFAULT_MESSAGE_DASHBOARD_PROFILE_STATISTICS_NOT_FOUND}
+      />
     )
   }
-  const {
-    userStats
-  } = props
-  
   // userStats[0] = -1;
   // userStats[1] = -1;
   // userStats[2] = -1;
@@ -54,7 +49,7 @@ const dashboardProfileStatList = ({...props}) => {
     [userStats[5], 'Resume Views', 'profileStatsViewsResume']
   ]
   
-  const firstThree = stats1.map( (stat, index) => {
+  const firstThree = stats1.map( (stat) => {
       return (
         <li key={stat[2]} className="grid-cell">
           <DashboardProfileStatListItem stat={stat} />
@@ -70,10 +65,13 @@ const dashboardProfileStatList = ({...props}) => {
       )
     }
   )
+  const {
+    title
+  } = CARD_TITLE_DASHBOARD_PROFILE_STATISTICS
   return (
     <article className="card fc--disp-flex fc--fdir-col">
       {/* fcGreyb9 */}
-      <h5 className="fw700 ls14 ttup fcGrey424041 mb10">Profile Statistics</h5>
+      <h5 className="fw600 ls14 fcGrey424041 mb10">{title}</h5>
       <ul className="grid gutters grid--cols-3">
         {firstThree}
       </ul>

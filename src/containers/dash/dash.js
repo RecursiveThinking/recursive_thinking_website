@@ -3,12 +3,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { FETCHING } from '../../actions/action_types'
-import { fetchUsers, fetchLessons, getCurrentUserById } from '../../actions/index'
-
+import { usersGetAll, lessonsGetAll } from '../../actions/index'
+// , getCurrentUserById
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultErrorMessage from '../../components/defaults/errorMessage/errorMessage'
-import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
+// import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
 import SecondaryLoadingPage from '../../components/defaults/loadingPage/secondaryLoadingPage';
+
+import { 
+  CARD_TITLE_DASHBOARD_PROFILE_STATISTICS,
+  CARD_TITLE_DASHBOARD_UPCOMING_LESSON,
+  CARD_TITLE_DASHBOARD_IM_ATTENDING,
+  // CARD_TITLE_DASHBOARD_IM_ATTENDING
+} from '../../components/common/content/contentInfo'
 
 import DashboardProfileStatList from '../../components/dash/dashboardProfileStatList'
 import UpComingLesson from '../../components/dash/upComingLesson'
@@ -18,7 +25,6 @@ import LessonMethods from '../../functions/lessonMethods'
 import OrderMethods from '../../functions/orderMethods'
 
 import DM from '../../standards/dictModel'
-import { generateErrorMessageContent } from '../../components/defaults/errorMessage/errorMessageContent/errorMessageContent';
 
 const { 
   user: { 
@@ -29,50 +35,86 @@ const {
     profileStatsViewsLinkedIn,
     profileStatsViewsResume,
     lessonStatus
-  },
-  // lesson: {}
+  }
 } = DM;
 
 class Dash extends Component {
   
   componentDidMount(){
-    this.props.fetchLessons();
-    this.props.fetchUsers();
-    this.props.getCurrentUserById();
+    // this.props.getCurrentUserById();
+    this.props.usersGetAll();
+    this.props.lessonsGetAll();
   }
   
-  renderStatList = (profileStats, currentUser) => {
-    const { errors: { errorsCurrentUser } } = this.props;
-    if(currentUser === FETCHING){
+  renderStatList = () => {
+    let {
+      // auth: { 
+      //   currentUser,
+      //   isGettingCurrentUserById, errorMessageCurrentUserById
+      // }
+      currentUser,
+    } = this.props;
+
+    // if(isGettingCurrentUserById){
+    //   return (
+    //     <SecondaryLoadingPage 
+    //       title={CARD_TITLE_DASHBOARD_PROFILE_STATISTICS.title}
+    //       classNameTxt='width100P ta-cent'
+    //     />
+    //   )
+    // }
+    // else if(errorMessageCurrentUserById){
+    //   return (
+    //     <DefaultErrorMessage 
+    //       heading='Current User By Id'
+    //       // errorObj={errorsCurrentUser}
+    //     />
+    //   )
+    // }
+    // else if(!isGettingCurrentUserById){  
+      const profileStats = [
+        currentUser[profileStatsVisits],
+        currentUser[profileStatsViewsGithub],
+        currentUser[profileStatsViewsCodePen],
+        currentUser[profileStatsViewsPortfolio],
+        currentUser[profileStatsViewsLinkedIn],
+        currentUser[profileStatsViewsResume]
+      ]
       return (
-        <SecondaryLoadingPage />
+        <DashboardProfileStatList userStats={profileStats} />
       )
-    }
-    else if(errorsCurrentUser){
+    // }
+  }
+  
+  renderUpComingLesson = () => {
+    let {
+      isFetchingUsersGetAll,
+      errorMessageUsersGetAll,
+      allUsers,
+    } = this.props.users;
+    let {
+      isFetchingLessonsGetAll,
+      errorMessageLessonsGetAll,
+      scheduledLessons,
+    } = this.props.lessons;
+    
+    if(isFetchingUsersGetAll || isFetchingLessonsGetAll){
+      const {
+        title
+      } = CARD_TITLE_DASHBOARD_UPCOMING_LESSON
       return (
-        <DefaultErrorMessage 
-          heading='Current User By Id'
-          errorObj={errorsCurrentUser}
+        <SecondaryLoadingPage 
+          title={title}
+          classNameTxt='width100P ta-cent'
         />
       )
-    }
-    return (
-      <DashboardProfileStatList userStats={profileStats} />
-    )
-  }
-  
-  renderUpComingLesson = (scheduledLessons, allUsers) => {
-    console.log('schedLessons: ', scheduledLessons, 'allUsers: ', allUsers)
-    if(scheduledLessons === FETCHING && allUsers === FETCHING){
+    } 
+    else if(errorMessageUsersGetAll || errorMessageLessonsGetAll){
       return (
-        <SecondaryLoadingPage />
+        <DefaultErrorPage />
       )
     }
-    else if(scheduledLessons === FETCHING || allUsers === FETCHING){
-      return (
-        <SecondaryLoadingPage />
-      )
-    } else {
+    else if(!isFetchingUsersGetAll || !isFetchingLessonsGetAll) {
       return (
         <UpComingLesson 
           upComingLessons={scheduledLessons}
@@ -82,93 +124,124 @@ class Dash extends Component {
     }
   }
   
-  render(){
-    const { 
-      currentUser, 
-      scheduledLessons, 
-      allUsers, 
-      // lookupTableAllUsers 
+  renderLessonsUserAttending = () => {
+    let {
+      // auth: { 
+      //   currentUser,
+      //   isGettingCurrentUserById, errorMessageCurrentUserById
+      // },
+      currentUser,
+      users: {
+        allUsers,
+        isFetchingUsersGetAll, errorMessageUsersGetAll,
+      },
+      lessons: {
+        scheduledLessons,
+        isFetchingLessonsGetAll, errorMessageLessonsGetAll,
+      }
     } = this.props;
-    
-    // make an array of profileStats
-    const profileStats = [
-      currentUser[profileStatsVisits],
-      currentUser[profileStatsViewsGithub],
-      currentUser[profileStatsViewsCodePen],
-      currentUser[profileStatsViewsPortfolio],
-      currentUser[profileStatsViewsLinkedIn],
-      currentUser[profileStatsViewsResume]
-    ]
-    
-    if(!scheduledLessons || !allUsers){
+    // if(isFetchingUsersGetAll || isFetchingLessonsGetAll || isGettingCurrentUserById){
+    if(isFetchingUsersGetAll || isFetchingLessonsGetAll){
+      const {
+        title
+      } = CARD_TITLE_DASHBOARD_IM_ATTENDING
       return (
-        <main className="content">
-          <DefaultErrorPage />
-        </main>
+        <SecondaryLoadingPage 
+          title={title}
+          classNameTxt='width100P ta-cent'
+        />
+      )
+    } 
+    // else if(errorMessageUsersGetAll || errorMessageLessonsGetAll || errorMessageCurrentUserById){
+    else if(errorMessageUsersGetAll || errorMessageLessonsGetAll){
+      return (
+        <DefaultErrorPage />
       )
     }
-    else if(scheduledLessons === FETCHING && allUsers === FETCHING && currentUser === FETCHING){
-      return (
-        <main className="content">
-          <DefaultLoadingPage />
-        </main>
-      )
-    }
-    else {
+    // else if(!isFetchingUsersGetAll && !isFetchingLessonsGetAll && !isGettingCurrentUserById) {
+    else if(!isFetchingUsersGetAll && !isFetchingLessonsGetAll) {
       // turn this on to show default messages
       // scheduledLessons.length = 0
       // UpComing Lessons
       let lessonsAttending = OrderMethods.orderArrayByDateAscending(LessonMethods.getCurrentUserLessonsAttendingArray(currentUser[lessonStatus], scheduledLessons), 'date')
-
-      // console.log('upcoming: ', lessonsAttending)
       // limit to the next three lessons
       if(lessonsAttending.length > 3){
         lessonsAttending.length = 3
       }
       return (
+        <LessonsUserAttending 
+          lessonsAttendingArr={lessonsAttending} 
+        />
+      )
+    }
+  }
+  
+  render(){
+    const { 
+      // auth: { 
+      //   currentUser,
+      //   isGettingCurrentUserById, errorMessageCurrentUserById
+      // },
+      currentUser,
+      lessons: {
+        scheduledLessons, 
+      }
+    } = this.props;
+    
+    // if(isGettingCurrentUserById){
+    //   return (
+    //     <div>Getting User</div>
+    //   )
+    // } 
+    // else 
+    // if(!isGettingCurrentUserById) {
+      // make an array of profileStats
+      
+      // turn this on to show default messages
+      // scheduledLessons.length = 0
+      // UpComing Lessons
+      // let lessonsAttending = OrderMethods.orderArrayByDateAscending(LessonMethods.getCurrentUserLessonsAttendingArray(currentUser[lessonStatus], scheduledLessons), 'date')
+
+      // console.log('upcoming: ', lessonsAttending)
+
+      return (
+        // <div>Dashboard</div>
         <main className="content">
           <div className="grid grid--full">
             <div className="grid-cell">
               {/* in this cell goes dashboardProfileStatList */}
               {/* recives profilesStats as props */}
-              {/* <DashboardProfileStatList userStats={profileStats} /> */}
-              {this.renderStatList(profileStats, currentUser)}
+              {this.renderStatList()}
             </div>
           </div>
           <div className="grid grid--1of2">
             <div className="grid-cell">
               {/* in this cell goes the next upcoming lesson */}
-              {/* <UpComingLesson 
-                upComingLessons={scheduledLessons}
-                allUsersArr={allUsers}
-              /> */}
-              {this.renderUpComingLesson(scheduledLessons, allUsers)}
+              {this.renderUpComingLesson()}
             </div>
             <div className="grid-cell">
               {/* in this cell goes a list of the next three lessons the user is attending  */}
-              <LessonsUserAttending lessonsAttendingArr={lessonsAttending} />
+              {this.renderLessonsUserAttending()}
+              {/* <LessonsUserAttending lessonsAttendingArr={lessonsAttending} /> */}
             </div>
           </div>
         </main>
-      ) 
-    }
-    
+      )
+    // }
   }
 }
 // errorsCurrentUser, errorsGetAllUsers, errorsGetAllLessons
 function mapStateToProps(state){
   return {
-    currentUser: state.auth.currentUser,
-    allUsers: state.users.allUsers,
-    lookupTableAllUsers: state.users.lookupTableAllUsers,
-    allLessons: state.lessons.allLessons,
-    scheduledLessons: state.lessons.scheduledLessons,
-    errors: state.errors
+    // currentUser: state.auth.currentUser,
+    // auth: state.auth,
+    users: state.users,
+    lessons: state.lessons,
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchUsers, fetchLessons, getCurrentUserById}, dispatch);
+  return bindActionCreators({usersGetAll, lessonsGetAll}, dispatch);
 }
-
+// , getCurrentUserById
 export default connect(mapStateToProps, mapDispatchToProps)(Dash);
