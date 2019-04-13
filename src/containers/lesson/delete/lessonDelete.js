@@ -3,9 +3,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getLessonById, deleteLessonById } from '../../../actions/index'
+import { lessonGetById, lessonDeleteById } from '../../../actions/index'
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+import DefaultErrorPage from '../../../components/defaults/errorPage/errorPage'
+import DefaultProcessingPage from '../../../components/defaults/processingPage/processingPage';
+import DefaultMessagePage from '../../../components/defaults/defaultMessage/defaultMessage'
+import { DEFAULT_MESSAGE_LESSON_BY_ID_ITEM_NOT_FOUND } from '../../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
+import { 
+  CARD_TITLE_SELECTED_LESSON_GET_BY_ID, CARD_TITLE_DELETING_LESSON_DELETE_BY_ID
+} from '../../../components/common/content/contentInfo'
 
 import { ROUTES_REACT } from '../../../standards/routes'
 
@@ -19,14 +26,52 @@ class LessonDelete extends Component {
   
   componentDidMount(){
     // console.log('props @ lessonDelete', this.props)
-    this.props.getLessonById(this.props.match.params.id);
+    this.props.lessonGetById(this.props.match.params.id);
   }
   
   renderContent(){
-    const { lessonById } = this.props;
-    if(!lessonById){
+    let { lessons: { 
+      isGettingLessonById, errorMessageGettingLessonById,
+      isDeletingLessonById, errorMessageDeletingLessonById,
+      lessonById
+    } } = this.props;
+    // lessonById = null
+    if(isGettingLessonById){
+      const {
+        title,
+        classNameTxt
+      } = CARD_TITLE_SELECTED_LESSON_GET_BY_ID;
       return (
-        <DefaultLoadingPage />
+        <DefaultLoadingPage
+          title={title}
+          classNameTxt={classNameTxt}
+        />        
+      )
+    }
+    else if(errorMessageGettingLessonById || errorMessageDeletingLessonById){
+      return (
+        <DefaultErrorPage 
+          
+        />
+      )
+    }
+    else if(isDeletingLessonById){
+      const {
+        title,
+        classNameTxt
+      } = CARD_TITLE_DELETING_LESSON_DELETE_BY_ID;
+      return (
+        <DefaultProcessingPage 
+          title={title}
+          classNameTxt={classNameTxt}
+        />
+      )
+    }
+    else if(!lessonById){
+      return (
+        <DefaultMessagePage 
+          content={DEFAULT_MESSAGE_LESSON_BY_ID_ITEM_NOT_FOUND}
+        />
       )
     } else {
       console.log('this props', this.props)
@@ -73,7 +118,7 @@ class LessonDelete extends Component {
                     </Link>
                     <button 
                       className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 ml20 mt30"
-                      onClick={() => {this.props.deleteLessonById(id)}}
+                      onClick={() => {this.props.lessonDeleteById(id)}}
                     >Delete Lesson</button>
                   </div>
                   {/* btn btnFillClrSchWarn btnOutlineClrSchUnavailable btnVoted fs16 fw500 ls12 ta-cent pdTB1p25LR2p5 */}
@@ -88,20 +133,9 @@ class LessonDelete extends Component {
   
   render(){
     return(
-      <section style={{padding: '1.5rem 1.5rem'}}>
+      <>
         {this.renderContent()}
-      </section>
-      // <section>
-      //   {
-      //     this.state.showModalLessonDelete &&
-          
-      //     <ModalDelete 
-      //       onCloseRequest={() => this.handleToggleModalLessonDelete()}
-      //       content={this.renderContent()}
-      //       buttons={this.renderModalButtons()}
-      //     />
-      //   }
-      // </section>
+      </>
     )
   }
 }
@@ -109,12 +143,13 @@ class LessonDelete extends Component {
 function mapStateToProps(state, ownProps){
   return {
     // lessonById: state.lessons.lookupTableAllLessons[ownProps.match.params.id]
-    lessonById: state.lessons.lessonById
+    lessons: state.lessons
+    // lessonById: state.lessons.lessonById
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getLessonById, deleteLessonById }, dispatch)
+  return bindActionCreators({ lessonGetById, lessonDeleteById }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(LessonDelete)
