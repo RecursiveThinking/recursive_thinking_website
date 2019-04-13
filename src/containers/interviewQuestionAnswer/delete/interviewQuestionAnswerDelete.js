@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { 
-  getInterviewQuestionById,
-  editInterviewQuestionById, 
-  getInterviewQuestionAnswerById, 
-  deleteInterviewQuestionAnswerById 
+  interviewQuestionGetById, interviewQuestionEditById, 
+  interviewQuestionAnswerGetById, interviewQuestionAnswerDeleteById 
 } from '../../../actions/index';
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+// import DefaultErrorPage from '../../../components/defaults/errorPage/errorPage';
+import DefaultMessage from '../../../components/defaults/defaultMessage/defaultMessage'
+import { DEFAULT_MESSAGE_INTERVIEW_QUESTION_ANSWER_BY_ID_ITEM_NOT_FOUND } from '../../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
+
+import { CARD_TITLE_INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID } from '../../../components/common/content/contentInfo'
 
 import { ROUTES_REACT } from '../../../standards/routes';
 
@@ -25,8 +28,8 @@ class InterviewQuestionAnswerDelete extends Component {
   }
   
   componentDidMount(){
-    this.props.getInterviewQuestionById(this.props.match.params.questId)    
-    this.props.getInterviewQuestionAnswerById(this.props.match.params.ansId)
+    this.props.interviewQuestionGetById(this.props.match.params.questId)    
+    this.props.interviewQuestionAnswerGetById(this.props.match.params.ansId)
     console.log('props @ CDM InterviewQuestionAnswerDelete: ', this.props)
   }
   
@@ -38,27 +41,42 @@ class InterviewQuestionAnswerDelete extends Component {
       intQuestAnsArrItem !== intQuestAns.Id
     )
     // console.log('intQuest Ans Arr After: ', temp)    
-    this.props.editInterviewQuestionById(intQuestToUpdate);
-    this.props.deleteInterviewQuestionAnswerById(intQuestAns, intQuest.Id);
+    this.props.interviewQuestionEditById(intQuestToUpdate);
+    this.props.interviewQuestionAnswerDeleteById(intQuestAns, intQuest.Id);
   }
-  
-  renderContent(){
     
-    if(!this.props.interviewQuestionAnswerById || !this.props.interviewQuestionById){
+  render(){
+    // console.log('================================================')
+    // console.log('props @ IntQuestAnsDelete: ', this.props);
+    // console.log('questId', this.props.match.params.questId, 'ansId', this.props.match.params.ansId);
+    const {
+      interviewQuestions: { isGettingInterviewQuestionById, interviewQuestionById },
+      interviewQuestionAnswers: { isGettingInterviewQuestionAnswerById, interviewQuestionAnswerById }
+    } = this.props
+    console.log('What is : ', isGettingInterviewQuestionById || isGettingInterviewQuestionAnswerById)
+    // this will need interviewQuestion, interviewQuestionAnswer, currentUser
+    if(isGettingInterviewQuestionById || isGettingInterviewQuestionAnswerById){
+      const { 
+        title, classNameTxt
+      } = CARD_TITLE_INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID
       return (
-        <DefaultLoadingPage />
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt={classNameTxt}
+        />
       )
-    } else {
-      // const { questId, ansId } = this.props.match.params;
-      // console.log('')
-      // console.log('questionId: ', questId, 'answerId: ', ansId)
-      const {
-        interviewQuestionById,
-        interviewQuestionAnswerById
-      } = this.props;
+    }
+    else if(!interviewQuestionById || !interviewQuestionAnswerById){
+      return (
+        <DefaultMessage
+          content={DEFAULT_MESSAGE_INTERVIEW_QUESTION_ANSWER_BY_ID_ITEM_NOT_FOUND}
+        />
+      )
+    }
+    else if(!isGettingInterviewQuestionById && !isGettingInterviewQuestionAnswerById){
       console.log('interviewQuestionAnswerById: ', interviewQuestionAnswerById)
       const { interviewquestions } = ROUTES_REACT;
-      return(
+      return (
         <article className="card">
           <div className="grid grid--full">
             <div className="grid-cell">
@@ -84,7 +102,6 @@ class InterviewQuestionAnswerDelete extends Component {
                       to={ interviewquestions }
                     >
                       <button className="btn btnFillGreyB9 pdTB2LR8 fs20 fw500 ls12 mt30">Cancel</button>
-                    
                     </Link>
                     <button 
                       className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 ml20 mt30"
@@ -96,45 +113,22 @@ class InterviewQuestionAnswerDelete extends Component {
           </div>
         </article>
       )
-    }    
-  }
-    
-  render(){
-    console.log('================================================')
-    console.log('props @ IntQuestAnsDelete: ', this.props);
-    console.log('questId', this.props.match.params.questId, 'ansId', this.props.match.params.ansId);
-    return (
-      <section style={{padding: '1.5rem 1.5rem'}}>
-        {this.renderContent()}
-      </section>
-    )
-  //   return(
-  //     <section>
-  //       {
-  //         this.state.showModalIQAnswerDelete &&
-          
-  //         <ModalDelete 
-  //           onCloseRequest={() => this.handleToggleModalIQADelete()}
-  //           content={this.renderContent()}
-  //           buttons={this.renderModalButtons()}
-  //         />
-  //       }
-  //     </section>
-  //   )
+    }
   }
 }
 
 function mapStateToProps(state, ownProps){
   return {
+    // currentUser: state.auth.currentUser,    
     // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.questId],
     // interviewQuestionAnswerById: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers[ownProps.match.params.ansId]
-    interviewQuestionById: state.interviewQuestions.interviewQuestionById,
-    interviewQuestionAnswerById: state.interviewQuestionsAnswers.interviewQuestionAnswerById
+    interviewQuestions: state.interviewQuestions,
+    interviewQuestionAnswers: state.interviewQuestionAnswers
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getInterviewQuestionById, editInterviewQuestionById, getInterviewQuestionAnswerById, deleteInterviewQuestionAnswerById }, dispatch)
+  return bindActionCreators({ interviewQuestionGetById, interviewQuestionEditById, interviewQuestionAnswerGetById, interviewQuestionAnswerDeleteById }, dispatch)
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(InterviewQuestionAnswerDelete)
