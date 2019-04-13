@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { FETCHING } from '../../../actions/action_types';
-import { fetchHomeScreenQuotes } from '../../../actions/index';
+import { homeScreenQuotesGetAll } from '../../../actions/index';
 
 import Header from '../header/header';
 import Footer from '../../../components/footer/footer';
@@ -14,8 +13,6 @@ import Modal from '../../../components/common/modal/modal';
 
 import { SignUpFormEx } from '../../../components/forms/forms_auth';
 
-import DM from '../../../standards/dictModel';
-
 class PublicHomeScreen extends Component {
   constructor(props){
     super(props);
@@ -25,8 +22,7 @@ class PublicHomeScreen extends Component {
   }
   
   componentDidMount(){
-    // this.props.fetchUsers();
-    this.props.fetchHomeScreenQuotes();
+    this.props.homeScreenQuotesGetAll();
   }
   
   handleToggleModalSignUp(){
@@ -34,38 +30,28 @@ class PublicHomeScreen extends Component {
   }
   
   renderSlider = () => {
-    if(this.props.allHomeScreenQuotes === FETCHING){
+    const {
+      allHomeScreenQuotes,
+      isFetchingHomeScreenQuotesGetAll, errorMessageHomeScreenQuotesGetAll
+    } = this.props;
+    if(isFetchingHomeScreenQuotesGetAll){
       return (
-        <div>Loading</div>
+        <div>Loading Information</div>
       )
     } 
-    else if (!this.props.allHomeScreenQuotes){
+    else if (errorMessageHomeScreenQuotesGetAll){
       return (
-        <div>Hello</div>
+        <div>Errors</div>
       )
     }
     else {
       return (
-        <Slider userInfoQuoteArr={this.props.allHomeScreenQuotes}/>
+        <Slider userInfoQuoteArr={allHomeScreenQuotes}/>
       )
     }
   }
   
-  render(){
-    // console.log('props', this.props)
-    const {
-      allHomeScreenQuotes,
-      // lookupTableAllUsers
-    } = this.props;
-    const {
-      user: {
-        userId,
-        avatar,
-        name,
-        title
-      }
-    } = DM
-    
+  render(){   
     let userArray = [
       { 
         name: 'Person 1', 
@@ -86,20 +72,6 @@ class PublicHomeScreen extends Component {
         quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
       }
     ]
-    // this makes a user 
-    // let userInfoQuoteArray = [];
-    // for(let i = 0; i < allHomeScreenQuotes.length; i += 1){
-    //   if(lookupTableAllUsers[allHomeScreenQuotes[i]['_createdByUser']]){
-    //     let tempUser = lookupTableAllUsers[allHomeScreenQuotes[i]['_createdByUser']]
-    //     let pushUser = {}
-    //       pushUser[userId] = tempUser[userId]
-    //       pushUser[avatar] = tempUser[avatar]
-    //       pushUser[name] = tempUser[name]
-    //       pushUser[title] = tempUser[title]
-    //       pushUser['quote'] = allHomeScreenQuotes[i]['quote']
-    //     userInfoQuoteArray.push(pushUser)
-    //   }
-    // }
     
     const personQuoteList = userArray.map((user, index) => {
       return (
@@ -108,8 +80,6 @@ class PublicHomeScreen extends Component {
         </li>
       )
     })
-
-    console.log('this.props: ', this.props)
     
     return (
       <main>
@@ -161,8 +131,7 @@ class PublicHomeScreen extends Component {
             {personQuoteList}
           </ul>
         </section>
-        {this.renderSlider()}
-        {/* <Slider userInfoQuoteArr={allHomeScreenQuotes}/> */}
+          {this.renderSlider()}
         <footer>
           <Footer /> 
         </footer>
@@ -173,13 +142,12 @@ class PublicHomeScreen extends Component {
 
 function mapStateToProps(state){
   return {
-    // allUsers: state.users.allUsers,
     allHomeScreenQuotes: state.homescreenquotes.allHomeScreenQuotes
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchHomeScreenQuotes }, dispatch)
+  return bindActionCreators({ homeScreenQuotesGetAll }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicHomeScreen);

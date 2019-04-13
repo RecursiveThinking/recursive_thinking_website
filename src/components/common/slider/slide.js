@@ -1,5 +1,6 @@
 import React from 'react'
-import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
+// import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
+import { PUBLIC_S3_URL } from '../../../standards/publicPaths'
 
 const Slide = (props) => {
   if(!props.userArray.length){
@@ -10,17 +11,19 @@ const Slide = (props) => {
     // console.log('p userArr', props.userArray, 'p currIndex', props.currentIndex)
     const currentSlide = props.userArray[props.currentIndex];
     const {
+      userId,
       avatar,
       title,
       name,
       quote
     } = currentSlide;
-    let srcString = `${PATH_FOR_IMAGES}${avatar}`;
+    let srcString = `${PUBLIC_S3_URL}${userId}/avatar/${avatar}`;
+    let altString = `Avatar of ${name}`
     return(
       <div className="slide">
         <div className="grid grid--1of3 fc--jCont-ce fc--aItem-ce">
           <div className="grid-cell fc--disp-flex fc--jCont-ce">
-            <img className="avatarXL avatarBS" src={srcString} alt={`${name}`}/>
+            <img className="avatarXL avatarBS" src={srcString} alt={altString}/>
           </div>
           <div className="grid-cell">
             <div className="c-quote">

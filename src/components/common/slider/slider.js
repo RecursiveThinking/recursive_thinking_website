@@ -66,7 +66,7 @@ class Slider extends Component {
       )
     })
     
-    console.log('userInfoQuoteArr: ', userInfoQuoteArr)
+    // console.log('userInfoQuoteArr: ', userInfoQuoteArr)
     
     return (
       <section className="secCarouselQuotes">

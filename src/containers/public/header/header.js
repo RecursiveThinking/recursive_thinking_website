@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
 import Modal from '../../../components/common/modal/modal'
-import { SignUpFormEx, VerifyAccountFormEx, ResendVerifyAccountFormEx, SignInFormEx } from '../../../components/forms/forms_auth'
+import { SignUpFormEx, VerifyAccountFormEx, ResendVerifyAccountFormEx, SignInFormEx, ForgotPasswordModalFormEx, ForgotPasswordSubmitModalFormEx, 
+  // ChangePasswordModalFormEx, RecoverAccountModalFormEx 
+} from '../../../components/forms/forms_auth'
 
-import { ROUTES_REACT } from '../../../standards/routes'
+// import { ROUTES_REACT } from '../../../standards/routes'
 import { PATH_FOR_IMAGES } from '../../../standards/publicPaths'
 
-const {
-  dashboard,
-  profile_create
-} = ROUTES_REACT
+// const {
+  // dashboard,
+  // profile_create
+// } = ROUTES_REACT
 
 class Header extends Component {
   constructor(props){
@@ -18,7 +20,11 @@ class Header extends Component {
       showModalSignUp: false,
       showModalSignIn: false,
       showModalVerifyAccount: false,
-      showModalResendVerifyAccount: false
+      showModalResendVerifyAccount: false,
+      showModalChangePassword: false,
+      showModalForgotPassword: false,
+      showModalForgotPasswordSubmit: false,
+      showModalRecoverAccount: false
     }
   }
 
@@ -34,6 +40,18 @@ class Header extends Component {
   handleToggleModalResendVerifyAccount(){
     this.setState( {showModalResendVerifyAccount: !this.state.showModalResendVerifyAccount} )
   }
+  handleToggleModalChangePassword(){
+    this.setState( {showModalChangePassword: !this.state.showModalChangePassword} )
+  }
+  handleToggleModalForgotPassword(){
+    this.setState( {showModalForgotPassword: !this.state.showModalForgotPassword} )
+  }
+  handleToggleModalForgotPasswordSubmit(){
+    this.setState( {showModalForgotPasswordSubmit: !this.state.showModalForgotPasswordSubmit} )
+  }
+  // handleToggleModalRecoverAccount(){
+  //   this.setState( {showModalRecoverAccount: !this.state.showModalRecoverAccount} )
+  // }
   
   render(){
     return (
@@ -96,7 +114,7 @@ class Header extends Component {
                           {...this.props}
                           closeModalVerifyAccount={() => this.handleToggleModalVerifyAccount()}
                           openModalResendVerifyAccount={() => this.handleToggleModalResendVerifyAccount()}
-                          openModalSignin={() => this.handleToggleModalSignIn()}
+                          openModalSignIn={() => this.handleToggleModalSignIn()}
                         />
                       }
                     />
@@ -130,10 +148,84 @@ class Header extends Component {
                       content={
                         <SignInFormEx 
                           closeModalSignIn={() => this.handleToggleModalSignIn()}
+                          // openModalChangePassword={() => this.handleToggleModalChangePassword()}
+                          openModalForgotPassword={() => this.handleToggleModalForgotPassword()}
+                          // openModalRecoverAccount={() => this.handleToggleModalRecoverAccount()}
                         />
                       }
                     />
                   }
+                  {/* <button 
+                    onClick={() => this.handleToggleModalChangePassword()} 
+                    type="button" 
+                    className="btn btnOutlineClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12"
+                  >CP</button>  */}
+                  {/* {
+                    this.state.showModalChangePassword &&
+                    
+                    <Modal
+                      onCloseRequest={() => this.handleToggleModalChangePassword()}
+                      content={
+                        <ChangePasswordModalFormEx
+                          closeModalChangePassword={() => this.handleToggleModalSignIn()}
+                        />
+                      }
+                    />
+                  } */}
+                  {/* <button 
+                    onClick={() => this.handleToggleModalForgotPassword()} 
+                    type="button" 
+                    className="btn btnOutlineClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12"
+                  >FP</button>  */}
+                  {
+                    this.state.showModalForgotPassword &&
+                    
+                    <Modal
+                      onCloseRequest={() => this.handleToggleModalForgotPassword()}
+                      content={
+                        <ForgotPasswordModalFormEx 
+                          closeModalForgotPassword={() => this.handleToggleModalForgotPassword()}
+                          openModalForgotPasswordSubmit={() => this.handleToggleModalForgotPasswordSubmit()}
+                        />
+                      }
+                    />
+                  }
+                  {/* <button 
+                    onClick={() => this.handleToggleModalForgotPasswordSubmit()} 
+                    type="button" 
+                    className="btn btnOutlineClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12"
+                  >FPS</button>  */}
+                  {
+                    this.state.showModalForgotPasswordSubmit &&
+                    
+                    <Modal
+                      onCloseRequest={() => this.handleToggleModalForgotPasswordSubmit()}
+                      content={
+                        <ForgotPasswordSubmitModalFormEx 
+                          closeModalForgotPasswordSubmit={() => this.handleToggleModalForgotPasswordSubmit()}
+                          openModalSignIn={() => this.handleToggleModalSignIn()}
+                          openModalForgotPassword={() => {this.handleToggleModalForgotPassword()}}
+                        />
+                      }
+                    />
+                  }
+                  {/* <button 
+                    onClick={() => this.handleToggleModalRecoverAccount()} 
+                    type="button" 
+                    className="btn btnOutlineClrSchGreen00b371 btnPadTB1 btnPadLR3 fs16 ls12"
+                  >RA</button> 
+                  {
+                    this.state.showModalRecoverAccount &&
+                    
+                    <Modal
+                      onCloseRequest={() => this.handleToggleModalRecoverAccount()}
+                      content={
+                        <RecoverAccountModalFormEx 
+                          closeModalRecoverAccount={() => this.handleToggleModalRecoverAccount()}
+                        />
+                      }
+                    />
+                  } */}
               </nav>
             </div>
           </div>
