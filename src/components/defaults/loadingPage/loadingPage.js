@@ -2,19 +2,17 @@ import React from 'react'
 
 import { PATH_FOR_ANIMATIONS } from '../../../standards/publicPaths'
 
-const loadingPage = () => {
+const loadingPage = ({...props}) => {
   const imgSrcPath = `${PATH_FOR_ANIMATIONS}robot-loading-dance-opt.gif`
-  // console.log('path', imgSrcPath)
   return (
-    <div className="grid grid--full">
-      <div className="grid-cell">
-        <main className="card ta-cent">
-          <figure className="loadingScreen">
-            <img className="loadingScreenAnimation" src={imgSrcPath} alt=""/>
-          </figure>
-        </main>
-      </div>
-    </div>
+    <article className="card">
+      <h5 className="fw600 ls14 fcGrey424041">{props.title}</h5>
+      {/* <h6 className="fs20 fw600 ls12 fcGrey424041">{props.title}</h6> */}
+      <hr className="mt10"/>
+      <figure className={props.classNameTxt}>
+        <img className="loadingScreenAnimation" src={imgSrcPath} alt=""/>
+      </figure>
+    </article>
   )
 }
 

@@ -8,10 +8,13 @@ const defaultMessage = ({...props}) => {
   } = props.content
   return (
     <article className="card">
-      <h5 className="fs22 fw600 ls12 fcGrey424041">{heading}</h5>
+      <h5 className="fw600 ls14 fcGrey424041">{heading}</h5>
       <hr className="mt10" />
       <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">{subheading}</h5>
-      <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">{paragraph}</p>
+      <p 
+        className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent wspl"
+        style={{ padding: '0 4rem'}}
+      >{paragraph}</p>
     </article>
   )
 }
