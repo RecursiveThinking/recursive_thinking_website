@@ -1,14 +1,17 @@
+import { LogService as ls, catObj as co, subObj as so, tableObj as to, methodObj as mo } from '../../../services/logService';
+
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getCurrentUserById, fetchSkills, getUserById, editUserById, createSkill } from '../../../actions';
-import { FETCHING } from '../../../actions/action_types' 
-
-// import { validateGitHubUsername, validateCodePenUsername } from '../../../functions/urlValidationMethods';
+import { skillsGetAll, userGetById, userEditById, skillCreateById, ranksGetAll } from '../../../actions';
+// getCurrentUserById, 
+// import { FETCHING } from '../../../actions/action_types' 
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
-import ContentPageWithTitleBar from '../../../components/common/contentPage/contentPageWithTitleBar';
+import DefaultErrorPage from '../../../components/defaults/errorPage/errorPage'
+import { CARD_TITLE_GETTING_CURRENT_USER_PROFILE } from '../../../components/common/content/contentInfo'
+
 import { FORM_HEADING_USER_EDIT } from '../../../components/forms/formContent/formContent';
 import UserForm from '../../../components/forms/form_user';
 
@@ -19,19 +22,25 @@ import DM from '../../../standards/dictModel';
 
 class UserEdit extends Component {
   componentDidMount(){
-    this.props.getCurrentUserById();
-    this.props.getUserById(this.props.match.params.id);
-    this.props.fetchSkills();
-  }
-  
-  componentDidUpdate(prevProps, prevState){
-    console.log('update @: ')
-    if(prevProps.currentUser !== this.props.currentUser){
-      console.log('there was a change.')
-      console.log('prevProps: ', prevProps.currentUser, 'currentUser: ', this.props.currentUser)
+    // if(this.props.auth.currentUser.userId){
+    //   console.log('Hey, in @userEdit, have a valid currentUser', this.props.auth)
+    // }
+    // if(!this.props.auth.currentUser.userId){
       // this.props.getCurrentUserById();
+    // }
+    // if(!this.props.currentUser){
+    //   this.props.getCurrentUserById();
+    // }
+    // if(this.props.match.params.id){
+    //   this.props.userGetById(this.props.match.params.id);
+    // }
+    this.props.skillsGetAll();
+    if(!this.props.ranks.allRanks.length){
+      this.props.ranksGetAll();
     }
   }
+  
+
   // {
   //   name: "Seth Borne"
   //   city: "SEATTLE"
@@ -50,15 +59,16 @@ class UserEdit extends Component {
   // }
   
   onSubmit = (formValues, addTheseSkillObjsToDatabase, removeUserIdFromTheseSkills, addTheseSkillObjsProfessional, localSkillsForProfessional, addTheseSkillObjsSoftware, localSkillsForSoftware, addTheseSkillObjsLanguages, localSkillsForLanguages) => {
+    console.log('@userEdit onSubmit (start): ', formValues)
+    console.log('all submit values: ', formValues, addTheseSkillObjsToDatabase, removeUserIdFromTheseSkills, addTheseSkillObjsProfessional, localSkillsForProfessional, addTheseSkillObjsSoftware, localSkillsForSoftware, addTheseSkillObjsLanguages, localSkillsForLanguages)
     const {
-      experience,
-      skillsProfessional,
-      skillsSoftware,
-      skillsLanguages
-    } = DM.user;
+      user: { experience, skillsProfessional, skillsSoftware, skillsLanguages }
+    } = DM;
+    const {
+      currentUser
+    } = this.props;
     
-    // console.log('formValues @ userEdit onSubmit: ', formValues)
-    let edittedUser = { ...this.props.currentUser };
+    let edittedUser = { ...currentUser };
     for(let key in formValues){
       if(formValues[key] === ""){
         formValues[key] = " ";
@@ -67,14 +77,14 @@ class UserEdit extends Component {
     }
     // experience is a date object
     edittedUser[experience] = new Date(edittedUser[experience]).toString();
-    console.log('edittedUser: ', edittedUser)
+    // console.log('edittedUser: ', edittedUser)
     // let updated
     // add skillObjs to database
     if(addTheseSkillObjsToDatabase){
-      console.log('addTheseSkillObjsToDatabase', addTheseSkillObjsToDatabase)
+      // console.log('addTheseSkillObjsToDatabase', addTheseSkillObjsToDatabase)
       if(addTheseSkillObjsToDatabase.length){
         addTheseSkillObjsToDatabase.forEach(skillObj => {
-          this.props.createSkill(skillObj)
+          this.props.skillCreateById(skillObj)
         })
       }
     }
@@ -101,7 +111,7 @@ class UserEdit extends Component {
     edittedUser[skillsProfessional] = updatedUserSkillsProfessionalIdArr;
     edittedUser[skillsSoftware] = updatedUserSkillsSoftwareIdArr;
     edittedUser[skillsLanguages] = updatedUserSkillsLanguagesIdArr;
-    console.log('user @ userEdit onSubmit: ', edittedUser)
+    console.log('@userEdit onSubmit (end): ', formValues)
     // these will be our async operations
     // validateGitHubUsername(linkGithub)
     //   .then(data => {
@@ -114,102 +124,135 @@ class UserEdit extends Component {
     if(!edittedUser.isProfileSetup){
       edittedUser.isProfileSetup = true;
       // happens when setting up User
-      this.props.editUserById(edittedUser, ROUTES_REACT.dashboard, ROUTES_REACT.dashboard, null, addUserIdToTheseSkillObjs)
+      this.props.userEditById(edittedUser, ROUTES_REACT.dashboard, ROUTES_REACT.dashboard, null, addUserIdToTheseSkillObjs)
     } 
     // when user already setup
     else if(edittedUser.isProfileSetup){
-      // this.props.editUserById(edittedUser, `${ROUTES_REACT.users_edit}/${edittedUser.userId}`, `${ROUTES_REACT.users_edit}/${edittedUser.userId}`)
-      this.props.editUserById(edittedUser, `${ROUTES_REACT.users_edit}`, `${ROUTES_REACT.users_edit}`, removeUserIdFromTheseSkills, addUserIdToTheseSkillObjs)
+      // this.props.userEditById(edittedUser, `${ROUTES_REACT.users_edit}/${edittedUser.userId}`, `${ROUTES_REACT.users_edit}/${edittedUser.userId}`)
+      this.props.userEditById(edittedUser, `${ROUTES_REACT.users_edit}`, `${ROUTES_REACT.users_edit}`, removeUserIdFromTheseSkills, addUserIdToTheseSkillObjs)
     }
   }
   
-  mapInitialValues = (dictModel, currentUserObj) => {
+  // mapInitialValues = (dictModel, currentUserObj) => {
     // this will need to return an object
     // return {}
-  }
+  // }
   
   render(){
-    console.log('props @ userEdit', this.props);
-    if(this.props.currentUser === FETCHING || this.props.allSkills === FETCHING){
+
+    let {
+      auth: {
+        isSignedIn, isGettingCurrentUserById, errorMessageCurrentUserById
+      },
+      skills: { allSkills, lookupTableAllSkills, 
+        isFetchingSkillsGetAll, errorMessageSkillsGetAll
+      },
+      users: {
+        userById, 
+        isGettingUserById, errorMessageGettingUserById        
+      },
+      ranks: {
+        allRanks, lookupTableAllRanks,
+        isFetchingRanksGetAll, errorMessageRanksGetAll
+      },
+      currentUser
+    } = this.props;
+    const { 
+      title, classNameTxt
+    } = CARD_TITLE_GETTING_CURRENT_USER_PROFILE;
+    // isFetchingSkillsGetAll = true
+    if(isFetchingSkillsGetAll || isFetchingRanksGetAll){
       return (
-        <section style={{padding: '1.5rem 1.5rem'}}>
-          <DefaultLoadingPage />
-        </section>
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt={classNameTxt}
+        />
       )
-    } else if (this.props.currentUser !== FETCHING && this.props.allSkills !== FETCHING) {
-      const {
-        currentUser,
-        lookupTableAllSkills
-      } = this.props
+    }
+    else if (errorMessageSkillsGetAll || errorMessageRanksGetAll){
+      return (
+        <DefaultErrorPage />
+      )
+    }
+    else if (isFetchingSkillsGetAll === false && isFetchingRanksGetAll === false) {
+      console.log('@ final condition, render userEdit: - this.props ', this.props)
+      console.log('conditions: ', isGettingCurrentUserById, isFetchingSkillsGetAll, isFetchingRanksGetAll)
+      
       const {
         user
       } = DM
-      // console.log('user: ', user.name)
-      console.log('currentUser: ', currentUser)
-      // console.log('currentUser Name: ', currentUser[user.name])
       const processedCurrentUser = FormMethods.removeSpaceFromDatabaseEntries(currentUser);
-      // console.log('processedCurrentUser: ', processedCurrentUser)
+      console.log('processedCurrentUser: ', processedCurrentUser)
       const extractUsername = (id, formValue) => {
-        const splitFormValue = formValue.split('/').filter(item => item !== '')
-        console.log('splitFormValue: ', splitFormValue);
-        if(id === 'linkedIn'){
-          return splitFormValue[2]
-        }
-        if(id === 'codePen'){
-          return splitFormValue[2]
+        if(formValue){
+          const splitFormValue = formValue.split('/').filter(item => item !== '')
+          if(id === 'linkedIn'){
+            return splitFormValue[2]
+          }
+          if(id === 'codePen'){
+            return splitFormValue[2]
+          }
+        } else {
+          return '';
         }
       }
+      
       const initValues = {
         name: processedCurrentUser[user.name],
         city: processedCurrentUser[user.city],
         state: processedCurrentUser[user.state],
         title: processedCurrentUser[user.title],
         employer: processedCurrentUser[user.employer],
-        linkGithub: extractUsername('linkedIn',processedCurrentUser[user.linkGithub]),
-        linkCodepen: extractUsername('linkedIn', processedCurrentUser[user.linkCodepen]),
+        linkGithub: extractUsername('linkedIn', processedCurrentUser[user.linkGithub]),
+        linkCodepen: extractUsername('codePen', processedCurrentUser[user.linkCodepen]),
         linkLinkedIn: processedCurrentUser[user.linkLinkedIn],
         linkPortfolioWebsite: processedCurrentUser[user.linkPortfolioWebsite],
         bio: processedCurrentUser[user.bio],
         experience: processedCurrentUser[user.experience],
+        rank: processedCurrentUser[user.rank],
         skillsProfessional: processedCurrentUser[user.skillsProfessional].map(skillObj => lookupTableAllSkills[skillObj]),
         skillsSoftware: processedCurrentUser[user.skillsSoftware].map(skillObj => lookupTableAllSkills[skillObj]),
         skillsLanguages: processedCurrentUser[user.skillsLanguages].map(skillObj => lookupTableAllSkills[skillObj])
       }
-      console.log('initialValues: ', initValues)
+      // console.log('initValues: ', initValues)
+      // skillsProfessional: processedCurrentUser[user.skillsProfessional].map(skillObj => lookupTableAllSkills[skillObj]),
+      // skillsSoftware: processedCurrentUser[user.skillsSoftware].map(skillObj => lookupTableAllSkills[skillObj]),
+      // skillsLanguages: processedCurrentUser[user.skillsLanguages].map(skillObj => lookupTableAllSkills[skillObj])
+      ls(co.cont, so.props, to.user, mo.ebid, this.props)
       return (
-        <>
-          <ContentPageWithTitleBar 
-            {...this.props} 
-            formContent={
-              <UserForm 
-                {...this.props}
-                onSubmit={this.onSubmit}
-                content={FORM_HEADING_USER_EDIT}
-                initialValues={initValues}
-                currentUser={processedCurrentUser}
-                userById={this.props.userById}
-                allSkills={this.props.allSkills}
-              />}
-            titleBarContent={this.props.titleBarContent}
-          />
-        </>
+        <UserForm 
+          {...this.props}
+          onSubmit={this.onSubmit}
+          content={FORM_HEADING_USER_EDIT}
+          initialValues={initValues}
+          currentUser={processedCurrentUser}
+          // userById={userById}
+          allSkills={allSkills}
+          lookupTableAllRanks={lookupTableAllRanks}
+        />
+      )
+      // return (
+      //   <div>User Edit</div>
+      // )
+    } else {
+      return (
+        <div>Waiting</div>
       )
     }
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('MSTP @ UserEdit: ', state, ownProps);
   return {
-    currentUser: state.auth.currentUser,
-    userById: state.users.userById,
-    allSkills: state.skills.allSkills,
-    lookupTableAllSkills: state.skills.lookupTableAllSkills
+    auth: state.auth,
+    users: state.users,
+    skills: state.skills,
+    ranks: state.ranks
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getCurrentUserById, fetchSkills, editUserById, getUserById, createSkill }, dispatch)
+  return bindActionCreators({ skillsGetAll, userEditById, userGetById, skillCreateById, ranksGetAll }, dispatch)
 }
-
+// getCurrentUserById, 
 export default connect( mapStateToProps, mapDispatchToProps)(UserEdit)

@@ -2,19 +2,19 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
-import { fetchUsers, fetchSkills, getCurrentUserById, getUserById, editUserById } from '../../../actions'
+import { usersGetAll, skillsGetAll, userGetById, userEditById, ranksGetAll } from '../../../actions'
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+import { CARD_TITLE_GETTING_SELECTED_USER_PROFILE } from '../../../components/common/content/contentInfo'
 
-import ContentPageTitleBar from '../../../components/common/contentPage/contentPageTitleBar';
-import { TITLE_BAR_USER_VIEW } from '../../../components/common/contentPage/contentPageTitleBarInfo';
 import CategoryList from '../../../components/common/category/categoryList';
 import RecursiveDirectoryListItemSm from '../../../components/recursiveDirectory/recursiveDirectoryListItemSm';
 
 import { ROUTES_REACT } from '../../../standards/routes';
-import { PATH_FOR_IMAGES } from '../../../standards/publicPaths';
+// import { PATH_FOR_IMAGES } from '../../../standards/publicPaths';
+import { PUBLIC_S3_URL } from '../../../standards/publicPaths';
 import DM from '../../../standards/dictModel';
-import { FETCHING } from '../../../actions/action_types';
+// import { FETCHING } from '../../../actions/action_types';
 
 const {
   users_view
@@ -30,21 +30,40 @@ class UserView extends Component{
   }
 
   componentDidMount(){
-    this.props.getUserById(this.props.match.params.id);
-    this.props.fetchUsers();
-    this.props.fetchSkills();
-    this.props.getCurrentUserById();
-    this.handleWindowResize()
+    this.props.userGetById(this.props.match.params.id);
+    if(!this.props.users.allUsers.length){
+      this.props.usersGetAll();
+    }
+    this.props.skillsGetAll();
+    if(!this.props.ranks.allRanks.length){
+      this.props.ranksGetAll();
+    }
+    // this.props.getCurrentUserById();
+    this.handleWindowResize();
     // window.addEventListener('load', this.handleWindowResize)
     window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('onbeforeunload', this.handleWindowResize)
+    window.addEventListener('onbeforeunload', this.handleWindowResize);
   }
   
   componentDidUpdate(prevProps, prevState){
     this.handleWindowResize();
-    if(prevProps.userById.userId !== this.props.match.params.id){
-      this.props.getUserById(this.props.match.params.id);
+    if(prevProps.users.userById){
+      // console.log('@ ComponentDidUpdate: prev !== match.params', 'prevProps.userId: ', prevProps.users.userById.userId, prevProps.users.userById.userId !== this.props.match.params.id, 'this.props.match.params.id: ', this.props.match.params.id)
+      if(prevProps.users.userById.userId !== this.props.match.params.id){
+        const {
+          isGettingUserById
+        } = prevProps.users
+        // console.log('isGettingUserById === false: ', !isGettingUserById)
+        if(!isGettingUserById){
+          this.props.userGetById(this.props.match.params.id);
+        }
+      }
     }
+    // if(prevProps.ranks.allRanks.length){
+    //   if(prevProps.ranks.allRanks.length !== this.props.ranks.allRanks.length){
+    //     this.props.usersGetAll();
+    //   }
+    // }
   }
   
   componentWillUnmount(){
@@ -66,8 +85,8 @@ class UserView extends Component{
     let updateUserObj = { ...userObj };
     updateUserObj[propToUpdate] += 1;
     // console.log('updateUser: (after): ', userObj, propToUpdate, userObj[propToUpdate], updateUserObj[propToUpdate])
-    this.props.editUserById(updateUserObj, `${users_view}/${updateUserObj.userId}`, `${users_view}/${updateUserObj.userId}`);
-    this.props.getUserById(updateUserObj.userId);
+    this.props.userEditById(updateUserObj, `${users_view}/${updateUserObj.userId}`, `${users_view}/${updateUserObj.userId}`);
+    this.props.userGetById(updateUserObj.userId);
   }
       // this gets 
   getDateForProfile = (date, profileItem) =>{
@@ -136,7 +155,7 @@ class UserView extends Component{
               <h2 className="fc--disp-flex fs48 fw300 ls30 fcGrey424041 pdl10">{months}</h2>
               <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
             </div>
-            <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
+            <h6 className="fs18 fw500 ls12 fcGrey81 ta-cent">Time with Recursive Thinking</h6>
           </div>
         )
       }
@@ -148,7 +167,7 @@ class UserView extends Component{
               <h2 className="fs48 fw300 ls30 fcGrey424041">{months}</h2>
               <span className="fc--disp-flex fc--fdir-col fs10 ls20 fw700 fcGrey424041 ttlow mt25 pdl05">{monthString}</span>
             </div>
-            <h6 className="fs18 fw500 ls12 fcGrey81">Time with Recursive Thinking</h6>
+            <h6 className="fs18 fw500 ls12 fcGrey81 ta-cent">Time with Recursive Thinking</h6>
           </div>
         )
       }
@@ -181,7 +200,7 @@ class UserView extends Component{
   // this makes the portfolio link
   checkPortValue = (linkValue) =>{
     const {
-      userById
+      users: { userById }
     } = this.props;
     const {
       user: {
@@ -213,19 +232,25 @@ class UserView extends Component{
       
   renderContent = () => {
     const {
-      userById,
-      allSkills,
-      lookupTableAllSkills
+      users: { userById },
+      skills: { 
+        allSkills, lookupTableAllSkills,
+        isFetchingSkillsGetAll, errorMessageSkillsGetAll
+      },
+      ranks: { lookupTableAllRanks },
+      currentUser
     } = this.props
     const { 
-      user: { 
-              userId, avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, profileStatsVisits, profileStatsViewsGithub, profileStatsViewsCodePen, profileStatsViewsPortfolio, profileStatsViewsLinkedIn, profileStatsViewsResume, experience, timeWithRT, skillsProfessional, skillsSoftware, skillsLanguages
-            }
+      user: 
+        { 
+          userId, avatar, name, title, city, state, employer, linkGithub, linkCodepen, linkLinkedIn, linkPortfolioWebsite, linkResume, bio, 
+          // profileStatsVisits, 
+          profileStatsViewsGithub, profileStatsViewsCodePen, 
+          // profileStatsViewsPortfolio, 
+          profileStatsViewsLinkedIn, profileStatsViewsResume, experience, timeWithRT, rank, skillsProfessional, skillsSoftware, skillsLanguages
+        }
     } = DM
     
-    // set avatar link
-    const imageSrc = `${PATH_FOR_IMAGES}${userById[avatar]}`
-
     // this makes the link list (Github, Codepen, etc.)
     const icons = [ 
       ['Github', 'fa fa fa-git-square', userById[linkGithub], profileStatsViewsGithub],
@@ -240,13 +265,13 @@ class UserView extends Component{
     // userById[linkLinkedIn] = ' '
     // userById[linkResume] = ' '
     
-    const iconList = icons.map(iconItem => {
+    const iconList = icons.map((iconItem, index) => {
       let iconClass, headingClass, hrefLink = ''
       if(iconItem[2] === ' '){
         iconClass = `linkNotSetup fs45 ${iconItem[1]} mb10`
         headingClass = `fs12 fw300 ls08 fcGreyc6`
         return (
-          <li className="icon fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce height50P width50P">
+          <li key={index} className="icon fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce height50P width50P">
             <div className="fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce">
               <i className={iconClass}></i>
               <h6 className={headingClass}>{iconItem[0]}</h6>
@@ -262,7 +287,7 @@ class UserView extends Component{
         hrefLink = iconItem[2]
         // console.log('link', hrefLink, iconItem)
         return (
-          <li className="icon fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce height50P width50P">
+          <li key={index} className="icon fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce height50P width50P">
             <a 
               className="fc--disp-flex fc--fdir-col fc--jCont-ce fc--aItem-ce" 
               href={hrefLink} 
@@ -279,7 +304,6 @@ class UserView extends Component{
     })
     // end link list
     
-
     // userById[linkPortfolioWebsite] = ' '
     let portText = this.checkPortValue(userById[linkPortfolioWebsite])
     // end portfolio link
@@ -287,68 +311,115 @@ class UserView extends Component{
     let experienceJSX = this.getDateForProfile(userById[experience], experience)
     let timeWithRTJSX = this.getDateForProfile(userById[timeWithRT], timeWithRT)
     
-    if(this.props.userById.userId !== this.props.match.params.id){
+    const skillsArray = [userById[skillsProfessional], userById[skillsSoftware], userById[skillsLanguages]]
+    const skillTitleArray = [ 'Professional Skills', 'Software Skills', 'Languages']
+    
+    
+    // console.log('renderContent - first if: do ids NOT match: ')
+    if(userById[userId] !== this.props.match.params.id || isFetchingSkillsGetAll){
+      // console.log('renderContent - in first if: userById[userId]: ', userById[userId], userById[userId] !== this.props.match.params.id, 'this.props.match.params.id', this.props.match.params.id )
+      const {
+        title
+      } = CARD_TITLE_GETTING_SELECTED_USER_PROFILE
       return (
-        <DefaultLoadingPage />
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt='ta-cent'
+        />
       )
-    } else {
+    } 
+    else if(userById[userId] === this.props.match.params.id && !isFetchingSkillsGetAll){
+      // console.log('renderContent - in else: can render')
+      // set avatar link
+      const imageSrc = `${PUBLIC_S3_URL}${userById[userId]}/avatar/${userById[avatar]}`
+      
+      let returnSkillsJSX = skillsArray.map((skillArray, index) => {
+        if(skillArray.length){
+          return (
+            <article key={index} className="card mt30">
+              <h5 className="fw600 ls14 fcGrey424041">{skillTitleArray[index]}</h5>
+              <hr className="mt10" />
+              <div className="">
+                <CategoryList 
+                  categories={skillArray}
+                  allSkillsArr={allSkills}
+                  lookupTableAllSkills={lookupTableAllSkills}
+                />
+              </div>
+            </article>
+          )
+        } else {
+          return (
+            null
+          )
+        }
+      }
+    )
       return (
         <>
           <article className="cardNoPadding">
-                  <div className="grid grid--full">
-                    <div className="grid-cell">
-                      <div className="grid grid--2of3">
-                        <div className="grid-cell">
-                          {/* avatar and text */}
-                          <div className="fc-twothirdsLeftViewProfile fc--disp-flex fc--fdir-row fc--jCont-fs fc--aItems-ce ">
-                            <img 
-                              className="avatarM avatarBS" 
-                              src={imageSrc}
-                              alt={userById[name]}
-                            />
-                            <div className="fc-twothirdsLeftViewProfile-sub fc--disp-flex fc--fdir-col fc--fwrap-yes fc--jCont-ce fc--aItems-fs">
-                              <h3 className="fs33 fw500 ls22 fcGrey424041">{userById[name]}</h3>
-                              <h5 className="fw300 ls14 fcGrey424041">{userById[title]}</h5>
-                              <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt10">
-                                <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
-                                  Location:
-                                </h6>
-                                <h6 className="fs14 fw500 ls08 fcGrey424041">
-                                  {userById[city]}, {userById[state]}
-                                </h6>
-                              </div>
-                              <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt0125">
-                                <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
-                                  Company:
-                                </h6>
-                                <h6 className="fs14 fw500 ls08 fcGrey424041">
-                                  {userById[employer]}
-                                </h6>
-                              </div>
-                            </div>
+            <div className="grid grid--full">
+              <div className="grid-cell">
+                <div className="grid grid--2of3">
+                  <div className="grid-cell">
+                    {/* avatar and text */}
+                    <div className="fc-twothirdsLeftViewProfile fc--disp-flex fc--fdir-row fc--jCont-fs fc--aItems-ce">
+                      <div className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                        <img 
+                          className="avatarM avatarBS" 
+                          src={imageSrc}
+                          alt={userById[name]}
+                        />
+                        <div className="userViewRank">
+                          <div className="rankNavTxt fs12 fw300 ls10 fcGrey424041 ta-cent">
+                            {lookupTableAllRanks[userById[rank]].rank}
+                            {/* Title */}
                           </div>
                         </div>
-                        <div className="grid-cell">
-                          {/* links */}
-                          <div className="fc--disp-flex fc--fdir-col height100P">
-                            <ul className="fc--disp-flex fc--fdir-row fc--fwrap-yes height75P">
-                              {/* icon list */}
-                              {iconList}
-                            </ul>
-                            {/* portfolio link */}
-                            {portText}
-                          </div>
+                      </div>
+                      <div className="fc-twothirdsLeftViewProfile-sub fc--disp-flex fc--fdir-col fc--fwrap-yes fc--jCont-ce fc--aItems-fs">
+                        <h3 className="fs33 fw500 ls22 fcGrey424041">{userById[name]}</h3>
+                        <h5 className="fw300 ls14 fcGrey424041">{userById[title]}</h5>
+                        <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt10">
+                          <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
+                            Location:
+                          </h6>
+                          <h6 className="fs14 fw500 ls08 fcGrey424041">
+                            {userById[city]}, {userById[state]}
+                          </h6>
+                        </div>
+                        <div className="fc--disp-flex fc-fdir-row fc--aItems-ce width100P mt0125">
+                          <h6 className="fs14 fw700 ls08 fcGrey424041 ttup">
+                            Company:
+                          </h6>
+                          <h6 className="fs14 fw500 ls08 fcGrey424041">
+                            {userById[employer]}
+                          </h6>
                         </div>
                       </div>
                     </div>
                   </div>
-                </article>
+                  <div className="grid-cell">
+                    {/* links */}
+                    <div className="fc--disp-flex fc--fdir-col height100P">
+                      <ul className="fc--disp-flex fc--fdir-row fc--fwrap-yes height75P">
+                        {/* icon list */}
+                        {iconList}
+                      </ul>
+                      {/* portfolio link */}
+                      {portText}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
           <article className="cardNoPadding mt30">
             <div className="grid grid--2of3">
               <div className="grid-cell">
                 <div className="fc-twothirdsLeftViewProfile">
-                  <h5 className="fw700 ls14 ttup fcGrey424041">About</h5>
-                  <hr />
+                  <h5 className="fw600 ls14 fcGrey424041">About</h5>
+                  <hr className="mt10" />
                   <p className="fs14 fw500 ls08 ta-just fcGrey424041 mt15 wspl">
                     {userById[bio]}
                   </p>
@@ -366,39 +437,7 @@ class UserView extends Component{
               </div>
             </div>
           </article>
-          <article className="card mt30">
-            <h5 className="fw700 ls14 ttup fcGrey424041">Professional Skills</h5>
-            <hr />
-            <div className="">
-              <CategoryList 
-                categories={userById[skillsProfessional]}
-                allSkillsArr={allSkills}
-                lookupTableAllSkills={lookupTableAllSkills}
-              />
-            </div>
-          </article>
-          <article className="card mt30">
-            <h5 className="fw700 ls14 ttup fcGrey424041">Software Skills</h5>
-            <hr />
-            <div className="">
-              <CategoryList 
-                categories={userById[skillsSoftware]}
-                allSkillsArr={allSkills}
-                lookupTableAllSkills={lookupTableAllSkills}
-              />
-            </div>
-          </article>
-          <article className="card mt30">
-            <h5 className="fw700 ls14 ttup fcGrey424041">Languages</h5>
-            <hr />
-            <div className="">
-              <CategoryList 
-                categories={userById[skillsLanguages]}
-                allSkillsArr={allSkills}
-                lookupTableAllSkills={lookupTableAllSkills}
-              />
-            </div>
-          </article>
+          {returnSkillsJSX}
         </>
       )
     }
@@ -408,35 +447,80 @@ class UserView extends Component{
     const {
       contentHeight
     } = this.state;
-
+    
+    let {
+      users: { 
+        allUsers, 
+        // lookupTableAllUsers, 
+        isFetchingUsersGetAll, 
+        // errorMessageUsersGetAll,
+        userById, 
+        isGettingUserById, 
+        // errorMessageGettingUserById 
+      },
+      skills: { 
+        
+      },
+      ranks: {
+        isFetchingRanksGetAll,
+        errorMessageRanksGetAll
+      },
+      currentUser
+    } = this.props
+    
+    const {
+      title
+    } = CARD_TITLE_GETTING_SELECTED_USER_PROFILE
     // const selectedUser = currentUser
+    // console.log('@ userView - this.props: ', this.props)
     if(contentHeight === 0){
+      // console.log('@ first if - setting content height')
       return (
         <div className="content"
           ref={ node => { if(node !== null){this.contentTarget = node}}}
         > 
-          <section style={{padding: '1.5rem 1.5rem'}}>
-            <DefaultLoadingPage />
-          </section>
+          <DefaultLoadingPage 
+            title={title}
+            classNameTxt='ta-cent'
+          />
         </div>
       )
     }
-    else if(this.props.userById === 'FETCHING' || this.props.allUsers === 'FETCHING' || this.props.allSkills === 'FETCHING' || this.props.currentUser === 'FETCHING' || this.props.userById === 'FETCHING'){
+    // else if(isGettingUserById || isFetchingUsersGetAll || isFetchingSkillsGetAll || currentUser === FETCHING){
+    else if(isFetchingUsersGetAll || isFetchingRanksGetAll){
+      // console.log('=== isGettingUserById: ', isGettingUserById, 'isFetchingUsersGetAll: ', isFetchingUsersGetAll, 'isFetchingSkillsGetAll: ',  isFetchingSkillsGetAll,  'currentUser: ', currentUser)
       // this.props.userById.userId !== this.props.match.params.id
+      // console.log('@ first else if - fetching all information')      
       return (
         <div className="content"
           ref={ node => { if(node !== null){this.contentTarget = node}}}
         >
-          <section style={{padding: '1.5rem 1.5rem'}}>
-            <DefaultLoadingPage />
-          </section>
+          <DefaultLoadingPage 
+            title={title}
+            classNameTxt='ta-cent'
+          />
         </div>
       )
     }
-    else {
+    else if(!userById){
+      // Default Error Message
+      // console.log('@ second else if - there is no userById')
+      return (
+        <div className="content"
+          ref={ node => { if(node !== null){this.contentTarget = node}}}
+        >
+          <DefaultLoadingPage 
+            title={title}
+            classNameTxt='ta-cent'
+          />
+        </div>
+      )
+    }
+    else if(!isFetchingUsersGetAll && !isFetchingRanksGetAll) {
+      // console.log('@ third else if - have the information to render')      
       const { user: { userId } } = DM;
       
-      const profileArray = this.props.allUsers.filter(user => user[userId] !== this.props.currentUser[userId]).filter(user => user.isProfileSetup === true)
+      const profileArray = allUsers.filter(user => user[userId] !== this.props.currentUser[userId]).filter(user => user.isProfileSetup === true)
       
       let profilesToRender = profileArray.map((user) => {
         return (
@@ -452,7 +536,7 @@ class UserView extends Component{
 
       return(
         <main>
-          <ContentPageTitleBar content={TITLE_BAR_USER_VIEW}/>
+          {/* <ContentPageTitleBar content={TITLE_BAR_USER_VIEW}/> */}
           <div className="grid grid--3of4">
             <div className="grid-cell"
               // ref={ node => { if(node !== null){this.contentTarget = node}}}
@@ -481,17 +565,16 @@ class UserView extends Component{
 
 function mapStateToProps(state){
   return {
-    allUsers: state.users.allUsers,
-    currentUser: state.auth.currentUser,
-    lookupTableAllUsers: state.users.lookupTableAllUsers,
-    allSkills: state.skills.allSkills,
-    lookupTableAllSkills: state.skills.lookupTableAllSkills,
-    userById: state.users.userById
+    auth: state.auth,
+    users: state.users,
+    skills: state.skills,
+    ranks: state.ranks
+    // userById: state.users.userById
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchUsers, fetchSkills, getCurrentUserById, getUserById, editUserById }, dispatch)
+  return bindActionCreators({ usersGetAll, skillsGetAll, userGetById, userEditById, ranksGetAll }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserView)

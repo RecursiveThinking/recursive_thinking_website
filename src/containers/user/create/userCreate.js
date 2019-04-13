@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { history } from '../../../index';
 
-import { getCurrentUserById, createUser, editUserById } from '../../../actions/index'
+import { userGetById, userCreateById, userEditById } from '../../../actions/index'
 import { FETCHING } from '../../../actions/action_types'
 
 import HeaderApp from '../../../components/headerApp/headerApp';
@@ -13,8 +13,9 @@ import DefaultLoadingPage from '../../../components/defaults/loadingPage/loading
 
 import ContentPageWithTitleBar from '../../../components/common/contentPage/contentPageWithTitleBar';
 import { TITLE_BAR_USER_CREATE } from '../../../components/common/contentPage/contentPageTitleBarInfo'
+// import { CARD_TITLE_SIGNING_IN } from '../../../components/common/content/contentInfo'
 
-import { createAssetFoldersForUser, createAvatarFolder } from '../../../functions/s3Methods'
+import { createAssetFoldersForUser } from '../../../functions/s3Methods'
 
 import { ROUTES_REACT } from '../../../standards/routes'
 import DM from '../../../standards/dictModel'
@@ -41,7 +42,7 @@ class CreateUser extends Component {
     // window.addEventListener('resize', this.handleWindowResize);
     // window.addEventListener('onbeforeunload', this.handleWindowResize)
     // this.props.getAuthUserById(this.props.location.state.userObjForCognito.sub);
-    this.props.getCurrentUserById();
+    this.props.userGetById(this.props.location.state.userObjFromCognito.sub);
     this.handleWindowResize();
   }
 
@@ -65,51 +66,6 @@ class CreateUser extends Component {
     })
   }
   
-  // checkIfUserSetup = () => {
-  //   const {
-  //     sub,
-  //     username,
-  //     name,
-  //     email
-  //   } = this.props.location.state.userObjForCognito;
-    
-  //   console.log('userObjPassed: ', this.props.location.state.userObjForCognito)
-  //   // not setup
-  //   if(!this.props.currentUser.userId){
-  //     const cogId = sub;
-  //     const cogUsername = username;
-  //     const cogName = name;
-  //     const cogEmail = email
-  //     let newCogUser = new CogUser(cogId, cogUsername, cogName, cogEmail)
-  //     console.log('newCogUser: ', newCogUser)
-  //     let newUser = new User(newCogUser)
-  //     console.log('newUser: ', newUser)
-  //     // create s3 buckets for user avatar/resume
-      
-  //     // // action creator - create user
-  //     this.props.createUser(newUser)
-  //       // .then(res => {
-  //       //   console.log('will this log?')
-  //       //   return res
-  //       // })
-  //       // .catch(err => err)
-  //     createAssetFoldersForUser(newUser.userId, 'avatar');
-  //     createAssetFoldersForUser(newUser.userId, 'resume')
-  //   }
-  //   else if(!this.props.currentUser.isProfileSetup){
-  //     const {
-  //       currentUser
-  //     } = this.props
-  //     history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
-  //     // , { setupUserId: currentUser.userId }
-  //     console.log('current user', this.props.currentUser)
-  //   }
-  //   else if(this.props.currentUser.isProfileSetup){
-  //     console.log('USER IS SETUP!')
-  //     history.push(ROUTES_REACT.dashboard)
-  //   }
-  // }
-  
   createNewUser = (sub, username, name, email) => {
     let newCogUser = new CogUser(sub, username, name, email);
     console.log('newCogUser: ', newCogUser)
@@ -120,47 +76,85 @@ class CreateUser extends Component {
     createAssetFoldersForUser(newUser.userId, 'avatar');
     createAssetFoldersForUser(newUser.userId, 'resume');
     // dynamo
-    this.props.createUser(newUser)
+    this.props.userCreateById(newUser)
   }
   
   renderContent(headerHeight, footerHeight, contentWrapper){
+    let {
+      users: { 
+        userById,
+        isGettingUserById,
+        isCreatingUserById
+      }
+    } = this.props
+    
+    // const {
+    //   title
+    // } = CARD_TITLE_SIGNING_IN
     console.log('@ userCreate comp @ renderContent Funcion: showing passed userObjForCognito passed from forms_auth',this.props.location.state.userObjForCognito)
+    // else if(this.props.currentUser === FETCHING){
+    if(isCreatingUserById){
+      return (
+        // <DefaultLoadingPage 
+        //   title={title}
+        //   classNameTxt='ta-cent'
+        // />
+        <div><h1>Creating</h1></div>
+      )
+    }
+    else if(isGettingUserById){
+      return (
+        // <DefaultLoadingPage 
+        //   title={title}
+        //   classNameTxt='ta-cent'
+        // />
+        <div><h1>Getting</h1></div>
+      )
+    }
     // if(headerHeight === 0 || footerHeight === 0 || !this.props.currentUser.userId){
-    if(headerHeight === 0 || footerHeight === 0 || this.props.currentUser === null){
+    // if(headerHeight === 0 || footerHeight === 0 || this.props.currentUser === null){
+    else if(!isGettingUserById && userById === null){
       const {
         sub,
         username,
         name,
         email
-      } = this.props.location.state.userObjForCognito;
+      } = this.props.location.state.userObjFromCognito;
       this.createNewUser(sub, username, name, email)
       return (
-        <>
-          <DefaultLoadingPage />
-        </>
+        <div><h1>Got, None, Need to Create</h1></div>
+        
+        // <DefaultLoadingPage 
+        //   title={title}
+        //   classNameTxt='ta-cent'
+        // />
       )
-    } 
-    else if(this.props.currentUser.userId && !this.props.currentUser.isProfileSetup){
+    }
+    // else if(this.props.currentUser.userId && !this.props.currentUser.isProfileSetup){
+    else if(!isGettingUserById && !isCreatingUserById && userById &&userById.isProfileSetup === false){
       const { currentUser } = this.props;
       console.log('user it not setup: go to userEdit')
-      history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
-      // return (
-      //   <>
-      //     Moving on to UserEdit!
-      //   </>
-      // )
+      // history.push(`${ROUTES_REACT.users_setup}/${currentUser.userId}`)
+      return (
+        <div>
+          Moving on to UserEdit!
+        </div>
+      )
     }
-    else if(this.props.currentUser.userId && this.props.currentUser.isProfileSetup){
-      console.log('user setup: go to dashboard')
-      const { user: { lastLogin }} = DM;
-      let dupUserObj = { ...this.props.currentUser };
-      dupUserObj[lastLogin] = new Date().toString();
-      this.props.editUserById(dupUserObj, ROUTES_REACT.dashboard, null)
+    // else if(this.props.currentUser.userId && this.props.currentUser.isProfileSetup){
+    else if(!isGettingUserById && !isCreatingUserById && userById && userById.isProfileSetup){
+      // console.log('user setup: go to dashboard')
+      // const { user: { lastLogin }} = DM;
+      // let dupUserObj = { ...this.props.currentUser };
+      // dupUserObj[lastLogin] = new Date().toString();
+      // this.props.userEditById(dupUserObj, ROUTES_REACT.dashboard, null)
       // history.push(ROUTES_REACT.dashboard)
       return (
-        <>
-          <DefaultLoadingPage />
-        </>
+        // <DefaultLoadingPage 
+        //   title={title}
+        //   classNameTxt='ta-cent'
+        // />
+        <div>Dashboard</div>
       )
     }
     else {
@@ -185,36 +179,8 @@ class CreateUser extends Component {
       height: (contentHeight)
     }
     
-    if(this.props.currentUser === FETCHING){
-      // console.log('=========================')
-      // console.log('User Is Fetching: ')
-      return (
-        <main className="wrapper">
-        <header ref={ node => { if(node !== null){this.headerTarget = node} }}>
-          <HeaderApp />
-        </header>
-        <div className="grid grid--full">
-          <div className="grid-cell">
-            <div className="contentWrapper" 
-              style={contentWrapper}
-              ref={ node => { if(node !== null){this.contentTarget = node}}}
-            >
-              <ContentPageWithTitleBar
-                {...this.props} 
-                titleBarContent={TITLE_BAR_USER_CREATE}
-                formContent={
-                  <DefaultLoadingPage />
-                }
-              />
-            </div>
-          </div>
-        </div>
-        <footer ref={ node => { if(node !== null){this.footerTarget = node}}}>
-          <Footer />
-        </footer>
-      </main>
-      )
-    }
+    console.log('props @ render: ', this.props, this.props.location.state.userObjFromCognito)
+    
     return (
       <main className="wrapper">
         <header ref={ node => { if(node !== null){this.headerTarget = node} }}>
@@ -228,8 +194,16 @@ class CreateUser extends Component {
             >
               <ContentPageWithTitleBar
                 {...this.props} 
+                content={
+                  this.renderContent(headerHeight, footerHeight, contentWrapper)
+                }
+                sectionStyle={{ 
+                  width: '80%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto'
+                }}
+                sectionClass='content'
                 titleBarContent={TITLE_BAR_USER_CREATE} 
-                formContent={this.renderContent(headerHeight, footerHeight, contentWrapper)}
               />
             </div>
           </div>
@@ -244,12 +218,13 @@ class CreateUser extends Component {
 
 function mapStateToProps(state){
   return {
-    currentUser: state.auth.currentUser
+    // currentUser: state.auth.currentUser
+    users: state.users
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getCurrentUserById, createUser, editUserById }, dispatch)
+  return bindActionCreators({ userGetById, userCreateById, userEditById }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
