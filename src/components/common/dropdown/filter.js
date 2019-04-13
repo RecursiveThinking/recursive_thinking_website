@@ -40,7 +40,8 @@ export class DropDownFilter extends Component {
         }
       })
     });
-    console.log('filterCount: ', filterCount)
+    // console.log('nextProps: ', nextProps)
+    // console.log('filterCount: ', filterCount)
     if(filterCount === 0){
       // just render the title
       return { headerTitle: nextProps.title }
@@ -103,8 +104,6 @@ export class DropDownFilter extends Component {
                       key={ulTitle.id}
                     >{ulTitle.title}
                       {
-                        // listOpen &&  
-                        
                         ulTitle.items.map((listItems, index) => {
                         const {
                           Id,
