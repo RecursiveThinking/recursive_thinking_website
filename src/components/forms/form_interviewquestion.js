@@ -202,7 +202,7 @@ class InterviewQuestionForm extends Component {
   }
   
   ifCategoriesArrayRenderUI = () => {
-    if(this.props.intQuestion){
+    if(this.props.intQuestion && this.state.localCategoriesForIntQuest.length){
       const {
         localCategoriesForIntQuest
       } = this.state;
@@ -257,87 +257,88 @@ class InterviewQuestionForm extends Component {
     } = this.props
     
     return (
-      <section style={{padding: '1.5rem 1.5rem'}}>
-        <article className="card">
-          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          <div className="grid grid--full">
-            <div className="grid-cell">
-            
-          <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
-            {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
-            {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
-            <legend>
-              {this.renderHeadingContent()}
-            </legend>
-            <hr className="modalHR mt10" />
-              <div className="fc-fieldset">
-                <Field 
-                  label="Title:"
-                  name="interviewQuestionTitle"
-                  type="text"
-                  placeholder="Enter Title"
-                  component={this.renderField}
-                  labelStyle="width100P"
-                  inputStyle="width100P"
-                  />
-                <Field 
-                  label="Description:"
-                  name="interviewQuestionDetails"
-                  type="text"
-                  placeholder="Enter Description"
-                  component={this.renderTextArea}
-                  labelStyle="width100P"
-                  textAreaStyle="width100P"
-                  cols={"30"}
-                  rows={"10"}
+      <article className="card">
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <div className="grid grid--full">
+          <div className="grid-cell">
+          
+        <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
+          {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
+          {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
+          <legend>
+            {this.renderHeadingContent()}
+          </legend>
+          <hr className="modalHR mt10" />
+            <div className="fc-fieldset">
+              <Field 
+                label="Title:"
+                name="interviewQuestionTitle"
+                type="text"
+                placeholder="Enter Title"
+                component={this.renderField}
+                labelStyle="width100P"
+                inputStyle="width100P"
                 />
-                <Field
-                  label="Tag Categories:"
-                  name="interviewQuestionTags"
-                  component={this.renderReactTag}
-                  labelStyle="width100P"
-                  inputStyle="width100P"
-                  // classNames={userClassNames}
-                  placeholder='Select Category Tags for this Interview Question'
-                  tags={this.state.addTheseCategoryObjsToIntQuest}
-                  suggestions={this.state.filterCategories}
-                  // allowNew={false}
-                  autoresize={true}
-                  // autofocus={true}
-                  minQueryLength={2}
-                  maxSuggestionsLength={4}
-                  delimiters={[9, 13]}
-                  delimiterChars={[',']}
-                  handleAddition={this.handleAddition}
-                  handleDelete={this.handleDelete}
-                />
-                {/* <Field
-                  label="Tag profession, skills and languages:"
-                  name="interviewQuestionTags"
-                  type="text"
-                  placeholder="Enter at Least One Tag for this Interview Question"
-                  component={this.renderField}
-                  labelStyle="width100P"
-                  inputStyle="width100P"
-                /> */}
+              <Field 
+                label="Description:"
+                name="interviewQuestionDetails"
+                type="text"
+                placeholder="Enter Description"
+                component={this.renderTextArea}
+                labelStyle="width100P"
+                textAreaStyle="width100P"
+                cols={"30"}
+                rows={"10"}
+              />
+              <Field
+                label="Tag Categories:"
+                name="interviewQuestionTags"
+                component={this.renderReactTag}
+                labelStyle="width100P"
+                inputStyle="width100P"
+                // classNames={userClassNames}
+                placeholder='Select Category Tags for this Interview Question'
+                tags={this.state.addTheseCategoryObjsToIntQuest}
+                suggestions={this.state.filterCategories}
+                // allowNew={false}
+                autoresize={true}
+                // autofocus={true}
+                minQueryLength={2}
+                maxSuggestionsLength={4}
+                delimiters={[9, 13]}
+                delimiterChars={[',']}
+                handleAddition={this.handleAddition}
+                handleDelete={this.handleDelete}
+              />
+              {/* <Field
+                label="Tag profession, skills and languages:"
+                name="interviewQuestionTags"
+                type="text"
+                placeholder="Enter at Least One Tag for this Interview Question"
+                component={this.renderField}
+                labelStyle="width100P"
+                inputStyle="width100P"
+              /> */}
+              {
+                this.state.localCategoriesForIntQuest.length &&
                 <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
                   {this.ifCategoriesArrayRenderUI()}
                 </div>
-              </div>
-              <hr className="modalHR mt80" />
-            <div className="ta-cent">
-              {/* {
-                this.props.anyTouched && !this.props.invalid &&
-              } */}
-                
-                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+              }
             </div>
-          </fieldset>
+            <hr className="modalHR mt80" />
+          <div className="ta-cent">
+            {/* {
+              this.props.anyTouched && !this.props.invalid &&
+            } */}
+              
+              <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
           </div>
-          </div>
-          </form>
-        </article>
-      </section>
+        </fieldset>
+        </div>
+        </div>
+        </form>
+      </article>
     )
   }
 }
@@ -360,7 +361,7 @@ function validate(values){
   };
   if(!values.interviewQuestionDetails){ errors.interviewQuestionDetails = 'Interview Question Descriptions can not be Empty' };
   if(values.interviewQuestionDetails){
-    const detailsWordLimit = 10;
+    const detailsWordLimit = 5;
     if(!ValidationMethods.doesContainNumberOfWords(values.interviewQuestionDetails, detailsWordLimit)){
       errors.interviewQuestionDetails = `Interview Question Descriptions must contain at Least ${detailsWordLimit} Words`
     }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
-
+import { Field, reduxForm } from 'redux-form';
+// , SubmissionError
 import ReactTags from 'react-tag-autocomplete'
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import ValidationMethods  from '../../functions/validationMethods'
 
 import { SkillOrCategory } from '../../models/models';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, CODEPEN_API_URL } from '../../credentials/githubApi';
 import { validateGitHubUsername, validateCodePenUsername, validateLinkedIn, validatePortfolioURL } from '../../functions/urlValidationMethods'
+import { PUBLIC_S3_URL } from '../../standards/publicPaths'
+
+import { SelectUserAvatarModalFormEx } from '../../components/forms/form_selectUserAvatar'
 
 import Modal from '../../components/common/modal/modal';
 import DM from '../../standards/dictModel'
@@ -16,7 +18,6 @@ import '../../css/react-widgets/react-widgets.css'
 import Moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
 
-// const  { DOM: { textarea } } = React
 Moment.locale('en')
 momentLocalizer()
 
@@ -31,54 +32,41 @@ const {
     linkCodepen,
     linkLinkedIn,
     linkPortfolioWebsite,
-    linkResume,
+    // linkResume,
     bio,
     experience,
-    skillsProfessional,
-    skillsSoftware,
-    skillsLanguages
+    rank,
+    // skillsProfessional,
+    // skillsSoftware,
+    // skillsLanguages
   }
 } = DM
-
-// const SKILLS_PROFESSIONAL = 'skillsProfessional'
-// const SKILLS_SOFTWARE = 'skillsSoftware'
-// const SKILLS_LANGUAGES = 'skillsLanguage'
 
 const SKILLS_PROFESSIONAL = 'addTheseSkillObjsProfessional'
 const SKILLS_SOFTWARE = 'addTheseSkillObjsSoftware'
 const SKILLS_LANGUAGES = 'addTheseSkillObjsLanguages'
 
-
-
 const asyncValidate = (values) => {
-  // console.log('values @ async: ', values)
-  // console.log('values.linkGithub: ', values.linkGithub)
-  // console.log('values.linkCodepen: ', values.linkCodepen)
-  // if(values.linkCodepen !== '' || values.linkGithub !== ''){
-    const promiseGitHub = new Promise((resolve, reject) => {
-      // console.log('resolve @ promise 1: ')
-      resolve(validateGitHubUsername(values.linkGithub))
+  const promiseGitHub = new Promise((resolve, reject) => {
+    // console.log('resolve @ promise 1: ')
+    resolve(validateGitHubUsername(values.linkGithub))
+  })
+  const promiseCodePen = new Promise((resolve, reject) => {
+    // console.log('resolve @ promise 2: ')
+    resolve(validateCodePenUsername(values.linkCodepen))
+  })
+  return Promise.all([promiseGitHub, promiseCodePen])
+    .then(val => {
+      if(val[0] === false){
+        // console.log('github is false: ')
+        throw ({ linkGithub: 'GitHub Username Not Found'})        
+      }
+      if(val[1] === false){
+        // console.log('codepen is false: ')
+        throw ({ linkCodepen: 'CodePen Username Not Found'})        
+      }
+      return val
     })
-    const promiseCodePen = new Promise((resolve, reject) => {
-      // console.log('resolve @ promise 2: ')
-      resolve(validateCodePenUsername(values.linkCodepen))
-    })
-    return Promise.all([promiseGitHub, promiseCodePen])
-      .then(val => {
-        // console.log('val: ', val)
-        if(val[0] === false){
-          // console.log('github is false: ')
-          throw ({ linkGithub: 'GitHub Username Not Found'})        
-        }
-        if(val[1] === false){
-          // console.log('codepen is false: ')
-          throw ({ linkCodepen: 'CodePen Username Not Found'})        
-        }
-        return val
-      })
-  // } else {
-  //   return [ true, true]
-  // }
 }
 
 class UserForm extends Component {
@@ -105,7 +93,6 @@ class UserForm extends Component {
   }
   
   updateFilteredArray = () => {
-    console.log('this.state: ', this.state)
     const {
       localSkillsForProfessional,
       addTheseSkillObjsProfessional,
@@ -135,13 +122,13 @@ class UserForm extends Component {
     if(addTheseSkillObjsLanguages.length){
       addTheseSkillObjsLanguages.forEach(item => allSkillsForUser.push(item.id))
     }
-    console.log('allSkillsForUser', allSkillsForUser)
+    // console.log('allSkillsForUser', allSkillsForUser)
     // allSkillsForUser [ "skill.id as string" ]
     let updatedFilterSkills = [ ...allSkills ];
     // filterSkills = [ skillObj{ id: "string" }]
     // filter the updated array so it only contains objects whose ids are NOT in the allSkillsForUser
     updatedFilterSkills = updatedFilterSkills.filter(item => !allSkillsForUser.includes(item.id))
-    console.log('updatedFilterSkills: ', updatedFilterSkills)
+    // console.log('updatedFilterSkills: ', updatedFilterSkills)
     this.setState({filterSkills: updatedFilterSkills})
     // return null;
   }
@@ -149,21 +136,16 @@ class UserForm extends Component {
   handleAllSkillAdditions = (tag, string) => {
     if(string === SKILLS_PROFESSIONAL){
       if(!tag.id){
-        // this is a new tag
         tag = new SkillOrCategory(tag, this.props.currentUser.userId);
         const addTheseSkillObjsToDatabase = [].concat(this.state.addTheseSkillObjsToDatabase, tag)
         const addTheseSkillObjsProfessional = [].concat(this.state.addTheseSkillObjsProfessional, tag)
         // const filterSkills = do something to filter
         this.setState({ addTheseSkillObjsToDatabase, addTheseSkillObjsProfessional }, () => this.updateFilteredArray())
-        // this.setState({ addToDatabase, addToSkillsProfessional }, this.updateFilteredArray)
-        // this.updateFilteredArray();
       } else {
         // this tag exists
         tag._usersWithSkill = [ ...tag._usersWithSkill, this.props.currentUser.userId]
         const addTheseSkillObjsProfessional = [].concat(this.state.addTheseSkillObjsProfessional, tag)
         this.setState({ addTheseSkillObjsProfessional }, () => this.updateFilteredArray())
-        // this.setState({ addToSkillsProfessional }, this.updateFilteredArray)
-        // this.updateFilteredArray();
       }
       
     }
@@ -261,7 +243,7 @@ class UserForm extends Component {
   }
   
   handleDeleteCurrentCategory = (stateArray, identifier, index) => {
-    console.log('stateArray: ', stateArray, 'identifier: ', identifier, 'index: ', index, 'this: ', this)
+    // console.log('stateArray: ', stateArray, 'identifier: ', identifier, 'index: ', index, 'this: ', this)
     // state array is a copy of the particular piece of state, so can generically dup it here:
     let dupStateArray = stateArray.slice(0);
     // copy remove array, and add to it the item removing from particular state array
@@ -329,13 +311,6 @@ class UserForm extends Component {
   
   renderField(field){
     const { meta: {asyncValidating, touched, error, warning }} = field;
-    // if(error){
-    //   console.log('error: ', error)
-    // }
-    // else if(warning){
-    //   console.log('warning: ', warning)
-    // }
-    // console.log('this.props @ renderField: ', field)
     
     const inputStyle = `fc-field-row fc--disp-flex fc--fdir-row width100P ${touched && ((error ? 'input-invalid' : '') || (warning ? 'input-warning' : '') )} ${asyncValidating ? 'async-validating' : ''}`
     const returnErrorJSX = (styleType, message) => {
@@ -365,6 +340,10 @@ class UserForm extends Component {
         </div>
       </div>
     )
+  }
+  
+  onSubmitAvatarSelector = () => {
+    console.log('onSubmitAvatarSelector @ form_user')
   }
   
   renderTextArea(field){
@@ -452,14 +431,14 @@ class UserForm extends Component {
         id,
         headingText,
         labelText,
-        inputName,
+        // inputName,
         placeholder,
         tags,
         suggestions,
         inputAttributes,
         allowNew,
         autoresize,
-        autofocus,
+        // autofocus,
         minQueryLength,
         maxSuggestionsLength,
         delimiters,
@@ -469,10 +448,8 @@ class UserForm extends Component {
         stateArray,
         identifier
       } = skillCategory
-      // console.log('skillCategory: ', skillCategory)
-      // console.log('identifier @ returnSkillSections: ', identifier)
       return (
-        <fieldset key={id} className="fieldsetSkills">
+        <div key={id} className="fieldsetSkills">
           <div className="grid grid--full">
             <div className="grid-cell">
               <legend>
@@ -482,8 +459,7 @@ class UserForm extends Component {
               <div className="grid grid--1of2 fc--disp-flex fc--fdir-row fc--jCont-ce">
                 <div className="grid-cell">
                   <div className="fc-form-input-col width90P">
-                    <label htmlFor="" className="fs20 fw300 ls14 fcGrey424041 mt45">{labelText}</label>
-                    {/* <input id={id} className="mt20" type="search" name={inputName} placeholder={placeholder}/> */}
+                    <label htmlFor="" className="fs20 fw300 ls14 fcGrey424041 mt45 mb20">{labelText}</label>
                     <ReactTags
                       tags={tags}
                       suggestions={suggestions}
@@ -499,23 +475,21 @@ class UserForm extends Component {
                       handleAddition={handleAddition}
                       handleDelete={handleDelete}
                     />
-                    {/* <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre> */}
                   </div>
                 </div>
                 <div className="grid-cell">{this.returnSkillJSXPerCategory(stateArray, identifier)}</div>
               </div>
             </div>
           </div>
-        </fieldset>
+        </div>
       )
     })
-    // console.log('skillSectionJSX: ', skillSectionJSX)
     return skillSectionJSX;
   }
   
   renderDateTimePicker = (field) => {
     const { meta: { touched, error, warning }, input: { onChange, value }, showTime} = field;
-    // const {  } = field;
+    
     const inputStyle = `fc--disp-flex fc--fdir-row fc--jCont-ce fc--aItem-ce width100P ${touched && ((error ? 'input-invalid' : '') || (warning ? 'input-warning' : '') )}`
     const returnErrorJSX = (styleType, message) => {
       return (
@@ -548,13 +522,15 @@ class UserForm extends Component {
     )
   }
   
-
-  
   render(){
     const {
       content,
       currentUser,
+      // auth: { currentUser },
+      lookupTableAllRanks
     } = this.props;
+    
+    // console.log('@formUser: this.props (RIGHT AT RENDER())', this.props)
     
     const {
       localSkillsForProfessional,
@@ -565,8 +541,6 @@ class UserForm extends Component {
       addTheseSkillObjsLanguages,
       filterSkills
     } = this.state
-    
-    // console.log('localSkillsForProfessional: ', localSkillsForProfessional, 'localSkillsForSoftware: ', localSkillsForSoftware, 'localSkillsForLanguages: ', localSkillsForLanguages)
     
     const skillArray = [
       {
@@ -632,246 +606,249 @@ class UserForm extends Component {
       }
     ]
     
-
-    const S3_PATH = 'https://s3-us-west-2.amazonaws.com/';
-    const S3_BUCKET = 'recursivethinking-rct-user-assets-us-west-2-sethborne-gmail-com/';
     const CURR_USER_ID = `${currentUser.userId}/`;
     const AVATAR_FOLDER = `avatar/`;
     const USER_AVATAR = `${currentUser.avatar}`
     
-    const AVATAR_PATH_FINAL = `${S3_PATH}${S3_BUCKET}${CURR_USER_ID}${AVATAR_FOLDER}${USER_AVATAR}`
+    const AVATAR_PATH_FINAL = `${PUBLIC_S3_URL}${CURR_USER_ID}${AVATAR_FOLDER}${USER_AVATAR}`
     
-    // console.log('===============================')
-    // console.log('@ formUser this.props: ', this.props, 'this.state: ', this.state)
-    // console.log('right before return in form_user')
+    // console.log('this.props: form_user: ', this.props)
     
     return(
-      <section style={this.props.sectionStyle}>
-        <article className="card" style={this.props.cardStyle}>
-          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <div className="grid grid--1of4">
-              <div className="grid-cell">
-                {/* this would come from the setup/avatardefault */}
-                <div className="fc--fdir-col fc--jCont-ce ta-cent">
-                  <img className="avatarL" name="avatar" src={AVATAR_PATH_FINAL} alt=""/>
-                  <div className="caption">
-                    <label id="profile-picture">
-                      <span 
-                        onClick={() => this.handleToggleModalUserAvatar()}
-                        className="fs20 fw500 ls12"
-                      >Add Profile Picture</span>
-                      {/* <input id="file" type="file" style={{visibility: 'hidden'}}/> */}
-                      {
-                        this.state.showModalUserAvatar &&
-                        
-                        <Modal 
-                          onCloseRequest={() => this.handleToggleModalUserAvatar()}
-                        />
-                      }
-                    </label>
-                  </div>
+      <article className="card" style={this.props.cardStyle}>
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <div className="grid grid--1of4">
+            <div className="grid-cell">
+              {/* this would come from the setup/avatardefault */}
+              <div className="fc--fdir-col fc--jCont-ce ta-cent">
+                {/* <div className="rankCont">
+                  <label className="rank fs14 fw300 ls12 fcGrey424041">
+                    {lookupTableAllRanks[currentUser[rank]].rank}
+                  </label>
+                </div> */} 
+                <img className="avatarL" name="avatar" src={AVATAR_PATH_FINAL} alt=""/>
+                <div className="caption">
+                  <label id="profile-picture">
+                    <span 
+                      onClick={() => this.handleToggleModalUserAvatar()}
+                      className="fs20 fw500 ls12"
+                    >Add Profile Picture</span>
+                    {/* <input id="file" type="file" style={{visibility: 'hidden'}}/> */}
+                    {
+                      this.state.showModalUserAvatar &&
+                      
+                      <Modal 
+                        onCloseRequest={() => this.handleToggleModalUserAvatar()}
+                        content={
+                          <SelectUserAvatarModalFormEx
+                            onSubmit={this.onSubmitAvatarSelector}
+                          />
+                        }
+                      />
+                    }
+                  </label>
                 </div>
               </div>
-              <div className="grid-cell">  
-                <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-                  <legend>
-                    <h5 className="fw600 ls12 fcGrey424041">Basic Information</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="fc-fieldset">
-                    <Field
-                      label="Name:"
-                      name={name}
-                      type="text" 
-                      placeholder="Your First and Last Name"
-                      component={this.renderField}
-                      labelStyle="width20P ta-right"
-                      inputStyle="width80P"
-                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
-                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
-                    />
-                    <Field
-                      label="City:"
-                      name={city}
-                      type="text" 
-                      placeholder="Your City"
-                      component={this.renderField}
-                      labelStyle="width20P ta-right"
-                      inputStyle="width80P"
-                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
-                    />
-                    <Field
-                      label="State:"
-                      name={state}
-                      type="text" 
-                      placeholder="Your State"
-                      component={this.renderField}
-                      labelStyle="width20P ta-right"
-                      inputStyle="width80P"
-                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
-                    />
-                  </div>
-                </fieldset>
-              </div>
             </div>
-              {/* Professional Status */}
-            <div className="grid grid--full">
-              <div className="grid-cell">
-                <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-                  <legend>
-                    <h5 className="fw600 ls12 fcGrey424041">Professional Status</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="fc-fieldset">
+            <div className="grid-cell">  
+              <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                <legend>
+                  <h5 className="fw600 ls12 fcGrey424041">Basic Information</h5>
+                </legend>
+                <hr className="mt10" />
+                <div className="fc-fieldset">
+                  <Field
+                    label="Name:"
+                    name={name}
+                    type="text" 
+                    placeholder="Your First and Last Name"
+                    component={this.renderField}
+                    labelStyle="width20P ta-right"
+                    inputStyle="width80P"
+                    errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
+                    warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
+                  />
+                  <Field
+                    label="City:"
+                    name={city}
+                    type="text" 
+                    placeholder="Your City"
+                    component={this.renderField}
+                    labelStyle="width20P ta-right"
+                    inputStyle="width80P"
+                    errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
+                  />
+                  <Field
+                    label="State:"
+                    name={state}
+                    type="text" 
+                    placeholder="Your State"
+                    component={this.renderField}
+                    labelStyle="width20P ta-right"
+                    inputStyle="width80P"
+                    errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width80P"
+                  />
+                </div>
+              </fieldset>
+            </div>
+          </div>
+            {/* Professional Status */}
+          <div className="grid grid--full">
+            <div className="grid-cell">
+              <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                <legend>
+                  <h5 className="fw600 ls12 fcGrey424041">Professional Status</h5>
+                </legend>
+                <hr className="mt10" />
+                <div className="fc-fieldset">
+                  <Field 
+                    label="Job Title:"
+                    name={title}
+                    type="text" 
+                    placeholder="Your Current Job Title"
+                    component={this.renderField}
+                    labelStyle="width15P ta-right"
+                    inputStyle="width85P"
+                    errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                  />
+                  <Field 
+                    label="Employer:"
+                    name={employer}
+                    type="text" 
+                    placeholder="Your Current Employer"
+                    component={this.renderField}
+                    labelStyle="width15P"
+                    inputStyle="width85P"
+                    errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                  />  
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          {/* Links */}
+          <div className="grid grid--full">
+            <div className="grid-cell">
+              <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
+                <legend>
+                  <h5 className="fw600 ls12 fcGrey424041">Links</h5>
+                </legend>
+                <hr className="mt10" />
+                <div className="fc-fieldset">
                     <Field 
-                      label="Job Title:"
-                      name={title}
-                      type="text" 
-                      placeholder="Your Current Job Title"
-                      component={this.renderField}
-                      labelStyle="width15P ta-right"
-                      inputStyle="width85P"
-                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                    />
-                    <Field 
-                      label="Employer:"
-                      name={employer}
-                      type="text" 
-                      placeholder="Your Current Employer"
+                      label="GitHub:"
+                      name={linkGithub}
+                      type="text"                               
+                      placeholder="Your GitHub Username"
                       component={this.renderField}
                       labelStyle="width15P"
                       inputStyle="width85P"
                       errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                    />  
-                  </div>
-                </fieldset>
-              </div>
+                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                    />
+                    <Field 
+                      label="CodePen:"
+                      name={linkCodepen}
+                      type="text"                                
+                      placeholder="Your CodePen Username"
+                      component={this.renderField}
+                      labelStyle="width15P"
+                      inputStyle="width85P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                    />
+                    <Field 
+                      label="LinkedIn:"
+                      name={linkLinkedIn}
+                      type="text"
+                      placeholder="Your LinkedIn URL"
+                      component={this.renderField}
+                      labelStyle="width15P"
+                      inputStyle="width85P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                    />
+                    <Field 
+                      label="Portfolio:"
+                      name={linkPortfolioWebsite}
+                      type="text"
+                      placeholder="Your Portfolio URL"
+                      component={this.renderField}
+                      labelStyle="width15P"
+                      inputStyle="width85P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                    /> 
+                    {/* <Field 
+                      label="Resume:"
+                      name={linkResume}
+                      type="text"
+                      placeholder="Upload your Resume"
+                      component={this.renderField}
+                      labelStyle="width15P"
+                      inputStyle="width85P"
+                      errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                      warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
+                    /> */}
+                  {/* 
+                  <div className="fc-form-input">
+                    <label htmlFor="name">Resume</label>
+                    <div className="fc-form-input-with-button">
+                      <input type="text" name="title" placeholder="Your Resume" />
+                      <button className="btn btnFillClrSchGreen00b371">Upload</button>
+                    </div>
+                  </div> */}
+                </div>
+              </fieldset> 
             </div>
-            {/* Links */}
-            <div className="grid grid--full">
-              <div className="grid-cell">
-                <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce">
-                  <legend>
-                    <h5 className="fw600 ls12 fcGrey424041">Links</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="fc-fieldset">
-                      <Field 
-                        label="GitHub:"
-                        name={linkGithub}
-                        type="text"                               
-                        placeholder="Your GitHub Username"
-                        component={this.renderField}
-                        labelStyle="width15P"
-                        inputStyle="width85P"
-                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                      />
-                      <Field 
-                        label="CodePen:"
-                        name={linkCodepen}
-                        type="text"                                
-                        placeholder="Your CodePen Username"
-                        component={this.renderField}
-                        labelStyle="width15P"
-                        inputStyle="width85P"
-                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                      />
-                      <Field 
-                        label="LinkedIn:"
-                        name={linkLinkedIn}
-                        type="text"
-                        placeholder="Your LinkedIn URL"
-                        component={this.renderField}
-                        labelStyle="width15P"
-                        inputStyle="width85P"
-                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                      />
-                      <Field 
-                        label="Portfolio:"
-                        name={linkPortfolioWebsite}
-                        type="text"
-                        placeholder="Your Portfolio URL"
-                        component={this.renderField}
-                        labelStyle="width15P"
-                        inputStyle="width85P"
-                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                      /> 
-                      {/* <Field 
-                        label="Resume:"
-                        name={linkResume}
-                        type="text"
-                        placeholder="Upload your Resume"
-                        component={this.renderField}
-                        labelStyle="width15P"
-                        inputStyle="width85P"
-                        errorStyle="error fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                        warnStyle="warn fc--disp-flex fc--fdir-row fc--jCont-fs width85P"
-                      /> */}
-                    {/* 
-                    <div className="fc-form-input">
-                      <label htmlFor="name">Resume</label>
-                      <div className="fc-form-input-with-button">
-                        <input type="text" name="title" placeholder="Your Resume" />
-                        <button className="btn btnFillClrSchGreen00b371">Upload</button>
-                      </div>
-                    </div> */}
+          </div>
+          {/* About */}
+          <div className="grid grid--full">
+            <div className="grid-cell">
+              <fieldset>
+                <legend>
+                  <h5 className="fw600 ls12 fcGrey424041">About</h5>
+                </legend>
+                <hr className="mt10" />
+                <div className="grid grid--1of2 mt30">
+                  <div className="grid-cell">
+                    {/* <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea> */}
+                    {/* <Field */}
+                    <Field
+                      name={bio}
+                      cols={"30"}
+                      rows={"10"} 
+                      component={this.renderTextArea}
+                      placeholder="Write Your About Statement Here"
+                      textAreaStyle=""
+                    />
                   </div>
-                </fieldset> 
-              </div>
-            </div>
-            {/* About */}
-            <div className="grid grid--full">
-              <div className="grid-cell">
-                <fieldset>
-                  <legend>
-                    <h5 className="fw600 ls12 fcGrey424041">About</h5>
-                  </legend>
-                  <hr className="mt10" />
-                  <div className="grid grid--1of2 mt30">
-                    <div className="grid-cell">
-                      {/* <textarea name="bio" cols="30" rows="10" placeholder="Write your about statement here"></textarea> */}
-                      {/* <Field */}
+                  <div className="grid-cell fc--disp-flex fc--fdir-col fc--jCont-ce">
+                    <div className="fc-fieldset">
                       <Field
-                        name={bio}
-                        cols={"30"}
-                        rows={"10"} 
-                        component={this.renderTextArea}
-                        placeholder="Write Your About Statement Here"
-                        textAreaStyle=""
+                        // name="dob"
+                        name={experience}
+                        showTime={false}
+                        component={this.renderDateTimePicker}
+                        // containerClassName=""
                       />
                     </div>
-                    <div className="grid-cell fc--disp-flex fc--fdir-col fc--jCont-ce">
-                      <div className="fc-fieldset">
-                        <Field
-                          // name="dob"
-                          name={experience}
-                          showTime={false}
-                          component={this.renderDateTimePicker}
-                          // containerClassName=""
-                        />
-                      </div>
-                    </div>
                   </div>
-                </fieldset>
-              </div>
+                </div>
+              </fieldset>
             </div>
-            {/* This function renders the three skill inputs */}
-            {this.returnSkillSections(skillArray)}
-            <hr className="modalHR mt80" />
-              <div className="ta-cent">
-                {/* {
-                  this.props.anyTouched && !this.props.invalid &&
-                } */}
-                  
-                  <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
-              </div>
-          </form>
-        </article>
-      </section> 
+          </div>
+          {/* This function renders the three skill inputs */}
+          {this.returnSkillSections(skillArray)}
+          <hr className="modalHR mt80" />
+            <div className="ta-cent">
+              {/* {
+                this.props.anyTouched && !this.props.invalid &&
+              } */}
+                
+                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+            </div>
+        </form>
+      </article>
     )
   }
 }
@@ -937,7 +914,7 @@ function validate(values){
   }
   if(!values.bio){ errors.bio = 'Please Enter a Short Description about Yourself'}
   if(values.bio){
-    const bioWordLimit = 10;
+    const bioWordLimit = 2;
     if(!ValidationMethods.doesContainNumberOfWords(values.bio, bioWordLimit)){
       errors.bio = `All Bios Must Have at Least ${bioWordLimit} words`
     }

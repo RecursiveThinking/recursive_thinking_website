@@ -56,50 +56,48 @@ class InterviewQuestionAnswerForm extends Component {
     } = DM
     console.log('intQuest @ intQuestAns Form: ', intQuestion)
     return (
-      <section style={{padding: '1.5rem 1.5rem'}}>
-        <article className="card fc--disp-flex fc--fdir-col">
-          {/* <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce"> */}
-            {/* <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Reply to Interview Question</h2> */}
-            {/* <hr className="modalHR mt35" /> */}
-            <div className="">
-              <h5 className="fw600 ls16 fcGrey424041">{content.heading}{intQuestion[title]}</h5>
-              {/* <h5 className="fw500 ls18 fcGreyb9 mt30">{this.props.intQuestion[DM.intQuestion.title]}</h5> */}
-              <hr className="mt20" />
-              <p className="fs16 fw300 ls10 fcGrey424041 mt25 wspl">
-                {this.props.intQuestion[DM.intQuestion.description]}
-              </p>
-              <hr className="mt25"/>
-            
-              <CategoryList 
-                categories={intQuestion[categories]}
-                allSkillsArr={this.props.allSkillsArr}
-                lookupTableAllSkills={this.props.lookupTableAllSkills}
+      <article className="card fc--disp-flex fc--fdir-col">
+        {/* <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce"> */}
+          {/* <h2 className="fs40 fw300 ls24 fcBlack ta-cent">Reply to Interview Question</h2> */}
+          {/* <hr className="modalHR mt35" /> */}
+          <div className="">
+            <h5 className="fw600 ls16 fcGrey424041">{content.heading}{intQuestion[title]}</h5>
+            {/* <h5 className="fw500 ls18 fcGreyb9 mt30">{this.props.intQuestion[DM.intQuestion.title]}</h5> */}
+            <hr className="mt20" />
+            <p className="fs16 fw300 ls10 fcGrey424041 mt25 wspl">
+              {this.props.intQuestion[DM.intQuestion.description]}
+            </p>
+            <hr className="mt25"/>
+          
+            <CategoryList 
+              categories={intQuestion[categories]}
+              allSkillsArr={this.props.allSkillsArr}
+              lookupTableAllSkills={this.props.lookupTableAllSkills}
+            />
+          </div>
+          
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <div className="fc-fieldset">
+              <Field
+                label={content.labelAnswer}
+                name="interviewQuestionAnswerDescription"
+                placeholder="Description"
+                component={this.renderTextArea}
+                cols={"30"}
+                rows={"10"}
               />
             </div>
-            
-            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-              <div className="fc-fieldset">
-                <Field
-                  label={content.labelAnswer}
-                  name="interviewQuestionAnswerDescription"
-                  placeholder="Description"
-                  component={this.renderTextArea}
-                  cols={"30"}
-                  rows={"10"}
-                />
-              </div>
-              <hr className="modalHR mt130" />
-              <div className="ta-cent">
-                {/* {
-                  this.props.anyTouched && !this.props.invalid &&
-                } */}
-                  
-                  <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
-              </div>
-            </form>
-          {/* </fieldset> */}
-        </article>
-      </section>
+            <hr className="modalHR mt130" />
+            <div className="ta-cent">
+              {/* {
+                this.props.anyTouched && !this.props.invalid &&
+              } */}
+                
+                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+            </div>
+          </form>
+        {/* </fieldset> */}
+      </article>
     )
   }
 }

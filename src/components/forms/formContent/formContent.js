@@ -5,7 +5,7 @@ export const FORM_HEADING_USER_CREATE = {
 
 export const FORM_HEADING_USER_EDIT = {
   heading: 'Edit User Profile: ',
-  buttonText: 'Submit Editted User'
+  buttonText: 'Submit Edited User'
 }
 
 export const FORM_HEADING_LESSON_CREATE = {
@@ -15,7 +15,7 @@ export const FORM_HEADING_LESSON_CREATE = {
 
 export const FORM_HEADING_LESSON_EDIT = {
   heading: 'Edit Information for Lesson: ',
-  buttonText: 'Submit Editted Lesson'
+  buttonText: 'Submit Edited Lesson'
 }
 
 export const FORM_HEADING_INTERVIEWQUESTION_CREATE = {
@@ -25,7 +25,7 @@ export const FORM_HEADING_INTERVIEWQUESTION_CREATE = {
 
 export const FORM_HEADING_INTERVIEWQUESTION_EDIT = {
   heading: 'Edit Information for Interview Question: ',
-  buttonText: 'Submit Editted Interview Question'
+  buttonText: 'Submit Edited Interview Question'
 }
 
 export const FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE = {
@@ -37,5 +37,5 @@ export const FORM_HEADING_INTERVIEWQUESTIONANSWER_CREATE = {
 export const FORM_HEADING_INTERVIEWQUESTIONANSWER_EDIT = {
   heading: 'Edit Information for: ',
   labelAnswer: 'Edit Your Answer',
-  buttonText: 'Submit Editted Answer'
+  buttonText: 'Submit Edited Answer'
 }

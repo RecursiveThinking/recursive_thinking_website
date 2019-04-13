@@ -212,7 +212,7 @@ class LessonForm extends Component {
           <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
             <label htmlFor="">Currently Teaching This Lesson:</label>
           </div>
-          <ul className="fc--disp-flex fc--fwrap--yes">
+          <ul className="fc--disp-flex fc--fwrap--yes mt10">
             {renderCurrentTeacherSection}
           </ul>
         </>
@@ -244,79 +244,83 @@ class LessonForm extends Component {
       suggestionActive: 'is-active',
       suggestionDisabled: 'is-disabled'
     }
+    
+    // const validateTaughtBy = (values) => this.state.addToTaughtByUsers.length === 0 && 
+    // this.state.localTaughtByUsersArray === 0 ? '' : 'Please Select at Least One User to Teach this Lesson';
+    
     return (
-      <section style={{padding: '1.5rem 1.5rem'}}>
-        <article className="card">
-          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          <div className="grid grid--full">
-            <div className="grid-cell">
-            
-          <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
-            {/* <h2 className="fs33 fw300 ls24 fcBlack ta-cent">{content.heading}</h2> */}
-            {/* <h5 className="fw700 ls14 ttup fcGrey424041">{content.heading}</h5> */}
-            <legend>
-              {this.renderHeadingContent()}
-            </legend>
-            <hr className="modalHR mt10" />
-              <div className="fc-fieldset">
-                <Field
-                  label="Title:"
-                  name="lessonTitle"
-                  type="text"
-                  placeholder="Enter Title"
-                  component={this.renderField}
-                  labelStyle="width100P"
-                  inputStyle="width100P"
-                />
-                <Field
-                  label="Description:"
-                  name="lessonDescription"
-                  placeholder="Enter Description"
-                  component={this.renderTextArea}
-                  labelStyle="width100P"
-                  textAreaStyle="width100P"
-                  cols={"30"}
-                  rows={"10"}
-                />
-                <Field
-                  label="Lesson Taught By:"
-                  name="lessonTaughtBy"
-                  component={this.renderReactTag}
-                  labelStyle="width100P"
-                  inputStyle="width100P"
-                  classNames={userClassNames}
-                  placeholder='Select a User To Teach this Lesson'
-                  tags={this.state.addToTaughtByUsers}
-                  suggestions={this.state.filterUsers}
-                  // allowNew={false}
-                  // autoresize={true}
-                  // autofocus={true}
-                  minQueryLength={2}
-                  maxSuggestionsLength={4}
-                  delimiters={[9, 13]}
-                  delimiterChars={[',']}
-                  handleAddition={this.handleAddition}
-                  handleDelete={this.handleDelete}
-                />
+      <article className="card">
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <div className="grid grid--full">
+          <div className="grid-cell">
+          
+        <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
+          <legend>
+            {this.renderHeadingContent()}
+          </legend>
+          <hr className="modalHR mt10" />
+            <div className="fc-fieldset">
+              <Field
+                label="Title:"
+                name="lessonTitle"
+                type="text"
+                placeholder="Enter Title"
+                component={this.renderField}
+                labelStyle="width100P"
+                inputStyle="width100P"
+              />
+              <Field
+                label="Description:"
+                name="lessonDescription"
+                placeholder="Enter Description"
+                component={this.renderTextArea}
+                labelStyle="width100P"
+                textAreaStyle="width100P"
+                cols={"30"}
+                rows={"10"}
+              />
+              <Field
+                label="Lesson Taught By:"
+                name="lessonTaughtBy"
+                component={this.renderReactTag}
+                labelStyle="width100P"
+                inputStyle="width100P"
+                classNames={userClassNames}
+                placeholder='Select a User To Teach this Lesson'
+                tags={this.state.addToTaughtByUsers}
+                suggestions={this.state.filterUsers}
+                // allowNew={false}
+                // autoresize={true}
+                // autofocus={true}
+                minQueryLength={2}
+                maxSuggestionsLength={4}
+                delimiters={[9, 13]}
+                delimiterChars={[',']}
+                handleAddition={this.handleAddition}
+                handleDelete={this.handleDelete}
+                // validate={validateTaughtBy}
+              />
+            {
+              this.state.localTaughtByUsersArray.length > 0 &&
               <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
                 {this.ifTaughtByArrayRenderUI()}
               </div>
-              </div>
-              <hr className="modalHR mt80" />
-              <div className="ta-cent">
-                {
-                  // this.props.anyTouched && !this.props.invalid &&
-                  
-                  <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
-                }
-              </div>
-              {/* here would be any existing taughtByUsers */}
-          </fieldset>
-          </div>
-          </div>
-          </form>
-        </article>
-      </section>
+            }
+            </div>
+            <hr className="modalHR mt80" />
+            <div className="ta-cent">
+              {
+                // this.props.anyTouched && !this.props.invalid &&
+                
+                <button className="btn btnFillClrSchGreen00b371 pdTB2LR8 fs20 fw500 ls12 mt30">{content.buttonText}</button>
+              }
+            </div>
+            {/* here would be any existing taughtByUsers */}
+        </fieldset>
+        </div>
+        </div>
+        </form>
+      </article>
     )
   }
 }
@@ -338,14 +342,13 @@ function validate(values){
   }
   if(!values.lessonDescription){ errors.lessonDescription = 'Lesson Descriptions can not be Empty' }
   if(values.lessonDescription){
-    const descriptionWordLimit = 10;
+    const descriptionWordLimit = 5;
     if(!ValidationMethods.doesContainNumberOfWords(values.lessonDescription, descriptionWordLimit)){
       errors.lessonDescription = `Lesson Descriptions must contain at Least ${descriptionWordLimit} Words`
     }
   }
-    
+  
   // if(!values.lessonTaughtBy){ errors.lessonTaughtBy = 'Please Search to Assign Users to this Lesson' }
-
   
   return errors
 }
