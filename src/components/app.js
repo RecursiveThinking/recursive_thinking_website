@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-
+import { Route } from 'react-router-dom';
+// , Redirect
 import HomeScreen from '../containers/public/HomeScreen/HomeScreen';
 import userCreate from '../containers/user/create/userCreate';
 import userSetup from '../containers/user/setup/userSetup';
