@@ -4,7 +4,8 @@ export const ROUTES_API = {
   interviewquestions: '/interviewquestions',
   interviewquestionsanswers: '/interviewquestionsanswers',
   skills: '/skills',
-  homeScreenQuotes: '/homescreenquotes'
+  homeScreenQuotes: '/homescreenquotes',
+  ranks: '/ranks'
 }
 
 export const CEDV = {
@@ -59,6 +60,7 @@ export const ROUTES_REACT = {
   users_view_id: `${ROUTES_API.users}${CEDV.view}/:id`,
   users_edit: `${ROUTES_API.users}${CEDV.edit}`,
   users_edit_id: `${ROUTES_API.users}${CEDV.edit}/:id`,
+  
   admindashboard: '/admindashboard',
   signout: '/signout'
 }
