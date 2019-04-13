@@ -8,19 +8,23 @@ import ScheduledLessonsListItem from '../../components/scheduledLessons/schedule
 
 import LessonMethods from '../../functions/lessonMethods'
 
+import DefaultMessage from '../../components/defaults/defaultMessage/defaultMessage';
+import { DEFAULT_MESSAGE_SCHEDULED_LESSONS_UPCOMING_LESSONS_NOT_FOUND } from '../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent';
+
 import DM from '../../standards/dictModel'
 
-const ScheduledLessonsList = ({...props}) => {
+const ScheduledLessonsList = ({scheduledLessons, currentUser, actions}) => {
   const { user: { lessonStatus }, lesson: { Id }} = DM;
   
-  if(props.scheduledLessons.length){
+  // scheduledLessons.length = 0;
+  if(scheduledLessons.length){
     // map the lesson list to return JSX
-    let allScheduledLessonsListItems = props.scheduledLessons.map(lessonItem => {
-      let currentUserLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(props.currentUser[lessonStatus], lessonItem[Id]);
+    let allScheduledLessonsListItems = scheduledLessons.map(lessonItem => {
+      let currentUserLessonStatus = LessonMethods.getSelectedLessonStatusForCurrentUser(currentUser[lessonStatus], lessonItem[Id]);
       return (
         <li
           key={lessonItem[Id]}
-          onClick = {() => props.actions.selectedLesson(lessonItem)}
+          onClick = {() => actions.selectedLesson(lessonItem)}
         >
           <ScheduledLessonsListItem lesson={lessonItem} currentUserLessonStatus={currentUserLessonStatus} />
         </li>
@@ -29,7 +33,7 @@ const ScheduledLessonsList = ({...props}) => {
     
     return (
       <article className="card">
-        <h5 className="fw700 ls14 ttup fcGrey424041">Upcoming Lessons</h5>
+        <h5 className="fw600 ls14 fcGrey424041">Upcoming Lessons</h5>
         <hr className="mt10"/>
         <ul>
           {allScheduledLessonsListItems}
@@ -39,16 +43,19 @@ const ScheduledLessonsList = ({...props}) => {
   } else {
     // the list has no length
     return (
-      <article className="card">
-        <h5 className="fw700 ls14 ttup fcGrey424041">Upcoming Lessons</h5>
-        <hr className="mt10" />
-        <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There are no upcoming lessons!</h5>
-        <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
-          To create a lesson, please select "Vote for Lessons" from the navigation panel.  On the subsequnet page, select the "Submit Lesson" and fill out the form.
-          <br /><br />
-          Afterwards, vote for lessons you would like to attend.  Lessons that receive 10 votes will be scheduled for the next available Saturday.
-        </p>
-      </article>
+      // <article className="card">
+      //   <h5 className="fw600 ls14 fcGrey424041">Upcoming Lessons</h5>
+      //   <hr className="mt10" />
+      //   <h5 className="fw500 ls14 fcGrey424041 mt30 ta-cent">Uh Oh! There are no upcoming lessons!</h5>
+      //   <p className="fs18 fw300 ls10 fcGrey81 mt15 ta-cent">
+      //     To create a lesson, please select "Vote for Lessons" from the navigation panel.  On the subsequnet page, select the "Submit Lesson" and fill out the form.
+      //     <br /><br />
+      //     Afterwards, vote for lessons you would like to attend.  Lessons that receive 10 votes will be scheduled for the next available Saturday.
+      //   </p>
+      // </article>
+      <DefaultMessage
+        content={DEFAULT_MESSAGE_SCHEDULED_LESSONS_UPCOMING_LESSONS_NOT_FOUND}
+      />
     )
   }
   

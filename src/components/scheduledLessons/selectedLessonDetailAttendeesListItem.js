@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import { ROUTES_REACT } from '../../standards/routes'
-import { PATH_FOR_IMAGES } from '../../standards/publicPaths'
+import { PUBLIC_S3_URL } from '../../standards/publicPaths'
 import DM from '../../standards/dictModel'
 
 const {
@@ -12,7 +12,7 @@ const {
 
 const selectedLessonDetailAttendeesListItem = ({attendingUserObj}) => {
   const { user: { userId, name, avatar}} = DM;
-  let avatarSrcPath = `${PATH_FOR_IMAGES}${attendingUserObj[avatar]}`
+  let avatarSrcPath = `${PUBLIC_S3_URL}${attendingUserObj[userId]}/avatar/${attendingUserObj[avatar]}`
   let altString = `A Photo of ${attendingUserObj[name]}`
   return (
     <div className="fc--disp-flex">

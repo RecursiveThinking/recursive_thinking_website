@@ -4,12 +4,18 @@ import SelectedLessonDetailAttendeesListItem from './selectedLessonDetailAttende
 
 const selectedLessonAttendeesList = ({selectedLessonAttendeesArrayOfUserObj}) => {
   const lessonAttendingAllUsersList = selectedLessonAttendeesArrayOfUserObj.map(attendingUserObj => {
-    // console.log('attendingUserObj: ', attendingUserObj)
-    return (
-      <li key={attendingUserObj.userId} className="grid-cell">
-        <SelectedLessonDetailAttendeesListItem attendingUserObj={attendingUserObj}/>
-      </li>
-    )
+    if(!attendingUserObj){
+      return (
+        null
+      )
+    } else {
+      // console.log('attendingUserObj: ', attendingUserObj)
+      return (
+        <li key={attendingUserObj.userId} className="grid-cell">
+          <SelectedLessonDetailAttendeesListItem attendingUserObj={attendingUserObj}/>
+        </li>
+      )
+    }
   })
   
   return (
