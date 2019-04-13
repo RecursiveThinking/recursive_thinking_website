@@ -7,12 +7,11 @@ export const TABLE_NAMES = {
   users: 'users',
   lessons: 'lessons',
   interviewQuestions: 'interviewQuestions',
-  interviewQuestionsAnswers: 'interviewQuestionsAnswers'
+  interviewQuestionAnswers: 'interviewQuestionAnswers'
 }
 
-
 const adminPanelList = ({...props}) => {
-  const { users, lessons, interviewQuestions, interviewQuestionsAnswers } = DM
+  const { users, lessons, interviewQuestions, interviewQuestionAnswers } = DM
   const tableTitle = [ 
     'User Admin Table',
     'Lesson Admin Table',
@@ -68,7 +67,7 @@ const adminPanelList = ({...props}) => {
           table={'lessons'} 
           tableHeadingArr={lessonTableHeadings} 
           tableBodyArr={props.allLessons}
-          lookupTableUsers={props.lookupTableUsers}
+          lookupTableAllUsers={props.lookupTableAllUsers}
         />
       </li>
       <li key={TABLE_NAMES[interviewQuestions]} className="grid grid--full">
@@ -79,17 +78,15 @@ const adminPanelList = ({...props}) => {
           tableBodyArr={props.allInterviewQuestions}
         />
       </li>
-      <li key={TABLE_NAMES[interviewQuestionsAnswers]} className="grid grid--full">
+      <li key={TABLE_NAMES[interviewQuestionAnswers]} className="grid grid--full">
         <AdminPanelListItem
           title={tableTitle[3]}
           table={'interviewQuestionsAnswers'}
           tableHeadingArr={interviewQuestionsAnswersTableHeadings} 
-          tableBodyArr={props.allInterviewQuestionsAnswers}
+          tableBodyArr={props.allInterviewQuestionAnswers}
         />
       </li>
     </ul>
-    
-
   )
 }
 

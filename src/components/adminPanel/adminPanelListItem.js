@@ -11,15 +11,17 @@ const adminPanelListItem = ({...props}) => {
   } = DM;
   const { users, lessons } = TABLE_NAMES;
   
-  let tableHeadingJSX  = props.tableHeadingArr.map(attr => {
+  let tableHeadingJSX  = props.tableHeadingArr.map((attr, index) => {
     return (
-      <th className="ta-cent">{attr}</th>
+      <th
+        key={index}
+        className="ta-cent">{attr}</th>
       )
     })
     
-    let tableBodyJSX = props.tableBodyArr.map((obj, index) => {
-      let tableData = props.tableHeadingArr.map(attr => {
-        function genRenderString(attr){
+    let tableBodyJSX = props.tableBodyArr.map((obj, objIndex) => {
+      let tableData = props.tableHeadingArr.map((attr, attrIndex) => {
+        function genRenderString(attr, index){
           if(props.table === users){
             if(attr === email){
               return (
@@ -45,7 +47,7 @@ const adminPanelListItem = ({...props}) => {
             return obj[attr].length
           }
           else if(attr === _lessonCreatedBy){
-            let content = getUserObjById(obj[attr], props.lookupTableUsers)
+            let content = getUserObjById(obj[attr], props.lookupTableAllUsers)
             if(typeof(content) === 'string'){
               return content;
             } else {
@@ -60,7 +62,7 @@ const adminPanelListItem = ({...props}) => {
           return obj[attr]
         }
       }
-      function genClassName(attr){
+      function genClassName(attr, attrIndex){
         if(props.table === users){
           if(attr === email){
             return "ta-cent"
@@ -86,14 +88,17 @@ const adminPanelListItem = ({...props}) => {
         return "ta-left"
       }
       return (
-        <td className={genClassName(attr)}>
-          {genRenderString(attr)}
+        <td
+          key={`${attr}${attrIndex}`}
+          className={genClassName(attr, attrIndex)}
+        >
+          {genRenderString(attr, attrIndex)}
         </td>
       )
     })
     
     return (
-      <tr>
+      <tr key={`${obj}${objIndex}`}>
         { tableData }
       </tr>
     )
@@ -116,7 +121,7 @@ const adminPanelListItem = ({...props}) => {
   return (
     // <li className="grid grid--full">
       <article className="card width100P">
-        <h5 className="fw700 ls14 ttup fcGrey424041 mb10">{props.title}</h5>
+        <h5 className="fw600 ls14 fcGrey424041 mb10">{props.title}</h5>
         <hr />
         <table className="width100P">
           <thead>

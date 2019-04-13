@@ -1,78 +1,87 @@
+import { LogService as ls, catObj as co, subObj as so, tableObj as to, methodObj as mo } from '../../services/logService';
+
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
-import { fetchUsers, fetchLessons, fetchInterviewQuestions, fetchInterviewQuestionsAnswers} from '../../actions/index';
-import { FETCHING } from '../../actions/action_types';
+import { usersGetAll, lessonsGetAll, interviewQuestionsGetAll, interviewQuestionAnswersGetAll} from '../../actions/index';
 
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
-import AdminPanelList from '../../components/adminPanel/adminPanelList'
+import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
+import { CARD_TITLE_GETTING_APP_DATA } from '../../components/common/content/contentInfo'
 
-import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
-import { TITLE_BAR_ADMIN_PANEL } from '../../components/common/contentPage/contentPageTitleBarInfo';
+import AdminPanelList from '../../components/adminPanel/adminPanelList'
 
 class AdminPanel extends Component {
   componentDidMount(){
-    this.props.fetchUsers();
-    this.props.fetchLessons();
-    this.props.fetchInterviewQuestions();
-    this.props.fetchInterviewQuestionsAnswers();
+    this.props.usersGetAll();
+    this.props.lessonsGetAll();
+    this.props.interviewQuestionsGetAll();
+    this.props.interviewQuestionAnswersGetAll();
   }
-  render(){
-    console.log('@ adminPanel Container - this.props: ', this.props)
-    const {
-      allUsers,
-      lookupTableUsers,
-      allLessons,
-      allInterviewQuestions,
-      allInterviewQuestionsAnswers
+  
+  renderContent = () => {
+    
+    let {
+      users: { allUsers, lookupTableAllUsers, isFetchingUsersGetAll, errorMessageUsersGetAll },
+      lessons: { allLessons, isFetchingLessonsGetAll, errorMessageLessonsGetAll},
+      interviewQuestions: { allInterviewQuestions, isFetchingInterviewQuestionsGetAll, errorMessageInterviewQuestionsGetAll },
+      interviewQuestionAnswers: { allInterviewQuestionAnswers, isFetchingInterviewQuestionsAnswersGetAll, errorMessageInterviewQuestionsAnswersGetAll }
     } = this.props;
-    if(allUsers === FETCHING || lookupTableUsers === FETCHING || allLessons === FETCHING || allInterviewQuestions === FETCHING || allInterviewQuestionsAnswers === FETCHING){
+    const {
+      title
+    } = CARD_TITLE_GETTING_APP_DATA;
+    
+    // isFetchingUsersGetAll = true;
+    
+    if(isFetchingUsersGetAll || isFetchingLessonsGetAll || isFetchingInterviewQuestionsGetAll || isFetchingInterviewQuestionsAnswersGetAll){
       return (
-        <main>
-          <div className="content">
-            <DefaultLoadingPage />
-          </div>
-        </main>
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt='ta-cent'
+        />
       )
-    } else {
-      return(
-        <main>
-          <ContentPageTitleBar 
-            content={TITLE_BAR_ADMIN_PANEL}
-          />
-          <div className="content">
-            {/* <div>Howdy Partner</div> */}
-            <AdminPanelList
-              allUsers={this.props.allUsers}
-              lookupTableUsers={this.props.lookupTableUsers}
-              allLessons={this.props.allLessons}
-              allInterviewQuestions={this.props.allInterviewQuestions}
-              allInterviewQuestionsAnswers={this.props.allInterviewQuestionsAnswers}
-            />
-          </div>
-        </main>
+    } 
+    else if(errorMessageUsersGetAll || errorMessageLessonsGetAll || errorMessageInterviewQuestionsGetAll || errorMessageInterviewQuestionsAnswersGetAll){
+      return (
+        <DefaultErrorPage />
       )
     }
+    else if(!isFetchingUsersGetAll || !isFetchingLessonsGetAll || !isFetchingInterviewQuestionsGetAll || !isFetchingInterviewQuestionsAnswersGetAll) {
+      ls(co.cont, so.props, to.adminPanel, null, this.props)
+      return(
+        <AdminPanelList
+          allUsers={allUsers}
+          lookupTableAllUsers={lookupTableAllUsers}
+          allLessons={allLessons}
+          allInterviewQuestions={allInterviewQuestions}
+          allInterviewQuestionAnswers={allInterviewQuestionAnswers}
+        />
+      )
+    }
+  }
+  
+  render(){
+    return (
+      <>
+        {this.renderContent()}
+      </>
+    )
   }
 }
 
 function mapStateToProps(state){
   return {
-    allUsers: state.users.allUsers,
-    lookupTableUsers: state.users.lookupTableAllUsers,
-    allLessons: state.lessons.allLessons,
-    lookupTableLessons: state.lessons.lookupTableAllLessons,
-    allInterviewQuestions: state.interviewQuestions.allInterviewQuestions,
-    lookupTableInterviewQuestions: state.interviewQuestions.lookupTableInterviewQuestions,
-    allInterviewQuestionsAnswers: state.interviewQuestionsAnswers.allInterviewQuestionsAnswers,
-    lookupTableInterviewQuestionsAnswers: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers,
+    users: state.users,
+    lessons: state.lessons,
+    interviewQuestions: state.interviewQuestions,
+    interviewQuestionAnswers: state.interviewQuestionAnswers,
     currentUser: state.auth.currentUser
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchUsers, fetchLessons, fetchInterviewQuestions, fetchInterviewQuestionsAnswers}, dispatch)
+  return bindActionCreators({usersGetAll, lessonsGetAll, interviewQuestionsGetAll, interviewQuestionAnswersGetAll}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminPanel)
