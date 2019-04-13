@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { FETCHING } from '../../actions/action_types'
-import { fetchUsers, fetchLessons, getCurrentUserById, editLessonById } from '../../actions'
+import { usersGetAll, lessonsGetAll, lessonEditById } from '../../actions'
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
+import { CARD_TITLE_UNSCHEDULED_LESSONS_GET_ALL }  from '../../components/common/content/contentInfo'
 
-import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
-import { TITLE_BAR_LESSONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
+// import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
+// import { TITLE_BAR_LESSONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
 import UnscheduledLessonsList from '../../components/unscheduledLessons/unscheduledLessonsList';
 
 import LessonMethods from '../../functions/lessonMethods';
@@ -28,26 +28,24 @@ class UnscheduledLessons extends Component {
   }
   
   componentDidMount(){
-    this.props.fetchUsers();
-    this.props.fetchLessons();
-    this.props.getCurrentUserById();
+    this.props.usersGetAll();
+    this.props.lessonsGetAll();
   }
   
   componentDidUpdate(prevProps){
-    if(this.props.allLessons !== prevProps.allLessons){
+    if(this.props.lessons.allLessons !== prevProps.lessons.allLessons){
       this.nextAvailableSaturdayDate();
     }
-    
   }
   
   nextAvailableSaturdayDate = () => {
     const {
       allLessons
-    } = this.props;
+    } = this.props.lessons;
     if(allLessons.length){
       // find the last scheduled lesson because we have lessons
       const lastScheduledDate = LessonMethods.getDateOfLastScheduledLesson(allLessons);
-      console.log('LSD: ', lastScheduledDate)
+      // console.log('LSD: ', lastScheduledDate)
       let nextAvailableSaturday = DateMethods.whenIsNextSaturdayNoon(lastScheduledDate.date)
       this.setState({nextAvailableSaturday: nextAvailableSaturday})
     } else {
@@ -67,70 +65,76 @@ class UnscheduledLessons extends Component {
         updatedLesson[date] = this.state.nextAvailableSaturday
       }
       updatedLesson[lessonVotes].push(currentUser[userId]);
-      this.props.editLessonById(updatedLesson)
+      this.props.lessonEditById(updatedLesson)
     }
     else if(action === 'remove'){
       const newVoteArray = lesson[lessonVotes].filter( Id => Id !== currentUser[userId] )
       updatedLesson[lessonVotes] = newVoteArray
-      this.props.editLessonById(updatedLesson)
+      this.props.lessonEditById(updatedLesson)
     }
   }
   
-  render(){
+  renderContent = () => {
+    let {
+      currentUser,
+      users: {
+        allUsers,
+        isFetchingUsersGetAll, errorMessageUsersGetAll
+      },
+      lessons: {
+        unscheduledLessons,
+        isFetchingLessonsGetAll, errorMessageLessonsGetAll
+      }
+    } = this.props;
     const {
-      allUsers,
-      allLessons,
-      unscheduledLessons,
-      currentUser
-    } = this.props
-    
-    console.log('currentUser @ unscheduled Lessons: ', currentUser)
-    
-    if(!allUsers || !allLessons || !unscheduledLessons){
+      title
+    } = CARD_TITLE_UNSCHEDULED_LESSONS_GET_ALL;
+    // isFetchingLessonsGetAll = true;
+    if(errorMessageUsersGetAll || errorMessageLessonsGetAll){
       return (
-        <main className="content">
-          <DefaultErrorPage />
-        </main>
+        <DefaultErrorPage />
       )
     }
-    else if(allUsers === FETCHING || allLessons === FETCHING || unscheduledLessons === FETCHING){
+    else if(isFetchingUsersGetAll || isFetchingLessonsGetAll){
       return (
-        <main className="content">
-          <DefaultLoadingPage />
-        </main>
+        <DefaultLoadingPage
+          title={title}
+          classNameTxt='ta-cent'
+        />
       )
     }
     else {
       return (
-        <main>
-          <ContentPageTitleBar
-            content={TITLE_BAR_LESSONS}
-          />
-          <div className="contentList"> 
-            <UnscheduledLessonsList 
-              currentUser={currentUser}
-              allUsersArr = {allUsers}
-              allUnscheduledLessonsArr={unscheduledLessons}
-              toggleLessonVote={this.toggleLessonVote}
-            />
-          </div>
-        </main>
+        <UnscheduledLessonsList 
+          currentUser={currentUser}
+          allUsersArr = {allUsers}
+          allUnscheduledLessonsArr={unscheduledLessons}
+          toggleLessonVote={this.toggleLessonVote}
+        />
       )
     }
+  }
+  
+  render(){
+    return(
+      <> 
+        {this.renderContent()}
+      </>
+    )
+
   }
 }
 
 function mapStateToProps(state){
   return {
-    allUsers: state.users.allUsers,
-    allLessons: state.lessons.allLessons,  
-    unscheduledLessons: state.lessons.unscheduledLessons,
-    currentUser: state.auth.currentUser
+    users: state.users,
+    lessons: state.lessons,
+    // currentUser: state.auth.currentUser
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchUsers, fetchLessons, getCurrentUserById, editLessonById }, dispatch)
+  return bindActionCreators({ usersGetAll, lessonsGetAll, lessonEditById }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UnscheduledLessons);

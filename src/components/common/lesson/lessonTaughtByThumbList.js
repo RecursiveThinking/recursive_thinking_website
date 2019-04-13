@@ -4,16 +4,23 @@ import LessonTaughtByThumbListItem from './lessonTaughtByThumbListItem'
 
 const lessonTaughtByThumbList = ({taughtByUserArray}) => {
   // console.log('lessonTaughtByThumb', taughtByUserArray);
+  
   let lessonAvatars = taughtByUserArray.map(userTeach => {
-    return (
-      <li key={userTeach.userId} >
-        <LessonTaughtByThumbListItem 
-          avatar={userTeach.avatar} 
-          altName={userTeach.name} 
-          userId={userTeach.userId}
-        />
-      </li>
-    )
+    if(userTeach === undefined){
+      return (
+        <div>Loading</div>
+      )
+    } else {
+      return (
+        <li key={userTeach.userId} >
+          <LessonTaughtByThumbListItem 
+            avatar={userTeach.avatar} 
+            altName={userTeach.name} 
+            userId={userTeach.userId}
+            />
+        </li>
+      )
+      }
   })
   
   return (

@@ -16,12 +16,12 @@ const unscheduledLessonListItem = ({currentUser, lesson, allUsersArr, toggleLess
       title, 
       description, 
       lessonTaughtBy, 
-      lessonVotes 
+      lessonVotes,
+      _lessonCreatedBy 
     }, 
     user: { 
       userId, 
-      admin, 
-      _lessonCreatedBy 
+      admin,
     }
   } = DM
   
