@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
-import { FETCHING } from '../../actions/action_types'
-import { fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills } from '../../actions'
+import { usersGetAll, interviewQuestionsGetAll, interviewQuestionAnswersGetAll, skillsGetAll } from '../../actions'
 
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage';
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage';
-
-import ContentPageTitleBar from '../../components/common/contentPage/contentPageTitleBar'
-import { TITLE_BAR_INTERVIEWQUESTIONS } from '../../components/common/contentPage/contentPageTitleBarInfo'
+import { 
+  CARD_TITLE_INTERVIEW_QUESTIONS_GET_ALL
+} from '../../components/common/content/contentInfo'
 
 import InterviewQuestionsList from '../../components/interviewQuestions/interviewQuestionsList';
 import { DropDownSort } from '../../components/common/dropdown/sort';
@@ -27,7 +26,7 @@ class InterviewQuestions extends Component {
       sortBy: [
         {
           id: 0,
-          title: 'Nothing',
+          title: 'Default - None',
           selected: false,
           orderType: '',
           key: 'sortBy'
@@ -100,7 +99,7 @@ class InterviewQuestions extends Component {
   }
   
   toggleSelected = (parentid, parentKey, childId, childIndex, childKey, name) => {
-    // console.log('inside ToggleSelected', parentid, parentKey, childId, childIndex, childKey, name)
+    // console.log('inside ToggleSelected: ', parentid, parentKey, childId, childIndex, childKey, name)
     let filterByArray = JSON.parse(JSON.stringify(this.state.filterBy))
     // console.log('filterByArray: ', filterByArray)
     let parentItem = { ...filterByArray[parentid]}
@@ -109,6 +108,8 @@ class InterviewQuestions extends Component {
     // console.log('parentItem after: ', parentItem)
     filterByArray[parentid] = parentItem;
     // need to update filterIntQuestBy Array
+    // console.log('final filterByArray: ', filterByArray)
+    // need to update filterIntQuestBy (this is the array that gets rendered on screen)
     let updatefilterIntQuest = JSON.parse(JSON.stringify(this.state.filterIntQuestBy))
     // console.log('updatefilterIntQuest: ', updatefilterIntQuest)
     let objIndex = updatefilterIntQuest.findIndex(obj => {
@@ -154,55 +155,62 @@ class InterviewQuestions extends Component {
     // let orderedArray = this.orderArray(temp[id]['orderType'])
     // console.log(temp[id]['orderType'], orderedArray)
   }
-
   
   componentDidMount(){
-    this.props.fetchUsers();
-    this.props.fetchInterviewQuestions();
-    this.props.fetchInterviewQuestionsAnswers();
-    this.props.fetchSkills();
+    this.props.usersGetAll();
+    this.props.interviewQuestionsGetAll();
+    this.props.interviewQuestionAnswersGetAll();
+    this.props.skillsGetAll();
   }
   
   static getDerivedStateFromProps(props, state){
     // console.log('GDSFP: ', 'props: ', props, 'state: ', state)
-    if(props.allSkills !== 'FETCHING'){
-      // console.log('props: ', props.allSkills)
-      if(!state.filterBy[0].items.length){
-        let skillDropDown = props.allSkills.map((skillItem, index) => {
-          return {
-              index: index,
-              // Id: skillItem.Id,
-              Id: skillItem.id,
-              name: skillItem.name,
-              count: skillItem._interviewquestionsWithCategory.length,
-              selected: false,
-              childKey: 'categoryItem'
-            }
-        }).filter(skillItem => skillItem.count > 0)
-        skillDropDown = skillDropDown.sort((a, b) => {
-          // console.log('a: ', a.count, 'b: ', b.count)
-          return b.count - a.count;
-        })
-        // reassign indexes so they are clean
-        skillDropDown.forEach((item, index) => {
-          item.index = index;
-        })
-        let filterByUpdate = { ...state.filterBy }
-        filterByUpdate[0].items = skillDropDown;
-        // console.log('finished making category filter state: ', state)
-        // this.setState({filterBy: filterByUpdate})
-        // console.log('state: ', state)
-      }
-      else {
-        // console.log('category filter state exists, skipping setup: ', state)
-        
-      }
+    let { 
+      users: {  lookupTableAllUsers, isFetchingUsersGetAll, errorMessageUsersGetAll },
+      skills: { allSkills, isFetchingSkillsGetAll, errorMessageSkillsGetAll },
+      interviewQuestions: { allInterviewQuestions, isFetchingInterviewQuestionsGetAll, errorMessageInterviewQuestionsGetAll }
+    } = props
+    if(errorMessageSkillsGetAll){
+      
     }
-    if(props.allUsers !== 'FETCHING' && props.allInterviewQuestions !== 'FETCHING'){
+    else if(!isFetchingSkillsGetAll){
+      // console.log('props: ', allSkills)
+      // if(!state.filterBy[0].items.length){
+        if(!state.filterBy[0].items.length){        
+          let skillDropDown = allSkills.map((skillItem, index) => {
+            return {
+                // index: index,
+                // Id: skillItem.Id,
+                Id: skillItem.id,
+                name: skillItem.name,
+                count: skillItem._interviewquestionsWithCategory.length,
+                selected: false,
+                childKey: 'categoryItem'
+              }
+          }).filter(skillItem => skillItem.count > 0)
+          skillDropDown = skillDropDown.sort((a, b) => {
+            // console.log('a: ', a.count, 'b: ', b.count)
+            return b.count - a.count;
+          })
+          // reassign indexes so they are clean
+          // skillDropDown.forEach((item, index) => {
+          //   item.index = index;
+          // })
+          let filterByUpdate = { ...state.filterBy }
+          filterByUpdate[0].items = skillDropDown;
+          // console.log('finished making category filter state: ', state)
+          // this.setState({filterBy: filterByUpdate})
+          // console.log('state: ', state)
+        }
+      }
+    if(errorMessageUsersGetAll && errorMessageInterviewQuestionsGetAll){
+      
+    }
+    else if(!isFetchingUsersGetAll && !isFetchingInterviewQuestionsGetAll){
       // make a map of intQuestions _createdBy
       if(!state.filterBy[1].items.length){
         let intQuestCreatedMap = {}
-        props.allInterviewQuestions.forEach(intQuestion => {
+        allInterviewQuestions.forEach(intQuestion => {
           if(intQuestCreatedMap[intQuestion._createdByUser]){
             intQuestCreatedMap[intQuestion._createdByUser] += 1;
           } else {
@@ -216,7 +224,7 @@ class InterviewQuestions extends Component {
           // console.log('key: ', key, 'vs: ', intQuestCreatedMap[key])
           let tempObj = {
             Id: key,
-            name: props.lookupTableUsers[key]['name'],
+            name: lookupTableAllUsers[key]['name'],
             count: intQuestCreatedMap[key],
             selected: false,
             childKey: 'authorItem'
@@ -231,9 +239,12 @@ class InterviewQuestions extends Component {
       }
       
     }
-    if(props.allInterviewQuestions !== 'FETCHING'){
+    if(errorMessageInterviewQuestionsGetAll){
+      
+    }
+    else if(!isFetchingInterviewQuestionsGetAll){
       // let allIntQuestToRender = [ ...state.allInterviewQuestionsToRender ]
-      state.allInterviewQuestionsToRender = [ ...props.allInterviewQuestions ]
+      state.allInterviewQuestionsToRender = [ ...allInterviewQuestions ]
     }
   }
 
@@ -290,110 +301,109 @@ class InterviewQuestions extends Component {
     return filteredIntQuestionsArray
   }
   
-  render(){
-    // console.log('this.state: (in outer component): ', this.state)
-    
-    const { 
-      allUsers, 
-      lookupTableUsers, 
-      allInterviewQuestions, 
-      lookupTableInterviewQuestions, 
-      allInterviewQuestionsAnswers, 
-      lookupTableInterviewQuestionsAnswers, 
-      allSkills, 
-      lookupTableAllSkills, 
+  renderContent = () => {
+    let { 
+      users: { allUsers, lookupTableAllUsers, isFetchingUsersGetAll, errorMessageUsersGetAll },
+      interviewQuestions: { 
+        // allInterviewQuestions, 
+        lookupTableAllInterviewQuestions, isFetchingInterviewQuestionsGetAll, errorMessageInterviewQuestionsGetAll },
+      interviewQuestionAnswers: { allInterviewQuestionAnswers, lookupTableAllInterviewQuestionAnswers, isFetchingInterviewQuestionAnswersGetAll, errorMessageInterviewQuestionAnswersGetAll},
+      skills: { allSkills, lookupTableAllSkills, isFetchingSkillsGetAll, errorMessageSkillsGetAll },
       currentUser 
     } = this.props;
-    
-    if(!allUsers || !allInterviewQuestions || !allInterviewQuestionsAnswers || !allSkills ){
-      // LogServices.log(allUsersAPIResponse)
+    const {
+      title
+    } = CARD_TITLE_INTERVIEW_QUESTIONS_GET_ALL;
+    // isFetchingUsersGetAll = true;
+    if(errorMessageUsersGetAll || errorMessageInterviewQuestionsGetAll || errorMessageInterviewQuestionAnswersGetAll || errorMessageSkillsGetAll ){
       return (
-        <main className="content">
-          <DefaultErrorPage />
-        </main>
+        <DefaultErrorPage 
+        
+        />
       )
     }
-    // || allInterviewQuestions === FETCHING
-    
-    else if(allUsers === FETCHING || allInterviewQuestions === FETCHING || allInterviewQuestionsAnswers === FETCHING || allSkills === FETCHING){
+    else if(isFetchingUsersGetAll || isFetchingInterviewQuestionsGetAll || isFetchingInterviewQuestionAnswersGetAll || isFetchingSkillsGetAll){
       return (
-        <main className="content">
-          <DefaultLoadingPage />
-        </main>
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt='ta-cent'
+        />
       )
     }
+    // else if(isFetchingUserGetAll && isFetchingInterviewQuestionsGetAll){
+    //   return (
+    //     <DefaultLoadingPage />
+    //   )
+    // }
     else{
-      // console.log('this.state: (in INNER component): ', this.state)
-      
       let questionsToRenderOrdered = this.sortArrayBy(this.state.allInterviewQuestionsToRender, this.state.sortByOrderType)
       // console.log('ordered: ', questionsToRenderOrdered )
-      
       let questionsToRenderOrderedAndFiltered = this.filterArrayBy(questionsToRenderOrdered, this.state.filterIntQuestBy)
-      
       // console.log('filtered Array: ', questionsToRenderOrderedAndFiltered)
-      
+      // console.log('this.state to child: ', this.state.filterBy)
       return (
-        <main>
-          <ContentPageTitleBar content={TITLE_BAR_INTERVIEWQUESTIONS} />
-          <div className="contentList">
-            <div className="fc-sortFilter">
-              <div className="grid grid--1of2">
-                <div className="grid-cell">
-                  <article className="fc-sortBar-row">
-                    <DropDownSort 
-                      title="Sort By:"
-                      list={this.state.sortBy}
-                      resetThenSet={this.resetThenSet}
-                    />
-                  </article>
-                </div>
-                <div className="grid-cell">
-                  <article className="fc-filterBar-row">
-                    <DropDownFilter 
-                      headerTitle=''
-                      title="Filter By:"
-                      list={this.state.filterBy}
-                      toggleSelected={this.toggleSelected}
-                    />
-                  </article>
-                </div>
+        <>
+          <div className="fc-sortFilter">
+            <div className="grid grid--1of2">
+              <div className="grid-cell">
+                <article className="fc-sortBar-row">
+                  <DropDownSort 
+                    title="Sort By:"
+                    list={this.state.sortBy}
+                    resetThenSet={this.resetThenSet}
+                  />
+                </article>
+              </div>
+              <div className="grid-cell">
+                <article className="fc-filterBar-row">
+                  <DropDownFilter 
+                    headerTitle=''
+                    title="Filter By:"
+                    list={this.state.filterBy}
+                    toggleSelected={this.toggleSelected}
+                  />
+                </article>
               </div>
             </div>
-
-            <InterviewQuestionsList
-              allUsersArr={allUsers}
-              lookupTableUsers={lookupTableUsers}
-              allInterviewQuestionsArr={questionsToRenderOrderedAndFiltered} 
-              lookupTableInterviewQuestions={lookupTableInterviewQuestions}
-              allInterviewQuestionsAnswersArr={allInterviewQuestionsAnswers}
-              lookupTableInterviewQuestionsAnswers={lookupTableInterviewQuestionsAnswers}
-              allSkillsArr={allSkills}
-              lookupTableAllSkills={lookupTableAllSkills}
-              currentUser={currentUser}
-            />
           </div>
-        </main>
+
+          <InterviewQuestionsList
+            allUsersArr={allUsers}
+            lookupTableAllUsers={lookupTableAllUsers}
+            allInterviewQuestionsArr={questionsToRenderOrderedAndFiltered} 
+            lookupTableAllInterviewQuestions={lookupTableAllInterviewQuestions}
+            allInterviewQuestionAnswersArr={allInterviewQuestionAnswers}
+            lookupTableAllInterviewQuestionAnswers={lookupTableAllInterviewQuestionAnswers}
+            allSkillsArr={allSkills}
+            lookupTableAllSkills={lookupTableAllSkills}
+            currentUser={currentUser}
+          />
+        </>
       )
     }
+  }
+  
+  render(){
+    return (
+      <>
+        {this.renderContent()}
+      </>
+    )
   }
 }
 
 function mapStateToProps(state){
   return {
-    allUsers: state.users.allUsers,
-    lookupTableUsers: state.users.lookupTableAllUsers,
-    allInterviewQuestions: state.interviewQuestions.allInterviewQuestions,
-    lookupTableInterviewQuestions: state.interviewQuestions.lookupTableInterviewQuestions,
-    allInterviewQuestionsAnswers: state.interviewQuestionsAnswers.allInterviewQuestionsAnswers,
-    lookupTableInterviewQuestionsAnswers: state.interviewQuestionsAnswers.lookupTableInterviewQuestionsAnswers,
-    allSkills: state.skills.allSkills,
-    lookupTableAllSkills: state.skills.lookupTableAllSkills,
-    currentUser: state.auth.currentUser,
+    users: state.users,
+    interviewQuestions: state.interviewQuestions,
+    interviewQuestionAnswers: state.interviewQuestionAnswers,
+    skills: state.skills,
+    auth: state.auth,
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchUsers, fetchInterviewQuestions, fetchInterviewQuestionsAnswers, fetchSkills}, dispatch)
+  return bindActionCreators({usersGetAll, interviewQuestionsGetAll, interviewQuestionAnswersGetAll, skillsGetAll}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InterviewQuestions);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'
 
-import InterviewQuestionsAnswersList from '../interviewQuestionsAnswers/interviewQuestionsAnswersList'
+import InterviewQuestionAnswersList from '../interviewQuestionAnswers/interviewQuestionAnswersList'
 import CategoryList from '../../components/common/category/categoryList'
 
 import DateMethods from '../../functions/dateMethods'
@@ -49,29 +49,18 @@ class InterviewQuestionsListItem extends Component {
   render(){
     const {
       allUsersArr,
-      lookupTableUsers,
+      lookupTableAllUsers,
       intQuestion,
-      allInterviewQuestionsAnswers,
-      lookupTableInterviewQuestionsAnswers,
+      allInterviewQuestionAnswersArr,
+      lookupTableAllInterviewQuestionAnswers,
       currentUser,
       allSkillsArr,
       lookupTableAllSkills
     } = this.props;
     
     const {
-      user: {
-        userId,
-        admin
-      },
-      intQuestion: {
-        Id,
-        title,
-        description,
-        categories,
-        answersToQuestion,
-        createdAt,
-        _createdByUser
-      }
+      user: { userId, admin },
+      intQuestion: { Id, title, description, categories, answersToQuestion, createdAt, _createdByUser }
     } = DM;
     
     let ANSWER_STRING = '';
@@ -80,9 +69,11 @@ class InterviewQuestionsListItem extends Component {
     } else {
       ANSWER_STRING = `${intQuestion.answersToQuestion.length} Answers`
     }
-    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_ban,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_delete, intQuestion[_createdByUser], intQuestion[Id], 'fs20')
+    let optionList = UtilityMethods.generateOptionsList(currentUser[userId], currentUser[admin], ROUTES_REACT.interviewquestions_ban,ROUTES_REACT.interviewquestions_edit,ROUTES_REACT.interviewquestions_delete, intQuestion[_createdByUser], intQuestion[Id], 'fs20');
     
-    let formattedDate = DateMethods.getFormattedDate(intQuestion[createdAt])
+    let formattedDate = DateMethods.getFormattedDate(intQuestion[createdAt]);
+    
+    // console.log('this.props: ', this.props)
     return (
       <article className="card fc--disp-flex fc--fdir-col">
         <div className="grid grid--cols-2">
@@ -114,14 +105,14 @@ class InterviewQuestionsListItem extends Component {
           <div className={this.state.isIntQuestAnswerClassOpen}>
           <h5 onClick={this.toggleIntQuestAnswers} className="fw900 ls14 fcGreenRT">{ANSWER_STRING}</h5>
             <div className={this.state.answerBlockClassString}>
-            
-              <InterviewQuestionsAnswersList
+
+              <InterviewQuestionAnswersList
                 allUsersArr={allUsersArr}
                 currentUser={currentUser}
-                lookupTableUsers={lookupTableUsers}
+                lookupTableAllUsers={lookupTableAllUsers}
                 intQuestionAnswers={intQuestion[answersToQuestion]}
-                allInterviewQuestionsAnswersArr={allInterviewQuestionsAnswers}
-                lookupTableInterviewQuestionsAnswers={lookupTableInterviewQuestionsAnswers}
+                allInterviewQuestionAnswersArr={allInterviewQuestionAnswersArr}
+                lookupTableAllInterviewQuestionAnswers={lookupTableAllInterviewQuestionAnswers}
                 intQuestionId={intQuestion[Id]}
               />
               
@@ -129,33 +120,6 @@ class InterviewQuestionsListItem extends Component {
             <Link to={`${interviewquestionsanswers_create}/${intQuestion[Id]}/answers/create`}>
               <button className="btn btnFillClrSchGreen00b371 fs16 fw500 ls12 ta-cent pdTB1p25LR2p5">Answer Question</button>
             </Link>
-              {/* {
-                this.state.showModalAnswer && 
-                
-                <Modal 
-                  onCloseRequest={() => this.handleToggleModalAnswer()}
-                  content={
-                    <CreateInterviewQuestionAnswerFormEx 
-                      intQuestion={intQuestion} 
-                      allSkillsArr={allSkillsArr}
-                      lookupTableAllSkills={lookupTableAllSkills}
-                    />
-                  }
-                />
-              } */}
-              
-              {/* {
-                this.state.showModalDelete && 
-                
-                <Modal 
-                  onCloseRequest={() => this.handleToggleModalDelete()}
-                  content={
-                    <DeleteInterviewQuestionFormEx
-                      intQuestion={intQuestion}
-                    />
-                  }
-                />
-              } */}
           </div>
         </div>
       </article>
