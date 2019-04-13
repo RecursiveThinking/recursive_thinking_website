@@ -322,6 +322,64 @@ legend {
   z-index: 0;
 }
 
+.rankCont {
+  /* margin: -1.75rem 0; */
+  margin: -2rem 0;
+}
+
+.rank {
+  width: var(--L);
+  padding: .625rem 1.25rem;
+  position: relative;
+  z-index: 5;
+  margin: 0 auto -6rem auto;
+  
+  background-color: var(--white-ff);
+  box-shadow: 0 0.05rem .4rem 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px var(--grey-c6);
+}
+
+.rankNav {
+  /* 17.6rem */
+  /* width: var(--S); */
+  /* padding: .5rem 1rem; */
+  position: relative;
+  z-index: 5;
+  margin: -3.875rem auto 0 auto;
+  
+  background-color: var(--white-ff);
+  box-shadow: 0 0.05rem .4rem 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px var(--grey-c6);
+}
+
+.rankNavTxt {
+  padding: .625rem 1.25rem;
+}
+
+.r01 {
+  color: red;
+}
+
+.rankNavTxt>i:first-of-type{
+  margin-right: 1rem;
+}
+.rankNavTxt>i:last-of-type{
+  margin-left: 1rem;
+}
+
+.userViewRank {
+  /* 17.6rem */
+  /* width: var(--S); */
+  /* padding: .5rem 1rem; */
+  position: relative;
+  z-index: 5;
+  margin: -2.75rem auto 0 auto;
+  
+  background-color: var(--white-ff);
+  box-shadow: 0 0.05rem .4rem 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px var(--grey-c6);
+}
+
 .caption {
   width: var(--L);
   padding: 2rem 4rem;
@@ -422,21 +480,25 @@ fieldset>.grid>.grid-cell>.width100P>textarea {
   font-weight: 500;
 }
 
-.fc-form-input-col>.react-tags {
-  padding: 0 0 0 1rem;
-  margin-top: 2rem;
+.fc-form-input-col>.react-tags,
+.fc-field>.fc-field-row-full>.react-tags {
+  padding: .5rem 0 .5rem 1rem;
+  /* margin-top: 2rem; */
 }
 
 /* .fc-field>.fc-field-row-full>.react-tags {
   
 } */
 
+/* .fc-field>.fc-field-row-full>.react-tags, */
+
 .fc-form-input-col>.react-tags>.react-tags__search {
   
 }
 
 .fc-field>.fc-field-row-full.input-invalid>input,
-.fc-field>.fc-field-row.input-invalid>input,
+.fc-field>.fc-field-row.input-invalid>input,.fc-field>.fc-field-row-full.input-invalid>textarea,
+.fc-field>.fc-field-row-full.input-invalid>.react-tags,
 fieldset>.grid>.grid-cell>.width100P.input-invalid>textarea {
   box-shadow: 0 0 .125rem .025rem var(--error);
   border: var(--input-brdr-thickness) solid var(--error);
@@ -769,7 +831,7 @@ select:-webkit-autofill:focus {
 } */
 
 .sidebarImage {
-  margin: 0 1rem 1.7rem 1rem;
+  margin: 0 1rem 2rem 1rem;
 }
 
 .sidebar>.sidebarLinksContainer>a {
@@ -1264,7 +1326,9 @@ ul li {
 .dropdownWrapper>.list>.listTitle>.listItem:first-child{
   margin-top: 1rem;
 }
-
+.dropdownWrapper>.list>.listItem:first-of-type{
+  color: transparent;
+}
 /* .fc-sortFilter > .grid > .grid-cell > .fc-sortBar-row > .fc-sortBar >  */
 .dropdownWrapper .listItem:hover,
 .dropdownWrapper .listItem.selected {
@@ -1334,7 +1398,8 @@ ul li {
 .modalCard {
   position: fixed;
   background: white;
-  width: 75%;
+  /* width: 75%; */
+  width: 65%;
   height: auto;
   top: 50%;
   left: 50%;
@@ -1505,11 +1570,9 @@ footer {
 
 .loadingScreenAnimation {
   /* width: 45%; */
-  height: 100%;
-}
-
-.loadingScreenSecondary {
-  height: calc(100vh - 60vh);
+  /* height: 25%; */
+  padding: 2rem 0 1rem 0;
+  height: calc(100vh - 35vh);
 }
 
 .loadingScreenAnimationSecondary {
@@ -1520,9 +1583,7 @@ footer {
 .datePicker {
   margin-left: 3.5rem;
 }
-.dateField > div > label {
-  
-}
+
 
 /* ============================================ */
 /*          react tags - categories             */
@@ -2256,6 +2317,10 @@ h5 {
 
 .wspl {
   white-space: pre-line;
+}
+
+.lh35 {
+  line-height: 3.5rem;
 }
 
 /* ============================================ */
