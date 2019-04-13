@@ -61,7 +61,7 @@ export default class dateMethods {
       let dateConversion = new Date(optionalDate);
       referenceDay = dateConversion.getTime();
     }
-    console.log('referenceDay: ', referenceDay)
+    // console.log('referenceDay: ', referenceDay)
     let millisecondsPerDay = 86400000;
     // Gets the day of the week for the entered date (user submitted or default)
     let dayOfWeek = new Date(referenceDay).getDay();
@@ -96,11 +96,11 @@ export default class dateMethods {
         day = "Saturday";
         // Checks to see if it is past noon already on Saturday. If so, returns the following Saturday
         if (new Date(referenceDay).getHours() === 12){
-          console.log('move day')
+          // console.log('move day')
           upcomingSaturday = new Date(referenceDay + 7*(millisecondsPerDay));
         }
         else {
-          console.log('do not move day')
+          // console.log('do not move day')
           upcomingSaturday = new Date(referenceDay + 0*(millisecondsPerDay));
         }
     }

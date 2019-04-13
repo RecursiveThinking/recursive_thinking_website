@@ -37,8 +37,9 @@ export default class utilityMethods {
     // }
   }
   static generateOptionsList(currentUserId, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedByUserId, itemId, size){
+    console.log('lesson created by: ', itemCreatedByUserId)
     let optionListVar = [ 'ban', 'edit', 'delete']
-    function returnOptionsList(item, currentUser, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, itemIdent, sizeP, indexP){
+    function returnOptionsList(item, currentUserId, isCurrentUserAdmin, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, itemIdent, sizeP, indexP){
       if(item === 'ban'){
         // let classString = `${sizeP} fcWarn fa fa-ban`
         return (
@@ -49,7 +50,8 @@ export default class utilityMethods {
         )
       }
       else if(item === 'edit'){
-        if(currentUser === itemCreatedBy || isCurrentUserAdmin){
+        console.log(currentUserId, itemCreatedBy, isCurrentUserAdmin)
+        if(currentUserId === itemCreatedBy || isCurrentUserAdmin){
           let classString = `${sizeP} fcGreenRT fa fa-pencil`
           return (
             <li key={indexP}>
@@ -61,7 +63,7 @@ export default class utilityMethods {
         }
       }
       else if(item === 'delete'){
-        if(currentUser === itemCreatedBy || isCurrentUserAdmin){
+        if(currentUserId === itemCreatedBy || isCurrentUserAdmin){
           let classString = `${sizeP} fcError fa fa-trash-o`
           return (
             <li key={indexP}>
@@ -80,7 +82,7 @@ export default class utilityMethods {
   }
   static generateOptionsListAnswers(currentUserId, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedByUserId, itemId, size){
     let optionListVar = [ 'ban', 'edit', 'delete']
-    function returnOptionsListAnswers(item, currentUser, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, answerId, sizeP, indexP){
+    function returnOptionsListAnswers(item, currentUserId, isCurrentUserAdmin, questionId, pathForBanLink, pathForEditLink, pathForDeleteLink, itemCreatedBy, answerId, sizeP, indexP){
       if(item === 'ban'){
         // let classString = `${sizeP} fcWarn fa fa-ban`
         return (
@@ -91,7 +93,7 @@ export default class utilityMethods {
         )
       }
       else if(item === 'edit'){
-        if(currentUser === itemCreatedBy || isCurrentUserAdmin){
+        if(currentUserId === itemCreatedBy || isCurrentUserAdmin){
           let classString = `${sizeP} fcGreenRT fa fa-pencil`
           return (
             <li key={indexP}>
@@ -103,7 +105,7 @@ export default class utilityMethods {
         }
       }
       else if(item === 'delete'){
-        if(currentUser === itemCreatedBy || isCurrentUserAdmin){
+        if(currentUserId === itemCreatedBy || isCurrentUserAdmin){
           let classString = `${sizeP} fcError fa fa-trash-o`
           return (
             <li key={indexP}>

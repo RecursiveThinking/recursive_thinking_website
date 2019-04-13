@@ -91,8 +91,8 @@ export default class LessonMethods {
   }
   static getArrayOfUserObjects = (inputArray, allUsersArray) => {
     let taughtByUserArray = []
-    console.log('====================')
-    console.log(inputArray, allUsersArray)
+    // console.log('====================')
+    // console.log(inputArray, allUsersArray)
     // console.log(inputArray.length, taughtByUserArray);
     inputArray.forEach(lessonId => {
       let foundIndex = allUsersArray.findIndex(user => {

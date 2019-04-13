@@ -6,7 +6,6 @@
 
 import { Auth } from 'aws-amplify';
 import { history } from '../index'
-import { SubmissionError } from 'redux-form'
 
 import { ROUTES_REACT } from '../standards/routes';
 
@@ -50,7 +49,7 @@ export const confirmSignUp = async ({username, code}) => {
     });
 }
 
-export const resendSignUp = (username) => {
+export const resendSignUp = async (username) => {
   console.log('@ resentSignUp: ', username)
   return Auth.resendSignUp(username)
     .then(() => {
@@ -72,69 +71,126 @@ export const signIn = async ({username, password}) => {
   try {
     const user = await Auth.signIn(username, password);
     if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        console.log('signin @ second if')  
+      console.log('signin @ second if')  
+    
+      // const { requiredAttributes } = user.challengeParam; 
       
-        // const { requiredAttributes } = user.challengeParam; 
-        
-        // the array of required attributes, e.g ['email', 'phone_number']
-        // You need to get the new password and required attributes from the UI inputs
-        // and then trigger the following function with a button click
-        // For example, the email and phone_number are required attributes
-        
-        // const { username, email, phone_number } = getInfoFromUserInput();
-        // const loggedUser = await Auth.completeNewPassword(
-        //     user,               // the Cognito User Object
-        //     newPassword,       // the new password
-        //     // OPTIONAL, the required attributes
-        //     {
-        //         email,
-        //         phone_number,
-        //     }
-        // );
+      // the array of required attributes, e.g ['email', 'phone_number']
+      // You need to get the new password and required attributes from the UI inputs
+      // and then trigger the following function with a button click
+      // For example, the email and phone_number are required attributes
+      
+      // const { username, email, phone_number } = getInfoFromUserInput();
+      // const loggedUser = await Auth.completeNewPassword(
+      //     user,               // the Cognito User Object
+      //     newPassword,       // the new password
+      //     // OPTIONAL, the required attributes
+      //     {
+      //         email,
+      //         phone_number,
+      //     }
+      // );
         
     } else if (user.challengeName === 'MFA_SETUP') {
       
       console.log('signin @ third if')  
-      
-      
-        // This happens when the MFA method is TOTP
-        // The user needs to setup the TOTP before using it
-        // More info please check the Enabling MFA part
-        Auth.setupTOTP(user);
+      // This happens when the MFA method is TOTP
+      // The user needs to setup the TOTP before using it
+      // More info please check the Enabling MFA part
+      Auth.setupTOTP(user);
     } else {
-        // The user directly signs in
-        // currentUser = utils.parseJwt(data.signInUserSession.idToken.jwtToken);
-        console.log('@ authMethod signIn method third if: show cogUser: ', user);
-        return user;
+      // The user directly signs in
+      // currentUser = utils.parseJwt(data.signInUserSession.idToken.jwtToken);
+      console.log('@ authMethod signIn method third if: show cogUser: ', user);
+      return user;
     } 
   } catch (err) {
     if (err.code === 'UserNotConfirmedException') {
-        // The error happens if the user didn't finish the confirmation step when signing up
-        // In this case you need to resend the code and confirm the user
-        // About how to resend the code and confirm the user, please check the signUp part
+      // The error happens if the user didn't finish the confirmation step when signing up
+      // In this case you need to resend the code and confirm the user
+      // About how to resend the code and confirm the user, please check the signUp part
     } else if (err.code === 'PasswordResetRequiredException') {
-        // The error happens when the password is reset in the Cognito console
-        // In this case you need to call forgotPassword to reset the password
-        // Please check the Forgot Password part.
+      // The error happens when the password is reset in the Cognito console
+      // In this case you need to call forgotPassword to reset the password
+      // Please check the Forgot Password part.
     } else {
-        console.log(err);
-        return err;
+      console.log(err);
+      return err;
     }
   }
 }
 
-// export const signInGetUserInfo = async () => {
-//     return Auth.currentUserInfo()
-//       .then((user) => {
-//         console.log('current user info ', user);
-//         // do something with signed in user credential
-//         return user;
-//       })
-//       .catch(err => {
-//         console.log("There was a problem getting user info ", err);
-//         return err;
-//       });
-// };
+// Change Password
+// this has to be done after logining in, otherwise how to find the currentAuthUser?
+export const changePassword = async (oldPassword, newPassword) => {
+  return Auth.currentAuthenticatedUser()
+    .then(user => {
+      return Auth.changePassword(user, oldPassword, newPassword);
+    })
+    .then(data => {
+      // what comes back is 'SUCCESS'
+      console.log('@ changePassword - then (2): ', data)
+      return data;
+    })
+    .catch(err => {
+      // { - if you give the wrong old password
+      //   code: "NotAuthorizedException"
+      //   message: "Incorrect username or password."
+      //   name: "NotAuthorizedException"
+      // }
+      console.log('@ changePassword - err: ', err)
+      return err
+    });
+}
+
+export const forgotPassword = async (username) => {
+  console.log('username @ forgotPassword authMethods: ', username)
+  return Auth.forgotPassword(username)
+    .then((data) => {
+      console.log('data @ forgotPassword authMethods: ', data);
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+}
+
+// Collect confirmation code and new password, then
+export const forgotPasswordSubmit = async (username, code, new_password) => {
+  console.log('params @ forgotPasswordSubmit authMethods: ', username, code, new_password)  
+  return Auth.forgotPasswordSubmit(username, code, new_password)
+    .then((data) => {
+      console.log('data @ forgotPasswordSubmit authMethods: ', data)
+      return data;
+    })
+    .catch((err) => {
+      console.log(err)
+      return err;
+    });
+}
+
+// To initiate the process of verifying the attribute like 'phone_number' or 'email'
+export const verifyCurrentUserAttribute = async (attr) => {
+  return Auth.verifyCurrentUserAttribute(attr)
+    .then(() => {
+      console.log('a verification code is sent');
+    }).catch((e) => {
+      console.log('failed with error', e);
+    });
+}
+
+export const verifyCurrentUserAttributeSubmit = async (attr) => {
+  // To verify attribute with the code
+  return Auth.verifyCurrentUserAttributeSubmit(attr, 'the_verification_code')
+    .then(() => {
+      console.log('phone_number verified');
+    }).catch(e => {
+      console.log('failed with error', e);
+    });
+}
+
+
 // You can call Auth.currentAuthenticatedUser() to get the current authenticated user object.
 
 //  This method can be used to check if a user is logged in when the page is loaded. It will throw an error if there is no user logged in. This method should be called after the Auth module is configured or the user is logged in. To ensure that you can listen on the auth events configured or signIn. Learn how to listen on auth events.
@@ -157,7 +213,7 @@ export const getCurrentUserFromSession = async () => {
   //Get current user's from  session
   return Auth.currentSession()
       .then((user) => {
-          console.log('current user session @ auth', user);
+          // console.log('current user session @ auth', user);
           // TODO: Do we want to return the user, or accept and invoke a callback?
           // cb(user);
           return user;
@@ -179,8 +235,9 @@ export const getCurrentUserFromSession = async () => {
 
 export const signOut = async () => {
   await Auth.signOut()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+    .then(data => console.log('success @ Signout', data))
+    .catch(err => console.log('err @ Signout', err));
+    
   // By doing this, you are revoking all the auth tokens(id token, access token and refresh token)
   // which means the user is signed out from all the devices
   // Note: although the tokens are revoked, the AWS credentials will remain valid until they expire (which by default is 1 hour)
