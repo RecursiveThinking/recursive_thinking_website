@@ -1,65 +1,61 @@
 // this is the entire object.
 import { CREDENTIALS } from '../credentials/cognitoCreds'
-// import AWS from 'aws-sdk'
-// import { browserHistory } from 'react-router'
 
 import { getCurrentUserFromSession, signOut } from '../functions/authMethods';
-// import LessonMethods from '../functions/lessonMethods';
 import ModelConverterForUpdate from '../models/modelConverterForUpdate';
+
+import { LogService as ls, catObj as co, subObj as so, tableObj as to, methodObj as mo } from '../services/logService';
 
 import DM from '../standards/dictModel'
 
 import {history} from '../index';
 
 import {
-  FETCH_USERS, 
-  CREATE_USER,
-  GET_USER_BY_ID, EDIT_USER_BY_ID, DELETE_USER_BY_ID,
   
-  ERRORS_FETCH_USERS, 
-  ERRORS_CREATE_USER,
-  ERRORS_GET_USER_BY_ID, ERRORS_EDIT_USER_BY_ID, ERRORS_DELETE_USER_BY_ID,
+  USERS_GET_ALL_REQUEST, USERS_GET_ALL_SUCCESS, USERS_GET_ALL_ERRORS,
+  USER_CREATE_BY_ID_REQUEST, USER_CREATE_BY_ID_SUCCESS, USER_CREATE_BY_ID_ERRORS,
+  USER_GET_BY_ID_REQUEST, USER_GET_BY_ID_SUCCESS, USER_GET_BY_ID_ERRORS,
+  USER_EDIT_BY_ID_REQUEST, USER_EDIT_BY_ID_SUCCESS, USER_EDIT_BY_ID_ERRORS,
+  // USER_DELETE_BY_ID_REQUEST, USER_DELETE_BY_ID_SUCCESS, USER_DELETE_BY_ID_ERRORS,
   
-  GET_CURRENT_USER_BY_ID,
+  // GET_CURRENT_USER_BY_ID, ERRORS_GET_CURRENT_USER_BY_ID,
   
-  ERRORS_GET_CURRENT_USER_BY_ID,
+  CURRENT_USER_GET_BY_ID_REQUEST, CURRENT_USER_GET_BY_ID_SUCCESS, CURRENT_USER_GET_BY_ID_ERRORS,
   
-  FETCH_LESSONS, CREATE_LESSON,
-  GET_LESSON_BY_ID, EDIT_LESSON_BY_ID, DELETE_LESSON_BY_ID, SELECTED_LESSON,
+  LESSONS_GET_ALL_REQUEST, LESSONS_GET_ALL_SUCCESS, LESSONS_GET_ALL_ERRORS,
+  LESSON_CREATE_BY_ID_REQUEST, LESSON_CREATE_BY_ID_SUCCESS, LESSON_CREATE_BY_ID_ERRORS,
+  LESSON_GET_BY_ID_REQUEST, LESSON_GET_BY_ID_SUCCESS, LESSON_GET_BY_ID_ERRORS,
+  LESSON_EDIT_BY_ID_REQUEST, LESSON_EDIT_BY_ID_SUCCESS, LESSON_EDIT_BY_ID_ERRORS,
+  LESSON_DELETE_BY_ID_REQUEST, LESSON_DELETE_BY_ID_SUCCESS, LESSON_DELETE_BY_ID_ERRORS,
   
-  ERRORS_FETCH_LESSONS, ERRORS_CREATE_LESSON,
-  ERRORS_GET_LESSON_BY_ID, ERRORS_EDIT_LESSON_BY_ID, ERRORS_DELETE_LESSON_BY_ID,
+  SELECTED_LESSON,
   
-  FETCH_INTERVIEW_QUESTIONS, CREATE_INTERVIEW_QUESTION,
-  GET_INTERVIEW_QUESTION_BY_ID, EDIT_INTERVIEW_QUESTION_BY_ID, DELETE_INTERVIEW_QUESTION_BY_ID,
+  INTERVIEW_QUESTIONS_GET_ALL_REQUEST, INTERVIEW_QUESTIONS_GET_ALL_SUCCESS, INTERVIEW_QUESTIONS_GET_ALL_ERRORS,
+  INTERVIEW_QUESTION_CREATE_BY_ID_REQUEST, INTERVIEW_QUESTION_CREATE_BY_ID_SUCCESS, INTERVIEW_QUESTION_CREATE_BY_ID_ERRORS,
+  INTERVIEW_QUESTION_GET_BY_ID_REQUEST, INTERVIEW_QUESTION_GET_BY_ID_SUCCESS, INTERVIEW_QUESTION_GET_BY_ID_ERRORS,
+  INTERVIEW_QUESTION_EDIT_BY_ID_REQUEST, INTERVIEW_QUESTION_EDIT_BY_ID_SUCCESS, INTERVIEW_QUESTION_EDIT_BY_ID_ERRORS,
+  INTERVIEW_QUESTION_DELETE_BY_ID_REQUEST, INTERVIEW_QUESTION_DELETE_BY_ID_SUCCESS, INTERVIEW_QUESTION_DELETE_BY_ID_ERRORS,
   
-  ERRORS_FETCH_INTERVIEW_QUESTIONS, ERRORS_CREATE_INTERVIEW_QUESTION,
-  ERRORS_GET_INTERVIEW_QUESTION_BY_ID, ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID,
+  INTERVIEW_QUESTION_ANSWERS_GET_ALL_REQUEST, INTERVIEW_QUESTION_ANSWERS_GET_ALL_SUCCESS, INTERVIEW_QUESTION_ANSWERS_GET_ALL_ERRORS,
+  INTERVIEW_QUESTION_ANSWER_CREATE_BY_ID_REQUEST, INTERVIEW_QUESTION_ANSWER_CREATE_BY_ID_SUCCESS, INTERVIEW_QUESTION_ANSWER_CREATE_BY_ID_ERRORS,
+  INTERVIEW_QUESTION_ANSWER_GET_BY_ID_REQUEST, INTERVIEW_QUESTION_ANSWER_GET_BY_ID_SUCCESS, INTERVIEW_QUESTION_ANSWER_GET_BY_ID_ERRORS,
+  INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID_REQUEST, INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID_SUCCESS, INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID_ERRORS,
+  INTERVIEW_QUESTION_ANSWER_DELETE_BY_ID_REQUEST, INTERVIEW_QUESTION_ANSWER_DELETE_BY_ID_SUCCESS, INTERVIEW_QUESTION_ANSWER_DELETE_BY_ID_ERRORS,
   
-  FETCH_INTERVIEW_QUESTIONS_ANSWERS, CREATE_INTERVIEW_QUESTION_ANSWER, 
-  GET_INTERVIEW_QUESTION_ANSWER_BY_ID, EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
+  SKILLS_GET_ALL_REQUEST, SKILLS_GET_ALL_SUCCESS, SKILLS_GET_ALL_ERRORS,
+  SKILL_CREATE_BY_ID_REQUEST, SKILL_CREATE_BY_ID_SUCCESS, SKILL_CREATE_BY_ID_ERRORS,
+  // SKILL_GET_BY_ID_REQUEST, SKILL_GET_BY_ID_SUCCESS, SKILL_GET_BY_ID_ERRORS,
+  SKILL_EDIT_BY_ID_REQUEST, SKILL_EDIT_BY_ID_SUCCESS, SKILL_EDIT_BY_ID_ERRORS,
+  // SKILL_DELETE_BY_ID_REQUEST, SKILL_DELETE_BY_ID_SUCCESS, SKILL_DELETE_BY_ID_ERRORS,
   
-  ERRORS_FETCH_INTERVIEW_QUESTIONS_ANSWERS, ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, 
-  ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
-  
-  FETCH_SKILLS, 
-  CREATE_SKILL,
-  GET_SKILL_BY_ID, EDIT_SKILL_BY_ID, DELETE_SKILL_BY_ID,
-  
-  ERRORS_FETCH_SKILLS, 
-  ERRORS_CREATE_SKILL,
-  ERRORS_GET_SKILL_BY_ID, ERRORS_EDIT_SKILL_BY_ID, ERRORS_DELETE_SKILL_BY_ID,
-  
-  FETCH_HOMESCREEN_QUOTES,
-  
-  ERRORS_FETCH_HOMESCREEN_QUOTES,
+  HOMESCREEN_QUOTES_GET_ALL_REQUEST, HOMESCREEN_QUOTES_GET_ALL_SUCCESS, HOMESCREEN_QUOTES_GET_ALL_ERRORS,
+  RANKS_GET_ALL_REQUEST, RANKS_GET_ALL_SUCCESS, RANKS_GET_ALL_ERRORS
 } from './action_types'
 
 import { 
   ROUTES_API,
   ROUTES_REACT
 } from '../standards/routes'
-// import dash from '../containers/dash/dash';
 
 const API_GATEWAY_INVOKE_URL = CREDENTIALS.apiUrl;
 
@@ -91,11 +87,9 @@ export const checkThenReturnAppropriateResBody = (responseBody) => {
   // this will check to see if the response body is an empty object ( because .get Dynamo method returns an empty object in the body id nothing is found.  Yeah, its stupid... )
   if(isPayloadEmpty(responseBody)){
     // the response body is an empty object, overwrite the body to evaluate falsy
-    console.log('res body is empty, setting to null')
     responseBody = null;
   } else { 
     // the response body is a valid object, so return it of the key from the DB (Item)
-    console.log('res body has return, set to .Item from DynamoDB')
     responseBody = responseBody.Item
   }
   return responseBody
@@ -105,9 +99,9 @@ const initFetchCall = async (urlPath, optionConfig, doesEndPointNeedAuth) => {
 
   if(doesEndPointNeedAuth === true){
     const userInfo = await getCurrentUserFromSession();
-    console.log('userFromSession: ', userInfo)
+    // console.log('userFromSession: ', userInfo)
     const token = userInfo.idToken.jwtToken;
-    console.log('token @ auth in initFetch', token)
+    // console.log('token @ auth in initFetch', token)
     optionConfig.headers['Authorization'] = token;
     optionConfig.headers['Content-Type'] = 'application/json';
     // console.log('optionConfig', optionConfig)
@@ -120,14 +114,14 @@ const initFetchCall = async (urlPath, optionConfig, doesEndPointNeedAuth) => {
       status = response.status;
       ok = response.ok;
       if(response.ok){
-        console.log('response @ then(1 - json())', response)
+        console.log('response @ initFetchCall then(1 - json())', response)
         return response.json()
           // .catch(err => {
           //   console.log('error @ then(1 - json().catch())', err)
           //   return Promise.reject(Response.error('Invalid JSON: ', err)) 
           // })
       }
-      console.log('error @ then(1 - json())', response)
+      console.log('error @ initFetchCall then(1 - json())', response)
       // return Promise.reject(Response.error(response))      
       return Promise.reject(response)
     })
@@ -137,11 +131,11 @@ const initFetchCall = async (urlPath, optionConfig, doesEndPointNeedAuth) => {
         ok,
         body: resData
       }
-      console.log('returnObj @ fetch(2)', returnObj)
+      console.log('returnObj @ initFetchCall then(2)', returnObj)
       return returnObj
     })
     .catch(error => {
-      console.log('error', error)
+      console.log('error @ initFetchCall catch', error)
       return error
     //   // { body: (...), bodyUsed: false, headers: Headers {}, ok: false, redirected: false, status: 0, statusText: "", type: "error", url: ""}
     //   console.log('error @ catch(1)', Response.error(error))
@@ -156,23 +150,24 @@ const errorNotExistPayload = {
 }
 
 export const getCurrentUserById = () => {
-  
   return async (dispatch) => {
     await getCurrentUserFromSession()
       .then(userInSesson => {
-        console.log('@ getCurrentUserById Action - userInSesson: ', userInSesson)
+        // console.log('@ getCurrentUserById userInSesson - then: ', userInSesson)
         dispatch(currentUser(userInSesson.idToken.payload.sub))
         // dispatch()
         // console.log('user', user)
         return userInSesson;
       })
       .catch(err => {
-        console.log('error at getCurrentUserById: ', err)
+        // console.log('@ getCurrentUserById userInSesson - err: ', err)
         // else we should signout and boot the person back to '/'?
         return err;
       })
   }
 }
+
+// CURRENT_USER_GET_BY_ID_REQUEST, CURRENT_USER_GET_BY_ID_SUCCESS, CURRENT_USER_GET_BY_ID_ERRORS,
 
 export const currentUser = (userId) => {
   console.log('userId @ currentUser action: ', userId)
@@ -185,100 +180,89 @@ export const currentUser = (userId) => {
   // console.log('currentUser', currentUser)
   return async (dispatch) => {
     // const currentUser = await getCurrentAuthenticatedUser()
-    await initFetchCall(URL, funcOptions, false)
+    dispatch({ type: CURRENT_USER_GET_BY_ID_REQUEST })
+    ls(co.act, so.req, to.currentUser, mo.bid)
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('res @ getUserByID: ', res)
         // console.log('typeof res: ', typeof res)
         if(status === 200){
           res.body = checkThenReturnAppropriateResBody(res.body)
-          console.log('res.body: ', res.body) 
-          dispatch({ type: GET_CURRENT_USER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.currentUser, mo.bid, res);          
+          dispatch({ type: CURRENT_USER_GET_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: GET_CURRENT_USER_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: errorNotExistPayload })
         }
         return res;
-        // if(typeof res === 'object'){
-        //   // console.log('Then the request was invalid and did not get to the lambda');
-        //   let customError = {
-        //     body: {
-        //       status: 502,
-        //       message: 'The request was invalid, and failed at the Lambda. Typically, this is because the request payload was ill-formed. Check your Cloudwatch Logs for the full error.'
-        //     }
-        //   }
-        //   dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: customError })
-        //   return res;
-        // }
-        // return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: err })
+        ls(co.act, so.res, to.currentUser, mo.bid, err);      
+        // dispatch({ type: ERRORS_GET_CURRENT_USER_BY_ID, payload: err })
+        dispatch({ type: CURRENT_USER_GET_BY_ID_ERRORS, payload: err })
         return err;
       })
   }
 }
   
-export const fetchUsers = () => {
+export const usersGetAll = () => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}`
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.get;
   
   return async (dispatch) => {
-    await initFetchCall(URL, funcOptions, false)
+    dispatch({ type: USERS_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.user, mo.gas)
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('response @ fetchUsers', res)
         if(status === 200){
-          dispatch({ type: FETCH_USERS, payload: res })
-          dispatch({ type: ERRORS_FETCH_USERS, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.user, mo.gas, res);
+          // dispatch({ type: GET_ALL_USERS, payload: res })
+          // dispatch({ type: ERRORS_GET_ALL_USERS, payload: errorNotExistPayload })
+          dispatch({ type: USERS_GET_ALL_SUCCESS, payload: res })
         }
         return res
       })
       .catch(err => {
-        console.log('err @ fetchUsers', err)
-        // should get an error object { status, ok, body }
-        dispatch({ type: ERRORS_FETCH_USERS, payload: err })
+        ls(co.act, so.err, to.user, mo.gas, err);
+        // dispatch({ type: ERRORS_GET_ALL_USERS, payload: err })
+        dispatch({ type: USERS_GET_ALL_ERRORS, payload: err })
         return err
       })
-    
   }
 }
 
-export const createUser = (newUser) => {
+export const userCreateById = (newUser) => {
   console.log('userValues @ createUser action: ', newUser);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}`
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.post;
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, newUser));
-  console.log('funcOptions', funcOptions);
   
   return async (dispatch) => {
-    await initFetchCall(URL, funcOptions, false)
+    dispatch({ type: USER_CREATE_BY_ID_REQUEST });
+    ls(co.act, so.req, to.user, mo.cbid);
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('createUserIdResponse: ', res)
         if(status === 200){
-          dispatch(currentUser(res.body.userId))
-          dispatch({ type: CREATE_USER, payload: res })
-          dispatch({ type: ERRORS_CREATE_USER, payload: errorNotExistPayload })
+          dispatch(userGetById(res.body.userId));
+          ls(co.act, so.res, to.user, mo.cbid, res);
+          dispatch({ type: USER_CREATE_BY_ID_SUCCESS, payload: res });
+          // history.push(`${ROUTES_REACT.users_setup}/${newUser.userId}`);
         }
-        // if(res.body.isProfileSetup){
-        //   console.log('route from createUser to Dashboard')
-        //   history.push(ROUTES_REACT.dashboard)
-        // } else {
-        //   console.log('route from createUser to editUser')
-        //   history.push(`${ROUTES_REACT.users_setup}/${res.body.userId}`)
-        // }
         return res
       })
       .catch(err => {
-        dispatch({ type: ERRORS_CREATE_USER, payload: err})
-        history.push(ROUTES_REACT.profile_create)
+        ls(co.act, so.err, to.user, mo.cbid, err);
+        dispatch({ type: USER_CREATE_BY_ID_ERRORS, payload: err});
+        history.push(ROUTES_REACT.users_setup);
         return err
       })
   }
 }
 
-export const getUserById = (userId) => {
+export const userGetById = (userId) => {
   console.log('userId @ getUserById action: ', userId)
   // userId = "9sdd7120-8ed0-11e8-b260-d5e4455e16bd"
   // \/ GOOD /\ BAD
@@ -286,31 +270,32 @@ export const getUserById = (userId) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${userId}`
   let funcOptions = {...OPTIONS}
   funcOptions.method = HTTP_METHODS.get
-  // console.log('currentUser', currentUser)
+  
   return async (dispatch) => {
-    // const currentUser = await getCurrentAuthenticatedUser()
-    await initFetchCall(URL, funcOptions, false)
+    dispatch({ type: USER_GET_BY_ID_REQUEST })
+    ls(co.act, so.req, to.user, mo.gbid)
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('res @ getUserByID: ', res)
         if(status === 200){
+          // ls(co.act, so.res, to.user, mo.gbid, res)
           res.body = checkThenReturnAppropriateResBody(res.body)
-          console.log('res.body: ', res.body)          
-          dispatch({ type: GET_USER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_GET_USER_BY_ID, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.user, mo.gbid, res)
+          dispatch({ type: USER_GET_BY_ID_SUCCESS, payload: res })
         }
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_GET_USER_BY_ID, payload: err })
+        ls(co.act, so.err, to.user, mo.gbid)
+        dispatch({ type: USER_GET_BY_ID_ERRORS, payload: err })
         return err;
       })
   }
 }
 
-export const editUserLastLogout = (userObj, thenPushPath, catchPushPath) => {
+export const userEditByIdLastLogout = (userObj, thenPushPath, catchPushPath) => {
   const { user: { lastLogout } } = DM;
-  console.log('userObj @ editUserLastLogout action: ', userObj);
+  
   let dupUserObj = { ...userObj };
   dupUserObj[lastLogout] = new Date().toString();
   //
@@ -320,9 +305,12 @@ export const editUserLastLogout = (userObj, thenPushPath, catchPushPath) => {
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, dupUserObj));
   
   return async (dispatch) => {
-    await initFetchCall(URL, funcOptions, false)
+    dispatch({ type: USER_EDIT_BY_ID_REQUEST })
+    ls(co.act, so.req, to.user, mo.ebidll) 
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
-        console.log('res @ editUserLastLogout action then if: ', res);
+        ls(co.act, so.res, to.user, mo.ebidll, res)
+        dispatch({ type: USER_EDIT_BY_ID_SUCCESS, payload: res });
         signOut()
           .then(data => {
             history.push(ROUTES_REACT.root);
@@ -334,40 +322,40 @@ export const editUserLastLogout = (userObj, thenPushPath, catchPushPath) => {
         return res;
       })
       .catch(err => {
-        console.log('err: ', err);
+        ls(co.act, so.err, to.user, mo.ebid, err)    
+        dispatch({ type: USER_EDIT_BY_ID_ERRORS, payload: err})
         return err;
       })
   }
 }
 
-export const editUserById = (edittedUser, thenPushPath, catchPushPath, removeUserIdFromTheseSkillObjs, addUserIdToTheseSkillObjs) => {
+export const userEditById = (edittedUser, thenPushPath, catchPushPath, removeUserIdFromTheseSkillObjs, addUserIdToTheseSkillObjs) => {
   const { user: { updatedAt } } = DM
-  console.log('userObj @ editUserById action: ', edittedUser);
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.users}/${edittedUser.userId}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
-  // revise updatedAt
   edittedUser[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.user, edittedUser));
-  // console.log('funcOptions @ editUserById: ', funcOptions.body);
   
   return async (dispatch) => {
-    await initFetchCall(URL, funcOptions, false)
+    dispatch({ type: USER_EDIT_BY_ID_REQUEST })
+    ls(co.act, so.req, to.user, mo.ebid)    
+    await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        if(status === 200){
-          console.log('res @ editUserById action then if: ', res);
-          // re,pve userId to these skillObjs          
+        if(status === 200){         
           if(removeUserIdFromTheseSkillObjs){
             if(removeUserIdFromTheseSkillObjs.length){
               removeUserIdFromTheseSkillObjs.forEach(skillObj => {
                 let dupSkillObj = { ...skillObj };
-                const { profileSkill: { _usersWithSkill, updatedAt }} = DM;
+                const { profileSkill: { _usersWithSkill, 
+                  // updatedAt 
+                }} = DM;
                 // remove userId from skillObj
                 console.log('editUserById - remove userId from skill (before): ', edittedUser.userId, dupSkillObj)
                 dupSkillObj[_usersWithSkill] = dupSkillObj[_usersWithSkill].filter(userId => userId !== edittedUser.userId);
                 console.log('editUserById - remove userId from skill (after): ', edittedUser.userId, dupSkillObj)
-                dispatch(editSkillById(dupSkillObj, null, null))
+                dispatch(skillEditById(dupSkillObj, null, null))
               })
             }
           }
@@ -380,20 +368,20 @@ export const editUserById = (edittedUser, thenPushPath, catchPushPath, removeUse
                 console.log('editUserById = add userId from skill (before): ', edittedUser.userId, dupSkillObj);
                 dupSkillObj[_usersWithSkill].push(edittedUser.userId)
                 console.log('editUserById = add userId from skill (after): ', edittedUser.userId, dupSkillObj);
-                dispatch(editSkillById(dupSkillObj, null, null))
+                dispatch(skillEditById(dupSkillObj, null, null))
               })
             }
           }
-          // then successfully updated user object before go to reducer, editskills
-          dispatch(getCurrentUserById())
-          dispatch({ type: EDIT_USER_BY_ID, payload: res });
-          dispatch({ type: ERRORS_EDIT_USER_BY_ID, payload: errorNotExistPayload });
+          ls(co.act, so.res, to.user, mo.ebid, res)     
+          dispatch({ type: USER_EDIT_BY_ID_SUCCESS, payload: res });
         }
         history.push(thenPushPath)
         return res;
       })
+      // , {currentUser: edittedUser}
       .catch(err => {
-        dispatch({ type: ERRORS_EDIT_USER_BY_ID, payload: err})
+        ls(co.act, so.err, to.user, mo.ebid, err)    
+        dispatch({ type: USER_EDIT_BY_ID_ERRORS, payload: err})
         history.push(catchPushPath)        
         return err;
       })
@@ -401,67 +389,67 @@ export const editUserById = (edittedUser, thenPushPath, catchPushPath, removeUse
 }
 
 export const deleteUserById = (userId) => {
-  // this should just make users inactive.
+  // this should just make users inactive?
 }
 
-export const fetchLessons = () => {
-  // API CALL HERE
+export const lessonsGetAll = () => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}`
   let funcOptions = { ...OPTIONS }
   funcOptions.method = HTTP_METHODS.get
   
   return async (dispatch) => {
+    dispatch({ type: LESSONS_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.lesson, mo.gas)            
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res
-        console.log('response @ fetchLessons', res)
-        // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: FETCH_LESSONS, payload: res })
-          dispatch({ type: ERRORS_FETCH_LESSONS, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.lesson, mo.gas, res)             
+          dispatch({ type: LESSONS_GET_ALL_SUCCESS, payload: res })
         }
         return res
       })
       .catch(err => {
-        console.log('err @ fetchLessons', err)
-        // should get an error object { status, ok, body }
-        dispatch({ type: ERRORS_FETCH_LESSONS, payload: err })
+        ls(co.act, so.err, to.lesson, mo.gas, err)           
+        dispatch({ type: LESSONS_GET_ALL_ERRORS, payload: err })
         return err
       })
   }
 }
-
-export const createLesson = (newLesson) => {
+// LESSON_CREATE_REQUEST, LESSON_CREATE_SUCCESS, LESSON_CREATE_ERRORS,
+export const lessonCreateById = (newLesson) => {
   console.log('formValues @ createLesson action:', newLesson)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}`
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.post;
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.lesson, newLesson));
-  console.log(funcOptions.body)
+  
   return async (dispatch) => {
+    dispatch({ type: LESSON_CREATE_BY_ID_REQUEST})
+    ls(co.act, so.req, to.lesson, mo.cbid) 
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
-        const { status } = res;
-        console.log('createLessonIdResponse: ', res)        
+        const { status } = res;  
         if(status === 200){
-          dispatch({ type: CREATE_LESSON, payload: res })
-          dispatch({ type: ERRORS_CREATE_LESSON, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.lesson, mo.cbid, res) 
+          dispatch({ type: LESSON_CREATE_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: ERRORS_CREATE_LESSON, payload: errorNotExistPayload })
         }
-        console.log('createLesson before reroute to unscheduled lessons')
-        console.log('this is history before history.push', history)        
+        // console.log('this is history before history.push', history)        
         history.push(ROUTES_REACT.unscheduledlessons)
-        console.log('this is history after history.push', history)
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_CREATE_LESSON, payload: err })
+        ls(co.act, so.err, to.lesson, mo.cbid, err)      
+        // dispatch({ type: ERRORS_CREATE_LESSON, payload: err })
+        dispatch({ type: LESSON_CREATE_BY_ID_ERRORS, payload: err })
         history.push(ROUTES_REACT.lessons_create)        
         return err;
       })
   }
 }
-
-export const getLessonById = (lessonId) => {
+// LESSON_GET_BY_ID_REQUEST, LESSON_GET_BY_ID_SUCCESS, LESSON_GET_BY_ID_ERRORS
+export const lessonGetById = (lessonId) => {
   // console.log('lessonId @ getLessonById action: ', lessonId)
   // lessonId = "8d57c8d7-8e19-11e8-924a-a70245d1837e"
   // \/ GOOD /\ BAD
@@ -471,28 +459,33 @@ export const getLessonById = (lessonId) => {
   funcOptions.method = HTTP_METHODS.get
   
   return async (dispatch) => {
+    dispatch({ type: LESSON_GET_BY_ID_REQUEST })
+    ls(co.act, so.req, to.lesson, mo.gbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('res @ getLessonByID: ', res)
         if(status === 200){
+          ls(co.act, so.res, to.lesson, mo.gbid, res)
           res.body = checkThenReturnAppropriateResBody(res.body)
-          dispatch({ type: GET_LESSON_BY_ID, payload: res })
-          dispatch({ type: ERRORS_GET_LESSON_BY_ID, payload: errorNotExistPayload })
+          dispatch({ type: LESSON_GET_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: GET_LESSON_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_GET_LESSON_BY_ID, payload: errorNotExistPayload })
         }
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_GET_LESSON_BY_ID, payload: err })
+        ls(co.act, so.err, to.lesson, mo.gbid, err)      
+        dispatch({ type: LESSON_GET_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_GET_LESSON_BY_ID, payload: err })
         return err;
       })
   }
 }
-
-export const editLessonById = (edittedLesson, thenPushPath, catchPushPath) => {
+// LESSON_EDIT_BY_ID_REQUEST, LESSON_EDIT_BY_ID_SUCCESS, LESSON_EDIT_BY_ID_ERRORS,
+export const lessonEditById = (edittedLesson, thenPushPath, catchPushPath) => {
   const { lesson: { updatedAt } } = DM
   // console.log('lessonId @ editLessonById action: ', edittedLesson.Id)
-  console.log('lessonObj @ editLessonById action: ', edittedLesson)
+  console.log('@ lessonEditById - edittedLessonObj: ', edittedLesson)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}/${edittedLesson.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
@@ -501,58 +494,63 @@ export const editLessonById = (edittedLesson, thenPushPath, catchPushPath) => {
   // console.log(funcOptions.body)
   
   return async (dispatch) => {
+    dispatch({ type: LESSON_EDIT_BY_ID_REQUEST })
+    ls(co.act, so.req, to.lesson, mo.ebid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          console.log('res @ editLesson if: ', res)
-          dispatch({ type: EDIT_LESSON_BY_ID, payload: res })
-          dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.lesson, mo.ebid, res) 
+          dispatch({ type: LESSON_EDIT_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: EDIT_LESSON_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: errorNotExistPayload })
         }
-        console.log(`@ editLesson then: ${thenPushPath}`)
         history.push(thenPushPath) 
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: err })
-        console.log(`@ editLesson catch: ${catchPushPath}`)        
+        ls(co.act, so.err, to.lesson, mo.ebid, err)
+        dispatch({ type: LESSON_EDIT_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_EDIT_LESSON_BY_ID, payload: err })       
         history.push(catchPushPath)
         return err;
       })
   }
 }
-
-export const deleteLessonById = (lessonId) => {
+// LESSON_DELETE_BY_ID_REQUEST, LESSON_DELETE_BY_ID_SUCCESS, LESSON_DELETE_BY_ID_ERRORS,
+export const lessonDeleteById = (lessonId) => {
   console.log('lessonId @ deleteLessonById action: ', lessonId)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.lessons}/${lessonId}`
   console.log('url', URL)
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.delete;
   funcOptions.body = JSON.stringify({ Id: lessonId })
-  console.log('funcOptions', funcOptions)
+  // console.log('funcOptions', funcOptions)
   return async (dispatch) => {
+    dispatch({ type: LESSON_DELETE_BY_ID_REQUEST })
+    ls(co.act, so.req, to.lesson, mo.dbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res
-        console.log('deleteLessonIdResponse: ', res)
-        // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: DELETE_LESSON_BY_ID, payload: res })
-          dispatch({ type: ERRORS_DELETE_LESSON_BY_ID, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.lesson, mo.dbid, res)
+          dispatch({ type: LESSON_DELETE_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: DELETE_LESSON_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_DELETE_LESSON_BY_ID, payload: errorNotExistPayload })
         }
-        console.log('history push to unsched @ deleteLessonId')
+        // console.log('history push to unsched @ deleteLessonId')
         history.push(ROUTES_REACT.unscheduledlessons)
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_DELETE_LESSON_BY_ID, payload: err })
-        console.log('history push to back to delLesson @ delLessonId')        
+        ls(co.act, so.err, to.lesson, mo.dbid, err) 
+        dispatch({ type: LESSON_DELETE_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_DELETE_LESSON_BY_ID, payload: err })      
         history.push(`${ROUTES_REACT.lessons_delete}/${lessonId}`)
         return err;
       })
   }
 }
-
 export function selectedLesson(lesson){
   // console.log('A Lesson has been selected', lesson.title)
   // return an action object, an object with a type property
@@ -563,71 +561,85 @@ export function selectedLesson(lesson){
     payload: lesson
   }
 }
-
-export const fetchInterviewQuestions = () => {
+export const interviewQuestionsGetAll = () => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}`
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.get;
-  
+
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTIONS_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.intQuest, mo.gas)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res
-        console.log('response @ fetchIntQuests', res)
-        // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: FETCH_INTERVIEW_QUESTIONS, payload: res })
-          dispatch({ type: ERRORS_FETCH_INTERVIEW_QUESTIONS, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.intQuest, mo.gas, res) 
+          dispatch({ type: INTERVIEW_QUESTIONS_GET_ALL_SUCCESS, payload: res })
+          // dispatch({ type: INTERVIEW_QUESTIONS_GET_ALL_REQUEST, payload: res })
+          // dispatch({ type: ERRORS_GET_ALL_INTERVIEW_QUESTIONS, payload: errorNotExistPayload })
         }
         return res
       })
       .catch(err => {
-        console.log('err @ fetchIntQuests', err)
-        // should get an error object { status, ok, body }
-        dispatch({ type: ERRORS_FETCH_INTERVIEW_QUESTIONS, payload: err })
+        ls(co.act, so.err, to.intQuest, mo.gas, err) 
+        // dispatch({ type: ERRORS_GET_ALL_INTERVIEW_QUESTIONS, payload: err })
+        dispatch({ type: INTERVIEW_QUESTIONS_GET_ALL_ERRORS, payload: err })
         return err
       })
   }
 }
-
-export const createInterviewQuestion = (newInterviewQuestion) => {
-  console.log('newIntQuest @ createIntQuestion action: ', newInterviewQuestion)
+// INTERVIEW_QUESTION_CREATE_BY_ID_REQUEST, INTERVIEW_QUESTION_CREATE_BY_ID_SUCCESS, INTERVIEW_QUESTION_CREATE_BY_ID_ERRORS,
+export const interviewQuestionCreateById = (newInterviewQuestion, thenPushPath, catchPushPath, addTheseCategoryObjsToIntQuest) => {
+  // console.log('newIntQuest @ createIntQuestion action: ', newInterviewQuestion)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.post;
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestion, newInterviewQuestion));
-  console.log('funcOptions @ createIntQuestion: ', funcOptions);
+  // console.log('funcOptions @ createIntQuestion: ', funcOptions);
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_CREATE_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuest, mo.cbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
           // if interview question goes thorugh, we need to update the _interviewquestionsWithCategory for each Id in the newInterviewQuestion.categories
-          if(newInterviewQuestion.categories.length){
-            //
-            newInterviewQuestion.categories.forEach(categoryid => {
-              dispatch(editSkillById(categoryid, null, null, null, newInterviewQuestion.Id))
-            })
+          if(addTheseCategoryObjsToIntQuest){
+            if(addTheseCategoryObjsToIntQuest.length){
+              const { 
+                profileSkill: { _interviewquestionsWithCategory },
+                intQuestion: { Id }
+              } = DM;
+              addTheseCategoryObjsToIntQuest.forEach(categoryObj => {
+                let dupCategoryObj = { ...categoryObj };
+                dupCategoryObj[_interviewquestionsWithCategory].push(newInterviewQuestion[Id])
+                dispatch(skillEditById(dupCategoryObj, null, null))
+              })
+            }
           }
-          dispatch({ type: CREATE_INTERVIEW_QUESTION, payload: res })
-          dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.intQuest, mo.cbid, res)
+          dispatch({ type: INTERVIEW_QUESTION_CREATE_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: CREATE_INTERVIEW_QUESTION, payload: res })
+          // dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: errorNotExistPayload })
         }
-        console.log('history push to intQuest @ createintQuestId')        
+        // console.log('history push to intQuest @ createintQuestId')        
         history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: err })
-        console.log('history push to back to createIntQuest @ createintQuestId')                
+        ls(co.act, so.err, to.intQuest, mo.cbid, err) 
+        dispatch({ type: INTERVIEW_QUESTION_CREATE_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION, payload: err })
+        // console.log('history push to back to createIntQuest @ createintQuestId')                
         history.push(ROUTES_REACT.interviewquestions_create)        
         return err;
       })
   }
 }
-
-export const getInterviewQuestionById = (interviewquestionId) => {
-  console.log('intQuestId @ getInterviewQuestionById action: ', interviewquestionId);
+// INTERVIEW_QUESTION_GET_BY_ID_REQUEST, INTERVIEW_QUESTION_GET_BY_ID_SUCCESS, INTERVIEW_QUESTION_GET_BY_ID_ERRORS,
+export const interviewQuestionGetById = (interviewquestionId) => {
+  // console.log('intQuestId @ getInterviewQuestionById action: ', interviewquestionId);
   // interviewquestionId = "870e9780-8e21-11e8-ad35-63bc93d0cda5"
   // \/ GOOD /\ BAD
   // interviewquestionId = "870d9780-8e21-11e8-ad35-63bc93d0cda5"
@@ -636,54 +648,55 @@ export const getInterviewQuestionById = (interviewquestionId) => {
   funcOptions.method = HTTP_METHODS.get
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_GET_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuest, mo.gbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('response @ getIntQuestionByID: ', res)
         if(status === 200){
           // then got a response
+          ls(co.act, so.res, to.intQuest, mo.gbid, res)
           res.body = checkThenReturnAppropriateResBody(res.body)
-          console.log('res.body: ', res.body)
-          dispatch({ type: GET_INTERVIEW_QUESTION_BY_ID, payload: res })
-          dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
+          dispatch({ type: INTERVIEW_QUESTION_GET_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: GET_INTERVIEW_QUESTION_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_BY_ID, payload: err })
+        ls(co.act, so.err, to.intQuest, mo.gbid, err)     
+        dispatch({ type: INTERVIEW_QUESTION_GET_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_BY_ID, payload: err })
         return err;
       })
   }
 }
-
-export const editInterviewQuestionById = (edittedInterviewQuestion, thenPushPath, catchPushPath, removeTheseCategoryObjsFromIntQuest, addTheseCategoryObjsToIntQuest) => {
+// INTERVIEW_QUESTION_EDIT_BY_ID_REQUEST, INTERVIEW_QUESTION_EDIT_BY_ID_SUCCESS, INTERVIEW_QUESTION_EDIT_BY_ID_ERRORS,
+export const interviewQuestionEditById = (edittedInterviewQuestion, thenPushPath, catchPushPath, removeTheseCategoryObjsFromIntQuest, addTheseCategoryObjsToIntQuest) => {
   const { intQuestion: { updatedAt }} = DM;
-  // console.log('InterviewQuestionId @ editInterviewQuestionById action: ', edittedInterviewQuestion.Id)
-  console.log('editIntQuestionObj @ editInterviewQuestionById action: ', edittedInterviewQuestion)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${edittedInterviewQuestion.Id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
   edittedInterviewQuestion[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestion, edittedInterviewQuestion))
-  // console.log(funcOptions.body)
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_EDIT_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuest, mo.ebid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          console.log('res @ editIntQuestion if: ', res)
           if(removeTheseCategoryObjsFromIntQuest){
             if(removeTheseCategoryObjsFromIntQuest.length){
               removeTheseCategoryObjsFromIntQuest.forEach(categoryObj => {
                 let dupCategoryObj = { ...categoryObj };
-                const { profileSkill: { _interviewquestionsWithCategory, updatedAt }} = DM;
+                const { profileSkill: { _interviewquestionsWithCategory }} = DM;
                 // remove intQuestion(Id) from _interviewquestionsWithCategory
-                console.log('editIntQuestion - remove intQuestId from category (before): ', dupCategoryObj, edittedInterviewQuestion.Id)
+                // console.log('editIntQuestion - remove intQuestId from category (before): ', dupCategoryObj, edittedInterviewQuestion.Id)
                 dupCategoryObj[_interviewquestionsWithCategory] = dupCategoryObj[_interviewquestionsWithCategory].filter(intQuestionId => intQuestionId !== edittedInterviewQuestion.Id);
-                // dupCategoryObj[updatedAt] = new Date().toString();
-                console.log('editIntQuestion - remove intQuestId from category (after): ', dupCategoryObj, edittedInterviewQuestion.Id)
-                dispatch(editSkillById(dupCategoryObj, null, null))
+                // console.log('editIntQuestion - remove intQuestId from category (after): ', dupCategoryObj, edittedInterviewQuestion.Id)
+                dispatch(skillEditById(dupCategoryObj, null, null))
               })
             }
           }
@@ -691,197 +704,222 @@ export const editInterviewQuestionById = (edittedInterviewQuestion, thenPushPath
             if(addTheseCategoryObjsToIntQuest.length){
               addTheseCategoryObjsToIntQuest.forEach(categoryObj => {
                 let dupCategoryObj = { ...categoryObj };
-                const { profileSkill: { _interviewquestionsWithCategory, updatedAt }} = DM;
+                const { profileSkill: { _interviewquestionsWithCategory }} = DM;
                 // add intQuestion(Id) to _interviewquestionsWithCategory
                 dupCategoryObj[_interviewquestionsWithCategory].push(edittedInterviewQuestion.Id);
-                // dupCategoryObj[updatedAt] = new Date().toString();
-                dispatch(editSkillById(dupCategoryObj, null, null));
+                dispatch(skillEditById(dupCategoryObj, null, null));
               })
             }
           }
-          dispatch({ type: EDIT_INTERVIEW_QUESTION_BY_ID, payload: res })
-          dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.intQuest, mo.ebid, res)           
+          dispatch({ type: INTERVIEW_QUESTION_EDIT_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: EDIT_INTERVIEW_QUESTION_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload })
         }
-        console.log(`@ editIntQuestion then: ${ROUTES_REACT.interviewquestions}`)        
+        // console.log(`@ editIntQuestion then: ${ROUTES_REACT.interviewquestions}`)        
         history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: err })
-        console.log(`@ editIntQuestion then: ${ROUTES_REACT.interviewquestions_edit}/${edittedInterviewQuestion.Id}`)
+          ls(co.act, so.err, to.intQuest, mo.ebid, err)        
+          dispatch({ type: INTERVIEW_QUESTION_EDIT_BY_ID_ERRORS, payload: err })
+          // dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, payload: err })
+        // console.log(`@ editIntQuestion then: ${ROUTES_REACT.interviewquestions_edit}/${edittedInterviewQuestion.Id}`)
         history.push(`${ROUTES_REACT.interviewquestions_edit}/${edittedInterviewQuestion.Id}`)
         return err;
       })
   }
 }
-
-export const deleteInterviewQuestionById = (interviewquestionId) => {
-  console.log('intQuestId @ deleteIQById action: ', interviewquestionId)
+// INTERVIEW_QUESTION_DELETE_BY_ID_REQUEST, INTERVIEW_QUESTION_DELETE_BY_ID_SUCCESS, INTERVIEW_QUESTION_DELETE_BY_ID_ERRORS,
+export const interviewQuestionDeleteById = (interviewquestionId) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestions}/${interviewquestionId}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.delete;
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_DELETE_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuest, mo.dbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res
-        console.log('deleteIntQuestIdResponse: ', res)
         if(status === 200){
           // if the question has answers, then delete them.
           if(res.body.answersToQuestion.length){
             res.body.answersToQuestion.forEach(intQuestAnswerId => {
-              dispatch(deleteInterviewQuestionAnswerById(intQuestAnswerId, res.body.Id))
+              dispatch(interviewQuestionAnswerDeleteById(intQuestAnswerId, res.body.Id))
             })
           }
-          dispatch({ type: DELETE_INTERVIEW_QUESTION_BY_ID, payload: res })
-          dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload})
+          // also need to remove interviewQuestionId from categories
+          // do that here
+          ls(co.act, so.res, to.intQuest, mo.dbid, res)                   
+          dispatch({ type: INTERVIEW_QUESTION_DELETE_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: DELETE_INTERVIEW_QUESTION_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID, payload: errorNotExistPayload})
         }
-        console.log('history push to intQuest @ deleteLessonId')        
+        // console.log('history push to intQuest @ deleteLessonId')        
         history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID, payload: err })
-        console.log('history push to back to deleteIntQuest @ deleteLessonId')        
+        ls(co.act, so.err, to.intQuest, mo.dbid, err)                             
+        dispatch({ type: INTERVIEW_QUESTION_DELETE_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID, payload: err })
+        // console.log('history push to back to deleteIntQuest @ deleteLessonId')        
         history.push(`${ROUTES_REACT.interviewquestions_delete}/${interviewquestionId}`)        
         return err;
       })
-    history.push(ROUTES_REACT.interviewquestions)
+    // history.push(ROUTES_REACT.interviewquestions)
   }
 }
 
-export const fetchInterviewQuestionsAnswers = () => {
+export const interviewQuestionAnswersGetAll = () => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}`
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.get;
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_ANSWERS_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.intQuestAns, mo.ga)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
-        const { status } = res
-        console.log('response @ fetchIntQuestsAns', res)
+        const { status } = res                            
         // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: FETCH_INTERVIEW_QUESTIONS_ANSWERS, payload: res })
-          dispatch({ type: ERRORS_FETCH_INTERVIEW_QUESTIONS_ANSWERS, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.intQuestAns, mo.ga, res)
+          dispatch({ type: INTERVIEW_QUESTION_ANSWERS_GET_ALL_SUCCESS, payload: res })
+          // dispatch({ type: GET_ALL_INTERVIEW_QUESTIONS_ANSWERS, payload: res })
+          // dispatch({ type: ERRORS_GET_ALL_INTERVIEW_QUESTIONS_ANSWERS, payload: errorNotExistPayload })
         }
         return res
       })
       .catch(err => {
-        console.log('err @ fetchIntQuestsAns', err)
+        ls(co.act, so.err, to.intQuestAns, mo.ga, err)
         // should get an error object { status, ok, body }
-        dispatch({ type: FETCH_INTERVIEW_QUESTIONS_ANSWERS, payload: err })
+        dispatch({ type: INTERVIEW_QUESTION_ANSWERS_GET_ALL_ERRORS, payload: err })
+        // dispatch({ type: GET_ALL_INTERVIEW_QUESTIONS_ANSWERS, payload: err })
         return err
       })
   }
 }
 
-export const createInterviewQuestionAnswer = (newInterviewQuestionAnswer, intQuestId) => {
-  console.log('newIntQuestAnswer @ createIntQuestionAnswer action: ', newInterviewQuestionAnswer);
+export const interviewQuestionAnswerCreateById = (newInterviewQuestionAnswer, intQuestId) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.post;
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestionAnswer, newInterviewQuestionAnswer));
-  console.log('funcOptions @ createIntQuestionAnswer: ', funcOptions);
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_ANSWER_CREATE_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuestAns, mo.cbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
+          ls(co.act, so.res, to.intQuestAns, mo.cbid, res)
           // dispatch(editInterviewQuestionById(edittedIntQuest))
-          dispatch({ type: CREATE_INTERVIEW_QUESTION_ANSWER, payload: res })
-          dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, payload: errorNotExistPayload })
+          dispatch({ type: INTERVIEW_QUESTION_ANSWER_CREATE_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: CREATE_INTERVIEW_QUESTION_ANSWER, payload: res })
+          // dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, payload: errorNotExistPayload })
         }
         history.push(ROUTES_REACT.interviewquestions)
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, payload: err })
-        console.log('history push to back to deleteIntQuest @ deleteLessonId')        
+        ls(co.act, so.err, to.intQuestAns, mo.cbid, err)
+        dispatch({ type: INTERVIEW_QUESTION_ANSWER_CREATE_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, payload: err })
+        // console.log('history push to back to deleteIntQuest @ deleteLessonId')        
         history.push(`${ROUTES_REACT.interviewquestionsanswers_create}/${intQuestId}/answers/create`)
         return err;
       })
   }
 }
 
-export const getInterviewQuestionAnswerById = (interviewquestionanswerId) => {
-  console.log('intQuestionAnswerId @ getInterviewQuestionAnswerById action: ', interviewquestionanswerId);
+export const interviewQuestionAnswerGetById = (interviewquestionanswerId) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${interviewquestionanswerId}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.get;
   
   return async (dispatch) => {
+    dispatch({ type: INTERVIEW_QUESTION_ANSWER_GET_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuestAns, mo.gbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
-        console.log('response @ getIntQuestionAnswerById: ', res);
         if(status === 200){
           res.body = checkThenReturnAppropriateResBody(res.body)
-          console.log('res.body: ', res.body)
-          dispatch({ type: GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.intQuestAns, mo.gbid, res)
+          dispatch({ type: INTERVIEW_QUESTION_ANSWER_GET_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
         }
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
+        ls(co.act, so.err, to.intQuestAns, mo.gbid, err)        
+        dispatch({ type: INTERVIEW_QUESTION_ANSWER_GET_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
         return err;
       })
   }
 }
 
-export const editInterviewQuestionAnswerById = (edittedInterviewQuestionAnswer, intQuestId) => {
+export const interviewQuestionAnswerEditById = (edittedInterviewQuestionAnswer, intQuestId) => {
   const { intQuestionAnswer: { updatedAt } } = DM
-  console.log('InterviewQuestionAnswerId @ editInterviewQuestionById action: ', edittedInterviewQuestionAnswer.Id)
-  console.log('edittedIntQuestAns @ editInterviewQuestionAnswerById action: ', edittedInterviewQuestionAnswer)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${edittedInterviewQuestionAnswer.Id}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
   edittedInterviewQuestionAnswer[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.intQuestionAnswer, edittedInterviewQuestionAnswer));
-  console.log('funcOptions @ editIntQuestAnswer: ', funcOptions);
   
   return async (dispatch) => {
-    // const response = 
+    dispatch({ type: INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuestAns, mo.ebid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          dispatch(editInterviewQuestionById(intQuestId));
-          dispatch({ type: EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
+          dispatch(interviewQuestionEditById(intQuestId));
+          ls(co.act, so.res, to.intQuestAns, mo.ebid, res)     
+          dispatch({ type: INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: errorNotExistPayload })
         }
         history.push(ROUTES_REACT.interviewquestions)        
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
+        ls(co.act, so.err, to.intQuestAns, mo.ebid, err)        
+        dispatch({ type: INTERVIEW_QUESTION_ANSWER_EDIT_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
         history.push(`${ROUTES_REACT.interviewquestions}/${intQuestId}/answers/edit/${edittedInterviewQuestionAnswer.Id}`)        
       })
   }
 }
 
-export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId, intQuestObj) => {
-  console.log('intQuestAnswerId @ deleteIQAById action: ', interviewquestionanswerId);
+export const interviewQuestionAnswerDeleteById = (interviewquestionanswerId, intQuestObj) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.interviewquestionsanswers}/${interviewquestionanswerId}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.delete;
   
   return async (dispatch) => {
-    // const response = 
+    dispatch({ type: INTERVIEW_QUESTION_ANSWER_DELETE_BY_ID_REQUEST })
+    ls(co.act, so.req, to.intQuestAns, mo.dbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res
-        console.log('deleteIntQuestAnsId Resopnse: ', res);
         if(status === 200){
-          dispatch({ type: DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
-          dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          ls(co.act, so.res, to.intQuestAns, mo.dbid, res)
+          dispatch({ type: INTERVIEW_QUESTION_ANSWER_DELETE_BY_ID_SUCCESS, payload: res })
+          // dispatch({ type: DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
+          // dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: res })
         }
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
+        ls(co.act, so.err, to.intQuestAns, mo.dbid, err)
+        dispatch({ type: INTERVIEW_QUESTION_ANSWER_DELETE_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID, payload: err })
         history.push(`${ROUTES_REACT.interviewquestions}/${intQuestObj.Id}/answers/delete/${interviewquestionanswerId}`)                
         return err
       })
@@ -890,118 +928,186 @@ export const deleteInterviewQuestionAnswerById = (interviewquestionanswerId, int
   
 }
 
-export const fetchSkills = () => {
+export const skillsGetAll = () => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.skills}`;
   let funcOptions = { ...OPTIONS };
   funcOptions.method = HTTP_METHODS.get;
   
   return async (dispatch) => {
+    dispatch({ type: SKILLS_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.skill, mo.gas)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res
-        console.log('response @ fetchSkills', res)
         // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: FETCH_SKILLS, payload: res })
-          dispatch({ type: ERRORS_FETCH_SKILLS, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.skill, mo.gas, res)
+          dispatch({ type: SKILLS_GET_ALL_SUCCESS, payload: res })
+        //   dispatch({ type: GET_ALL_SKILLS, payload: res })
+        //   dispatch({ type: ERRORS_GET_ALL_SKILLS, payload: errorNotExistPayload })
         }
         return res
       })
       .catch(err => {
-        console.log('err @ fetchSkills', err)
+        ls(co.act, so.err, to.skill, mo.gas, err)
         // should get an error object { status, ok, body }
-        dispatch({ type: ERRORS_FETCH_SKILLS, payload: err })
+        dispatch({ type: SKILLS_GET_ALL_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_GET_ALL_SKILLS, payload: err })
         return err
       })
   }
 }
-
-export const createSkill = (newSkill, thenPushPath, catchPushPath) => {
-  console.log('newSkill @ createSkill action: ', newSkill);
+// SKILL_CREATE_BY_ID_REQUEST, SKILL_CREATE_BY_ID_SUCCESS, SKILL_CREATE_BY_ID_ERRORS
+export const skillCreateById = (newSkill, thenPushPath, catchPushPath) => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.skills}`
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.post;
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.profileSkill, newSkill));
-  console.log('funcOptions @ createSkill: ', funcOptions);
   
   return async (dispatch) => {
+    dispatch({ type: SKILL_CREATE_BY_ID_REQUEST })
+    ls(co.act, so.req, to.skill, mo.cbid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          dispatch({ type: CREATE_SKILL, payload: res });
-          dispatch({ type: ERRORS_CREATE_SKILL, payload: errorNotExistPayload });
+          ls(co.act, so.res, to.skill, mo.cbid, res)
+          dispatch({ type: SKILL_CREATE_BY_ID_SUCCESS, payload: res });
+          // dispatch({ type: CREATE_SKILL, payload: res });
+          // dispatch({ type: ERRORS_CREATE_SKILL, payload: errorNotExistPayload });
         }
         // history.push()
         return res;
       })
       .catch(err => {
-        dispatch({ type: ERRORS_CREATE_SKILL, payload: err })
-        console.log('history push to back to createSkill @ createSkill')
+        ls(co.act, so.err, to.skill, mo.cbid, err)      
+        dispatch({ type: SKILL_CREATE_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_CREATE_SKILL, payload: err })
+        // console.log('history push to back to createSkill @ createSkill')
         // history.push()
         return err;
       })
   }
 }
-
-export const getSkillById = () => {
+// SKILL_GET_BY_ID_REQUEST, SKILL_GET_BY_ID_SUCCESS, SKILL_GET_BY_ID_ERRORS,
+export const skillGetById = () => {
   
 }
-
-export const editSkillById = (edittedSkill, thenPushPath, catchPushPath) => {
+// SKILL_EDIT_BY_ID_REQUEST, SKILL_EDIT_BY_ID_SUCCESS, SKILL_EDIT_BY_ID_ERRORS,
+export const skillEditById = (edittedSkill, thenPushPath, catchPushPath) => {
   const { profileSkill: { updatedAt } } = DM  
-  console.log('skillId @ editSkillById action: ', edittedSkill.id)
-  console.log('edittedSkill @ editSkillById action: ', edittedSkill)
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.skills}/${edittedSkill.id}`;
   let funcOptions = {...OPTIONS};
   funcOptions.method = HTTP_METHODS.put;
   edittedSkill[updatedAt] = new Date().toString();
   funcOptions.body = JSON.stringify(ModelConverterForUpdate.returnBodyObject(DM.profileSkill, edittedSkill));
-  console.log('funcOptions @ editSkill: ', funcOptions);
   
   return async (dispatch) => {
+    dispatch({ type: SKILL_EDIT_BY_ID_REQUEST })
+    ls(co.act, so.req, to.skill, mo.ebid)
     await initFetchCall(URL, funcOptions, true)
       .then(res => {
         const { status } = res;
         if(status === 200){
-          dispatch({ type: EDIT_SKILL_BY_ID, payload: res });
-          dispatch({ type: ERRORS_EDIT_SKILL_BY_ID, payload: errorNotExistPayload });
+          ls(co.act, so.res, to.skill, mo.ebid, res)         
+          dispatch({ type: SKILL_EDIT_BY_ID_SUCCESS, payload: res });
+          // dispatch({ type: EDIT_SKILL_BY_ID, payload: res });
+          // dispatch({ type: ERRORS_EDIT_SKILL_BY_ID, payload: errorNotExistPayload });
         }
       })
       .catch(err => {
-        dispatch({ type: ERRORS_EDIT_SKILL_BY_ID, payload: err })
+        ls(co.act, so.err, to.skill, mo.ebid, err)        
+        dispatch({ type: SKILL_EDIT_BY_ID_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_EDIT_SKILL_BY_ID, payload: err })
         history.push(`${ROUTES_REACT.skills_edit}/${edittedSkill.id}`)
       })
   }
   
 }
-
-export const deleteSkillById = () => {
+// SKILL_DELETE_BY_ID_REQUEST, SKILL_DELETE_BY_ID_SUCCESS, SKILL_DELETE_BY_ID_ERRORS,
+export const skillDeleteById = () => {
   
 }
 
-export const fetchHomeScreenQuotes = () => {
+export const homeScreenQuotesGetAll = () => {
   const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.homeScreenQuotes}`;
   let funcOptions = { ...OPTIONS }
   funcOptions.method = HTTP_METHODS.get
   
   return async (dispatch) => {
+    dispatch({ type: HOMESCREEN_QUOTES_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.homeScreenQuotes, mo.ga)
     await initFetchCall(URL, funcOptions, false)
       .then(res => {
         const { status } = res
-        console.log('response @ fetchHomescreenQuotes', res)
-        // should get a response object {status, ok, body}
         if(status === 200){
-          dispatch({ type: FETCH_HOMESCREEN_QUOTES, payload: res })
-          dispatch({ type: ERRORS_FETCH_HOMESCREEN_QUOTES, payload: errorNotExistPayload })
+          ls(co.act, so.res, to.homeScreenQuotes, mo.ga, res)
+          dispatch({ type: HOMESCREEN_QUOTES_GET_ALL_SUCCESS, payload: res })
+          // dispatch({ type: GET_ALL_HOMESCREEN_QUOTES, payload: res })
+          // dispatch({ type: ERRORS_GET_ALL_HOMESCREEN_QUOTES, payload: errorNotExistPayload })
         }
         return res
       })
       .catch(err => {
-        console.log('err @ fetchHomescreenQuotes', err)
-        // should get an error object { status, ok, body }
-        dispatch({ type: ERRORS_FETCH_HOMESCREEN_QUOTES, payload: err })
+        ls(co.act, so.err, to.homeScreenQuotes, mo.ga, err)
+        dispatch({ type: HOMESCREEN_QUOTES_GET_ALL_ERRORS, payload: err })
+        // dispatch({ type: ERRORS_GET_ALL_HOMESCREEN_QUOTES, payload: err })
         return err
       })
   }
 }
+// RANKS_GET_ALL_REQUEST, RANKS_GET_ALL_SUCCESS, RANKS_GET_ALL_ERRORS
+export const ranksGetAll = () => {
+  const URL = `${API_GATEWAY_INVOKE_URL}${ROUTES_API.ranks}`;
+  let funcOptions = { ...OPTIONS }
+  funcOptions.method = HTTP_METHODS.get
+  
+  return async (dispatch) => {
+    dispatch({ type: RANKS_GET_ALL_REQUEST })
+    ls(co.act, so.req, to.ranks, mo.ga)
+    await initFetchCall(URL, funcOptions, true)
+      .then(res => {
+        const { status } = res
+        if(status === 200){
+          ls(co.act, so.res, to.ranks, mo.ga, res)
+          dispatch({ type: RANKS_GET_ALL_SUCCESS, payload: res })
+        }
+        return res
+      })
+      .catch(err => {
+        ls(co.act, so.err, to.ranks, mo.ga, err)
+        dispatch({ type: RANKS_GET_ALL_ERRORS, payload: err })
+        return err
+      })
+  }
+}
+
+// GET_ALL_USERS, CREATE_USER,
+// GET_USER_BY_ID, EDIT_USER_BY_ID, DELETE_USER_BY_ID,
+
+// ERRORS_GET_ALL_USERS, ERRORS_CREATE_USER,
+// ERRORS_GET_USER_BY_ID, ERRORS_EDIT_USER_BY_ID, ERRORS_DELETE_USER_BY_ID,
+
+// GET_ALL_LESSONS, CREATE_LESSON,
+// GET_LESSON_BY_ID, EDIT_LESSON_BY_ID, DELETE_LESSON_BY_ID, 
+// ERRORS_GET_ALL_LESSONS, ERRORS_CREATE_LESSON,
+// ERRORS_GET_LESSON_BY_ID, ERRORS_EDIT_LESSON_BY_ID, ERRORS_DELETE_LESSON_BY_ID,
+
+// GET_ALL_INTERVIEW_QUESTIONS, CREATE_INTERVIEW_QUESTION,
+// GET_INTERVIEW_QUESTION_BY_ID, EDIT_INTERVIEW_QUESTION_BY_ID, DELETE_INTERVIEW_QUESTION_BY_ID,
+// ERRORS_GET_ALL_INTERVIEW_QUESTIONS, ERRORS_CREATE_INTERVIEW_QUESTION,
+// ERRORS_GET_INTERVIEW_QUESTION_BY_ID, ERRORS_EDIT_INTERVIEW_QUESTION_BY_ID, ERRORS_DELETE_INTERVIEW_QUESTION_BY_ID,
+
+// GET_ALL_INTERVIEW_QUESTIONS_ANSWERS, CREATE_INTERVIEW_QUESTION_ANSWER, 
+// GET_INTERVIEW_QUESTION_ANSWER_BY_ID, EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
+
+// ERRORS_GET_ALL_INTERVIEW_QUESTIONS_ANSWERS, ERRORS_CREATE_INTERVIEW_QUESTION_ANSWER, 
+// ERRORS_GET_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_EDIT_INTERVIEW_QUESTION_ANSWER_BY_ID, ERRORS_DELETE_INTERVIEW_QUESTION_ANSWER_BY_ID,
+
+// GET_ALL_SKILLS, CREATE_SKILL,
+// GET_SKILL_BY_ID, EDIT_SKILL_BY_ID, DELETE_SKILL_BY_ID,
+
+// ERRORS_GET_ALL_SKILLS, ERRORS_CREATE_SKILL,
+// ERRORS_GET_SKILL_BY_ID, ERRORS_EDIT_SKILL_BY_ID, ERRORS_DELETE_SKILL_BY_ID,
+
+// GET_ALL_HOMESCREEN_QUOTES, ERRORS_GET_ALL_HOMESCREEN_QUOTES,
