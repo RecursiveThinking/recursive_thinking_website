@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
-import { FETCHING } from '../../actions/action_types'
-import { fetchLessons, fetchUsers, getCurrentUserById, editUserById, editLessonById } from '../../actions'
-
+import { lessonsGetAll, usersGetAll, userEditById, lessonEditById } from '../../actions'
+// , getCurrentUserById
 import DefaultErrorPage from '../../components/defaults/errorPage/errorPage'
 import DefaultLoadingPage from '../../components/defaults/loadingPage/loadingPage'
+
+import { CARD_TITLE_SCHEDULED_LESSONS_GET_ALL } from '../../components/common/content/contentInfo'
 
 import ScheduledLessonsList from '../../components/scheduledLessons/scheduledLessonsList'
 import SelectedLessonDetail from '../../components/scheduledLessons/selectedLessonDetail'
@@ -23,9 +24,9 @@ class ScheduledLessons extends Component {
   }
   
   componentDidMount(){
-    this.props.fetchLessons();
-    this.props.fetchUsers();
-    this.props.getCurrentUserById();
+    this.props.lessonsGetAll();
+    this.props.usersGetAll();
+    // this.props.getCurrentUserById();
   }
   
   updateSelectedLesson = (lessonObjToAdd, status) => {
@@ -38,7 +39,7 @@ class ScheduledLessons extends Component {
       console.log('update on status 1: ')
       let lessonToUpdate = { ...lessonObjToAdd };
       lessonToUpdate.lessonAttendees.push(this.props.currentUser.userId)
-      this.props.editLessonById(lessonToUpdate, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
+      this.props.lessonEditById(lessonToUpdate, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
     }
     if(status === 0 || status === 2){
       console.log('update on status 0 or 2: ', status)
@@ -47,41 +48,49 @@ class ScheduledLessons extends Component {
         lessonToUpdate.lessonAttendees = lessonToUpdate.lessonAttendees.filter(userId => {
           return userId !== this.props.currentUser.userId
         })
-        this.props.editLessonById(lessonToUpdate, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
+        this.props.lessonEditById(lessonToUpdate, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
       }
     }
     
     let updateUserLessonStatus = { ...this.props.currentUser }
     updateUserLessonStatus.lessonStatus[lessonObjToAdd.Id] = status;
-    this.props.editUserById(updateUserLessonStatus, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
+    this.props.userEditById(updateUserLessonStatus, ROUTES_REACT.scheduledlessons, ROUTES_REACT.scheduledlessons)
   }
   
-  render(){
-    
-    const { 
+  renderContent = () => {
+    let { 
       currentUser, 
-      selectedLesson, 
-      scheduledLessons, 
-      allUsers,
+      selectedLesson,
+      users: {
+        allUsers,
+        isFetchingUsersGetAll, errorMessageUsersGetAll
+      },
+      lessons: {
+        scheduledLessons,
+        isFetchingLessonsGetAll, errorMessageLessonsGetAll
+      }
     } = this.props;
     
-    if(!allUsers || !scheduledLessons ){
+    const {
+      title
+    } = CARD_TITLE_SCHEDULED_LESSONS_GET_ALL;
+    // isFetchingLessonsGetAll = true;
+    if(errorMessageUsersGetAll || errorMessageLessonsGetAll ){
       return (
-        <main className="content">
-          <DefaultErrorPage />
-        </main>
+        <DefaultErrorPage />
       )
     }
-    else if(allUsers === FETCHING || scheduledLessons === FETCHING){
+    else if(isFetchingUsersGetAll || isFetchingLessonsGetAll){
       return (
-        <main className="content">
-          <DefaultLoadingPage />
-        </main>
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt='ta-cent'
+        />
       )
     }
     else {
       return (
-        <main className="content">
+        <>
           <div className="grid grid--1of3">
             <div className="grid-cell">
               <ScheduledLessonsList 
@@ -99,24 +108,31 @@ class ScheduledLessons extends Component {
               />
             </div>
           </div>
-        </main>
+        </>
       )
     }
+  }
+  
+  render(){
+    return (
+      <main className="content">
+        {this.renderContent()}
+      </main>
+    )
   }
 }
 
 function mapStateToProps(state){
   return {
-    currentUser: state.auth.currentUser,
-    allUsers: state.users.allUsers,
-    allLessons: state.lessons.allLessons,
-    scheduledLessons: state.lessons.scheduledLessons,
+    // currentUser: state.auth.currentUser,
+    users: state.users,
+    lessons: state.lessons,
     selectedLesson: state.selectedLesson
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchLessons, fetchUsers, getCurrentUserById, editUserById, editLessonById }, dispatch)
+  return bindActionCreators({ lessonsGetAll, usersGetAll, userEditById, lessonEditById }, dispatch)
 }
-
+// , getCurrentUserById
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduledLessons);
