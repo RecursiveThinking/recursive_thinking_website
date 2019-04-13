@@ -34,7 +34,7 @@ export class User extends CogUser{
     this.profileStatsViewsResume = viewDefaultVal;
     this.experience = empty;
     this.timeWithRT = new Date().toString();
-    this.rank = empty;
+    this.rank = 'f227e840-8ed5-11e8-a170-15022f2a2d75';
     this.skillsProfessional = [];
     this.skillsSoftware = [];
     this.skillsLanguages = [];
