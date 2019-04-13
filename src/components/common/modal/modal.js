@@ -56,9 +56,8 @@ class Modal extends Component {
   }
   
   render(){
-    console.log('props @ modal', this.props)
+    // console.log('props @ modal', this.props)
     // console.log('content', this.props.content.type)
-    
     return ReactDOM.createPortal(
       <div className="modal">
         <section className="modalCard" ref={node => (this.modal = node)}>
