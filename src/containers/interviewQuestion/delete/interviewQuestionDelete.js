@@ -3,9 +3,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getInterviewQuestionById, deleteInterviewQuestionById } from '../../../actions/index';
+import { interviewQuestionGetById, interviewQuestionDeleteById } from '../../../actions/index';
 
 import DefaultLoadingPage from '../../../components/defaults/loadingPage/loadingPage';
+import DefaultErrorPage from '../../../components/defaults/errorPage/errorPage';
+import DefaultMessage from '../../../components/defaults/defaultMessage/defaultMessage'
+import DefaultProcessingPage from '../../../components/defaults/processingPage/processingPage';
+import { DEFAULT_MESSAGE_INTERVIEW_QUESTION_BY_ID_ITEM_NOT_FOUND } from '../../../components/defaults/defaultMessage/defaultMessageContent/defaultMessageContent'
+
+import { 
+  CARD_TITLE_SELECTED_INTERVIEW_QUESTION_GET_BY_ID,
+  CARD_TITLE_DELETING_INTERVIEW_QUESTION_DELETE_BY_ID
+} from '../../../components/common/content/contentInfo';
 
 import { ROUTES_REACT } from '../../../standards/routes';
 
@@ -18,28 +27,68 @@ class InterviewQuestionDelete extends Component {
 
   componentDidMount(){
     console.log('props @ CDM InterviewQuestionDelete: ', this.props)
-    this.props.getInterviewQuestionById(this.props.match.params.id)
+    this.props.interviewQuestionGetById(this.props.match.params.id)
   }
   
   renderContent(){
-    const { interviewQuestionById } = this.props;
-    if(!interviewQuestionById){
+    let { 
+      interviewQuestions: { 
+        isGettingInterviewQuestionById, errorMessageGettingInterviewQuestionById,
+        isDeletingInterviewQuestionById, errorMessageDeletingInterviewQuestionById,
+        interviewQuestionById,  
+      } 
+    } = this.props;
+    
+    if(isGettingInterviewQuestionById){
+      let { 
+        title, classNameTxt
+      } = CARD_TITLE_SELECTED_INTERVIEW_QUESTION_GET_BY_ID
       return (
-        <DefaultLoadingPage />
+        <DefaultLoadingPage 
+          title={title}
+          classNameTxt={classNameTxt}
+        />
+      )
+    }
+    else if(errorMessageGettingInterviewQuestionById || errorMessageDeletingInterviewQuestionById){
+      return (
+        <DefaultErrorPage
+          // title={title}
+          // classNameTxt={classNameTxt}
+        />        
+      )
+    }
+    else if(isDeletingInterviewQuestionById){
+      const {
+        title,
+        classNameTxt
+      } = CARD_TITLE_DELETING_INTERVIEW_QUESTION_DELETE_BY_ID;
+      return (
+        <DefaultProcessingPage
+          title={title}
+          classNameTxt={classNameTxt}
+        />        
+      )
+    }
+    else if(!interviewQuestionById){
+      return (
+        <DefaultMessage
+          content={DEFAULT_MESSAGE_INTERVIEW_QUESTION_BY_ID_ITEM_NOT_FOUND}
+        />
       )
     } else {
       console.log('this props', this.props)
       const { id } = this.props.match.params;
       console.log('id', id)
       const { interviewquestions } = ROUTES_REACT;
+      let { title, description } = interviewQuestionById
       return(
         <article className="card">
           <div className="grid grid--full">
             <div className="grid-cell">
               <fieldset className="fc--disp-flex fc--fdir-col fc--aItem-ce noMargin">
-                <h5 className="fw600 ls12 fcGrey424041">Interview Question Information: {interviewQuestionById.title}</h5>
+                <h5 className="fw600 ls12 fcGrey424041">Interview Question Information: {title}</h5>
                 <hr className="modalHR mt10" />
-                {/* <form> */}
                   <div className="fc-fieldset">
                     <div className="fc-field fc--disp-flex fc--fdir-col fc--jCont-ce width100P">
                       <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
@@ -47,7 +96,7 @@ class InterviewQuestionDelete extends Component {
                       </div>
                       <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
                         <p className="fs16 fw300 ls10 fcGrey424041 mt10">
-                          {interviewQuestionById.title}
+                          {title}
                         </p>
                       </div>
                       <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt30">
@@ -55,7 +104,7 @@ class InterviewQuestionDelete extends Component {
                       </div>                  
                       <div className="fc-field-row-full fc--disp-flex fc--fdir-row mt10">
                         <p className="fs16 fw300 ls10 fcGrey424041 mt10">
-                          {interviewQuestionById.description}
+                          {description}
                         </p>
                       </div>                  
                     </div>
@@ -71,11 +120,9 @@ class InterviewQuestionDelete extends Component {
                     </Link>
                     <button 
                       className="btn btnFillClrSchWarn pdTB2LR8 fs20 fw500 ls12 ml20 mt30"
-                      onClick={() => {this.props.deleteInterviewQuestionById(id)}}
+                      onClick={() => {this.props.interviewQuestionDeleteById(id)}}
                     >Delete Interview Question</button>
                   </div>
-                  {/* btn btnFillClrSchWarn btnOutlineClrSchUnavailable btnVoted fs16 fw500 ls12 ta-cent pdTB1p25LR2p5 */}
-                {/* </form> */}
               </fieldset>
             </div>
           </div>
@@ -86,35 +133,23 @@ class InterviewQuestionDelete extends Component {
   
   render(){
     return(
-      <section style={{padding: '1.5rem 1.5rem'}}>
+      <>
         {this.renderContent()}
-      </section>
+      </>
     )
-  //   return(
-  //     <section>
-  //       {
-  //         this.state.showModalIQDelete &&
-          
-  //         <ModalDelete 
-  //           onCloseRequest={() => this.handleToggleModalIQDelete()}
-  //           content={this.renderContent()}
-  //           buttons={this.renderModalButtons()}
-  //         />
-  //       }
-  //     </section>
-  //   )
   }
 }
 
 function mapStateToProps(state, ownProps){
   return {
     // interviewQuestionById: state.interviewQuestions.lookupTableInterviewQuestions[ownProps.match.params.id]
-    interviewQuestionById: state.interviewQuestions.interviewQuestionById
+    interviewQuestions: state.interviewQuestions
+    // interviewQuestionById: state.interviewQuestions.interviewQuestionById
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getInterviewQuestionById, deleteInterviewQuestionById }, dispatch)
+  return bindActionCreators({ interviewQuestionGetById, interviewQuestionDeleteById }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InterviewQuestionDelete)
