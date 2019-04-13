@@ -14,15 +14,15 @@ const {
 } = ROUTES_REACT
 
 export const TITLE_BAR_USER_CREATE = {
-  heading: 'Create Your User Profile',
+  heading: 'Checking Account Status',
   subheading: 'Please fill in all Fields Below and Submit Your Profile',
   buttontext: '',
   link: null
 }
 
 export const TITLE_BAR_USER_SETUP = {
-  heading: 'Setup Your User Profile',
-  subheading: 'Please fill in all Fields Below and Submit Your Profile',
+  heading: 'Checking Your Account',
+  subheading: 'Currently Evaluating Your Account Configuration',
   buttontext: '',
   link: null
 }
@@ -39,6 +39,13 @@ export const TITLE_BAR_USER_VIEW = {
   subheading: 'Otherwise Click the Button to Return to the Previous Page',
   buttontext: 'Return to Directory',
   link: recursivedirectory
+}
+
+export const TITLE_BAR_RECURSIVE_DIRECTORY = {
+  heading: 'Recursive Thinking Member Directory',
+  subheading: 'Click on the Member\'s Avatar or Name to View their Profile',
+  buttontext: '',
+  link: null
 }
 
 export const TITLE_BAR_LESSONS = {
